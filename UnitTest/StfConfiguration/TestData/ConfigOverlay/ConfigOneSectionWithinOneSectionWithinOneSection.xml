@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
+  
+  <section name="SectionNameOuter" defaultsection="DefSecOuter">
+    <section name="SectionNameInner" defaultsection="DefSecInner">
+      <section name="SectionNameMostInner" defaultsection="DefSecMostInner">
+      </section>
+    </section>
+  </section>
+</configuration>

@@ -1,0 +1,21 @@
+Stf +
+    + Logger +
+    + Utilities +
+                + Datatypes +
+                            + DateTime
+                            + String
+                + Utils +
+                        + ScreenShot
+                        + RegExp
+                + Assert : Assumes
+                + Database +
+                           + Adodb
+                             - Paged resultset 
+                + File
+
+                + Process
+                  - start process (cmd, exe)
+                  - kill processes (byName)
+                  - CheckIfProcess is running
+                + Archive
+                + Xml

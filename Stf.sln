@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{670A3A8D-48DC-4C18-82E5-E40F023AADD7}"
+	ProjectSection(SolutionItems) = preProject
+		Settings.StyleCop = Settings.StyleCop
+		TestResultHtmlLogger\Todo.csv = TestResultHtmlLogger\Todo.csv
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfAssert", "Source\StfAssert\StfAssert.csproj", "{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfConfiguration", "Source\StfConfiguration\StfConfiguration.csproj", "{2D259B87-A08E-406F-818C-6F60BC16C983}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfLogger", "Source\StfLogger\StfLogger.csproj", "{761BF58C-4B19-46D2-9601-2F9296C80152}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{5634F2A1-8310-4A9F-A08B-F0AF7D692AE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfAssertTests", "UnitTest\StfAssert\StfAssertTests.csproj", "{8BEE6440-B2B9-4C12-A93A-13DD5C3D6A96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfConfigurationTests", "UnitTest\StfConfiguration\StfConfigurationTests.csproj", "{A951C0DE-47F0-4836-B1C9-153605E13598}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfLoggerTests", "UnitTest\StfLogger\StfLoggerTests.csproj", "{0D9AE5D1-F176-45DE-A447-07E3DF405F96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D259B87-A08E-406F-818C-6F60BC16C983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D259B87-A08E-406F-818C-6F60BC16C983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D259B87-A08E-406F-818C-6F60BC16C983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D259B87-A08E-406F-818C-6F60BC16C983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{761BF58C-4B19-46D2-9601-2F9296C80152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{761BF58C-4B19-46D2-9601-2F9296C80152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{761BF58C-4B19-46D2-9601-2F9296C80152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{761BF58C-4B19-46D2-9601-2F9296C80152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BEE6440-B2B9-4C12-A93A-13DD5C3D6A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BEE6440-B2B9-4C12-A93A-13DD5C3D6A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BEE6440-B2B9-4C12-A93A-13DD5C3D6A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BEE6440-B2B9-4C12-A93A-13DD5C3D6A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A951C0DE-47F0-4836-B1C9-153605E13598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A951C0DE-47F0-4836-B1C9-153605E13598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A951C0DE-47F0-4836-B1C9-153605E13598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A951C0DE-47F0-4836-B1C9-153605E13598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D9AE5D1-F176-45DE-A447-07E3DF405F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D9AE5D1-F176-45DE-A447-07E3DF405F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D9AE5D1-F176-45DE-A447-07E3DF405F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D9AE5D1-F176-45DE-A447-07E3DF405F96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8BEE6440-B2B9-4C12-A93A-13DD5C3D6A96} = {5634F2A1-8310-4A9F-A08B-F0AF7D692AE3}
+		{A951C0DE-47F0-4836-B1C9-153605E13598} = {5634F2A1-8310-4A9F-A08B-F0AF7D692AE3}
+		{0D9AE5D1-F176-45DE-A447-07E3DF405F96} = {5634F2A1-8310-4A9F-A08B-F0AF7D692AE3}
+	EndGlobalSection
+EndGlobal

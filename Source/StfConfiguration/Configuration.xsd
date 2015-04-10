@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:tn="http://www.testautomation.com/StfConfiguration"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.testautomation.com/StfConfiguration"
+           version="1.0.0.0">
+
+  <xs:element name="configuration" type="tn:Configuration"/>
+
+  <xs:complexType name="Configuration">
+    <xs:complexContent>
+      <xs:extension base="tn:SectionBase">
+        <xs:attribute name="version" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Section">
+    <xs:complexContent>
+      <xs:extension base="tn:SectionBase">
+        <xs:attribute name="name" type="tn:name" use="required"/>
+        <xs:attribute name="defaultsection" type="tn:name" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SectionBase">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element name="section" minOccurs="1" type="tn:Section"/>
+        <xs:element name="key" minOccurs="1" type="tn:keyValuePair"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="default" type="tn:name" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="keyValuePair">
+    <xs:attribute name="name" type="tn:name" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="name">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-zA-Z_\-]+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OvidDemo", "OvidDemo\OvidDemo.csproj", "{2F745DC9-6ED7-4D97-A09E-3622261D0045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp", "WinFormsApp\WinFormsApp.csproj", "{B0D4652D-42DB-46B3-96F2-F977D021B69D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F745DC9-6ED7-4D97-A09E-3622261D0045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F745DC9-6ED7-4D97-A09E-3622261D0045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F745DC9-6ED7-4D97-A09E-3622261D0045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F745DC9-6ED7-4D97-A09E-3622261D0045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D4652D-42DB-46B3-96F2-F977D021B69D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D4652D-42DB-46B3-96F2-F977D021B69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D4652D-42DB-46B3-96F2-F977D021B69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D4652D-42DB-46B3-96F2-F977D021B69D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

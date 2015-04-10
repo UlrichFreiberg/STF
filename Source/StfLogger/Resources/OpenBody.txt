@@ -1,0 +1,24 @@
+<body onload="loadKeyValueList()">
+	<div id="header">
+        <aside>
+            <div id="logo" style="float: right">Ovid</div>
+        </aside>
+		<h1 id="logtitle">LOGFILETITLE</h1>
+		<p id="generatedbyOvid">Leveret til dig af Ovid</p>
+		<div id="buttons">
+			<button id="passBtn"          value="Hide" type="button" onclick="toggleLogElements('.pass',  'passBtn',  'Pass')" >Hide Pass</button>
+			<button id="failBtn"          value="Hide" type="button" onclick="toggleLogElements('.fail',  'failBtn',  'Fail')" >Hide Fail</button>
+			<button id="errorBtn"         value="Hide" type="button" onclick="toggleLogElements('.error', 'errorBtn', 'Error')">Hide Error</button>
+			<button id="warnBtn"          value="Hide" type="button" onclick="toggleLogElements('.warning',  'warnBtn',  'Warning')" >Hide Warn</button>
+			<button id="infoBtn"          value="Show" type="button" onclick="toggleLogElements('.info',  'infoBtn',  'Info')" >Show Info</button>
+			<button id="debugBtn"         value="Show" type="button" onclick="toggleLogElements('.debug', 'debugBtn', 'Debug')">Show Debug</button>
+			<button id="traceBtn"         value="Show" type="button" onclick="toggleLogElements('.trace', 'traceBtn', 'Trace')">Show Trace</button>
+			<button id="internalBtn"      value="Show" type="button" onclick="toggleLogElements('.internal', 'internalBtn', 'Internal')">Show Internal</button>
+			<button id="toggleAllBtn"     value="Show" type="button" onclick="toggleAll()">Show All</button>
+			<button id="toggleIndent"     value="Show" type="button" onclick="toggleIndent()">Show Depth</button>
+			<button id="toggleKeyValues"  value="Show" type="button" onclick="toggleKeyValues()">Show KeyValues</button>
+		</div>
+		<ul id="logfileinfo">
+		</ul>
+	</div>
+	<div id="logfileelements">

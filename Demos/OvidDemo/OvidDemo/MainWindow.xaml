@@ -1,0 +1,9 @@
+﻿<Window x:Class="OvidDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="ClickMe" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" RenderTransformOrigin="1.987,3.793" Height="59" Margin="46,34,0,0"/>
+
+    </Grid>
+</Window>

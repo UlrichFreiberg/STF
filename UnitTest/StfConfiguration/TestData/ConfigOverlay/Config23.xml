@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
+  
+  <section name="SectionName" defaultsection="SubSectionName1">
+    <!-- The path of this key is: "SectionName.k2" -->
+    <key name="k1" value="config2_key1value"/>
+    <key name="k2" value="config3_key2value"/>
+    <key name="k3" value="config3_key3value"/>
+  </section>
+</configuration>

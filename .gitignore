@@ -1,0 +1,6 @@
+*.Cache
+Thumbs.db
+*.suo
+**/bin/**
+**/obj/**
+*.user
