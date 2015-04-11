@@ -50,15 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest_StfAssert.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="UnitTest_StfAssert_Equality.cs" />
-    <Compile Include="UnitTest_StfAssert_FileAndFolder.cs" />
-    <Compile Include="UnitTest_StfAssert_Object.cs" />
-    <Compile Include="UnitTest_StfStringAssert.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="UnitTest_StfLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +61,10 @@
     <ProjectReference Include="..\..\Source\StfLogger\StfLogger.csproj">
       <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
       <Name>TestResultHtmlLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
+      <Project>{f6af2aeb-2651-4df3-86f6-4decae421800}</Project>
+      <Name>StfTestScriptBase</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
