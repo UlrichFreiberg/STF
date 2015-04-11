@@ -11,11 +11,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests
 {
-    [TestClass]
-    public class ParserTests
-    {
-        public TestContext TestContext { get; set; }
+    using Stf.Utilities;
 
+    [TestClass]
+    public class ParserTests : StfTestScriptBase
+    {
         [TestMethod]
         public void ParserSimpleVariable_1()
         {

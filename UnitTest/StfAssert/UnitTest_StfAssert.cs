@@ -21,6 +21,7 @@ namespace UnitTest
         [TestInitialize]
         public void TestInitialize()
         {
+            MyAssert.EnableNegativeTesting = true;
             this.MyLogger.LogInfo("UnitTestStfAsserts TestInitialize");
         }
 
@@ -44,6 +45,9 @@ namespace UnitTest
             Assert.IsTrue(this.MyAssert.AssertFalse("false", false));
         }
 
+        /// <summary>
+        /// The test cleanup.
+        /// </summary>
         [TestCleanup]
         public void TestCleanup()
         {

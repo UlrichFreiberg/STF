@@ -17,7 +17,7 @@ namespace Tests
     /// The load config tests.
     /// </summary>
     [TestClass]
-    public class LoadConfigTests
+    public class LoadConfigTests : StfTestScriptBase
     {
         /// <summary>
         /// Test of load config with 2 sub sections.

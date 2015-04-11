@@ -19,10 +19,8 @@ namespace Tests
     /// The over layer tests.
     /// </summary>
     [TestClass]
-    public class OverLayerTests
+    public class OverLayerTests : StfTestScriptBase
     {
-        public TestContext TestContext { get; set; }
-
         /// <summary>
         /// TODO The over lay config1 with config2.
         /// </summary>

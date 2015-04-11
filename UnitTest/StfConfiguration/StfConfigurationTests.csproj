@@ -63,6 +63,10 @@
       <Project>{2D259B87-A08E-406F-818C-6F60BC16C983}</Project>
       <Name>Yacf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
+      <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>
+      <Name>StfTestScriptBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestData\ConfigOverlay\Config1.xml" />

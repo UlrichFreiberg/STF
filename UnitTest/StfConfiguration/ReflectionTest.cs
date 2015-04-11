@@ -14,7 +14,7 @@ namespace Tests
     using Stf.Utilities;
 
     [TestClass]
-    public class ReflectionTest
+    public class ReflectionTest : StfTestScriptBase
     {
         class TestMethod1Class
         {
