@@ -6,6 +6,8 @@
 
 namespace Stf.Utilities
 {
+    using System.IO;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -16,12 +18,17 @@ namespace Stf.Utilities
     [TestClass]
     public class StfTestScriptBase
     {
+        private const string LogDirRoot = @"c:\temp\StfLogs";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StfTestScriptBase"/> class.
         /// </summary>
         public StfTestScriptBase()
         {
-            this.MyLogger = new StfLogger();
+            if (MyLogger == null)
+            {
+                this.MyLogger = new StfLogger();                
+            }
         }
 
         /// <summary>
@@ -47,16 +54,17 @@ namespace Stf.Utilities
         [TestInitialize]
         public void BaseTestInitialize()
         {
-            var ovidName = string.Format(@"c:\temp\unittestlogger_{0}.html", TestContext.TestName);
+            var ovidName = string.Format("{0}.html", Path.Combine(LogDirRoot, TestContext.TestName));
+
+            if (!Directory.Exists(LogDirRoot))
+            {
+                Directory.CreateDirectory(LogDirRoot);
+            }
 
             this.MyLogger.FileName = ovidName;
+            this.MyAssert = new StfAssert(this.MyLogger);
 
-            this.MyAssert = new StfAssert(this.MyLogger)
-            {
-                EnableNegativeTesting = true
-            };
-
-            this.MyLogger.LogInfo("StfTestScriptBase TestInitialize");
+            LogBaseClassMessage("StfTestScriptBase TestInitialize");
         }
 
         /// <summary>
@@ -65,8 +73,22 @@ namespace Stf.Utilities
         [TestCleanup]
         public void BaseTestCleanup()
         {
-            this.MyLogger.LogInfo("StfTestScriptBase BaseTestCleanup");
+            this.LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
             this.MyLogger.CloseLogFile();
+        }
+
+        /// <summary>
+        /// Make sure logLevel is set to internal and set it back again
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        private void LogBaseClassMessage(string message)
+        {
+            var oldLoglevel = MyLogger.LogLevel;
+            MyLogger.LogLevel = LogLevel.Internal;
+            this.MyLogger.LogInternal(message);
+            MyLogger.LogLevel = oldLoglevel;
         }
     }
 }
