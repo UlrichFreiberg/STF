@@ -314,6 +314,11 @@ namespace Stf.Utilities
                 return -1;
             }
 
+            if (!LogFileHandle.Initialized)
+            {
+                return -2;
+            }
+
             messageIdString = GetNextMessageId();
             logLevelString = Enum.GetName(typeof(LogLevel), logLevel) ?? "Unknown LogLevel";
             logLevelString = logLevelString.ToLower();

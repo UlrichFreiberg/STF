@@ -49,6 +49,12 @@ namespace Stf.Utilities.Utils
                 return false;
             }
 
+            // might be that a unit test closed the logfile- in the middle of everything....
+            if (!Initialized)
+            {
+                return false;
+            }
+
             this.Stream.Write(stuffToWrite);
             return true;
         }
