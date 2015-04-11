@@ -13,20 +13,25 @@ namespace UnitTest
     /// The unit test stf asserts.
     /// </summary>
     [TestClass]
-    public class UnitTestStfAsserts
+    public class UnitTestStfAsserts : StfTestScriptBase
     {
+        /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            this.MyLogger.LogInfo("UnitTestStfAsserts TestInitialize");
+        }
+
         /// <summary>
         /// The test method assert strings.
         /// </summary>
         [TestMethod]
         public void TestMethodAssertTrue()
         {
-            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_AssertTrue.html" };
-            var myAsserts = new StfAssert(myLogger);
-            myAsserts.EnableNegativeTesting = true;
-
-            Assert.IsTrue(myAsserts.AssertTrue("true", true));
-            Assert.IsFalse(myAsserts.AssertTrue("false", false));
+            Assert.IsTrue(this.MyAssert.AssertTrue("true", true));
+            Assert.IsFalse(this.MyAssert.AssertTrue("false", false));
         }
 
         /// <summary>
@@ -35,13 +40,14 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertFalse()
         {
-            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_AssertFalse.html" };
-            var myAsserts = new StfAssert(myLogger);
+            Assert.IsFalse(this.MyAssert.AssertFalse("true", true));
+            Assert.IsTrue(this.MyAssert.AssertFalse("false", false));
+        }
 
-            myAsserts.EnableNegativeTesting = true;
-
-            Assert.IsFalse(myAsserts.AssertFalse("true", true));
-            Assert.IsTrue(myAsserts.AssertFalse("false", false));
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            this.MyLogger.LogInfo("UnitTestStfAsserts TestCleanup");
         }
     }
 }
