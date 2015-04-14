@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Grace">
+      <HintPath>..\..\packages\Grace.2.4.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Grace.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -68,12 +71,15 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Source\StfLogger\StfLogger.csproj">
       <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
-      <Name>TestResultHtmlLogger</Name>
+      <Name>StfLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
       <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>
       <Name>StfTestScriptBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

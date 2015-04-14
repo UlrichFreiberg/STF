@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Grace">
+      <HintPath>..\..\packages\Grace.2.4.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Grace.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -61,7 +64,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Source\StfConfiguration\StfConfiguration.csproj">
       <Project>{2D259B87-A08E-406F-818C-6F60BC16C983}</Project>
-      <Name>Yacf</Name>
+      <Name>StfConfiguration</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
       <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>
@@ -82,7 +85,9 @@
     <Content Include="TestData\Parser\parser1.xml" />
     <Content Include="TestData\Reflection\Reflection1.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
