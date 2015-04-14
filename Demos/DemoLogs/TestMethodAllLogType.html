@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ovid LogTitle</title>
+    <style type="text/css">
+body {
+    font-family: verdana;
+    font-size: 1.0em;
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+
+h1#logtitle {
+    font-size: 1.5em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+div#logo {
+    margin-right: 25px;
+    margin-left: 15px;
+    height: 150px;
+    width: 150px;
+    background: url('data:image/x-png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQTEhUUExQWFhUWGBsYGBgYGBwfGhoYFx0aFxgYGx0bHiggHRolHBoYIjEiJSkrLi4uGh8zODMtNyguLisBCgoKDQ0MDwwMDiwZFBksKzcsKyssKys3KysrLCssKysrNysrKywrKywrKysrLCsrLCssKysrKyssKysrKywrK//AABEIAMIBAwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAAIEBQYBB//EAEMQAAIBAgUBBQUHAgUDAQkAAAECEQMhAAQSMUFRBRMiYXEGMoGRoRQjQrHB0fBS4RUzYnLxBySCFiU0Q3SDkrLS4v/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AkPRUibxuT8d4+QgYiowJBiAb3mZ+N7fvibmE6EgfS3MnCamWHh4jysL2I533nEREp3YRAAU+Jj05ECb2wYLqEiJi07+eOVE2MiDIHXr12x2krA76eJG7Dc+gwA2J4k/pE8G+CpXDKN7TNyL7dN/UYLTAggsf3IuN+fTHHXR4dxAkm5nnyjzwAa8Wa29xfj06Hy4w9gBOkkjrPoPgL4JRJE28hf6j1x1nBAsdtwReTtc8RgIaVo94NBNl0mALgkEAi8g3wWq41Xhl6yJ23gDDe5Nj70ggab9Dza1sNfOuhLNquSCQd7cBPlEDAFaLaSRI6G3PwBGwxHVgYEyBcgMAfpgorllk6ifMyxA58R69cAdgCYB1EGEUy7RwB5mBJgAm+Ak6V0XYhtvX06YcKDSRE2G17czinp+0Sq8F8uoWpocaqlRgpkh9QGmdQ0lY5mdsD7UylbM6Qagp6mhFpMNJBAkV3kFj4W8ILQYB5gNCUfwnQZA3gghd5FvLnEbN9q5amD3tamjATpsXv/So8RnGbPs33ToKN3IMklUZC0+IGkoZSApIU6149Ddr+zxd/BSpM7lQQahq1tEFQPEVAYkXgggAkETYJVP2hy1SNFWoFNwwpVItvJINtpOwxKrdvUAq6q9Mltu6IqG0SISTyPPfB8v7H0qWoOYDqwPdDQxDe941GqJ/CdQ2scVOY7HqIC1GqtQAKqgGlRraEIsxCg1OQGDgMLHAFPtpkmJBdlJMRoNzsb7KJ6njFp3y1QB31Ni6nTpqgsQLEiDJA6iInGLf2RNSlIZBWM+AKiKsAltTJNlAFyYmZO2KXN+yeaoDvFlirSHpDwwIbWrWaBPvaQBG+2Kr03LUwukamIW0G7R0M8eeJqOjQLgnyFtwVNri4vtfHnnZPtg1PXTzwZ2Qgh1ZGYRHhIJhvgZF8a3s/tdKpWBVQuNVM1EC64mQpDMC1xYmbj4RFoMvpgSTa0T+Gx8PmDgCKbWg2gHqbkmL89Y8sPp0pOppEbGdoPAEgW6b84fXXVpZIAiTMi0HYAT0wEGrTUydpJPuR71p+N5scEXLJEi0SIMj536YMjtLA3AtPy+e+OjSSdQBvY9YwA2X7v3mSCNiJgHjUCL7bbHg3wiQCDJAjSRAHMr4oGxnc4KBJuCQLi1/nsfTAWpzJE7gHyP7YAtPJ2kDrY/S44wD7PceTTAIj092wsLxODuxHi0mx8jAO838sHaprI8JG28ReP0wEPMZFaiDxMAeAbQQIk+uA1si0eHYki5mBBuARO/TD3pt4tMgA+9xOwBMSbWw2ozKshvdnkRItF9v7YAFPJtA1M0xeDa1tiJHpjuK2p206nT9n1x+LUBqPJ93nCwGlrqSbWJAkEXB8iLETjpJsRE8kddsNNUiLlj8Li4iOeu2JNKqpFiBe99/lx+2AiVV562PrF/KZGCihawmwgenU8j4Y5VTxCGG5i4i/wAb/LHEzBFpn9YvgBVBpFt56D8sPGaUtpgzNzwSB9cSBBkalB1eUk8/l9MAaiokji5J4vJO9jv8MANiTICmJ4EcyBgesSBpPNvKDMXwYU72cCRYRe3OOf7dMxAJgxAuBHXABy+YMCy32NwD5eduMA7U7RWjSNV9rMF5MEEgCD4gJN4G0nEl6IJksIZlAAksZ2VANzM/IzbGR7ezBrVFRWZEgKWBRtIa4okrU0Bm0yyyZIXi2AqO1fa+t3qrTJp3lxSCzLwdIN9RXabSZsMTOxczVzCN37MyllUMqqalR1I7unT1LB5Ym0apMYm5b2Hq5llK06VNCxqGBBMkkqCJCIROkAtAUEknGr9mewkGXpUWADUmdSzavx1jqNwD4lFMTFwY2xVVPZ3szUqBVZMsqd4yqopk1AviJVaoiTKkQBBvB2xsMr2cpy+lZIUiWnxhhYOSODczO04suzcj3CRfwsb2JB3mOQDa39IHOB5lghJRlQE30hmgtJMQCb9GA89pxEV9PIqpK1K40rcKqQSdpYq3iBM7AbwZw7sfQC4QU6a6vD3ayzKLanmAsmRB4Gx4lUsu7yz1FKgySAKcnqxEKPntG+HrmVMKhWnTAu7oxLG3uqI0r5sVJ6c4CDmGbVJAamRBLJpgiYPeIoA2P/FsQ6py3eAVmZWtU8QsRaCXVHS5/wBSkxxiz7Uz50keCtItNN+N5DSQdrB4PQYp6C5iqYoKDEeAJKAyCRUqHWEuNoJE8YDnaGYpCoumm+kkE6abEvoFlAQGVBtBm/AxR9nL9pzFdKWXZ6gGpKtNWZ6bFiGSo76WSpc28MDwkGMWtTs0nMVFzRo/Z6Jh6iGajVSNQoUKjEFHAI1FdO5t01/ZgKFsrl6S5YBZJplWC6rhyZl3jk2G97YDzvP/APSZ3Q1alWhlDdquptSgTvCjTTiPdDHffGa7G9nsy9V2oM2YpAnVXGpE0j/LeappnvJAPhaR1vj0f2m7bpf5JU1crllFQILmvXQ27wi60EMMTBLmYnY0naXadU1qi1376tAQZSlBpC7MsaAwp+HkkHki4iqP/jeX71KOp0rmPuzTcxIB0g3tvcnElluZj4TIJ2v5YpzmUSoveZqjQKFGeigIVUIMUQyoxqkkGQCBJ+GNDUAJJkRwCD6i1vTEQOk94i44DGfW+DVKQ9JvM32k2+uIy1NMNYERaJ25AxYrXDCGClbx+k+eAhFjbxRG97Qd5jrbBajBt+u+3wgj8sGqFGIDFQSYFx4jBME+gOIdZoUgi19jv08/ywD6tFQwM+vFusdNrnDC2mymDM729J3vhwzBUAWEAGPlcnpiQoBaSBvqIDDfYfDAV8XIAAvwxkDym3XfBM1k9o09bMdJE3tsd8GaARCnc+IbCOOsieOmGU6h63FrSLeZwAKWXgAaUECLWFultscwWu7aj+np64WAJWW+re2429fXHcsbkXgbCPgPphgqAGycgbm/MmfzwXL1lbiN5PxtgCAgyGgRMfQRb9+MBpILsLwZkC1hFtt8FAJO1xcxPPWeecCaoQpkTeJj8rRvgGUqpFxZZ56jp09MdbM6pBJkmOgHT842wVaivsBMdG32mNvTAu60QSu/hkAxbfAKppOnSALEFr+903n+eeIVQw3ivI3FrbXEiLc4mva8SAIMKeZi0fy2GZka1IiPEEYjgMQpgxMaZ9MBlfaLtXuyigsrOt3UEmnlyVBRBP8AmOApYnggYZ7JdkCvWLFRoQMECAAX7si4UrIVjJDA3GwxHpZQVq2YMsC5mCwUkrUOhJqONSBVpwArEj+m2PR+wckQqsiAm6qGEgGNNJdRDEXFMGXmw6WqplHs1UUBfAA1JViywNBPpN4G1sWYyMa4kgkh1m+lgBK+YaY+GOd6j0w8qqVFBQtEKwsJG0qx0twIQ9cProXWSWpVUEGwIa3QXg3iI5iRiIA4YAauDpVwrMtURGoaJZGAsZ6RJ4bmMwBpBdg0gKpYqSW2C94Smo8DEJVeodOpae41anXjczTIHrOC5cOHWlXLsr+BkqQ2lxN1Mc2M7EHbAHpUTVBAJfS3vjwVFP8AqEE7iLAg32iMVGfpKrlm7xgDpJFY+AnxadOgBSZkDSZ3g4d29maK0vvKdJtM+JixOkKGkMjBtIJYEtAjriH7J+zrVqhqKHoUSPEdLDVAt3HeAELG5AA6TJwEjJ99mqrIrEd2Iaqy2COPddBA1jw2c3iQi740NbNplcrVYGoUpIdLGS9So40hmMCSWMA2A8gMZqvWJyz08qhXLh1NWq5F++YGIBDMzKUAsIkSeMc/xSm1Rdc/ZqJHc0LN9ozCXZ2It3dI2AMLrBv4RgA9hezlZ0o96gy1FR7lQCo7GpuqeIEK7M2pnMsZAEYrvb3syjkst3FOvmHqZlmZad1ppTZi1SoyU1lkBNlfVPQgY1ec7ZajTWpWvWqyEoKTuPxuV8Qpou56n0xlxkM3m3Oaq1WotUhaNWkdHd2buUq0jIqUpkSCWBqNIgyCsvQ9nq5oo9Coa5qM2hKLRScKBOqYJGlWQq2mCygFpIx2pWzPdii9EDLlYFJIywdjrIRzp1VG40BoJm8kHHo+RzD01p1KjU6feGTp0hVLKQKjaTZS8E7kahMDbPe0/adXTVda4okFaKs+mAoHeylQsAzank6S1rabTijDvn66VXCpRpU6SDMCgAy0mCQN5DM4DTLEmRHGNtkc6Ki0yBAddYG0DYzIne2PPaPaWqolEvV0lEoNo8JakDJQpOwBUCb+8TO2PSsplVVQF8KLYC8hBYCYnAS8oQ6x82gXPPAg+vXDX90kRxA+CjY77nbEQ7+8RLG3XzMX/LEhHIgmL2kRN+hOIgdy14kE9JvtHI9cMzJgFSb9Tp5kRERN7YsNKn8Z0mePxAbyDisjUGGo7gg34i1/IfPAF7qVUkrIAEwNx1iw64LqZTBAXke7JsL7/wAtgIjwDcSBtsOWPQ4PTUdZUeZNpAiwwHMtU2kK3x2+pGD1UMWMbmIFuBbbFe+kvExfzAF4A6TzczbElO0FTdhIFwGueOl77+cYBi1/L/8AH9b4WI9LtKiRJVSeSS3/AOuFgJedy8QbDrx6+eBgaSSGEbiGER0x1XAg2M/L4dTh6UliYlon0J3/AGwEkVzI851EAkk/sLXwyvuRHMCIiDc72BxH7szx5XPqSf5zhxrNtEgXv5+U4BZeoRcMb9eoHI/nGCPXYgfW3xMftbffCFObAASo8Q5nyPOGOlgIPhO89PjfAFqLIBURBHMcYjZpZZLiCVO8c7fPEigy7FSFAidvy4xmPaLtbX3yUxqFGDHMTodhJF/EFVRJJDbWOAq8g9WlVYOXIQVlJOtiyeFnJBemXCrpNvIaWmcehZDMHQaRaAwm5ltB1MANGggqSRJXhTcgnHnnYkCo9amSoSmZUbstVWK6ip0a9IpSIMlwBOnG5y/ZNNIFJVUwwVL7wahIUQBckeHTaMBbCqW106iKdcllNqNVtwZuaVUyPEJVuRe7uzckkN3ZrBkbxUquoMh2IHEWPipFQd4OLOtlVVSqgLLQyyY8J1HTezcWtJPUzDU1JU6g3iem8gSUU6QZBuBqjASM65im/iRwySNz3fhZifNRaR54pe288o1OYimw7tgSTM6AAiwrMSUhfEfLFz2zm+6RSaesKqsw8BPdaYdkBO6t4iDvBENMYh9gdmKHXOVqLIxUChTcklQRLVWSSKbSSoAJ2ERMYCFkOzatet/3lHRSyyrUCtDNUZiRRiPcFizKRIKpi6/x+oaFbNeEgHRSBOlJYhFaTc7gxzYAScQu28/NVsvT3r1j3sE6oRaY0qR7rQIMm1zziyqdp0qFMnUrJSEgCNOobmJ91FEA9TbbBWXpewS1aQbN1TSTwsUCAvUYkNrrCSutjACKDpURN8M9sez0y9LL08pRd69RxGYZdRogyqqqqJTUbaVEQpk2xZVvaJEonN52EQglKJkOx4WDALnqRA62xXdlZg5nR2hm2WmwqwAAdNCi6TTnUCNJvLxckkmLAK/2Vy/cCpKL3pUsjyfEVOpWMgHvNLPuzMRN4sLzJ9onMtSoKpq020qWEHuxTAPWdROkkngG+2I1bssMH01afe6u9NZ21xUgqFppSlu7WnaxkC59441nsXQenl9NRSksWGpdLHVeSCZI2sxnjjBDOxOwBl+8LVXrNUILF9vDOm0m8GJ/0jDu2KYK3WYnaCI6En+WxeZhYE7/AM2OM92121l6ImtWp05FtTAE7m173GKryU00p5ym+okQRsXPigCCLxHBEAKIO+NOKpWRBiLEeW5P7Ywntt2inek0aqsNQbwMInTpEDVYEO5JiZO+NjksyMxRTMeHxLMA7NsbCYuDacREpYP4WM/0kbXIn6fPBlUMCYgjcfWdsRoZWnUT6n0Hug3/AOcSaOaGxYiY58Xp1GASZmCfDA5Hr9PjgPfLI8IZhMC8SOkeU4I6XEGbFje0WEeZviPogagSeZJuALSI4g4AtQ+JTpa5uQDFutvqcdVgNpEWvxzhjM2pbkC1zY9bfznEtRqQyJMyT05AnnAQqob/AFQRccWOqfXzx1nsRFxG8+Rmf0xLenqJkCIG3mNsCqICCN4g7en6WwFKMkB5zeZY+9fk+eFi8poYEQRA5GFgO5yjcE7eUfkOMDS1up554H8GO6zIGlZO5ItIsAL3+mDgahpkSD7omQeZ/aT8cAsvEWi3P9M3/bHKlHcKVIPlvPXzjnAcvXNzERaIg7DBEzBB6348vj8cAqfgNzIE+GNpPU9bY5ScEFjsTaQLTaT8uMdqqDHO/wAZ2sLiccZWYTva3qegwHc0sKWVhZWYA3BKqSCeuMx21lhTgwtQKQNfvBJfvHLJGhgRTBizQDGoAxo6VfYEWUxuOdyfKTxip7WrBKiIFgqC5YKQGVZ0kNd2adMqJ9yCApIID9n+x6igq4E94O8aQTpVZWnuBC+BmZD7pA0g2xrabnw1GBbWATqBA01WhhBhix2VSqkl42mKbs8IlCmq6SGqOQDJWrUps3vIsa1kOSF0A8qbY0mSqAdw3jINVyBcEtSRwmoLTuRDNc7nywEulmgTVZI1UmKeL3DV98i3RjLROxANsVbZulSZdbaQ6sksCEIYltULsXcWJInWqzcYZl83To5TUxChNbPAkgyrNUIFydJJuRscEy+eUnxKe7oaCsrCtUqT3dQHSNUKCZI0mEYEnYEdLZpcvUY+HVVek4EGmo1EqrqQoMgyr6uCxgjEzKdvJVrNUYuKVH3mayhlBqMVYP4iQyDaAfPam7XQ0+0My8uBmMvRbUCzMupxReApgwqTEAkk4gdnZVMxSZftTnKUqoDVmDo9VEAbSiNB7wt7z7DSCADABQsjRzHaWbzD5V+7SNP2gr4KfeEu4pkXeqdWggARoudgT+0Hs7S7OpUqgWpmsw7sAUUqiUUHiVEUkKNriSTOND2R2kMwsUwuWyNOmCpBKgUeWuF0E9YPPqYXZFZs0/2po7hZp5dNJZRSDTqM+87wJA3UCJ5DOdmdkCq9Y9olqThmVlmFFIo1OEJHLHVqkAnQD5XXZIr0qS09BzVMQtKtRqBKkMSEp1VqOhAKwQSSNxLQCe+1wpVqi95TpsgUHvWRyFH9DViNKK1hLUybCeosvZDsepSWGZu71F0VihcKSG0eA6Qsg7ADe1zgi37C7KKJ96ioA0pTFR2AsL1AW0a56A+pxeVa6osnYfy37DEc7W+MTf44pO2M4EYap0gaubm/wNhtiqNm6lfMGNQo0p4B7xli1j7v0O2Mv2i3ZOTLK1MVKzARSYGo7TIAVLwZ2jknnEPtPt+tmg1Oi/c0kHjzFTw06agwV1W1MbjSD8dsV1JK60HPZOVOkDUc9XjvHHOnWJjgSNvniDO9uZStWr06r5RcvSLhQdKKwnSRr8QIlhp8QgBjaYGJ/s9FNq9MJoRChE9YK6rW8QRDYRJYYqex+0MxXRqmZru6SRpcEjUsMHMLBgxCXltI6YueyKkvmF0lahKk6jDFAIi+4UlZa5JcmdsUX6HWsRsd+nx3viWaawCBfUL+flbFeJ1WHEcRMiT1mMHy9cCxMyAeN+sdcRD6o0mw4jeTzN+lj8sAo1JIBAHr02GJL1Rzv+YsTaLb/niKiHcXvxbzt/IwB2U6hAnj4R089/hgndtI8Ph2IM8/i+U4D3pLdLRPXr624xMFWAVkGLwVIMfCYGA6qiQNO52mCQNj/bDa17hYtcdf2wqtPaWUCehFx18jGGHMlSTYyZJi8xG54nAR3Qg7L9cLFilUkSSJ9P2wsBUlm3Ckm02PwuQIv0wRa7CBedyYnfcT1xNNOfdJW2q+nTbjecDq0Dc6jME2A3n+XwAr8xJn8Lm53EgWxGpA6RaIt6i9gRb53tiUh2BkQJ+PQTbBS4axU7dRFr/P98BCptp5i42BME+nw3xZqpIsy/MiZPlxiPHiIII23IgThtF4MydNxuBeY52H54AapLwdIMwTpeQB/wCOKbMsS2llg1SqsAxk0jpYhwwsptsoJHdw2640AzPiifT6gEkcWxkfaxak0wgGqmNaRpA00iGUtq0qYlVgajOomZAwEnO59UC1EOqkp1PBlwtQAazqYVSAwO+lACBBjEql7T0qY7s1FZC57urCNoqLpY6kUXHimVABlxMm2By9Z1p6xVKshNRqfhAIqDQXAO51kqU0mBJG+J1Ts5E1hlbvAiRTZkZXJJDsjK0qA8aP6tIB3jFVq/aH2mpqveFVdm0VAqV9VEOCIbUniRypmAEMEA6htpaXZ9HLZWgtIItSu9OoSWB8UayI1AaUpyBHAGKf2a9mxl+zsxRcI2Yq06b1hAJSmSAKYMHxBVYxNjeNsW9aq1ftBo1DL5amRUPjCrcQoNhJVR6DyxEATIVsxm69fKoRS00qdPMVCO71UtQfQPEzAOxcG4LILgXxTUe8zYpZXKUTmKa6leqIVIDHxS4ZZkGALCEvxjU+0fbzVMq/drpVgKNIX0xUOgSo2uTYm4AtfET2py1WllamXy3erlcsi0VSj/mV8w4MhiAWKJqWQPxAzOCst7SZmpQqDI5qn3FNF1USzaqdSrqGipV/CVMEHoCSPFBxp8plu4pakzFamWVS1MaatJ5BOjvav3bLJgFoba+Kr/qVkHfs/synTL1GVAxdtTP7gDEgS06iBHEeWIFPN5oZcuK6Vu7lDTr0aRUhUGoagmvWZ8JvMxuDii+XtT7uFdkqAL3lN0povd1j3QqKUlYDFSGVirCQQDjedjZdKaBaYimFAURAVQFVV6+6Bvfc+Qz3sp2IuXoBdC6nBZ/DKIGJcUxEQF1EiYJuQTjS0gRMKOsTF+QRbn0+OILRKE+t+vP/AB0xX9p9nBgQRLC/XYz8d+euJeXrEXPw/UdMTAAR5Dj9MUYav2XTqt99TDMhGlWdtAKX1Kp8GrmCDtuMWXaGdC0ClTu9BGnT4lJHMaZAa04va3ZwbeG3iQPPp8sVPbHY6kRpg8QSPkP16njAePVezWOZSjltdUA62BVQxvGtrmZBciYGo2gWx6L2l7GitRVkhcwgswtNtJV4F1IlSOJPMHEv2ZoJTaoAsMQL8kf0jyGNGptIP1wHk2WqNABEOCQ4JurAwQLXE7G0jjBAInw3s0gx63jGl9tewQjfaqawGtV0j5OR5eV4PligK2gn4+W/wtYYiIwLz7oI6zcRFsHSCCCsm+7WubWA225xJq0JmCFNyPO34r7/ALYj+7F5+F7fHod8A2qwDa1WLiIO8giduIw+jmCbkAehvvF7eeHJWmTpm/A55J6iMSK9K0KTxcgAT+IXwARmzGnSD06W6W2wNgD7wEc+I3O9vLrbDh6HUBAiY+f8nAVBKkFWPwg9OfI84A/2rTbwD1cThYYlEQPCD66J+MnCwBgwWLQBG/M7kT08scqVjvHiM3kwL7nyi+JFUBgBKk7xtfmbYA3+kC97cAdZG84CSlMEXgkbRa2IDCLEDzgg8ze9hGD99AEEyd7bA/TBEpLpIgDgWPi4uBzgI4e88CY9DFvScNKK4KEWjg2sL+uHHK+cAdZJJ6A/Da+GUdRJOo6SRpFoWRBIO9ydj54BzPaynzIji/SOcAz2Xp1V01EDAEbsRB3kFCCDbgicSlcC9r2A6xeLYXdgH4jzueY6TgMf2h2DlKDAzUfvUdAHIkM7KqmnoRi1QLriQSbXtBJ2JlP/AGhk6a90BRNVtKBgpWnNPvfGPxvS1XO7Cw3Oyp+yNPMoe9zHd0aJU1HCqWPiDR4lIAlQZIjyOKRsj/h1WtVo1u+y+YpP3deluSCGWnNEQp4BjTYARsaq+y+ffuc49ODU0VtJY2Zh4STBiBcCTwYERis7Z7TOXo08sGVa2ZZq1fUVARGNx94Y1FIQXMyxA6Q+w2qtopUqoRfC9WtDE6gQSiErrdi93jT+LoQC/YuzwK1av3mYUamqVGqtFRgxhQEhYJaNINhueDBWf+qU+15GnTA+zpWQtpWzEQqsCTZASRsJ0k3BGPUqmfGRy1aowB7qs4JaYGpmqF+TOg7DnoMeVe0HZLVqNPPMgpOSpCUl+5RUI7uSoNwmkE2upgXON5RztPtLJMSWFLMKmtqa941Gsg0nWoBmmwG5HXa2KBo9St2dVzqhjVqo5pKbnug/vKi2Dtd4v+EcYpfY56La+5q1C4qWLaWGinAXTHiUjSZLf1cTjU+zPstmsmUWlnhXyZDEo9PxBmvNNpNif6j13N8Tasq0aRIniw5B9Np8pxEcQAmAY2g72kyekmdxadwcWCPaPESBM+pkwbiZi18VitEQ0kQQRESYAMm1+Ovniblnjm/0tII28hcSRO2AmFwPTbY9bemxv8jiZQqj/nfp/P1xVqNUMTNxHWeojrLbH4YOlcckzx5m8x6x+cgYqrehWG2A50grfz68j+fycAp5hQJmB/aQBG4i9sRs1n4EbG4EgbrA2vJuDG8emAyXa9U066HdtR9d7noZj+/GNbRrzBAaDfwiQPlb88YbtKczXFJRA1SYJVoFySY3gRFt/hh3tb7T53IjRTowurwVWDFGDEgSQCARI97TiI36OtQaCJDAiDaeCCDfHnHa3Zhy1TQ0mzFGixUbj/cu2/niJ2d/1SzZamtbKIQ39BJZoAJKjaL8nE72i9phnjRpjLOop1RUNVxp0hf6fNvdPkTiqiFYNpHnIsNv564I6hvCGIIi5AJYwJtaOmDHLAqYW+++3PBxE0kkGPe6fOLbepxESWFomDAPEc/th7OYsdSkzfr/AC+BUjpkxF42+eJhpMVuPS/FrW2MYACmEiDMibi8nmcCrALbg7g3I8/5fD0pSYg7SOdp5/vhvdgG4PpHJ4sOdvjgGqD0+n9sdw6nSAA3+BMfnhYBVqVvI7dbXvfDiQY+sX38rDrhNmgZDTe+3O0R8MNzSCdm6bHffg7YCV3an3gLDi0H4HEXMHY8AgT1O0i9r4bWqlQLkwTYTfcxgtVgykE9ItsR6eeAB33iBkel7xxPW84QSAbAmZIHEGRbrhZgELqAkLFyGFrTxv8Athi1gZkHfziR9d8BxVGrY6hsbRt0m2+HJKmSvSJAMGZ+PX0wSgRN7k2uDH5WxxW6gXm3n1wGg7K7bShTrFu8ViAwdKTVIUWgoB/VqvzOMH7Se0NGomZl6JqRpqmkO6TMI6koxQknvUk7knwwN7eieyaVDQrCgy96HUAvIXTpsLAkGZPOMP7YUi+SoZXMBRmEZhUZpLfdAudMTdxcTqGnUeMVWUyvbusaKVJzSURTo95CQfDDwpNbwlSQTA1GeTi57K7Mq5uGzDqjIyvSRW1U6bJNqlJjGoeHUxMkHTY4XYOQqU6ZeJKRSVWA/wAxRoLzqJDrKrC+ANTidQGnmaekCKtMB6lUqioA+sAhyr0jp1LUBUljIENBgzIaLtHtU0KWnuWyrs2lq1J1eiTY6yNSvcaiZUbkkRgPs1kamgZig/2fMgsHWS9OpBmWCkAkgAarnedsT1yxXLotXvHI7mtXKkmKa+EGASZbxEC50pPTBcl2qEr0qKI9TvQxq1CD/nEuxubd2AIP+6nvOIjRezvtR3jmjmQKOYSFZZsxa4IsBBIMNaZjyxWV+1B9sehr1q0shhZU0yoe4Hugusb7HF7nfZ+hm1HfIwKiEamxRwDvdT1vfbGfpewdPJGrUSrUcGyhwCVUX0ggbk+V+cVU2iIJYtqvvpIiY3n3djME7Xtibl2LXBmeQReCYud5i0QRxvilyuc12aBMGwjryfdsSJ8sTqC/1De0G87TJ2O6t8POMRFpRfzB32JjfrETDbG4jHQwJmAePlEmOObdRI3wGnUMXuIB4+Pl/Va1xwDg2o87yN+hte3J4J/SSkhIj1iYmIFzxI1D6xbEHP5sKDNwN77/AIT6gHY/vg9Xwjz3uYiIaLDcAEREx88UvaLxIkfiBAEtbYiCbRFufLAF9n66Go0G53tE7fH9PTF3nMzTSkWrkd2BB1bXtEHc/XHmmfyOYqVilCr3RBjXp23kHgmdO5ERzgHavsv2mKev7WtRotaCDueSEbzAwRYillTWLZd/DVAIVgUqBgCCCG8RAWIkdcSnygBsAQALjpyfXGf7HpKwpVi7PUCMhNUg6DsyjSq2LD3rkxvi6D+GC49BHFzHP/OA6xvMiOt/rghqa5E3EQRtvEeuBpBiCuwO++x2nfDK3VRuZ3t1O2ANmKFjJU7zcdAZ+mOtVIWxkj+T6RgdOuSDIBuJmI2Jt5YLVqgAzAFyfSx+PTAP1Qd4/S2w6DHWAPTURI3meeeBOAOTKnwwxOx2niAfPDACTAIkAj6QSB5xOAA2WINlt/vx3Dg1TonzjCwBszTNmO43jgnknj4nHaBOkXabCfzHNsIVriQCATF5O3kLScHpoXNwFi9iJ3iL4AaurmQCBNreZ2A88BalveebX3nHVJG/rAMjzNuMOo1SBEjeQJiB+0YAQYxDE6bkk9BFyOnrgwqCAVuDJkfO3XAswgIgwAf9U78C2BsSuxG1xOxP0t5YCS5vMREQJ2B/fAaDmTpH9iNxI2/5wOlUsGIPSzQQTtP98aLs3/taLZx1Qw3dpTJ3JgWt7xa1uLYCL2Z2vUydShUqU27vMTSgKZJ3ptpFws2BGqdXGHe29XL54aQhJ7oiowjwgkBCCZGsENHTywWgtLLU1z+cq9/mUp95Qp6oSmrBgoQagGZhbU3oIxkMv94uYero11nbUqnSqgyYUX5J9ScFVYrPUonSaiBS3eHxqjBDSQalRDBZarBoA1CQfCAcXeTp1FpB41tVZqwUyX016ZBEFtSmWRywkAkiwxQdjd4GVCEe7IDdVdVVCSjaDBXu1JLKbqQPeGNh7IdiVVCvUd1X/wCHSLa1C/hJJMKDJsoGyATGCHdgZXNa6aVaboyKiPWR/C1OmCFGkNGuCVLaJGoweTs8v2bSViyKisbEqBIA4XBqCR0PzifynjEwLEfmd7bxgp/ZsbRG+39sSs5SlLz6j4jEHLGG26f8+lsWrrYidxtijy/tCvUo1oMgFuAWgGw2sf5fE3L1CQBAT6yReDHoDtiw9psirb7iYI3i34oMcYzGRrur6HhSRa95+fl/xiI1eWzMm4uIB4BYx87Em24PlgnfzIHznrwTuPdkTzInFFSrq0A+ICxABj/+bgXGxBsBfFhQrzt5xzBW/PE7rcjVMYCRUrAyJsT0EQQw2nmBB9cR2UNERNvrpi25uI9CBxiQpWD4o3g7zMkREHoR0k4FVq+I7AAk8g3Mz190X/tgIVHs+5Cje8xvuSd4Ekne+MR7TZrMCrSpCrUp02JDBdXikwATFrfikRxj1dHWbCJBNrkwASZmdQBncyJ6YyX/AFE0mh7yqdTLqckCVDEgxML4SZtIGAqaeWCU1VY0hQLmSAPM3n1wUDpI6mP5xjhoSLExaTBtb5YdQDHrB58vObHpgOVKjLY7CLAW8/lgj1lgMbzxHlYb9cFDSoHxtF9/LyGI75Y/inkm1vIycA8JZjLTM3HwixsPPHa6mwuTEjif3E4ZTqs1rjy0738xtgtWlsfKYI8O82+WALQq+Hf4mJHnH026Yg1Lg2/CWsDqPmB9Y8sPfWXChAF35md9gNMbYKHaR5iNto+k+owEGmpgeL6/2wsGLHp9ThYBV9zC/Mkx573w6jV0/guPWD8fjhMjQJsBJ+fUDbD8ugKtbgwbXJ+XlgJVKorH3eIsYt+pxHFEAGJI3gtflbc7RgWTQmdwBYje0cb4L4VaLmBA4k82H64AFemQbC0mTebCbXthPpgypm2oBjtvaeb4M1QMPEskjqL+X98BgTb4zx5b74Bi01ElVIMW2IAMXE2AtscWnaeYGbTL5XLUygSrYkzqhHGohbAlm1EzAg9MQRYyLEDYmNr8b8YL2d209Gpro6DVKwdal4H+kK6xPUg2G+Ad/wBUqtI1cvk0UkrTBqMDZUSABJ/ERIB3viopooULDkARdmYwLbG5v54dnKdSpWq13XTqhQARp82UyW8R4IEafjh1GlVNoa53uYnm+2AF2N2JTqZjWF0jxamEwdWmVAaQJgbRNxzj0XI0AkKoEbjmbgAg+e08xvit9neyu7RRcNbVpYwNpgiJ2+fmMaOlkyAOfoPKw2ERgHonI9f5GE/kLx5YLoMGZH/O+OFT8r+fM/rbFUNQZn4RNuv6cdcWyG2KluSNxe+wiPlOJmXcwJn9/j9cBWdu0tn1AAETPSYtYyZIjzg4yPa3ZwqaW5jfSNXBE8ECN/3xuM/7sm4/UbGOuKNMuCSQWAmDM8SFi+0ehlrnERh83UaiS1TUnAYBve5MjYTHzMxg/wDirSBA1Heb3WIBIJMy0RsIJnGq7SyNNkMi7CBuOQBf+mSesjbrjy7tjKimx06iLd4AJCqNXict+HxM34rgibkENMe3CSQCB1tcCNYtsLFfITvgFft0UzGoKdMnUTAi0BmJH4STebm2Kjsvs81F11iS5JMByFiwuAPFIA5gWEbzcnsSiH1GimsXB0Sbzct+IzN4wA//AFlVZCKCl5/EvuXkEamGkhTYnz2OImaTM5l1eu40qQdKkyIZWZWg6dLQfO5vBjFwqaR+wFzFycNJFidUxE/W1hgDUI0mxMyBB/vga0J1QT707WjeN9/PBSgiRcxwP0vfA0ci30tMYB75cDYNIAj0PW/ljuUrbmIImb3mOLW/XBzUMQZg+Q44kRgeXKmALdL+e3UnABpOWb8Q1GTcDEhlUzBt/LeeB1EgxYQYg7wes7fPBqUgRwNhgIrIIm8XIM8kX+mB09BsA1r2bcn/AMcS6rSfED57T0vx1xCbKSSZCmLeoJmeDaMAM0k4NT4E4WF3ZFixBHGoYWAfmGBudwJ2MEbbk2P84w5q8CYO1x12G+I1QOYAOkWO3HTaOuG1D4IMERvG/wAhgJ3ZmeEsQCrTzERewgjDO0qqlyRCzYsSAJ4O8zxGG5el+IGJ67Hcc4ZmEYlYaep5mJ6G8fngBNSIJOqbRpFh6zwP5OBrWkFRO8CJmdtt5wapVChmZwAoux4G28CWJsAOTjNZztA1BUQK6Lp1abCaZbQGZ5JDExAsIMaovgL+shh1Vlq1jMUQTq1ESFZSzECB5eoxn+2O0nUPTNZjULKFpIoBVdOoqWA1sZAAKMR1jGo9mOxhQproWHcKxdhDMXR2OnwioadwNo8O5g40Hsn2flKISmaSo0majAEVGtcOWY67G0mL7TGA8vyXsRmMwomn3KSGLvBqM1p/1TLGxPTfHp3sx7JJQWV1Fti7XYxbwmLAzOkneDc43NDslB4hBnmbHrzzz8OmCtkgNgI8rden8viqpsrTbwm4jeDIJ+PW3Hri5ylQTEjpGI4pnc2/nX584Y9t73/Pfc8mfTAWNTba/wC/PniIyfU/z+euHUs2GEH5cxxI9CNjhNtb8554/K/6YCMw4A+Pnyfz+eC5UbeVvhwfy+uFVvPnv6fsbfL4Yj5etHMmbWjczBI+Xl5b4CVnKMqwuJt/Prir7yCbbGBEXBiBNiNp422OLl2MTvGM5mk1VGU2axB5MAkje+0RtBGAbmc7T0kWBPEw0gWMWJXxcDgY8r9uM2rg0vu1EsRrk3iRCiIN/eI8r41nbGUKFoMAgFrHR0gAG4mYlTE4ztJFq1+7LGwLQQgmIgCDxq485xEWncgMApEhd+R13HliZQcwviHMc7m8+V8Ru+C8+6pBHl+uDDa3uxba3r5YCVpDi0bAixt8I64F9nMmCJHQmTxBth1JzpO07WG5G3Mn1wxKhEyOLkzcwfpfAcJIHoNpbpMbYYTqNiB8xFpvbBGqbWvbjmN/Mc44yyF897SP+cAqgIU+VxvubTiOAQynkzbe4N5wSmxBg7ERt1+uJK1VNpU2P4RAwBxVXcCx3+W8YNpBXz6TBvtxhmWqCTcEARvF/wAjjh1Ag+GDMAb/ABwEd8uJB2iBf16/PA61vEReIiDHwxLLBipMft8DvgdVDECNuPmY+u2AryG/CoI4OkfrhYM8TcA/+OFgAkjwg6zbaRaP59McFMXB1bx6j5fDHdIDTPig8gxOw/nXA8s8D3edjsJvG+Al0HG5VgNtt48jxvbEXtXtCjTGzu5KxSp3czZeDpJIIA/FECcR+2u1Vy9MtKhj4UF4LkWkAGY9OBiJ2X2qlOoatelUCuxAqsGKyEXeYYQ2nYab74CsqZ56hCZhAo0llSwIemVYBJkuZN5NoIIEQdZlfZinXpuWQAO1QF0EXdlZWDLCQABAHSSCbYvqa5essDS66ZAJsF90RrX7tIY7qgHCsTOGUuygj66X3LghRpBCktAEgGZM2phtbQS0AwAqh7L5nL/+7hXUTKXDCdQBI06WgNYsKZgQBthw7XBEMCHb8LSR8ZEH312Ji9pti8HaTpAqRp1EAqLi7TaNNgssV0gExrY4Nm8tl8yiuwV1EFWg+qkljDcEaqhW22Ap+zO1sxR1NQYNSCg90SWTxBWADAkqYDfiM7kIMazJe2eWe1Q9w1/fjQYIErUBKkSRyMY3N+x1Ni5Vtx4Q91VRadUpKTqliBTAYqA+IOc7EzVK4PfD3rvDe8rF/vACB4NKsxpgSunexXsCQ6hlIZSJBUgg+YIsRiNmcrAsed7/ACt6fXHkGR7frZUsyM1AAyVCh6TEk3FIw8szIAd2MnU2PROwPbihWHd1qlOnWAE3IpsSJ8JcBhcEQwFwReDiiXVWCCN/XcbyYMmJ6bDEplJFiNunx/THM5TDbeIHbSTHwg7RfHKCG9tun5fyMBx52IkEG/E+X0xGqUjII8xsf5yfpiZpvB4/ny/bA2Wxkjy39ALbnAPUkieIH57Yps7UhyeojoI8rETJicW2qZ8+v83/AJGMl7Z5gppZbFrAnaQZNvlAv6YCs9ps4qp3ZIZjCgGCTqg2PhIki/pjI+zmXBrs8BfuyEhkAiRLKJA0nSLjgYlO7O/3rAiRFnE6bwSTyQLRfjyz3bFbv2OjdH7pFBNyLEC3hAkiTHhEeeIjQ5nt6msimrNUMd2X0rSqRPuOWkg2gxF5mBOJ2S7cH2h6LAqwQPBU+IGLgHiTA6xIscYvs/N1RrpI6lQzqaemUgEa9QMnToBHXfEns3NFs5RKlkWSe7KkCCpkqGYkXvGwt0uV6MtaJ89rbRwCOd8AZAbyQSOn1G/njuoH3S2w3tvEm/x2wxzYgmIsCTsN48sED7vkX4PUDDVMzEzIAgfy2JVGOZJJt6m94F7YcKYI8MwYAt6SMAMrr+XnuP2wM0vT5dDHxJwsw5SW2N+d/jsBgmUqK4BkE2NiDsbkQTgCFCBfifX+RGCpWmxBHPzAubXw9ip2ifzJ5JG2BmlsJjzk3674B70gQBv5nn4x9MQK1cDZY45iIj88TErEGzX2iR8rQemIeccXg3EmT9NzcTgIPeTc2PTCwTuqfME9ZGFgA5U74kZP3B/uP5t+wwsLAUeZrN9ppnUZk8nlb4mdofdGiafgL5g6ynhLae6K6o3g3E7YWFgBdrIFreEBYFJhFoY92Swjkm842vYbE0Cxu1hJ3hnYMJ6EWOFhYC1qoDWZCAU+0qmk+7oCEhI20g3jbGXyVVlZWUkMWaSDBNm5wsLAaZmP3Bn3u8Zv9TKp0sepHBO2Fkx7v/ywq/8A1Cb1P95k+LfCwsFVXbtMBCQAP+3qPYR4yYL/AO6Od8YTt/LJ3lUaFju0MQIktRJt5kk/E4WFgjO5891WzApfd6fs8aPDElQYjaQT88e4dk5hzkqLFmLFUkkmTvzhYWKJ2WrN3nvHdOTyL4mU7qJ/pJ+N74WFiKe4/LGK9uzZf9p/NcLCxR59XGlLW++Ta3BP53xT9u0VD0oUCEAEAbaXP54WFgJPZdIEUWIBJDkki5OjeeuAdlnRmHK+G5FrWLUrW4ucLCwHpWQc7SbTHl6Yehne9xvhYWIjldRJsN8CXY/z8IwsLASswPAPQ/lgGVEaY/pwsLAHfc/H9Mdrm/xP6YWFgKke8T64VQx/9o/PHcLABffHMLCwH//Z') no-repeat left top;
+    background-size: cover;
+}
+
+ul#logfileinfo {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 10px;
+    border-bottom: 5px solid #EFEBEF;
+    border-left: 5px solid #EFEBEF;
+    border-right: 5px solid #EFEBEF;
+    background-color: white;
+    font-size: 0.75em;
+    list-style-type: none;
+    position: fixed;
+    top: 0;
+    display: none;
+}
+
+div#header {
+    padding: 15px;
+    font-family: "Lucida Sans Unicode","Lucida Grande";
+    color: rgb(152, 45, 58);
+    background-color: #EFEBEF;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.logfileinfovalue {
+    font-style: normal;
+}
+
+div#logfileelements {
+    margin-top: 195px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+div.line {
+    clear: both;
+    font-size: 0.7em;
+    margin-bottom: 3px;
+}
+
+div.logheader {
+    font-size: 1.25em;
+    font-weight: bolder;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+div.logsubheader {
+    font-size: 1.0em;
+    font-weight: bolder;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
+div.el {
+    float: left;
+    margin-bottom: 5px;
+}
+
+div.level {
+    width: 60px;
+    padding-right: 10px;
+    text-transform: uppercase;
+}
+
+div.debug {
+    color: black;
+}
+
+div.info {
+    color: black;
+}
+
+div.warn {
+    color: #868A08;
+}
+
+div.error {
+    color: red;
+}
+
+div.pass {
+    color: green;
+    font-weight: bolder;
+}
+
+div.fail {
+    color: red;
+    font-weight: bolder;
+}
+
+div.trace {
+    color: #666666;
+}
+
+div.internal {
+    color: #666666;
+}
+
+.pass {
+    display: block;
+}
+
+.fail {
+    display: block;
+}
+
+.error {
+    display: block;
+}
+
+.warn {
+    display: block;
+}
+
+.info {
+    display: none;
+}
+
+.debug {
+    display: none;
+}
+
+.trace {
+    display: none;
+}
+
+.internal {
+    display: none;
+}
+
+.keyvalue {
+    display: none;
+}
+
+div.time {
+    padding-right: 10px;
+}
+
+div.msg {
+    /*padding-bottom: 10px;*/
+    margin-left: 0.5em;
+    width: 1000px;
+}
+
+div#buttons {
+    display: block;
+}
+
+div.pad {
+    color: #FF6666;
+    display: none;
+}
+
+div.pad0 {
+    width: 0;
+}
+
+div.pad1 {
+    width: 1em;
+}
+
+div.pad2 {
+    width: 2em;
+}
+
+div.pad3 {
+    width: 3em;
+}
+
+div.pad4 {
+    width: 4em;
+}
+
+div.pad5 {
+    width: 5em;
+}
+
+div.pad6 {
+    width: 6em;
+}
+
+div.pad7 {
+    width: 7em;
+}
+
+div.pad8 {
+    width: 9em;
+}
+
+div.pad9 {
+    width: 9em;
+}
+
+div.pad10 {
+    width: 10em;
+}
+
+div.pad11 {
+    width: 11em;
+}
+
+div.pad12 {
+    width: 12em;
+}
+
+div.pad13 {
+    width: 13em;
+}
+
+div.pad14 {
+    width: 14em;
+}
+
+div.pad15 {
+    width: 15em;
+}
+
+div.pad16 {
+    width: 16em;
+}
+
+div.pad17 {
+    width: 17em;
+}
+
+div.pad18 {
+    width: 18em;
+}
+
+div.pad19 {
+    width: 19em;
+}
+
+div.pad20 {
+    width: 20em;
+}
+
+img.embeddedimage {
+    max-width: 400px;
+    height: auto;
+    display: block;
+    clear: both;
+}
+
+    img.embeddedimage:hover {
+        max-width: 100%;
+        height: auto;
+    }
+
+span.symbol {
+    color: blue;
+}
+
+span.roproperties {
+    font-family: "courier", "monospace";
+    font-size: 1.0em;
+}
+    </style>
+<script type="text/javascript">var lastAnchor = "";
+
+/* Hide buttons if no messages are present - good idea, not implemented fully yet */
+var PassCount = 1;
+var FailCount = 1;
+var ErrorCount = 1;
+var WarnCount = 1;
+var InfoCount = 1;
+var DebugCount = 1;
+var TraceCount = 1;
+var InternalCount = 1;
+
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(location.search) || [, ""])[1].replace(/\+/g, "%20")) || null;
+}
+
+function toggleKeyValues() {
+    if (document.getElementById("toggleKeyValues").value === "Hide") {
+        css("ul#logfileinfo", "display", "none");
+        toggleButton("toggleKeyValues", "Show", "Show KeyValues");
+    } else if (document.getElementById("toggleKeyValues").value === "Show") {
+        var headerHeight = getHeaderHeight();
+        document.getElementById("logfileinfo").style.top = headerHeight + "px";
+        css("ul#logfileinfo", "display", "Block");
+        setKeyValuesCenter();
+        toggleButton("toggleKeyValues", "Hide", "Hide KeyValues");
+    }
+}
+
+// as per http://stackoverflow.com/questions/7410949/javascript-document-getelementsbyclassname-compatibility-with-ie
+if (!document.getElementsByClassName) {
+    document.getElementsByClassName = function (className) {
+        return this.querySelectorAll("." + className);
+    };
+    Element.prototype.getElementsByClassName = document.getElementsByClassName;
+}
+
+function css(selector, property, value) {
+    for (var i = 0; i < document.styleSheets.length; i++) { //Loop through all styles
+        try {
+            document.styleSheets[i].insertRule(selector + " {" + property + ":" + value + "}", document.styleSheets[i].cssRules.length);
+        } catch (err) {
+            try {
+                document.styleSheets[i].addRule(selector, property + ":" + value);
+            } catch (err) { }
+        } //IE 
+    }
+}
+
+function toggleButton(buttonId, value, text) {
+    document.getElementById(buttonId).value = value;
+    document.getElementById(buttonId).innerHTML = text;
+}
+
+function toggleLogElements(divElement, buttonId, logElement) {
+    if (document.getElementById(buttonId).value === "Hide") {
+        css(divElement, "display", "none");
+        toggleButton(buttonId, "Show", "Show " + logElement);
+    } else if (document.getElementById(buttonId).value === "Show") {
+        css(divElement, "display", "Block");
+        toggleButton(buttonId, "Hide", "Hide " + logElement);
+    }
+
+    goToLastAnchor();
+}
+
+function loadKeyValueList() {
+    var logFileInfoList = document.getElementById("logfileinfo");
+    var keyValueList = document.getElementsByClassName("keyvalue");
+
+    for (var i = 0; i < keyValueList.length; i++) {
+        var key = keyValueList[i].children[0].innerHTML;
+        var dupKeyFound = false;
+
+        // search to see if a similar key has been set after this one
+        for (var j = i+1; j < keyValueList.length; j++) {
+            var thisKey = keyValueList[j].children[0].innerHTML;
+            if (key === thisKey) {
+                dupKeyFound = true;
+                break;
+            }
+        }
+
+        if (dupKeyFound) {
+            continue;
+        }
+
+        var logFileInfoListItem = document.createElement("li");
+        var keyItem = document.createElement("b");
+        var valueItem = document.createElement("em");
+        var value = keyValueList[i].children[1].innerHTML;
+        var keyItemText = document.createTextNode(key + ": ");
+        var valueItemText = document.createTextNode(value);
+
+        if ((value.indexOf("http") === 0) || (value.indexOf("td://") === 0)) {
+            var link = document.createElement("a");
+            link.setAttribute("href", value);
+            link.textContent = value;
+            valueItemText = link;
+        }
+
+        keyItem.appendChild(keyItemText);
+        valueItem.appendChild(valueItemText);
+        logFileInfoListItem.appendChild(keyItem);
+        logFileInfoListItem.appendChild(valueItem);
+        logFileInfoList.appendChild(logFileInfoListItem);
+    }
+
+    initButtons();
+    updateHeaderWithStatus();
+}
+
+function displayAllElements(blockOrNone) {
+    //css('.pass', 'display', blockOrNone);  
+    //css('.fail', 'display', blockOrNone);   
+    css(".error", "display", blockOrNone);
+    css(".warning", "display", blockOrNone);
+    css(".info", "display", blockOrNone);
+    css(".debug", "display", blockOrNone);
+    css(".trace", "display", blockOrNone);
+    css(".internal", "display", blockOrNone);
+}
+
+function toggleAll() {
+    var buttonId = "toggleAllBtn";
+    if (document.getElementById(buttonId).value === "Hide") {
+        displayAllElements("none");
+        toggleButton(buttonId, "Show", "Show All");
+        //toggleButton("passBtn", "Show", "Show Pass") 
+        //toggleButton("failBtn", "Show", "Show Fail") 
+        toggleButton("errorBtn", "Show", "Show Error");
+        toggleButton("warnBtn", "Show", "Show Warn");
+        toggleButton("infoBtn", "Show", "Show Info");
+        toggleButton("debugBtn", "Show", "Show Debug");
+        toggleButton("traceBtn", "Show", "Show Trace");
+        toggleButton("internalBtn", "Show", "Show Internal");
+    } else if (document.getElementById(buttonId).value === "Show") {
+        displayAllElements("block");
+        toggleButton(buttonId, "Hide", "Hide All");
+        toggleButton("passBtn", "Hide", "Hide Pass");
+        toggleButton("failBtn", "Hide", "Hide Fail");
+        toggleButton("errorBtn", "Hide", "Hide Error");
+        toggleButton("warnBtn", "Hide", "Hide Warn");
+        toggleButton("infoBtn", "Hide", "Hide Info");
+        toggleButton("debugBtn", "Hide", "Hide Debug");
+        toggleButton("traceBtn", "Hide", "Hide Trace");
+        toggleButton("internalBtn", "Hide", "Hide Internal");
+    }
+}
+
+function toggleIndent() {
+    var buttonId = "toggleIndent";
+    if (document.getElementById(buttonId).value === "Hide") {
+        toggleButton(buttonId, "Show", "Show Depth");
+        css("div.pad", "display", "none");
+    } else if (document.getElementById(buttonId).value === "Show") {
+        toggleButton(buttonId, "Hide", "Hide Depth");
+        css("div.pad", "display", "Block");
+    }
+}
+
+function getHeaderHeight() {
+    var headerHeight = document.getElementById("header").clientHeight;
+    return headerHeight;
+}
+
+
+function pushDownLogElements() {
+    var headerHeight = getHeaderHeight();
+    headerHeight = headerHeight + 5;
+    document.getElementById("logfileelements").style.marginTop = headerHeight + "px";
+}
+
+function setKeyValuesCenter() {
+    var widthOfHeader = document.getElementById("header").clientWidth;
+    var widthOfKeyValues = document.getElementById("logfileinfo").clientWidth;
+    var marginLeftKeyValues = (widthOfHeader - widthOfKeyValues) / 2;
+
+    document.getElementById("logfileinfo").style.marginLeft = marginLeftKeyValues + "px";
+}
+
+function showImage(image) {
+    var url = image.getAttribute("src");
+    window.open(url, "Image", "resizable=1");
+}
+
+function initLogFile() {
+    loadKeyValueList();
+    pushDownLogElements();
+}
+
+function addLastAnchor() {
+    window.location.hash = lastAnchor;
+}
+
+function goToLastAnchor() {
+    if (lastAnchor.length > 0) {
+        document.getElementById(lastAnchor).scrollIntoView();
+        var scrollPositionArray = getScrollingPosition();
+        var newScrollPosition = scrollPositionArray[1] + getHeaderHeight();
+        window.scrollTo(0, newScrollPosition);
+    }
+}
+
+function sa(anchorName) {
+    lastAnchor = (anchorName);
+}
+
+function getScrollingPosition() {
+    var position = [0, 0];
+
+    if (typeof window.pageYOffset != "undefined") {
+        position = [window.pageXOffset, window.pageYOffset];
+    } else if (typeof document.documentElement.scrollTop != "undefined" && document.documentElement.scrollTop > 0) {
+        position = [document.documentElement.scrollLeft, document.documentElement.scrollTop];
+    } else if (typeof document.body.scrollTop != "undefined") {
+        position = [document.body.scrollLeft, document.body.scrollTop];
+    }
+
+    return position;
+}
+
+function hideButtonByDisplayCount(buttonSelector, displayCount) {
+    if (displayCount === 0) {
+        document.getElementById(buttonSelector).disabled = true;
+    }
+}
+
+function updateHeaderWithStatus() {
+    var statusText = document.getElementById("runstatus").innerHTML;
+    var currentGenereatedBy = document.getElementById("generatedbyOvid").innerHTML;
+    document.getElementById("generatedbyOvid").innerHTML = statusText + " - " + currentGenereatedBy;
+}
+
+function initButtonCount(className) {
+    return document.getElementsByClassName("line " + className).length;
+}
+
+function initButtons() {
+    if (getURLParameter("hidebuttons") === "1") {
+        css("div#buttons", "display", "none");
+    } else {
+        css("siv#buttons", "display", "block");
+    }
+
+    PassCount = initButtonCount("pass");
+    FailCount = initButtonCount("fail")
+    ErrorCount = initButtonCount("error")
+    WarnCount = initButtonCount("warn")
+    InfoCount = initButtonCount("info")
+    DebugCount = initButtonCount("debug")
+    TraceCount = initButtonCount("trace")
+    InternalCount = initButtonCount("internal")
+
+    hideButtonByDisplayCount("passBtn", PassCount);
+    hideButtonByDisplayCount("failBtn", FailCount);
+    hideButtonByDisplayCount("errorBtn", ErrorCount);
+    hideButtonByDisplayCount("warnBtn", WarnCount);
+    hideButtonByDisplayCount("infoBtn", InfoCount);
+    hideButtonByDisplayCount("debugBtn", DebugCount);
+    hideButtonByDisplayCount("traceBtn", TraceCount);
+    hideButtonByDisplayCount("internalBtn", InternalCount);
+}
+  </script>
+</head>
+<body onload="loadKeyValueList()">
+	<div id="header">
+        <aside>
+            <div id="logo" style="float: right">Ovid</div>
+        </aside>
+		<h1 id="logtitle">Ovid LogTitle</h1>
+		<p id="generatedbyOvid">Leveret til dig af Ovid</p>
+		<div id="buttons">
+			<button id="passBtn"          value="Hide" type="button" onclick="toggleLogElements('.pass',  'passBtn',  'Pass')" >Hide Pass</button>
+			<button id="failBtn"          value="Hide" type="button" onclick="toggleLogElements('.fail',  'failBtn',  'Fail')" >Hide Fail</button>
+			<button id="errorBtn"         value="Hide" type="button" onclick="toggleLogElements('.error', 'errorBtn', 'Error')">Hide Error</button>
+			<button id="warnBtn"          value="Hide" type="button" onclick="toggleLogElements('.warning',  'warnBtn',  'Warning')" >Hide Warn</button>
+			<button id="infoBtn"          value="Show" type="button" onclick="toggleLogElements('.info',  'infoBtn',  'Info')" >Show Info</button>
+			<button id="debugBtn"         value="Show" type="button" onclick="toggleLogElements('.debug', 'debugBtn', 'Debug')">Show Debug</button>
+			<button id="traceBtn"         value="Show" type="button" onclick="toggleLogElements('.trace', 'traceBtn', 'Trace')">Show Trace</button>
+			<button id="internalBtn"      value="Show" type="button" onclick="toggleLogElements('.internal', 'internalBtn', 'Internal')">Show Internal</button>
+			<button id="toggleAllBtn"     value="Show" type="button" onclick="toggleAll()">Show All</button>
+			<button id="toggleIndent"     value="Show" type="button" onclick="toggleIndent()">Show Depth</button>
+			<button id="toggleKeyValues"  value="Show" type="button" onclick="toggleKeyValues()">Show KeyValues</button>
+		</div>
+		<ul id="logfileinfo">
+		</ul>
+	</div>
+	<div id="logfileelements">
+<div class="line keyvalue">
+   <div class="el key">Environment</div>
+   <div class="el value">TODO_ENVIRONMENT</div>
+   <div class="el msg">Configuration.EnvironmentName</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">OS</div>
+   <div class="el value">Microsoft Windows NT 6.3.9600.0</div>
+   <div class="el msg"></div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">User</div>
+   <div class="el value">MIRPC01\Ulrich</div>
+   <div class="el msg"></div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">InstDir</div>
+   <div class="el value">D:\Projects\STF\UnitTest\StfLogger\bin\Debug</div>
+   <div class="el msg">TODO_InstDir</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">ResultDir</div>
+   <div class="el value">D:\Projects\STF\UnitTest\StfLogger\bin\Debug</div>
+   <div class="el msg">TODO_ResultDir</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">Controller</div>
+   <div class="el value">MIRPC01</div>
+   <div class="el msg">TODO_Controller</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">Hostname</div>
+   <div class="el value">MIRPC01</div>
+   <div class="el msg">TODO_Hostname</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">TestDir</div>
+   <div class="el value">D:\Projects\STF\UnitTest\StfLogger\bin\Debug</div>
+   <div class="el msg">TODO_TestDir</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">Test Iteration</div>
+   <div class="el value">TODO_Test Iteration</div>
+   <div class="el msg">TODO_Test Iteration</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">Testname</div>
+   <div class="el value">TestName_Not_Set</div>
+   <div class="el msg">TODO_Testname</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">Date</div>
+   <div class="el value">4/14/2015</div>
+   <div class="el msg"></div>
+</div>
+<div onclick="sa('m1')" id="m1" class="line internal ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">internal</div>
+    <div class="el pad"></div>
+    <div class="el msg">StfTestScriptBase TestInitialize</div>
+</div>
+<div onclick="sa('m2')" id="m2" class="line error ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">error</div>
+    <div class="el pad"></div>
+    <div class="el msg">LogError</div>
+</div>
+<div onclick="sa('m3')" id="m3" class="line warning ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">warning</div>
+    <div class="el pad"></div>
+    <div class="el msg">LogWarning</div>
+</div>
+<div onclick="sa('m4')" id="m4" class="line info ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">info</div>
+    <div class="el pad"></div>
+    <div class="el msg">LogInfo</div>
+</div>
+<div onclick="sa('m5')" id="m5" class="line debug ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">debug</div>
+    <div class="el pad"></div>
+    <div class="el msg">LogDebug</div>
+</div>
+<div onclick="sa('m6')" id="m6" class="line trace ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">trace</div>
+    <div class="el pad"></div>
+    <div class="el msg">LogTrace</div>
+</div>
+<div onclick="sa('m7')" id="m7" class="line internal ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">internal</div>
+    <div class="el pad"></div>
+    <div class="el msg">LogInternal</div>
+</div>
+<div class="line logheader">LogHeader</div>
+<div class="line logsubheader">LogSubHeader</div>
+<div onclick="sa('m10')" id="m10" class="line info ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">info</div>
+    <div class="el pad"> . . .</div>
+    <div class="el msg">> NameOfFunction TODO: Concatenated string of argName and Values returning Int</div>
+</div>
+<div onclick="sa('m11')" id="m11" class="line info ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">info</div>
+    <div class="el pad"></div>
+    <div class="el msg">< Exited NameOfFunction returning returnValue.ToString</div>
+</div>
+<div onclick="sa('m12')" id="m12" class="line info ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">info</div>
+    <div class="el pad"> . . .</div>
+    <div class="el msg">> NameOfFunctionShort TODO: Concatenated string of argName and Values returning Int</div>
+</div>
+<div onclick="sa('m13')" id="m13" class="line info ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">info</div>
+    <div class="el pad"></div>
+    <div class="el msg">< Exited NameOfFunctionShort returning returnValue.ToString</div>
+</div>
+<div onclick="sa('m14')" id="m14" class="line pass ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">pass</div>
+    <div class="el pad"></div>
+    <div class="el msg">TestStepName=[testStepName LogPass], message=[LogPass]</div>
+</div>
+<div onclick="sa('m15')" id="m15" class="line fail ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">fail</div>
+    <div class="el pad"></div>
+    <div class="el msg">TestStepName=[testStepName LogFail], message=[LogFail]</div>
+</div>
+<div class="line keyvalue">
+   <div class="el key">SomeKey</div>
+   <div class="el value">SomeValue</div>
+   <div class="el msg">LogKeyValue</div>
+</div>
+<div onclick="sa('m16')" id="m16" class="line info ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">info</div>
+    <div class="el pad"></div>
+    <div class="el msg">Property MyTestProperty Get value [Stf.Utilities.StfLogger]</div>
+</div>
+<div onclick="sa('m17')" id="m17" class="line info ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">info</div>
+    <div class="el pad"></div>
+    <div class="el msg">Property MyTestProperty Set value [Stf.Utilities.StfLogger]</div>
+</div>
+<div onclick="sa('m18')" id="m18" class="line internal ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">internal</div>
+    <div class="el pad"></div>
+    <div class="el msg">AutomationId: [Stf.Utilities.StfLogger] - Message: [Using MyLogger as AID for test]</div>
+</div>
+<div onclick="sa('m19')" id="m19" class="line pass ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">pass</div>
+    <div class="el pad"></div>
+    <div class="el msg"><span id="runstatus">Test showed no errors</span></div>
+</div>
+<div onclick="sa('m20')" id="m20" class="line internal ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">internal</div>
+    <div class="el pad"></div>
+    <div class="el msg">StfTestScriptBase BaseTestCleanup</div>
+</div>
+<div onclick="sa('m21')" id="m21" class="line pass ">
+    <div class="el time">19:08:25</div>
+    <div class="el level">pass</div>
+    <div class="el pad"></div>
+    <div class="el msg"><span id="runstatus">Test showed no errors</span></div>
+</div>
+  </body>
+</html>
