@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AFA320E0-C895-4408-B631-26B1F2D8D030}</ProjectGuid>
+    <ProjectGuid>{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Stf.Utilities</RootNamespace>

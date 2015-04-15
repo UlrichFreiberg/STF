@@ -54,13 +54,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\SimplePlugin\StfPlugin.csproj">
-      <Project>{AFA320E0-C895-4408-B631-26B1F2D8D030}</Project>
-      <Name>StfPlugin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Source\StfAssert\StfAssert.csproj">
       <Project>{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}</Project>
       <Name>StfAssert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\StfPluginLoader\StfPluginLoader.csproj">
+      <Project>{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}</Project>
+      <Name>StfPluginLoader</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
       <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>

@@ -34,8 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfLoggerTests", "UnitTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfTestScriptBase", "Source\StfTestScriptBase\StfTestScriptBase.csproj", "{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfPlugin", "Source\SimplePlugin\StfPlugin.csproj", "{AFA320E0-C895-4408-B631-26B1F2D8D030}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StfPluginLoaderTests", "StfPluginLoaderTests", "{FC2B6B1C-DC78-4150-89DF-C723C3E10AD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stf.UnitTestPlugin1", "UnitTest\StfPluginLoader\Stf.UnitTestPlugin1\Stf.UnitTestPlugin1.csproj", "{83199E65-40A3-4238-8AAF-03386BB130AD}"
@@ -43,6 +41,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stf.UnitTestPlugin2", "UnitTest\StfPluginLoader\Stf.UnitTestPlugin2\Stf.UnitTestPlugin2.csproj", "{A83FFB89-1F56-4755-9060-2F4F6ABD0DCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfPluginLoader", "UnitTest\StfPluginLoader\StfPluginLoader\StfPluginLoader.csproj", "{3EC91AD5-2EB9-4AF2-B584-469871E3743F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfPluginLoader", "Source\StfPluginLoader\StfPluginLoader.csproj", "{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,10 +78,6 @@ Global
 		{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFA320E0-C895-4408-B631-26B1F2D8D030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFA320E0-C895-4408-B631-26B1F2D8D030}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFA320E0-C895-4408-B631-26B1F2D8D030}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFA320E0-C895-4408-B631-26B1F2D8D030}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83199E65-40A3-4238-8AAF-03386BB130AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83199E65-40A3-4238-8AAF-03386BB130AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83199E65-40A3-4238-8AAF-03386BB130AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,6 +90,10 @@ Global
 		{3EC91AD5-2EB9-4AF2-B584-469871E3743F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC91AD5-2EB9-4AF2-B584-469871E3743F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC91AD5-2EB9-4AF2-B584-469871E3743F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
