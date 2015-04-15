@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Grace">
+      <HintPath>..\..\packages\Grace.2.4.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Grace.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
   </ItemGroup>
@@ -62,7 +65,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Source\StfLogger\StfLogger.csproj">
       <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
-      <Name>TestResultHtmlLogger</Name>
+      <Name>StfLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
       <Project>{f6af2aeb-2651-4df3-86f6-4decae421800}</Project>
@@ -70,6 +73,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Data\Data.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

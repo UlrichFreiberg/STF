@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A951C0DE-47F0-4836-B1C9-153605E13598}</ProjectGuid>
+    <ProjectGuid>{3EC91AD5-2EB9-4AF2-B584-469871E3743F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>UnitTest</RootNamespace>
+    <AssemblyName>StfPluginLoader</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Grace">
-      <HintPath>..\..\packages\Grace.2.4.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Grace.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,40 +50,26 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="LoadConfigTests.cs" />
-    <Compile Include="OverLayerTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ParserTests.cs" />
+    <Compile Include="UnitTest_StfPluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\StfConfiguration\StfConfiguration.csproj">
-      <Project>{2D259B87-A08E-406F-818C-6F60BC16C983}</Project>
-      <Name>StfConfiguration</Name>
+    <ProjectReference Include="..\..\..\Source\StfAssert\StfAssert.csproj">
+      <Project>{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}</Project>
+      <Name>StfAssert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
+    <ProjectReference Include="..\..\..\Source\StfPluginLoader\StfPluginLoader.csproj">
+      <Project>{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}</Project>
+      <Name>StfPluginLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
       <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>
       <Name>StfTestScriptBase</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TestData\ConfigOverlay\Config1.xml" />
-    <Content Include="TestData\ConfigOverlay\Config12.xml" />
-    <Content Include="TestData\ConfigOverlay\Config13.xml" />
-    <Content Include="TestData\ConfigOverlay\Config1a.xml" />
-    <Content Include="TestData\ConfigOverlay\Config2.xml" />
-    <Content Include="TestData\ConfigOverlay\Config23.xml" />
-    <Content Include="TestData\ConfigOverlay\Config3.xml" />
-    <Content Include="TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml" />
-    <Content Include="TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml" />
-    <Content Include="TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml" />
-    <Content Include="TestData\Parser\parser1.xml" />
-    <Content Include="TestData\Reflection\Reflection1.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Stf.UnitTestPluginInterfaces\Stf.UnitTestPluginInterfaces.csproj">
+      <Project>{a308d188-65b8-4554-95d3-4cc568952b00}</Project>
+      <Name>Stf.UnitTestPluginInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -108,9 +91,6 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>robocopy $(ProjectDir)TestData $(TargetDir)TestData /MIR</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

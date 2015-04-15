@@ -1,8 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfAssert.cs" company="Foobar">
+// <copyright file="StfAssert_Object.cs" company="Foobar">
 //   2015
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Stf.Utilities
 {
     using System;
