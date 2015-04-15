@@ -66,6 +66,10 @@
       <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>
       <Name>StfTestScriptBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Stf.UnitTestPluginInterfaces\Stf.UnitTestPluginInterfaces.csproj">
+      <Project>{a308d188-65b8-4554-95d3-4cc568952b00}</Project>
+      <Name>Stf.UnitTestPluginInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
