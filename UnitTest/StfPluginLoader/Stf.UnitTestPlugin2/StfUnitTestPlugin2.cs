@@ -14,15 +14,15 @@ namespace Stf.Unittests
     /// <summary>
     /// The Plugin interface.
     /// </summary>
-    public class StfUnitTestPlugin1 : IStfUnitTestPlugin1
+    public class StfUnitTestPlugin2 : IStfUnitTestPlugin2
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StfUnitTestPlugin2"/> class.
         /// </summary>
-        public StfUnitTestPlugin1()
+        public StfUnitTestPlugin2()
         {
-            this.Name = "StfUnitTestPlugin1";
-            this.VersionInfo = "StfUnitTestPlugin1 V1.0";
+            this.Name = "StfUnitTestPlugin2";
+            this.VersionInfo = "StfUnitTestPlugin2 V2.0";
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Stf.Unittests
             return true;
         }
 
-        public int StfUnitTestPlugin1Func()
+        public int StfUnitTestPlugin2Func()
         {
-            return 101;
+            return 102;
         }
     }
 }

@@ -39,13 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StfUnitTestPlugin1.cs" />
+    <Compile Include="StfUnitTestPlugin2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Source\StfPluginLoader\StfPluginLoader.csproj">
       <Project>{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}</Project>
       <Name>StfPluginLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stf.UnitTestPluginInterfaces\Stf.UnitTestPluginInterfaces.csproj">
+      <Project>{a308d188-65b8-4554-95d3-4cc568952b00}</Project>
+      <Name>Stf.UnitTestPluginInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
