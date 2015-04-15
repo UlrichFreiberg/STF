@@ -20,6 +20,8 @@ namespace Stf.Utilities
     /// </summary>
     public class StfPluginLoader
     {
+        private List<IStfPlugin> stfPlugins { get; set; }
+
         /// <summary>
         /// The load plugins.
         /// </summary>
@@ -70,14 +72,27 @@ namespace Stf.Utilities
                 }
             }
 
-            var stfPlugins = new List<IStfPlugin>(pluginTypes.Count);
+            stfPlugins = new List<IStfPlugin>(pluginTypes.Count);
             foreach (var type in pluginTypes)
             {
                 var plugin = (IStfPlugin)Activator.CreateInstance(type);
                 stfPlugins.Add(plugin);
             }
-
+            
             return stfPlugins;
+        }
+
+        public T Get<T>() where T : IStfPlugin
+        {
+            foreach (var stfPlugin in stfPlugins)
+            {
+                if (stfPlugin is T)
+                {
+                    return (T)stfPlugin;
+                }    
+            }
+
+            return default(T);
         }
     }
 }
