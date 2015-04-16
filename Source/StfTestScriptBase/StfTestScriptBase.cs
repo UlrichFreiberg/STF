@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Runtime.Remoting.Messaging;
+
 namespace Stf.Utilities
 {
     using System.IO;
@@ -27,7 +29,7 @@ namespace Stf.Utilities
         {
             if (MyLogger == null)
             {
-                this.MyLogger = new StfLogger();                
+                this.MyLogger = new StfLogger();
             }
         }
 
@@ -54,7 +56,15 @@ namespace Stf.Utilities
         [TestInitialize]
         public void BaseTestInitialize()
         {
-            var ovidName = string.Format("{0}.html", Path.Combine(LogDirRoot, TestContext.TestName));
+            string logFilePostfix = string.Empty;
+            var logFileNo = DataRowIndex();
+
+            if (logFileNo >= 0)
+            {
+                logFilePostfix = string.Format("_{0}", logFileNo);
+            }
+
+            var ovidName = string.Format("{0}{1}.html", Path.Combine(LogDirRoot, TestContext.TestName), logFilePostfix);
 
             if (!Directory.Exists(LogDirRoot))
             {
@@ -66,6 +76,18 @@ namespace Stf.Utilities
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
         }
+
+        private int DataRowIndex()
+        {
+            if (TestContext.DataRow == null)
+            {
+                return -1;
+            }
+
+            int currentIteration = TestContext.DataRow.Table.Rows.IndexOf(TestContext.DataRow);
+            return currentIteration;
+        }
+
 
         /// <summary>
         /// The test cleanup.

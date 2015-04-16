@@ -314,6 +314,14 @@ namespace Stf.Utilities
                 return -1;
             }
 
+            if (messageId == 0)
+            {
+                if (!Init())
+                {
+                    Console.WriteLine(@"Coulnd't initialise the logfile");
+                }
+            }
+
             if (!LogFileHandle.Initialized)
             {
                 return -2;
@@ -336,11 +344,11 @@ namespace Stf.Utilities
 
                 default:
                     htmlLine = string.Format(
-                        "<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", 
-                        messageIdString, 
+                        "<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n",
+                        messageIdString,
                         logLevelString);
                     htmlLine += string.Format(
-                        "    <div class=\"el time\">{0}</div>\n", 
+                        "    <div class=\"el time\">{0}</div>\n",
                         this.timeOfLastMessage.ToString("HH:mm:ss"));
                     htmlLine += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
                     htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", IndentString());

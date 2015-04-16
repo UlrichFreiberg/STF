@@ -114,10 +114,8 @@ namespace Stf.Utilities
             set
             {
                 this.fileName = value;
-                if (!Init())
-                {
-                    Console.WriteLine(@"Coulnd't initialise the logfile");
-                }
+                this.CloseLogFile();
+                messageId = 0;
             }
         }
 
