@@ -3,9 +3,6 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System.Runtime.Remoting.Messaging;
-
 namespace Stf.Utilities
 {
     using System.IO;
@@ -20,6 +17,9 @@ namespace Stf.Utilities
     [TestClass]
     public class StfTestScriptBase
     {
+        /// <summary>
+        /// The log dir root. Where the logfiles is placed
+        /// </summary>
         private const string LogDirRoot = @"c:\temp\StfLogs";
 
         /// <summary>
@@ -77,18 +77,6 @@ namespace Stf.Utilities
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
         }
 
-        private int DataRowIndex()
-        {
-            if (TestContext.DataRow == null)
-            {
-                return -1;
-            }
-
-            int currentIteration = TestContext.DataRow.Table.Rows.IndexOf(TestContext.DataRow);
-            return currentIteration;
-        }
-
-
         /// <summary>
         /// The test cleanup.
         /// </summary>
@@ -111,6 +99,25 @@ namespace Stf.Utilities
             MyLogger.LogLevel = LogLevel.Internal;
             this.MyLogger.LogInternal(message);
             MyLogger.LogLevel = oldLoglevel;
+        }
+
+        /// <summary>
+        /// Checks wether or not if this test is datadriven. 
+        /// If so it returns the row number of the current test data.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// If not datadriven it return -1. If datadriven it returns the row number of the current test data.
+        /// </returns>
+        private int DataRowIndex()
+        {
+            if (TestContext.DataRow == null)
+            {
+                return -1;
+            }
+
+            var currentIteration = TestContext.DataRow.Table.Rows.IndexOf(TestContext.DataRow);
+            return currentIteration;
         }
     }
 }
