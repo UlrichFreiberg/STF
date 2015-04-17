@@ -15,7 +15,7 @@ namespace Stf.Utilities
     /// and instantiate the <see cref="StfAssert"/> (MyAssert)
     /// </summary>
     [TestClass]
-    public class StfTestScriptBase
+    public class StfTestScriptBase : StfKernel
     {
         /// <summary>
         /// The log dir root. Where the logfiles is placed
@@ -27,16 +27,7 @@ namespace Stf.Utilities
         /// </summary>
         public StfTestScriptBase()
         {
-            if (MyLogger == null)
-            {
-                this.MyLogger = new StfLogger();
-            }
         }
-
-        /// <summary>
-        /// Gets the Stf logger.
-        /// </summary>
-        public StfLogger MyLogger { get; private set; }
 
         /// <summary>
         /// Gets the Stf Asserter.
@@ -57,11 +48,13 @@ namespace Stf.Utilities
         public void BaseTestInitialize()
         {
             string logFilePostfix = string.Empty;
-            var logFileNo = DataRowIndex();
+            var iterationNo = DataRowIndex();
+            string iterationStatus = "Not datadriven";
 
-            if (logFileNo >= 0)
+            if (iterationNo >= 0)
             {
-                logFilePostfix = string.Format("_{0}", logFileNo);
+                logFilePostfix = string.Format("_{0}", iterationNo);
+                iterationStatus = string.Format("Iteration {0}", iterationNo);
             }
 
             var ovidName = string.Format("{0}{1}.html", Path.Combine(LogDirRoot, TestContext.TestName), logFilePostfix);
@@ -75,6 +68,8 @@ namespace Stf.Utilities
             this.MyAssert = new StfAssert(this.MyLogger);
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
+            this.MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
+
         }
 
         /// <summary>
