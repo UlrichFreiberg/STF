@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfPluginLoader", "Source\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stf.UnitTestPluginInterfaces", "UnitTest\StfPluginLoader\Stf.UnitTestPluginInterfaces\Stf.UnitTestPluginInterfaces.csproj", "{A308D188-65B8-4554-95D3-4CC568952B00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfKernel", "Source\StfKernel\StfKernel.csproj", "{469148AB-9343-4E38-BA46-013F12657B69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{A308D188-65B8-4554-95D3-4CC568952B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A308D188-65B8-4554-95D3-4CC568952B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A308D188-65B8-4554-95D3-4CC568952B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{469148AB-9343-4E38-BA46-013F12657B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{469148AB-9343-4E38-BA46-013F12657B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{469148AB-9343-4E38-BA46-013F12657B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{469148AB-9343-4E38-BA46-013F12657B69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

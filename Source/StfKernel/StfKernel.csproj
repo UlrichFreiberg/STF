@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</ProjectGuid>
+    <ProjectGuid>{469148AB-9343-4E38-BA46-013F12657B69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stf.Utilities</RootNamespace>
-    <AssemblyName>StfTestScriptBase</AssemblyName>
+    <RootNamespace>Stf</RootNamespace>
+    <AssemblyName>Stf.Kernel</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Grace">
-      <HintPath>..\..\packages\Grace.2.4.2\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Grace.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,25 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StfTestScriptBase.cs" />
+    <Compile Include="StfKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StfAssert\StfAssert.csproj">
-      <Project>{6933e0af-0e2a-48d2-8660-2c939b3db6fb}</Project>
-      <Name>StfAssert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StfKernel\StfKernel.csproj">
-      <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
-      <Name>StfKernel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StfLogger\StfLogger.csproj">
-      <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
+      <Project>{761BF58C-4B19-46D2-9601-2F9296C80152}</Project>
       <Name>StfLogger</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

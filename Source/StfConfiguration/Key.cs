@@ -39,7 +39,7 @@ namespace Stf.Utilities
         /// </returns>
         public override string ToString()
         {
-            string txt = string.Format("KeyName:{0}, KeyValue:{1}", this.KeyName, this.KeyValue);
+            var txt = string.Format("KeyName:{0}, KeyValue:{1}", this.KeyName, this.KeyValue);
             return txt;
         }
     }
