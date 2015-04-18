@@ -18,14 +18,14 @@ namespace Stf.Utilities
     public partial class StfLogger : ILogfileManagement
     {
         /// <summary>
-        /// The _m file name.
+        /// The log file name.
         /// </summary>
         private string fileName;
 
         /// <summary>
         /// The _m log level.
         /// </summary>
-        private LogLevel logLevel;
+        private StfLogLevel stfLogLevel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StfLogger"/> class.
@@ -36,7 +36,7 @@ namespace Stf.Utilities
         public StfLogger(string logfileName)
             : this()
         {
-            this.FileName = logfileName;
+            FileName = logfileName;
         }
 
         /// <summary>
@@ -44,37 +44,39 @@ namespace Stf.Utilities
         /// </summary>
         public StfLogger()
         {
-            this.LogInfoDetails = new Dictionary<string, string>();
-            this.AddLoglevelToRunReport = new Dictionary<LogLevel, bool>();
-            this.NumberOfLoglevelMessages = new Dictionary<LogLevel, int>();
+            LogInfoDetails = new Dictionary<string, string>();
+            AddLoglevelToRunReport = new Dictionary<StfLogLevel, bool>();
+            NumberOfLoglevelMessages = new Dictionary<StfLogLevel, int>();
 
-            foreach (LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
+            foreach (StfLogLevel loglevel in Enum.GetValues(typeof(StfLogLevel)))
             {
-                this.NumberOfLoglevelMessages.Add(loglevel, 0);
-                this.AddLoglevelToRunReport.Add(loglevel, true);
+                NumberOfLoglevelMessages.Add(loglevel, 0);
+                AddLoglevelToRunReport.Add(loglevel, true);
             }
 
-            this.LogFileHandle = new LogfileWriter();
+            LogFileHandle = new LogfileWriter { OverwriteLogFile = this.OverwriteLogFile };
 
             // Set according to the configuration
-            this.Configuration = new LogConfiguration();
-            this.FileName = Configuration.LogFileName;
-            this.LogLevel = Configuration.LogLevel;
-            this.OverwriteLogFile = Configuration.OverwriteLogFile;
-            this.LogToFile = Configuration.LogToFile;
-            this.LogTitle = Configuration.LogTitle;
-            this.AlertLongInterval = Configuration.AlertLongInterval;
-            this.PathToLogoImageFile = Configuration.PathToLogoImageFile;
+            Configuration = new LogConfiguration();
+            FileName = Configuration.LogFileName;
+            this.StfLogLevel = Configuration.StfLogLevel;
+            OverwriteLogFile = Configuration.OverwriteLogFile;
+            LogToFile = Configuration.LogToFile;
+            LogTitle = Configuration.LogTitle;
+            AlertLongInterval = Configuration.AlertLongInterval;
+            PathToLogoImageFile = Configuration.PathToLogoImageFile;
 
             // setting the default AID logging function
             LogAutomationIdObjectUserFunction =
                 (level, obj, message) => LogOneHtmlMessage(level, string.Format("AutomationId: [{0}] - Message: [{1}]", obj.ToString(), message));
+
+            LogFileInitialized = false;
         }
 
         /// <summary>
         /// Gets the Number Messages per Loglevel - to the finishing TestStatus
         /// </summary>
-        public Dictionary<LogLevel, int> NumberOfLoglevelMessages { get; private set; }
+        public Dictionary<StfLogLevel, int> NumberOfLoglevelMessages { get; private set; }
 
         /// <summary>
         /// Gets the configuration for the logfile.
@@ -108,13 +110,13 @@ namespace Stf.Utilities
         {
             get
             {
-                return this.fileName;
+                return fileName;
             }
 
             set
             {
-                this.fileName = value;
-                this.CloseLogFile();
+                fileName = value;
+                CloseLogFile();
                 messageId = 0;
             }
         }
@@ -124,51 +126,51 @@ namespace Stf.Utilities
         /// Lower levels than this will be ignored.
         /// Eg "trace" will be ignored is level is set to "debug"
         /// </summary>
-        public LogLevel LogLevel
+        public StfLogLevel StfLogLevel
         {
             get
             {
-                return this.logLevel;
+                return this.stfLogLevel;
             }
 
             set
             {
-                this.logLevel = value;
-                this.timeOfLastMessage = DateTime.Now;
+                this.stfLogLevel = value;
+                timeOfLastMessage = DateTime.Now;
 
-                foreach (LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
+                foreach (StfLogLevel loglevel in Enum.GetValues(typeof(StfLogLevel)))
                 {
-                    this.AddLoglevelToRunReport[loglevel] = true;
+                    AddLoglevelToRunReport[loglevel] = true;
                 }
 
                 switch (value)
                 {
-                    case LogLevel.Error:
-                        this.AddLoglevelToRunReport[LogLevel.Warning] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Info] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Debug] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Internal] = false;
+                    case StfLogLevel.Error:
+                        AddLoglevelToRunReport[StfLogLevel.Warning] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Info] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Debug] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Trace] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Internal] = false;
                         break;
-                    case LogLevel.Warning:
-                        this.AddLoglevelToRunReport[LogLevel.Info] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Debug] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Internal] = false;
+                    case StfLogLevel.Warning:
+                        AddLoglevelToRunReport[StfLogLevel.Info] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Debug] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Trace] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Internal] = false;
                         break;
-                    case LogLevel.Info:
-                        this.AddLoglevelToRunReport[LogLevel.Debug] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Internal] = false;
+                    case StfLogLevel.Info:
+                        AddLoglevelToRunReport[StfLogLevel.Debug] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Trace] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Internal] = false;
                         break;
-                    case LogLevel.Debug:
-                        this.AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        this.AddLoglevelToRunReport[LogLevel.Internal] = false;
+                    case StfLogLevel.Debug:
+                        AddLoglevelToRunReport[StfLogLevel.Trace] = false;
+                        AddLoglevelToRunReport[StfLogLevel.Internal] = false;
                         break;
-                    case LogLevel.Trace:
-                        this.AddLoglevelToRunReport[LogLevel.Internal] = false;
+                    case StfLogLevel.Trace:
+                        AddLoglevelToRunReport[StfLogLevel.Internal] = false;
                         break;
-                    case LogLevel.Internal:
+                    case StfLogLevel.Internal:
                         break;
                     default:
                         Console.WriteLine(@"Internal Error: Unknown loglevel meet");
@@ -193,6 +195,11 @@ namespace Stf.Utilities
         public bool ArchiveLogFile { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether log file initialized.
+        /// </summary>
+        private bool LogFileInitialized { get; set; }
+
+        /// <summary>
         /// Gets or sets the _log file handle.
         /// </summary>
         private LogfileWriter LogFileHandle { get; set; }
@@ -206,7 +213,7 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets or sets whether we do log for a given log level?
         /// </summary>
-        private Dictionary<LogLevel, bool> AddLoglevelToRunReport { get; set; }
+        private Dictionary<StfLogLevel, bool> AddLoglevelToRunReport { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether whether if an existing logfile should be overwriten.
@@ -221,7 +228,7 @@ namespace Stf.Utilities
         /// </returns>
         public int ErrorOrFail()
         {
-            return NumberOfLoglevelMessages[LogLevel.Error] + NumberOfLoglevelMessages[LogLevel.Fail];
+            return NumberOfLoglevelMessages[StfLogLevel.Error] + NumberOfLoglevelMessages[StfLogLevel.Fail];
         }
 
         /// <summary>
@@ -232,10 +239,16 @@ namespace Stf.Utilities
         /// </returns>
         public bool CloseLogFile()
         {
-            SetRunStatus();
+            if (!LogFileInitialized)
+            {
+                return true;
+            }
 
-            EndHtmlLogFile();
-            return this.LogFileHandle.Close();
+            var retVal = SetRunStatus();
+            retVal = retVal && EndHtmlLogFile();
+            retVal = retVal && LogFileHandle.Close();
+            LogFileInitialized = false;
+            return retVal;
         }
 
         /// <summary>
@@ -255,17 +268,8 @@ namespace Stf.Utilities
         /// <returns>A string representing the JS that controls the logger</returns>
         private string GetJavaScript()
         {
-            string retVal;
             var loggerJs = Resources.ResourceManager.GetObject("logger");
-
-            if (loggerJs == null)
-            {
-                retVal = "<error>No Logger JS section defined</error>";
-            }
-            else
-            {
-                retVal = loggerJs.ToString();
-            }
+            var retVal = loggerJs == null ? "<error>No Logger JS section defined</error>" : loggerJs.ToString();
 
             return retVal;
         }
@@ -298,17 +302,8 @@ namespace Stf.Utilities
         /// <returns>A string representing the CSS that controls the logger</returns>
         private string GetStyleSheet()
         {
-            string retVal;
             var styleSheet = Resources.ResourceManager.GetObject("style");
-
-            if (styleSheet == null)
-            {
-                retVal = "<error>No styleSheet file found</error>";
-            }
-            else
-            {
-                retVal = styleSheet.ToString();
-            }
+            var retVal = styleSheet == null ? "<error>No styleSheet file found</error>" : styleSheet.ToString();
 
             return retVal;
         }
@@ -322,11 +317,9 @@ namespace Stf.Utilities
         /// private
         private bool BeginHtmlLogFile()
         {
-            string htmlLine;
+            LogFileHandle.Open(fileName);
 
-            this.LogFileHandle.Open(fileName);
-
-            htmlLine = "<!DOCTYPE html>\n";
+            var htmlLine = "<!DOCTYPE html>\n";
             htmlLine += "<html>\n";
             htmlLine += "  <head>\n";
             htmlLine += string.Format("    <title>{0}</title>\n", LogTitle);
@@ -337,7 +330,7 @@ namespace Stf.Utilities
             htmlLine += "  </script>\n</head>\n";
             htmlLine += GetOpenBody();
 
-            this.LogFileHandle.Write(htmlLine);
+            LogFileHandle.Write(htmlLine);
             return true;
         }
 
@@ -349,16 +342,15 @@ namespace Stf.Utilities
         /// </returns>
         private bool EndHtmlLogFile()
         {
-            string htmlLine;
+            LogKeyValue("Passed", NumberOfLoglevelMessages[StfLogLevel.Pass].ToString(), "Passed Tests");
+            LogKeyValue("Failed", NumberOfLoglevelMessages[StfLogLevel.Fail].ToString(), "Failed Tests");
+            LogKeyValue("Errors", NumberOfLoglevelMessages[StfLogLevel.Error].ToString(), "Errors logged");
+            LogKeyValue("Warnings", NumberOfLoglevelMessages[StfLogLevel.Warning].ToString(), "Warnings logged");
 
-            LogKeyValue("Passed", NumberOfLoglevelMessages[LogLevel.Pass].ToString(), "Passed Tests");
-            LogKeyValue("Failed", NumberOfLoglevelMessages[LogLevel.Fail].ToString(), "Failed Tests");
-            LogKeyValue("Errors", NumberOfLoglevelMessages[LogLevel.Error].ToString(), "Errors logged");
-            LogKeyValue("Warnings", NumberOfLoglevelMessages[LogLevel.Warning].ToString(), "Warnings logged");
-            htmlLine = "  </body>\n";
+            var htmlLine = "  </body>\n";
             htmlLine += "</html>\n";
 
-            this.LogFileHandle.Write(htmlLine);
+            LogFileHandle.Write(htmlLine);
             return true;
         }
 
@@ -372,18 +364,23 @@ namespace Stf.Utilities
         {
             var userName = string.Format("{0}\\{1}", Environment.UserDomainName, Environment.UserName);
 
+            if (LogFileInitialized)
+            {
+                return true;
+            }
+
             OverwriteLogFile = Configuration.OverwriteLogFile;
             TestName = "TestName_Not_Set";
             LogToFile = Configuration.LogToFile;
             LogTitle = Configuration.LogTitle;
-            LogLevel = Configuration.LogLevel;
+            this.StfLogLevel = Configuration.StfLogLevel;
 
-            if (this.LogFileHandle.Initialized)
+            if (LogFileHandle.Initialized)
             {
-                this.CloseLogFile();
+                CloseLogFile();
             }
 
-            if (!this.LogFileHandle.Open(FileName))
+            if (!LogFileHandle.Open(FileName))
             {
                 return false;
             }
@@ -406,6 +403,7 @@ namespace Stf.Utilities
             LogKeyValue("Date", DateTime.Now.ToShortDateString(), string.Empty);
 
             LogTrace(string.Format("Log Initiated at [{0}]", FileName));
+            LogFileInitialized = true;
             return true;
         }
     }
