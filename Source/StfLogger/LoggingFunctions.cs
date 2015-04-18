@@ -357,6 +357,7 @@ namespace Stf.Utilities
                     break;
             }
 
+            NumberOfLoglevelMessages[logLevel]++;
             this.LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }

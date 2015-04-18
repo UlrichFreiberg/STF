@@ -351,6 +351,10 @@ namespace Stf.Utilities
         {
             string htmlLine;
 
+            LogKeyValue("Passed", NumberOfLoglevelMessages[LogLevel.Pass].ToString(), "Passed Tests");
+            LogKeyValue("Failed", NumberOfLoglevelMessages[LogLevel.Fail].ToString(), "Failed Tests");
+            LogKeyValue("Errors", NumberOfLoglevelMessages[LogLevel.Error].ToString(), "Errors logged");
+            LogKeyValue("Warnings", NumberOfLoglevelMessages[LogLevel.Warning].ToString(), "Warnings logged");
             htmlLine = "  </body>\n";
             htmlLine += "</html>\n";
 
