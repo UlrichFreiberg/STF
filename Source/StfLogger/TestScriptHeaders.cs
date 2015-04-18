@@ -29,29 +29,45 @@ namespace Stf.Utilities
         /// </returns>
         public bool SetRunStatus()
         {
-            var statusMsg = string.Empty;
-            string retVal;
-            LogLevel logLevel;
-
-            if (NumberOfLoglevelMessages[LogLevel.Warning] > 0)
-            {
-                statusMsg += " - Test showed warnings";
-                logLevel = LogLevel.Warning;
-            }
+            string statusMsg;
+            StfLogLevel logLevel;
 
             if (this.ErrorOrFail() > 0)
             {
-                statusMsg += "Test showed errors";
-                logLevel = LogLevel.Error;
+                statusMsg = "Test showed errors";
+                logLevel = StfLogLevel.Error;
             }
             else
             {
-                statusMsg += "Test showed no errors";
-                logLevel = LogLevel.Pass;
+                if (NumberOfLoglevelMessages[StfLogLevel.Warning] > 0)
+                {
+                    statusMsg = "Test showed warnings";
+                    logLevel = StfLogLevel.Warning;
+                }
+                else
+                {
+                    statusMsg = "Test showed no errors";
+                    logLevel = StfLogLevel.Pass;
+                }
             }
 
-            retVal = string.Format(@"<span id=""runstatus"">{0}</span>", statusMsg);
-            LogOneHtmlMessage(logLevel, retVal);
+            var runstats = string.Format(@"<span id=""runstatus"">{0}</span>", statusMsg);
+            runstats += string.Format(
+                        "<div class=\"line runstats\" passed=\"{0}\" failed=\"{1}\" Errors=\"{2}\" Warnings=\"{3}\">",
+                        NumberOfLoglevelMessages[StfLogLevel.Pass],
+                        NumberOfLoglevelMessages[StfLogLevel.Fail],
+                        NumberOfLoglevelMessages[StfLogLevel.Error],
+                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
+
+            runstats += string.Format(
+                        "   {0} Passed, {1} Failed, {2} Errors, {3} Warnings",
+                        NumberOfLoglevelMessages[StfLogLevel.Pass],
+                        NumberOfLoglevelMessages[StfLogLevel.Fail],
+                        NumberOfLoglevelMessages[StfLogLevel.Error],
+                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
+            runstats += "</div>";
+
+            LogOneHtmlMessage(logLevel, runstats);
             return true;
         }
     }
