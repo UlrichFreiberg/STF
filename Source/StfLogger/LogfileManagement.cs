@@ -25,7 +25,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The _m log level.
         /// </summary>
-        private StfLogLevel stfLogLevel;
+        private StfLogLevel logLevel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StfLogger"/> class.
@@ -59,7 +59,7 @@ namespace Stf.Utilities
             // Set according to the configuration
             Configuration = new LogConfiguration();
             FileName = Configuration.LogFileName;
-            this.StfLogLevel = Configuration.StfLogLevel;
+            this.LogLevel = Configuration.LogLevel;
             OverwriteLogFile = Configuration.OverwriteLogFile;
             LogToFile = Configuration.LogToFile;
             LogTitle = Configuration.LogTitle;
@@ -126,16 +126,16 @@ namespace Stf.Utilities
         /// Lower levels than this will be ignored.
         /// Eg "trace" will be ignored is level is set to "debug"
         /// </summary>
-        public StfLogLevel StfLogLevel
+        public StfLogLevel LogLevel
         {
             get
             {
-                return this.stfLogLevel;
+                return this.logLevel;
             }
 
             set
             {
-                this.stfLogLevel = value;
+                this.logLevel = value;
                 timeOfLastMessage = DateTime.Now;
 
                 foreach (StfLogLevel loglevel in Enum.GetValues(typeof(StfLogLevel)))
@@ -373,7 +373,7 @@ namespace Stf.Utilities
             TestName = "TestName_Not_Set";
             LogToFile = Configuration.LogToFile;
             LogTitle = Configuration.LogTitle;
-            this.StfLogLevel = Configuration.StfLogLevel;
+            this.LogLevel = Configuration.LogLevel;
 
             if (LogFileHandle.Initialized)
             {
@@ -390,6 +390,9 @@ namespace Stf.Utilities
                 return false;
             }
 
+            LogFileInitialized = true;
+            LogTrace(string.Format("Log Initiated at [{0}]", FileName));
+
             LogKeyValue("Environment", "TODO_ENVIRONMENT", "Configuration.EnvironmentName");
             LogKeyValue("OS", Environment.OSVersion.ToString(), string.Empty);
             LogKeyValue("User", userName, string.Empty);
@@ -402,8 +405,6 @@ namespace Stf.Utilities
             LogKeyValue("Testname", TestName, "TODO_Testname");
             LogKeyValue("Date", DateTime.Now.ToShortDateString(), string.Empty);
 
-            LogTrace(string.Format("Log Initiated at [{0}]", FileName));
-            LogFileInitialized = true;
             return true;
         }
     }

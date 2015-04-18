@@ -32,7 +32,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log all windows.
         /// </summary>
-        /// <param name="level">
+        /// <param name="logLevel">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -41,7 +41,7 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogAllWindows(StfLogLevel level, string message)
+        public int LogAllWindows(StfLogLevel logLevel, string message)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +49,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log screenshot.
         /// </summary>
-        /// <param name="level">
+        /// <param name="logLevel">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -58,12 +58,12 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogScreenshot(StfLogLevel level, string message)
+        public int LogScreenshot(StfLogLevel logLevel, string message)
         {
             var length = 0;
             foreach (var screen in Screen.AllScreens)
             {
-                length += LogOneImage(level, Utilities.DoScreenshot(screen.Bounds), message);
+                length += LogOneImage(logLevel, Utilities.DoScreenshot(screen.Bounds), message);
                 if (length < 0)
                 {
                     break;
@@ -76,7 +76,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log image.
         /// </summary>
-        /// <param name="level">
+        /// <param name="logLevel">
         /// The log level.
         /// </param>
         /// <param name="imageFile">
@@ -88,9 +88,9 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogImage(StfLogLevel level, string imageFile, string message)
+        public int LogImage(StfLogLevel logLevel, string imageFile, string message)
         {
-            return LogOneImage(level, imageFile, message);
+            return LogOneImage(logLevel, imageFile, message);
         }
 
         /// <summary>

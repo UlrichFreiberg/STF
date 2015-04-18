@@ -29,17 +29,17 @@ namespace Stf.Utilities
             AlertLongInterval = Settings.Setting("AlertLongInterval", 30000);
             PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
 
-            const StfLogLevel DefaultLoglevel = StfLogLevel.Info;
-            var logLevelString = Settings.Setting("StfLogLevel", DefaultLoglevel.ToString());
+            const StfLogLevel DefaultLoglevel = StfLogLevel.Internal;
+            var logLevelString = Settings.Setting("LogLevel", DefaultLoglevel.ToString());
             var convertedLoglevel = StringToLogLevel(logLevelString);
 
             if (convertedLoglevel == null)
             {
-                this.StfLogLevel = DefaultLoglevel;
+                this.LogLevel = DefaultLoglevel;
             }
             else
             {
-                this.StfLogLevel = (StfLogLevel)convertedLoglevel;
+                this.LogLevel = (StfLogLevel)convertedLoglevel;
             }
         }
 
@@ -71,7 +71,7 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets or sets the log level.
         /// </summary>
-        public StfLogLevel StfLogLevel { get; set; }
+        public StfLogLevel LogLevel { get; set; }
 
         /// <summary>
         /// Gets or sets the path to logo image file.
@@ -85,7 +85,7 @@ namespace Stf.Utilities
         /// The loglevel string.
         /// </param>
         /// <returns>
-        /// The <see cref="StfLogLevel"/>.
+        /// The <see cref="LogLevel"/>.
         /// </returns>
         internal StfLogLevel? StringToLogLevel(string loglevelString)
         {
@@ -108,12 +108,12 @@ namespace Stf.Utilities
                 }
                 else
                 {
-                    Console.WriteLine(@"{0} is not an underlying value of the StfLogLevel enumeration.", loglevelString);
+                    Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
                 }
             }
             catch (ArgumentException)
             {
-                Console.WriteLine(@"{0} is not an underlying value of the StfLogLevel enumeration.", loglevelString);
+                Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
             }
 
             return retVal;

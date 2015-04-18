@@ -2,6 +2,9 @@
 // <copyright file="StfLogLevel.cs" company="Foobar">
 //   2015
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Stf.Utilities

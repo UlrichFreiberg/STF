@@ -75,17 +75,17 @@ namespace Stf.Utilities
         }
 
         /// <summary>
-        /// Make sure StfLogLevel is set to internal and set it back again
+        /// Make sure LogLevel is set to internal and set it back again
         /// </summary>
         /// <param name="message">
         /// The message.
         /// </param>
         private void LogBaseClassMessage(string message)
         {
-            var oldLoglevel = MyLogger.StfLogLevel;
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
-            this.MyLogger.LogInternal(message);
-            MyLogger.StfLogLevel = oldLoglevel;
+            var oldLoglevel = MyLogger.LogLevel;
+            MyLogger.LogLevel = StfLogLevel.Internal;
+            MyLogger.LogInternal(message);
+            MyLogger.LogLevel = oldLoglevel;
         }
 
         /// <summary>

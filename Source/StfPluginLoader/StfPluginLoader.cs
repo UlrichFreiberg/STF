@@ -20,7 +20,10 @@ namespace Stf.Utilities
     /// </summary>
     public class StfPluginLoader
     {
-        private List<IStfPlugin> stfPlugins { get; set; }
+        /// <summary>
+        /// Gets or sets the stf plugins.
+        /// </summary>
+        private List<IStfPlugin> StfPlugins { get; set; }
 
         /// <summary>
         /// The load plugins.
@@ -29,7 +32,10 @@ namespace Stf.Utilities
         /// The StfPluginPath.
         /// </param>
         /// <returns>
-        /// The <see cref="ICollection"/>.
+        /// The <see>
+        ///         <cref>ICollection</cref>
+        ///     </see>
+        ///     .
         /// </returns>
         public ICollection<IStfPlugin> LoadStfPlugins(string stfPluginPath)
         {
@@ -72,19 +78,19 @@ namespace Stf.Utilities
                 }
             }
 
-            stfPlugins = new List<IStfPlugin>(pluginTypes.Count);
+            this.StfPlugins = new List<IStfPlugin>(pluginTypes.Count);
             foreach (var type in pluginTypes)
             {
                 var plugin = (IStfPlugin)Activator.CreateInstance(type);
-                stfPlugins.Add(plugin);
+                this.StfPlugins.Add(plugin);
             }
             
-            return stfPlugins;
+            return this.StfPlugins;
         }
 
         public T Get<T>() where T : IStfPlugin
         {
-            foreach (var stfPlugin in stfPlugins)
+            foreach (var stfPlugin in this.StfPlugins)
             {
                 if (stfPlugin is T)
                 {
