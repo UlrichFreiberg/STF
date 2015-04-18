@@ -164,7 +164,7 @@ namespace Stf.Utilities
 
             if (!enableNegativeTesting)
             {
-                throw new AssertFailedException("Nix");
+                throw new AssertFailedException(message);
             }
 
             return true;

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Key.cs" company="Mir Software">
-//   Copyright 2013 Mir Software. All rights reserved.
+// <copyright file="Key.cs" company="Foobar">
+//   2015
 // </copyright>
 // <summary>
 //   Defines the Key type.

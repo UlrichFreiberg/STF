@@ -2,23 +2,17 @@
 // <copyright file="StfAssert_Object.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities
 {
     using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The stf assert.
     /// </summary>
-    public partial class StfAssert : IStfAssert
+    public partial class StfAssert
     {
         /// <summary>
         /// Asserts that a value is a Object type and not a reference type

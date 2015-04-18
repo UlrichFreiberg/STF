@@ -23,13 +23,6 @@ namespace Stf.Utilities
         private const string LogDirRoot = @"c:\temp\StfLogs";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StfTestScriptBase"/> class.
-        /// </summary>
-        public StfTestScriptBase()
-        {
-        }
-
-        /// <summary>
         /// Gets the Stf Asserter.
         /// </summary>
         public StfAssert MyAssert { get; private set; }
@@ -69,7 +62,6 @@ namespace Stf.Utilities
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             this.MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
-
         }
 
         /// <summary>
@@ -83,17 +75,17 @@ namespace Stf.Utilities
         }
 
         /// <summary>
-        /// Make sure logLevel is set to internal and set it back again
+        /// Make sure StfLogLevel is set to internal and set it back again
         /// </summary>
         /// <param name="message">
         /// The message.
         /// </param>
         private void LogBaseClassMessage(string message)
         {
-            var oldLoglevel = MyLogger.LogLevel;
-            MyLogger.LogLevel = LogLevel.Internal;
+            var oldLoglevel = MyLogger.StfLogLevel;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
             this.MyLogger.LogInternal(message);
-            MyLogger.LogLevel = oldLoglevel;
+            MyLogger.StfLogLevel = oldLoglevel;
         }
 
         /// <summary>

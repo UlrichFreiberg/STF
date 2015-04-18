@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfAssert.cs" company="Foobar">
+// <copyright file="StfAssert_FileAndFolder.cs" company="Foobar">
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,12 +8,10 @@ namespace Stf.Utilities
     using System.IO;
     using System.Text.RegularExpressions;
 
-    using Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The stf assert.
     /// </summary>
-    public partial class StfAssert : IStfAssert
+    public partial class StfAssert
     {
         /// <summary>
         /// Asserts that a file exists

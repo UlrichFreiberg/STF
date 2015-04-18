@@ -32,12 +32,12 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogFunctionEnter(LogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues);
+        int LogFunctionEnter(StfLogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues);
 
         /// <summary>
         /// The log function exit. Should be called/inserted when exiting a model/adapter function.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="lLogLevel">
         /// The log level.
         /// </param>
         /// <param name="functionName">
@@ -49,7 +49,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogFunctionExit(LogLevel logLevel, string functionName, object returnValue);
+        int LogFunctionExit(StfLogLevel lLogLevel, string functionName, object returnValue);
 
         // Properties in models/adapters
 
@@ -68,7 +68,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogGet(LogLevel logLevel, string callingProperty, object getValue);
+        int LogGet(StfLogLevel logLevel, string callingProperty, object getValue);
 
         /// <summary>
         /// The log set.
@@ -85,6 +85,6 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogSet(LogLevel logLevel, string callingProperty, object setValue);
+        int LogSet(StfLogLevel logLevel, string callingProperty, object setValue);
     }
 }

@@ -37,7 +37,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAllLogType()
         {
-            MyLogger.LogLevel = LogLevel.Internal;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
 
             MyLogger.LogError("LogError");
             MyLogger.LogWarning("LogWarning");
@@ -52,11 +52,11 @@ namespace UnitTest
             MyLogger.LogHeader("LogHeader");
             MyLogger.LogSubHeader("LogSubHeader");
 
-            MyLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction", new[] { "arg1", "arg2" }, new object[] { null });
-            MyLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction", 42);
+            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction", new[] { "arg1", "arg2" }, new object[] { null });
+            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction", 42);
 
-            MyLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunctionShort");
-            MyLogger.LogFunctionExit(LogLevel.Info, "NameOfFunctionShort");
+            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunctionShort");
+            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunctionShort");
 
             // used solely by Assert functions
             MyLogger.LogPass("testStepName LogPass", "LogPass");
@@ -64,10 +64,10 @@ namespace UnitTest
 
             MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
 
-            MyLogger.LogGet(LogLevel.Info, "MyTestProperty", MyLogger);
-            MyLogger.LogSet(LogLevel.Info, "MyTestProperty", MyLogger);
+            MyLogger.LogGet(StfLogLevel.Info, "MyTestProperty", MyLogger);
+            MyLogger.LogSet(StfLogLevel.Info, "MyTestProperty", MyLogger);
 
-            MyLogger.LogAutomationIdObject(LogLevel.Internal, MyLogger, "Using MyLogger as AID for test");
+            MyLogger.LogAutomationIdObject(StfLogLevel.Internal, MyLogger, "Using MyLogger as AID for test");
 
             MyLogger.SetRunStatus();
         }
@@ -78,7 +78,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodLotsOfEntries()
         {
-            MyLogger.LogLevel = LogLevel.Internal;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
 
             for (int i = 0; i < 75; i++)
             {
@@ -94,40 +94,40 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodCallStack()
         {
-            MyLogger.LogLevel = LogLevel.Internal;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
 
             MyLogger.LogInfo("NameOfFunction_L0A");
             MyLogger.LogInfo("NameOfFunction_L0B");
 
-            MyLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L1");
+            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L1");
             MyLogger.LogInfo("NameOfFunction_L1A");
             MyLogger.LogInfo("NameOfFunction_L1B");
 
-            MyLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L2");
+            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L2");
             MyLogger.LogInfo("NameOfFunction_L2A");
             MyLogger.LogInfo("NameOfFunction_L2B");
 
-            MyLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L3");
+            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L3");
             MyLogger.LogInfo("NameOfFunction_L3A");
             MyLogger.LogInfo("NameOfFunction_L3B");
 
-            MyLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L3");
+            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L3");
             MyLogger.LogInfo("NameOfFunction_L2A");
             MyLogger.LogInfo("NameOfFunction_L2B");
 
-            MyLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L2");
+            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L2");
             MyLogger.LogInfo("NameOfFunction_L1A");
             MyLogger.LogInfo("NameOfFunction_L1B");
 
-            MyLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L2");
+            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L2");
             MyLogger.LogInfo("NameOfFunction_L2A");
             MyLogger.LogInfo("NameOfFunction_L2B");
 
-            MyLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L2");
+            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L2");
             MyLogger.LogInfo("NameOfFunction_L1A");
             MyLogger.LogInfo("NameOfFunction_L1B");
 
-            MyLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L1");
+            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L1");
             MyLogger.LogInfo("NameOfFunction_L0A");
             MyLogger.LogInfo("NameOfFunction_L0B");
         }
@@ -138,10 +138,10 @@ namespace UnitTest
         [TestMethod]
         public void TestLogScreenshot()
         {
-            MyLogger.LogLevel = LogLevel.Internal;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
 
             MyLogger.LogTrace("Just before a screenshot is taken");
-            MyLogger.LogScreenshot(LogLevel.Info, "Grabbed screenshot");
+            MyLogger.LogScreenshot(StfLogLevel.Info, "Grabbed screenshot");
             MyLogger.LogTrace("right after a screenshot is taken");
         }
 
@@ -151,10 +151,10 @@ namespace UnitTest
         [TestMethod, ExpectedException(typeof(NotImplementedException))]
         public void TestLogAllWindows()
         {
-            MyLogger.LogLevel = LogLevel.Internal;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
 
             MyLogger.LogTrace("Just before logging all windows");
-            MyLogger.LogAllWindows(LogLevel.Info, "Grabbed all windows");
+            MyLogger.LogAllWindows(StfLogLevel.Info, "Grabbed all windows");
             MyLogger.LogTrace("right after logging all windows");
         }
 
@@ -177,7 +177,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAsserts()
         {
-            MyLogger.LogLevel = LogLevel.Internal;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
             MyAssert.EnableNegativeTesting = true;
 
             MyAssert.AssertTrue("True Value for AssertTrue", true);
@@ -197,7 +197,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodKeyValues()
         {
-            MyLogger.LogLevel = LogLevel.Internal;
+            MyLogger.StfLogLevel = StfLogLevel.Internal;
 
             MyLogger.LogKeyValue("Bent", "42", "First value for Bent");
             MyLogger.LogKeyValue("Bent", "43", "Second value for Bent - this is the only one that should be shown in the list");

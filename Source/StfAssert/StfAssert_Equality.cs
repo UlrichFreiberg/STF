@@ -3,18 +3,17 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Stf.Utilities
 {
     using System;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The stf assert.
     /// </summary>
-    public partial class StfAssert : IStfAssert
+    public partial class StfAssert
     {
         /// <summary>
         /// Assert if two values are the same. Values and objects can be compared.
@@ -238,7 +237,7 @@ namespace Stf.Utilities
             }
             catch (Exception ex)
             {
-                msg = ex.Message;
+                AssertLogger.LogTrace(ex.Message);
             }
 
             // if T2 cant convert to T1 perhaps T1 can convert to T2

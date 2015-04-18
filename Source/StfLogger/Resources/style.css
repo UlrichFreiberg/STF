@@ -122,6 +122,14 @@ div.internal {
     color: #666666;
 }
 
+div.runstats {
+    color: purple;
+    font-size: 1.5em;
+    font-weight: bolder;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
 .pass {
     display: block;
 }

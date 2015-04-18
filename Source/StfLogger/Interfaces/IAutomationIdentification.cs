@@ -26,6 +26,6 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogAutomationIdObject(LogLevel logLevel, object automationIdObj, string message);
+        int LogAutomationIdObject(StfLogLevel logLevel, object automationIdObj, string message);
     }
 }

@@ -32,7 +32,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogError(string message)
         {
-            return LogOneHtmlMessage(LogLevel.Error, message);
+            return LogOneHtmlMessage(StfLogLevel.Error, message);
         }
 
         /*
@@ -53,7 +53,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogWarning(string message)
         {
-            return LogOneHtmlMessage(LogLevel.Warning, message);
+            return LogOneHtmlMessage(StfLogLevel.Warning, message);
         }
 
         /*
@@ -74,7 +74,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogInfo(string message)
         {
-            return LogOneHtmlMessage(LogLevel.Info, message);
+            return LogOneHtmlMessage(StfLogLevel.Info, message);
         }
 
         /*
@@ -95,7 +95,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogDebug(string message)
         {
-            return LogOneHtmlMessage(LogLevel.Debug, message);
+            return LogOneHtmlMessage(StfLogLevel.Debug, message);
         }
 
         /*
@@ -116,7 +116,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogTrace(string message)
         {
-            return LogOneHtmlMessage(LogLevel.Trace, message);
+            return LogOneHtmlMessage(StfLogLevel.Trace, message);
         }
 
         /*
@@ -140,7 +140,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogHeader(string headerMessage)
         {
-            return LogOneHtmlMessage(LogLevel.Header, headerMessage);
+            return LogOneHtmlMessage(StfLogLevel.Header, headerMessage);
         }
 
         /*
@@ -161,7 +161,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogSubHeader(string subHeaderMessage)
         {
-            return LogOneHtmlMessage(LogLevel.SubHeader, subHeaderMessage);
+            return LogOneHtmlMessage(StfLogLevel.SubHeader, subHeaderMessage);
         }
 
         /*
@@ -185,7 +185,7 @@ namespace Stf.Utilities
         /// </returns>
         public int LogInternal(string message)
         {
-            return LogOneHtmlMessage(LogLevel.Internal, message);
+            return LogOneHtmlMessage(StfLogLevel.Internal, message);
         }
 
         /*
@@ -214,7 +214,7 @@ namespace Stf.Utilities
         {
             var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
 
-            return LogOneHtmlMessage(LogLevel.Pass, tempNeedsToBeReworkedMessage);
+            return LogOneHtmlMessage(StfLogLevel.Pass, tempNeedsToBeReworkedMessage);
         }
 
         /*
@@ -240,7 +240,7 @@ namespace Stf.Utilities
         {
             var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
 
-            return LogOneHtmlMessage(LogLevel.Fail, tempNeedsToBeReworkedMessage);
+            return LogOneHtmlMessage(StfLogLevel.Fail, tempNeedsToBeReworkedMessage);
         }
 
         /*
@@ -304,10 +304,9 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        private int LogOneHtmlMessage(LogLevel logLevel, string message)
+        private int LogOneHtmlMessage(StfLogLevel logLevel, string message)
         {
-            string htmlLine, logLevelString;
-            string messageIdString;
+            string htmlLine;
 
             if (!this.AddLoglevelToRunReport[logLevel])
             {
@@ -327,18 +326,19 @@ namespace Stf.Utilities
                 return -2;
             }
 
-            messageIdString = GetNextMessageId();
-            logLevelString = Enum.GetName(typeof(LogLevel), logLevel) ?? "Unknown LogLevel";
+            var messageIdString = this.GetNextMessageId();
+            var logLevelString = Enum.GetName(typeof(StfLogLevel), logLevel) ?? "Unknown StfLogLevel";
+
             logLevelString = logLevelString.ToLower();
 
             CheckForPerformanceAlert();
 
             switch (logLevel)
             {
-                case LogLevel.Header:
+                case StfLogLevel.Header:
                     htmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", message);
                     break;
-                case LogLevel.SubHeader:
+                case StfLogLevel.SubHeader:
                     htmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", message);
                     break;
 

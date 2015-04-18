@@ -14,7 +14,7 @@ namespace Stf.Utilities.Interfaces
         /// <summary>
         /// The log all windows.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="stfLogLevel">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -23,12 +23,12 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogAllWindows(LogLevel logLevel, string message);
+        int LogAllWindows(StfLogLevel stfLogLevel, string message);
 
         /// <summary>
         /// The log screenshot.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="stfLogLevel">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -37,12 +37,12 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogScreenshot(LogLevel logLevel, string message);
+        int LogScreenshot(StfLogLevel stfLogLevel, string message);
 
         /// <summary>
         /// The log image.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="stfLogLevel">
         /// The log level.
         /// </param>
         /// <param name="imageFile">
@@ -54,6 +54,6 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogImage(LogLevel logLevel, string imageFile, string message);
+        int LogImage(StfLogLevel stfLogLevel, string imageFile, string message);
     }
 }

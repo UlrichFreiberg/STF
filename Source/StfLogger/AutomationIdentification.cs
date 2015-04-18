@@ -15,7 +15,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log automation id object func.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="stfLogLevel">
         /// The log level.
         /// </param>
         /// <param name="automationIdObj">
@@ -24,7 +24,10 @@ namespace Stf.Utilities
         /// <param name="message">
         /// The message.
         /// </param>
-        public delegate int LogAutomationIdObjectFunc(LogLevel logLevel, object automationIdObj, string message);
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public delegate int LogAutomationIdObjectFunc(StfLogLevel stfLogLevel, object automationIdObj, string message);
 
         /// <summary>
         /// Gets or sets the LogAutomationIdObject user function.
@@ -46,7 +49,7 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogAutomationIdObject(LogLevel logLevel, object automationIdObj, string message)
+        public int LogAutomationIdObject(StfLogLevel logLevel, object automationIdObj, string message)
         {
             return LogAutomationIdObjectUserFunction(logLevel, automationIdObj, message);
         }

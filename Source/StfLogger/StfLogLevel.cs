@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LogLevel.cs" company="Foobar">
+// <copyright file="StfLogLevel.cs" company="Foobar">
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The log level.
     /// </summary>
-    public enum LogLevel
+    public enum StfLogLevel
     {
         /// <summary>
         /// The error.

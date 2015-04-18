@@ -29,17 +29,17 @@ namespace Stf.Utilities
             AlertLongInterval = Settings.Setting("AlertLongInterval", 30000);
             PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
 
-            const LogLevel DefaultLoglevel = LogLevel.Info;
-            var logLevelString = Settings.Setting("LogLevel", DefaultLoglevel.ToString());
+            const StfLogLevel DefaultLoglevel = StfLogLevel.Info;
+            var logLevelString = Settings.Setting("StfLogLevel", DefaultLoglevel.ToString());
             var convertedLoglevel = StringToLogLevel(logLevelString);
 
             if (convertedLoglevel == null)
             {
-                LogLevel = DefaultLoglevel;
+                this.StfLogLevel = DefaultLoglevel;
             }
             else
             {
-                LogLevel = (LogLevel)convertedLoglevel;
+                this.StfLogLevel = (StfLogLevel)convertedLoglevel;
             }
         }
 
@@ -71,7 +71,7 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets or sets the log level.
         /// </summary>
-        public LogLevel LogLevel { get; set; }
+        public StfLogLevel StfLogLevel { get; set; }
 
         /// <summary>
         /// Gets or sets the path to logo image file.
@@ -85,11 +85,11 @@ namespace Stf.Utilities
         /// The loglevel string.
         /// </param>
         /// <returns>
-        /// The <see cref="LogLevel"/>.
+        /// The <see cref="StfLogLevel"/>.
         /// </returns>
-        internal LogLevel? StringToLogLevel(string loglevelString)
+        internal StfLogLevel? StringToLogLevel(string loglevelString)
         {
-            LogLevel? retVal = null;
+            StfLogLevel? retVal = null;
 
             if (string.IsNullOrEmpty(loglevelString))
             {
@@ -101,19 +101,19 @@ namespace Stf.Utilities
 
             try
             {
-                var logLevelValue = (LogLevel)Enum.Parse(typeof(LogLevel), loglevelString);
-                if (Enum.IsDefined(typeof(LogLevel), logLevelValue) | logLevelValue.ToString().Contains(","))
+                var logLevelValue = (StfLogLevel)Enum.Parse(typeof(StfLogLevel), loglevelString);
+                if (Enum.IsDefined(typeof(StfLogLevel), logLevelValue) | logLevelValue.ToString().Contains(","))
                 {
                     retVal = logLevelValue;
                 }
                 else
                 {
-                    Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
+                    Console.WriteLine(@"{0} is not an underlying value of the StfLogLevel enumeration.", loglevelString);
                 }
             }
             catch (ArgumentException)
             {
-                Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
+                Console.WriteLine(@"{0} is not an underlying value of the StfLogLevel enumeration.", loglevelString);
             }
 
             return retVal;

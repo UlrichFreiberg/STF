@@ -44,14 +44,11 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionEnter(LogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues)
+        public int LogFunctionEnter(StfLogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues)
         {
-            string message;
-            string argsString;
+            const string ArgsString = "TODO: Concatenated string of argName and Values";
+            var message = string.Format("> {0} {1} returning {2}", functionName, ArgsString, nameOfReturnType);
 
-            argsString = "TODO: Concatenated string of argName and Values";
-
-            message = string.Format("> {0} {1} returning {2}", functionName, argsString, nameOfReturnType);
             this.callStack.Push(functionName);
             return LogOneHtmlMessage(logLevel, message);
         }
@@ -71,7 +68,7 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionEnter(LogLevel logLevel, string nameOfReturnType, string functionName)
+        public int LogFunctionEnter(StfLogLevel logLevel, string nameOfReturnType, string functionName)
         {
             return LogFunctionEnter(logLevel, nameOfReturnType, functionName, null, null);
         }
@@ -91,13 +88,11 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionExit(LogLevel logLevel, string functionName, object returnValue)
+        public int LogFunctionExit(StfLogLevel logLevel, string functionName, object returnValue)
         {
-            string message;
-            string poppedName;
+            var poppedName = this.callStack.Pop();
+            var message = string.Format("< Exited {0} returning {1}", poppedName, "returnValue.ToString");
 
-            poppedName = this.callStack.Pop();
-            message = string.Format("< Exited {0} returning {1}", poppedName, "returnValue.ToString");
             return LogOneHtmlMessage(logLevel, message);
         }
 
@@ -113,7 +108,7 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionExit(LogLevel logLevel, string functionName)
+        public int LogFunctionExit(StfLogLevel logLevel, string functionName)
         {
             return LogFunctionExit(logLevel, functionName, null);
         }
@@ -137,14 +132,11 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogGet(LogLevel logLevel, string callingProperty, object getValue)
+        public int LogGet(StfLogLevel logLevel, string callingProperty, object getValue)
         {
-            string message;
-            string valueString;
+            var valueString = getValue == null ? "null" : getValue.ToString();
+            var message = string.Format("Property {0} Get value [{1}]", callingProperty, valueString);
 
-            valueString = getValue == null ? "null" : getValue.ToString();
-
-            message = string.Format("Property {0} Get value [{1}]", callingProperty, valueString);
             return LogOneHtmlMessage(logLevel, message);
         }
 
@@ -163,14 +155,11 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogSet(LogLevel logLevel, string callingProperty, object setValue)
+        public int LogSet(StfLogLevel logLevel, string callingProperty, object setValue)
         {
-            string message;
-            string valueString;
+            var valueString = setValue == null ? "null" : setValue.ToString();
+            var message = string.Format("Property {0} Set value [{1}]", callingProperty, valueString);
 
-            valueString = setValue == null ? "null" : setValue.ToString();
-
-            message = string.Format("Property {0} Set value [{1}]", callingProperty, valueString);
             return LogOneHtmlMessage(logLevel, message);
         }
 
