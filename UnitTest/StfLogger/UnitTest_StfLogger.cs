@@ -10,6 +10,11 @@
 namespace UnitTest
 {
     using System;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Xml;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -37,7 +42,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAllLogType()
         {
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
+            MyLogger.LogLevel = StfLogLevel.Internal;
 
             MyLogger.LogError("LogError");
             MyLogger.LogWarning("LogWarning");
@@ -78,7 +83,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodLotsOfEntries()
         {
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
+            MyLogger.LogLevel = StfLogLevel.Internal;
 
             for (int i = 0; i < 75; i++)
             {
@@ -94,7 +99,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodCallStack()
         {
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
+            MyLogger.LogLevel = StfLogLevel.Internal;
 
             MyLogger.LogInfo("NameOfFunction_L0A");
             MyLogger.LogInfo("NameOfFunction_L0B");
@@ -138,7 +143,7 @@ namespace UnitTest
         [TestMethod]
         public void TestLogScreenshot()
         {
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
+            MyLogger.LogLevel = StfLogLevel.Internal;
 
             MyLogger.LogTrace("Just before a screenshot is taken");
             MyLogger.LogScreenshot(StfLogLevel.Info, "Grabbed screenshot");
@@ -151,7 +156,7 @@ namespace UnitTest
         [TestMethod, ExpectedException(typeof(NotImplementedException))]
         public void TestLogAllWindows()
         {
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
+            MyLogger.LogLevel = StfLogLevel.Internal;
 
             MyLogger.LogTrace("Just before logging all windows");
             MyLogger.LogAllWindows(StfLogLevel.Info, "Grabbed all windows");
@@ -177,7 +182,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAsserts()
         {
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
+            MyLogger.LogLevel = StfLogLevel.Internal;
             MyAssert.EnableNegativeTesting = true;
 
             MyAssert.AssertTrue("True Value for AssertTrue", true);
@@ -197,10 +202,62 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodKeyValues()
         {
-            MyLogger.StfLogLevel = StfLogLevel.Internal;
+            MyLogger.LogLevel = StfLogLevel.Internal;
 
             MyLogger.LogKeyValue("Bent", "42", "First value for Bent");
             MyLogger.LogKeyValue("Bent", "43", "Second value for Bent - this is the only one that should be shown in the list");
         }
+
+        /// <summary>
+        /// The test for keyvalues
+        /// </summary>
+        [TestMethod]
+        public void TestMethodSummaryLogger()
+        {
+            // One logline looks like:
+            //      <div class="line runstats" passed="0" failed="0" Errors="0" Warnings="0">
+            var dataDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @".\Data"));
+            foreach (var logfile in Directory.GetFiles(dataDir, "DatadrivenLoggerTest_*.html"))
+            {
+                const string Regexp = "div class=\"line runstats\" passed=\"(?<pass>[0-9]+)\" failed=\"(?<fail>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
+                string everything = File.ReadAllText(logfile, Encoding.UTF8);
+                var matches = Regex.Matches(everything, Regexp, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+                foreach (Match match in matches)
+                {
+                    var stats = string.Format(
+                        "pass={0}, fail={1}, error={2}, warning={3} <a href=\"{4}\">{5}</a>",
+                        match.Groups["pass"].Value,
+                        match.Groups["fail"].Value,
+                        match.Groups["error"].Value,
+                        match.Groups["warning"].Value,
+                        logfile,
+                        Path.GetFileName(logfile));
+
+                    MyLogger.LogTrace(string.Format("RunMatch line found[{0}]", match.ToString()));
+                    if (int.Parse(match.Groups["fail"].Value) > 0)
+                    {
+                        MyLogger.LogFail("SummeryLog", stats);
+                        continue;
+                    }
+
+                    if (int.Parse(match.Groups["error"].Value) > 0)
+                    {
+                        MyLogger.LogError(stats);
+                        continue;
+                    }
+
+                    if (int.Parse(match.Groups["warning"].Value) > 0)
+                    {
+                        MyLogger.LogWarning(stats);
+                        continue;
+                    }
+
+                    MyLogger.LogPass("SummeryLog", stats);
+                }
+            }
+
+        }
+
     }
 }
