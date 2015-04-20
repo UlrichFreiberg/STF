@@ -7,6 +7,9 @@ namespace Stf.Utilities
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+    using System.Text.RegularExpressions;
 
     using Stf.Utilities.Interfaces;
     using Stf.Utilities.Properties;
@@ -260,6 +263,63 @@ namespace Stf.Utilities
         public bool ArchiveThisLogFile()
         {
             return false;
+        }
+
+        /// <summary>
+        /// The create summary log.
+        /// </summary>
+        /// <param name="nameOfSummeryfile">
+        /// The name of wanted summeryfile to be created.
+        /// </param>
+        /// <param name="logDir">
+        /// The log dir, where all the logfiles to summerize are placed.
+        /// </param>
+        /// <param name="filePattern">
+        /// The file pattern for the logfiles.
+        /// </param>
+        public void CreateSummaryLog(string nameOfSummeryfile, string logDir, string filePattern)
+        {
+            // One runstats logline looks like:
+            //      <div class="line runstats" passed="0" failed="0" Errors="0" Warnings="0">
+            foreach (var logfile in Directory.GetFiles(logDir, filePattern))
+            {
+                const string Regexp = "div class=\"line runstats\" passed=\"(?<pass>[0-9]+)\" failed=\"(?<fail>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
+                string everything = File.ReadAllText(logfile, Encoding.UTF8);
+                var matches = Regex.Matches(everything, Regexp, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+                foreach (Match match in matches)
+                {
+                    var stats = string.Format(
+                        "pass={0}, fail={1}, error={2}, warning={3} <a href=\"{4}\">{5}</a>",
+                        match.Groups["pass"].Value,
+                        match.Groups["fail"].Value,
+                        match.Groups["error"].Value,
+                        match.Groups["warning"].Value,
+                        logfile,
+                        Path.GetFileName(logfile));
+
+                    LogTrace(string.Format("RunMatch line found[{0}]", match.ToString()));
+                    if (int.Parse(match.Groups["fail"].Value) > 0)
+                    {
+                        LogFail("SummeryLog", stats);
+                        continue;
+                    }
+
+                    if (int.Parse(match.Groups["error"].Value) > 0)
+                    {
+                        LogError(stats);
+                        continue;
+                    }
+
+                    if (int.Parse(match.Groups["warning"].Value) > 0)
+                    {
+                        LogWarning(stats);
+                        continue;
+                    }
+
+                    LogPass("SummeryLog", stats);
+                }
+            }
         }
 
         /// <summary>
