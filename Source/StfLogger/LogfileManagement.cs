@@ -347,7 +347,8 @@ namespace Stf.Utilities
             LogKeyValue("Errors", NumberOfLoglevelMessages[StfLogLevel.Error].ToString(), "Errors logged");
             LogKeyValue("Warnings", NumberOfLoglevelMessages[StfLogLevel.Warning].ToString(), "Warnings logged");
 
-            var htmlLine = "  </body>\n";
+            var htmlLine = "    </div>\n";
+            htmlLine += "  </body>\n";
             htmlLine += "</html>\n";
 
             LogFileHandle.Write(htmlLine);
