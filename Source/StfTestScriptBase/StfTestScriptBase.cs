@@ -18,9 +18,17 @@ namespace Stf.Utilities
     public class StfTestScriptBase : StfKernel
     {
         /// <summary>
-        /// The log dir root. Where the logfiles is placed
+        /// Initializes a new instance of the <see cref="StfTestScriptBase"/> class.
         /// </summary>
-        private const string LogDirRoot = @"c:\temp\StfLogs";
+        public StfTestScriptBase()
+        {
+            LogDirRoot = @"c:\temp\StfLogs";
+        }
+
+        /// <summary>
+        /// Gets the log dir root. Where the logfiles is placed
+        /// </summary>
+        public string LogDirRoot { get; private set; }
 
         /// <summary>
         /// Gets the Stf Asserter.
