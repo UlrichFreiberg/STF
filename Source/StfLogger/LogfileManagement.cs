@@ -279,6 +279,8 @@ namespace Stf.Utilities
         /// </param>
         public void CreateSummaryLog(string nameOfSummeryfile, string logDir, string filePattern)
         {
+            FileName = nameOfSummeryfile;
+
             // One runstats logline looks like:
             //      <div class="line runstats" passed="0" failed="0" Errors="0" Warnings="0">
             foreach (var logfile in Directory.GetFiles(logDir, filePattern))

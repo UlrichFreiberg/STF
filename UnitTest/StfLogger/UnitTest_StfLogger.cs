@@ -214,50 +214,11 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodSummaryLogger()
         {
-            // One logline looks like:
-            //      <div class="line runstats" passed="0" failed="0" Errors="0" Warnings="0">
-            var dataDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @".\Data"));
-            foreach (var logfile in Directory.GetFiles(dataDir, "DatadrivenLoggerTest_*.html"))
-            {
-                const string Regexp = "div class=\"line runstats\" passed=\"(?<pass>[0-9]+)\" failed=\"(?<fail>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
-                string everything = File.ReadAllText(logfile, Encoding.UTF8);
-                var matches = Regex.Matches(everything, Regexp, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            var logDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @".\Data"));
+            var summaryFilename = Path.Combine(LogDirRoot, "TestMethodSummaryLogger_SummeryLog.html");
 
-                foreach (Match match in matches)
-                {
-                    var stats = string.Format(
-                        "pass={0}, fail={1}, error={2}, warning={3} <a href=\"{4}\">{5}</a>",
-                        match.Groups["pass"].Value,
-                        match.Groups["fail"].Value,
-                        match.Groups["error"].Value,
-                        match.Groups["warning"].Value,
-                        logfile,
-                        Path.GetFileName(logfile));
-
-                    MyLogger.LogTrace(string.Format("RunMatch line found[{0}]", match.ToString()));
-                    if (int.Parse(match.Groups["fail"].Value) > 0)
-                    {
-                        MyLogger.LogFail("SummeryLog", stats);
-                        continue;
-                    }
-
-                    if (int.Parse(match.Groups["error"].Value) > 0)
-                    {
-                        MyLogger.LogError(stats);
-                        continue;
-                    }
-
-                    if (int.Parse(match.Groups["warning"].Value) > 0)
-                    {
-                        MyLogger.LogWarning(stats);
-                        continue;
-                    }
-
-                    MyLogger.LogPass("SummeryLog", stats);
-                }
-            }
-
+            MyLogger.CreateSummaryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html");
+            MyAssert.AssertFileExists("MyLogger.CreateSummaryLog", summaryFilename);
         }
-
     }
 }
