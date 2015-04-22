@@ -101,8 +101,8 @@
     <Compile Include="Utils\ScreenshotUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="StfLogger.dll.config" />
     <None Include="Resources\OpenBody.txt" />
     <None Include="Resources\Transparent.gif" />
     <None Include="Resources\logger.js" />

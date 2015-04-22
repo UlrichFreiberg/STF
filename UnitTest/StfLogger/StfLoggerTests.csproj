@@ -78,6 +78,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\StfLogger\App.config">
+      <Link>App.config</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Data\Data.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

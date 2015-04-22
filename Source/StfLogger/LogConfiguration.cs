@@ -132,7 +132,7 @@ namespace Stf.Utilities
             /// <summary>
             /// The configuration file for <c>this</c> <c>assemnbly</c>.
             /// </summary>
-            private static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(Uri.Path);
+            private static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(System.Uri.UnescapeDataString(Uri.Path));
 
             /// <summary>
             /// The application settings.
