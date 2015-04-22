@@ -384,6 +384,7 @@ namespace Stf.Utilities
             var htmlLine = "<!DOCTYPE html>\n";
             htmlLine += "<html>\n";
             htmlLine += "  <head>\n";
+            htmlLine += "    <meta charset=\"utf-8\" />\n";
             htmlLine += string.Format("    <title>{0}</title>\n", LogTitle);
             htmlLine += "    <style type=\"text/css\">\n";
             htmlLine += GetStyleSheet();
