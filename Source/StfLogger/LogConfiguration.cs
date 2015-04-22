@@ -3,14 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Configuration;
+using System.Globalization;
+using System.Linq;
+
 namespace Stf.Utilities
 {
-    using System;
-    using System.Configuration;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-
     /// <summary>
     /// The log configuration.
     /// </summary>
@@ -125,19 +125,14 @@ namespace Stf.Utilities
         private static class Settings
         {
             /// <summary>
-            /// The path to the assembly.
-            /// </summary>
-            private static readonly UriBuilder Uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
-
-            /// <summary>
             /// The configuration file for <c>this</c> <c>assemnbly</c>.
             /// </summary>
-            private static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(System.Uri.UnescapeDataString(Uri.Path));
+            private static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             /// <summary>
             /// The application settings.
             /// </summary>
-            private static readonly AppSettingsSection AppSettings = (AppSettingsSection)MyDllConfig.GetSection("appSettings");
+            private static readonly AppSettingsSection AppSettings = (AppSettingsSection)MyDllConfig.GetSection("StfConfiguration");
 
             /// <summary>
             /// The nfi.
@@ -167,7 +162,7 @@ namespace Stf.Utilities
             {
                 T retVal;
 
-                if (AppSettings.Settings.AllKeys.Contains(name))
+                if (AppSettings != null && AppSettings.Settings.AllKeys.Contains(name))
                 {
                     retVal = (T)Convert.ChangeType(AppSettings.Settings[name].Value, typeof(T), Nfi);
                 }
