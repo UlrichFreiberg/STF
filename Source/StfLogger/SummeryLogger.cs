@@ -62,8 +62,7 @@ namespace Stf.Utilities
             var summaryLogFile = new LogfileWriter { LogFileName = nameOfSummeryfile, OverwriteLogFile = true };
             var loglineStatRegexp = GetLoglineStatRegexp();
 
-            summaryLogFile.Open();
-            summaryLogFile.Write(GetTextReource("SummaryLoggerHeader"));
+            this.InitializeSummeryLogFile(nameOfSummeryfile, summaryLogFile);
 
             foreach (var logfile in Directory.GetFiles(logDir, filePattern))
             {
@@ -91,8 +90,24 @@ namespace Stf.Utilities
                 }
             }
 
-            summaryLogFile.Write(GetTextReource("SummaryLoggerFooter"));
+            summaryLogFile.Write(this.GetTextResource("SummaryLoggerFooter"));
             return summaryLogFile.Close();
+        }
+
+        private bool InitializeSummeryLogFile(string nameOfSummeryfile, LogfileWriter summaryLogFile)
+        {
+            var logHeader = this.GetTextResource("SummaryLoggerHeader");
+
+            if (!summaryLogFile.Open())
+            {
+                return false;
+            }
+
+            var logfileTitle = string.Format("SummaryLogger for {0}", Path.GetFileNameWithoutExtension(nameOfSummeryfile));
+            logHeader = logHeader.Replace("LOGFILETITLE", logfileTitle);
+            summaryLogFile.Write(logHeader);
+
+            return true;
         }
 
         /// <summary>
@@ -104,7 +119,7 @@ namespace Stf.Utilities
         /// <returns>
         /// A Html string representing the start of the Body for the logger
         /// </returns>
-        private string GetTextReource(string resourceName)
+        private string GetTextResource(string resourceName)
         {
             string retVal;
             var resourceObject = Resources.ResourceManager.GetObject(resourceName);

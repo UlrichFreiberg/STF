@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>SummaryLogger for DatadrivenLoggerTest</title>
+    <title>LOGFILETITLE</title>
     <style>
         #testresultpass {
             background-color: lightgreen
@@ -49,6 +49,7 @@
 
 </head>
 <body>
+    <h1 id="logtitle">LOGFILETITLE</h1>
     <table id="RunStats">
         <tr>
             <th>Iteration</th>
