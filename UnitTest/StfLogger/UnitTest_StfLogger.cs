@@ -216,8 +216,9 @@ namespace UnitTest
         {
             var logDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @".\Data"));
             var summaryFilename = Path.Combine(LogDirRoot, "TestMethodSummaryLogger_SummeryLog.html");
+            var oneSummeryLogger = new StfSummeryLogger();
 
-            MyLogger.CreateSummaryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html");
+            MyAssert.AssertTrue("MyLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
             MyAssert.AssertFileExists("MyLogger.CreateSummaryLog", summaryFilename);
         }
     }

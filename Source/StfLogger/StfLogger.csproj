@@ -75,6 +75,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LogConfiguration.cs" />
+    <Compile Include="SummeryLogger.cs" />
     <Compile Include="Utils\LogfileWriter.cs" />
     <Compile Include="LogfileManagement.cs">
       <SubType>Code</SubType>
@@ -121,7 +122,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\SummaryLoggerHeader.txt" />
+    <None Include="Resources\SummaryLoggerFooter.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -193,6 +193,45 @@ namespace Stf.Utilities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to     &lt;/table&gt;
+        ///
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string SummaryLoggerFooter {
+            get {
+                return ResourceManager.GetString("SummaryLoggerFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;SummaryLogger for DatadrivenLoggerTest&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        #RunStats {
+        ///            font-family: &quot;Trebuchet MS&quot;, Arial, Helvetica, sans-serif;
+        ///            text-align: center;
+        ///            width: 25%;
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///            #RunStats td, #RunStats th {
+        ///                font-size: 1em;
+        ///                border: 1px solid #98bf21;
+        ///                padding: 3px 7px 2px 7px;
+        ///            }
+        ///
+        ///            #RunStats th [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SummaryLoggerHeader {
+            get {
+                return ResourceManager.GetString("SummaryLoggerHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Transparent {
