@@ -97,7 +97,7 @@ namespace Stf.Utilities.Utils
 
             if (File.Exists(this.LogFileName))
             {
-                if (OverwriteLogFile)
+                if (!OverwriteLogFile)
                 {
                     Console.WriteLine(@"File [{0}] exists and OverwriteLogFile is false", LogFileName);
                     return false;
