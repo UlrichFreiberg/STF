@@ -68,13 +68,19 @@ namespace Stf.Utilities
             foreach (var logfile in Directory.GetFiles(logDir, filePattern))
             {
                 var everything = File.ReadAllText(logfile, Encoding.UTF8);
-                var matches = Regex.Matches(everything, loglineStatRegexp, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                var matches = Regex.Matches(
+                                        everything,
+                                        loglineStatRegexp,
+                                        RegexOptions.IgnoreCase | RegexOptions.Singleline);
                 var tableFormatString = this.GetTableFormatString();
+                string tableRowId;
 
                 foreach (Match match in matches)
                 {
+                    tableRowId = GetTableRowId(match);
                     var tableRow = string.Format(
                         tableFormatString,
+                        tableRowId,
                         logfile,
                         Path.GetFileName(logfile),
                         match.Groups["pass"].Value,
@@ -123,14 +129,15 @@ namespace Stf.Utilities
         /// </returns>
         private string GetTableFormatString()
         {
-            var retVal = "<tr>\n";
+            int index = 0;
+            var retVal = "<tr id=\"{" + index++ + "}\">\n";
 
             retVal += "  <td>\n";
-            retVal += "    <a href=\"{0}\">{1}</a>\n";
+            retVal += "    <a href=\"{" + index++ + "}\">{" + index++ + "}</a>\n";
             retVal += "  </td>\n";
             for (var i = 2; i < 6; i++)
             {
-                retVal += "  <td>{" + i + "}</td>\n";
+                retVal += "  <td>{" + index++ + "}</td>\n";
             }
 
             retVal += "</tr>\n";
@@ -148,9 +155,35 @@ namespace Stf.Utilities
         {
             // One runstats logline looks like:
             // <div class="line runstats" passed="0" failed="0" Errors="0" Warnings="0">
-            const string Regexp = "div class=\"line runstats\" passed=\"(?<pass>[0-9]+)\" failed=\"(?<fail>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
+            const string Regexp =
+                "div class=\"line runstats\" passed=\"(?<pass>[0-9]+)\" failed=\"(?<fail>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
 
             return Regexp;
+        }
+
+        private string GetTableRowId(Match match)
+        {
+            if (int.Parse(match.Groups["fail"].Value) > 0)
+            {
+                return "testresultfail";
+            }
+
+            if (int.Parse(match.Groups["error"].Value) > 0)
+            {
+                return "testresulterror";
+            }
+
+            if (int.Parse(match.Groups["warning"].Value) > 0)
+            {
+                return "testresultwarning";
+            }
+
+            if (int.Parse(match.Groups["pass"].Value) > 0)
+            {
+                return "testresultpass";
+            }
+
+            return "not";
         }
     }
 }

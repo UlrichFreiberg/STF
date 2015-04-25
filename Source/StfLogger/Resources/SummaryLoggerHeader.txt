@@ -3,6 +3,19 @@
 <head>
     <title>SummaryLogger for DatadrivenLoggerTest</title>
     <style>
+        #testresultpass {
+            background-color: lightgreen
+		}
+        #testresultfail {
+            background-color: red
+		}
+        #testresulterror {
+            background-color: magenta
+		}
+        #testresultwarning {
+            background-color: yellow
+		}
+	
         #RunStats {
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             text-align: center;
