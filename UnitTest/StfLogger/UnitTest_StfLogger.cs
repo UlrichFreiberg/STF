@@ -146,7 +146,7 @@ namespace UnitTest
             MyLogger.LogLevel = StfLogLevel.Internal;
 
             MyLogger.LogTrace("Just before a screenshot is taken");
-            MyLogger.LogScreenshot(StfLogLevel.Info, "Grabbed screenshot");
+            MyLogger.LogScreenshot(StfLogLevel.Debug, "Grabbed screenshot");
             MyLogger.LogTrace("right after a screenshot is taken");
         }
 

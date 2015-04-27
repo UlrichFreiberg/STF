@@ -116,14 +116,15 @@ namespace Stf.Utilities
             }
 
             var messageIdString = GetNextMessageId();
-            var logLevelString = Enum.GetName(typeof(StfLogLevel), level);
+            var logLevelString = Enum.GetName(typeof(StfLogLevel), level) ?? "Unknown StfLogLevel";
+            logLevelString = logLevelString.ToLower();
 
-            var html = string.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line info image\">", messageIdString);
-            html += string.Format("    <div class=\"el time\">{0}</div>", DateTime.Now.ToString("HH:mm:ss"));
-            html += string.Format("    <div class=\"el level\">{0}</div>", logLevelString);
-            html += string.Format("    <div class=\"el msg\">{0}</div>", message);
+            var html = string.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} image\">\n", messageIdString, logLevelString);
+            html += string.Format("    <div class=\"el time\">{0}</div>\n", DateTime.Now.ToString("HH:mm:ss"));
+            html += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
+            html += string.Format("    <div class=\"el msg\">{0}</div>\n", message);
             html += string.Format("    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{0}\" src=\"data:image/png;base64, {1}\"</p>", message, imageFile);
-            html += "</div>";
+            html += "</div>\n";
 
             this.LogFileHandle.Write(html);
 
