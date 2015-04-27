@@ -22,7 +22,7 @@ namespace UnitTest
             var stfLoader = new StfPluginLoader();
             var stfPlugins = stfLoader.LoadStfPlugins(".");
 
-            MyAssert.AssertEquals("stfPlugins.Count", stfPlugins.Count, 2);
+            MyAssert.AssertEquals("stfPlugins.Count", 2, stfPlugins.Count);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace UnitTest
             var stfLoader = new StfPluginLoader();
             var stfPlugins = stfLoader.LoadStfPlugins(".");
 
-            MyAssert.AssertEquals("stfPlugins.Count", stfPlugins.Count, 2);
+            MyAssert.AssertEquals("stfPlugins.Count", 2, stfPlugins.Count);
 
             var sp1 = stfLoader.Get<IStfUnitTestPlugin1>();
             MyAssert.AssertNotNull("Get<IStfUnitTestPlugin1>", sp1);

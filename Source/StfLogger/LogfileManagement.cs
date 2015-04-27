@@ -320,8 +320,6 @@ namespace Stf.Utilities
         /// private
         private bool BeginHtmlLogFile()
         {
-            LogFileHandle.Open(fileName);
-
             var htmlLine = "<!DOCTYPE html>\n";
             htmlLine += "<html>\n";
             htmlLine += "  <head>\n";

@@ -48,6 +48,10 @@ namespace Stf.Utilities
                 {
                     statusMsg = "Test showed no errors";
                     logLevel = StfLogLevel.Pass;
+                    if (NumberOfLoglevelMessages[StfLogLevel.Pass] < 1)
+                    {
+                        NumberOfLoglevelMessages[logLevel]++;
+                    }
                 }
             }
 

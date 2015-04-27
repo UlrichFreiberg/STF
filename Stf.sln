@@ -41,6 +41,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stf.UnitTestPlugin2", "UnitTest\StfPluginLoader\Stf.UnitTestPlugin2\Stf.UnitTestPlugin2.csproj", "{A83FFB89-1F56-4755-9060-2F4F6ABD0DCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfPluginLoaderTests", "UnitTest\StfPluginLoader\StfPluginLoader\StfPluginLoaderTests.csproj", "{3EC91AD5-2EB9-4AF2-B584-469871E3743F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{83199E65-40A3-4238-8AAF-03386BB130AD} = {83199E65-40A3-4238-8AAF-03386BB130AD}
+		{A83FFB89-1F56-4755-9060-2F4F6ABD0DCC} = {A83FFB89-1F56-4755-9060-2F4F6ABD0DCC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfPluginLoader", "Source\StfPluginLoader\StfPluginLoader.csproj", "{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}"
 EndProject
