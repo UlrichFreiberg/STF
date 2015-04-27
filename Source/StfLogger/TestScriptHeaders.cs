@@ -29,33 +29,9 @@ namespace Stf.Utilities
         /// </returns>
         public bool SetRunStatus()
         {
-            string statusMsg;
-            StfLogLevel logLevel;
-
-            if (this.ErrorOrFail() > 0)
-            {
-                statusMsg = "Test showed errors";
-                logLevel = StfLogLevel.Error;
-            }
-            else
-            {
-                if (NumberOfLoglevelMessages[StfLogLevel.Warning] > 0)
-                {
-                    statusMsg = "Test showed warnings";
-                    logLevel = StfLogLevel.Warning;
-                }
-                else
-                {
-                    statusMsg = "Test showed no errors";
-                    logLevel = StfLogLevel.Pass;
-                    if (NumberOfLoglevelMessages[StfLogLevel.Pass] < 1)
-                    {
-                        NumberOfLoglevelMessages[logLevel]++;
-                    }
-                }
-            }
-
+            var statusMsg = GetStatusMsgAndSetLoglevel(out this.logLevel);
             var runstats = string.Format(@"<span id=""runstatus"">{0}</span>", statusMsg);
+
             runstats += string.Format(
                         "<div class=\"line runstats\" passed=\"{0}\" failed=\"{1}\" Errors=\"{2}\" Warnings=\"{3}\">",
                         NumberOfLoglevelMessages[StfLogLevel.Pass],
@@ -73,6 +49,38 @@ namespace Stf.Utilities
 
             LogOneHtmlMessage(logLevel, runstats);
             return true;
+        }
+
+        /// <summary>
+        /// The status msg.
+        /// </summary>
+        /// <param name="logLevel">
+        /// The log level.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetStatusMsgAndSetLoglevel(out StfLogLevel logLevel)
+        {
+            if (this.ErrorOrFail() > 0)
+            {
+                logLevel = StfLogLevel.Error;
+                return "Test showed errors";
+            }
+
+            if (this.NumberOfLoglevelMessages[StfLogLevel.Warning] > 0)
+            {
+                logLevel = StfLogLevel.Warning;
+                return "Test showed warnings";
+            }
+
+            logLevel = StfLogLevel.Pass;
+            if (this.NumberOfLoglevelMessages[logLevel] < 1)
+            {
+                this.NumberOfLoglevelMessages[logLevel] = 1;
+            }
+
+            return "Test showed no errors";
         }
     }
 }
