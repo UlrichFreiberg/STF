@@ -99,6 +99,7 @@
     <Compile Include="TestScriptHeaders.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utils\RunStatusUtils.cs" />
     <Compile Include="Utils\ScreenshotUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

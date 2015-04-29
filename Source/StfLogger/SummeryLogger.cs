@@ -12,6 +12,7 @@ namespace Stf.Utilities
 
     using Stf.Utilities.Properties;
     using Stf.Utilities.Utils;
+    using System.Collections.Generic;
 
     /// <summary>
     /// The summery logger.
@@ -60,40 +61,44 @@ namespace Stf.Utilities
         public bool CreateSummeryLog(string nameOfSummeryfile, string logDir, string filePattern)
         {
             var summaryLogFile = new LogfileWriter { LogFileName = nameOfSummeryfile, OverwriteLogFile = true };
-            var loglineStatRegexp = GetLoglineStatRegexp();
 
             this.InitializeSummeryLogFile(nameOfSummeryfile, summaryLogFile);
 
-            foreach (var logfile in Directory.GetFiles(logDir, filePattern))
+            foreach (var logFilename in Directory.GetFiles(logDir, filePattern))
             {
-                var everything = File.ReadAllText(logfile, Encoding.UTF8);
-                var matches = Regex.Matches(
-                                        everything,
-                                        loglineStatRegexp,
-                                        RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                var runStatus = RunStatusUtils.GetRunStatus(logFilename);
                 var tableFormatString = this.GetTableFormatString();
-                string tableRowId;
+                var tableRowId = GetTableRowId(runStatus);
 
-                foreach (Match match in matches)
-                {
-                    tableRowId = GetTableRowId(match);
-                    var tableRow = string.Format(
-                        tableFormatString,
-                        tableRowId,
-                        logfile,
-                        Path.GetFileName(logfile),
-                        match.Groups["pass"].Value,
-                        match.Groups["fail"].Value,
-                        match.Groups["error"].Value,
-                        match.Groups["warning"].Value);
-                    summaryLogFile.Write(tableRow);
-                }
+                var tableRow = string.Format(
+                    tableFormatString,
+                    tableRowId,
+                    logFilename,
+                    Path.GetFileName(logFilename),
+                    runStatus[StfLogLevel.Pass],
+                    runStatus[StfLogLevel.Fail],
+                    runStatus[StfLogLevel.Error],
+                    runStatus[StfLogLevel.Warning]);
+
+                summaryLogFile.Write(tableRow);
             }
 
             summaryLogFile.Write(this.GetTextResource("SummaryLoggerFooter"));
             return summaryLogFile.Close();
         }
 
+        /// <summary>
+        /// The initialize summery log file.
+        /// </summary>
+        /// <param name="nameOfSummeryfile">
+        /// The name of summeryfile.
+        /// </param>
+        /// <param name="summaryLogFile">
+        /// The summary log file.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool InitializeSummeryLogFile(string nameOfSummeryfile, LogfileWriter summaryLogFile)
         {
             var logHeader = this.GetTextResource("SummaryLoggerHeader");
@@ -161,44 +166,37 @@ namespace Stf.Utilities
         }
 
         /// <summary>
-        /// The get logline stat regexp.
+        /// The get table row id.
         /// </summary>
+        /// <param name="match">
+        /// The match.
+        /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string GetLoglineStatRegexp()
+        private string GetTableRowId(Dictionary<StfLogLevel, int> RunResultStatus)
         {
-            // One runstats logline looks like:
-            // <div class="line runstats" passed="0" failed="0" Errors="0" Warnings="0">
-            const string Regexp =
-                "div class=\"line runstats\" passed=\"(?<pass>[0-9]+)\" failed=\"(?<fail>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
-
-            return Regexp;
-        }
-
-        private string GetTableRowId(Match match)
-        {
-            if (int.Parse(match.Groups["fail"].Value) > 0)
+            if (RunResultStatus[StfLogLevel.Fail] > 0)
             {
                 return "testresultfail";
             }
 
-            if (int.Parse(match.Groups["error"].Value) > 0)
+            if (RunResultStatus[StfLogLevel.Error] > 0)
             {
                 return "testresulterror";
             }
 
-            if (int.Parse(match.Groups["warning"].Value) > 0)
+            if (RunResultStatus[StfLogLevel.Warning] > 0)
             {
                 return "testresultwarning";
             }
 
-            if (int.Parse(match.Groups["pass"].Value) > 0)
+            if (RunResultStatus[StfLogLevel.Pass] > 0)
             {
                 return "testresultpass";
             }
 
-            return "not";
+            return "testresultUnknown";
         }
     }
 }
