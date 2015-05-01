@@ -8,6 +8,7 @@ namespace Stf.Utilities
     using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 
     /// <summary>
     /// BaseClass for all Stf test scripts.
@@ -80,6 +81,22 @@ namespace Stf.Utilities
         {
             this.LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
             this.MyLogger.CloseLogFile();
+
+            if (TestDataDriven())
+            {
+                var iterationNo = DataRowIndex();
+
+                if (iterationNo == TestContext.DataRow.Table.Rows.Count - 1)
+                {
+                    var MyStfSummeryLogger = new StfSummeryLogger();
+                    var SummeryLogfile_LogDirname = Path.GetDirectoryName(MyLogger.FileName);
+                    var SummeryLogfile_LogFilename = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", ".html");
+                    var SummeryLogfilename = string.Format(@"{0}\SummeryLogfile_{1}", SummeryLogfile_LogDirname, SummeryLogfile_LogFilename);
+                    var SummeryLogfile_LogfilePattern  = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", "_*");
+
+                    MyStfSummeryLogger.CreateSummeryLog(SummeryLogfilename, SummeryLogfile_LogDirname, SummeryLogfile_LogfilePattern);
+                }
+            }
         }
 
         /// <summary>
@@ -106,13 +123,23 @@ namespace Stf.Utilities
         /// </returns>
         private int DataRowIndex()
         {
-            if (TestContext.DataRow == null)
+            if (!TestDataDriven())
             {
                 return -1;
             }
 
             var currentIteration = TestContext.DataRow.Table.Rows.IndexOf(TestContext.DataRow);
             return currentIteration;
+        }
+
+        private bool TestDataDriven()
+        {
+            if (TestContext.DataRow == null)
+            {
+                return false;
+            }
+            
+            return TestContext.DataRow.Table.Rows.Count > 0;
         }
     }
 }

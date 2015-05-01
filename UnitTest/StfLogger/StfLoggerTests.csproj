@@ -81,6 +81,18 @@
     <None Include="..\..\Source\StfLogger\App.config">
       <Link>App.config</Link>
     </None>
+    <None Include="Data\Data_SummeryLog_3lines_allpass.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Data_SummeryLog_3lines_line1fail.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Data_SummeryLog_3lines_line2fail.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Data_SummeryLog_3lines_line3fail.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Data\Data.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
