@@ -69,6 +69,16 @@ using System.Text.RegularExpressions;
             this.MyLogger.FileName = ovidName;
             this.MyAssert = new StfAssert(this.MyLogger);
 
+            if (TestDataDriven())
+            {
+                for (var index = 0; index < TestContext.DataRow.Table.Columns.Count; index++)
+                {
+                    var HeaderCaption = TestContext.DataRow.Table.Columns[index].Caption;
+
+                    this.MyLogger.LogInfo(string.Format("Column[{0}]=[{1}]", HeaderCaption, TestContext.DataRow[HeaderCaption]));
+                }
+            }
+
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             this.MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
         }
