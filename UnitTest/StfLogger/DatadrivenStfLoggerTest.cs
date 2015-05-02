@@ -13,20 +13,25 @@ using Stf.Utilities;
 
 namespace UnitTest
 {
+    using System;
+
+    /// <summary>
+    /// The data driven stf logger test.
+    /// </summary>
     [TestClass]
     public class DatadrivenStfLoggerTest : StfTestScriptBase
     {
         /// <summary>
         /// Backing field
         /// </summary>
-        private static IList<string> _logMessages;
+        private static IList<string> logMessages;
 
         /// <summary>
-        /// Log messages recorded during DD test
+        /// Gets the Log messages recorded during DD test
         /// </summary>
         private IList<string> LogMessages
         {
-            get { return _logMessages ?? (_logMessages = new List<string>()); }
+            get { return logMessages ?? (logMessages = new List<string>()); }
         }
 
         /// <summary>
@@ -40,11 +45,11 @@ namespace UnitTest
         }
 
         /// <summary>
-        /// Test of DatadrivenLoggerTest. Data has three lines - all pass
+        /// Test of data driven Test. Data has three lines - all pass
         /// </summary>
         [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_allpass.csv", "Data_SummeryLog_3lines_allpass#csv", DataAccessMethod.Sequential)]
-        public void DatadrivenLoggerTest_3lines_allpass()
+        public void DatadrivenLoggerTest3LinesAllpass()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
             var message = (string)TestContext.DataRow["Message"];
@@ -55,11 +60,11 @@ namespace UnitTest
         }
 
         /// <summary>
-        /// Test of DatadrivenLoggerTest. Data has three lines - first line fail - others pass
+        /// Test of data driven Test. Data has three lines - first line fail - others pass
         /// </summary>
         [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_line1fail.csv", "Data_SummeryLog_3lines_line1fail#csv", DataAccessMethod.Sequential)]
-        public void DatadrivenLoggerTest_3lines_line1fail()
+        public void DatadrivenLoggerTest3LinesLine1Fail()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
             var message = (string)TestContext.DataRow["Message"];
@@ -70,11 +75,11 @@ namespace UnitTest
         }
 
         /// <summary>
-        /// Test of DatadrivenLoggerTest. Data has three lines - second line fail - others pass
+        /// Test of data driven Test. Data has three lines - second line fail - others pass
         /// </summary>
         [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_line2fail.csv", "Data_SummeryLog_3lines_line2fail#csv", DataAccessMethod.Sequential)]
-        public void DatadrivenLoggerTest_3lines_line2fail()
+        public void DatadrivenLoggerTest3LinesLine2Fail()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
             var message = (string)TestContext.DataRow["Message"];
@@ -85,11 +90,11 @@ namespace UnitTest
         }
 
         /// <summary>
-        /// Test of DatadrivenLoggerTest. Data has three lines - third line fail - others pass
+        /// Test of data driven Test. Data has three lines - third line fail - others pass
         /// </summary>
         [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_line3fail.csv", "Data_SummeryLog_3lines_line3fail#csv", DataAccessMethod.Sequential)]
-        public void DatadrivenLoggerTest_3lines_line3fail()
+        public void DatadrivenLoggerTest3LinesLine3Fail()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
             var message = (string)TestContext.DataRow["Message"];
@@ -97,18 +102,6 @@ namespace UnitTest
 
             MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
             MyAssert.AssertTrue("FailPass", failPass);
-        }
-
-        private bool ConvertToBool(string boolValue)
-        {
-            if (string.Compare(boolValue.ToLower(), "true") == 0
-             || string.Compare(boolValue.ToLower(), "pass") == 0
-             || string.Compare(boolValue.ToLower(), "1") == 0)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -124,10 +117,10 @@ namespace UnitTest
             LogMessages.Add(message);
 
             MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            ////foreach (var logMessage in LogMessages)
-            ////{
-            ////    MyAssert.AssertFileContains(iteration.ToString(), MyLogger.FileName, logMessage);
-            ////}
+            foreach (var logMessage in LogMessages)
+            {
+                MyAssert.AssertFileContains(iteration.ToString(), MyLogger.FileName, logMessage);
+            }
         }
 
         /// <summary>
@@ -137,6 +130,27 @@ namespace UnitTest
         public void TestCleanup()
         {
             this.MyLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
+        }
+
+        /// <summary>
+        /// The convert to <see langword="bool"/>.
+        /// </summary>
+        /// <param name="boolValue">
+        /// The bool value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool ConvertToBool(string boolValue)
+        {
+            if (string.CompareOrdinal(boolValue.ToLower(), "true") == 0
+             || string.CompareOrdinal(boolValue.ToLower(), "pass") == 0
+             || string.CompareOrdinal(boolValue.ToLower(), "1") == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
