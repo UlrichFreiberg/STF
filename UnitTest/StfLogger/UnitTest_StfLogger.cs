@@ -206,6 +206,10 @@ namespace UnitTest
 
             MyLogger.LogKeyValue("Bent", "42", "First value for Bent");
             MyLogger.LogKeyValue("Bent", "43", "Second value for Bent - this is the only one that should be shown in the list");
+
+            MyLogger.LogKeyValue("File Url", @"File://c:/Temp/Stf", @"An explorer should pop up show c:\temp\Stf");
+            MyLogger.LogKeyValue("Web Url", "Http://www.testautomation.dk", "A browser should pop up show testautomation.dk");
+
         }
 
         /// <summary>
