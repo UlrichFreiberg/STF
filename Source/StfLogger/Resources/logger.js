@@ -89,12 +89,16 @@ function loadKeyValueList() {
         var keyItem = document.createElement("b");
         var valueItem = document.createElement("em");
         var value = keyValueList[i].children[1].innerHTML;
+        var hoverMessage = keyValueList[i].children[2].innerHTML;
         var keyItemText = document.createTextNode(key + ": ");
         var valueItemText = document.createTextNode(value);
 
-        if ((value.indexOf("http") === 0) || (value.indexOf("td://") === 0)) {
+        if ((value.toLowerCase().indexOf("http:") == 0)
+         || (value.toLowerCase().indexOf("td:") == 0)
+         || (value.toLowerCase().indexOf("file:") == 0)) {
             var link = document.createElement("a");
             link.setAttribute("href", value);
+            link.setAttribute("title", hoverMessage);
             link.textContent = value;
             valueItemText = link;
         }
