@@ -114,13 +114,15 @@ namespace UnitTest
             var iteration = (int)TestContext.DataRow["Iteration"];
             var message = (string)TestContext.DataRow["Message"];
 
-            LogMessages.Add(message);
-
             MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            foreach (var logMessage in LogMessages)
-            {
-                MyAssert.AssertFileContains(iteration.ToString(), MyLogger.FileName, logMessage);
-            }
+
+            // need to close the logfile, in order to check the content of the logfile...
+            MyLogger.CloseLogFile();
+
+            // we want to fail, if AssertFileContains fails
+            MyAssert.EnableNegativeTesting = false;
+
+            MyAssert.AssertFileContains(iteration.ToString(), MyLogger.FileName, message);
         }
 
         /// <summary>

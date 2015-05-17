@@ -26,9 +26,14 @@ namespace Stf.Utilities
         private string fileName;
 
         /// <summary>
-        /// The _m log level.
+        /// The log level.
         /// </summary>
         private StfLogLevel logLevel;
+
+        /// <summary>
+        /// Should the logfile be overwritten or not
+        /// </summary>
+        private bool overwriteLogFile;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StfLogger"/> class.
@@ -221,7 +226,11 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets or sets a value indicating whether whether if an existing logfile should be overwriten.
         /// </summary>
-        private bool OverwriteLogFile { get; set; }
+        private bool OverwriteLogFile
+        {
+            get { return this.overwriteLogFile; }
+            set { LogFileHandle.OverwriteLogFile = this.overwriteLogFile = value; }
+        }
 
         /// <summary>
         /// Have we logged a Error or Fail? 
