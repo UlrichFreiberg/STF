@@ -3,6 +3,11 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.Serialization.Formatters.Binary;
+
 namespace Stf.Utilities
 {
     using System;
@@ -315,7 +320,14 @@ namespace Stf.Utilities
         private string GetStyleSheet()
         {
             var styleSheet = Resources.ResourceManager.GetObject("style");
-            var retVal = styleSheet == null ? "<error>No styleSheet file found</error>" : styleSheet.ToString();
+
+            if (styleSheet == null)
+            {
+                return "<error>No styleSheet file found</error>";
+            }
+
+            var retVal = styleSheet.ToString();
+            retVal = retVal.Replace("#IMAGELOGO#", GetBase64ImageForLogo());
 
             return retVal;
         }
@@ -417,6 +429,103 @@ namespace Stf.Utilities
             LogKeyValue("Testname", TestName, "TODO_Testname");
             LogKeyValue("Date", DateTime.Now.ToShortDateString(), string.Empty);
 
+            return true;
+        }
+
+        /// <summary>
+        /// The get base 64 image for logo.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetBase64ImageForLogo()
+        {
+            byte[] imageAsBytes;
+            if (!TryGetImageAsBytes(out imageAsBytes, PathToLogoImageFile))
+            {
+                return "No image for logo available";
+            }
+
+            return Convert.ToBase64String(imageAsBytes);
+        }
+
+        /// <summary>
+        /// The try get bytes from default logo.
+        /// </summary>
+        /// <param name="imageBytes">
+        /// The image bytes.
+        /// </param>
+        /// <param name="imageFilePath">
+        /// The image File Path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool TryGetImageAsBytes(out byte[] imageBytes, string imageFilePath)
+        {
+            imageBytes = new byte[64];
+            Array.Clear(imageBytes, 0, imageBytes.Length);
+
+            Bitmap image;
+            if (!TryGetImageFromFile(out image, imageFilePath))
+            {
+                image = Resources.StfLogo;
+            }
+            
+            if (image == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                using (var memStream = new MemoryStream())
+                {
+                    image.Save(memStream, ImageFormat.Png);
+                    imageBytes = memStream.ToArray();
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                image.Dispose();
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// The try get bytes from image file.
+        /// </summary>
+        /// <param name="image">
+        /// The image.
+        /// </param>
+        /// <param name="imageFilePath">
+        /// The image file path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool TryGetImageFromFile(out Bitmap image, string imageFilePath)
+        {
+            image = null;
+            if (!File.Exists(imageFilePath))
+            {
+                return false;
+            }
+
+            try
+            {
+                image = new Bitmap(imageFilePath);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
             return true;
         }
     }

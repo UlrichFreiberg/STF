@@ -6,9 +6,8 @@
 namespace Stf.Utilities
 {
     using System.IO;
-
+    using System.Text.RegularExpressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text.RegularExpressions;
 
     /// <summary>
     /// BaseClass for all Stf test scripts.

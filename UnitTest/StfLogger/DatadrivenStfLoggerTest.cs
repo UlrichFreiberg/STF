@@ -22,19 +22,6 @@ namespace UnitTest
     public class DatadrivenStfLoggerTest : StfTestScriptBase
     {
         /// <summary>
-        /// Backing field
-        /// </summary>
-        private static IList<string> logMessages;
-
-        /// <summary>
-        /// Gets the Log messages recorded during DD test
-        /// </summary>
-        private IList<string> LogMessages
-        {
-            get { return logMessages ?? (logMessages = new List<string>()); }
-        }
-
-        /// <summary>
         /// The test initialize.
         /// </summary>
         [TestInitialize]
