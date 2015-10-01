@@ -3,6 +3,9 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+
 namespace Stf.Utilities
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -126,6 +129,51 @@ namespace Stf.Utilities
             }
 
             return retVal;
+        }
+
+        /// <summary>
+        /// Asserts that the supplied throws an exception of a specific type.
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script.
+        /// </param>
+        /// <param name="action">
+        /// The action that throws an exception.
+        /// </param>
+        /// <typeparam name="T">
+        /// The expected exception.
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool AssertThrows<T>(string testStep, Action action) where T : Exception
+        {
+            var isExpected = false;
+            var expectedTypeName = string.Empty;
+            
+            try
+            {
+                action();
+            }
+            catch (Exception exception)
+            {
+                isExpected = exception is T;
+                expectedTypeName = exception.GetType().Name;
+            }
+
+            var msg = string.Format("AssertThrows: Actual exception [{0}] is", expectedTypeName);
+            if (isExpected)
+            {
+                msg = string.Format("{0} of expected type [{1}]", msg, typeof(T).Name);
+                AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("{0} not of expected type [{1}]", msg, typeof(T).Name);
+                AssertFail(testStep, msg);
+            }
+
+            return isExpected;
         }
 
         /// <summary>

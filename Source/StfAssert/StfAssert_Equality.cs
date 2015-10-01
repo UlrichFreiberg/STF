@@ -131,12 +131,12 @@ namespace Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("AssertGreaterThan: [{0}] is greater then [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("AssertGreaterThan: [{0}] is greater than [{1}]", leftHandSide, rightHandSide);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertGreaterThan: [{0}] is Not greater then [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("AssertGreaterThan: [{0}] is Not greater than [{1}]", leftHandSide, rightHandSide);
                 this.AssertFail(testStep, msg);
             }
 

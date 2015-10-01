@@ -3,6 +3,10 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.IO;
+
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -46,12 +50,66 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test assert throws true.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAssertThrows()
+        {
+            Assert.IsTrue(this.MyAssert.AssertThrows<NotImplementedException>("true", ThrowNotImplementedException));
+            Assert.IsFalse(this.MyAssert.AssertThrows<ArgumentException>("false", ThrowNotImplementedException));
+        }
+
+        /// <summary>
+        /// The test method assert throws lambda.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAssertThrowsLambda()
+        {
+            Assert.IsTrue(this.MyAssert.AssertThrows<ApplicationException>(
+                "true",
+                () => MethodWithParamCanThrow<ApplicationException>(true)));
+            
+            Assert.IsFalse(this.MyAssert.AssertThrows<ApplicationException>(
+                "false",
+                () => MethodWithParamCanThrow<ApplicationException>(false)));
+        }
+
+        /// <summary>
         /// The test cleanup.
         /// </summary>
         [TestCleanup]
         public void TestCleanup()
         {
             this.MyLogger.LogInfo("UnitTestStfAsserts TestCleanup");
+        }
+
+        /// <summary>
+        /// The throw not implemented exception.
+        /// </summary>
+        private void ThrowNotImplementedException()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The method with param throws.
+        /// </summary>
+        /// <param name="throwIt">
+        /// The throw it.
+        /// </param>
+        /// <typeparam name="T">
+        /// Type of exception
+        /// </typeparam>
+        /// <exception>
+        /// Exception to throw
+        /// </exception>
+        // ReSharper disable once UnusedParameter.Local
+        private void MethodWithParamCanThrow<T>(bool throwIt) where T : Exception, new()
+        {
+            if (throwIt)
+            {
+                throw new T();
+            }
         }
     }
 }
