@@ -239,8 +239,15 @@ namespace Stf.Utilities
         public int LogFail(string testStepName, string message)
         {
             var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
+            
+            var theLogLevel = StfLogLevel.Fail;
+            var length = 0;
+            if (Configuration.ScreenshotOnLogFail)
+            {
+                length = LogScreenshot(theLogLevel, string.Empty);
+            }
 
-            return LogOneHtmlMessage(StfLogLevel.Fail, tempNeedsToBeReworkedMessage);
+            return length + LogOneHtmlMessage(theLogLevel, tempNeedsToBeReworkedMessage);
         }
 
         /*

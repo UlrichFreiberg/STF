@@ -1,8 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest_StfAssert.cs" company="Foobar">
+// <copyright file="UnitTest_StfStringAssert.cs" company="Foobar">
 //   2015
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;

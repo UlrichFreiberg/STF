@@ -209,7 +209,19 @@ namespace UnitTest
 
             MyLogger.LogKeyValue("File Url", @"File://c:/Temp/Stf", @"An explorer should pop up show c:\temp\Stf");
             MyLogger.LogKeyValue("Web Url", "Http://www.testautomation.dk", "A browser should pop up show testautomation.dk");
+        }
 
+        /// <summary>
+        /// The test screenshot on log fail.
+        /// </summary>
+        [TestMethod]
+        public void TestScreenshotOnLogFail()
+        {
+            MyLogger.LogLevel = StfLogLevel.Internal;
+            MyLogger.LogFail("Screenshot on log fail on by default", string.Empty);
+
+            MyLogger.Configuration.ScreenshotOnLogFail = false;
+            MyLogger.LogFail("Screenshot on log fail turned off. No screenshot logged.", string.Empty);
         }
 
         /// <summary>

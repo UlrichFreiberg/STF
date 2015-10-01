@@ -8,8 +8,8 @@ namespace Stf.Utilities
     using System;
     using System.Windows.Forms;
 
-    using Stf.Utilities.Interfaces;
-    using Stf.Utilities.Utils;
+    using Interfaces;
+    using Utils;
 
     /// <summary>
     /// The test result html logger.
@@ -32,7 +32,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log all windows.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="stfLogLevel">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -41,7 +41,7 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogAllWindows(StfLogLevel logLevel, string message)
+        public int LogAllWindows(StfLogLevel stfLogLevel, string message)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +49,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log screenshot.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="stfLogLevel">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -58,12 +58,12 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogScreenshot(StfLogLevel logLevel, string message)
+        public int LogScreenshot(StfLogLevel stfLogLevel, string message)
         {
             var length = 0;
             foreach (var screen in Screen.AllScreens)
             {
-                length += LogOneImage(logLevel, Utilities.DoScreenshot(screen.Bounds), message);
+                length += LogOneImage(stfLogLevel, Utilities.DoScreenshot(screen.Bounds), message);
                 if (length < 0)
                 {
                     break;
@@ -76,7 +76,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log image.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="stfLogLevel">
         /// The log level.
         /// </param>
         /// <param name="imageFile">
@@ -88,9 +88,9 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogImage(StfLogLevel logLevel, string imageFile, string message)
+        public int LogImage(StfLogLevel stfLogLevel, string imageFile, string message)
         {
-            return LogOneImage(logLevel, imageFile, message);
+            return LogOneImage(stfLogLevel, imageFile, message);
         }
 
         /// <summary>
