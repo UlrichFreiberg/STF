@@ -88,6 +88,15 @@ namespace Stf.Utilities
             return this.StfPlugins;
         }
 
+        /// <summary>
+        /// The get.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type to get
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
         public T Get<T>() where T : IStfPlugin
         {
             foreach (var stfPlugin in this.StfPlugins)

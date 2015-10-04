@@ -1,8 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest_StfAssert.cs" company="Foobar">
+// <copyright file="UnitTest_StfPluginLoader.cs" company="Foobar">
 //   2015
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,6 +20,9 @@ namespace UnitTest
     [TestClass]
     public class UnitTestStfPluginLoader : StfTestScriptBase
     {
+        /// <summary>
+        /// The test method plugin test.
+        /// </summary>
         [TestMethod]
         public void TestMethodPluginTest()
         {
@@ -25,6 +32,9 @@ namespace UnitTest
             MyAssert.AssertEquals("stfPlugins.Count", 2, stfPlugins.Count);
         }
 
+        /// <summary>
+        /// The test method plugin test get.
+        /// </summary>
         [TestMethod]
         public void TestMethodPluginTestGet()
         {

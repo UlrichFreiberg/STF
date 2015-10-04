@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Stf.Utilities
 {
     /// <summary>
@@ -22,7 +24,7 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets the version info.
         /// </summary>
-        string VersionInfo { get; }
+        Version VersionInfo { get; }
 
         /// <summary>
         /// The init.

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfPlugin.cs" company="Foobar">
+// <copyright file="StfUnitTestPlugin2.cs" company="Foobar">
 //   2015
 // </copyright>
 // <summary>
@@ -7,10 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Stf.Unittests
 {
-    using Stf.Utilities;
-
     /// <summary>
     /// The Plugin interface.
     /// </summary>
@@ -22,7 +22,7 @@ namespace Stf.Unittests
         public StfUnitTestPlugin2()
         {
             this.Name = "StfUnitTestPlugin2";
-            this.VersionInfo = "StfUnitTestPlugin2 V2.0";
+            this.VersionInfo = new Version(2, 0, 0, 0);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Stf.Unittests
         /// <summary>
         /// Gets the version info.
         /// </summary>
-        public string VersionInfo { get; private set; }
+        public Version VersionInfo { get; private set; }
 
         /// <summary>
         /// The init.
@@ -46,6 +46,12 @@ namespace Stf.Unittests
             return true;
         }
 
+        /// <summary>
+        /// The stf unit test plugin 2 func.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int StfUnitTestPlugin2Func()
         {
             return 102;
