@@ -27,6 +27,11 @@ namespace Stf.Utilities
         Version VersionInfo { get; }
 
         /// <summary>
+        /// Gets the stf container.
+        /// </summary>
+        IStfContainer StfContainer { get; set; }
+
+        /// <summary>
         /// The init.
         /// </summary>
         /// <returns>

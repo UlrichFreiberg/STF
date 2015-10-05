@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using Stf.Utilities;
 
 namespace Stf.Unittests
 {
@@ -34,6 +35,11 @@ namespace Stf.Unittests
         /// Gets the version info.
         /// </summary>
         public Version VersionInfo { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the stf container.
+        /// </summary>
+        public IStfContainer StfContainer { get; set; }
 
         /// <summary>
         /// The init.

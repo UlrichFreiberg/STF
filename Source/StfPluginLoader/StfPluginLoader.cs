@@ -11,7 +11,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using Microsoft.Practices.Unity;
 
 namespace Stf.Utilities
 {
@@ -21,27 +23,33 @@ namespace Stf.Utilities
     public class StfPluginLoader
     {
         /// <summary>
-        /// Gets or sets the stf plugins.
+        /// The container.
         /// </summary>
-        private List<IStfPlugin> StfPlugins { get; set; }
+        private readonly IUnityContainer container;
 
         /// <summary>
-        /// The load plugins.
+        /// Initializes a new instance of the <see cref="StfPluginLoader"/> class.
+        /// </summary>
+        public StfPluginLoader()
+        {
+            container = new UnityContainer();
+            RegisterInternalTypes();
+        }
+
+        /// <summary>
+        /// The load stf plugins.
         /// </summary>
         /// <param name="stfPluginPath">
-        /// The StfPluginPath.
+        /// The stf plugin path.
         /// </param>
         /// <returns>
-        /// The <see>
-        ///         <cref>ICollection</cref>
-        ///     </see>
-        ///     .
+        /// The <see cref="int"/>.
         /// </returns>
-        public ICollection<IStfPlugin> LoadStfPlugins(string stfPluginPath)
+        public int LoadStfPlugins(string stfPluginPath)
         {
             if (!Directory.Exists(stfPluginPath))
             {
-                return null;
+                return 0;
             }
 
             var stfPluginDllFileNames = Directory.GetFiles(stfPluginPath, "stf.*.dll");
@@ -54,7 +62,6 @@ namespace Stf.Utilities
                 assemblies.Add(assembly);
             }
 
-            var pluginTypes = new List<Type>();
             foreach (var assembly in assemblies)
             {
                 if (assembly == null)
@@ -73,19 +80,12 @@ namespace Stf.Utilities
 
                     if (type.GetInterface(typeof(IStfPlugin).FullName) != null)
                     {
-                        pluginTypes.Add(type);
+                        RegisterPlugin(type);
                     }
                 }
             }
 
-            this.StfPlugins = new List<IStfPlugin>(pluginTypes.Count);
-            foreach (var type in pluginTypes)
-            {
-                var plugin = (IStfPlugin)Activator.CreateInstance(type);
-                this.StfPlugins.Add(plugin);
-            }
-            
-            return this.StfPlugins;
+            return container.Registrations.Count();
         }
 
         /// <summary>
@@ -97,17 +97,50 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="T"/>.
         /// </returns>
-        public T Get<T>() where T : IStfPlugin
+        public T Get<T>() 
         {
-            foreach (var stfPlugin in this.StfPlugins)
+            var returnObject = container.Resolve<T>();
+            
+            var pluginObject = returnObject as IStfPlugin;
+            if (pluginObject != null)
             {
-                if (stfPlugin is T)
-                {
-                    return (T)stfPlugin;
-                }    
+                pluginObject.Init();
             }
 
-            return default(T);
+            return returnObject;
+        }
+
+        /// <summary>
+        /// The register type.
+        /// </summary>
+        /// <param name="typeToRegister">
+        /// The type to register.
+        /// </param>
+        private void RegisterPlugin(Type typeToRegister)
+        {
+            var interfaceName = string.Format("I{0}", typeToRegister.Name);
+            var mainInterface = typeToRegister.GetInterface(interfaceName);
+            if (mainInterface == null)
+            {
+                container.RegisterType(
+                    typeToRegister, 
+                    new InjectionProperty("StfContainer"));
+                
+                return;
+            }
+            
+            container.RegisterType(
+                mainInterface, 
+                typeToRegister, 
+                new InjectionProperty("StfContainer"));
+        }
+
+        /// <summary>
+        /// Register internal plugin loader types.
+        /// </summary>
+        private void RegisterInternalTypes()
+        {
+            container.RegisterType<IStfContainer, StfContainer>();
         }
     }
 }

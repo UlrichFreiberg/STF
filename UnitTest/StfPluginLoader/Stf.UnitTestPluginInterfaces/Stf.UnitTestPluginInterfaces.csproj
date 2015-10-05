@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPlugin2Type.cs" />
     <Compile Include="IStfUnitTestPlugin1.cs" />
     <Compile Include="IStfUnitTestPlugin2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

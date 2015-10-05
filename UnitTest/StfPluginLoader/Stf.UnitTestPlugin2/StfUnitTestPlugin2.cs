@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using Stf.Unittests.UnitTestPluginTypes;
+using Stf.Utilities;
 
 namespace Stf.Unittests
 {
@@ -36,6 +38,11 @@ namespace Stf.Unittests
         public Version VersionInfo { get; private set; }
 
         /// <summary>
+        /// Gets or sets the stf container.
+        /// </summary>
+        public IStfContainer StfContainer { get; set; }
+
+        /// <summary>
         /// The init.
         /// </summary>
         /// <returns>
@@ -43,6 +50,15 @@ namespace Stf.Unittests
         /// </returns>
         public bool Init()
         {
+            try
+            {
+                StfContainer.RegisterType<IPlugin2Type, Plugin2Type>();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
             return true;
         }
 
