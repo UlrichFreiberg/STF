@@ -57,5 +57,19 @@ namespace Stf.Utilities
         {
             container.RegisterType<TFrom, TTo>();
         }
+
+        /// <summary>
+        /// The get.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type to get from the container
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        public T Get<T>()
+        {
+            return container.Resolve<T>();
+        }
     }
 }

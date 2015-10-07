@@ -29,5 +29,16 @@ namespace Stf.Utilities
         /// <typeparam name="TTo">
         /// </typeparam>
         void RegisterType<TFrom, TTo>() where TTo : TFrom;
+
+        /// <summary>
+        /// The get.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type to get from the container
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        T Get<T>();
     }
 }
