@@ -42,6 +42,11 @@ namespace Stf.Unittests
         public IStfContainer StfContainer { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether is initialized.
+        /// </summary>
+        public bool IsInitialized { get; set; }
+
+        /// <summary>
         /// The init.
         /// </summary>
         /// <returns>
@@ -49,6 +54,7 @@ namespace Stf.Unittests
         /// </returns>
         public bool Init()
         {
+            IsInitialized = true;
             return true;
         }
 

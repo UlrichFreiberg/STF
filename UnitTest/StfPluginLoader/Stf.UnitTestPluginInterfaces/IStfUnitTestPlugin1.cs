@@ -17,6 +17,11 @@ namespace Stf.Unittests
     public interface IStfUnitTestPlugin1 : IStfPlugin
     {
         /// <summary>
+        /// Gets or sets a value indicating whether is initialized.
+        /// </summary>
+        bool IsInitialized { get; set; }
+
+        /// <summary>
         /// The stf unit test plugin 1 func.
         /// </summary>
         /// <returns>

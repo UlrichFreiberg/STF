@@ -62,5 +62,17 @@ namespace UnitTest
             MyAssert.AssertNotNull("Not null", pluginType);
         }
 
+        /// <summary>
+        /// The test method container extension initializes plugin.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodContainerExtensionInitializesPlugin()
+        {
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.AssertNotNull("sp2.StfContainer != null", sp2.StfContainer);
+            var sp1 = sp2.StfContainer.Get<IStfUnitTestPlugin1>();
+            MyAssert.AssertTrue("sp1.IsInitialized", sp1.IsInitialized);
+        }
+
     }
 }
