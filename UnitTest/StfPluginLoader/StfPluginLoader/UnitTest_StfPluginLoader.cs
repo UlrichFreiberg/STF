@@ -74,5 +74,16 @@ namespace UnitTest
             MyAssert.AssertEquals("plugin2Type.Plugin2TypeFunc", 202, plugin2Type.Plugin2TypeFunc());
         }
 
+        /// <summary>
+        /// The test method getter on stf container.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodGetterOnStfContainer()
+        {
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            var pluginType = sp2.StfContainer.Get<IPlugin2Type>();
+            MyAssert.AssertNotNull("Not null", pluginType);
+        }
+
     }
 }
