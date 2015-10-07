@@ -43,9 +43,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StfConfiguration\StfConfiguration.csproj">
+      <Project>{2d259b87-a08e-406f-818c-6f60bc16c983}</Project>
+      <Name>StfConfiguration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StfLogger\StfLogger.csproj">
       <Project>{761BF58C-4B19-46D2-9601-2F9296C80152}</Project>
       <Name>StfLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StfPluginLoader\StfPluginLoader.csproj">
+      <Project>{dfff16ec-8e3e-48d1-a247-b7ba7208231e}</Project>
+      <Name>StfPluginLoader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

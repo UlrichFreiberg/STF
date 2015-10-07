@@ -36,6 +36,11 @@ namespace Stf.Utilities
         public StfAssert MyAssert { get; private set; }
 
         /// <summary>
+        /// Gets the my logger.
+        /// </summary>
+        public StfLogger MyLogger { get; private set; }
+
+        /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
         /// The test context instance is set by the MsTestFrame work
@@ -48,6 +53,8 @@ namespace Stf.Utilities
         [TestInitialize]
         public void BaseTestInitialize()
         {
+            MyLogger = Get<StfLogger>();
+
             string logFilePostfix = string.Empty;
             var iterationNo = DataRowIndex();
             string iterationStatus = "Not datadriven";
@@ -58,23 +65,25 @@ namespace Stf.Utilities
                 iterationStatus = string.Format("Iteration {0}", iterationNo);
             }
 
-            var ovidName = string.Format("{0}{1}.html", Path.Combine(LogDirRoot, TestContext.TestName), logFilePostfix);
+            var logdir = Path.Combine(StfRoot, TestContext.TestName);
 
-            if (!Directory.Exists(LogDirRoot))
+            if (!Directory.Exists(logdir))
             {
-                Directory.CreateDirectory(LogDirRoot);
+                Directory.CreateDirectory(logdir);
             }
 
-            this.MyLogger.FileName = ovidName;
+            var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
+
+            this.MyLogger.FileName = logFilename;
             this.MyAssert = new StfAssert(this.MyLogger);
 
             if (TestDataDriven())
             {
                 for (var index = 0; index < TestContext.DataRow.Table.Columns.Count; index++)
                 {
-                    var HeaderCaption = TestContext.DataRow.Table.Columns[index].Caption;
+                    var headerCaption = TestContext.DataRow.Table.Columns[index].Caption;
 
-                    this.MyLogger.LogInfo(string.Format("Column[{0}]=[{1}]", HeaderCaption, TestContext.DataRow[HeaderCaption]));
+                    this.MyLogger.LogInfo(string.Format("Column[{0}]=[{1}]", headerCaption, TestContext.DataRow[headerCaption]));
                 }
             }
 

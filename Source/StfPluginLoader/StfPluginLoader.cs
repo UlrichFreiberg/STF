@@ -30,11 +30,29 @@ namespace Stf.Utilities
         /// <summary>
         /// Initializes a new instance of the <see cref="StfPluginLoader"/> class.
         /// </summary>
+        /// <param name="stfLogger">
+        /// The stf Logger.
+        /// </param>
+        public StfPluginLoader(StfLogger stfLogger)
+        {
+            PluginLogger = stfLogger;
+            container = new UnityContainer();
+            RegisterInternalTypes();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfPluginLoader"/> class.
+        /// </summary>
         public StfPluginLoader()
         {
             container = new UnityContainer();
             RegisterInternalTypes();
         }
+
+        /// <summary>
+        /// Gets or sets the plugin logger.
+        /// </summary>
+        private StfLogger PluginLogger { get; set; }
 
         /// <summary>
         /// The load stf plugins.
@@ -141,6 +159,11 @@ namespace Stf.Utilities
         private void RegisterInternalTypes()
         {
             container.RegisterType<IStfContainer, StfContainer>();
+
+            if (PluginLogger != null)
+            {
+                container.RegisterInstance(PluginLogger);
+            }
         }
     }
 }
