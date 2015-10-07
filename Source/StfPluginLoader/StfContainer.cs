@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.Practices.Unity;
+using Mir.Stf.Utilities.Extension;
 
 namespace Mir.Stf.Utilities
 {
@@ -68,7 +69,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public T Get<T>()
         {
-            return container.Resolve<T>();
+            return container.ResolveType<T>();
         }
     }
 }

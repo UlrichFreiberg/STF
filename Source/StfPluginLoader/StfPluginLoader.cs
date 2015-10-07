@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Practices.Unity;
+using Mir.Stf.Utilities.Extension;
 
 namespace Mir.Stf.Utilities
 {
@@ -115,17 +116,9 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="T"/>.
         /// </returns>
-        public T Get<T>() 
+        public T Get<T>()
         {
-            var returnObject = container.Resolve<T>();
-            
-            var pluginObject = returnObject as IStfPlugin;
-            if (pluginObject != null)
-            {
-                pluginObject.Init();
-            }
-
-            return returnObject;
+            return container.ResolveType<T>();
         }
 
         /// <summary>

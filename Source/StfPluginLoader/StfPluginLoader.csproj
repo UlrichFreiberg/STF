@@ -75,6 +75,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extension\ContainerExtensions.cs" />
     <Compile Include="IStfContainer.cs" />
     <Compile Include="IStfPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
