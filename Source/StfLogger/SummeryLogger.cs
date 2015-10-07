@@ -4,16 +4,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities
+using System.Collections.Generic;
+using System.IO;
+using Mir.Stf.Utilities.Properties;
+using Mir.Stf.Utilities.Utils;
+
+namespace Mir.Stf.Utilities
 {
-    using System.IO;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
-    using Stf.Utilities.Properties;
-    using Stf.Utilities.Utils;
-    using System.Collections.Generic;
-
     /// <summary>
     /// The summery logger.
     /// </summary>

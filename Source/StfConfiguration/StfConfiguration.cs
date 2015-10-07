@@ -8,12 +8,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Xml;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// The configuration tree. 
     /// Holding all the low level information around all the config files.

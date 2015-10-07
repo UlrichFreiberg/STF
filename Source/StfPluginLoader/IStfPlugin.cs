@@ -9,7 +9,7 @@
 
 using System;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
     /// <summary>
     /// The Plugin interface.

@@ -1,15 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IStfUnitTestPlugin2.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the IStfUnitTestPlugin2 type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using Mir.Stf.Utilities;
 
 namespace Stf.Unittests
 {
-    using Stf.Utilities;
-
+    /// <summary>
+    /// The StfUnitTestPlugin2 interface.
+    /// </summary>
     public interface IStfUnitTestPlugin2 : IStfPlugin
     {
+        /// <summary>
+        /// The stf unit test plugin 2 func.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int StfUnitTestPlugin2Func();
     }
 }

@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.Interfaces
+namespace Mir.Stf.Utilities.Interfaces
 {
     /// <summary>
     /// The LogfileManagement <c>interface</c>.

@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities
-{
-    using System;
-    using System.Text.RegularExpressions;
+using System;
+using System.Text.RegularExpressions;
 
+namespace Mir.Stf.Utilities
+{
     /// <summary>
     /// Functionality to expose and navigate through the Section tree
     /// </summary>

@@ -8,8 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using Mir.Stf.Utilities;
 using Stf.Unittests.UnitTestPluginTypes;
-using Stf.Utilities;
 
 namespace Stf.Unittests
 {

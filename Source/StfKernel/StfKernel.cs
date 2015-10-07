@@ -5,11 +5,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.IO;
+using Mir.Stf.Utilities;
 
-namespace Stf
+namespace Mir.Stf
 {
-    using Utilities;
-
     /// <summary>
     /// The stf kernel.
     /// </summary>

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest_TestResultHtmlLogger.cs" company="Foobar">
+// <copyright file="UnitTest_StfLogger.cs" company="Foobar">
 //   2015
 // </copyright>
 // <summary>
@@ -7,18 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Mir.Stf.Utilities;
+
 namespace UnitTest
 {
     using System;
     using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Xml;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities;
 
     /// <summary>
     /// The unit test 1.
@@ -32,7 +27,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodInit()
         {
-            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodInit2.html" };
+            var myLogger = new StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodInit2.html" };
             myLogger.CloseLogFile();
         }
 

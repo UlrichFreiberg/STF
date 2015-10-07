@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
     /// <summary>
     /// The log level.

@@ -6,6 +6,7 @@
 
 using System;
 using System.IO;
+using Mir.Stf.Utilities;
 
 namespace UnitTest
 {

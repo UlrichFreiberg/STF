@@ -5,13 +5,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Stf.Utilities;
+using Stf.Utilities.Interfaces;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The stf assert.
     /// </summary>

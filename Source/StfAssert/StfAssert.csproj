@@ -7,8 +7,8 @@
     <ProjectGuid>{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stf.Utilities</RootNamespace>
-    <AssemblyName>Stf.Utilities.StfAssert</AssemblyName>
+    <RootNamespace>Mir.Stf.Utilities</RootNamespace>
+    <AssemblyName>Mir.Stf.Utilities.StfAssert</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

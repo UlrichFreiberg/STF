@@ -4,22 +4,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using Mir.Stf.Utilities.Interfaces;
+using Mir.Stf.Utilities.Properties;
+using Mir.Stf.Utilities.Utils;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
-    using Stf.Utilities.Interfaces;
-    using Stf.Utilities.Properties;
-    using Stf.Utilities.Utils;
-
     /// <summary>
     /// The test result html logger. the <see cref="ILogfileManagement"/> part
     /// </summary>

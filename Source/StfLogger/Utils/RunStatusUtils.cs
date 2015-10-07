@@ -8,7 +8,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-namespace Stf.Utilities.Utils
+
+namespace Mir.Stf.Utilities.Utils
 {
     /// <summary>
     /// The run status utils.

@@ -7,10 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities
-{
-    using System;
+using System;
 
+namespace Mir.Stf.Utilities
+{
     /// <summary>
     /// The over layer of configuration trees.
     /// </summary>

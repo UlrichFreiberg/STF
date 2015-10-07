@@ -15,7 +15,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Practices.Unity;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
     /// <summary>
     /// The stf plugin loader.
@@ -70,7 +70,7 @@ namespace Stf.Utilities
                 return 0;
             }
 
-            var stfPluginDllFileNames = Directory.GetFiles(stfPluginPath, "stf.*.dll");
+            var stfPluginDllFileNames = Directory.GetFiles(stfPluginPath, "Stf.*.dll");
             var assemblies = new List<Assembly>(stfPluginDllFileNames.Length);
 
             foreach (var stfPluginDllFileName in stfPluginDllFileNames)

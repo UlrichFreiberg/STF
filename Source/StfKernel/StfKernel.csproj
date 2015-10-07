@@ -7,8 +7,8 @@
     <ProjectGuid>{469148AB-9343-4E38-BA46-013F12657B69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stf</RootNamespace>
-    <AssemblyName>Stf.Kernel</AssemblyName>
+    <RootNamespace>Mir.Stf</RootNamespace>
+    <AssemblyName>Mir.Stf.Kernel</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

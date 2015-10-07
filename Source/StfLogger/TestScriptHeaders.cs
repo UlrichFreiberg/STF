@@ -3,10 +3,11 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
-{
-    using Stf.Utilities.Interfaces;
 
+using Mir.Stf.Utilities.Interfaces;
+
+namespace Mir.Stf.Utilities
+{
     /// <summary>
     /// The test result html logger.
     /// </summary>

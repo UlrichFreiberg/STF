@@ -3,14 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
+
+using System;
+using System.Windows.Forms;
+using Mir.Stf.Utilities.Interfaces;
+using Mir.Stf.Utilities.Utils;
+
+namespace Mir.Stf.Utilities
 {
-    using System;
-    using System.Windows.Forms;
-
-    using Interfaces;
-    using Utils;
-
     /// <summary>
     /// The test result html logger.
     /// </summary>

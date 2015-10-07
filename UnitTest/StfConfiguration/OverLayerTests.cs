@@ -8,12 +8,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mir.Stf.Utilities;
 
 namespace Tests
 {
     using System.IO;
-
-    using Stf.Utilities;
 
     /// <summary>
     /// The over layer tests.

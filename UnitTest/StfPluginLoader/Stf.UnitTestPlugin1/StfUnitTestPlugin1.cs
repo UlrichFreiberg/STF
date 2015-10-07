@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using Stf.Utilities;
+using Mir.Stf.Utilities;
 
 namespace Stf.Unittests
 {

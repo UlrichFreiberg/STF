@@ -7,8 +7,8 @@
     <ProjectGuid>{761BF58C-4B19-46D2-9601-2F9296C80152}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stf.Utilities</RootNamespace>
-    <AssemblyName>Stf.Utilities.StfLogger</AssemblyName>
+    <RootNamespace>Mir.Stf.Utilities</RootNamespace>
+    <AssemblyName>Mir.Stf.Utilities.StfLogger</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

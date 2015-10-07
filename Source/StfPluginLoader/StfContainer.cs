@@ -7,10 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
 using Microsoft.Practices.Unity;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
     /// <summary>
     /// The stf container.

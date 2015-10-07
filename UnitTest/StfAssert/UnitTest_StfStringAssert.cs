@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Mir.Stf.Utilities;
+
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;

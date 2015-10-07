@@ -3,12 +3,12 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
+
+using System;
+using Mir.Stf.Utilities.Interfaces;
+
+namespace Mir.Stf.Utilities
 {
-    using System;
-
-    using Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The test result html logger. The <c>IPerformanceManagement</c> part.
     /// </summary>

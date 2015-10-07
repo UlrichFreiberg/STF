@@ -8,11 +8,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mir.Stf.Utilities;
 
 namespace Tests
 {
-    using Stf.Utilities;
-
     [TestClass]
     public class ReflectionTest : StfTestScriptBase
     {

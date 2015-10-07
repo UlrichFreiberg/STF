@@ -7,8 +7,8 @@
     <ProjectGuid>{2D259B87-A08E-406F-818C-6F60BC16C983}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stf.Utilities</RootNamespace>
-    <AssemblyName>Stf.Utilities.StfConfiguration</AssemblyName>
+    <RootNamespace>Mir.Stf.Utilities</RootNamespace>
+    <AssemblyName>Mir.Stf.Utilities.StfConfiguration</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

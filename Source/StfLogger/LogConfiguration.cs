@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Globalization;
 using System.Linq;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
     /// <summary>
     /// The log configuration.

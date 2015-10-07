@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.Interfaces
+namespace Mir.Stf.Utilities.Interfaces
 {
     /// <summary>
     /// The CallStackManagement <see langword="interface"/>. If used by the logger, it will indent the logging - indicating a call stack.

@@ -3,12 +3,13 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
-{
-    using System.IO;
-    using System.Text.RegularExpressions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using System.IO;
+using System.Text.RegularExpressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Mir.Stf.Utilities
+{
     /// <summary>
     /// BaseClass for all Stf test scripts.
     /// The class will set up the right <see cref="StfLogger"/> (MyLogger)

@@ -3,11 +3,12 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
-{
-    using System.IO;
-    using System.Text.RegularExpressions;
 
+using System.IO;
+using System.Text.RegularExpressions;
+
+namespace Mir.Stf.Utilities
+{
     /// <summary>
     /// The stf assert.
     /// </summary>

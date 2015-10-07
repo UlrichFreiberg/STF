@@ -3,12 +3,12 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
+
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Mir.Stf.Utilities
 {
-    using System;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     /// <summary>
     /// The stf assert.
     /// </summary>

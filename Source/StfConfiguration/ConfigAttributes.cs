@@ -7,10 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities
-{
-    using System;
+using System;
 
+namespace Mir.Stf.Utilities
+{
     /// <summary>
     /// The config attributes - used to fine the link into the configuration tree
     /// </summary>

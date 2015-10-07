@@ -7,15 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml;
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
-    using System;
-    using System.Linq;
-    using System.Text;
-    using System.Xml;
-
     /// <summary>
     /// The section. Contains sections or values
     /// </summary>

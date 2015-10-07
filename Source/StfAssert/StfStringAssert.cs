@@ -3,14 +3,13 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
+
+using System.Text.RegularExpressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Stf.Utilities.Interfaces;
+
+namespace Mir.Stf.Utilities
 {
-    using System.Text.RegularExpressions;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The stf assert.
     /// </summary>

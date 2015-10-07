@@ -8,18 +8,17 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mir.Stf.Utilities;
 
 namespace Tests
 {
-    using Stf.Utilities;
-
     [TestClass]
     public class ParserTests : StfTestScriptBase
     {
         [TestMethod]
         public void ParserSimpleVariable_1()
         {
-            var yacf = new Stf.Utilities.StfConfiguration();
+            var yacf = new StfConfiguration();
             var conf = yacf.LoadConfig(@"TestData\Parser\parser1.xml");
 
             var key1Value = yacf.GetKeyValue(conf, "SectionName.k1");
@@ -29,7 +28,7 @@ namespace Tests
                 [TestMethod]
         public void ParserSimpleVariable_2()
         {
-            var yacf = new Stf.Utilities.StfConfiguration();
+            var yacf = new StfConfiguration();
             var conf = yacf.LoadConfig(@"TestData\Parser\parser1.xml");
 
             var key2Value = yacf.GetKeyValue(conf, "SectionName.SubSectionName.k2");

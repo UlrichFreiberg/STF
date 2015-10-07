@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities
+namespace Mir.Stf.Utilities
 {
     /// <summary>
     /// The StfContainer interface.
@@ -18,6 +18,7 @@ namespace Stf.Utilities
         /// The register type.
         /// </summary>
         /// <typeparam name="T">
+        /// the type to register
         /// </typeparam>
         void RegisterType<T>();
 
@@ -25,8 +26,10 @@ namespace Stf.Utilities
         /// The register type.
         /// </summary>
         /// <typeparam name="TFrom">
+        /// The type interface to register
         /// </typeparam>
         /// <typeparam name="TTo">
+        /// The type to register
         /// </typeparam>
         void RegisterType<TFrom, TTo>() where TTo : TFrom;
 

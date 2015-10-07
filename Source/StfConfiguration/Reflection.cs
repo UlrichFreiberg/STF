@@ -3,17 +3,23 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
+namespace Mir.Stf.Utilities
+{
     /// <summary>
     /// The reflection.
     /// </summary>
     public class Reflection
     {
+        /// <summary>
+        /// The current field set.
+        /// </summary>
+        private object currentFieldSet;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Reflection"/> class.
         /// </summary>
@@ -24,11 +30,6 @@ namespace Stf.Utilities
         {
             this.currentFieldSet = fieldSet;
         }
-
-        /// <summary>
-        /// The current field set.
-        /// </summary>
-        private object currentFieldSet;
 
         /// <summary>
         /// The get config properties from type.

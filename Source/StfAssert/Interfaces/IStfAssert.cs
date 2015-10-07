@@ -3,6 +3,9 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+using Mir.Stf.Utilities;
+
 namespace Stf.Utilities.Interfaces
 {
     using System;
