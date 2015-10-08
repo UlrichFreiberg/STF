@@ -74,10 +74,6 @@
       <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
       <Name>StfLogger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
-      <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>
-      <Name>StfTestScriptBase</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

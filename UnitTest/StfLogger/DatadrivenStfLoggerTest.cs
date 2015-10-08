@@ -9,6 +9,7 @@
 
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mir.Stf;
 using Mir.Stf.Utilities;
 using Stf.Utilities;
 

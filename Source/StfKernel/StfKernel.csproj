@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,8 +42,13 @@
   <ItemGroup>
     <Compile Include="StfKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StfTestScriptBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StfAssert\StfAssert.csproj">
+      <Project>{6933e0af-0e2a-48d2-8660-2c939b3db6fb}</Project>
+      <Name>StfAssert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StfConfiguration\StfConfiguration.csproj">
       <Project>{2d259b87-a08e-406f-818c-6f60bc16c983}</Project>
       <Name>StfConfiguration</Name>

@@ -67,10 +67,6 @@
       <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
       <Name>StfKernel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
-      <Project>{F6AF2AEB-2651-4DF3-86F6-4DECAE421800}</Project>
-      <Name>StfTestScriptBase</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestData\ConfigOverlay\Config1.xml" />

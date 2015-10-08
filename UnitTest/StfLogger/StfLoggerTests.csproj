@@ -69,10 +69,6 @@
       <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
       <Name>StfLogger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\StfTestScriptBase\StfTestScriptBase.csproj">
-      <Project>{f6af2aeb-2651-4df3-86f6-4decae421800}</Project>
-      <Name>StfTestScriptBase</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\StfLogger\App.config">

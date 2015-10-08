@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mir.Stf;
 using Mir.Stf.Utilities;
 
 namespace Tests

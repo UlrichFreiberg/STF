@@ -5,14 +5,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.IO;
-using Mir.Stf.Utilities;
+using Mir.Stf;
 
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities;
 
     /// <summary>
     /// The unit test stf asserts.

@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Mir.Stf.Utilities;
+using Mir.Stf;
 
 namespace UnitTest
 {
@@ -73,6 +73,5 @@ namespace UnitTest
             var sp1 = sp2.StfContainer.Get<IStfUnitTestPlugin1>();
             MyAssert.AssertTrue("sp1.IsInitialized", sp1.IsInitialized);
         }
-
     }
 }
