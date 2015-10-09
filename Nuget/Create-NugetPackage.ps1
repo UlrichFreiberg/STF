@@ -2,6 +2,12 @@
     [switch] $PushPackage
 )
 
+function Get-PackageName()
+{
+    $file = Get-ChildItem -Name | Where-Object { $_ -match "Mir\.Stf\.Kernel\.\d+\.\d+\.\d+\.\d+\.nupkg" }
+    return $file
+}
+
 $rootDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 $nugetPath = "{0}\nuget.exe" -f $rootDir
 $stfKernelPath = "{0}\..\Source\StfKernel" -f $rootDir
@@ -17,7 +23,8 @@ nuget pack $kernelProjName -IncludeReferencedProjects
 
 if ($PushPackage)
 {
-    nuget push $kernelProjName
+    $packageName = Get-PackageName
+    nuget push $packageName
 }
 
 Pop-Location

@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
