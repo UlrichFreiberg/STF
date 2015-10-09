@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.Practices.Unity;
-using Mir.Stf.Utilities.Extension;
+using Mir.Stf.Utilities.Extensions;
 
 namespace Mir.Stf.Utilities
 {

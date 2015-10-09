@@ -9,7 +9,7 @@
 
 using Microsoft.Practices.Unity;
 
-namespace Mir.Stf.Utilities.Extension
+namespace Mir.Stf.Utilities.Extensions
 {
     /// <summary>
     /// The container extensions.

@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Practices.Unity;
-using Mir.Stf.Utilities.Extension;
+using Mir.Stf.Utilities.Extensions;
 
 namespace Mir.Stf.Utilities
 {
@@ -61,45 +61,52 @@ namespace Mir.Stf.Utilities
         /// <param name="stfPluginPath">
         /// The stf plugin path.
         /// </param>
+        /// <param name="pluginPatterns">
+        /// The plugin Patterns.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LoadStfPlugins(string stfPluginPath)
+        public int LoadStfPlugins(string stfPluginPath, string pluginPatterns = "*stf.*.dll")
         {
             if (!Directory.Exists(stfPluginPath))
             {
                 return 0;
             }
 
-            var stfPluginDllFileNames = Directory.GetFiles(stfPluginPath, "Stf.*.dll");
-            var assemblies = new List<Assembly>(stfPluginDllFileNames.Length);
-
-            foreach (var stfPluginDllFileName in stfPluginDllFileNames)
+            var patterns = pluginPatterns.Split(';');
+            foreach (var pattern in patterns)
             {
-                var stfPluginDllAssemblyName = AssemblyName.GetAssemblyName(stfPluginDllFileName);
-                var assembly = Assembly.Load(stfPluginDllAssemblyName);
-                assemblies.Add(assembly);
-            }
+                var stfPluginDllFileNames = Directory.GetFiles(stfPluginPath, pattern);
+                var assemblies = new List<Assembly>(stfPluginDllFileNames.Length);
 
-            foreach (var assembly in assemblies)
-            {
-                if (assembly == null)
+                foreach (var stfPluginDllFileName in stfPluginDllFileNames)
                 {
-                    continue;
+                    var stfPluginDllAssemblyName = AssemblyName.GetAssemblyName(stfPluginDllFileName);
+                    var assembly = Assembly.Load(stfPluginDllAssemblyName);
+                    assemblies.Add(assembly);
                 }
 
-                var types = assembly.GetTypes();
-
-                foreach (var type in types)
+                foreach (var assembly in assemblies)
                 {
-                    if (type.IsInterface || type.IsAbstract)
+                    if (assembly == null)
                     {
                         continue;
                     }
 
-                    if (type.GetInterface(typeof(IStfPlugin).FullName) != null)
+                    var types = assembly.GetTypes();
+
+                    foreach (var type in types)
                     {
-                        RegisterPlugin(type);
+                        if (type.IsInterface || type.IsAbstract)
+                        {
+                            continue;
+                        }
+
+                        if (type.GetInterface(typeof(IStfPlugin).FullName) != null)
+                        {
+                            RegisterPlugin(type);
+                        }
                     }
                 }
             }
@@ -119,6 +126,42 @@ namespace Mir.Stf.Utilities
         public T Get<T>()
         {
             return container.ResolveType<T>();
+        }
+
+        /// <summary>
+        /// The register instance.
+        /// </summary>
+        /// <param name="typeToRegister">
+        /// The type to register.
+        /// </param>
+        /// <param name="instanceToRegister">
+        /// The instance to register.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool RegisterInstance(Type typeToRegister, object instanceToRegister)
+        {
+            bool success;
+            try
+            {
+                container.RegisterInstance(typeToRegister, instanceToRegister);
+                success = true;
+            }
+            catch (Exception)
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
+        /// <summary>
+        /// The dispose.
+        /// </summary>
+        public void Dispose()
+        {
+            container.Dispose();
         }
 
         /// <summary>

@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.IO;
 using Mir.Stf.Utilities;
 
@@ -12,8 +13,13 @@ namespace Mir.Stf
     /// <summary>
     /// The stf kernel.
     /// </summary>
-    public class StfKernel
+    public class StfKernel : IDisposable
     {
+        /// <summary>
+        /// The disposed.
+        /// </summary>
+        private bool disposed;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StfKernel"/> class.
         /// </summary>
@@ -25,6 +31,7 @@ namespace Mir.Stf
             KernelLogger = new StfLogger { Configuration = { LogFileName = Path.Combine(StfLogDir, @"KernelLogger.html") } };
             PluginLoader = new StfPluginLoader(KernelLogger);
             StfConfiguration = new StfConfiguration(Path.Combine(StfRoot, @"Config\StfConfiguration.xml"));
+            PluginLoader.RegisterInstance(typeof(StfConfiguration), StfConfiguration);
             PluginLoader.LoadStfPlugins(StfConfiguration.GetKeyValue("StfKernel.PluginPath"));
         }
 
@@ -54,6 +61,14 @@ namespace Mir.Stf
         private string StfLogDir { get; set; }
 
         /// <summary>
+        /// The dispose.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        /// <summary>
         /// The get.
         /// </summary>
         /// <typeparam name="T">
@@ -65,6 +80,34 @@ namespace Mir.Stf
         protected T Get<T>()
         {
             return PluginLoader.Get<T>();
+        }
+
+        /// <summary>
+        /// The dispose.
+        /// </summary>
+        /// <param name="disposing">
+        /// The disposing.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    if (KernelLogger != null)
+                    {
+                        KernelLogger.LogDebug("Closing log files and disposing container");
+                        KernelLogger.CloseLogFile();
+                    }
+
+                    if (PluginLoader != null)
+                    {
+                        PluginLoader.Dispose();
+                    }
+                }
+
+                disposed = true;
+            }
         }
     }
 }

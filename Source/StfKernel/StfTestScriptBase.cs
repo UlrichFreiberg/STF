@@ -76,8 +76,8 @@ namespace Mir.Stf
 
             var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
 
-            this.MyLogger.FileName = logFilename;
-            this.MyAssert = new StfAssert(this.MyLogger);
+            MyLogger.FileName = logFilename;
+            MyAssert = new StfAssert(this.MyLogger);
 
             if (TestDataDriven())
             {
@@ -90,7 +90,7 @@ namespace Mir.Stf
             }
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
-            this.MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
+            MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace Mir.Stf
         [TestCleanup]
         public void BaseTestCleanup()
         {
-            this.LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
-            this.MyLogger.CloseLogFile();
+            LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
+            MyLogger.CloseLogFile();
 
             if (TestDataDriven())
             {
@@ -108,13 +108,13 @@ namespace Mir.Stf
 
                 if (iterationNo == TestContext.DataRow.Table.Rows.Count - 1)
                 {
-                    var MyStfSummeryLogger = new StfSummeryLogger();
-                    var SummeryLogfile_LogDirname = Path.GetDirectoryName(MyLogger.FileName);
-                    var SummeryLogfile_LogFilename = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", ".html");
-                    var SummeryLogfilename = string.Format(@"{0}\SummeryLogfile_{1}", SummeryLogfile_LogDirname, SummeryLogfile_LogFilename);
-                    var SummeryLogfile_LogfilePattern  = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", "_*");
+                    var myStfSummeryLogger = new StfSummeryLogger();
+                    var summeryLogfileLogDirname = Path.GetDirectoryName(MyLogger.FileName);
+                    var summeryLogfileLogFilename = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", ".html");
+                    var summeryLogfilename = string.Format(@"{0}\SummeryLogfile_{1}", summeryLogfileLogDirname, summeryLogfileLogFilename);
+                    var summeryLogfileLogfilePattern  = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", "_*");
 
-                    MyStfSummeryLogger.CreateSummeryLog(SummeryLogfilename, SummeryLogfile_LogDirname, SummeryLogfile_LogfilePattern);
+                    myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
                 }
             }
         }
@@ -152,6 +152,12 @@ namespace Mir.Stf
             return currentIteration;
         }
 
+        /// <summary>
+        /// The test data driven.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool TestDataDriven()
         {
             if (TestContext.DataRow == null)
