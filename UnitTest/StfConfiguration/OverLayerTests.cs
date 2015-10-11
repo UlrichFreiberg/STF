@@ -27,12 +27,12 @@ namespace Tests
         [TestMethod]
         public void OverLay12()
         {
-            var yacf = new StfConfiguration();
-            var conf1 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config1.xml");
-            var conf2 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
-            var conf12 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config12.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config1.xml");
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
+            var conf12 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config12.xml");
 
-            var overLayed = yacf.OverLay(conf1, conf2);
+            var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
             dumpTree(overLayed, @"overLayed.xml");
             dumpTree(conf12, @"expected.xml");
@@ -46,12 +46,12 @@ namespace Tests
         [TestMethod]
         public void OverLay23()
         {
-            var yacf = new StfConfiguration();
-            var conf2 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
-            var conf3 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config3.xml");
-            var conf23 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config23.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
+            var conf3 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config3.xml");
+            var conf23 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config23.xml");
 
-            var overLayed = yacf.OverLay(conf2, conf3);
+            var overLayed = stfConfiguration.OverLay(conf2, conf3);
             dumpTree(overLayed, @"overLayed.xml");
             dumpTree(conf23, @"expected.xml");
 
@@ -64,10 +64,10 @@ namespace Tests
         [TestMethod]
         public void OverLaySimpleWithNull()
         {
-            var yacf = new StfConfiguration();
-            var conf2 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
 
-            var overLayed = yacf.OverLay(conf2, null);
+            var overLayed = stfConfiguration.OverLay(conf2, null);
 
             dumpTree(overLayed, @"overLayed.xml");
             dumpTree(conf2, @"expected.xml");
@@ -81,10 +81,10 @@ namespace Tests
         [TestMethod]
         public void OverLayNullWithSimple()
         {
-            var yacf = new StfConfiguration();
-            var conf2 = yacf.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
 
-            var overLayed = yacf.OverLay(null, conf2);
+            var overLayed = stfConfiguration.OverLay(null, conf2);
 
             dumpTree(overLayed, @"overLayed.xml");
             dumpTree(conf2, @"expected.xml");
@@ -98,11 +98,11 @@ namespace Tests
         [TestMethod]
         public void OverLayConfigTwoSectionsSideBySide()
         {
-            var yacf = new StfConfiguration();
-            var conf1 = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
-            var conf2 = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
 
-            var overLayed = yacf.OverLay(conf1, conf2);
+            var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
             dumpTree(overLayed, @"overLayed.xml");
             dumpTree(conf2, @"expected.xml");
@@ -116,11 +116,11 @@ namespace Tests
         [TestMethod]
         public void OverLayConfigConfigOneSectionWithinOneSection()
         {
-            var yacf = new StfConfiguration();
-            var conf1 = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
-            var conf2 = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
 
-            var overLayed = yacf.OverLay(conf1, conf2);
+            var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
             dumpTree(overLayed, @"overLayed.xml");
             dumpTree(conf2, @"expected.xml");
@@ -134,11 +134,11 @@ namespace Tests
         [TestMethod]
         public void OverLayConfigConfigOneSectionWithinOneSectionWithinOneSection()
         {
-            var yacf = new StfConfiguration();
-            var conf1 = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml");
-            var conf2 = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml");
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml");
 
-            var overLayed = yacf.OverLay(conf1, conf2);
+            var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
             dumpTree(overLayed, @"overLayed.xml");
             dumpTree(conf2, @"expected.xml");
@@ -152,13 +152,13 @@ namespace Tests
         [TestMethod]
         public void MakeCopyTests()
         {
-            var yacf = new StfConfiguration();
+            var stfConfiguration = new StfConfiguration();
 
             var configFiles = Directory.EnumerateFiles(".", "config*.xml");
 
             foreach (var configFile in configFiles)
             {
-                var conf = yacf.LoadConfig(configFile);
+                var conf = stfConfiguration.LoadConfig(configFile);
                 var confCopy = conf.MakeCopy();
 
                 dumpTree(conf, "Original" + configFile.Replace(@".\", string.Empty));

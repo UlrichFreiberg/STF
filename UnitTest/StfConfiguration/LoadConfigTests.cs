@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoadConfigTests.cs" company="Mir Software">
-//   Copyright 2013 Mir Software. All rights reserved.
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   Defines the UnitTest1 type.
@@ -25,8 +26,8 @@ namespace Tests
         [TestMethod]
         public void LoadConfig2SubSections()
         {
-            var yacf = new StfConfiguration();
-            var conf = yacf.LoadConfig(@"TestData\ConfigOverlay\Config1.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config1.xml");
 
             Assert.AreEqual(1, conf.Sections.Count, 1);
             var sectionTotest = conf.Sections["SectionName"];
@@ -59,8 +60,8 @@ namespace Tests
         [TestMethod]
         public void LoadConfig1Section1Key()
         {
-            var yacf = new StfConfiguration();
-            var conf = yacf.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
 
             Assert.AreEqual(1, conf.Sections.Count);
             var sectionTotest = conf.Sections["SectionName"];
@@ -76,8 +77,8 @@ namespace Tests
         [TestMethod]
         public void LoadConfig1Section2Keys()
         {
-            var yacf = new StfConfiguration();
-            var conf = yacf.LoadConfig(@"TestData\ConfigOverlay\Config3.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config3.xml");
 
             var sectionTotest = conf.Sections["SectionName"];
             Assert.AreEqual("SectionName", sectionTotest.SectionName);
@@ -93,8 +94,8 @@ namespace Tests
         [TestMethod]
         public void LoadConfigOneSectionWithinOneSection()
         {
-            var yacf = new StfConfiguration();
-            var conf = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
 
             var sectionTotest = conf.Sections["SectionNameOuter"];
             Assert.AreEqual("SectionNameOuter", sectionTotest.SectionName);
@@ -109,8 +110,8 @@ namespace Tests
         [TestMethod]
         public void LoadConfigTwoSectionsSideBySide()
         {
-            var yacf = new StfConfiguration();
-            var conf = yacf.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
+            var stfConfiguration = new StfConfiguration();
+            var conf = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
 
             var sectionTotest = conf.Sections["SectionNameFirst"];
             Assert.AreEqual("SectionNameFirst", sectionTotest.SectionName);

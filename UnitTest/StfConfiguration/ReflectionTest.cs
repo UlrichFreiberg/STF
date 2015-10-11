@@ -35,10 +35,10 @@ namespace Tests
                            };
 
             // Load a configuration in StfConfiguration
-            var yacf = new StfConfiguration(@"TestData\Reflection\Reflection1.xml");
+            var stfConfiguration = new StfConfiguration(@"TestData\Reflection\Reflection1.xml");
 
             // Load that (resolved) configuration into the User Object
-            var props = yacf.LoadUserConfiguration(tmc1);
+            var props = stfConfiguration.LoadUserConfiguration(tmc1);
 
             Assert.IsTrue(props.Count > 0, "Props collection is empty");
             Assert.AreEqual("config_key1value", tmc1.PropPublicString1);

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
-           xmlns:tn="http://www.testautomation.com/StfConfiguration"
+           xmlns:tn="http://www.testautomation.dk/StfConfiguration"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://www.testautomation.com/StfConfiguration"
+           targetNamespace="http://www.testautomation.dk/StfConfiguration"
            version="1.0.0.0">
 
   <xs:element name="configuration" type="tn:Configuration"/>

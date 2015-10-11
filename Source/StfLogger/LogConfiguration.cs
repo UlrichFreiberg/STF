@@ -18,7 +18,7 @@ namespace Mir.Stf.Utilities
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LogConfiguration"/> class. 
-        /// TODO:Later YACF kicks in..
+        /// TODO:Later stfConfiguration kicks in..
         /// </summary>
         public LogConfiguration()
         {
