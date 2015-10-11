@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfKernel.cs" company="Foobar">
-//   2015
+// <copyright file="StfKernel.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -25,20 +29,42 @@ namespace Mir.Stf
         /// </summary>
         public StfKernel()
         {
-            StfRoot = @"c:\temp\Stf"; // TODO: Skal komme et godt sted fra:-) Environment variable!
+            StfTextUtils = new StfTextUtils();
 
-            StfLogDir = Path.Combine(StfRoot, @"Logs\");
+            // setup needed kernel directories
+            StfRoot = CheckForNeededKernelDirectory(@"Stf_Root", @"C:\temp\Stf");
+            StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
+            StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
+
+            // lets get a logger and a configuration
             KernelLogger = new StfLogger { Configuration = { LogFileName = Path.Combine(StfLogDir, @"KernelLogger.html") } };
+            StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
+
+            // Any plugins for us?
             PluginLoader = new StfPluginLoader(KernelLogger);
-            StfConfiguration = new StfConfiguration(Path.Combine(StfRoot, @"Config\StfConfiguration.xml"));
             PluginLoader.RegisterInstance(typeof(StfConfiguration), StfConfiguration);
             PluginLoader.LoadStfPlugins(StfConfiguration.GetKeyValue("StfKernel.PluginPath"));
         }
 
         /// <summary>
+        /// Gets or sets the stf text utils - where string stuff to remember is stored.
+        /// </summary>
+        public StfTextUtils StfTextUtils { get; set; }
+
+        /// <summary>
         /// Gets or sets the stf root.
         /// </summary>
         public string StfRoot { get; set; }
+    
+        /// <summary>
+        /// Gets or sets the stf log dir.
+        /// </summary>
+        public string StfLogDir { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stf configuration directory
+        /// </summary>
+        public string StfConfigDir { get; set; }
 
         /// <summary>
         /// Gets the Stf logger.
@@ -54,11 +80,6 @@ namespace Mir.Stf
         /// Gets or sets the stf configuration.
         /// </summary>
         private StfConfiguration StfConfiguration { get; set; }
-
-        /// <summary>
-        /// Gets or sets the stf log dir.
-        /// </summary>
-        private string StfLogDir { get; set; }
 
         /// <summary>
         /// The dispose.
@@ -80,6 +101,21 @@ namespace Mir.Stf
         protected T Get<T>()
         {
             return PluginLoader.Get<T>();
+        }
+
+        /// <summary>
+        /// Load Additional Stf Plugins - if someone has "found" some extra one somewhere (like the unit test:-))
+        /// </summary>
+        /// <param name="directoryName">
+        /// </param>
+        /// <param name="pluginPatterns">
+        /// </param>
+        /// <returns>
+        /// </returns>
+        protected bool LoadAdditionalStfPlugins(string directoryName, string pluginPatterns)
+        {
+            PluginLoader.LoadStfPlugins(directoryName, pluginPatterns);
+            return true;
         }
 
         /// <summary>
@@ -108,6 +144,46 @@ namespace Mir.Stf
 
                 disposed = true;
             }
+        }
+
+        /// <summary>
+        /// Check For Needed Kernel Directory - like configDir
+        /// </summary>
+        /// <param name="dirVariableName">
+        /// What STF name should we remember this directory as
+        /// </param>
+        /// <param name="defaultValue">
+        /// default Value
+        /// </param>
+        /// <returns>
+        /// The path to the diretory
+        /// </returns>
+        private string CheckForNeededKernelDirectory(string dirVariableName, string defaultValue = null)
+        {
+            var directoryNameVariable = string.Format("%{0}%", dirVariableName);
+            var directoryName = StfTextUtils.ExpandVariables(directoryNameVariable);
+
+            // if unknown directory (the variable didn't got expanded), 
+            // then use the default value...
+            if (directoryName == directoryNameVariable)
+            {
+                if (string.IsNullOrEmpty(defaultValue))
+                {
+                    return null;
+                }
+
+                // The default value might be using variables 
+                defaultValue = StfTextUtils.ExpandVariables(defaultValue);
+                directoryName = StfTextUtils.GetVariableOrSetDefault(dirVariableName, defaultValue);
+            }
+
+            // We need the directory - try to create it
+            if (!Directory.Exists(directoryName))
+            {
+                Directory.CreateDirectory(directoryName);
+            }
+
+            return Directory.Exists(directoryName) ? directoryName : null;
         }
     }
 }
