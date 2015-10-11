@@ -68,8 +68,8 @@ namespace UnitTestProject1
             string[] header = { "fornavn", "efternavn", "gadeNavn", "gadeNummer" };
             string[] row = { "Ulrich", "Freiberg", "Æblestien", "13" };
 
-            var wtu = new TableUtils(header);
-            var rowType = wtu.Projection<UnitTestProjection>(row);
+            var tableUtils = new TableUtils(header);
+            var rowType = tableUtils.Projection<UnitTestProjection>(row);
 
             Assert.IsTrue(rowType.Gadenavn == "Æblestien");
         }
