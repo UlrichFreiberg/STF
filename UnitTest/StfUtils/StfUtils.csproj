@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3EC91AD5-2EB9-4AF2-B584-469871E3743F}</ProjectGuid>
+    <ProjectGuid>{ADF34342-F1A8-4866-8B92-A76C36FBA3F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UnitTest</RootNamespace>
-    <AssemblyName>StfPluginLoader</AssemblyName>
+    <AssemblyName>UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,7 +29,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,25 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTestStfPluginLoader.cs" />
+    <Compile Include="UnitTestStfTextUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\StfAssert\StfAssert.csproj">
-      <Project>{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}</Project>
-      <Name>StfAssert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Source\StfKernel\StfKernel.csproj">
-      <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
-      <Name>StfKernel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Source\StfPluginLoader\StfPluginLoader.csproj">
-      <Project>{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}</Project>
-      <Name>StfPluginLoader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Stf.UnitTestPluginInterfaces\Stf.UnitTestPluginInterfaces.csproj">
-      <Project>{a308d188-65b8-4554-95d3-4cc568952b00}</Project>
-      <Name>Stf.UnitTestPluginInterfaces</Name>
+    <ProjectReference Include="..\..\Source\StfUtils\StfUtils.csproj">
+      <Project>{8a46e8a4-0dd5-4bbd-a990-40ec4c715eb0}</Project>
+      <Name>StfUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

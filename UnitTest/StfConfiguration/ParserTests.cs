@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ParserTests.cs" company="Mir Software">
-//   Copyright 2013 Mir Software. All rights reserved.
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   Defines the ParserTests type.
