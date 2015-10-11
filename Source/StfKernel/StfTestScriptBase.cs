@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfTestScriptBase.cs" company="Foobar">
-//   2015
+// <copyright file="StfTestScriptBase.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.IO;
@@ -11,6 +15,8 @@ using Mir.Stf.Utilities;
 
 namespace Mir.Stf
 {
+    using System.Runtime.CompilerServices;
+
     /// <summary>
     /// BaseClass for all Stf test scripts.
     /// The class will set up the right <see cref="StfLogger"/> (MyLogger)
@@ -24,13 +30,7 @@ namespace Mir.Stf
         /// </summary>
         public StfTestScriptBase()
         {
-            LogDirRoot = @"c:\temp\StfLogs";
         }
-
-        /// <summary>
-        /// Gets the log dir root. Where the logfiles is placed
-        /// </summary>
-        public string LogDirRoot { get; private set; }
 
         /// <summary>
         /// Gets the Stf Asserter.
@@ -67,7 +67,7 @@ namespace Mir.Stf
                 iterationStatus = string.Format("Iteration {0}", iterationNo);
             }
 
-            var logdir = Path.Combine(StfRoot, TestContext.TestName);
+            var logdir = Path.Combine(StfLogDir, TestContext.TestName);
 
             if (!Directory.Exists(logdir))
             {
