@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{469148AB-9343-4E38-BA46-013F12657B69}</ProjectGuid>
+    <ProjectGuid>{8A46E8A4-0DD5-4BBD-A990-40EC4C715EB0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mir.Stf</RootNamespace>
-    <AssemblyName>Mir.Stf.Kernel</AssemblyName>
+    <RootNamespace>Mir.Stf.Utilities</RootNamespace>
+    <AssemblyName>Mir.Stf.Utilities.StfUtils</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,13 +24,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,31 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StfKernel.cs" />
+    <Compile Include="StfTextUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StfTestScriptBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StfAssert\StfAssert.csproj">
-      <Project>{6933e0af-0e2a-48d2-8660-2c939b3db6fb}</Project>
-      <Name>StfAssert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StfConfiguration\StfConfiguration.csproj">
-      <Project>{2d259b87-a08e-406f-818c-6f60bc16c983}</Project>
-      <Name>StfConfiguration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StfLogger\StfLogger.csproj">
-      <Project>{761BF58C-4B19-46D2-9601-2F9296C80152}</Project>
-      <Name>StfLogger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StfPluginLoader\StfPluginLoader.csproj">
-      <Project>{dfff16ec-8e3e-48d1-a247-b7ba7208231e}</Project>
-      <Name>StfPluginLoader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StfUtils\StfUtils.csproj">
-      <Project>{8a46e8a4-0dd5-4bbd-a990-40ec4c715eb0}</Project>
-      <Name>StfUtils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

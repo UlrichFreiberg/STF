@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest_StfLogger.cs" company="Foobar">
-//   2015
+// <copyright file="UnitTestStfLogger.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   
@@ -227,7 +228,7 @@ namespace UnitTest
         public void TestMethodSummaryLogger()
         {
             var logDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @".\Data"));
-            var summaryFilename = Path.Combine(LogDirRoot, "TestMethodSummaryLogger_SummeryLog.html");
+            var summaryFilename = Path.Combine(StfTextUtils.GetVariable("Stf_LogDir"), "TestMethodSummaryLogger_SummeryLog.html");
             var oneSummeryLogger = new StfSummeryLogger();
 
             MyAssert.AssertTrue("MyLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));

@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Section.cs" company="Foobar">
-//   2015
+// <copyright file="Section.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   Defines the Section type.

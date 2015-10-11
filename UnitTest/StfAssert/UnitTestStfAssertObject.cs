@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest_StfAssert.cs" company="Foobar">
-//   2015
+// <copyright file="UnitTestStfAssertObject.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using Mir.Stf;
@@ -16,7 +20,7 @@ namespace UnitTest
     /// The unit test stf asserts.
     /// </summary>
     [TestClass]
-    public class UnitTestStfAssert_Object : StfTestScriptBase
+    public class UnitTestStfAssertObject : StfTestScriptBase
     {
         /// <summary>
         /// The test method assert equals.

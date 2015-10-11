@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest_StfStringAssert.cs" company="Foobar">
-//   2015
+// <copyright file="UnitTestStfAssertString.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   
@@ -17,7 +18,7 @@ namespace UnitTest
     /// The unit test stf asserts.
     /// </summary>
     [TestClass]
-    public class UnitTestStfStringAsserts : StfTestScriptBase
+    public class UnitTestStfAssertString : StfTestScriptBase
     {
         /// <summary>
         /// The test method assert strings.

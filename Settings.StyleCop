@@ -24,8 +24,9 @@
         </Rule>
       </Rules>
       <AnalyzerSettings>
-        <StringProperty Name="CompanyName">Foobar</StringProperty>
-        <StringProperty Name="Copyright">2015</StringProperty>
+        <StringProperty Name="CompanyName">Mir Software</StringProperty>
+        <StringProperty Name="Copyright">Copyright governed by Artistic license as described here:
+       http://www.perlfoundation.org/artistic_license_2_0</StringProperty>
       </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">

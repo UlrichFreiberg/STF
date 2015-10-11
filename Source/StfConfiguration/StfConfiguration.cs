@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfConfiguration.cs" company="Foobar">
-//   2015
+// <copyright file="StfConfiguration.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   The configuration tree.
@@ -13,6 +14,9 @@ using System.Xml;
 
 namespace Mir.Stf.Utilities
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// The configuration tree. 
     /// Holding all the low level information around all the config files.
@@ -38,7 +42,7 @@ namespace Mir.Stf.Utilities
         /// </param>
         public StfConfiguration(string configFileName)
         {
-            this.LoadConfig(configFileName);
+            LoadConfig(configFileName);
         }
 
         /// <summary>
@@ -59,9 +63,15 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public Section LoadConfig(string fileName)
         {
-            this.reader = new XmlTextReader(fileName);
-            this.currentlyLoadedSection = GetSections();
-            return this.currentlyLoadedSection;
+            if (!File.Exists(fileName))
+            {
+                var errMsg = string.Format("Configuration File [{0}] doesn't exist", fileName);
+                throw new ArgumentOutOfRangeException(fileName, errMsg);
+            }
+
+            reader = new XmlTextReader(fileName);
+            currentlyLoadedSection = GetSections();
+            return currentlyLoadedSection;
         }
 
         /// <summary>
@@ -79,6 +89,8 @@ namespace Mir.Stf.Utilities
         public Section OverLay(Section core, Section overlay)
         {
             var overLayer = new OverLayer();
+
+            // the overlayer handles if arguments are null
             return overLayer.OverLay(core, overlay);
         }
 
@@ -111,7 +123,13 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public string GetKeyValue(string keyName)
         {
-            return this.GetKeyValue(this.currentlyLoadedSection, keyName);
+            if (currentlyLoadedSection != null)
+            {
+                return GetKeyValue(currentlyLoadedSection, keyName);
+            }
+
+            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
         /// <summary>
@@ -128,8 +146,14 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public string GetKeyValue(Section section, string keyName)
         {
-            var parser = new Parser();
-            return parser.GetKey(section, keyName);
+            if (currentlyLoadedSection != null)
+            {
+                var parser = new Parser();
+                return parser.GetKey(section, keyName);
+            }
+
+            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
         /// <summary>
@@ -150,10 +174,10 @@ namespace Mir.Stf.Utilities
 
             while (GetToNextToken())
             {
-                switch (this.reader.NodeType)
+                switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        switch (this.reader.Name)
+                        switch (reader.Name)
                         {
                             case "key":
                                 HandleAdd(currentSection);
@@ -182,9 +206,9 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool GetToNextToken()
         {
-            while (this.reader.Read())
+            while (reader.Read())
             {
-                switch (this.reader.NodeType)
+                switch (reader.NodeType)
                 {
                     case XmlNodeType.EndElement:
                     case XmlNodeType.Element:
@@ -207,15 +231,15 @@ namespace Mir.Stf.Utilities
         private Section HandleSection(Section section)
         {
             section.DefaultSection = string.Empty;
-            while (this.reader.MoveToNextAttribute())
+            while (reader.MoveToNextAttribute())
             {
-                switch (this.reader.Name)
+                switch (reader.Name)
                 {
                     case "name":
-                        section.SectionName = this.reader.Value;
+                        section.SectionName = reader.Value;
                         break;
                     case "defaultsection":
-                        section.DefaultSection = this.reader.Value;
+                        section.DefaultSection = reader.Value;
                         break;
                 }
             }
@@ -231,17 +255,17 @@ namespace Mir.Stf.Utilities
         /// </param>
         private void HandleAdd(Section section)
         {
-            var newKey = new Key { SourceConfigFile = this.reader.BaseURI };
+            var newKey = new Key { SourceConfigFile = reader.BaseURI };
 
-            while (this.reader.MoveToNextAttribute())
+            while (reader.MoveToNextAttribute())
             {
-                switch (this.reader.Name)
+                switch (reader.Name)
                 {
                     case "name":
-                        newKey.KeyName = this.reader.Value;
+                        newKey.KeyName = reader.Value;
                         break;
                     case "value":
-                        newKey.KeyValue = this.reader.Value;
+                        newKey.KeyValue = reader.Value;
                         break;
                 }
             }

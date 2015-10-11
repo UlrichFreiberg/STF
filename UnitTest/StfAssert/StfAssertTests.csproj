@@ -50,13 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest_StfAssert.cs">
+    <Compile Include="UnitTestStfAsserts.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UnitTest_StfAssert_Equality.cs" />
-    <Compile Include="UnitTest_StfAssert_FileAndFolder.cs" />
-    <Compile Include="UnitTest_StfAssert_Object.cs" />
-    <Compile Include="UnitTest_StfStringAssert.cs">
+    <Compile Include="UnitTestStfAssertEquality.cs" />
+    <Compile Include="UnitTestStfAssertFileAndFolder.cs" />
+    <Compile Include="UnitTestStfAssertObject.cs" />
+    <Compile Include="UnitTestStfAssertString.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
