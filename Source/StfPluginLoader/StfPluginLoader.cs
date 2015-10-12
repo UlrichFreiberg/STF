@@ -1,11 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Foobar" file="StfPluginLoader.cs">
-//   2015
+// <copyright file="StfPluginLoader.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the GenericPluginLoader type.
+//   The stf plugin loader.
 // </summary>
-// 
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -14,7 +14,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.InterceptionExtension;
 using Mir.Stf.Utilities.Extensions;
+using Mir.Stf.Utilities.Interceptors;
 
 namespace Mir.Stf.Utilities
 {
@@ -183,23 +185,27 @@ namespace Mir.Stf.Utilities
                 return;
             }
             
-            container.RegisterType(
-                mainInterface, 
-                typeToRegister, 
-                new InjectionProperty("StfContainer"));
+            container.RegisterMyType(mainInterface, typeToRegister);
         }
 
         /// <summary>
         /// Register internal plugin loader types.
         /// </summary>
+        /// <remarks>
+        /// Currently interception is only about logging, so we can't register
+        /// the interception extension unless we also have a logger
+        /// </remarks>
         private void RegisterInternalTypes()
         {
             container.RegisterType<IStfContainer, StfContainer>();
 
-            if (PluginLogger != null)
+            if (PluginLogger == null)
             {
-                container.RegisterInstance(PluginLogger);
+                return;
             }
+
+            container.RegisterInstance(PluginLogger);
+            container.AddNewExtension<Interception>();
         }
     }
 }

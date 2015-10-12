@@ -6,8 +6,9 @@
     <title>Mir.Stf</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
+	<licenseUrl>http://www.perlfoundation.org/artistic_license_2_0</licenseUrl>
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>

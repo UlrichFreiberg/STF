@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Mir.Stf.Utilities;
+
 namespace Stf.Unittests.UnitTestPluginTypes
 {
     /// <summary>
@@ -24,5 +26,7 @@ namespace Stf.Unittests.UnitTestPluginTypes
         {
             return 202;
         }
+
+        public IStfContainer StfContainer { get; set; }
     }
 }

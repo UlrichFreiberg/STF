@@ -76,7 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ContainerExtensions.cs" />
+    <Compile Include="Interceptors\LoggingHandler.cs" />
     <Compile Include="IStfContainer.cs" />
+    <Compile Include="IStfGettable.cs" />
+    <Compile Include="IStfLoggable.cs" />
     <Compile Include="IStfPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

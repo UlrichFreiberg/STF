@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfUnitTestPlugin2.cs" company="Foobar">
-//   2015
+// <copyright file="StfUnitTestPlugin2.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   Defines one unit test IPlugin type.
@@ -8,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using Mir.Stf.Utilities;
 using Stf.Unittests.UnitTestPluginTypes;
 
@@ -61,6 +63,19 @@ namespace Stf.Unittests
 
             return true;
         }
+
+//////        public static Type[] TypesToRegister =
+////        private Type[] TypesToRegister =
+////          {
+////            typeof(Plugin2Type), 
+////            typeof(StfUnitTestPlugin2)
+////        };
+
+        private Dictionary<Type, Type> TypesToRegister2 = new Dictionary<Type, Type>
+        {
+            { typeof(IPlugin2Type), typeof(Plugin2Type) },
+        };
+        
 
         /// <summary>
         /// The stf unit test plugin 2 func.

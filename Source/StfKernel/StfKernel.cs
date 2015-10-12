@@ -107,8 +107,10 @@ namespace Mir.Stf
         /// Load Additional Stf Plugins - if someone has "found" some extra one somewhere (like the unit test:-))
         /// </summary>
         /// <param name="directoryName">
+        /// The directory name
         /// </param>
         /// <param name="pluginPatterns">
+        /// The plugin patterns
         /// </param>
         /// <returns>
         /// </returns>

@@ -7,12 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Mir.Stf.Utilities;
+
 namespace Stf.Unittests
 {
     /// <summary>
     /// The Plugin2Type interface.
     /// </summary>
-    public interface IPlugin2Type
+    public interface IPlugin2Type : IStfGettable, IStfLoggable
     {
         /// <summary>
         /// The plugin 2 type func.

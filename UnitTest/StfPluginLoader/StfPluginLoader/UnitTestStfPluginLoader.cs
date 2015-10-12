@@ -12,12 +12,7 @@ using Mir.Stf;
 
 namespace UnitTest
 {
-    using System.Runtime.InteropServices;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Mir.Stf.Utilities;
-
     using Stf.Unittests;
 
     /// <summary>

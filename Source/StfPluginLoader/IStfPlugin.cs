@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfPlugin.cs" company="Foobar">
-//   2015
+// <copyright file="IStfPlugin.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   Defines the IPlugin type.
@@ -14,7 +15,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The Plugin interface.
     /// </summary>
-    public interface IStfPlugin
+    public interface IStfPlugin : IStfGettable, IStfLoggable
     {
         /// <summary>
         /// Gets the name.
@@ -25,11 +26,6 @@ namespace Mir.Stf.Utilities
         /// Gets the version info.
         /// </summary>
         Version VersionInfo { get; }
-
-        /// <summary>
-        /// Gets or sets the stf container.
-        /// </summary>
-        IStfContainer StfContainer { get; set; }
 
         /// <summary>
         /// The init.

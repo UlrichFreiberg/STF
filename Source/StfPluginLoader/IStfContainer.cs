@@ -1,11 +1,15 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfContainer.cs" company="Foobar">
-//   2015
+// <copyright file="IStfContainer.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IStfContainer type.
+//   The StfContainer interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
 
 namespace Mir.Stf.Utilities
 {
@@ -32,6 +36,14 @@ namespace Mir.Stf.Utilities
         /// The type to register
         /// </typeparam>
         void RegisterType<TFrom, TTo>() where TTo : TFrom;
+
+        /// <summary>
+        /// The register types.
+        /// </summary>
+        /// <param name="dictionary">
+        /// The dictionary.
+        /// </param>
+        void RegisterTypes(Dictionary<Type, Type> dictionary);
 
         /// <summary>
         /// The get.
