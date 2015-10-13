@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AutomationIdentification.cs" company="Foobar">
-//   2015
+// <copyright file="AutomationIdentification.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using Mir.Stf.Utilities.Interfaces;
@@ -9,9 +13,9 @@ using Mir.Stf.Utilities.Interfaces;
 namespace Mir.Stf.Utilities
 {
     /// <summary>
-    /// The test result logger. The <see cref="IAutomationIdentification"/> part.
+    /// The test result logger. The <see cref="IStfLoggerAutomationIdentification"/> part.
     /// </summary>
-    public partial class StfLogger : IAutomationIdentification
+    public partial class StfLogger : IStfLoggerAutomationIdentification
     {
         /// <summary>
         /// The log automation id object func.
@@ -38,7 +42,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Dump an AutomationIdentification <c>object</c>.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="automationIdObj">
@@ -50,9 +54,9 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogAutomationIdObject(StfLogLevel logLevel, object automationIdObj, string message)
+        public int LogAutomationIdObject(StfLogLevel loglevel, object automationIdObj, string message)
         {
-            return LogAutomationIdObjectUserFunction(logLevel, automationIdObj, message);
+            return LogAutomationIdObjectUserFunction(loglevel, automationIdObj, message);
         }
     }
 }

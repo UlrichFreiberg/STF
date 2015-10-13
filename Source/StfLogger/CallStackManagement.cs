@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CallStackManagement.cs" company="Foobar">
-//   2015
+// <copyright file="CallStackManagement.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
@@ -10,9 +14,9 @@ using Mir.Stf.Utilities.Interfaces;
 namespace Mir.Stf.Utilities
 {
     /// <summary>
-    /// The test result html logger. The <see cref="ICallStackManagement"/> part
+    /// The test result html logger. The <see cref="IStfLoggerCallStackManagement"/> part
     /// </summary>
-    public partial class StfLogger : ICallStackManagement
+    public partial class StfLogger : IStfLoggerCallStackManagement
     {
         /// <summary>
         /// The _call stack.
@@ -26,7 +30,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The log function enter. Should be called/inserted when entering a model/adapter function.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="nameOfReturnType">
@@ -44,19 +48,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionEnter(StfLogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues)
+        public int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName, string[] args, object[] argValues)
         {
             const string ArgsString = "TODO: Concatenated string of argName and Values";
             var message = string.Format("> {0} {1} returning {2}", functionName, ArgsString, nameOfReturnType);
 
             this.callStack.Push(functionName);
-            return LogOneHtmlMessage(logLevel, message);
+            return LogOneHtmlMessage(loglevel, message);
         }
 
         /// <summary>
         /// The log function enter. Should be called/inserted when entering a model/adapter function.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="nameOfReturnType">
@@ -68,15 +72,15 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionEnter(StfLogLevel logLevel, string nameOfReturnType, string functionName)
+        public int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName)
         {
-            return LogFunctionEnter(logLevel, nameOfReturnType, functionName, null, null);
+            return LogFunctionEnter(loglevel, nameOfReturnType, functionName, null, null);
         }
 
         /// <summary>
         /// The log function exit. Should be called/inserted when exiting a model/adapter function.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="functionName">
@@ -88,18 +92,18 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionExit(StfLogLevel logLevel, string functionName, object returnValue)
+        public int LogFunctionExit(StfLogLevel loglevel, string functionName, object returnValue)
         {
             var poppedName = this.callStack.Pop();
             var message = string.Format("< Exited {0} returning {1}", poppedName, "returnValue.ToString");
 
-            return LogOneHtmlMessage(logLevel, message);
+            return LogOneHtmlMessage(loglevel, message);
         }
 
         /// <summary>
         /// The log function exit. Should be called/inserted when exiting a model/adapter function.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="functionName">
@@ -108,9 +112,9 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionExit(StfLogLevel logLevel, string functionName)
+        public int LogFunctionExit(StfLogLevel loglevel, string functionName)
         {
-            return LogFunctionExit(logLevel, functionName, null);
+            return LogFunctionExit(loglevel, functionName, null);
         }
 
         // =============================================================
@@ -120,7 +124,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The log get.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="callingProperty">
@@ -132,18 +136,18 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogGet(StfLogLevel logLevel, string callingProperty, object getValue)
+        public int LogGet(StfLogLevel loglevel, string callingProperty, object getValue)
         {
             var valueString = getValue == null ? "null" : getValue.ToString();
             var message = string.Format("Property {0} Get value [{1}]", callingProperty, valueString);
 
-            return LogOneHtmlMessage(logLevel, message);
+            return LogOneHtmlMessage(loglevel, message);
         }
 
         /// <summary>
         /// The log set.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="callingProperty">
@@ -155,12 +159,12 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogSet(StfLogLevel logLevel, string callingProperty, object setValue)
+        public int LogSet(StfLogLevel loglevel, string callingProperty, object setValue)
         {
             var valueString = setValue == null ? "null" : setValue.ToString();
             var message = string.Format("Property {0} Set value [{1}]", callingProperty, valueString);
 
-            return LogOneHtmlMessage(logLevel, message);
+            return LogOneHtmlMessage(loglevel, message);
         }
 
         /// <summary>

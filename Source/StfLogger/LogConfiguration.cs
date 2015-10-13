@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LogConfiguration.cs" company="Foobar">
-//   2015
+// <copyright file="LogConfiguration.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;

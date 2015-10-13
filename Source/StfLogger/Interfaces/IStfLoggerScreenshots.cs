@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IScreenShots.cs" company="Foobar">
-//   2015
+// <copyright file="IStfLoggerScreenshots.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Mir.Stf.Utilities.Interfaces
@@ -9,7 +13,7 @@ namespace Mir.Stf.Utilities.Interfaces
     /// <summary>
     /// The Screenshots interface.
     /// </summary>
-    public interface IScreenshots
+    public interface IStfLoggerScreenshots
     {
         /// <summary>
         /// The log all windows.

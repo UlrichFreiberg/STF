@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestScriptHeaders.cs" company="Foobar">
-//   2015
+// <copyright file="TestScriptHeaders.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using Mir.Stf.Utilities.Interfaces;
@@ -11,7 +15,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger.
     /// </summary>
-    public partial class StfLogger : ITestScriptHeaders
+    public partial class StfLogger : IStfLoggerTestScriptHeaders
     {
         /// <summary>
         /// Gets or sets the name of Current Test
@@ -55,30 +59,30 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The status msg.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string GetStatusMsgAndSetLoglevel(out StfLogLevel logLevel)
+        private string GetStatusMsgAndSetLoglevel(out StfLogLevel loglevel)
         {
             if (this.ErrorOrFail() > 0)
             {
-                logLevel = StfLogLevel.Error;
+                loglevel = StfLogLevel.Error;
                 return "Test showed errors";
             }
 
             if (this.NumberOfLoglevelMessages[StfLogLevel.Warning] > 0)
             {
-                logLevel = StfLogLevel.Warning;
+                loglevel = StfLogLevel.Warning;
                 return "Test showed warnings";
             }
 
-            logLevel = StfLogLevel.Pass;
-            if (this.NumberOfLoglevelMessages[logLevel] < 1)
+            loglevel = StfLogLevel.Pass;
+            if (this.NumberOfLoglevelMessages[loglevel] < 1)
             {
-                this.NumberOfLoglevelMessages[logLevel] = 1;
+                this.NumberOfLoglevelMessages[loglevel] = 1;
             }
 
             return "Test showed no errors";

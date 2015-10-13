@@ -49,30 +49,31 @@
     <Compile Include="CallStackManagement.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\IAutomationIdentification.cs">
+    <Compile Include="Interfaces\IStfLoggerAutomationIdentification.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ICallStackManagement.cs">
+    <Compile Include="Interfaces\IStfLoggerCallStackManagement.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ILogfileManagement.cs">
+    <Compile Include="Interfaces\IStfLoggerLogfileManagement.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ILoggingFunctions.cs" />
-    <Compile Include="Interfaces\IPerformanceManagement.cs">
+    <Compile Include="Interfaces\IStfLoggerLoggingFunctions.cs" />
+    <Compile Include="Interfaces\IStfLoggerPerformanceManagement.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\IScreenShots.cs">
+    <Compile Include="Interfaces\IStfLoggerScreenshots.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\IStfLogger.cs" />
     <Compile Include="StfLogLevel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ITestScriptHeaders.cs">
+    <Compile Include="Interfaces\IStfLoggerTestScriptHeaders.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LogConfiguration.cs" />
-    <Compile Include="SummeryLogger.cs" />
+    <Compile Include="StfSummeryLogger.cs" />
     <Compile Include="Utils\LogfileWriter.cs" />
     <Compile Include="LogfileManagement.cs">
       <SubType>Code</SubType>

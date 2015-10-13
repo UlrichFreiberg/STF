@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILoggingFunctions.cs" company="Foobar">
-//   2015
+// <copyright file="IStfLoggerLoggingFunctions.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Mir.Stf.Utilities.Interfaces
@@ -9,7 +13,7 @@ namespace Mir.Stf.Utilities.Interfaces
     /// <summary>
     /// The LoggingFunctions <c>interface</c>.
     /// </summary>
-    public interface ILoggingFunctions
+    public interface IStfLoggerLoggingFunctions
     {
         // normal logging functions - test scripts/models/adapters
 
@@ -30,7 +34,7 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message.
         /// </param>
-        /// C:\Users\Ulrich\Documents\GitHub\StfLogger\StfLogger\Interfaces\ILoggingFunctions.cs
+        /// C:\Users\Ulrich\Documents\GitHub\StfLogger\StfLogger\Interfaces\IStfLoggerLoggingFunctions.cs
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
