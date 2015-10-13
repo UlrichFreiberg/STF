@@ -10,6 +10,7 @@
 
 using System;
 using System.IO;
+using Mir.Stf.KernelUtils;
 using Mir.Stf.Utilities;
 
 namespace Mir.Stf

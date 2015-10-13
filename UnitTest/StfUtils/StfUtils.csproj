@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -52,8 +53,13 @@
   <ItemGroup>
     <Compile Include="UnitTestStfTextUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestTableUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\StfKernel\StfKernel.csproj">
+      <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
+      <Name>StfKernel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\StfUtils\StfUtils.csproj">
       <Project>{8a46e8a4-0dd5-4bbd-a990-40ec4c715eb0}</Project>
       <Name>StfUtils</Name>

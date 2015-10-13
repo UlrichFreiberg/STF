@@ -8,11 +8,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Mir.Stf.KernelUtils;
+
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Mir.Stf.Utilities;
 
     /// <summary>
     /// UnitTests for StfTextUtils

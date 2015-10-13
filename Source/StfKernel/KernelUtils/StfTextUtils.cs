@@ -8,12 +8,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Mir.Stf.Utilities
-{
-    using System;
-    using System.Collections.Specialized;
-    using System.Text.RegularExpressions;
+using System;
+using System.Collections.Specialized;
+using System.Text.RegularExpressions;
 
+namespace Mir.Stf.KernelUtils
+{
     /// <summary>
     /// Utils for handling text for the kernel 
     /// </summary>
