@@ -1,6 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContainerExtensions.cs" company="Foobar">
-//   2015
+// <copyright file="ContainerExtensions.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
 //   The container extensions.
@@ -73,7 +74,7 @@ namespace Mir.Stf.Utilities.Extensions
 
                 container.Configure<Interception>()
                 .AddPolicy(string.Format("LoggingFor{0}", typeFrom.Name))
-                .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(typeFrom.Name))
+                .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(typeFrom.FullName))
                 .AddCallHandler<LoggingHandler>(
                     new ContainerControlledLifetimeManager(),
                     new InjectionConstructor(new ResolvedParameter<StfLogger>()),

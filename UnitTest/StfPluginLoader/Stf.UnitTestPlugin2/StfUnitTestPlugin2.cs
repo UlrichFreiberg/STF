@@ -9,7 +9,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using Mir.Stf.Utilities;
 using Stf.Unittests.UnitTestPluginTypes;
 
@@ -63,20 +62,7 @@ namespace Stf.Unittests
 
             return true;
         }
-
-//////        public static Type[] TypesToRegister =
-////        private Type[] TypesToRegister =
-////          {
-////            typeof(Plugin2Type), 
-////            typeof(StfUnitTestPlugin2)
-////        };
-
-        private Dictionary<Type, Type> TypesToRegister2 = new Dictionary<Type, Type>
-        {
-            { typeof(IPlugin2Type), typeof(Plugin2Type) },
-        };
         
-
         /// <summary>
         /// The stf unit test plugin 2 func.
         /// </summary>
