@@ -4,7 +4,7 @@
 
 
 ##########################################################################
-# Blah
+# Get the name of the nuget package (changes with every new version)
 ##########################################################################
 function Get-PackageName()
 {
@@ -14,7 +14,7 @@ function Get-PackageName()
 
 
 ##########################################################################
-# Blah
+# Write a message
 ##########################################################################
 function Write-InfoMessage([string] $Message)
 {
@@ -24,7 +24,7 @@ function Write-InfoMessage([string] $Message)
 
 
 ##########################################################################
-# Blah
+# Execute a PS script
 ##########################################################################
 function Execute-Script([string] $ScriptToExecute)
 {
