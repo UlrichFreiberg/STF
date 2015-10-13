@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfAssert_Object.cs" company="Foobar">
-//   2015
+// <copyright file="StfAssert_Object.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -26,13 +30,13 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertIsObject(string testStep, object actual)
+        public bool IsObject(string testStep, object actual)
         {
             string msg;
 
             if (actual == null)
             {
-                msg = string.Format("AssertIsObject: Null is Not an object ");
+                msg = string.Format("IsObject: Null is Not an object ");
                 this.AssertFail(testStep, msg);
                 return false;
             }
@@ -42,12 +46,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("AssertIsObject: is an object ");
+                msg = string.Format("IsObject: is an object ");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertIsObject: is Not an object ");
+                msg = string.Format("IsObject: is Not an object ");
                 this.AssertFail(testStep, msg);
             }
 
@@ -69,7 +73,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertIsInstanceOf(string testStep, object value, Type expectedType)
+        public bool IsInstanceOfType(string testStep, object value, Type expectedType)
         {
             bool retVal;
             string msg;
@@ -77,7 +81,7 @@ namespace Mir.Stf.Utilities
             try
             {
                 Assert.IsInstanceOfType(value, expectedType);
-                msg = string.Format("AssertIsInstanceOf: [{0}] is of type [{1}]", value, expectedType);
+                msg = string.Format("IsInstanceOfType: [{0}] is of type [{1}]", value, expectedType);
                 retVal = this.AssertPass(testStep, msg);
             }
             catch (AssertFailedException ex)
@@ -85,6 +89,41 @@ namespace Mir.Stf.Utilities
                 retVal = false;
                 msg = ex.Message;
                 this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Asserts a variable is NOT of a specific type
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="value">
+        /// The variable to investigate
+        /// </param>
+        /// <param name="expectedType">
+        /// The expected Type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool IsNotInstanceOfType(string testStep, object value, Type expectedType)
+        {
+            bool retVal;
+            string msg;
+
+            try
+            {
+                Assert.IsInstanceOfType(value, expectedType);
+                msg = string.Format("IsInstanceOfType: [{0}] is of type [{1}]", value, expectedType);
+                retVal = this.AssertFail(testStep, msg);
+            }
+            catch (AssertFailedException)
+            {
+                msg = string.Format("IsInstanceOfType: [{0}] is NOT of type [{1}]", value, expectedType);
+                retVal = this.AssertPass(testStep, msg);
             }
 
             return retVal;
@@ -102,19 +141,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertNotNull(string testStep, object actual)
+        public bool IsNotNull(string testStep, object actual)
         {
             bool retVal = actual != null;
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertNotNull: 'actual' Is not null");
+                msg = string.Format("IsNotNull: 'actual' Is not null");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertNotNull: 'actual' Is null");
+                msg = string.Format("IsNotNull: 'actual' Is null");
                 this.AssertFail(testStep, msg);
             }
 
@@ -133,19 +172,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertNull(string testStep, object actual)
+        public bool IsNull(string testStep, object actual)
         {
             bool retVal = actual == null;
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertNull: object Is null");
+                msg = string.Format("IsNull: object Is null");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertNull:'{0}' Is not null", actual);
+                msg = string.Format("IsNull:'{0}' Is not null", actual);
                 this.AssertFail(testStep, msg);
             }
 
@@ -164,19 +203,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertHasValue(string testStep, object actual)
+        public bool HasValue(string testStep, object actual)
         {
             bool retVal = actual != null;
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertHasValue: Has a value");
+                msg = string.Format("HasValue: Has a value");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertHasValue: Has no value");
+                msg = string.Format("HasValue: Has no value");
                 this.AssertFail(testStep, msg);
             }
 
@@ -195,19 +234,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertHasNoValue(string testStep, object actual)
+        public bool HasNoValue(string testStep, object actual)
         {
             bool retVal = actual == null;
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertHasNoValue: Has no value");
+                msg = string.Format("HasNoValue: Has no value");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertHasNoValue: Has a value");
+                msg = string.Format("HasNoValue: Has a value");
                 this.AssertFail(testStep, msg);
             }
 

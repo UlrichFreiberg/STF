@@ -30,29 +30,29 @@ namespace UnitTest
         {
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsFalse(MyAssert.AssertIsObject("An integer", 1));
-            Assert.IsTrue(MyAssert.AssertIsObject("A string", "1"));
-            Assert.IsTrue(MyAssert.AssertIsObject("An object", new object()));
-            Assert.IsTrue(MyAssert.AssertIsObject("An object", MyAssert));
-            Assert.IsFalse(MyAssert.AssertIsObject("null", null));
+            Assert.IsFalse(MyAssert.IsObject("An integer", 1));
+            Assert.IsTrue(MyAssert.IsObject("A string", "1"));
+            Assert.IsTrue(MyAssert.IsObject("An object", new object()));
+            Assert.IsTrue(MyAssert.IsObject("An object", MyAssert));
+            Assert.IsFalse(MyAssert.IsObject("null", null));
         }
 
         /// <summary>
-        /// The test method assert AssertIsInstanceOf.
+        /// The test method assert IsInstanceOfType.
         /// </summary>
         [TestMethod]
         public void TestMethodAssertIsInstanceOf()
         {
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsFalse(MyAssert.AssertIsInstanceOf("An integer", 1, Type.GetType("int")));
-            Assert.IsTrue(MyAssert.AssertIsInstanceOf("A string", "1", Type.GetType(typeof(string).FullName)));
-            Assert.IsTrue(MyAssert.AssertIsInstanceOf("An object", new object(), Type.GetType(typeof(object).FullName)));
-            Assert.IsFalse(MyAssert.AssertIsInstanceOf("null", null, null));
+            Assert.IsFalse(MyAssert.IsInstanceOfType("An integer", 1, Type.GetType("int")));
+            Assert.IsTrue(MyAssert.IsInstanceOfType("A string", "1", Type.GetType(typeof(string).FullName)));
+            Assert.IsTrue(MyAssert.IsInstanceOfType("An object", new object(), Type.GetType(typeof(object).FullName)));
+            Assert.IsFalse(MyAssert.IsInstanceOfType("null", null, null));
 
             /*
              * TODO: Have no idea why this fails?
-             * Assert.IsTrue(MyAssert.AssertIsInstanceOf("An object", MyAssert, Type.GetType(typeof(StfAssert).FullName)));
+             * Assert.IsTrue(MyAssert.IsInstanceOfType("An object", MyAssert, Type.GetType(typeof(StfAssert).FullName)));
              * 
              * typeof(StfAssert).FullName returns null?
              * 

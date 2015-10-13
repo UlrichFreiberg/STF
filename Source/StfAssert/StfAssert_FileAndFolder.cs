@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfAssert_FileAndFolder.cs" company="Foobar">
-//   2015
+// <copyright file="StfAssert_FileAndFolder.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.IO;
@@ -26,19 +30,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertFileExists(string testStep, string filenameAndPath)
+        public bool FileExists(string testStep, string filenameAndPath)
         {
             var retVal = File.Exists(filenameAndPath);
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertFileExists: [{0}] Does exist", filenameAndPath);
+                msg = string.Format("FileExists: [{0}] Does exist", filenameAndPath);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertFileExists: [{0}] Does Not exist", filenameAndPath);
+                msg = string.Format("FileExists: [{0}] Does Not exist", filenameAndPath);
                 this.AssertFail(testStep, msg);
             }
 
@@ -60,13 +64,13 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertFileContains(string testStep, string filenameAndPath, string pattern)
+        public bool FileContains(string testStep, string filenameAndPath, string pattern)
         {
             string msg;
 
             if (!File.Exists(filenameAndPath))
             {
-                msg = string.Format("AssertFileContains: [{0}] Does Not exist", filenameAndPath);
+                msg = string.Format("FileContains: [{0}] Does Not exist", filenameAndPath);
                 this.AssertFail(testStep, msg);
                 return false;
             }
@@ -77,12 +81,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("AssertFileContains: [{0}] Does contain [{1}]", filenameAndPath, pattern);
+                msg = string.Format("FileContains: [{0}] Does contain [{1}]", filenameAndPath, pattern);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertFileContains: [{0}] Does Not contain [{1}]", filenameAndPath, pattern);
+                msg = string.Format("FileContains: [{0}] Does Not contain [{1}]", filenameAndPath, pattern);
                 this.AssertFail(testStep, msg);
             }
 
@@ -101,19 +105,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertFolderExists(string testStep, string foldernameAndPath)
+        public bool FolderExists(string testStep, string foldernameAndPath)
         {
             var retVal = Directory.Exists(foldernameAndPath);
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertFolderExists: [{0}] Does exist", foldernameAndPath);
+                msg = string.Format("FolderExists: [{0}] Does exist", foldernameAndPath);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertFolderExists: [{0}] Does Not exist", foldernameAndPath);
+                msg = string.Format("FolderExists: [{0}] Does Not exist", foldernameAndPath);
                 this.AssertFail(testStep, msg);
             }
 
@@ -132,19 +136,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertFolderNotExists(string testStep, string foldernameAndPath)
+        public bool FolderNotExists(string testStep, string foldernameAndPath)
         {
             var retVal = !Directory.Exists(foldernameAndPath);
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertFolderNotExists: [{0}] Does Not exist", foldernameAndPath);
+                msg = string.Format("FolderNotExists: [{0}] Does Not exist", foldernameAndPath);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertFolderNotExists: [{0}] Does exist", foldernameAndPath);
+                msg = string.Format("FolderNotExists: [{0}] Does exist", foldernameAndPath);
                 this.AssertFail(testStep, msg);
             }
 
@@ -163,19 +167,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertFileNotExists(string testStep, string filenameAndPath)
+        public bool FileNotExists(string testStep, string filenameAndPath)
         {
             var retVal = !File.Exists(filenameAndPath);
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertFileNotExists: [{0}] Does Not exist", filenameAndPath);
+                msg = string.Format("FileNotExists: [{0}] Does Not exist", filenameAndPath);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertFileNotExists: [{0}] Does exist", filenameAndPath);
+                msg = string.Format("FileNotExists: [{0}] Does exist", filenameAndPath);
                 this.AssertFail(testStep, msg);
             }
 

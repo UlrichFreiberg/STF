@@ -8,15 +8,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mir.Stf;
-using Mir.Stf.Utilities;
-using Stf.Utilities;
-
 namespace UnitTest
 {
-    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mir.Stf;
 
     /// <summary>
     /// The data driven stf logger test.
@@ -46,7 +42,7 @@ namespace UnitTest
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
             MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.AssertTrue("FailPass", failPass);
+            MyAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -61,7 +57,7 @@ namespace UnitTest
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
             MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.AssertTrue("FailPass", failPass);
+            MyAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -76,7 +72,7 @@ namespace UnitTest
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
             MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.AssertTrue("FailPass", failPass);
+            MyAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -91,7 +87,7 @@ namespace UnitTest
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
             MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.AssertTrue("FailPass", failPass);
+            MyAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -109,10 +105,10 @@ namespace UnitTest
             // need to close the logfile, in order to check the content of the logfile...
             MyLogger.CloseLogFile();
 
-            // we want to fail, if AssertFileContains fails
+            // we want to fail, if FileContains fails
             MyAssert.EnableNegativeTesting = false;
 
-            MyAssert.AssertFileContains(iteration.ToString(), MyLogger.FileName, message);
+            MyAssert.FileContains(iteration.ToString(), MyLogger.FileName, message);
         }
 
         /// <summary>

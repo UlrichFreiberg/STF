@@ -1,15 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfStringAssert.cs" company="Foobar">
-//   2015
+// <copyright file="StfStringAssert.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
+    using Mir.Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The stf assert.
     /// </summary>
