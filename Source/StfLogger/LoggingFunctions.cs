@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LoggingFunctions.cs" company="Foobar">
-//   2015
+// <copyright file="LoggingFunctions.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -10,9 +14,9 @@ using Mir.Stf.Utilities.Interfaces;
 namespace Mir.Stf.Utilities
 {
     /// <summary>
-    /// The test result html logger. The <see cref="ILoggingFunctions"/> part.
+    /// The test result html logger. The <see cref="IStfLoggerLoggingFunctions"/> part.
     /// </summary>
-    public partial class StfLogger : ILoggingFunctions
+    public partial class StfLogger : IStfLoggerLoggingFunctions
     {
         /// <summary>
         /// The _message id.
@@ -238,16 +242,16 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public int LogFail(string testStepName, string message)
         {
-            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
-            
-            var theLogLevel = StfLogLevel.Fail;
+            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);            
+            const StfLogLevel TheLogLevel = StfLogLevel.Fail;
             var length = 0;
+
             if (Configuration.ScreenshotOnLogFail)
             {
-                length = LogScreenshot(theLogLevel, string.Empty);
+                length = LogScreenshot(TheLogLevel, string.Empty);
             }
 
-            return length + LogOneHtmlMessage(theLogLevel, tempNeedsToBeReworkedMessage);
+            return length + LogOneHtmlMessage(TheLogLevel, tempNeedsToBeReworkedMessage);
         }
 
         /*
@@ -302,7 +306,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The log one html Message.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -311,11 +315,11 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        private int LogOneHtmlMessage(StfLogLevel logLevel, string message)
+        private int LogOneHtmlMessage(StfLogLevel loglevel, string message)
         {
             string htmlLine;
 
-            if (!this.AddLoglevelToRunReport[logLevel])
+            if (!this.AddLoglevelToRunReport[loglevel])
             {
                 return -1;
             }
@@ -334,13 +338,13 @@ namespace Mir.Stf.Utilities
             }
 
             var messageIdString = this.GetNextMessageId();
-            var logLevelString = Enum.GetName(typeof(StfLogLevel), logLevel) ?? "Unknown StfLogLevel";
+            var logLevelString = Enum.GetName(typeof(StfLogLevel), loglevel) ?? "Unknown StfLogLevel";
 
             logLevelString = logLevelString.ToLower();
 
             CheckForPerformanceAlert();
 
-            switch (logLevel)
+            switch (loglevel)
             {
                 case StfLogLevel.Header:
                     htmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", message);
@@ -364,7 +368,7 @@ namespace Mir.Stf.Utilities
                     break;
             }
 
-            NumberOfLoglevelMessages[logLevel]++;
+            NumberOfLoglevelMessages[loglevel]++;
             this.LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }

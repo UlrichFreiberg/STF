@@ -33,23 +33,23 @@ namespace UnitTest
 
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsTrue(MyAssert.AssertEquals("1 = 1", 1, 1));
-            Assert.IsFalse(MyAssert.AssertEquals("1 = 1.0", 1, 1.0));
-            Assert.IsFalse(MyAssert.AssertEquals("1 = \"1\"", 1, "1"));
-            Assert.IsFalse(MyAssert.AssertEquals("1 = \"1.0\"", 1, "1.0"));
+            Assert.IsTrue(MyAssert.AreEqual("1 = 1", 1, 1));
+            Assert.IsFalse(MyAssert.AreEqual("1 = 1.0", 1, 1.0));
+            Assert.IsFalse(MyAssert.AreEqual("1 = \"1\"", 1, "1"));
+            Assert.IsFalse(MyAssert.AreEqual("1 = \"1.0\"", 1, "1.0"));
 
-            Assert.IsTrue(MyAssert.AssertEquals("\"\" == \"\"", string.Empty, string.Empty));
-            Assert.IsFalse(MyAssert.AssertEquals("\"\" == \" \"", string.Empty, " "));
-            Assert.IsFalse(MyAssert.AssertEquals("\" \" == \" \"", " ", string.Empty));
-            Assert.IsFalse(MyAssert.AssertEquals("\"A\" == \"a\"", "A", "a"));
-            Assert.IsTrue(MyAssert.AssertEquals("\"string\" == \"string\"", "string", "string"));
+            Assert.IsTrue(MyAssert.AreEqual("\"\" == \"\"", string.Empty, string.Empty));
+            Assert.IsFalse(MyAssert.AreEqual("\"\" == \" \"", string.Empty, " "));
+            Assert.IsFalse(MyAssert.AreEqual("\" \" == \" \"", " ", string.Empty));
+            Assert.IsFalse(MyAssert.AreEqual("\"A\" == \"a\"", "A", "a"));
+            Assert.IsTrue(MyAssert.AreEqual("\"string\" == \"string\"", "string", "string"));
 
-            Assert.IsTrue(MyAssert.AssertEquals("obj1 = obj1", obj1, obj1));
-            Assert.IsFalse(MyAssert.AssertEquals("obj1 = obj2", obj1, obj2));
+            Assert.IsTrue(MyAssert.AreEqual("obj1 = obj1", obj1, obj1));
+            Assert.IsFalse(MyAssert.AreEqual("obj1 = obj2", obj1, obj2));
 
             // fail scenarios
-            Assert.IsFalse(MyAssert.AssertEquals("obj1 = 1", obj1, 1));
-            Assert.IsFalse(MyAssert.AssertEquals("obj1 = \"string\"", obj1, "string"));
+            Assert.IsFalse(MyAssert.AreEqual("obj1 = 1", obj1, 1));
+            Assert.IsFalse(MyAssert.AreEqual("obj1 = \"string\"", obj1, "string"));
         }
 
         /// <summary>
@@ -63,27 +63,27 @@ namespace UnitTest
 
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsTrue(MyAssert.AssertGreaterThan("2 > 1", 2, 1));
-            Assert.IsTrue(MyAssert.AssertGreaterThan("2.0 > 1", 2.0, 1));
-            Assert.IsFalse(MyAssert.AssertGreaterThan("1 > \"2\"", 1, "2"));
-            Assert.IsTrue(MyAssert.AssertGreaterThan("1 > \"1.0\"", 1, "1.0"));
+            Assert.IsTrue(MyAssert.GreaterThan("2 > 1", 2, 1));
+            Assert.IsTrue(MyAssert.GreaterThan("2.0 > 1", 2.0, 1));
+            Assert.IsFalse(MyAssert.GreaterThan("1 > \"2\"", 1, "2"));
+            Assert.IsTrue(MyAssert.GreaterThan("1 > \"1.0\"", 1, "1.0"));
 
-            Assert.IsFalse(MyAssert.AssertGreaterThan("\"\" > \"\"", string.Empty, string.Empty));
-            Assert.IsFalse(MyAssert.AssertGreaterThan("\"\" > \" \"", string.Empty, " "));
-            Assert.IsTrue(MyAssert.AssertGreaterThan("\" \" > \" \"", " ", string.Empty));
-            Assert.IsFalse(MyAssert.AssertGreaterThan("\"a\" > \"A\"", "a", "A"));
-            Assert.IsTrue(MyAssert.AssertGreaterThan("\"A\" > \"a\"", "A", "a"));
-            Assert.IsFalse(MyAssert.AssertGreaterThan("\"string\" > \"string\"", "string", "string"));
+            Assert.IsFalse(MyAssert.GreaterThan("\"\" > \"\"", string.Empty, string.Empty));
+            Assert.IsFalse(MyAssert.GreaterThan("\"\" > \" \"", string.Empty, " "));
+            Assert.IsTrue(MyAssert.GreaterThan("\" \" > \" \"", " ", string.Empty));
+            Assert.IsFalse(MyAssert.GreaterThan("\"a\" > \"A\"", "a", "A"));
+            Assert.IsTrue(MyAssert.GreaterThan("\"A\" > \"a\"", "A", "a"));
+            Assert.IsFalse(MyAssert.GreaterThan("\"string\" > \"string\"", "string", "string"));
 
-            Assert.IsFalse(MyAssert.AssertGreaterThan("obj1 = obj1", obj1, obj1));
-            Assert.IsFalse(MyAssert.AssertGreaterThan("obj1 = obj2", obj1, obj2));
-            Assert.IsTrue(MyAssert.AssertGreaterThan("obj2 = obj1", obj2, obj1));
+            Assert.IsFalse(MyAssert.GreaterThan("obj1 = obj1", obj1, obj1));
+            Assert.IsFalse(MyAssert.GreaterThan("obj1 = obj2", obj1, obj2));
+            Assert.IsTrue(MyAssert.GreaterThan("obj2 = obj1", obj2, obj1));
 
             // fail scenarios
-            Assert.IsFalse(MyAssert.AssertGreaterThan("obj1 = 1", obj1, 1));
+            Assert.IsFalse(MyAssert.GreaterThan("obj1 = 1", obj1, 1));
 
             // a bit funky - the object obj1 is converted to string, and then the strings are compared.
-            Assert.IsTrue(MyAssert.AssertGreaterThan("obj1 = \"string\"", obj1, "string"));
+            Assert.IsTrue(MyAssert.GreaterThan("obj1 = \"string\"", obj1, "string"));
         }
 
         /// <summary>
@@ -97,27 +97,27 @@ namespace UnitTest
 
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsFalse(MyAssert.AssertLessThan("2 < 1", 2, 1));
-            Assert.IsFalse(MyAssert.AssertLessThan("2.0 < 1", 2.0, 1));
-            Assert.IsTrue(MyAssert.AssertLessThan("1 < \"2\"", 1, "2"));
-            Assert.IsFalse(MyAssert.AssertLessThan("1 < \"1.0\"", 1, "1.0"));
+            Assert.IsFalse(MyAssert.LessThan("2 < 1", 2, 1));
+            Assert.IsFalse(MyAssert.LessThan("2.0 < 1", 2.0, 1));
+            Assert.IsTrue(MyAssert.LessThan("1 < \"2\"", 1, "2"));
+            Assert.IsFalse(MyAssert.LessThan("1 < \"1.0\"", 1, "1.0"));
 
-            Assert.IsFalse(MyAssert.AssertLessThan("\"\" < \"\"", string.Empty, string.Empty));
-            Assert.IsTrue(MyAssert.AssertLessThan("\"\" < \" \"", string.Empty, " "));
-            Assert.IsFalse(MyAssert.AssertLessThan("\" \" < \" \"", " ", string.Empty));
-            Assert.IsTrue(MyAssert.AssertLessThan("\"a\" < \"A\"", "a", "A"));
-            Assert.IsFalse(MyAssert.AssertLessThan("\"A\" < \"a\"", "A", "a"));
-            Assert.IsFalse(MyAssert.AssertLessThan("\"string\" < \"string\"", "string", "string"));
+            Assert.IsFalse(MyAssert.LessThan("\"\" < \"\"", string.Empty, string.Empty));
+            Assert.IsTrue(MyAssert.LessThan("\"\" < \" \"", string.Empty, " "));
+            Assert.IsFalse(MyAssert.LessThan("\" \" < \" \"", " ", string.Empty));
+            Assert.IsTrue(MyAssert.LessThan("\"a\" < \"A\"", "a", "A"));
+            Assert.IsFalse(MyAssert.LessThan("\"A\" < \"a\"", "A", "a"));
+            Assert.IsFalse(MyAssert.LessThan("\"string\" < \"string\"", "string", "string"));
 
-            Assert.IsFalse(MyAssert.AssertLessThan("obj1 < obj1", obj1, obj1));
-            Assert.IsTrue(MyAssert.AssertLessThan("obj1 < obj2", obj1, obj2));
-            Assert.IsFalse(MyAssert.AssertLessThan("obj2 < obj1", obj2, obj1));
+            Assert.IsFalse(MyAssert.LessThan("obj1 < obj1", obj1, obj1));
+            Assert.IsTrue(MyAssert.LessThan("obj1 < obj2", obj1, obj2));
+            Assert.IsFalse(MyAssert.LessThan("obj2 < obj1", obj2, obj1));
 
             // fail scenarios
-            Assert.IsFalse(MyAssert.AssertLessThan("obj1 = 1", obj1, 1));
+            Assert.IsFalse(MyAssert.LessThan("obj1 = 1", obj1, 1));
 
             // a bit funky - the object obj1 is converted to string, and then the strings are compared.
-            Assert.IsFalse(MyAssert.AssertLessThan("obj1 = \"string\"", obj1, "string"));
+            Assert.IsFalse(MyAssert.LessThan("obj1 = \"string\"", obj1, "string"));
         }
     }
 }

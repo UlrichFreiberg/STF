@@ -1,14 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfAssert.cs" company="Foobar">
-//   2015
+// <copyright file="IStfAssert.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Mir.Stf.Utilities;
-
-namespace Stf.Utilities.Interfaces
+namespace Mir.Stf.Utilities.Interfaces
 {
     using System;
+
+    using Mir.Stf.Utilities;
 
     /// <summary>
     /// The <see cref="StfAssert"/> interface.
@@ -29,6 +33,12 @@ namespace Stf.Utilities.Interfaces
         /// <summary>
         /// Assert if two values are the same. Values and objects can be compared.
         /// </summary>
+        /// <typeparam name="T1">
+        /// Generic type for first argument
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// Generic type for second argument
+        /// </typeparam>
         /// <param name="testStep">
         /// Name of the test step in the test script
         /// </param>
@@ -41,7 +51,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual);
+        bool AreEqual<T1, T2>(string testStep, T1 expected, T2 actual);
 
         /// <summary>
         /// Asserts that two values are the same. Values and objects can be compared.
@@ -58,7 +68,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertNotEquals(string testStep, object expected, object actual);
+        bool AreNotEqual(string testStep, object expected, object actual);
 
         /// <summary>
         /// Asserts that a value is a Object type and not a reference type
@@ -72,7 +82,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertIsObject(string testStep, object actual);
+        bool IsObject(string testStep, object actual);
 
         /// <summary>
         /// Asserts a variable is of a specific type
@@ -89,10 +99,27 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertIsInstanceOf(string testStep, object value, Type expectedType);
+        bool IsInstanceOfType(string testStep, object value, Type expectedType);
 
         /// <summary>
-        /// Asserts whether a variable is Null
+        /// Asserts a variable is of a specific type
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="value">
+        /// The variable to investigate
+        /// </param>
+        /// <param name="expectedType">
+        /// The expected type of the variable
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool IsNotInstanceOfType(string testStep, object value, Type expectedType);
+
+        /// <summary>
+        /// s whether a variable is Null
         /// </summary>
         /// <param name="testStep">
         /// Name of the test step in the test script
@@ -103,7 +130,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertNull(string testStep, object actual);
+        bool IsNull(string testStep, object actual);
 
         /// <summary>
         /// Asserts whether a variable is NOT Null
@@ -117,7 +144,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertNotNull(string testStep, object actual);
+        bool IsNotNull(string testStep, object actual);
 
         /// <summary>
         /// Asserts whether a variable has a value - e.g. not Null or Empty
@@ -131,7 +158,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertHasValue(string testStep, object actual);
+        bool HasValue(string testStep, object actual);
 
         /// <summary>
         /// Asserts whether a variable has NO value - e.g. Null or Empty
@@ -145,7 +172,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertHasNoValue(string testStep, object actual);
+        bool HasNoValue(string testStep, object actual);
 
         /// <summary>
         /// Asserts whether the left hand side is greater than the right hand side
@@ -168,9 +195,8 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertGreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+        bool GreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
             where T1 : IConvertible, IComparable where T2 : IConvertible, IComparable;
-
 
         /// <summary>
         /// Asserts whether the left hand side is less than the right hand side
@@ -193,7 +219,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertLessThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+        bool LessThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
             where T1 : IConvertible, IComparable
             where T2 : IConvertible, IComparable;
 
@@ -209,7 +235,24 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertFileExists(string testStep, string filenameAndPath);
+        bool FileExists(string testStep, string filenameAndPath);
+
+        /// <summary>
+        /// Asserts that a file exists
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="filenameAndPath">
+        /// Absolute path to the file of interest
+        /// </param>
+        /// <param name="pattern">
+        /// The pattern.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool FileContains(string testStep, string filenameAndPath, string pattern);
 
         /// <summary>
         /// Asserts that a file doesn't exists
@@ -223,7 +266,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertFileNotExists(string testStep, string filenameAndPath);
+        bool FileNotExists(string testStep, string filenameAndPath);
 
         /// <summary>
         /// Asserts that a folder (directory) exists
@@ -237,7 +280,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertFolderExists(string testStep, string foldernameAndPath);
+        bool FolderExists(string testStep, string foldernameAndPath);
 
         /// <summary>
         /// Asserts that a folder (directory) does NOT exists
@@ -251,7 +294,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertFolderNotExists(string testStep, string foldernameAndPath);
+        bool FolderNotExists(string testStep, string foldernameAndPath);
 
         /// <summary>
         /// Asserts that a expression is True
@@ -265,7 +308,7 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertTrue(string testStep, bool value);
+        bool IsTrue(string testStep, bool value);
 
         /// <summary>
         /// Asserts that a expression is True
@@ -279,6 +322,6 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertFalse(string testStep, bool value);
+        bool IsFalse(string testStep, bool value);
     }
 }

@@ -31,12 +31,12 @@ namespace UnitTest
             LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
 
             var sp1 = Get<IStfUnitTestPlugin1>();
-            MyAssert.AssertNotNull("Get<IStfUnitTestPlugin1>", sp1);
-            MyAssert.AssertEquals("sp1.StfUnitTestPlugin1Func", 101, sp1.StfUnitTestPlugin1Func());
+            MyAssert.IsNotNull("Get<IStfUnitTestPlugin1>", sp1);
+            MyAssert.AreEqual("sp1.StfUnitTestPlugin1Func", 101, sp1.StfUnitTestPlugin1Func());
 
             var sp2 = Get<IStfUnitTestPlugin2>();
-            MyAssert.AssertNotNull("Get<IStfUnitTestPlugin2>", sp2);
-            MyAssert.AssertEquals("sp2.StfUnitTestPlugin2Func", 102, sp2.StfUnitTestPlugin2Func());
+            MyAssert.IsNotNull("Get<IStfUnitTestPlugin2>", sp2);
+            MyAssert.AreEqual("sp2.StfUnitTestPlugin2Func", 102, sp2.StfUnitTestPlugin2Func());
         }
 
         /// <summary>
@@ -49,12 +49,12 @@ namespace UnitTest
             LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
 
             var sp2 = Get<IStfUnitTestPlugin2>();
-            MyAssert.AssertNotNull("Get<IStfUnitTestPlugin2>", sp2);
-            MyAssert.AssertEquals("sp2.StfUnitTestPlugin2Func", 102, sp2.StfUnitTestPlugin2Func());
+            MyAssert.IsNotNull("Get<IStfUnitTestPlugin2>", sp2);
+            MyAssert.AreEqual("sp2.StfUnitTestPlugin2Func", 102, sp2.StfUnitTestPlugin2Func());
 
             var plugin2Type = Get<IPlugin2Type>();
-            MyAssert.AssertNotNull("Get<IPlugin2Type>", plugin2Type);
-            MyAssert.AssertEquals("plugin2Type.Plugin2TypeFunc", 202, plugin2Type.Plugin2TypeFunc());
+            MyAssert.IsNotNull("Get<IPlugin2Type>", plugin2Type);
+            MyAssert.AreEqual("plugin2Type.Plugin2TypeFunc", 202, plugin2Type.Plugin2TypeFunc());
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace UnitTest
 
             var sp2 = Get<IStfUnitTestPlugin2>();
             var pluginType = sp2.StfContainer.Get<IPlugin2Type>();
-            MyAssert.AssertNotNull("Not null", pluginType);
+            MyAssert.IsNotNull("Not null", pluginType);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace UnitTest
             LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
 
             var sp2 = Get<IStfUnitTestPlugin2>();
-            MyAssert.AssertNotNull("sp2.StfContainer != null", sp2.StfContainer);
+            MyAssert.IsNotNull("sp2.StfContainer != null", sp2.StfContainer);
             var sp1 = sp2.StfContainer.Get<IStfUnitTestPlugin1>();
-            MyAssert.AssertTrue("sp1.IsInitialized", sp1.IsInitialized);
+            MyAssert.IsTrue("sp1.IsInitialized", sp1.IsInitialized);
         }
     }
 }

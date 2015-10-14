@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ScreenShots.cs" company="Foobar">
-//   2015
+// <copyright file="ScreenShots.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -14,7 +18,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger.
     /// </summary>
-    public partial class StfLogger : IScreenshots
+    public partial class StfLogger : IStfLoggerScreenshots
     {
         /// <summary>
         /// The utilities.

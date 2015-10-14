@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RunStatusUtils.cs" company="Foobar">
-//   2015
+// <copyright file="RunStatusUtils.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
@@ -32,6 +36,12 @@ namespace Mir.Stf.Utilities.Utils
             return Regexp;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="logFilename">
+        /// </param>
+        /// <returns>
+        /// </returns>
         public static Dictionary<StfLogLevel, int> GetRunStatus(string logFilename)
         {
             var retVal = new Dictionary<StfLogLevel, int>();

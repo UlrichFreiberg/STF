@@ -16,7 +16,6 @@ using System.Reflection;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using Mir.Stf.Utilities.Extensions;
-using Mir.Stf.Utilities.Interceptors;
 
 namespace Mir.Stf.Utilities
 {

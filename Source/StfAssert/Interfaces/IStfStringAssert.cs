@@ -1,9 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfStringAssert.cs" company="Foobar">
-//   2015
+// <copyright file="IStfStringAssert.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.Interfaces
+
+namespace Mir.Stf.Utilities.Interfaces
 {
     /// <summary>
     /// The StfStringAssert interface.

@@ -37,8 +37,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertTrue()
         {
-            Assert.IsTrue(this.MyAssert.AssertTrue("true", true));
-            Assert.IsFalse(this.MyAssert.AssertTrue("false", false));
+            Assert.IsTrue(this.MyAssert.IsTrue("true", true));
+            Assert.IsFalse(this.MyAssert.IsTrue("false", false));
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertFalse()
         {
-            Assert.IsFalse(this.MyAssert.AssertFalse("true", true));
-            Assert.IsTrue(this.MyAssert.AssertFalse("false", false));
+            Assert.IsFalse(this.MyAssert.IsFalse("true", true));
+            Assert.IsTrue(this.MyAssert.IsFalse("false", false));
         }
 
         /// <summary>

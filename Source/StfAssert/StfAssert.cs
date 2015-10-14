@@ -12,9 +12,9 @@ namespace Mir.Stf.Utilities
 {
     using System;
 
-    using global::Stf.Utilities.Interfaces;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mir.Stf.Utilities.Interfaces;
 
     /// <summary>
     /// The stf assert.
@@ -85,19 +85,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertTrue(string testStep, bool value)
+        public bool IsTrue(string testStep, bool value)
         {
-            bool retVal = value;
+            var retVal = value;
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertTrue: value True");
+                msg = string.Format("IsTrue: value True");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertTrue: value False");
+                msg = string.Format("IsTrue: value False");
                 this.AssertFail(testStep, msg);
             }
 
@@ -116,19 +116,19 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertFalse(string testStep, bool value)
+        public bool IsFalse(string testStep, bool value)
         {
-            bool retVal = !value;
+            var retVal = !value;
             string msg;
 
             if (retVal)
             {
-                msg = string.Format("AssertFalse: value False");
+                msg = string.Format("IsFalse: value False");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertFalse: value True");
+                msg = string.Format("IsFalse: value True");
                 this.AssertFail(testStep, msg);
             }
 

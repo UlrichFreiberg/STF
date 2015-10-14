@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SummeryLogger.cs" company="Foobar">
-//   2015
+// <copyright file="StfSummeryLogger.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
@@ -59,7 +63,10 @@ namespace Mir.Stf.Utilities
         {
             var summaryLogFile = new LogfileWriter { LogFileName = nameOfSummeryfile, OverwriteLogFile = true };
 
-            this.InitializeSummeryLogFile(nameOfSummeryfile, summaryLogFile);
+            if (!InitializeSummeryLogFile(nameOfSummeryfile, summaryLogFile))
+            {
+                return false;
+            }
 
             foreach (var logFilename in Directory.GetFiles(logDir, filePattern))
             {
@@ -165,30 +172,30 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The get table row id.
         /// </summary>
-        /// <param name="match">
-        /// The match.
+        /// <param name="runResultStatus">
+        /// A collection of number of entries for each StfLogLevels
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string GetTableRowId(Dictionary<StfLogLevel, int> RunResultStatus)
+        private string GetTableRowId(Dictionary<StfLogLevel, int> runResultStatus)
         {
-            if (RunResultStatus[StfLogLevel.Fail] > 0)
+            if (runResultStatus[StfLogLevel.Fail] > 0)
             {
                 return "testresultfail";
             }
 
-            if (RunResultStatus[StfLogLevel.Error] > 0)
+            if (runResultStatus[StfLogLevel.Error] > 0)
             {
                 return "testresulterror";
             }
 
-            if (RunResultStatus[StfLogLevel.Warning] > 0)
+            if (runResultStatus[StfLogLevel.Warning] > 0)
             {
                 return "testresultwarning";
             }
 
-            if (RunResultStatus[StfLogLevel.Pass] > 0)
+            if (runResultStatus[StfLogLevel.Pass] > 0)
             {
                 return "testresultpass";
             }

@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICallStackManagement.cs" company="Foobar">
-//   2015
+// <copyright file="IStfLoggerCallStackManagement.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Mir.Stf.Utilities.Interfaces
@@ -9,12 +13,12 @@ namespace Mir.Stf.Utilities.Interfaces
     /// <summary>
     /// The CallStackManagement <see langword="interface"/>. If used by the logger, it will indent the logging - indicating a call stack.
     /// </summary>
-    public interface ICallStackManagement
+    public interface IStfLoggerCallStackManagement
     {
         /// <summary>
         /// The log function enter. Should be called/inserted when entering a model/adapter function.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="nameOfReturnType">
@@ -32,12 +36,12 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogFunctionEnter(StfLogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues);
+        int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName, string[] args, object[] argValues);
 
         /// <summary>
         /// The log function exit. Should be called/inserted when exiting a model/adapter function.
         /// </summary>
-        /// <param name="lLogLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="functionName">
@@ -49,14 +53,14 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogFunctionExit(StfLogLevel lLogLevel, string functionName, object returnValue);
+        int LogFunctionExit(StfLogLevel loglevel, string functionName, object returnValue);
 
         // Properties in models/adapters
 
         /// <summary>
         /// The log get.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="callingProperty">
@@ -68,12 +72,12 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogGet(StfLogLevel logLevel, string callingProperty, object getValue);
+        int LogGet(StfLogLevel loglevel, string callingProperty, object getValue);
 
         /// <summary>
         /// The log set.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="loglevel">
         /// The log level.
         /// </param>
         /// <param name="callingProperty">
@@ -85,6 +89,6 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogSet(StfLogLevel logLevel, string callingProperty, object setValue);
+        int LogSet(StfLogLevel loglevel, string callingProperty, object setValue);
     }
 }

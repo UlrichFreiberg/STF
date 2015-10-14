@@ -182,15 +182,15 @@ namespace UnitTest
             MyLogger.LogLevel = StfLogLevel.Internal;
             MyAssert.EnableNegativeTesting = true;
 
-            MyAssert.AssertTrue("True Value for AssertTrue", true);
-            MyAssert.AssertTrue("False Value for AssertTrue", false);
-            MyAssert.AssertTrue("2 > 3 Value for AssertTrue", 2 > 3);
-            MyAssert.AssertTrue("3 > 2 Value for AssertTrue", 3 > 2);
+            MyAssert.IsTrue("True Value for IsTrue", true);
+            MyAssert.IsTrue("False Value for IsTrue", false);
+            MyAssert.IsTrue("2 > 3 Value for IsTrue", 2 > 3);
+            MyAssert.IsTrue("3 > 2 Value for IsTrue", 3 > 2);
 
-            MyAssert.AssertFalse("True Value for AssertFalse", true);
-            MyAssert.AssertFalse("False Value for AssertFalse", false);
-            MyAssert.AssertFalse("2 > 3 Value for AssertFalse", 2 > 3);
-            MyAssert.AssertFalse("3 > 2 Value for AssertFalse", 3 > 2);
+            MyAssert.IsFalse("True Value for IsFalse", true);
+            MyAssert.IsFalse("False Value for IsFalse", false);
+            MyAssert.IsFalse("2 > 3 Value for IsFalse", 2 > 3);
+            MyAssert.IsFalse("3 > 2 Value for IsFalse", 3 > 2);
         }
 
         /// <summary>
@@ -231,8 +231,8 @@ namespace UnitTest
             var summaryFilename = Path.Combine(StfTextUtils.GetVariable("Stf_LogDir"), "TestMethodSummaryLogger_SummeryLog.html");
             var oneSummeryLogger = new StfSummeryLogger();
 
-            MyAssert.AssertTrue("MyLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
-            MyAssert.AssertFileExists("MyLogger.CreateSummaryLog", summaryFilename);
+            MyAssert.IsTrue("MyLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
+            MyAssert.FileExists("MyLogger.CreateSummaryLog", summaryFilename);
         }
     }
 }

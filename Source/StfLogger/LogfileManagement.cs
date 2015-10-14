@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LogfileManagement.cs" company="Foobar">
-//   2015
+// <copyright file="LogfileManagement.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -16,9 +20,9 @@ using Mir.Stf.Utilities.Utils;
 namespace Mir.Stf.Utilities
 {
     /// <summary>
-    /// The test result html logger. the <see cref="ILogfileManagement"/> part
+    /// The test result html logger. the <see cref="IStfLoggerLogfileManagement"/> part
     /// </summary>
-    public partial class StfLogger : ILogfileManagement
+    public partial class StfLogger : IStfLoggerLogfileManagement
     {
         /// <summary>
         /// The log file name.

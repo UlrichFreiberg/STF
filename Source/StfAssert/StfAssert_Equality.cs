@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfAssert_Equality.cs" company="Foobar">
-//   2015
+// <copyright file="StfAssert_Equality.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -35,14 +39,14 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
+        public bool AreEqual<T1, T2>(string testStep, T1 expected, T2 actual)
         {
             bool retVal = true;
             string msg;
 
             try
             {
-                msg = string.Format("AssertEquals: [{0}] Are Equal to [{1}]", expected, actual);
+                msg = string.Format("AreEqual: [{0}] Are Equal to [{1}]", expected, actual);
                 Assert.AreEqual(expected, actual);
                 this.AssertPass(testStep, msg);
             }
@@ -71,7 +75,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertNotEquals(string testStep, object expected, object actual)
+        public bool AreNotEqual(string testStep, object expected, object actual)
         {
             bool retVal;
             string msg;
@@ -79,7 +83,7 @@ namespace Mir.Stf.Utilities
             try
             {
                 Assert.AreNotEqual(expected, actual);
-                msg = string.Format("AssertNotEquals: [{0}] Not Equal to [{1}]", expected, actual);
+                msg = string.Format("AreNotEqual: [{0}] Not Equal to [{1}]", expected, actual);
                 retVal = this.AssertPass(testStep, msg);
             }
             catch (AssertFailedException ex)
@@ -113,7 +117,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertGreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+        public bool GreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
             where T1 : IConvertible, IComparable
             where T2 : IConvertible, IComparable
         {
@@ -130,12 +134,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("AssertGreaterThan: [{0}] is greater than [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("GreaterThan: [{0}] is greater than [{1}]", leftHandSide, rightHandSide);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertGreaterThan: [{0}] is Not greater than [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("GreaterThan: [{0}] is Not greater than [{1}]", leftHandSide, rightHandSide);
                 this.AssertFail(testStep, msg);
             }
 
@@ -163,7 +167,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertLessThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+        public bool LessThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
             where T1 : IConvertible, IComparable
             where T2 : IConvertible, IComparable
         {
@@ -180,12 +184,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("AssertLessThan: [{0}] is less than [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("LessThan: [{0}] is less than [{1}]", leftHandSide, rightHandSide);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertLessThan: [{0}] is Not less than [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("LessThan: [{0}] is Not less than [{1}]", leftHandSide, rightHandSide);
                 this.AssertFail(testStep, msg);
             }
 

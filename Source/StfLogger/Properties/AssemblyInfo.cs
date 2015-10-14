@@ -1,7 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="Foobar">
-//   2015
+// <copyright file="AssemblyInfo.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
@@ -35,7 +39,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.23.51013")]
-[assembly: AssemblyFileVersion("1.0.23.51013")]
-
-
+[assembly: AssemblyVersion("1.0.22.51013")]
+[assembly: AssemblyFileVersion("1.0.22.51013")]
