@@ -8,7 +8,8 @@
 ##########################################################################
 function Get-PackageName()
 {
-    $file = Get-ChildItem -Name | Where-Object { $_ -match "Mir\.Stf\.Kernel\.\d+\.\d+\.\d+\.\d+\.nupkg" }
+    $file = Get-ChildItem -Name | Where-Object { $_ -match "Mir\.Stf\.Kernel\.\d+\.\d+\.\d+\.\d+\.nupkg" } `
+                                | Sort-Object -Descending `                                | Select-Object -First 1
     return $file
 }
 
