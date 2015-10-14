@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using Mir.Stf.Utilities.Interceptors;
@@ -60,14 +61,19 @@ namespace Mir.Stf.Utilities.Extensions
         /// </param>
         public static void RegisterMyType(this IUnityContainer container, Type typeFrom, Type typeTo)
         {
+            if (IsAlreadyMapped(container, typeFrom, typeTo))
+            {
+                return;
+            }
+
             var injectionMembers = new List<InjectionMember>();
 
-            if (CheckTypeHasInterface(typeFrom, typeof(IStfGettable)))
+            if (CheckTypeHasInterface<IStfGettable>(typeFrom))
             {
                 injectionMembers.Add(new InjectionProperty("StfContainer"));
             }
 
-            if (CheckTypeHasInterface(typeFrom, typeof(IStfLoggable)))
+            if (CheckTypeHasInterface<IStfLoggable>(typeFrom))
             {
                 injectionMembers.Add(new InterceptionBehavior<PolicyInjectionBehavior>());
                 injectionMembers.Add(new Interceptor<InterfaceInterceptor>());
@@ -85,20 +91,51 @@ namespace Mir.Stf.Utilities.Extensions
         }
 
         /// <summary>
-        /// The type has interface.
+        /// The is already mapped.
         /// </summary>
-        /// <param name="theType">
-        /// The the type.
+        /// <param name="container">
+        /// The container.
         /// </param>
-        /// <param name="expectedInterface">
-        /// The expected Interface.
+        /// <param name="typeFrom">
+        /// The type from.
+        /// </param>
+        /// <param name="typeTo">
+        /// The type to.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private static bool CheckTypeHasInterface(Type theType, Type expectedInterface)
+        /// <remarks>
+        /// Unity's own .IsRegistered method only checks on registered type.
+        /// We want to check on the mapped to type as well to prevent
+        /// redundant interception policies from being registered
+        /// but still allow custom implementations of StfInterfaces to 
+        /// overwrite the default ones we register on startup
+        /// </remarks>
+        private static bool IsAlreadyMapped(IUnityContainer container, Type typeFrom, Type typeTo)
         {
-            var theInterface = theType.GetInterface(expectedInterface.Name);
+            return container.Registrations.Any(
+                containerRegistration =>
+                    containerRegistration.RegisteredType == typeFrom && 
+                    containerRegistration.MappedToType == typeTo &&
+                    string.IsNullOrEmpty(containerRegistration.Name));
+        }
+
+        /// <summary>
+        /// The type has interface.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of interface to check
+        /// </typeparam>
+        /// <param name="theType">
+        /// The the type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private static bool CheckTypeHasInterface<T>(Type theType)
+        {
+            var theInterface = theType.GetInterface(typeof(T).Name);
             return theInterface != null;
         }
     }
