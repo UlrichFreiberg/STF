@@ -41,9 +41,17 @@
   <ItemGroup>
     <Compile Include="StfUnitTestPlugin2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTestPluginTypes\Plugin2Type.cs" />
+    <Compile Include="UnitTestPluginTypes\TestAdapterWithoutInterface.cs" />
+    <Compile Include="UnitTestPluginTypes\TestPluginModel2.cs" />
+    <Compile Include="UnitTestPluginTypes\TestPluginAdapter.cs" />
+    <Compile Include="UnitTestPluginTypes\TestPluginModel.cs" />
+    <Compile Include="UnitTestPluginTypes\TestPluginTypeWithoutInterface.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Source\StfLogger\StfLogger.csproj">
+      <Project>{761BF58C-4B19-46D2-9601-2F9296C80152}</Project>
+      <Name>StfLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Source\StfPluginLoader\StfPluginLoader.csproj">
       <Project>{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}</Project>
       <Name>StfPluginLoader</Name>

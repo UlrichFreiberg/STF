@@ -1,23 +1,26 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfLoggable.cs" company="Mir Software">
+// <copyright file="ITestPluginAdapter.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IStfLoggable type.
+//   Defines the ITestPluginAdapter type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Mir.Stf.Utilities
+namespace Stf.Unittests
 {
     /// <summary>
-    /// The StfLoggable interface.
+    /// The TestPluginAdapter interface.
     /// </summary>
-    public interface IStfLoggable
+    public interface ITestPluginAdapter
     {
         /// <summary>
-        /// Gets or sets the my logger.
+        /// The test plugin adapter func.
         /// </summary>
-        StfLogger MyLogger { get; set; }
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int TestPluginAdapterFunc();
     }
 }

@@ -1,20 +1,19 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IPlugin2Type.cs" company="Foobar">
-//   2015
+// <copyright file="ITestPluginModel2.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IPlugin2Type type.
+//   The TestPlugin2Model interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-using Mir.Stf.Utilities;
 
 namespace Stf.Unittests
 {
     /// <summary>
-    /// The Plugin2Type interface.
+    /// The TestPlugin2Model interface.
     /// </summary>
-    public interface IPlugin2Type : IStfGettable, IStfLoggable
+    public interface ITestPluginModel2
     {
         /// <summary>
         /// The plugin 2 type func.
@@ -22,6 +21,6 @@ namespace Stf.Unittests
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int Plugin2TypeFunc();
+        int TestPlugin2Func();
     }
 }

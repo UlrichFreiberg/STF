@@ -1,23 +1,29 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfLoggable.cs" company="Mir Software">
+// <copyright file="IStfAdapterBase.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IStfLoggable type.
+//   Defines the IStfAdapterBase type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Mir.Stf.Utilities
+namespace Mir.Stf.Utilities.Interfaces
 {
     /// <summary>
-    /// The StfLoggable interface.
+    /// The StfAdapterBase interface.
     /// </summary>
-    public interface IStfLoggable
+    public interface IStfAdapterBase : IStfLoggable, IStfGettable
     {
         /// <summary>
-        /// Gets or sets the my logger.
+        /// The get.
         /// </summary>
-        StfLogger MyLogger { get; set; }
+        /// <typeparam name="T">
+        /// The requested type to be resolved by the container
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        T Get<T>();
     }
 }

@@ -77,6 +77,8 @@
   <ItemGroup>
     <Compile Include="Extensions\ContainerExtensions.cs" />
     <Compile Include="Interceptors\LoggingHandler.cs" />
+    <Compile Include="Interfaces\IStfAdapterBase.cs" />
+    <Compile Include="Interfaces\IStfModelBase.cs" />
     <Compile Include="IStfContainer.cs" />
     <Compile Include="IStfGettable.cs" />
     <Compile Include="IStfLoggable.cs" />
@@ -94,7 +96,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="StfAdapterBase.cs" />
     <Compile Include="StfContainer.cs" />
+    <Compile Include="StfModelBase.cs" />
     <Compile Include="StfPluginLoader.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

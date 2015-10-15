@@ -44,6 +44,11 @@ namespace Stf.Unittests
         public IStfContainer StfContainer { get; set; }
 
         /// <summary>
+        /// Gets or sets the my logger.
+        /// </summary>
+        public StfLogger MyLogger { get; set; }
+
+        /// <summary>
         /// The init.
         /// </summary>
         /// <returns>
@@ -53,7 +58,11 @@ namespace Stf.Unittests
         {
             try
             {
-                StfContainer.RegisterType<IPlugin2Type, Plugin2Type>();
+                StfContainer.RegisterType<ITestPluginModel, TestPluginModel>();
+                StfContainer.RegisterType<ITestPluginModel2, TestPluginModel2>();
+                StfContainer.RegisterType<ITestPluginAdapter, TestPluginAdapter>();
+                StfContainer.RegisterType<TestPluginTypeWithoutInterface>();
+                StfContainer.RegisterType<TestAdapterWithoutInterface>();
             }
             catch (Exception)
             {

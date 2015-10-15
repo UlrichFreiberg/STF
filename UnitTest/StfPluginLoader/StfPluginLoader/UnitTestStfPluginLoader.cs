@@ -8,7 +8,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using Mir.Stf;
+using Stf.Unittests.UnitTestPluginTypes;
 
 namespace UnitTest
 {
@@ -52,9 +54,9 @@ namespace UnitTest
             MyAssert.IsNotNull("Get<IStfUnitTestPlugin2>", sp2);
             MyAssert.AreEqual("sp2.StfUnitTestPlugin2Func", 102, sp2.StfUnitTestPlugin2Func());
 
-            var plugin2Type = Get<IPlugin2Type>();
-            MyAssert.IsNotNull("Get<IPlugin2Type>", plugin2Type);
-            MyAssert.AreEqual("plugin2Type.Plugin2TypeFunc", 202, plugin2Type.Plugin2TypeFunc());
+            var plugin2Type = Get<ITestPluginModel>();
+            MyAssert.IsNotNull("Get<ITestPluginModel>", plugin2Type);
+            MyAssert.AreEqual("plugin2Type.TestPluginFunc", 202, plugin2Type.TestPluginFunc());
         }
 
         /// <summary>
@@ -67,8 +69,8 @@ namespace UnitTest
             LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
 
             var sp2 = Get<IStfUnitTestPlugin2>();
-            var pluginType = sp2.StfContainer.Get<IPlugin2Type>();
-            MyAssert.IsNotNull("Not null", pluginType);
+            var pluginModel = sp2.StfContainer.Get<ITestPluginModel>();
+            MyAssert.IsNotNull("Not null", pluginModel);
         }
 
         /// <summary>
@@ -82,8 +84,152 @@ namespace UnitTest
 
             var sp2 = Get<IStfUnitTestPlugin2>();
             MyAssert.IsNotNull("sp2.StfContainer != null", sp2.StfContainer);
-            var sp1 = sp2.StfContainer.Get<IStfUnitTestPlugin1>();
-            MyAssert.IsTrue("sp1.IsInitialized", sp1.IsInitialized);
+
+            var pluginModel = sp2.StfContainer.Get<ITestPluginModel>();
+            MyAssert.IsNotNull("sp1.IsInitialized", pluginModel);
+
+            var pluginModel2 = sp2.StfContainer.Get<ITestPluginModel2>();
+            MyAssert.IsNotNull("sp1.IsInitialized", pluginModel2);
+
+            var pluginAdapter = sp2.StfContainer.Get<ITestPluginModel2>();
+            MyAssert.IsNotNull("sp1.IsInitialized", pluginAdapter);
+
+            var pluginTypeWithoutInterface = sp2.StfContainer.Get<TestPluginTypeWithoutInterface>();
+            MyAssert.IsNotNull("sp1.IsInitialized", pluginTypeWithoutInterface);
+
+            var testAdapterWithoutInterface = sp2.StfContainer.Get<TestAdapterWithoutInterface>();
+            MyAssert.IsNotNull("sp1.IsInitialized", testAdapterWithoutInterface);
+        }
+
+        /// <summary>
+        /// The test method stf container is injected.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodStfContainerIsInjected()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2.StfContainer != null", sp2.StfContainer);
+        }
+
+        /// <summary>
+        /// The test method stf logger is injected.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodStfLoggerIsInjected()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2.MyLogger != null", sp2.MyLogger);
+        }
+
+        /// <summary>
+        /// The test method stf container is injected on model base.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodStfContainerIsInjectedOnModelBase()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2 != null", sp2);
+
+            var typeWithoutInterface = sp2.StfContainer.Get<TestPluginTypeWithoutInterface>();
+            MyAssert.IsNotNull("typeWithoutInterface != null", typeWithoutInterface);
+            MyAssert.IsNotNull("typeWithoutInterface.StfContainer != null", typeWithoutInterface.StfContainer);
+        }
+
+        /// <summary>
+        /// The test method stf logger is injected on model base.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodStfLoggerIsInjectedOnModelBase()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2 != null", sp2);
+
+            var typeWithoutInterface = sp2.StfContainer.Get<TestPluginTypeWithoutInterface>();
+            MyAssert.IsNotNull("typeWithoutInterface != null", typeWithoutInterface);
+            MyAssert.IsNotNull("typeWithoutInterface.MyLogger != null", typeWithoutInterface.MyLogger);
+        }
+
+        /// <summary>
+        /// The test method stf container is injected on adapter base.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodStfContainerIsInjectedOnAdapterBase()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2 != null", sp2);
+
+            var typeWithoutInterface = sp2.StfContainer.Get<TestAdapterWithoutInterface>();
+            MyAssert.IsNotNull("typeWithoutInterface != null", typeWithoutInterface);
+            MyAssert.IsNotNull("typeWithoutInterface.StfContainer != null", typeWithoutInterface.StfContainer);
+        }
+
+        /// <summary>
+        /// The test method stf logger is injected on adapter base.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodStfLoggerIsInjectedOnAdapterBase()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2 != null", sp2);
+
+            var typeWithoutInterface = sp2.StfContainer.Get<TestAdapterWithoutInterface>();
+            MyAssert.IsNotNull("typeWithoutInterface != null", typeWithoutInterface);
+            MyAssert.IsNotNull("typeWithoutInterface.MyLogger != null", typeWithoutInterface.MyLogger);
+        }
+
+        /// <summary>
+        /// The test method stf logger is injected on adapter base.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodModelBaseCanBeUsed()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2 != null", sp2);
+
+            var testPluginModel = Get<ITestPluginModel>();
+            MyAssert.IsNotNull("testPluginModel != null", testPluginModel);
+            MyAssert.IsTrue("Use ModelBase internally", testPluginModel.CanUseModelBaseInternally());
+        }
+
+        /// <summary>
+        /// The test method proxy object created for plugin with matching interface.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodProxyObjectCreatedForPluginWithMatchingInterface()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+
+            MyAssert.IsNotNull(
+                "Has interface",
+                typeof(StfUnitTestPlugin2).GetInterface(typeof(IStfUnitTestPlugin2).Name));
+
+            MyAssert.AssertThrows<InvalidCastException>(
+                "Unit test plugin is a proxy object", 
+                // ReSharper disable once UnusedVariable
+                () => { var stfUnitTestPlugin2 = (StfUnitTestPlugin2)sp2; });
         }
     }
 }

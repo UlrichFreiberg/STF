@@ -43,6 +43,11 @@ namespace Stf.Unittests
         public IStfContainer StfContainer { get; set; }
 
         /// <summary>
+        /// Gets or sets the my logger.
+        /// </summary>
+        public StfLogger MyLogger { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether is initialized.
         /// </summary>
         public bool IsInitialized { get; set; }

@@ -66,18 +66,10 @@ namespace Mir.Stf.Utilities.Extensions
                 return;
             }
 
-            var injectionMembers = new List<InjectionMember>();
-
-            if (CheckTypeHasInterface<IStfGettable>(typeFrom))
-            {
-                injectionMembers.Add(new InjectionProperty("StfContainer"));
-            }
+            var injectionMembers = GetInjectionMembers(typeFrom, typeTo);
 
             if (CheckTypeHasInterface<IStfLoggable>(typeFrom))
             {
-                injectionMembers.Add(new InterceptionBehavior<PolicyInjectionBehavior>());
-                injectionMembers.Add(new Interceptor<InterfaceInterceptor>());
-
                 container.Configure<Interception>()
                 .AddPolicy(string.Format("LoggingFor{0}", typeFrom.Name))
                 .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(typeFrom.FullName))
@@ -88,6 +80,21 @@ namespace Mir.Stf.Utilities.Extensions
             }
 
             container.RegisterType(typeFrom, typeTo, injectionMembers.ToArray());
+        }
+
+        /// <summary>
+        /// The register my type.
+        /// </summary>
+        /// <param name="container">
+        /// The container.
+        /// </param>
+        /// <param name="typeToRegister">
+        /// The type to register.
+        /// </param>
+        public static void RegisterMyType(this IUnityContainer container, Type typeToRegister)
+        {
+            var injectionMembers = GetInjectionMembers(typeToRegister);
+            container.RegisterType(typeToRegister, injectionMembers.ToArray());
         }
 
         /// <summary>
@@ -137,6 +144,63 @@ namespace Mir.Stf.Utilities.Extensions
         {
             var theInterface = theType.GetInterface(typeof(T).Name);
             return theInterface != null;
+        }
+
+        /// <summary>
+        /// The get injection members.
+        /// </summary>
+        /// <param name="typeToRegister">
+        /// The type to register.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/>.
+        /// </returns>
+        private static IList<InjectionMember> GetInjectionMembers(Type typeToRegister)
+        {
+            var injectionMembers = new List<InjectionMember>();
+
+            if (CheckTypeHasInterface<IStfGettable>(typeToRegister))
+            {
+                injectionMembers.Add(new InjectionProperty("StfContainer"));
+            }
+
+            if (CheckTypeHasInterface<IStfLoggable>(typeToRegister))
+            {
+                injectionMembers.Add(new InjectionProperty("MyLogger"));
+
+                if (!typeToRegister.IsInterface)
+                {
+                    return injectionMembers;
+                }
+
+                injectionMembers.Add(new InterceptionBehavior<PolicyInjectionBehavior>());
+                injectionMembers.Add(new Interceptor<InterfaceInterceptor>());
+            }
+
+            return injectionMembers;
+        }
+
+        /// <summary>
+        /// The get injection members.
+        /// </summary>
+        /// <param name="typeFrom">
+        /// The type from.
+        /// </param>
+        /// <param name="typeTo">
+        /// The type to.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/>.
+        /// </returns>
+        private static IList<InjectionMember> GetInjectionMembers(Type typeFrom, Type typeTo)
+        {
+            // TODO: FIX PLEASE - We are getting redundant injectionmembers here! (they're not breaking anything, though, Unity doesn't care)
+            var injectionMembers = GetInjectionMembers(typeFrom);
+            ((List<InjectionMember>)injectionMembers)
+                .AddRange(GetInjectionMembers(typeTo)
+                .Where(i => !injectionMembers.Contains(i)));
+
+            return injectionMembers;
         }
     }
 }

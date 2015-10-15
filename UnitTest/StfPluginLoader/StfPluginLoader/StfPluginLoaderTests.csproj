@@ -62,9 +62,17 @@
       <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
       <Name>StfKernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\StfLogger\StfLogger.csproj">
+      <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
+      <Name>StfLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Source\StfPluginLoader\StfPluginLoader.csproj">
       <Project>{DFFF16EC-8E3E-48D1-A247-B7BA7208231E}</Project>
       <Name>StfPluginLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stf.UnitTestPlugin2\Stf.UnitTestPlugin2.csproj">
+      <Project>{A83FFB89-1F56-4755-9060-2F4F6ABD0DCC}</Project>
+      <Name>Stf.UnitTestPlugin2</Name>
     </ProjectReference>
     <ProjectReference Include="..\Stf.UnitTestPluginInterfaces\Stf.UnitTestPluginInterfaces.csproj">
       <Project>{a308d188-65b8-4554-95d3-4cc568952b00}</Project>

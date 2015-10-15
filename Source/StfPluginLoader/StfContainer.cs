@@ -44,7 +44,7 @@ namespace Mir.Stf.Utilities
         /// </typeparam>
         public void RegisterType<T>()
         {
-            container.RegisterType<T>();
+            container.RegisterMyType(typeof(T));
         }
 
         /// <summary>
@@ -55,6 +55,8 @@ namespace Mir.Stf.Utilities
         /// </param>
         public void RegisterTypes(Dictionary<Type, Type> dictionary)
         {
+            // There is no guarantee as to the order (interface or implementing type) in the dictionary
+            // TODO: Do a check on the types to make sure we get the order right
             foreach (var pluginType in dictionary)
             {
                 container.RegisterMyType(pluginType.Key, pluginType.Value);
