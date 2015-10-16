@@ -1,15 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Form1.cs" company="Foobar">
-//   2015
+// <copyright file="Form1.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using Mir.Stf.Utilities;
+
 namespace WinFormsApp
 {
     using System;
     using System.Diagnostics;
     using System.Windows.Forms;
-
-    using Stf.Utilities;
 
     /// <summary>
     /// The form 1.
@@ -26,14 +31,14 @@ namespace WinFormsApp
         /// </summary>
         public Form1()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.Mylogger = new StfLogger(LogfileName);
-            this.MyAssert = new StfAssert(this.Mylogger) { EnableNegativeTesting = true };
-            this.Mylogger.LogLevel = LogLevel.Trace;
+            Mylogger = new StfLogger(LogfileName);
+            MyAssert = new StfAssert(Mylogger) { EnableNegativeTesting = true };
+            Mylogger.LogLevel = StfLogLevel.Trace;
  
-            this.Mylogger.LogInfo("logFile opened from DemoApp constructor");
-            this.TxtMessage.Text = @"Some test message";
+            Mylogger.LogInfo("logFile opened from DemoApp constructor");
+            TxtMessage.Text = @"Some test message";
         }
 
         /// <summary>
@@ -62,10 +67,10 @@ namespace WinFormsApp
         /// </param>
         private void BtnCallStackDemo_Click(object sender, EventArgs e)
         {
-            this.Mylogger.LogFunctionEnter(LogLevel.Info, "Void", "BtnCallStackDemo_Click");
-            this.Mylogger.LogInfo("Someone pressed the CallStackDemo button");
+            Mylogger.LogFunctionEnter(StfLogLevel.Info, "Void", "BtnCallStackDemo_Click");
+            Mylogger.LogInfo("Someone pressed the CallStackDemo button");
             callStackDemo("Demo");
-            this.Mylogger.LogFunctionExit(LogLevel.Info, "BtnCallStackDemo_Click");
+            Mylogger.LogFunctionExit(StfLogLevel.Info, "BtnCallStackDemo_Click");
         }
 
         /// <summary>
@@ -121,7 +126,7 @@ namespace WinFormsApp
         /// </param>
         private void btnLogInfo_Click(object sender, EventArgs e)
         {
-            this.Mylogger.LogInfo("Info: " + this.TxtMessage.Text);
+            Mylogger.LogInfo("Info: " + TxtMessage.Text);
         }
 
         /// <summary>
@@ -135,7 +140,7 @@ namespace WinFormsApp
         /// </param>
         private void btnLogTrace_Click(object sender, EventArgs e)
         {
-            this.Mylogger.LogTrace("Info: " + this.TxtMessage.Text);
+            Mylogger.LogTrace("Info: " + TxtMessage.Text);
         }
 
         /// <summary>
@@ -149,7 +154,7 @@ namespace WinFormsApp
         /// </param>
         private void btnLogPass_Click(object sender, EventArgs e)
         {
-            this.Mylogger.LogPass("OvidDemo", this.TxtMessage.Text);
+            Mylogger.LogPass("OvidDemo", TxtMessage.Text);
         }
 
         /// <summary>
@@ -163,7 +168,7 @@ namespace WinFormsApp
         /// </param>
         private void btnLogFail_Click(object sender, EventArgs e)
         {
-            this.Mylogger.LogFail("OvidDemo", this.TxtMessage.Text);
+            Mylogger.LogFail("OvidDemo", TxtMessage.Text);
         }
 
         /// <summary>
@@ -179,12 +184,12 @@ namespace WinFormsApp
         {
             var retVal = 40;
 
-            this.Mylogger.LogFunctionEnter(LogLevel.Debug, "Void", "callStackDemo");
-            this.Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", this.SomeCounter++));
-            this.callStackDemoL1("From Demo");
-            this.callStackDemoL1("From Demo");
+            Mylogger.LogFunctionEnter(StfLogLevel.Debug, "Void", "callStackDemo");
+            Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", SomeCounter++));
+            callStackDemoL1("From Demo");
+            callStackDemoL1("From Demo");
 
-            this.Mylogger.LogFunctionExit(LogLevel.Debug, "callStackDemo");                        
+            Mylogger.LogFunctionExit(StfLogLevel.Debug, "callStackDemo");                        
             return retVal;
         }
 
@@ -201,11 +206,11 @@ namespace WinFormsApp
         {
             var retVal = 41;
 
-            this.Mylogger.LogFunctionEnter(LogLevel.Debug, "Void", "callStackDemoL1");
-            this.Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", this.SomeCounter++));
-            this.callStackDemoL2("From Demo1");
-            this.callStackDemoL2("From Demo1");
-            this.Mylogger.LogFunctionExit(LogLevel.Debug, "callStackDemoL1");
+            Mylogger.LogFunctionEnter(StfLogLevel.Debug, "Void", "callStackDemoL1");
+            Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", SomeCounter++));
+            callStackDemoL2("From Demo1");
+            callStackDemoL2("From Demo1");
+            Mylogger.LogFunctionExit(StfLogLevel.Debug, "callStackDemoL1");
             return retVal;
         }
 
@@ -222,9 +227,9 @@ namespace WinFormsApp
         {
             var retVal = 42;
 
-            this.Mylogger.LogFunctionEnter(LogLevel.Debug, "Void", "callStackDemoL2");
-            this.Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", this.SomeCounter++));
-            this.Mylogger.LogFunctionExit(LogLevel.Debug, "callStackDemoL2");
+            Mylogger.LogFunctionEnter(StfLogLevel.Debug, "Void", "callStackDemoL2");
+            Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", SomeCounter++));
+            Mylogger.LogFunctionExit(StfLogLevel.Debug, "callStackDemoL2");
             return retVal;
         }
 
@@ -239,7 +244,7 @@ namespace WinFormsApp
         /// </param>
         private void BtnAssertStringEquals_Click(object sender, EventArgs e)
         {
-            this.MyAssert.StringEquals("DemoApp", this.TxtStringAssertArg1.Text, this.TxtStringAssertArg2.Text);
+            MyAssert.StringEquals("DemoApp", TxtStringAssertArg1.Text, TxtStringAssertArg2.Text);
         }
 
         /// <summary>
@@ -253,7 +258,7 @@ namespace WinFormsApp
         /// </param>
         private void BtnAssertStringMatches_Click(object sender, EventArgs e)
         {
-            this.MyAssert.StringMatches("DemoApp", this.TxtStringAssertArg1.Text, this.TxtStringAssertArg2.Text);
+            MyAssert.StringMatches("DemoApp", TxtStringAssertArg1.Text, TxtStringAssertArg2.Text);
         }
 
         /// <summary>
@@ -267,7 +272,7 @@ namespace WinFormsApp
         /// </param>
         private void BtnAssertStringContains_Click(object sender, EventArgs e)
         {
-            this.MyAssert.StringContains("DemoApp", this.TxtStringAssertArg1.Text, this.TxtStringAssertArg2.Text);
+            MyAssert.StringContains("DemoApp", TxtStringAssertArg1.Text, TxtStringAssertArg2.Text);
         }
 
         /// <summary>
@@ -281,7 +286,7 @@ namespace WinFormsApp
         /// </param>
         private void BtnAssertEquals_Click(object sender, EventArgs e)
         {
-            this.MyAssert.AssertEquals("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+            MyAssert.AreEqual("DemoApp", TxtAssertArg1.Text, TxtAssertArg2.Text);
         }
 
         /// <summary>
@@ -295,7 +300,7 @@ namespace WinFormsApp
         /// </param>
         private void BtnAssertHasValue_Click(object sender, EventArgs e)
         {
-            this.MyAssert.AssertHasValue("DemoApp", this.TxtAssertArg1.Text);
+            MyAssert.HasValue("DemoApp", TxtAssertArg1.Text);
         }
 
         /// <summary>
@@ -309,7 +314,7 @@ namespace WinFormsApp
         /// </param>
         private void BtnAssertNull_Click(object sender, EventArgs e)
         {
-            this.MyAssert.AssertNull("DemoApp", this.TxtAssertArg1.Text);
+            MyAssert.IsNull("DemoApp", TxtAssertArg1.Text);
         }
 
         /// <summary>

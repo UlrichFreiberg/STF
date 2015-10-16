@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mir.Stf.Utilities
 {
-    using Mir.Stf.Utilities.Interfaces;
+    using Interfaces;
 
     /// <summary>
     /// The stf assert.
@@ -73,11 +73,11 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = string.Format("[{0}] contains [{1}]", value, substring);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
-                AssertLogger.LogFail(testStep, retVal);
+                AssertFail(testStep, retVal);
             }
 
             return retVal == null;
@@ -105,12 +105,12 @@ namespace Mir.Stf.Utilities
             if (retVal != null)
             {
                 var message = string.Format("[{0}] don't contain [{1}]", value, substring);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
                 var message = string.Format("[{0}] do contain [{1}]", value, substring);
-                AssertLogger.LogFail(testStep, message);
+                AssertFail(testStep, message);
             }
 
             return retVal != null;
@@ -138,11 +138,11 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = string.Format("[{0}] is matched by [{1}]", value, pattern);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
-                AssertLogger.LogFail(testStep, retVal);
+                AssertFail(testStep, retVal);
             }
 
             return retVal == null;
@@ -170,11 +170,11 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = string.Format("[{0}] is not matched by [{1}]", value, pattern);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
-                AssertLogger.LogFail(testStep, retVal);
+                AssertFail(testStep, retVal);
             }
 
             return retVal == null;
@@ -202,11 +202,11 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = string.Format("[{0}] StartsWith [{1}]", value, substring);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
-                AssertLogger.LogFail(testStep, retVal);
+                AssertFail(testStep, retVal);
             }
 
             return retVal == null;
@@ -234,12 +234,12 @@ namespace Mir.Stf.Utilities
             if (retVal != null)
             {
                 var message = string.Format("[{0}] doesn't start with [{1}]", value, substring);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
                 var message = string.Format("[{0}] do start with [{1}]", value, substring);
-                AssertLogger.LogFail(testStep, message);
+                AssertFail(testStep, message);
             }
 
             return retVal != null;
@@ -267,11 +267,11 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = string.Format("[{0}] EndsWith [{1}]", value, substring);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
-                AssertLogger.LogFail(testStep, retVal);
+                AssertFail(testStep, retVal);
             }
 
             return retVal == null;
@@ -299,12 +299,12 @@ namespace Mir.Stf.Utilities
             if (retVal != null)
             {
                 var message = string.Format("[{0}] doesn't ends with [{1}]", value, substring);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
                 var message = string.Format("[{0}] do ends with [{1}]", value, substring);
-                AssertLogger.LogFail(testStep, message);
+                AssertFail(testStep, message);
             }
 
             return retVal != null;
@@ -332,12 +332,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 var message = string.Format("[{0}] is equal to [{1}]", expected, actual);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
                 var message = string.Format("[{0}] is NOT equal to [{1}]", expected, actual);
-                AssertLogger.LogFail(testStep, message);
+                AssertFail(testStep, message);
             }
 
             return retVal;
@@ -385,12 +385,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 var message = string.Format("[{0}] is NOT equal to [{1}]", expected, actual);
-                AssertLogger.LogPass(testStep, message);
+                AssertPass(testStep, message);
             }
             else
             {
                 var message = string.Format("[{0}] is equal to [{1}]", expected, actual);
-                AssertLogger.LogFail(testStep, message);
+                AssertFail(testStep, message);
             }
 
             return retVal;
@@ -434,13 +434,13 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                var message = string.Format("String is NullOrEmpty");
-                AssertLogger.LogPass(testStep, message);
+                var message = "String is NullOrEmpty";
+                AssertPass(testStep, message);
             }
             else
             {
                 var message = string.Format("[{0}] is NOT NullOrEmpty", actual);
-                AssertLogger.LogFail(testStep, message);
+                AssertFail(testStep, message);
             }
 
             return retVal;
@@ -464,13 +464,13 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                var message = string.Format("String is not NullOrEmpty");
-                AssertLogger.LogPass(testStep, message);
+                var message = "String is not NullOrEmpty";
+                AssertPass(testStep, message);
             }
             else
             {
                 var message = string.Format("[{0}] IS NullOrEmpty", actual);
-                AssertLogger.LogFail(testStep, message);
+                AssertFail(testStep, message);
             }
 
             return retVal;

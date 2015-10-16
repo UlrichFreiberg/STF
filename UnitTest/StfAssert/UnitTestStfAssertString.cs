@@ -26,6 +26,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertStrings()
         {
+            MyAssert.EnableNegativeTesting = true;
+
             Assert.IsTrue(MyAssert.StringContains("TestStepName 1", "Hejsa", "Hej"));
             Assert.IsFalse(MyAssert.StringContains("TestStepName 2", "Hejsa", "Bent"));
 
