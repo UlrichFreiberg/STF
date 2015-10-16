@@ -14,6 +14,7 @@ using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using Mir.Stf.Utilities.Interceptors;
+using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities.Extensions
 {
@@ -67,17 +68,8 @@ namespace Mir.Stf.Utilities.Extensions
             }
 
             var injectionMembers = GetInjectionMembers(typeFrom, typeTo);
-
-            if (CheckTypeHasInterface<IStfLoggable>(typeFrom))
-            {
-                container.Configure<Interception>()
-                .AddPolicy(string.Format("LoggingFor{0}", typeFrom.Name))
-                .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(typeFrom.FullName))
-                .AddCallHandler<LoggingHandler>(
-                    new ContainerControlledLifetimeManager(),
-                    new InjectionConstructor(new ResolvedParameter<StfLogger>()),
-                    new InjectionProperty("Order", 1));
-            }
+            ((List<InjectionMember>)injectionMembers)
+                .AddRange(ConfigureForInterceptionIfNecessary(container, typeFrom, typeTo));
 
             container.RegisterType(typeFrom, typeTo, injectionMembers.ToArray());
         }
@@ -167,14 +159,6 @@ namespace Mir.Stf.Utilities.Extensions
             if (CheckTypeHasInterface<IStfLoggable>(typeToRegister))
             {
                 injectionMembers.Add(new InjectionProperty("MyLogger"));
-
-                if (!typeToRegister.IsInterface)
-                {
-                    return injectionMembers;
-                }
-
-                injectionMembers.Add(new InterceptionBehavior<PolicyInjectionBehavior>());
-                injectionMembers.Add(new Interceptor<InterfaceInterceptor>());
             }
 
             return injectionMembers;
@@ -199,6 +183,71 @@ namespace Mir.Stf.Utilities.Extensions
             ((List<InjectionMember>)injectionMembers)
                 .AddRange(GetInjectionMembers(typeTo)
                 .Where(i => !injectionMembers.Contains(i)));
+
+            return injectionMembers;
+        }
+
+        /// <summary>
+        /// The configure for interception if necessary.
+        /// </summary>
+        /// <param name="container">
+        /// The container.
+        /// </param>
+        /// <param name="typeFrom">
+        /// The type from.
+        /// </param>
+        /// <param name="typeTo">
+        /// The type to.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/>.
+        /// </returns>
+        private static IList<InjectionMember> ConfigureForInterceptionIfNecessary(IUnityContainer container, Type typeFrom, Type typeTo)
+        {
+            var injectionMembers = new List<InjectionMember>();
+
+            if (CheckTypeHasInterface<IStfLoggable>(typeFrom) ||
+                CheckTypeHasInterface<IStfModelBase>(typeTo) ||
+                CheckTypeHasInterface<IStfAdapterBase>(typeTo))
+            {
+                injectionMembers.AddRange(AddInterceptionMembers(container, typeFrom));
+                return injectionMembers;
+            }
+
+            return injectionMembers;
+        }
+
+        /// <summary>
+        /// The add interception members.
+        /// </summary>
+        /// <param name="container">
+        /// The container.
+        /// </param>
+        /// <param name="theType">
+        /// The the type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/>.
+        /// </returns>
+        private static IList<InjectionMember> AddInterceptionMembers(IUnityContainer container, Type theType)
+        {
+            var injectionMembers = new List<InjectionMember>();
+
+            if (!theType.IsInterface)
+            {
+                return injectionMembers;
+            }
+
+            injectionMembers.Add(new InterceptionBehavior<PolicyInjectionBehavior>());
+            injectionMembers.Add(new Interceptor<InterfaceInterceptor>());
+
+            container.Configure<Interception>()
+                .AddPolicy(string.Format("LoggingFor{0}", theType.Name))
+                .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(theType.FullName))
+                .AddCallHandler<LoggingHandler>(
+                    new ContainerControlledLifetimeManager(),
+                    new InjectionConstructor(new ResolvedParameter<StfLogger>()),
+                    new InjectionProperty("Order", 1));
 
             return injectionMembers;
         }

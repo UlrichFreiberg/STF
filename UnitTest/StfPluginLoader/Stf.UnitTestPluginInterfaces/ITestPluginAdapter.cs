@@ -22,5 +22,13 @@ namespace Stf.Unittests
         /// The <see cref="int"/>.
         /// </returns>
         int TestPluginAdapterFunc();
+
+        /// <summary>
+        /// The can use adapter base internally.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool CanUseAdapterBaseInternally();
     }
 }

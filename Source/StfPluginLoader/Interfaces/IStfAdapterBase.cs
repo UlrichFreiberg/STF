@@ -25,5 +25,24 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="T"/>.
         /// </returns>
         T Get<T>();
+
+        /// <summary>
+        /// The log.
+        /// </summary>
+        /// <param name="logMessage">
+        /// The log message.
+        /// </param>
+        void Log(string logMessage);
+
+        /// <summary>
+        /// The log.
+        /// </summary>
+        /// <param name="logMessage">
+        ///     The log message.
+        /// </param>
+        /// <param name="args">
+        ///     The args.
+        /// </param>
+        void Log(string logMessage, params object[] args);
     }
 }

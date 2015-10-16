@@ -212,6 +212,23 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test method stf logger is injected on adapter base.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAdapterCanBeUsed()
+        {
+            // need to load the UnitTest plug-ins
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            MyAssert.IsNotNull("sp2 != null", sp2);
+
+            var testPluginModel = Get<ITestPluginAdapter>();
+            MyAssert.IsNotNull("testPluginModel != null", testPluginModel);
+            MyAssert.IsTrue("Use ModelBase internally", testPluginModel.CanUseAdapterBaseInternally());
+        }
+
+        /// <summary>
         /// The test method proxy object created for plugin with matching interface.
         /// </summary>
         [TestMethod]

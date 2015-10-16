@@ -40,5 +40,30 @@ namespace Mir.Stf.Utilities
         {
             return StfContainer.Get<T>();
         }
+
+        /// <summary>
+        /// The log.
+        /// </summary>
+        /// <param name="logMessage">
+        /// The log message.
+        /// </param>
+        public void Log(string logMessage)
+        {
+            MyLogger.LogDebug(logMessage);
+        }
+
+        /// <summary>
+        /// The log.
+        /// </summary>
+        /// <param name="logMessage">
+        /// The log message.
+        /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
+        public void Log(string logMessage, params object[] args)
+        {
+            Log(string.Format(logMessage, args));
+        }
     }
 }
