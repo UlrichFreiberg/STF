@@ -48,8 +48,13 @@ $buildScript = "{0}\..\Build\BuildVsSolutions.ps1" -f $rootDir
 Write-Host
 Write-InfoMessage "Note that this script requires Nuget.exe. Get it here: https://dist.nuget.org/index.html"
 
-Execute-Script $setVersionScript
-Execute-Script $buildScript
+& $setVersionScript
+$buildFailure = & $buildScript
+
+if ($buildFailure)
+{
+    Write-Error "One or more builderrors detected. Fix please!" -ErrorAction Stop
+}
 
 Push-Location $stfKernelPath
 
