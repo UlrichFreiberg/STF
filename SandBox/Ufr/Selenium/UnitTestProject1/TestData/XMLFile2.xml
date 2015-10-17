@@ -1,0 +1,1804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<div tabindex="0" class=" x-grid-panel x-component x-border-panel " id="x-auto-142" style="left: 0px; top: 25px; width: 1700px; height: 279px; position: relative;" hidefocus="true">
+  <div class="x-grid3" role="presentation" style="width: 1700px; height: 279px;">
+    <div class="x-grid3-viewport" role="presentation">
+      <div class="x-grid3-header" role="presentation">
+        <div class="x-grid3-header-inner" role="presentation" style="width: 1700px;">
+          <div class="x-grid3-header-offset" role="presentation">
+            <div class="x-grid3-hh" role="row" style="width: 2030px;">
+              <table class=" x-component x-unselectable" id="x-auto-793" role="presentation" style="width: 2011px;" cellspacing="0" cellpadding="0" unselectable="on">
+                <colgroup role="presentation">
+                  <col/>
+                </colgroup>
+                <tbody>
+                  <tr class="x-grid3-hd-row" role="presentation">
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-expander" role="presentation" style="width: 0px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-expander x-component" id="x-auto-748" role="presentation" aria-haspopup="true" aria-owns="x-auto-748-menu" style="height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-747"></span>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-checker" role="presentation" style="width: 20px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-checker x-component" id="x-auto-750" role="columnheader" aria-haspopup="true" aria-owns="x-auto-750-menu" style="width: 18px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-749"></span>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber" role="presentation" style="width: 80px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-investmentAccountDetails.accountNumber x-component" id="x-auto-752" role="columnheader" aria-haspopup="true" aria-owns="x-auto-752-menu" style="width: 78px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-751">
+                          Account<br/>Number</span>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-investmentAccountDetails.accountName" role="presentation" style="width: 140px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-investmentAccountDetails.accountName x-component" id="x-auto-754" role="columnheader" aria-haspopup="true" aria-owns="x-auto-754-menu" style="width: 138px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-753">Account Name</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-caDetails.optionNumber" role="presentation" style="width: 60px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-caDetails.optionNumber x-component" id="x-auto-756" role="columnheader" aria-haspopup="true" aria-owns="x-auto-756-menu" style="width: 58px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-755">Option</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-securityDetails.name" role="presentation" style="width: 80px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-securityDetails.name x-component" id="x-auto-758" role="columnheader" aria-haspopup="true" aria-owns="x-auto-758-menu" style="width: 78px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-757">New Security</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="right" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.stockQuantity" role="presentation" style="width: 70px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.stockQuantity x-component" id="x-auto-760" role="columnheader" aria-haspopup="true" aria-owns="x-auto-760-menu" style="width: 68px; height: 45px; padding-right: 16px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-759">Quantity</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.statusCd" role="presentation" style="width: 100px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.statusCd x-component" id="x-auto-762" role="columnheader" aria-haspopup="true" aria-owns="x-auto-762-menu" style="width: 98px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-761">Status</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay" role="presentation" style="width: 80px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.allocationIdDisplay x-component" id="x-auto-764" role="columnheader" aria-haspopup="true" aria-owns="x-auto-764-menu" style="width: 78px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-763">Allocation ID</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.contractual" role="presentation" style="width: 50px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.contractual x-component" id="x-auto-766" role="columnheader" aria-haspopup="true" aria-owns="x-auto-766-menu" style="width: 48px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-765">
+                          Sett<br/>Type</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled" role="presentation" style="width: 80px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.custodyAccountReconciled x-component" id="x-auto-768" role="columnheader" aria-haspopup="true" aria-owns="x-auto-768-menu" style="width: 78px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-767">Reconciled</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate" role="presentation" style="width: 90px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.expectedSettlementDate x-component" id="x-auto-770" role="columnheader" aria-haspopup="true" aria-owns="x-auto-770-menu" style="width: 88px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-769">
+                          Expt Sett<br/>Date</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd" role="presentation" style="width: 50px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.tradeCurrencyCd x-component" id="x-auto-772" role="columnheader" aria-haspopup="true" aria-owns="x-auto-772-menu" style="width: 48px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-771">Ccy</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="right" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr" role="presentation" style="width: 80px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.grossAmountTradeCurr x-component" id="x-auto-774" role="columnheader" aria-haspopup="true" aria-owns="x-auto-774-menu" style="width: 78px; height: 45px; padding-right: 16px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-773">Gross</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="right" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr" role="presentation" style="width: 80px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.settlementAmountTradeCurr x-component" id="x-auto-776" role="columnheader" aria-haspopup="true" aria-owns="x-auto-776-menu" style="width: 78px; height: 45px; padding-right: 16px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-775">Total Net</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.sourceCd" role="presentation" style="width: 80px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.sourceCd x-component" id="x-auto-778" role="columnheader" aria-haspopup="true" aria-owns="x-auto-778-menu" style="width: 78px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-777">Source</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd" role="presentation" style="width: 100px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.positionTypeCd x-component" id="x-auto-780" role="columnheader" aria-haspopup="true" aria-owns="x-auto-780-menu" style="width: 98px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-779">Position Type</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.claimAssociation" role="presentation" style="width: 130px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.claimAssociation x-component" id="x-auto-782" role="columnheader" aria-haspopup="true" aria-owns="x-auto-782-menu" style="width: 128px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-781">Claim Association</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd" role="presentation" style="width: 120px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.counterpartyCd x-component" id="x-auto-784" role="columnheader" aria-haspopup="true" aria-owns="x-auto-784-menu" style="width: 118px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-783">Counterparty</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd" role="presentation" style="width: 100px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.releaseTypeCd x-component" id="x-auto-786" role="columnheader" aria-haspopup="true" aria-owns="x-auto-786-menu" style="width: 98px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-785">Release Type</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.releaseDate" role="presentation" style="width: 100px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.releaseDate x-component" id="x-auto-788" role="columnheader" aria-haspopup="true" aria-owns="x-auto-788-menu" style="width: 98px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-787">Release Date</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId" role="presentation" style="width: 140px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.claimReceivingInstitutionId x-component" id="x-auto-790" role="columnheader" aria-haspopup="true" aria-owns="x-auto-790-menu" style="width: 138px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-789">Receiving Institution</span>
+                        <img/>
+                      </div>
+                    </td>
+                    <td align="left" class="x-grid3-header x-grid3-hd x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd" role="presentation" style="width: 180px;">
+                      <div class=" x-grid3-hd-inner x-grid3-hd-allocationDetails.claimInstructionStatusCd x-component" id="x-auto-792" role="columnheader" aria-haspopup="true" aria-owns="x-auto-792-menu" style="width: 178px; height: 45px;">
+                        <a class="x-grid3-hd-btn" href="#"></a>
+                        <span class=" x-component" id="x-auto-791">Claim Instruction Status</span>
+                        <img/>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="x-clear"></div>
+      </div>
+      <div class="x-grid3-scroller" role="presentation" style="width: 1700px; height: 234px;" automationId="T1">
+        <div class="x-grid3-body" role="presentation">
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-795" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-796" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-797" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-798" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110000308</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-799" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">JACK THE, TRADER - Jack Test 1 - 11000029</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-800" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-801" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-802" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-803" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-804" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12786</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-805" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000030-11000030</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-806" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-807" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-808" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-809" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-810" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">88,328.76</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-811" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-812" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-813" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-814" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-815" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-816" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-817" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-818" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">88,328.76</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-819" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Automatic CA]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-820" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-821" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-822" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-823" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-824" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-825" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-826" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-827" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">nbsp</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-828" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-829" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-830" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-831" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110000308</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-832" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">JACK THE, TRADER - Jack Test 1 - 11000029</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-833" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-834" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-835" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-836" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-837" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12799</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-838" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000030-11000030_null_POS_TYP_PENR_2029_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-839" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-840" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-841" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-842" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-843" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">3,397.26</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-844" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-845" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-846" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-847" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-848" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-849" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-850" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-851" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">3,397.26</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-852" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-853" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Receivable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-854" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-855" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-856" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-857" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-858" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-859" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-860" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-861" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-862" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-863" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-864" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110000308</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-865" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">JACK THE, TRADER - Jack Test 1 - 11000029</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-866" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-867" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-868" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-869" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-870" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12800</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-871" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000030-11000030_null_POS_TYP_PENR_2029_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-872" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-873" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-874" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-875" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-876" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">3,397.26</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-877" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-878" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-879" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-880" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-881" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-882" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-883" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-884" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">3,397.26</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-885" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-886" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Receivable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-887" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-888" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-889" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-890" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-891" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-892" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-893" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-894" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-895" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-896" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-897" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110000308</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-898" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">JACK THE, TRADER - Jack Test 1 - 11000029</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-899" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-900" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-901" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-902" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-903" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12801</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-904" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000030-11000030_null_POS_TYP_PENR_2029_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-905" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-906" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-907" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-908" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-909" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">33,972.60</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-910" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-911" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-912" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-913" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-914" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-915" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-916" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-917" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">33,972.60</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-918" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-919" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Receivable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-920" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-921" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-922" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-923" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-924" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-925" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-926" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-927" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-928" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-929" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-930" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110000605</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-931" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">KORPPI KALEVI ARTO, FONDA - FONDA Test 1 - 11000059</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-932" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-933" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-934" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-935" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-936" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12788</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-937" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000060-11000060</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-938" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-939" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-940" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-941" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-942" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">6,794.52</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-943" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-944" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-945" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-946" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-947" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-948" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-949" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-950" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">6,794.52</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-951" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Automatic CA]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-952" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-953" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-954" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-955" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-956" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-957" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-958" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-959" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">nbsp</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-960" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-961" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-962" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-963" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001009</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-964" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">OLD STARA OY - Old Stara Test 1 - 11000099</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-965" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-966" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-967" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-968" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-969" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12782</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-970" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000100-11000100_null_POS_TYP_TRK_BRW_2300_CATX_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-971" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-972" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-973" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-974" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-975" role="gridcell" style="width: 80px; text-align: right; color: red;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">-6,794.52</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-976" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-977" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-978" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-979" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-980" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-981" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-982" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-983" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">-6,794.52</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-984" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-985" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Borrow</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-986" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-987" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-988" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Capital Market (Broker)</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-989" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-990" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-991" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-992" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">No Claim Instruction</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-993" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-994" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-995" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-996" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001009</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-997" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">OLD STARA OY - Old Stara Test 1 - 11000099</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-998" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-999" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1000" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1001" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1002" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12787</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1003" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000100-11000100</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1004" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1005" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1006" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1007" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1008" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">406,991.75</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1009" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1010" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1011" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1012" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1013" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1014" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1015" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1016" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">406,991.75</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1017" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Automatic CA]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1018" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1019" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1020" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1021" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1022" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1023" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1024" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1025" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">nbsp</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-1026" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-1027" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-1028" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-1029" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001009</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-1030" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">OLD STARA OY - Old Stara Test 1 - 11000099</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-1031" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-1032" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1033" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1034" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1035" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12804</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1036" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000100-11000100_null_POS_TYP_PEND_2300_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1037" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1038" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1039" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1040" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1041" role="gridcell" style="width: 80px; text-align: right; color: red;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">-203,156.15</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1042" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1043" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1044" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1045" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1046" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1047" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1048" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1049" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">-203,156.15</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1050" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1051" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Payable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1052" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1053" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1054" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Capital Market (Broker)</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1055" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1056" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1057" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1058" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-1059" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-1060" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-1061" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-1062" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001009</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-1063" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">OLD STARA OY - Old Stara Test 1 - 11000099</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-1064" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-1065" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1066" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1067" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1068" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12805</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1069" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000100-11000100_null_POS_TYP_PENR_2300_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1070" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1071" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1072" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1073" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1074" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">203,156.15</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1075" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1076" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1077" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1078" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1079" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1080" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1081" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1082" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">203,156.15</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1083" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1084" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Receivable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1085" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1086" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1087" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Capital Market (Broker)</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1088" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1089" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1090" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1091" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-1092" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-1093" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-1094" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-1095" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001009</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-1096" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">OLD STARA OY - Old Stara Test 1 - 11000099</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-1097" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-1098" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1099" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1100" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1101" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12806</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1102" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000100-11000100_null_POS_TYP_PENR_2300_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1103" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1104" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1105" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1106" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1107" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">6,794.52</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1108" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1109" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1110" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1111" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1112" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1113" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1114" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1115" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">6,794.52</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1116" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1117" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Receivable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1118" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1119" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1120" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Capital Market (Broker)</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1121" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1122" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1123" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1124" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-1125" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-1126" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-1127" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-1128" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001009</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-1129" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">OLD STARA OY - Old Stara Test 1 - 11000099</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-1130" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-1131" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1132" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1133" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1134" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12807</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1135" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000100-11000100_null_POS_TYP_PEND_2300_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1136" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1137" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1138" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1139" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1140" role="gridcell" style="width: 80px; text-align: right; color: red;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">-679.45</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1141" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1142" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1143" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1144" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1145" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1146" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1147" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1148" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">-679.45</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1149" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1150" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Payable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1151" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1152" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1153" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Capital Market (Broker)</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1154" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1155" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1156" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1157" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-1158" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-1159" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-1160" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-1161" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001009</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-1162" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">OLD STARA OY - Old Stara Test 1 - 11000099</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-1163" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-1164" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1165" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1166" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1167" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12808</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1168" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000100-11000100_null_POS_TYP_PEND_NA_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1169" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1170" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1171" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1172" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1173" role="gridcell" style="width: 80px; text-align: right; color: red;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">-203,835.60</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1174" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1175" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1176" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1177" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1178" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1179" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1180" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1181" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">-203,835.60</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1182" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1183" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Payable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1184" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1185" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1186" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1187" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1188" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1189" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1190" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-1191" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-1192" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-1193" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-1194" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001066</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-1195" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">RAVINTOLA VIESKA - Ravintola Test 1 - 11000105</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-1196" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-1197" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1198" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1199" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1200" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12802</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1201" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000106-11000106_null_POS_TYP_PENR_2300_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1202" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1203" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1204" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1205" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1206" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">13,589.04</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1207" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1208" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1209" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1210" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1211" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1212" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1213" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1214" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">13,589.04</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1215" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1216" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Receivable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1217" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1218" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1219" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Capital Market (Broker)</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1220" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1221" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1222" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1223" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="x-grid3-row  x-unselectable-single x-grid3-row-collapsed " id="x-auto-142_x-auto-1224" style="width: 2010px;" unselectable="on">
+            <table class="x-grid3-row-table" role="presentation" style="width: 2010px;" border="0" cellspacing="0" cellpadding="0">
+              <tbody role="presentation">
+                <tr role="presentation">
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-expander x-grid-cell-first " id="x-auto-1225" role="gridcell" style="width: 0px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-expander" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-expander">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-checker " id="x-auto-1226" role="gridcell" style="width: 20px;" rowspan="2">
+                    <div class="x-grid3-cell-inner x-grid3-col-checker" unselectable="on" rowspan="2">
+                      <div class="x-grid3-row-checker">nbsp</div>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountNumber " id="x-auto-1227" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountNumber" unselectable="on">APKE0000000000000220110001066</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-investmentAccountDetails.accountName " id="x-auto-1228" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-investmentAccountDetails.accountName" unselectable="on">RAVINTOLA VIESKA - Ravintola Test 1 - 11000105</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-caDetails.optionNumber " id="x-auto-1229" role="gridcell" style="width: 60px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-caDetails.optionNumber" unselectable="on">001</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-securityDetails.name " id="x-auto-1230" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-securityDetails.name" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.stockQuantity " id="x-auto-1231" role="gridcell" style="width: 70px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.stockQuantity" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.statusCd " id="x-auto-1232" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.statusCd" unselectable="on">Unsettled</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationIdDisplay " id="x-auto-1233" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationIdDisplay" unselectable="on">12803</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.allocationGroupId " id="x-auto-1234" role="gridcell" style="width: 0px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.allocationGroupId" unselectable="on">26227-11000106-11000106_null_POS_TYP_PEND_2300_CATX_AUTO_MKT_CLM</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.contractual " id="x-auto-1235" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.contractual" unselectable="on">A</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.custodyAccountReconciled " id="x-auto-1236" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.custodyAccountReconciled" unselectable="on">
+                      <img/>
+                    </div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.expectedSettlementDate " id="x-auto-1237" role="gridcell" style="width: 90px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.expectedSettlementDate" unselectable="on">13-Oct-2015</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeCurrencyCd " id="x-auto-1238" role="gridcell" style="width: 50px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeCurrencyCd" unselectable="on">EUR</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.grossAmountTradeCurr " id="x-auto-1239" role="gridcell" style="width: 80px; text-align: right; color: red;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.grossAmountTradeCurr" unselectable="on">-13,589.04</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_FEE_AMOUNT " id="x-auto-1240" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FEE_AMOUNT " id="x-auto-1241" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FEE_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.FI_TAX_AMOUNT " id="x-auto-1242" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.FI_TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_AMOUNT " id="x-auto-1243" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TAX_RATE " id="x-auto-1244" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TAX_RATE" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_VAT_AMOUNT " id="x-auto-1245" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_VAT_AMOUNT" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.TOTAL_CHARGES " id="x-auto-1246" role="gridcell" style="width: 80px; text-align: right; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.TOTAL_CHARGES" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.settlementAmountTradeCurr " id="x-auto-1247" role="gridcell" style="width: 80px; text-align: right;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.settlementAmountTradeCurr" unselectable="on">-13,589.04</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.sourceCd " id="x-auto-1248" role="gridcell" style="width: 80px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.sourceCd" unselectable="on">[Market Claims]</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.positionTypeCd " id="x-auto-1249" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.positionTypeCd" unselectable="on">Payable</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimAssociation " id="x-auto-1250" role="gridcell" style="width: 130px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimAssociation" unselectable="on">Automatic Market Claims</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.tradeReference " id="x-auto-1251" role="gridcell" style="width: 120px; display: none;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.tradeReference" unselectable="on">nbsp</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.counterpartyCd " id="x-auto-1252" role="gridcell" style="width: 120px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.counterpartyCd" unselectable="on">Nordea Capital Market (Broker)</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseTypeCd " id="x-auto-1253" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseTypeCd" unselectable="on">Manual Release All Instructions</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.releaseDate " id="x-auto-1254" role="gridcell" style="width: 100px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.releaseDate" unselectable="on"></div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimReceivingInstitutionId " id="x-auto-1255" role="gridcell" style="width: 140px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimReceivingInstitutionId" unselectable="on">Euroclear Finland</div>
+                  </td>
+                  <td class="x-grid3-col x-grid3-cell x-grid3-td-allocationDetails.claimInstructionStatusCd x-grid3-cell-last " id="x-auto-1256" role="gridcell" style="width: 180px;">
+                    <div class="x-grid3-cell-inner x-grid3-col-allocationDetails.claimInstructionStatusCd" unselectable="on">To Be Released</div>
+                  </td>
+                </tr>
+                <tr class="x-grid3-row-body-tr">
+                  <td class="x-grid3-body-cell" colspan="30">
+                    <div class="x-grid3-row-body">${body}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <a tabindex="-1" class="x-grid3-focus" style="left: 850px; top: 274px;" href="#"></a>
+      </div>
+    </div>
+    <div class="x-grid3-resize-marker">nbsp</div>
+    <div class="x-grid3-resize-proxy">nbsp</div>
+  </div>
+  <div class=" x-component" id="x-auto-794" style="left: 244px; top: 0px; width: 5px; height: 279px; visibility: hidden; position: absolute; opacity: 0; background-color: white;"></div>
+</div>
