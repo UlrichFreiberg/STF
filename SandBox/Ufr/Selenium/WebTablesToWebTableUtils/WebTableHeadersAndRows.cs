@@ -87,22 +87,23 @@ namespace WebTablesToWebTableUtils
  
             foreach (var xpathRow in xpathRows)
             {
-                var rowElements = xpathRow.FindElements(By.XPath("tr/td/div"));
+                // a DIV node without any descendents
+                var rowElements = xpathRow.FindElements(By.XPath("tr/td/div/self::node()[not(child::div)]"));
                 var row = new List<string>();
 
                 foreach (var rowElement in rowElements)
                 {
                     var text = rowElement.Text.Trim();
                     var match = Regex.Match(text, RegExpr);
+                    var cellText = string.Empty;
 
-                    if (!match.Success)
+                    if (match.Success)
                     {
-                        continue;
+                        cellText = match.Groups["cell"].Value;
+                        cellText = cellText.Replace("\r\n", string.Empty);
                     }
 
-                    var cellText = match.Groups["cell"].Value;
-                    cellText = cellText.Replace("\r\n", string.Empty).Replace(" ", string.Empty);
-                    row.Add(cellText);                    
+                    row.Add(cellText);
                 }
                 
                 retVal.Add(row);
