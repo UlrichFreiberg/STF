@@ -57,6 +57,8 @@ namespace Mir.Stf
         {
             MyLogger = Get<StfLogger>();
 
+            MyLogger.LogTitle = TestContext.TestName;
+            
             string logFilePostfix = string.Empty;
             var iterationNo = DataRowIndex();
             string iterationStatus = "Not datadriven";
@@ -77,6 +79,7 @@ namespace Mir.Stf
             var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
 
             MyLogger.FileName = logFilename;
+
             MyAssert = new StfAssert(this.MyLogger);
 
             if (TestDataDriven())

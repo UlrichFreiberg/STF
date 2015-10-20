@@ -9,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Text;
 using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
@@ -39,21 +40,18 @@ namespace Mir.Stf.Utilities
         /// <param name="functionName">
         /// The function name.
         /// </param>
-        /// <param name="args">
-        /// The <c>args</c>.
-        /// </param>
         /// <param name="argValues">
         /// The <c>arg</c> values.
         /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName, string[] args, object[] argValues)
+        public int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName, object[] argValues)
         {
-            const string ArgsString = "TODO: Concatenated string of argName and Values";
-            var message = string.Format("> {0} {1} returning {2}", functionName, ArgsString, nameOfReturnType);
+            var argsString = CreateStringFromArgsAndArgsValues(argValues);
+            var message = string.Format("> Entering [{0}] with values [{1}] returning [{2}]", functionName, argsString, nameOfReturnType);
 
-            this.callStack.Push(functionName);
+            callStack.Push(functionName);
             return LogOneHtmlMessage(loglevel, message);
         }
 
@@ -74,7 +72,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName)
         {
-            return LogFunctionEnter(loglevel, nameOfReturnType, functionName, null, null);
+            return LogFunctionEnter(loglevel, nameOfReturnType, functionName, null);
         }
 
         /// <summary>
@@ -95,7 +93,7 @@ namespace Mir.Stf.Utilities
         public int LogFunctionExit(StfLogLevel loglevel, string functionName, object returnValue)
         {
             var poppedName = this.callStack.Pop();
-            var message = string.Format("< Exited {0} returning {1}", poppedName, "returnValue.ToString");
+            var message = string.Format("< Exited [{0}] returning [{1}]", poppedName, returnValue);
 
             return LogOneHtmlMessage(loglevel, message);
         }
@@ -125,7 +123,27 @@ namespace Mir.Stf.Utilities
         /// The log get.
         /// </summary>
         /// <param name="loglevel">
-        /// The log level.
+        /// The loglevel.
+        /// </param>
+        /// <param name="callingProperty">
+        /// The calling property.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public int LogGetEnter(StfLogLevel loglevel, string callingProperty)
+        {
+            var propName = GetLogFriendlyPropName(callingProperty);
+            var message = string.Format("Entering Get Property [{0}]", propName);
+
+            return LogOneHtmlMessage(loglevel, message);
+        }
+
+        /// <summary>
+        /// The log get exit.
+        /// </summary>
+        /// <param name="loglevel">
+        /// The loglevel.
         /// </param>
         /// <param name="callingProperty">
         /// The calling property.
@@ -136,10 +154,11 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogGet(StfLogLevel loglevel, string callingProperty, object getValue)
+        public int LogGetExit(StfLogLevel loglevel, string callingProperty, object getValue)
         {
+            var propName = GetLogFriendlyPropName(callingProperty);
             var valueString = getValue == null ? "null" : getValue.ToString();
-            var message = string.Format("Property {0} Get value [{1}]", callingProperty, valueString);
+            var message = string.Format("Exiting Get Property [{0}] with value [{1}]", propName, valueString);
 
             return LogOneHtmlMessage(loglevel, message);
         }
@@ -159,10 +178,35 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogSet(StfLogLevel loglevel, string callingProperty, object setValue)
+        public int LogSetEnter(StfLogLevel loglevel, string callingProperty, object setValue)
         {
+            var propName = GetLogFriendlyPropName(callingProperty);
             var valueString = setValue == null ? "null" : setValue.ToString();
-            var message = string.Format("Property {0} Set value [{1}]", callingProperty, valueString);
+            var message = string.Format("Entering Set Property [{0}] with value [{1}]", propName, valueString);
+
+            return LogOneHtmlMessage(loglevel, message);
+        }
+
+        /// <summary>
+        /// The log set exit.
+        /// </summary>
+        /// <param name="loglevel">
+        /// The loglevel.
+        /// </param>
+        /// <param name="callingProperty">
+        /// The calling property.
+        /// </param>
+        /// <param name="setValue">
+        /// The set value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public int LogSetExit(StfLogLevel loglevel, string callingProperty, object setValue)
+        {
+            var propName = GetLogFriendlyPropName(callingProperty);
+            var valueString = setValue == null ? "null" : setValue.ToString();
+            var message = string.Format("Exiting Set Property [{0}] after setting value [{1}]", propName, valueString);
 
             return LogOneHtmlMessage(loglevel, message);
         }
@@ -184,6 +228,52 @@ namespace Mir.Stf.Utilities
             }
 
             return retVal;
+        }
+
+        /// <summary>
+        /// The create string from parameter collection.
+        /// </summary>
+        /// <param name="argumentValues">
+        /// The argument values.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string CreateStringFromArgsAndArgsValues(object[] argumentValues)
+        {
+            if (argumentValues == null)
+            {
+                return string.Empty;
+            }
+
+            var formattedString = "{0}, ";
+            var stringBuilder = new StringBuilder();
+
+            foreach (object argValue in argumentValues)
+            {
+                if (argumentValues.Length == 1 || argumentValues[argumentValues.Length - 1] == argValue)
+                {
+                    formattedString = "{0}";
+                }
+
+                stringBuilder.Append(string.Format(formattedString, argValue));
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// The get log friendly prop name.
+        /// </summary>
+        /// <param name="propName">
+        /// The prop name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetLogFriendlyPropName(string propName)
+        {
+            return string.IsNullOrEmpty(propName) ? propName : propName.Replace("get_", string.Empty).Replace("set_", string.Empty);
         }
     }
 }

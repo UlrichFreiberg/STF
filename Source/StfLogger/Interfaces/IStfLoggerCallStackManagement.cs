@@ -27,16 +27,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="functionName">
         /// The function name.
         /// </param>
-        /// <param name="args">
-        /// The <c>args</c>.
-        /// </param>
         /// <param name="argValues">
         /// The <c>arg</c> values.
         /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName, string[] args, object[] argValues);
+        int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName, object[] argValues);
 
         /// <summary>
         /// The log function exit. Should be called/inserted when exiting a model/adapter function.
@@ -66,13 +63,27 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="callingProperty">
         /// The calling property.
         /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogGetEnter(StfLogLevel loglevel, string callingProperty);
+
+        /// <summary>
+        /// The log get exit.
+        /// </summary>
+        /// <param name="loglevel">
+        /// The loglevel.
+        /// </param>
+        /// <param name="callingProperty">
+        /// The calling property.
+        /// </param>
         /// <param name="getValue">
         /// The get value.
         /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogGet(StfLogLevel loglevel, string callingProperty, object getValue);
+        int LogGetExit(StfLogLevel loglevel, string callingProperty, object getValue);
 
         /// <summary>
         /// The log set.
@@ -89,6 +100,23 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogSet(StfLogLevel loglevel, string callingProperty, object setValue);
+        int LogSetEnter(StfLogLevel loglevel, string callingProperty, object setValue);
+
+        /// <summary>
+        /// The log set exit.
+        /// </summary>
+        /// <param name="loglevel">
+        /// The loglevel.
+        /// </param>
+        /// <param name="callingProperty">
+        /// The calling property.
+        /// </param>
+        /// <param name="setValue">
+        /// The set value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogSetExit(StfLogLevel loglevel, string callingProperty, object setValue);
     }
 }

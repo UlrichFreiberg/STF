@@ -395,7 +395,6 @@ namespace Mir.Stf.Utilities
             OverwriteLogFile = Configuration.OverwriteLogFile;
             TestName = "TestName_Not_Set";
             LogToFile = Configuration.LogToFile;
-            LogTitle = Configuration.LogTitle;
             this.LogLevel = Configuration.LogLevel;
 
             if (LogFileHandle.Initialized)

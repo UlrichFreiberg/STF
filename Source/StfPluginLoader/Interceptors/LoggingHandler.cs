@@ -9,8 +9,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Reflection;
 using System.Text;
 using Microsoft.Practices.Unity.InterceptionExtension;
+using Mir.Stf.Utilities.Extensions;
 
 namespace Mir.Stf.Utilities.Interceptors
 {
@@ -91,7 +93,7 @@ namespace Mir.Stf.Utilities.Interceptors
         /// </returns>
         public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
         {
-            LogThisInfo(input.MethodBase.Name, LogMessageType.Enter, input.Inputs, string.Empty);
+            LogThisMessage(input.MethodBase.Name, LogMessageType.Enter, input.Inputs, GetReturnType(input.MethodBase), string.Empty);
 
             var result = getNext().Invoke(input, getNext);
 
@@ -104,28 +106,39 @@ namespace Mir.Stf.Utilities.Interceptors
             }
             else
             {
-                LogThisInfo(input.MethodBase.Name, LogMessageType.Exit, input.Inputs, result.ReturnValue);
+                LogThisMessage(input.MethodBase.Name, LogMessageType.Exit, input.Inputs, GetReturnType(input.MethodBase), result.ReturnValue);
             }
 
             return result;
         }
 
         /// <summary>
-        /// The log this info.
+        /// The log this message.
         /// </summary>
         /// <param name="methodName">
-        /// Name of method or property
+        /// The method name.
         /// </param>
         /// <param name="messageType">
-        /// Enter or exit
+        /// The message type.
         /// </param>
         /// <param name="inputs">
-        /// Inputs for method or property call
+        /// The inputs.
+        /// </param>
+        /// <param name="returnTypeName">
+        /// The return Type Name.
         /// </param>
         /// <param name="returnValue">
-        /// Returnvalue of method call
+        /// The return value.
         /// </param>
-        private void LogThisInfo(string methodName, LogMessageType messageType, IParameterCollection inputs, object returnValue)
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// If unrecognized membertype
+        /// </exception>
+        private void LogThisMessage(
+            string methodName, 
+            LogMessageType messageType, 
+            IParameterCollection inputs,
+            string returnTypeName, 
+            object returnValue)
         {
             var typeOfMethod = GetTypeOfMember(methodName);
             switch (typeOfMethod)
@@ -134,12 +147,10 @@ namespace Mir.Stf.Utilities.Interceptors
                     switch (messageType)
                     {
                         case LogMessageType.Enter:
-                            var enterSet = "Setting [{0}] to value [{1}]";
-                            LogPropertyMessage(methodName, enterSet, CreateStringFromParameterCollection(inputs));
+                            stfLogger.LogSetEnter(StfLogLevel.Info, methodName, CreateStringFromParameterCollection(inputs));
                             break;
                         case LogMessageType.Exit:
-                            var exitSet = "Set [{0}] to value [{1}]";
-                            LogPropertyMessage(methodName, exitSet, CreateStringFromParameterCollection(inputs));
+                            stfLogger.LogSetExit(StfLogLevel.Info, methodName, CreateStringFromParameterCollection(inputs));
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
@@ -150,12 +161,10 @@ namespace Mir.Stf.Utilities.Interceptors
                     switch (messageType)
                     {
                         case LogMessageType.Enter:
-                            var enterGet = "Getting value from [{0}]";
-                            LogPropertyMessage(methodName, enterGet, null);
+                            stfLogger.LogGetEnter(StfLogLevel.Info, methodName);
                             break;
                         case LogMessageType.Exit:
-                            var exitGet = "Got value [{1}] from [{0}]";
-                            LogPropertyMessage(methodName, exitGet, returnValue);
+                            stfLogger.LogGetExit(StfLogLevel.Info, methodName, returnValue);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
@@ -166,10 +175,10 @@ namespace Mir.Stf.Utilities.Interceptors
                     switch (messageType)
                     {
                         case LogMessageType.Enter:
-                            LogEnterMethodCall(methodName, CreateStringFromParameterCollection(inputs));
+                            stfLogger.LogFunctionEnter(StfLogLevel.Info, returnTypeName, methodName, inputs.ToArray());
                             break;
                         case LogMessageType.Exit:
-                            LogExitMethodCall(methodName, returnValue);
+                            stfLogger.LogFunctionExit(StfLogLevel.Info, methodName, returnValue);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
@@ -202,46 +211,6 @@ namespace Mir.Stf.Utilities.Interceptors
 
             var propName = propertyName.Replace("get_", string.Empty).Replace("set_", string.Empty);
             stfLogger.LogInfo(string.Format(templateMessage, propName, value));
-        }
-
-        /// <summary>
-        /// Log call to a method
-        /// </summary>
-        /// <param name="methodName">
-        /// Name of method
-        /// </param>
-        /// <param name="returnValue">
-        /// The object representing the return value
-        /// </param>
-        private void LogExitMethodCall(string methodName, object returnValue)
-        {
-            var logMessage = "Exiting [{0}] with return value [{1}]";
-            if (returnValue == null)
-            {
-                logMessage = "Exiting [{0}]";
-            }
-
-            stfLogger.LogInfo(string.Format(logMessage, methodName, returnValue));
-        }
-
-        /// <summary>
-        /// Log message when entering method
-        /// </summary>
-        /// <param name="methodName">
-        /// The name of the method
-        /// </param>
-        /// <param name="methodParametersAsString">
-        /// Parameters as a string
-        /// </param>
-        private void LogEnterMethodCall(string methodName, string methodParametersAsString)
-        {
-            var logMessage = "Entering [{0}] with parameters [{1}]";
-            if (string.IsNullOrEmpty(methodParametersAsString))
-            {
-                logMessage = "Entering [{0}]";
-            }
-
-            stfLogger.LogInfo(string.Format(logMessage, methodName, methodParametersAsString));
         }
 
         /// <summary>
@@ -295,5 +264,21 @@ namespace Mir.Stf.Utilities.Interceptors
 
             return stringBuilder.ToString();
         }
+
+        /// <summary>
+        /// The get return type.
+        /// </summary>
+        /// <param name="methodBase">
+        /// The method base.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetReturnType(MethodBase methodBase)
+        {
+            var methodInfo = methodBase as MethodInfo;
+            return methodInfo == null ? string.Empty : methodInfo.ReturnType.Name;
+        }
+
     }
 }

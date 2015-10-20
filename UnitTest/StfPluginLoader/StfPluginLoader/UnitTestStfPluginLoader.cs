@@ -57,6 +57,14 @@ namespace UnitTest
             var plugin2Type = Get<ITestPluginModel>();
             MyAssert.IsNotNull("Get<ITestPluginModel>", plugin2Type);
             MyAssert.AreEqual("plugin2Type.TestPluginFunc", 202, plugin2Type.TestPluginFunc());
+
+            var plugin2Type2 = Get<ITestPluginModel2>();
+            MyAssert.IsNotNull("Get<ITestPluginModel>", plugin2Type2);
+            MyAssert.AreEqual("plugin2Type.TestPluginFunc", "2+2=4", plugin2Type2.TestPlugin2FuncWithParams("2+2", 4));
+
+            MyAssert.AreEqual("plugin2Type.TestProp", "Default", plugin2Type2.TestProp);
+            plugin2Type2.TestProp = "NewValue";
+            MyAssert.AreEqual("plugin2Type.TestProp", "NewValue", plugin2Type2.TestProp);
         }
 
         /// <summary>

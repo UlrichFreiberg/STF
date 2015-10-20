@@ -54,7 +54,7 @@ namespace UnitTest
             MyLogger.LogHeader("LogHeader");
             MyLogger.LogSubHeader("LogSubHeader");
 
-            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction", new[] { "arg1", "arg2" }, new object[] { null });
+            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction", new object[] { "arg1", "arg2", "arg3" });
             MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction", 42);
 
             MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunctionShort");
@@ -66,8 +66,10 @@ namespace UnitTest
 
             MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
 
-            MyLogger.LogGet(StfLogLevel.Info, "MyTestProperty", MyLogger);
-            MyLogger.LogSet(StfLogLevel.Info, "MyTestProperty", MyLogger);
+            MyLogger.LogGetEnter(StfLogLevel.Info, "MyTestProperty");
+            MyLogger.LogGetExit(StfLogLevel.Info, "MyTestProperty", MyLogger);
+            MyLogger.LogSetEnter(StfLogLevel.Info, "MyTestProperty", MyLogger);
+            MyLogger.LogSetExit(StfLogLevel.Info, "MyTestProperty", MyLogger);
 
             MyLogger.LogAutomationIdObject(StfLogLevel.Internal, MyLogger, "Using MyLogger as AID for test");
 
