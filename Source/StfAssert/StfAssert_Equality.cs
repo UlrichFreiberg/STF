@@ -41,18 +41,16 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool AreEqual<T1, T2>(string testStep, T1 expected, T2 actual)
         {
-            bool retVal = true;
-            string msg;
+            var retVal = true;
+            var msg = string.Format("AreEqual: [{0}] Are Equal to [{1}]", expected, actual);
 
             try
             {
-                msg = string.Format("AreEqual: [{0}] Are Equal to [{1}]", expected, actual);
                 Assert.AreEqual(expected, actual);
                 this.AssertPass(testStep, msg);
             }
-            catch (AssertFailedException ex)
+            catch (AssertFailedException)
             {
-                msg = ex.Message;
                 retVal = false;
                 this.AssertFail(testStep, msg);
             }
@@ -78,17 +76,15 @@ namespace Mir.Stf.Utilities
         public bool AreNotEqual(string testStep, object expected, object actual)
         {
             bool retVal;
-            string msg;
+            var msg = string.Format("AreNotEqual: [{0}] Not Equal to [{1}]", expected, actual);
 
             try
             {
                 Assert.AreNotEqual(expected, actual);
-                msg = string.Format("AreNotEqual: [{0}] Not Equal to [{1}]", expected, actual);
                 retVal = this.AssertPass(testStep, msg);
             }
-            catch (AssertFailedException ex)
+            catch (AssertFailedException)
             {
-                msg = ex.Message;
                 retVal = false;
                 this.AssertFail(testStep, msg);
             }

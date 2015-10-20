@@ -32,6 +32,7 @@ namespace UnitTest
             var obj2 = new DateTime(4242);
 
             MyAssert.EnableNegativeTesting = true;
+            MyLogger.Configuration.ScreenshotOnLogFail = false;
 
             Assert.IsTrue(MyAssert.AreEqual("1 = 1", 1, 1));
             Assert.IsFalse(MyAssert.AreEqual("1 = 1.0", 1, 1.0));
