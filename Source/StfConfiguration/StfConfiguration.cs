@@ -34,6 +34,16 @@ namespace Mir.Stf.Utilities
         private Section currentlyLoadedSection;
 
         /// <summary>
+        /// The configuration for the set environment from the resolved configuration.
+        /// </summary>
+        private Section environmentConfiguration;
+
+        /// <summary>
+        /// Backing field for Environment
+        /// </summary>
+        private string environment;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StfConfiguration"/> class.
         /// and loads it with the configuration tree in the file
         /// </summary>
@@ -50,6 +60,91 @@ namespace Mir.Stf.Utilities
         /// </summary>
         public StfConfiguration()
         {
+        }
+
+        /// <summary>
+        /// Gets or sets the current Environment.
+        /// For most test configurations Environment is an intrinsic abstraction.
+        /// </summary>
+        public string Environment
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(environment))
+                {
+                    Environment = DefaultEnvironment;
+                }
+
+                return environment;
+            }
+
+            set
+            {
+                // no need to change is same:-)
+                if (environment == value)
+                {
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(value))
+                {
+                    environment = null;
+                    environmentConfiguration = currentlyLoadedSection;
+                    return;
+                }
+
+                var configEnvironmentSection = currentlyLoadedSection.Sections["Environments"];
+                var newEnvironmentName = value;
+                var newEnvironmentConfig = configEnvironmentSection.Sections[newEnvironmentName];
+
+                if (newEnvironmentConfig == null)
+                {
+                    return;
+                }
+
+                environment = newEnvironmentName;
+                environmentConfiguration = newEnvironmentConfig;
+            }
+        }
+
+        /// <summary>
+        /// Gets the default environment set in configuration file
+        /// </summary>
+        public string DefaultEnvironment
+        {
+            get
+            {
+                if (!currentlyLoadedSection.Sections.ContainsKey("Environments"))
+                {
+                    return null;
+                }
+
+                var environmentSection = currentlyLoadedSection.Sections["Environments"];
+                return currentlyLoadedSection.Sections["Environments"].DefaultSection;
+            }
+        }
+
+        /// <summary>
+        /// Get a value for a key - take into account and checks for the current Environment if set.
+        /// </summary>
+        /// <param name="configValuePath">
+        /// Path to the KeyValue pair
+        /// </param>
+        /// <returns>
+        /// the value of the keyValue pair
+        /// </returns>
+        public string GetConfigValue(string configValuePath)
+        {
+            var configToUse = currentlyLoadedSection;
+
+            // lets see if we should use the Environment configuration
+            if (!string.IsNullOrEmpty(Environment))
+            {
+                configToUse = environmentConfiguration;
+            }
+
+            var value = GetKeyValue(configToUse, configValuePath);
+            return value;
         }
 
         /// <summary>

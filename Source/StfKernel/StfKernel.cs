@@ -45,6 +45,9 @@ namespace Mir.Stf
             PluginLoader = new StfPluginLoader(KernelLogger);
             PluginLoader.RegisterInstance(typeof(StfConfiguration), StfConfiguration);
             PluginLoader.LoadStfPlugins(StfConfiguration.GetKeyValue("StfKernel.PluginPath"));
+
+            // now all configurations are loaded, we can set the Environment.
+            StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
         }
 
         /// <summary>
