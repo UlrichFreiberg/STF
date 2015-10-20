@@ -179,7 +179,8 @@ namespace Mir.Stf.Utilities
             {
                 container.RegisterType(
                     typeToRegister, 
-                    new InjectionProperty("StfContainer"));
+                    new InjectionProperty("StfContainer"),
+                    new InjectionProperty("MyLogger"));
                 
                 return;
             }
