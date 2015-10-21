@@ -61,6 +61,24 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test method plugin 2 settings overlayed.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodPlugin2SettingsOverlayed()
+        {
+            var configuration = Get<StfConfiguration>();
+            MyAssert.AreEqual("DefaulEnvironment == ENV1", "ENV1", configuration.DefaultEnvironment);
+
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            MyAssert.AreEqual("DefaulEnvironment == ENV2", "ENV2", configuration.DefaultEnvironment);
+
+            var env2Keyvalue = configuration.GetConfigValue("UnitTestPlugin2.UnitTestPlugin2Key");
+            MyAssert.IsNotNull("Key not null", env2Keyvalue);
+            MyAssert.AreEqual("ENV2 keyvalue", "ENV2_Value", env2Keyvalue);
+        }
+
+        /// <summary>
         /// The test method get plugin type test.
         /// </summary>
         [TestMethod]
