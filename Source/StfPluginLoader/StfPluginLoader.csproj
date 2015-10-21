@@ -113,6 +113,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StfConfiguration\StfConfiguration.csproj">
+      <Project>{2d259b87-a08e-406f-818c-6f60bc16c983}</Project>
+      <Name>StfConfiguration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StfLogger\StfLogger.csproj">
       <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
       <Name>StfLogger</Name>

@@ -58,6 +58,10 @@
       <Project>{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}</Project>
       <Name>StfAssert</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Source\StfConfiguration\StfConfiguration.csproj">
+      <Project>{2D259B87-A08E-406F-818C-6F60BC16C983}</Project>
+      <Name>StfConfiguration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Source\StfKernel\StfKernel.csproj">
       <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
       <Name>StfKernel</Name>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
+  <section name="StfKernel">
+    <key name="PluginPath" value="%STF_ROOT%\Plugins\" />
+  </section>
+  <section name="Environments" defaultsection="ENV1">
+    <section name="ENV1"></section>
+    <section name="ENV2"></section>
+  </section>
+</configuration>

@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Improvements to the interception loghandler. Now also setting testname as the logtitle</releaseNotes>
+    <releaseNotes>More explicit handling of Environments section in configuration</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>

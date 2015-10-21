@@ -190,6 +190,30 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// The overlayer used by the pluginloader. Meant to take a (plugin)settings
+        /// and overlay the core configuration with a (plugin)settings.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Section"/>.
+        /// </returns>
+        public Section OverLay(string filename)
+        {
+            var overLayer = new OverLayer();
+            var stfconfiguration = new StfConfiguration();
+            var overlay = stfconfiguration.LoadConfig(filename);
+
+            // the overlayer handles if arguments are null
+            currentlyLoadedSection = overLayer.OverLay(currentlyLoadedSection, overlay);
+            
+            Environment = DefaultEnvironment;
+            
+            return currentlyLoadedSection;
+        }
+
+        /// <summary>
         /// Initiates a dictionary of relevant information given a endUser configuration type.
         /// </summary>
         /// <param name="userConfigurationObject">

@@ -10,6 +10,7 @@
 
 using System;
 using Mir.Stf;
+using Mir.Stf.Utilities;
 using Stf.Unittests.UnitTestPluginTypes;
 
 namespace UnitTest
@@ -39,6 +40,24 @@ namespace UnitTest
             var sp2 = Get<IStfUnitTestPlugin2>();
             MyAssert.IsNotNull("Get<IStfUnitTestPlugin2>", sp2);
             MyAssert.AreEqual("sp2.StfUnitTestPlugin2Func", 102, sp2.StfUnitTestPlugin2Func());
+        }
+
+        /// <summary>
+        /// The test method plugin settings overlayed.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodPluginSettingsOverlayed()
+        {
+            var configuration = Get<StfConfiguration>();
+            MyAssert.AreEqual("DefaulEnvironment == ENV1", "ENV1", configuration.DefaultEnvironment);
+            
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            MyAssert.AreEqual("DefaulEnvironment == ENV2", "ENV2", configuration.DefaultEnvironment);
+            
+            var env2Keyvalue = configuration.GetConfigValue("UnitTestPlugin1.UnitTestPlugin1Key");
+            MyAssert.IsNotNull("Key not null", env2Keyvalue);
+            MyAssert.AreEqual("ENV2 keyvalue", "ENV2_Value", env2Keyvalue);
         }
 
         /// <summary>

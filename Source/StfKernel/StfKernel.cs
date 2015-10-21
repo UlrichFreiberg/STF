@@ -41,8 +41,9 @@ namespace Mir.Stf
             KernelLogger = new StfLogger { Configuration = { LogFileName = Path.Combine(StfLogDir, @"KernelLogger.html") } };
             StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
 
+
             // Any plugins for us?
-            PluginLoader = new StfPluginLoader(KernelLogger);
+            PluginLoader = new StfPluginLoader(KernelLogger, StfConfiguration);
             PluginLoader.RegisterInstance(typeof(StfConfiguration), StfConfiguration);
             PluginLoader.LoadStfPlugins(StfConfiguration.GetKeyValue("StfKernel.PluginPath"));
 
@@ -117,6 +118,7 @@ namespace Mir.Stf
         /// The plugin patterns
         /// </param>
         /// <returns>
+        /// A boolean indicating whether successfull
         /// </returns>
         protected bool LoadAdditionalStfPlugins(string directoryName, string pluginPatterns)
         {
