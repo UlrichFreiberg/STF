@@ -14,18 +14,15 @@ using Mir.Stf.Utilities;
 
 namespace Tests
 {
+    /// <summary>
+    /// The reflection test.
+    /// </summary>
     [TestClass]
     public class ReflectionTest : StfTestScriptBase
     {
-        class TestMethod1Class
-        {
-            [ConfigAttributes.ConfigInfo("SectionName.k1")]
-            public string PropPublicString1 { get; set; }
-
-            [ConfigAttributes.ConfigInfo("SectionName.SubSectionName.k2")]
-            public string PropPublicString2 { get; set; }
-        }
-
+        /// <summary>
+        /// The reflection test method 1.
+        /// </summary>
         [TestMethod]
         public void ReflectionTestMethod1()
         {
@@ -44,6 +41,24 @@ namespace Tests
             Assert.IsTrue(props.Count > 0, "Props collection is empty");
             Assert.AreEqual("config_key1value", tmc1.PropPublicString1);
             Assert.AreEqual("config_key2value", tmc1.PropPublicString2);
+        }
+
+        /// <summary>
+        /// The test method 1 class.
+        /// </summary>
+        private class TestMethod1Class
+        {
+            /// <summary>
+            /// Gets or sets the prop public string 1.
+            /// </summary>
+            [ConfigAttributes.ConfigInfo("SectionName.k1")]
+            public string PropPublicString1 { get; set; }
+
+            /// <summary>
+            /// Gets or sets the prop public string 2.
+            /// </summary>
+            [ConfigAttributes.ConfigInfo("SectionName.SubSectionName.k2")]
+            public string PropPublicString2 { get; set; }
         }
     }
 }
