@@ -30,23 +30,23 @@ namespace Mir.Stf.Utilities
         private readonly IUnityContainer container;
 
         /// <summary>
+        /// The plugin assembly list.
+        /// </summary>
+        private IList<Assembly> pluginAssemblyList; 
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StfPluginLoader"/> class.
         /// </summary>
         /// <param name="stfLogger">
         /// The stf Logger.
         /// </param>
-        public StfPluginLoader(StfLogger stfLogger)
+        /// <param name="stfConfiguration">
+        /// The stf Configuration.
+        /// </param>
+        public StfPluginLoader(StfLogger stfLogger, StfConfiguration stfConfiguration)
         {
             PluginLogger = stfLogger;
-            container = new UnityContainer();
-            RegisterInternalTypes();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StfPluginLoader"/> class.
-        /// </summary>
-        public StfPluginLoader()
-        {
+            StfConfiguration = stfConfiguration;
             container = new UnityContainer();
             RegisterInternalTypes();
         }
@@ -55,6 +55,19 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the plugin logger.
         /// </summary>
         private StfLogger PluginLogger { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stf configuration.
+        /// </summary>
+        private StfConfiguration StfConfiguration { get; set; }
+
+        /// <summary>
+        /// Gets the plugin assemblies.
+        /// </summary>
+        private IList<Assembly> PluginAssemblies
+        {
+            get { return pluginAssemblyList ?? (pluginAssemblyList = new List<Assembly>()); }
+        }
 
         /// <summary>
         /// The load stf plugins.
@@ -107,10 +120,13 @@ namespace Mir.Stf.Utilities
                         if (type.GetInterface(typeof(IStfPlugin).FullName) != null)
                         {
                             RegisterPlugin(type);
+                            PluginAssemblies.Add(assembly);
                         }
                     }
                 }
             }
+
+            OverlayPluginSettings();
 
             return container.Registrations.Count();
         }
@@ -206,6 +222,62 @@ namespace Mir.Stf.Utilities
 
             container.RegisterInstance(PluginLogger);
             container.AddNewExtension<Interception>();
+        }
+
+        /// <summary>
+        /// The overlay plugin settings.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool OverlayPluginSettings()
+        {
+            if (PluginAssemblies.Count == 0)
+            {
+                return false;
+            }
+
+            var success = true;
+            var fileNameFormat = "{0}.PluginSettings.Xml";
+            foreach (var assembly in PluginAssemblies)
+            {
+                var settingsFile = string.Format(fileNameFormat, assembly.Location);
+                if (!File.Exists(settingsFile))
+                {
+                    continue;
+                }
+
+                if (!PerformOverlay(settingsFile))
+                {
+                    success = false;
+                }
+            }
+
+            return success;
+        }
+
+        /// <summary>
+        /// The perform overlay.
+        /// </summary>
+        /// <param name="settingsFilePath">
+        /// The settings file path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool PerformOverlay(string settingsFilePath)
+        {
+            try
+            {
+                StfConfiguration.OverLay(settingsFilePath);
+            }
+            catch (Exception ex)
+            {
+                PluginLogger.LogInternal(string.Format("Error when overlaying plugin settings: {0}", ex.Message));
+                return false;
+            }
+
+            return true;
         }
     }
 }

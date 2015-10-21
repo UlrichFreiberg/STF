@@ -85,7 +85,7 @@ namespace Mir.Stf.Utilities
             {
                 var property = t.GetProperty(uc.Key);
                 var currentValue = property.GetValue(this.currentFieldSet);
-                var newValue = stfConfiguration.GetKeyValue(uc.Value);
+                var newValue = stfConfiguration.GetConfigValue(uc.Value);
                 property.SetValue(currentFieldSet, newValue);
             }
 
