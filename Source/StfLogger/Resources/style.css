@@ -289,3 +289,7 @@ span.roproperties {
     font-family: "courier", "monospace";
     font-size: 1.0em;
 }
+
+.left {
+    float:left;
+}

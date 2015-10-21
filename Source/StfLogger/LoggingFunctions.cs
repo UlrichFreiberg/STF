@@ -13,6 +13,8 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// The test result html logger. The <see cref="IStfLoggerLoggingFunctions"/> part.
     /// </summary>
@@ -242,7 +244,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public int LogFail(string testStepName, string message)
         {
-            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);            
+            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
             const StfLogLevel TheLogLevel = StfLogLevel.Fail;
             var length = 0;
 
@@ -343,6 +345,26 @@ namespace Mir.Stf.Utilities
             logLevelString = logLevelString.ToLower();
 
             CheckForPerformanceAlert();
+
+            if (Configuration.MapNewlinesToBr)
+            {
+                var multiLineMatch = Regex.Match(message, @"\n", RegexOptions.Multiline);
+
+                if (multiLineMatch.Success)
+                {
+                    var multiLineMessageParts = Regex.Match(message, "(?<firstLine>[^\n]+)", RegexOptions.Multiline);
+                    var firstLine = multiLineMessageParts.Groups["firstLine"].Value;
+                    var restOfMessage = Regex.Replace(message, "^" + firstLine, string.Empty);
+
+                    var multiLineSection = string.Format("<a class=\"left\" href=\"javascript:toggle_messege()\" id='href_about'> {0} </a>", firstLine);
+//                    multiLineSection += "  <br />";
+                    multiLineSection += "    <div id='div_messege' class='hide' style=\"display:none;\">";
+                    multiLineSection += restOfMessage.Replace("\n", "<br/>");
+                    multiLineSection += "    </div>";
+
+                    message = multiLineSection;
+                }
+            }
 
             switch (loglevel)
             {

@@ -33,6 +33,7 @@ namespace Mir.Stf.Utilities
             AlertLongInterval = Settings.Setting("AlertLongInterval", 30000);
             PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
             ScreenshotOnLogFail = Settings.Setting("ScreenshotOnLogFail", true);
+            MapNewlinesToBr = Settings.Setting("MapNewlinesToBr", true);
 
             const StfLogLevel DefaultLoglevel = StfLogLevel.Internal;
             var logLevelString = Settings.Setting("LogLevel", DefaultLoglevel.ToString());
@@ -87,6 +88,11 @@ namespace Mir.Stf.Utilities
         /// Gets or sets a value indicating whether to log a screenshot when calling log fail.
         /// </summary>
         public bool ScreenshotOnLogFail { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether log entries with newlines will be mapped to html tag BR 
+        /// </summary>
+        public bool MapNewlinesToBr { get; set; }
 
         /// <summary>
         /// The string to log level.

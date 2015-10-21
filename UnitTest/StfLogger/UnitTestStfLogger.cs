@@ -224,6 +224,18 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test screenshot on log fail.
+        /// </summary>
+        [TestMethod]
+        public void TestLogTextWithNewlines()
+        {
+            MyLogger.LogLevel = StfLogLevel.Info;
+            MyLogger.LogInfo("Single line 1");
+            MyLogger.LogInfo("Multi line\nSecond row\nThird row\n\nBlank line above\nLast line");
+            MyLogger.LogInfo("Single line 2");
+        }
+
+        /// <summary>
         /// The test for keyvalues
         /// </summary>
         [TestMethod]

@@ -10,6 +10,17 @@ var DebugCount = 1;
 var TraceCount = 1;
 var InternalCount = 1;
 
+var MessegeType = "inline";
+
+function toggle_messege() {
+    document.getElementById("div_messege").style.display = MessegeType;
+    if (MessegeType === "inline") {
+        MessegeType = "none";
+    } else {
+        MessegeType = "inline";
+    }
+}
+
 function getURLParameter(name) {
     return decodeURIComponent((new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(location.search) || [, ""])[1].replace(/\+/g, "%20")) || null;
 }
