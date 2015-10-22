@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace StfArchiver
+namespace Mir.Stf.Utilities
 {
     using System;
     using System.Collections.Generic;
@@ -47,8 +47,6 @@ namespace StfArchiver
         /// </returns>
         public bool Init()
         {
-            // If Not Ptf_Fso.FolderExists(Ptf_Configuration.PtfLogger.TestResultsDir) Then
-            // Ptf_Logger.LogError "Kunne ikke få adgang til resultat-arkivet[" & Ptf_Configuration.PtfLogger.TestResultsDir & "], som er en forudsætning for at kunne arkivere filer."
             FilesToArchive = new List<string>();
             DirectoriesToArchive = new List<string>();
 
@@ -110,6 +108,7 @@ namespace StfArchiver
 
             }
 
+            // TODO: Generate filelist.txt and place it in the DestinationDir
             var retVal = ZipDestination();
             return true;
         }
