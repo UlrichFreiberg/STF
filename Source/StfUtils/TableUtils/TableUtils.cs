@@ -14,6 +14,8 @@ using Slapper;
 
 namespace Mir.Stf.Utilities.TableUtils
 {
+    using System.Reflection;
+
     /// <summary>
     /// The web table header description.
     /// </summary>
@@ -119,6 +121,34 @@ namespace Mir.Stf.Utilities.TableUtils
             // Act
             var retVal = AutoMapper.MapDynamic<T>(RowType) as T;
             return retVal;
+        }
+
+        /// <summary>
+        /// The projection. 
+        /// </summary>
+        /// <param name="initializeMe">
+        /// First argument is usually a containing "this" to initialize the properties for "this".
+        /// </param>
+        /// <param name="row">
+        /// The row as a string array
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of the record in the recieving end
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        public T Projection<T>(T initializeMe, string[] row) where T : class
+        {
+            var projectionObject = Projection<T>(row);
+
+            var fields = initializeMe.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+            foreach (var field in fields)
+            {
+                field.SetValue(initializeMe, field.GetValue(projectionObject));
+            }
+
+            return projectionObject;
         }
 
         /// <summary>
