@@ -32,25 +32,36 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets or sets the list of files to archive
         /// </summary>
-        public IList<string> FilesToArchive { get; set; }
+        private IList<string> FilesToArchive { get; set; }
 
         /// <summary>
         /// Gets or sets the list of directories to archive
         /// </summary>
-        public IList<string> DirectoriesToArchive { get; set; }
+        private IList<string> DirectoriesToArchive { get; set; }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="testname">
+        /// </param>
+        public StfArchiver(string testname)
+        {
+            Init(testname);
+        }
 
         /// <summary>
         /// Sets up the archiver.
         /// </summary>
+        /// <param name="testname">
+        /// </param>
         /// <returns>
         /// indication of success
         /// </returns>
-        public bool Init()
+        public bool Init(string testname)
         {
             FilesToArchive = new List<string>();
             DirectoriesToArchive = new List<string>();
 
-            ArchiveDestination = CalculateDefaultarchiveDestination();
+            ArchiveDestination = CalculateDefaultarchiveDestination(testname);
             return true;
         }
 
@@ -87,6 +98,11 @@ namespace Mir.Stf.Utilities
                 retVal += string.Format("\t{0}\n", file);
             }
 
+            if (!headerAdded)
+            {
+                retVal = "Nothing to Archive";
+            }
+
             return retVal;
         }
 
@@ -96,16 +112,33 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// Indication of success
         /// </returns>
-        public bool ArchiveFiles()
+        public bool PerformArchive()
         {
-            foreach (var directory in DirectoriesToArchive)
+            if (!Directory.Exists(ArchiveDestination))
             {
-
+                Directory.CreateDirectory(ArchiveDestination);
             }
 
-            foreach (var file in FilesToArchive)
+            foreach (var directory in DirectoriesToArchive)
             {
+                var dirname = new DirectoryInfo(directory).Name;
+                var destination = Path.Combine(ArchiveDestination, dirname);
+                var robocopyCmdline = string.Format(" \"{0}\" \"{1}\" /MIR ", directory, destination);
 
+                RoboCopyWrapper.CopyFiles(robocopyCmdline, 5);
+            }
+
+            foreach (var filename in FilesToArchive)
+            {
+                var filenameNoPath = Path.GetFileName(filename);
+                var destFilename = Path.Combine(ArchiveDestination, filenameNoPath);
+
+                if (File.Exists(destFilename))
+                {
+                    File.Delete(destFilename);
+                }
+
+                File.Copy(filename, destFilename);
             }
 
             // TODO: Generate filelist.txt and place it in the DestinationDir
@@ -150,7 +183,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool AddDirectory(string dirname, string archiveComment = null)
         {
-            if (!File.Exists(dirname))
+            if (!Directory.Exists(dirname))
             {
                 return false;
             }
@@ -187,30 +220,25 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Get a best guess for the path to a archive destination
         /// </summary>
+        /// <param name="testname">
+        /// </param>
         /// <returns>
         /// The directory path
         /// </returns>
-        private string CalculateDefaultarchiveDestination()
+        private string CalculateDefaultarchiveDestination(string testname)
         {
-            var currentUser = "Ulrich";
-            var testName = "Tc65TestName";
-            var unique = DateTime.Now.ToString("yy-MM-ddHHmmss");
+            var currentUser = Environment.UserName;  
+            var unique = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
             var archiveTopDir = @"c:\temp\stf\archiveDir";  // TODO: Get from config
 
-            if (!File.Exists(archiveTopDir))
+            if (!Directory.Exists(archiveTopDir))
             {
                 Directory.CreateDirectory(archiveTopDir);
             }
 
             var retVal = Path.Combine(archiveTopDir, currentUser);
-            retVal = Path.Combine(retVal, currentUser);     // TODO: To be controlled from config
-            retVal = Path.Combine(retVal, testName);        // TODO: To be controlled from config
+            retVal = Path.Combine(retVal, testname);        // TODO: To be controlled from config
             retVal = Path.Combine(retVal, unique);          // TODO: To be controlled from config
-
-            if (!File.Exists(retVal))
-            {
-                Directory.CreateDirectory(retVal);
-            }
 
             return retVal;
         }
