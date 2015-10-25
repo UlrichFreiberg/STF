@@ -4,7 +4,7 @@
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-// Util to archive files and directories as evidence after a test run
+//   
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -13,6 +13,7 @@ namespace Mir.Stf.Utilities
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.IO.Compression;
 
     /// <summary>
     /// Util to archive files and directories as evidence after a test run
@@ -131,6 +132,11 @@ namespace Mir.Stf.Utilities
             foreach (var filename in FilesToArchive)
             {
                 var filenameNoPath = Path.GetFileName(filename);
+                if (filenameNoPath == null)
+                {
+                    continue;
+                }
+
                 var destFilename = Path.Combine(ArchiveDestination, filenameNoPath);
 
                 if (File.Exists(destFilename))
@@ -200,9 +206,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool ZipDestination()
         {
-            var zipDestination = false; // TODO: get it from configuration
-
-            if (!zipDestination)
+            if (string.IsNullOrEmpty(ZipFilename))
             {
                 return true;
             }
@@ -212,8 +216,7 @@ namespace Mir.Stf.Utilities
                 File.Delete(ZipFilename);
             }
 
-            // todo: zip the stuff 
-
+            ZipFile.CreateFromDirectory(ArchiveDestination, ZipFilename);
             return true;
         }
 
