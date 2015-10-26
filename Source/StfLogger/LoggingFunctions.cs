@@ -9,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
@@ -348,21 +349,25 @@ namespace Mir.Stf.Utilities
 
             if (Configuration.MapNewlinesToBr)
             {
-                var multiLineMatch = Regex.Match(message, @"\n", RegexOptions.Multiline);
-
-                if (multiLineMatch.Success)
+                var count = message.Count(f => f == '\n');
+                if (count > 1)
                 {
-                    var multiLineMessageParts = Regex.Match(message, "(?<firstLine>[^\n]+)", RegexOptions.Multiline);
-                    var firstLine = multiLineMessageParts.Groups["firstLine"].Value;
-                    var restOfMessage = Regex.Replace(message, "^" + firstLine, string.Empty);
+                    var indexOfFirstLine = message.IndexOf(Environment.NewLine, StringComparison.Ordinal);
+                    if (indexOfFirstLine > 0)
+                    {
+                        var firstLine = message.Substring(0, indexOfFirstLine);
+                        var restOfMessage = message.Substring(indexOfFirstLine);
 
-                    var multiLineSection = string.Format("<a class=\"left\" href=\"javascript:toggle_messege()\" id='href_about'> {0} </a>", firstLine);
-//                    multiLineSection += "  <br />";
-                    multiLineSection += "    <div id='div_messege' class='hide' style=\"display:none;\">";
-                    multiLineSection += restOfMessage.Replace("\n", "<br/>");
-                    multiLineSection += "    </div>";
+                        var multiLineSection =
+                            string.Format(
+                                "<a class=\"left\" href=\"javascript:toggle_messege()\" id='href_about'> {0} </a>",
+                                firstLine);
+                        multiLineSection += "    <div id='div_messege' class='hide' style=\"display:none;\">";
+                        multiLineSection += restOfMessage.Replace("\n", "<br/>");
+                        multiLineSection += "    </div>";
 
-                    message = multiLineSection;
+                        message = multiLineSection;
+                    }
                 }
             }
 
