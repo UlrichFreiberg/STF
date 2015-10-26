@@ -13,13 +13,19 @@ var InternalCount = 1;
 var MessegeType = "inline";
 
 function toggle_messege() {
-    document.getElementById("div_messege").style.display = MessegeType;
+    var el = document.getElementsByClassName("hide");
+
+    for (var i = 0, ilen = el.length; i < ilen; i++) {
+        el[i].style.display = MessegeType;
+    }
+
     if (MessegeType === "inline") {
         MessegeType = "none";
     } else {
         MessegeType = "inline";
     }
 }
+
 
 function getURLParameter(name) {
     return decodeURIComponent((new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(location.search) || [, ""])[1].replace(/\+/g, "%20")) || null;

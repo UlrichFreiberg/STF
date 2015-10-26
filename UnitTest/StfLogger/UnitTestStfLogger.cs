@@ -231,7 +231,7 @@ namespace UnitTest
         {
             MyLogger.LogLevel = StfLogLevel.Info;
             MyLogger.LogInfo("Single line 1");
-            MyLogger.LogInfo("Multi line\nSecond row\nThird row\n\nBlank line above\nLast line");
+            MyLogger.LogInfo(string.Format("Entering Multi line{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
             MyLogger.LogInfo("Single line 2");
         }
 
@@ -243,7 +243,7 @@ namespace UnitTest
         {
             MyLogger.LogLevel = StfLogLevel.Info;
             MyLogger.LogInfo("Single line 1");
-            MyLogger.LogInfo("Entering [Multi line\nSecond row\nThird row\n\nBlank line above\nLast line");
+            MyLogger.LogInfo(string.Format("Entering [Multi line{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
             MyLogger.LogInfo("Single line 2");
         }
 
