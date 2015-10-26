@@ -243,8 +243,26 @@ namespace UnitTest
         {
             MyLogger.LogLevel = StfLogLevel.Info;
             MyLogger.LogInfo("Single line 1");
-            MyLogger.LogInfo(string.Format("Entering [Multi line{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            MyLogger.LogInfo(string.Format("Entering [Multi line1{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
             MyLogger.LogInfo("Single line 2");
+            MyLogger.LogInfo(string.Format("Entering [Multi line2{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+        }
+
+        /// <summary>
+        /// The test log text with new many lines.
+        /// </summary>
+        [TestMethod]
+        public void TestLogTextWithNewManyLines()
+        {
+            MyLogger.LogLevel = StfLogLevel.Info;
+            MyLogger.LogInfo("Single line 1");
+            MyLogger.LogInfo(string.Format("Entering [Multi line1{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            MyLogger.LogInfo("Single line 2");
+            MyLogger.LogInfo(string.Format("Entering [Multi line2{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            MyLogger.LogInfo("Single line 3");
+            MyLogger.LogInfo(string.Format("Entering [Multi line3{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            MyLogger.LogInfo("Single line 4");
+            MyLogger.LogInfo(string.Format("Entering [Multi line4{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
         }
 
         /// <summary>

@@ -12,12 +12,8 @@ var InternalCount = 1;
 
 var MessegeType = "inline";
 
-function toggle_messege() {
-    var el = document.getElementsByClassName("hide");
-
-    for (var i = 0, ilen = el.length; i < ilen; i++) {
-        el[i].style.display = MessegeType;
-    }
+function toggle_messege(messageId) {
+    document.getElementById(messageId).style.display = MessegeType;
 
     if (MessegeType === "inline") {
         MessegeType = "none";

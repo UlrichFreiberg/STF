@@ -340,7 +340,7 @@ namespace Mir.Stf.Utilities
                 return -2;
             }
 
-            var messageIdString = this.GetNextMessageId();
+            var messageIdString = GetNextMessageId();
             var logLevelString = Enum.GetName(typeof(StfLogLevel), loglevel) ?? "Unknown StfLogLevel";
 
             logLevelString = logLevelString.ToLower();
@@ -355,14 +355,16 @@ namespace Mir.Stf.Utilities
                     var indexOfFirstLine = message.IndexOf(Environment.NewLine, StringComparison.Ordinal);
                     if (indexOfFirstLine > 0)
                     {
+                        var multilineId = string.Format("multiLineId_{0}", messageIdString);
                         var firstLine = message.Substring(0, indexOfFirstLine);
                         var restOfMessage = message.Substring(indexOfFirstLine);
 
                         var multiLineSection =
                             string.Format(
-                                "<a class=\"left\" href=\"javascript:toggle_messege()\" id='href_about'> {0} </a>",
+                                "<a class=\"left\" href=\"javascript:toggle_messege('{0}')\" id='href_about'> {1} </a>",
+                                multilineId,
                                 firstLine);
-                        multiLineSection += "    <div id='div_messege' class='hide' style=\"display:none;\">";
+                        multiLineSection += string.Format("    <div id='{0}' class='hide' style=\"display:none;\">", multilineId);
                         multiLineSection += restOfMessage.Replace("\n", "<br/>");
                         multiLineSection += "    </div>";
 
