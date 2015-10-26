@@ -12,6 +12,7 @@ namespace Mir.Stf.Utilities
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.Text;
     using System.Threading;
 
@@ -160,6 +161,16 @@ namespace Mir.Stf.Utilities
             {
                 robocopy.Close();
             }
+        }
+
+        public static int MirrorDir(string sourceDirectory, string destinationDirectory)
+        {
+            var sourceDirname = new DirectoryInfo(sourceDirectory).Name;
+            var destinationDirname = Path.Combine(destinationDirectory, sourceDirname);
+            var robocopyCmdline = string.Format(" \"{0}\" \"{1}\" /MIR ", sourceDirectory, destinationDirname);
+
+            var retVal = CopyFiles(robocopyCmdline, 5);
+            return retVal;
         }
     }
 }

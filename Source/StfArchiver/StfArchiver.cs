@@ -12,6 +12,7 @@ namespace Mir.Stf.Utilities
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.IO.Compression;
 
@@ -39,6 +40,8 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the list of directories to archive
         /// </summary>
         private IList<string> DirectoriesToArchive { get; set; }
+        
+        private string TempDirectory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -59,10 +62,17 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool Init(string testname)
         {
+            var tempPath = Path.GetTempPath();
+            var tempDir = string.Format(
+                "StfArchiver_{0}_{1}",
+                Environment.UserName,
+                DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss"));
+
+            TempDirectory = Path.Combine(tempPath, tempDir);
             FilesToArchive = new List<string>();
             DirectoriesToArchive = new List<string>();
-
-            ArchiveDestination = CalculateDefaultarchiveDestination(testname);
+            ArchiveDestination = GetDefaultArchiveDestination(testname);
+            ZipFilename = GetDefaultZipFilename(testname);
             return true;
         }
 
@@ -115,18 +125,14 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool PerformArchive()
         {
-            if (!Directory.Exists(ArchiveDestination))
+            if (!Directory.Exists(TempDirectory))
             {
-                Directory.CreateDirectory(ArchiveDestination);
+                Directory.CreateDirectory(TempDirectory);
             }
 
             foreach (var directory in DirectoriesToArchive)
             {
-                var dirname = new DirectoryInfo(directory).Name;
-                var destination = Path.Combine(ArchiveDestination, dirname);
-                var robocopyCmdline = string.Format(" \"{0}\" \"{1}\" /MIR ", directory, destination);
-
-                RoboCopyWrapper.CopyFiles(robocopyCmdline, 5);
+                RoboCopyWrapper.MirrorDir(directory, TempDirectory);
             }
 
             foreach (var filename in FilesToArchive)
@@ -137,7 +143,7 @@ namespace Mir.Stf.Utilities
                     continue;
                 }
 
-                var destFilename = Path.Combine(ArchiveDestination, filenameNoPath);
+                var destFilename = Path.Combine(TempDirectory, filenameNoPath);
 
                 if (File.Exists(destFilename))
                 {
@@ -147,8 +153,19 @@ namespace Mir.Stf.Utilities
                 File.Copy(filename, destFilename);
             }
 
+            if (!Directory.Exists(ArchiveDestination))
+            {
+                Directory.CreateDirectory(ArchiveDestination);
+            }
+
             // TODO: Generate filelist.txt and place it in the DestinationDir
-            var retVal = ZipDestination();
+
+            // TODO: Let configuration control if to MirrorDir
+            RoboCopyWrapper.MirrorDir(TempDirectory, ArchiveDestination);
+
+            // TODO: Let configuration control if to MirrorDir
+            ZipDestination();
+
             return true;
         }
 
@@ -208,7 +225,7 @@ namespace Mir.Stf.Utilities
         {
             if (string.IsNullOrEmpty(ZipFilename))
             {
-                return true;
+                return false;
             }
 
             if (File.Exists(ZipFilename))
@@ -216,8 +233,23 @@ namespace Mir.Stf.Utilities
                 File.Delete(ZipFilename);
             }
 
-            ZipFile.CreateFromDirectory(ArchiveDestination, ZipFilename);
+            ZipFile.CreateFromDirectory(TempDirectory, ZipFilename);
             return true;
+        }
+
+        private string GetDefaultZipFilename(string testname)
+        {
+            bool CreateZipFile = true; // TODO: get from configuration
+
+            if (!CreateZipFile)
+            {
+                return null;
+            }
+
+            var filename = string.Format("{0}.zip", testname);
+            var retVal = Path.Combine(ArchiveDestination, filename);
+
+            return retVal;
         }
 
         /// <summary>
@@ -228,7 +260,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The directory path
         /// </returns>
-        private string CalculateDefaultarchiveDestination(string testname)
+        private string GetDefaultArchiveDestination(string testname)
         {
             var currentUser = Environment.UserName;  
             var unique = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
