@@ -92,6 +92,8 @@ namespace Mir.Stf
                 }
             }
 
+            SetUpArchiverIfNecessary(TestContext.TestName);
+
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
         }
@@ -104,6 +106,11 @@ namespace Mir.Stf
         {
             LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
             MyLogger.CloseLogFile();
+
+            if (UseArchiver)
+            {
+                StfArchiver.AddFile(MyLogger.FileName);
+            }
 
             if (TestDataDriven())
             {
@@ -118,8 +125,15 @@ namespace Mir.Stf
                     var summeryLogfileLogfilePattern  = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", "_*");
 
                     myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
+
+                    if (UseArchiver)
+                    {
+                        StfArchiver.AddFile(summeryLogfilename);
+                    }
                 }
             }
+
+            ArchiveFilesIfNecessary();
         }
 
         /// <summary>
@@ -169,6 +183,49 @@ namespace Mir.Stf
             }
             
             return TestContext.DataRow.Table.Rows.Count > 0;
+        }
+
+        /// <summary>
+        /// The set up archiver if necessary.
+        /// </summary>
+        /// <param name="testName">
+        /// The test name.
+        /// </param>
+        private void SetUpArchiverIfNecessary(string testName)
+        {
+            var config = Get<StfConfiguration>();
+
+            string useArchiver;
+            if (!config.TryGetKeyValue("StfKernel.ArchiveTestResults", out useArchiver))
+            {
+                return;
+            }
+
+            bool shouldArchive;
+            if (!bool.TryParse(useArchiver, out shouldArchive))
+            {
+                return;
+            }
+
+            UseArchiver = shouldArchive;
+
+            if (UseArchiver)
+            {
+                StfArchiver.Init(testName);
+            }
+        }
+
+        /// <summary>
+        /// The archive files if necessary.
+        /// </summary>
+        private void ArchiveFilesIfNecessary()
+        {
+            if (!UseArchiver)
+            {
+                return;
+            }
+
+            StfArchiver.PerformArchive();
         }
     }
 }

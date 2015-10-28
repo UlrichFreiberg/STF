@@ -46,6 +46,10 @@
     <Compile Include="StfTestScriptBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StfArchiver\StfArchiver.csproj">
+      <Project>{DE01EB76-5217-4D7D-917A-66C14A3335C0}</Project>
+      <Name>StfArchiver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StfAssert\StfAssert.csproj">
       <Project>{6933e0af-0e2a-48d2-8660-2c939b3db6fb}</Project>
       <Name>StfAssert</Name>
@@ -67,7 +71,9 @@
       <Name>StfUtils</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Config\StfConfiguration.xml.Template" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Config\StfConfiguration.xml" />
   </ItemGroup>

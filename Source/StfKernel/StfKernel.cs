@@ -40,6 +40,7 @@ namespace Mir.Stf
             // lets get a logger and a configuration
             KernelLogger = new StfLogger { Configuration = { LogFileName = Path.Combine(StfLogDir, @"KernelLogger.html") } };
             StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
+            StfArchiver = new StfArchiver { ArchiveTopDir = StfTextUtils.ExpandVariables(GetArchiveTopDir()) };
 
             // Any plugins for us?
             PluginLoader = new StfPluginLoader(KernelLogger, StfConfiguration);
@@ -71,9 +72,19 @@ namespace Mir.Stf
         public string StfConfigDir { get; set; }
 
         /// <summary>
-        /// Gets the Stf logger.
+        /// Gets or sets the stf archiver.
         /// </summary>
-        public StfLogger KernelLogger { get; private set; }
+        protected StfArchiver StfArchiver { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether use archiver.
+        /// </summary>
+        protected bool UseArchiver { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Stf logger.
+        /// </summary>
+        private StfLogger KernelLogger { get; set; }
 
         /// <summary>
         /// Gets or sets the stf container.
@@ -191,6 +202,20 @@ namespace Mir.Stf
             }
 
             return Directory.Exists(directoryName) ? directoryName : null;
+        }
+
+        /// <summary>
+        /// The get archive top dir.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetArchiveTopDir()
+        {
+            var topDir = @"c:\temp\stf\archiveDir";
+
+            string dirFromConfig;
+            return !StfConfiguration.TryGetKeyValue("StfKernel.ArchiveDestination", out dirFromConfig) ? topDir : dirFromConfig;
         }
     }
 }

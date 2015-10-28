@@ -276,6 +276,33 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// The try get key value.
+        /// </summary>
+        /// <param name="keyName">
+        /// The key name.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool TryGetKeyValue(string keyName, out string value)
+        {
+            value = string.Empty;
+            try
+            {
+                value = GetKeyValue(keyName);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Get sections for this root.
         /// </summary>
         /// <param name="currentSection">

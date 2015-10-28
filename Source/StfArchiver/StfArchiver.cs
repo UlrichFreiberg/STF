@@ -12,7 +12,6 @@ namespace Mir.Stf.Utilities
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.IO;
     using System.IO.Compression;
 
@@ -21,6 +20,24 @@ namespace Mir.Stf.Utilities
     /// </summary>
     public class StfArchiver
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfArchiver"/> class.
+        /// </summary>
+        public StfArchiver()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfArchiver"/> class.
+        /// </summary>
+        /// <param name="testname">
+        /// The testname.
+        /// </param>
+        public StfArchiver(string testname)
+        {
+            Init(testname);
+        }
+
         /// <summary>
         /// Gets or sets the destination to archive 
         /// </summary>
@@ -32,6 +49,11 @@ namespace Mir.Stf.Utilities
         public string ZipFilename { get; set; }
 
         /// <summary>
+        /// Gets or sets the archive top dir.
+        /// </summary>
+        public string ArchiveTopDir { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of files to archive
         /// </summary>
         private IList<string> FilesToArchive { get; set; }
@@ -40,25 +62,20 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the list of directories to archive
         /// </summary>
         private IList<string> DirectoriesToArchive { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the temp directory.
+        /// </summary>
         private string TempDirectory { get; set; }
 
         /// <summary>
+        /// Sets up the archiver
         /// </summary>
         /// <param name="testname">
-        /// </param>
-        public StfArchiver(string testname)
-        {
-            Init(testname);
-        }
-
-        /// <summary>
-        /// Sets up the archiver.
-        /// </summary>
-        /// <param name="testname">
+        /// The testname.
         /// </param>
         /// <returns>
-        /// indication of success
+        /// The <see cref="bool"/>.
         /// </returns>
         public bool Init(string testname)
         {
@@ -103,7 +120,7 @@ namespace Mir.Stf.Utilities
                 if (!headerAdded)
                 {
                     headerAdded = true;
-                    retVal = "Files to archive\n";
+                    retVal += "Files to archive\n";
                 }
 
                 retVal += string.Format("\t{0}\n", file);
@@ -237,6 +254,15 @@ namespace Mir.Stf.Utilities
             return true;
         }
 
+        /// <summary>
+        /// The get default zip filename.
+        /// </summary>
+        /// <param name="testname">
+        /// The testname.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         private string GetDefaultZipFilename(string testname)
         {
             bool CreateZipFile = true; // TODO: get from configuration
@@ -253,18 +279,23 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// Get a best guess for the path to a archive destination
+        /// The get default archive destination.
         /// </summary>
         /// <param name="testname">
+        /// The testname.
         /// </param>
         /// <returns>
-        /// The directory path
+        /// The <see cref="string"/>.
         /// </returns>
         private string GetDefaultArchiveDestination(string testname)
         {
             var currentUser = Environment.UserName;  
             var unique = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
-            var archiveTopDir = @"c:\temp\stf\archiveDir";  // TODO: Get from config
+            var archiveTopDir = @"c:\temp\stf\archiveDir";
+            if (!string.IsNullOrEmpty(ArchiveTopDir))
+            {
+                archiveTopDir = ArchiveTopDir;
+            }
 
             if (!Directory.Exists(archiveTopDir))
             {
