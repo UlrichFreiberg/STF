@@ -15,8 +15,6 @@ using Mir.Stf.Utilities;
 
 namespace Mir.Stf
 {
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// BaseClass for all Stf test scripts.
     /// The class will set up the right <see cref="StfLogger"/> (MyLogger)
@@ -130,7 +128,11 @@ namespace Mir.Stf
                     {
                         StfArchiver.AddFile(summeryLogfilename);
                     }
+
+                    ArchiveFilesIfNecessary();
                 }
+
+                return;
             }
 
             ArchiveFilesIfNecessary();
