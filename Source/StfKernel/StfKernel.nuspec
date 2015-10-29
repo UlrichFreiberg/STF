@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added archiving functionality that enables testlogs to be archived</releaseNotes>
+    <releaseNotes>Minor bugfixes</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
