@@ -58,6 +58,8 @@ if ($buildFailure)
 
 Push-Location $stfKernelPath
 
+# Receiving 500 error code when trying to push symbols package to symbolsource
+#nuget pack $kernelProjName -IncludeReferencedProjects -Symbols
 nuget pack $kernelProjName -IncludeReferencedProjects
 
 if ($PushPackage)
