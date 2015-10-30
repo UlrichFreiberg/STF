@@ -1,5 +1,18 @@
-﻿namespace Mir.Stf.Utilities.Configuration
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IStfArchiverConfiguration.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Mir.Stf.Utilities.Configuration
 {
+    /// <summary>
+    /// The interface for configuring the StfArchiver
+    /// </summary>
     public interface IStfArchiverConfiguration
     {
         /// <summary>
@@ -22,5 +35,4 @@
         /// </summary>
         string TempDirectory { get; set; }
     }
-
 }

@@ -1,5 +1,17 @@
-﻿namespace Mir.Stf.Utilities.Configuration
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="StfArchiverConfiguration.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Mir.Stf.Utilities.Configuration
 {
+    /// <summary>
+    /// </summary>
     public class StfArchiverConfiguration : IStfArchiverConfiguration
     {
         /// <summary>

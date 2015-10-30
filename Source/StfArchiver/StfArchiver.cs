@@ -25,6 +25,12 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Initializes a new instance of the <see cref="StfArchiver"/> class.
         /// </summary>
+        /// <param name="config">
+        /// A configuration for the StfArchiver
+        /// </param>
+        /// <param name="testname">
+        /// Name of the test
+        /// </param>
         public StfArchiver(IStfArchiverConfiguration config, string testname)
         {
             ArchiveDestination = config.ArchiveDestination;
@@ -62,6 +68,11 @@ namespace Mir.Stf.Utilities
         public string ArchiveTopDir { get; set; }
 
         /// <summary>
+        /// Gets or sets the temp directory.
+        /// </summary>
+        public string TempDirectory { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of files to archive
         /// </summary>
         private IList<string> FilesToArchive { get; set; }
@@ -70,11 +81,6 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the list of directories to archive
         /// </summary>
         private IList<string> DirectoriesToArchive { get; set; }
-
-        /// <summary>
-        /// Gets or sets the temp directory.
-        /// </summary>
-        public string TempDirectory { get; set; }
 
         /// <summary>
         /// Sets up the archiver
