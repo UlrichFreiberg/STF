@@ -15,6 +15,8 @@ namespace Mir.Stf.Utilities
     using System.IO;
     using System.IO.Compression;
 
+    using Mir.Stf.Utilities.Configuration;
+
     /// <summary>
     /// Util to archive files and directories as evidence after a test run
     /// </summary>
@@ -23,8 +25,14 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Initializes a new instance of the <see cref="StfArchiver"/> class.
         /// </summary>
-        public StfArchiver()
+        public StfArchiver(IStfArchiverConfiguration config, string testname)
         {
+            ArchiveDestination = config.ArchiveDestination;
+            ZipFilename = config.ZipFilename;
+            ArchiveTopDir = config.ArchiveTopDir;
+            TempDirectory = config.TempDirectory;
+
+            Init(testname);
         }
 
         /// <summary>
@@ -66,7 +74,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets or sets the temp directory.
         /// </summary>
-        private string TempDirectory { get; set; }
+        public string TempDirectory { get; set; }
 
         /// <summary>
         /// Sets up the archiver
@@ -265,9 +273,9 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private string GetDefaultZipFilename(string testname)
         {
-            bool CreateZipFile = true; // TODO: get from configuration
+            bool createZipFile = true; // TODO: get from configuration
 
-            if (!CreateZipFile)
+            if (!createZipFile)
             {
                 return null;
             }
@@ -292,6 +300,7 @@ namespace Mir.Stf.Utilities
             var currentUser = Environment.UserName;  
             var unique = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
             var archiveTopDir = @"c:\temp\stf\archiveDir";
+
             if (!string.IsNullOrEmpty(ArchiveTopDir))
             {
                 archiveTopDir = ArchiveTopDir;
@@ -301,6 +310,11 @@ namespace Mir.Stf.Utilities
             {
                 Directory.CreateDirectory(archiveTopDir);
             }
+
+            if (string.IsNullOrEmpty(testname))
+            {
+                testname = "DefaultTestDir";
+            } 
 
             var retVal = Path.Combine(archiveTopDir, currentUser);
             retVal = Path.Combine(retVal, testname);        // TODO: To be controlled from config

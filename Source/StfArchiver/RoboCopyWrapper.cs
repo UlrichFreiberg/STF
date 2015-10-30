@@ -122,6 +122,11 @@ namespace Mir.Stf.Utilities
             try
             {
                 robocopy = Process.Start("C:\\Windows\\SysWOW64\\robocopy.exe", commandLine);
+                if (robocopy == null)
+                {
+                    return 0;
+                }
+
                 for (var i = 0; i <= maxSleepingIterations; i++)
                 {
                     Thread.Sleep(MilliSecondsToSleep);
@@ -159,7 +164,10 @@ namespace Mir.Stf.Utilities
             }
             finally
             {
-                robocopy.Close();
+                if (robocopy != null)
+                {
+                    robocopy.Close();
+                }
             }
         }
 
