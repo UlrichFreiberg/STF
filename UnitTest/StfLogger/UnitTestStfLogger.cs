@@ -261,7 +261,7 @@ namespace UnitTest
             MyLogger.LogInfo("Using PrettyXml");
 
             // TODO: Missing playing a bit with the XmlUtils
-            var prettyXml = "<xmltags><xmltag>return newline                  </xmltag></xmltags>");
+            var prettyXml = "<xmltags><xmltag>return newline                  </xmltag></xmltags>";
             MyLogger.LogInfo(prettyXml);
 
             MyLogger.LogInfo("Using PrettyXml and Escape");
