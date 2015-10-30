@@ -15,6 +15,7 @@ namespace UnitTest
 {
     using System;
     using System.IO;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -248,6 +249,26 @@ namespace UnitTest
             MyLogger.LogInfo(string.Format("Entering [Multi line2{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
         }
 
+        /// <summary>
+        /// The test screenshot on log fail.
+        /// </summary>
+        [TestMethod]
+        public void TestLogTextWithXmlContent()
+        {
+            MyLogger.LogLevel = StfLogLevel.Info;
+            MyLogger.LogInfo("Using Escape");
+            MyLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}<xmltag>{0}<xmltags>{0}", Environment.NewLine)));
+            MyLogger.LogInfo("Using PrettyXml");
+
+            // TODO: Missing playing a bit with the XmlUtils
+            var prettyXml = "<xmltags><xmltag>return newline                  </xmltag></xmltags>");
+            MyLogger.LogInfo(prettyXml);
+
+            MyLogger.LogInfo("Using PrettyXml and Escape");
+            MyLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}</xmltag>{0}</xmltags>{0}", Environment.NewLine)));
+        }
+
+   
         /// <summary>
         /// The test log text with new many lines.
         /// </summary>
