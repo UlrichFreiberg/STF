@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
+
+  <section name="Environments">
+      <section name="ENV1">
+          <section name="PluginDocDemo" >
+              <key name="KeyOne" value="key1valueForEnv1"/>
+              <key name="KeyTwo" value="key2valueForEnv1"/>
+          </section>
+      </section>
+      <section name="ENV2">
+          <section name="PluginDocDemo" >
+              <key name="KeyOne" value="key1valueForEnv2"/>
+              <key name="KeyTwo" value="key2valueForEnv2"/>
+          </section>
+      </section>
+  </section>
+    
+</configuration>
