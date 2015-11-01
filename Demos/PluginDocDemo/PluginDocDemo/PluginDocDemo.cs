@@ -8,16 +8,19 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-
-using Mir.Stf.Utilities;
-
-namespace PluginDocDemo
+namespace DemoCorp.Stf.PluginDocDemo
 {
+    using System;
+
+    using DemoCorp.Stf.PluginDocDemo.Configuration;
+    using DemoCorp.Stf.PluginDocDemo.Interfaces;
+
+    using Mir.Stf.Utilities;
+
     /// <summary>
     /// Demo for a Stf Plugin
     /// </summary>
-    public class PluginDocDemo : IStfPlugin
+    public class PluginDocDemo : IPluginDocDemo
     {
         /// <summary>
         /// Gets the name of the plugin - Standard Stf IStfPlugin property
@@ -49,6 +52,11 @@ namespace PluginDocDemo
         public StfLogger MyLogger { get; set; }
 
         /// <summary>
+        /// The configiration for the plugin
+        /// </summary>
+        private PluginDocDemoConfiguration Configuration { get; set; }
+
+        /// <summary>
         /// Standard Stf IStfPlugin function
         /// </summary>
         /// <returns>
@@ -56,7 +64,18 @@ namespace PluginDocDemo
         /// </returns>
         public bool Init()
         {
+            Configuration = new PluginDocDemoConfiguration { KeyOne = "KeyOneValue", KeyTwo = "KeyTwoValue" };
+
             return true;
+        }
+
+        /// <summary>
+        /// Print the values
+        /// </summary>
+        public void PrintValues()
+        {
+            this.MyLogger.LogInfo(string.Format("KeyVal for KeyOne = [{0}]", this.Configuration.KeyOne));
+            this.MyLogger.LogInfo(string.Format("KeyVal for KeyTwo = [{0}]", this.Configuration.KeyTwo));
         }
     }
 }

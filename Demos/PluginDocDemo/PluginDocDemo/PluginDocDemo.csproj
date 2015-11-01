@@ -7,8 +7,8 @@
     <ProjectGuid>{10A87680-1CFA-4D44-AAD3-8C40DA3F4FB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PluginDocDemo</RootNamespace>
-    <AssemblyName>PluginDocDemo</AssemblyName>
+    <RootNamespace>DemoCorp.Stf.PluginDocDemo</RootNamespace>
+    <AssemblyName>DemoCorp.Stf.PluginDocDemo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -95,6 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\PluginDocDemoConfiguration.cs" />
+    <Compile Include="Configuration\IPluginDocDemoConfiguration.cs" />
+    <Compile Include="Interfaces\IPluginDocDemo.cs" />
     <Compile Include="PluginDocDemo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
