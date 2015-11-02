@@ -8,6 +8,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Mir.Stf;
+
 namespace StfArchiverTests
 {
     using System.IO;
@@ -63,6 +65,9 @@ namespace StfArchiverTests
             s.PerformArchive();
         }
 
+        /// <summary>
+        /// The test perform archive and zip.
+        /// </summary>
         [TestMethod]
         public void TestPerformArchiveAndZip()
         {
@@ -70,7 +75,7 @@ namespace StfArchiverTests
             const string ZipFilename = @"c:\temp\Stf\StfArchiver.zip";
 
             s.AddDirectory(@"C:\Temp\Stf\Config");
-            s.ZipFilename = ZipFilename;
+            s.Configuration.ZipFilename = ZipFilename;
             s.PerformArchive();
 
             Assert.IsTrue(File.Exists(ZipFilename));

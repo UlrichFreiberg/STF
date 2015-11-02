@@ -15,7 +15,7 @@ using Mir.Stf.Utilities;
 
 namespace Mir.Stf
 {
-    using Mir.Stf.Utilities.Configuration;
+    using Utilities.Configuration;
 
     /// <summary>
     /// The stf kernel.
@@ -49,38 +49,6 @@ namespace Mir.Stf
 
             // now all configurations are loaded, we can set the Environment.
             StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
-        }
-
-        private void KernelSetupKernelDirectories()
-        {
-            StfRoot = CheckForNeededKernelDirectory(@"Stf_Root", @"C:\temp\Stf");
-            StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
-            StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
-        }
-
-        private void KernelSetupStfArchiver()
-        {
-            string dirFromConfig;
-            const string DefaultArchiveDir = @"%STF_ROT%\archiveDir";
-
-            var archiverConfiguration = new StfArchiverConfiguration();
-
-            try
-            {
-                StfConfiguration.LoadUserConfiguration(archiverConfiguration);
-            }
-            catch (Exception)
-            {
-                ;
-            }
-
-            archiverConfiguration.ArchiveTopDir = 
-                StfConfiguration.TryGetKeyValue("StfKernel.ArchiveDestination", out dirFromConfig) 
-                ? dirFromConfig 
-                : DefaultArchiveDir;
-
-            archiverConfiguration.ArchiveTopDir = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveTopDir);
-            StfArchiver = new StfArchiver(archiverConfiguration, null);
         }
 
         /// <summary>
@@ -234,6 +202,38 @@ namespace Mir.Stf
             }
 
             return Directory.Exists(directoryName) ? directoryName : null;
+        }
+
+        /// <summary>
+        /// The kernel setup kernel directories.
+        /// </summary>
+        private void KernelSetupKernelDirectories()
+        {
+            StfRoot = CheckForNeededKernelDirectory(@"Stf_Root", @"C:\temp\Stf");
+            StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
+            StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
+        }
+
+        /// <summary>
+        /// The kernel setup stf archiver.
+        /// </summary>
+        private void KernelSetupStfArchiver()
+        {
+            var archiverConfiguration = new StfArchiverConfiguration();
+
+            try
+            {
+                StfConfiguration.LoadUserConfiguration(archiverConfiguration);
+            }
+            catch (Exception)
+            {
+                ////TODO: do something intelligent here
+            }
+
+            archiverConfiguration.ArchiveTopDir = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveTopDir);
+            archiverConfiguration.ArchiveDestination = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveDestination);
+            archiverConfiguration.TempDirectory = StfTextUtils.ExpandVariables(archiverConfiguration.TempDirectory);
+            StfArchiver = new StfArchiver(archiverConfiguration, null);
         }
     }
 }

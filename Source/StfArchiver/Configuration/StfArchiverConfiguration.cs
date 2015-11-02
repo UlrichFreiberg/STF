@@ -11,31 +11,32 @@
 namespace Mir.Stf.Utilities.Configuration
 {
     /// <summary>
+    /// The stf archiver configuration object
     /// </summary>
     public class StfArchiverConfiguration : IStfArchiverConfiguration
     {
         /// <summary>
         /// Gets or sets the destination to archive 
         /// </summary>
-        [ConfigAttributes.ConfigInfo("StfKernel.StfArchiver.ArchiveDestination")]
+        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveDestination")]
         public string ArchiveDestination { get; set; }
 
         /// <summary>
         /// Gets or sets the name of ZipFile if the archive should be zipped.
         /// </summary>
-        [ConfigAttributes.ConfigInfo("StfKernel.StfArchiver.ZipFilename")]
+        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.ZipFilename")]
         public string ZipFilename { get; set; }
 
         /// <summary>
         /// Gets or sets the archive top dir.
         /// </summary>
-        [ConfigAttributes.ConfigInfo("StfKernel.StfArchiver.ArchiveTopDir")]
+        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveTopDir")]
         public string ArchiveTopDir { get; set; }
 
         /// <summary>
         /// Gets or sets the temp directory.
         /// </summary>
-        [ConfigAttributes.ConfigInfo("StfKernel.StfArchiver.TempDirectory")]
+        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.TempDirectory")]
         public string TempDirectory { get; set; }
     }
 }

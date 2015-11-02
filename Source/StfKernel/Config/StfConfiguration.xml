@@ -2,8 +2,13 @@
 <configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
   <section name="StfKernel">
     <key name="PluginPath" value="%STF_ROOT%\Plugins\" />
-    <key name="ArchiveTestResults" value="false" />
-    <key name="ArchiveDestination" value="%STF_ROOT%\archiveDir" />
+    <section name="StfArchiver">
+      <key name="ArchiveTestResults" value="false" />
+      <key name="ArchiveDestination" value="" />
+      <key name="ZipFilename" value="TestLogs.zip" />
+      <key name="TempDirectory" value="%STF_ROOT%\Temp\" />
+      <key name="ArchiveTopDir" value="%STF_ROOT%\archiveDir" />
+    </section>
   </section>
   <section name="Environments" defaultsection="ENV1">
     <section name="ENV1"></section>

@@ -198,7 +198,7 @@ namespace Mir.Stf
             var config = Get<StfConfiguration>();
 
             string useArchiver;
-            if (!config.TryGetKeyValue("StfKernel.ArchiveTestResults", out useArchiver))
+            if (!config.TryGetKeyValue("StfKernel.StfArchiver.ArchiveTestResults", out useArchiver))
             {
                 return;
             }
@@ -213,6 +213,10 @@ namespace Mir.Stf
 
             if (UseArchiver)
             {
+                // TODO: Fix this usage: 
+                // Setting archivedestination to empty and calling init again ensures the archiver puts things 
+                // in a path with the leaf named after the test (instead of default hardcoded)
+                StfArchiver.Configuration.ArchiveDestination = string.Empty;
                 StfArchiver.Init(testName);
             }
         }

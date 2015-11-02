@@ -119,7 +119,6 @@ namespace Mir.Stf.Utilities
                     return null;
                 }
 
-                var environmentSection = currentlyLoadedSection.Sections["Environments"];
                 return currentlyLoadedSection.Sections["Environments"].DefaultSection;
             }
         }
@@ -138,12 +137,13 @@ namespace Mir.Stf.Utilities
             var configToUse = currentlyLoadedSection;
 
             // lets see if we should use the Environment configuration
-            if (!string.IsNullOrEmpty(Environment))
+            var pathToUse = configValuePath;
+            if (!string.IsNullOrEmpty(Environment) && !IsAbsoluteConfigurationPath(ref pathToUse))
             {
                 configToUse = environmentConfiguration;
             }
 
-            var value = GetKeyValue(configToUse, configValuePath);
+            var value = GetKeyValue(configToUse, pathToUse);
             return value;
         }
 
@@ -417,6 +417,32 @@ namespace Mir.Stf.Utilities
             }
 
             section.Keys.Add(newKey.KeyName, newKey);
+        }
+
+        /// <summary>
+        /// The is absolute configuration path.
+        /// </summary>
+        /// <param name="configPath">
+        /// The config path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool IsAbsoluteConfigurationPath(ref string configPath)
+        {
+            if (string.IsNullOrEmpty(configPath))
+            {
+                return false;
+            }
+
+            var startOfAbsolutePath = "Configuration.";
+            if (configPath.StartsWith(startOfAbsolutePath, StringComparison.OrdinalIgnoreCase))
+            {
+                configPath = configPath.Replace(startOfAbsolutePath, string.Empty);
+                return true;
+            }
+
+            return false;
         }
     }
 }

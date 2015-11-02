@@ -72,6 +72,11 @@ namespace Mir.Stf.KernelUtils
         /// </returns>
         public string ExpandVariables(string line)
         {
+            if (string.IsNullOrEmpty(line))
+            {
+                return line;
+            }
+
             var variables = new Regex("%(?<variable>[^%]+)%");
             var matches = variables.Match(line);
 
