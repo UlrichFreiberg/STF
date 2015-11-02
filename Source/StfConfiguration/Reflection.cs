@@ -56,7 +56,7 @@ namespace Mir.Stf.Utilities
             foreach (var property in props)
             {
                 var value = property.GetValue(this.currentFieldSet);
-                ConfigAttributes.ConfigInfo configAttributes = property.GetCustomAttributes<ConfigAttributes.ConfigInfo>(true).FirstOrDefault();
+                ConfigInfo configAttributes = property.GetCustomAttributes<ConfigInfo>(true).FirstOrDefault();
 
                 // var propertyConfigInfo = GetConfigInfo(property);
                 dict.Add(property.Name, configAttributes.ConfigKeyPath);

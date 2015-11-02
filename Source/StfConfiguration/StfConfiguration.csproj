@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigAttributes.cs" />
+    <Compile Include="ConfigInfo.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="OverLayer.cs" />
     <Compile Include="Parser.cs" />

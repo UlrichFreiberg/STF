@@ -34,5 +34,15 @@ namespace Mir.Stf.Utilities.Configuration
         /// Gets or sets the temp directory.
         /// </summary>
         string TempDirectory { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use date time in path.
+        /// </summary>
+        string UseDateTimeInPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use test name in path.
+        /// </summary>
+        string UseTestNameInPath { get; set; }
     }
 }

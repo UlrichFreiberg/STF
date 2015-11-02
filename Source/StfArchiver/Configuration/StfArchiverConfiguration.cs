@@ -18,25 +18,37 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the destination to archive 
         /// </summary>
-        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveDestination")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveDestination")]
         public string ArchiveDestination { get; set; }
 
         /// <summary>
         /// Gets or sets the name of ZipFile if the archive should be zipped.
         /// </summary>
-        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.ZipFilename")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.ZipFilename")]
         public string ZipFilename { get; set; }
 
         /// <summary>
         /// Gets or sets the archive top dir.
         /// </summary>
-        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveTopDir")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveTopDir")]
         public string ArchiveTopDir { get; set; }
 
         /// <summary>
         /// Gets or sets the temp directory.
         /// </summary>
-        [ConfigAttributes.ConfigInfo("Configuration.StfKernel.StfArchiver.TempDirectory")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.TempDirectory")]
         public string TempDirectory { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use date time in path.
+        /// </summary>
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.UseDateTimeInPath")]
+        public string UseDateTimeInPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use test name in path.
+        /// </summary>
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.UseTestnameInPath")]
+        public string UseTestNameInPath { get; set; }
     }
 }

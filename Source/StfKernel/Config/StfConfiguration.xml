@@ -8,6 +8,8 @@
       <key name="ZipFilename" value="TestLogs.zip" />
       <key name="TempDirectory" value="%STF_ROOT%\Temp\" />
       <key name="ArchiveTopDir" value="%STF_ROOT%\archiveDir" />
+      <key name="UseDateTimeInPath" value="true" />
+      <key name="UseTestnameInPath" value="true" />
     </section>
   </section>
   <section name="Environments" defaultsection="ENV1">
