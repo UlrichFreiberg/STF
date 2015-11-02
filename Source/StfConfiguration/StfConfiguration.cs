@@ -16,6 +16,7 @@ namespace Mir.Stf.Utilities
 {
     using System;
     using System.IO;
+    using System.Linq;
 
     /// <summary>
     /// The configuration tree. 
@@ -132,9 +133,10 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// the value of the keyValue pair
         /// </returns>
-        public string GetConfigValue(string configValuePath)
+        public string GetConfigValue(string configValuePath, string defaultValue = null)
         {
             var configToUse = currentlyLoadedSection;
+            string retVal ;
 
             // lets see if we should use the Environment configuration
             var pathToUse = configValuePath;
@@ -143,8 +145,22 @@ namespace Mir.Stf.Utilities
                 configToUse = environmentConfiguration;
             }
 
-            var value = GetKeyValue(configToUse, pathToUse);
-            return value;
+            try
+            {
+                retVal = GetKeyValue(configToUse, pathToUse);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // if no default value, then we are missing something in the configuration
+                if (defaultValue == null)
+                {
+                    throw;
+                }
+
+                retVal = defaultValue;
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -222,7 +238,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The Dictionary holding information around fieldNames and its current Values.
         /// </returns>
-        public Dictionary<string, string> LoadUserConfiguration(object userConfigurationObject)
+        public Dictionary<string, ConfigInfo> LoadUserConfiguration(object userConfigurationObject)
         {
             var confValuesHandler = new Reflection(userConfigurationObject);
             var configEntities = confValuesHandler.GetConfigPropertiesFromType();

@@ -42,24 +42,23 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="Dictionary{TKey,TValue}"/>.
         /// </returns>
-        internal Dictionary<string, string> GetConfigPropertiesFromType()
+        internal Dictionary<string, ConfigInfo> GetConfigPropertiesFromType()
         {
             if (this.currentFieldSet == null)
             {
-                return new Dictionary<string, string>();
+                return new Dictionary<string, ConfigInfo>();
             }
 
-            var t = this.currentFieldSet.GetType();
-            var props = t.GetProperties(); 
-            var dict = new Dictionary<string, string>();
+            var currentFieldSetype = currentFieldSet.GetType();
+            var props = currentFieldSetype.GetProperties();
+            var dict = new Dictionary<string, ConfigInfo>();
 
             foreach (var property in props)
             {
                 var value = property.GetValue(this.currentFieldSet);
-                ConfigInfo configAttributes = property.GetCustomAttributes<ConfigInfo>(true).FirstOrDefault();
+                var configAttributes = property.GetCustomAttributes<ConfigInfo>(true).FirstOrDefault();
 
-                // var propertyConfigInfo = GetConfigInfo(property);
-                dict.Add(property.Name, configAttributes.ConfigKeyPath);
+                dict.Add(property.Name, configAttributes);
             }
 
             return dict;
@@ -77,15 +76,15 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        internal object SetConfig(Dictionary<string, string> userConfig, StfConfiguration stfConfiguration)
+        internal object SetConfig(Dictionary<string, ConfigInfo> userConfig, StfConfiguration stfConfiguration)
         {
             var t = this.currentFieldSet.GetType();
 
             foreach (var uc in userConfig)
             {
                 var property = t.GetProperty(uc.Key);
-                var currentValue = property.GetValue(this.currentFieldSet);
-                var newValue = stfConfiguration.GetConfigValue(uc.Value);
+                var currentValue = property.GetValue(currentFieldSet);
+                var newValue = stfConfiguration.GetConfigValue(uc.Value.ConfigKeyPath, uc.Value.DefaultValue);
                 property.SetValue(currentFieldSet, newValue);
             }
 
