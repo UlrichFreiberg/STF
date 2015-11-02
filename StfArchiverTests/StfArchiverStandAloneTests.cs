@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfArchiverTests.cs" company="Mir Software">
+// <copyright file="StfArchiverStandAloneTests.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -14,32 +14,36 @@ namespace StfArchiverTests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
     using Mir.Stf.Utilities;
 
     /// <summary>
     /// Stf Archiver Tests
     /// </summary>
     [TestClass]
-    public class StfArchiverTests : StfTestScriptBase
+    public class StfArchiverStandAloneTests
     {
+        /// <summary>
+        /// Gets or sets the standard text context
+        /// </summary>
+        public TestContext TestContext { get; set; }
+
         /// <summary>
         /// Test Perform Archive with Zero And One File
         /// </summary>
         [TestMethod]
         public void TestPerformArchiveZeroAndOneFile()
         {
-            var emptyStatusTxt = MyArchiver.Status();
+            var stfArchiver = new StfArchiver(TestContext.TestName);
+
+            var emptyStatusTxt = stfArchiver.Status();
             Assert.AreEqual("Nothing to Archive", emptyStatusTxt);
 
-            MyArchiver.AddFile(@"C:\Temp\Stf\Config\StfConfiguration.xml");
-            var oneFileStatusTxt = MyArchiver.Status();
+            stfArchiver.AddFile(@"C:\Temp\Stf\Config\StfConfiguration.xml");
+            var oneFileStatusTxt = stfArchiver.Status();
             const string ExpectedStatusTxt = "Files to archive\n\tC:\\Temp\\Stf\\Config\\StfConfiguration.xml\n";
             Assert.AreEqual(ExpectedStatusTxt, oneFileStatusTxt);
 
-            MyArchiver.PerformArchive();
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = "False";
-            MyArchiver.Configuration.DoArchiveToZipfile = "False";
+            stfArchiver.PerformArchive();
         }
 
         /// <summary>
@@ -48,15 +52,15 @@ namespace StfArchiverTests
         [TestMethod]
         public void TestPerformArchiveOneDirectory()
         {
-            MyArchiver.AddDirectory(@"C:\Temp\Stf\Config");
+            var stfArchiver = new StfArchiver(TestContext.TestName);
 
-            var oneFileStatusTxt = MyArchiver.Status();
+            stfArchiver.AddDirectory(@"C:\Temp\Stf\Config");
+
+            var oneFileStatusTxt = stfArchiver.Status();
             const string ExpectedStatusTxt = "Directories to archive\n\tC:\\Temp\\Stf\\Config\n";
             Assert.AreEqual(ExpectedStatusTxt, oneFileStatusTxt);
 
-            MyArchiver.PerformArchive();
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = "False";
-            MyArchiver.Configuration.DoArchiveToZipfile = "False";
+            stfArchiver.PerformArchive();
         }
 
         /// <summary>
@@ -65,16 +69,14 @@ namespace StfArchiverTests
         [TestMethod]
         public void TestPerformArchiveAndZip()
         {
+            var stfArchiver = new StfArchiver(TestContext.TestName);
             const string ZipFilename = @"c:\temp\Stf\StfArchiver.zip";
 
-            MyArchiver.AddDirectory(@"C:\Temp\Stf\Config");
-            MyArchiver.Configuration.ZipFilename = ZipFilename;
-            MyArchiver.PerformArchive();
+            stfArchiver.AddDirectory(@"C:\Temp\Stf\Config");
+            stfArchiver.Configuration.ZipFilename = ZipFilename;
+            stfArchiver.PerformArchive();
 
             Assert.IsTrue(File.Exists(ZipFilename));
-
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = "False";
-            MyArchiver.Configuration.DoArchiveToZipfile = "False";
         }
     }
 }
