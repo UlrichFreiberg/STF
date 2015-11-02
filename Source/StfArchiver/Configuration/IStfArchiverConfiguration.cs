@@ -16,6 +16,16 @@ namespace Mir.Stf.Utilities.Configuration
     public interface IStfArchiverConfiguration
     {
         /// <summary>
+        /// Gets or sets wether or not to Archive folders and files
+        /// </summary>
+        string DoArchiveFoldersAndFiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets wether or not to Archive to zip file
+        /// </summary>
+        string DoArchiveToZipfile { get; set; }
+
+        /// <summary>
         /// Gets or sets the destination to archive 
         /// </summary>
         string ArchiveDestination { get; set; }
@@ -34,6 +44,11 @@ namespace Mir.Stf.Utilities.Configuration
         /// Gets or sets the temp directory.
         /// </summary>
         string TempDirectory { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use loginName in path.
+        /// </summary>
+        string UseLoginNameInPath { get; set; }
 
         /// <summary>
         /// Gets or sets the use date time in path.

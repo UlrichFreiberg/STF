@@ -14,6 +14,7 @@ namespace Mir.Stf.Utilities
     using System.Collections.Generic;
     using System.IO;
     using System.IO.Compression;
+    using System.Linq;
 
     using Configuration;
 
@@ -34,7 +35,6 @@ namespace Mir.Stf.Utilities
         public StfArchiver(IStfArchiverConfiguration config, string testname)
         {
             Configuration = config;
-
             Init(testname);
         }
 
@@ -75,28 +75,13 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool Init(string testname)
         {
-            if (Configuration == null)
-            {
-                var tempPath = Path.GetTempPath();
-                var tempDir = string.Format(
-                    "StfArchiver_{0}_{1}",
-                    Environment.UserName,
-                    DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss"));
-
-                Configuration = new StfArchiverConfiguration();
-                Configuration.TempDirectory = Path.Combine(tempPath, tempDir);
-            }
-
-            if (string.IsNullOrEmpty(Configuration.ArchiveDestination))
-            {
-                Configuration.ArchiveDestination = GetDefaultArchiveDestination(testname);
-            }
-
-            Configuration.ZipFilename = GetDefaultZipFilename(testname);
-
             FilesToArchive = new List<string>();
             DirectoriesToArchive = new List<string>();
-           
+
+            CheckArchiveConfiguration();
+            SetDefaultArchiveDestination(testname);
+            SetDefaultZipFilename(testname);
+
             return true;
         }
 
@@ -109,31 +94,25 @@ namespace Mir.Stf.Utilities
         public string Status()
         {
             var retVal = string.Empty;
-            var headerAdded = false;
 
-            foreach (var directory in DirectoriesToArchive)
+            if (DirectoriesToArchive.Count > 0)
             {
-                if (!headerAdded)
-                {
-                    headerAdded = true;
-                    retVal = "Directories to archive\n";
-                }
+                retVal = "Directories to archive\n";
 
-                retVal += string.Format("\t{0}\n", directory);
+                retVal = DirectoriesToArchive.Aggregate(
+                    retVal,
+                    (current, directory) => current + string.Format("\t{0}\n", directory));
             }
 
-            foreach (var file in FilesToArchive)
+            if (FilesToArchive.Count > 0)
             {
-                if (!headerAdded)
-                {
-                    headerAdded = true;
-                    retVal += "Files to archive\n";
-                }
-
-                retVal += string.Format("\t{0}\n", file);
+                retVal += "Files to archive\n";
+                retVal = FilesToArchive.Aggregate(
+                    retVal,
+                    (current, file) => current + string.Format("\t{0}\n", file));
             }
 
-            if (!headerAdded)
+            if (string.IsNullOrEmpty(retVal))
             {
                 retVal = "Nothing to Archive";
             }
@@ -149,6 +128,8 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool PerformArchive()
         {
+            var retVal = true;
+
             if (!Directory.Exists(Configuration.TempDirectory))
             {
                 Directory.CreateDirectory(Configuration.TempDirectory);
@@ -156,7 +137,10 @@ namespace Mir.Stf.Utilities
 
             foreach (var directory in DirectoriesToArchive)
             {
-                RoboCopyWrapper.MirrorDir(directory, Configuration.TempDirectory);
+                if (RoboCopyWrapper.MirrorDir(directory, Configuration.TempDirectory) <= 0)
+                {
+                    retVal = false;
+                }
             }
 
             foreach (var filename in FilesToArchive)
@@ -182,15 +166,20 @@ namespace Mir.Stf.Utilities
                 Directory.CreateDirectory(Configuration.ArchiveDestination);
             }
 
-            // TODO: Generate filelist.txt and place it in the DestinationDir
+            if (InferBoolValue(Configuration.DoArchiveFoldersAndFiles))
+            {
+                // TODO: Generate filelist.txt and place it in the DestinationDir
 
-            // TODO: Let configuration control if to MirrorDir
-            RoboCopyWrapper.MirrorDir(Configuration.TempDirectory, Configuration.ArchiveDestination);
+                // TODO: Let configuration control if to MirrorDir
+                RoboCopyWrapper.MirrorDir(Configuration.TempDirectory, Configuration.ArchiveDestination);
+            }
 
-            // TODO: Let configuration control if to MirrorDir
-            ZipDestination();
+            if (InferBoolValue(Configuration.DoArchiveFoldersAndFiles))
+            {
+                retVal = retVal && ZipDestination();
+            }
 
-            return true;
+            return retVal;
         }
 
         /// <summary>
@@ -240,6 +229,37 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// If no configuration is provided, then create a default one.
+        /// </summary>
+        private void CheckArchiveConfiguration()
+        {
+            if (Configuration != null)
+            {
+                return;
+            }
+
+            var tempPath = Path.GetTempPath();
+            var tempDirLeaf = string.Format(
+                                        "StfArchiver_{0}_{1}",
+                                        Environment.UserName,
+                                        DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss"));
+            var tempDir = Path.Combine(tempPath, tempDirLeaf);
+
+            Configuration = new StfArchiverConfiguration
+            {
+                TempDirectory = tempDir,
+                ArchiveDestination = string.Empty,
+                ZipFilename = "StfArchive.zip",
+                UseLoginNameInPath = "true",
+                UseDateTimeInPath = "true",
+                UseTestNameInPath = "true",
+                DoArchiveToZipfile = "true",
+                DoArchiveFoldersAndFiles = "true",
+                ArchiveTopDir = @"C:\temp\Stf\StfArchive"
+            };
+        }
+
+        /// <summary>
         /// Zip up the destination directory
         /// </summary>
         /// <returns>
@@ -267,16 +287,12 @@ namespace Mir.Stf.Utilities
         /// <param name="testname">
         /// The testname.
         /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string GetDefaultZipFilename(string testname)
+        private void SetDefaultZipFilename(string testname)
         {
-            bool createZipFile = true; // TODO: get from configuration
-
-            if (!createZipFile)
+            if (!InferBoolValue(Configuration.DoArchiveToZipfile))
             {
-                return null;
+                Configuration.ZipFilename = string.Empty;
+                return;
             }
 
             var filename = string.Format("{0}.zip", testname);
@@ -285,29 +301,30 @@ namespace Mir.Stf.Utilities
                 filename = Path.GetFileName(Configuration.ZipFilename);
             }
 
-            var retVal = Path.Combine(Configuration.ArchiveDestination, filename);
-
-            return retVal;
+            var newArchiveDestination = Path.Combine(Configuration.ArchiveDestination, filename);
+            Configuration.ZipFilename = newArchiveDestination;
         }
 
         /// <summary>
-        /// The get default archive destination.
+        /// The set default archive destination.
         /// </summary>
         /// <param name="testname">
         /// The testname.
         /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string GetDefaultArchiveDestination(string testname)
+        private void SetDefaultArchiveDestination(string testname)
         {
-            var currentUser = Environment.UserName;  
+            if (!string.IsNullOrEmpty(Configuration.ArchiveDestination))
+            {
+                return;
+            }
+
+            var currentUser = Environment.UserName;
             var unique = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
-            var defaultArchiveTopDir = @"c:\temp\stf\archiveDir";
+            const string DefaultArchiveTopDir = @"c:\temp\stf\archiveDir";
 
             if (string.IsNullOrEmpty(Configuration.ArchiveTopDir))
             {
-                Configuration.ArchiveTopDir = defaultArchiveTopDir;
+                Configuration.ArchiveTopDir = DefaultArchiveTopDir;
             }
 
             if (!Directory.Exists(Configuration.ArchiveTopDir))
@@ -320,11 +337,56 @@ namespace Mir.Stf.Utilities
                 testname = "DefaultTestDir";
             }
 
-            var retVal = Path.Combine(Configuration.ArchiveTopDir, currentUser);
-            retVal = Path.Combine(retVal, testname);        // TODO: To be controlled from config
-            retVal = Path.Combine(retVal, unique);          // TODO: To be controlled from config
+            AddToPath(Configuration.UseLoginNameInPath, currentUser);
+            AddToPath(Configuration.UseLoginNameInPath, testname);
+            AddToPath(Configuration.UseLoginNameInPath, unique);
+        }
 
-            return retVal;
+        /// <summary>
+        /// Depending on a condition, add a string as a new dir in the path for ArchiveDestination
+        /// </summary>
+        /// <param name="condition">
+        /// String from configuration holding a bool value
+        /// </param>
+        /// <param name="dirElement">
+        /// The element
+        /// </param>
+        private void AddToPath(string condition, string dirElement)
+        {
+            if (string.IsNullOrEmpty(Configuration.ArchiveDestination))
+            {
+                Configuration.ArchiveDestination = Configuration.ArchiveTopDir;
+            }
+
+            if (!InferBoolValue(condition))
+            {
+                return;
+            }
+
+            var newArchiveDestination = Path.Combine(Configuration.ArchiveDestination, dirElement);
+            Configuration.ArchiveDestination = newArchiveDestination;
+        }
+
+        /// <summary>
+        /// Take a string and see if a boolean true can be parsed - if not, then return false
+        /// </summary>
+        /// <param name="value">
+        /// the string to parse
+        /// </param>
+        /// <returns>
+        /// true, if a boolean true can be parsed - if not, then return false
+        /// </returns>
+        private bool InferBoolValue(string value)
+        {
+            switch (value)
+            {
+                case "1":
+                case "yes":
+                case "true":
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

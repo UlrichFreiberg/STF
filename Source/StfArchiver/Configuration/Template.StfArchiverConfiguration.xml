@@ -1,32 +1,44 @@
 ﻿<?xml version="1.0"?>
 <configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
-  <section name="StfKernel">
-    <section name="StfArchiver">
-      
-      <!-- 
+    <section name="StfKernel">
+        <section name="StfArchiver">
+
+            <!-- 
       Description: If true the StfArchiver will archive files and folders added 
       Default value: True;
       Optional Value
       -->
-      <key name="ArchiveTestResults" value="false" />
-      
-      <!-- If set will use the path as the archive destination, if not set the archiver will compose a default destination -->
-      <key name="ArchiveDestination" value="" />
-      
-      <!-- If set the archiver will zip the files using the zipfile name at the archive destination -->
-      <key name="ZipFilename" value="TestLogs.zip" />
-      
-      <!-- Temporary directory for the files and folders added to the StfArchiver. If not set StfArchiver will compose a default destination -->
-      <key name="TempDirectory" value="%STF_ROOT%\Temp\" />
-      
-      <!-- Used when composing default archive destination path (when archive destination is blank) -->
-      <key name="ArchiveTopDir" value="%STF_ROOT%\archiveDir" />
+            <key name="ArchiveTestResults" value="false" />
 
-      <!--  -->
-      <key name="UseDateTimeInPath" value="true" />
+            <!-- If set will use the path as the archive destination, if not set the archiver will compose a default destination -->
+            <key name="ArchiveDestination" value="" />
 
-      <!-- -->
-      <key name="UseTestnameInPath" value="true" />
+            <!-- If set the archiver will zip the files using the zipfile name at the archive destination -->
+            <key name="ZipFilename" value="TestLogs.zip" />
+
+            <!-- Temporary directory for the files and folders added to the StfArchiver. If not set StfArchiver will compose a default destination -->
+            <key name="TempDirectory" value="%STF_ROOT%\Temp\" />
+
+            <!-- Used when composing default archive destination path (when archive destination is blank) -->
+            <key name="ArchiveTopDir" value="%STF_ROOT%\archiveDir" />
+
+            <!--  
+            When composing the path for archive destination, should the LoginName be used 
+            like in c:\temp\AchiveTopDir\User01\ 
+            -->
+            <key name="UseLoginNameInPath" value="true" />
+
+            <!--  
+            When composing the path for archive destination, should the DateTime be used 
+            like in c:\temp\AchiveTopDir\30-Oct-2015_21-00-05\ 
+            -->
+            <key name="UseDateTimeInPath" value="true" />
+
+            <!--  
+            When composing the path for archive destination, should the TestName be used 
+            like in c:\temp\AchiveTopDir\TestAddingTwoObjects\ 
+            -->
+            <key name="UseTestNameInPath" value="true" />
+        </section>
     </section>
-  </section>
 </configuration>

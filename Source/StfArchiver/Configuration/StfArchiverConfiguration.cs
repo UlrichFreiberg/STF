@@ -16,6 +16,18 @@ namespace Mir.Stf.Utilities.Configuration
     public class StfArchiverConfiguration : IStfArchiverConfiguration
     {
         /// <summary>
+        /// Gets or sets wether or not to Archive folders and files
+        /// </summary>
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.DoArchiveFoldersAndFiles", DefaultValue = "false")]
+        public string DoArchiveFoldersAndFiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets wether or not to Archive to zip file
+        /// </summary>
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.DoArchiveToZipfile", DefaultValue = "false")]
+        public string DoArchiveToZipfile { get; set; }
+
+        /// <summary>
         /// Gets or sets the destination to archive 
         /// </summary>
         [ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveDestination")]
@@ -24,13 +36,13 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the name of ZipFile if the archive should be zipped.
         /// </summary>
-        [ConfigInfo("Configuration.StfKernel.StfArchiver.ZipFilename")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.ZipFilename", DefaultValue = null)]
         public string ZipFilename { get; set; }
 
         /// <summary>
         /// Gets or sets the archive top dir.
         /// </summary>
-        [ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveTopDir")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.ArchiveTopDir", DefaultValue = @"c:\temp\Stf\StfArchive")]
         public string ArchiveTopDir { get; set; }
 
         /// <summary>
@@ -42,13 +54,19 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the use date time in path.
         /// </summary>
-        [ConfigInfo("Configuration.StfKernel.StfArchiver.UseDateTimeInPath")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.UseDateTimeInPath", DefaultValue = "true")]
         public string UseDateTimeInPath { get; set; }
 
         /// <summary>
         /// Gets or sets the use test name in path.
         /// </summary>
-        [ConfigInfo("Configuration.StfKernel.StfArchiver.UseTestnameInPath")]
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.UseTestnameInPath", DefaultValue = "true")]
         public string UseTestNameInPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use LoginName in path.
+        /// </summary>
+        [ConfigInfo("Configuration.StfKernel.StfArchiver.UseLoginNameInPath", DefaultValue = "true")]
+        public string UseLoginNameInPath { get; set; }
     }
 }
