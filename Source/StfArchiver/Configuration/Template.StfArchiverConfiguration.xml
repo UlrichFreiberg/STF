@@ -1,0 +1,32 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
+  <section name="StfKernel">
+    <section name="StfArchiver">
+      
+      <!-- 
+      Description: If true the StfArchiver will archive files and folders added 
+      Default value: True;
+      Optional Value
+      -->
+      <key name="ArchiveTestResults" value="false" />
+      
+      <!-- If set will use the path as the archive destination, if not set the archiver will compose a default destination -->
+      <key name="ArchiveDestination" value="" />
+      
+      <!-- If set the archiver will zip the files using the zipfile name at the archive destination -->
+      <key name="ZipFilename" value="TestLogs.zip" />
+      
+      <!-- Temporary directory for the files and folders added to the StfArchiver. If not set StfArchiver will compose a default destination -->
+      <key name="TempDirectory" value="%STF_ROOT%\Temp\" />
+      
+      <!-- Used when composing default archive destination path (when archive destination is blank) -->
+      <key name="ArchiveTopDir" value="%STF_ROOT%\archiveDir" />
+
+      <!--  -->
+      <key name="UseDateTimeInPath" value="true" />
+
+      <!-- -->
+      <key name="UseTestnameInPath" value="true" />
+    </section>
+  </section>
+</configuration>
