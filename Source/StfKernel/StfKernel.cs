@@ -40,7 +40,6 @@ namespace Mir.Stf
             // lets get a logger and a configuration
             KernelLogger = new StfLogger { Configuration = { LogFileName = Path.Combine(StfLogDir, @"KernelLogger.html") } };
             StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
-            KernelSetupStfArchiver();
 
             // Any plugins for us?
             PluginLoader = new StfPluginLoader(KernelLogger, StfConfiguration);
@@ -70,11 +69,6 @@ namespace Mir.Stf
         /// Gets or sets the stf configuration directory
         /// </summary>
         public string StfConfigDir { get; set; }
-
-        /// <summary>
-        /// Gets or sets the stf archiver.
-        /// </summary>
-        protected StfArchiver StfArchiver { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether use archiver.
@@ -212,28 +206,6 @@ namespace Mir.Stf
             StfRoot = CheckForNeededKernelDirectory(@"Stf_Root", @"C:\temp\Stf");
             StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
             StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
-        }
-
-        /// <summary>
-        /// The kernel setup stf archiver.
-        /// </summary>
-        private void KernelSetupStfArchiver()
-        {
-            var archiverConfiguration = new StfArchiverConfiguration();
-
-            try
-            {
-                StfConfiguration.LoadUserConfiguration(archiverConfiguration);
-            }
-            catch (Exception)
-            {
-                ////TODO: do something intelligent here
-            }
-
-            archiverConfiguration.ArchiveTopDir = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveTopDir);
-            archiverConfiguration.ArchiveDestination = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveDestination);
-            archiverConfiguration.TempDirectory = StfTextUtils.ExpandVariables(archiverConfiguration.TempDirectory);
-            StfArchiver = new StfArchiver(archiverConfiguration, null);
         }
     }
 }
