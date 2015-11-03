@@ -143,7 +143,7 @@ namespace Mir.Stf.Utilities
             /// <summary>
             /// The configuration file for <c>this</c> <c>assemnbly</c>.
             /// </summary>
-            private static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            private static readonly System.Configuration.Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             /// <summary>
             /// The application settings.

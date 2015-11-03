@@ -49,6 +49,9 @@
     <Compile Include="CallStackManagement.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Configuration\IStfLoggerConfiguration.cs" />
+    <Compile Include="Configuration\StfLoggerConfiguration.cs" />
+    <Compile Include="ILogConfiguration.cs" />
     <Compile Include="Interfaces\IStfLoggerAutomationIdentification.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,6 +129,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\StfLogo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StfConfiguration\StfConfiguration.csproj">
+      <Project>{2d259b87-a08e-406f-818c-6f60bc16c983}</Project>
+      <Name>StfConfiguration</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Template.StfLoggerConfiguration.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
