@@ -51,13 +51,13 @@ namespace Tests
             /// <summary>
             /// Gets or sets the prop public string 1.
             /// </summary>
-            [ConfigInfo("SectionName.k1")]
+            [StfConfiguration("SectionName.k1")]
             public string PropPublicString1 { get; set; }
 
             /// <summary>
             /// Gets or sets the prop public string 2.
             /// </summary>
-            [ConfigInfo("SectionName.SubSectionName.k2")]
+            [StfConfiguration("SectionName.SubSectionName.k2")]
             public string PropPublicString2 { get; set; }
         }
     }

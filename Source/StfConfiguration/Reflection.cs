@@ -42,21 +42,21 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="Dictionary{TKey,TValue}"/>.
         /// </returns>
-        internal Dictionary<string, ConfigInfo> GetConfigPropertiesFromType()
+        internal Dictionary<string, StfConfigurationAttribute> GetConfigPropertiesFromType()
         {
             if (this.currentFieldSet == null)
             {
-                return new Dictionary<string, ConfigInfo>();
+                return new Dictionary<string, StfConfigurationAttribute>();
             }
 
             var currentFieldSetype = currentFieldSet.GetType();
             var props = currentFieldSetype.GetProperties();
-            var dict = new Dictionary<string, ConfigInfo>();
+            var dict = new Dictionary<string, StfConfigurationAttribute>();
 
             foreach (var property in props)
             {
                 var value = property.GetValue(this.currentFieldSet);
-                var configAttributes = property.GetCustomAttributes<ConfigInfo>(true).FirstOrDefault();
+                var configAttributes = property.GetCustomAttributes<StfConfigurationAttribute>(true).FirstOrDefault();
 
                 dict.Add(property.Name, configAttributes);
             }
@@ -76,7 +76,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        internal object SetConfig(Dictionary<string, ConfigInfo> userConfig, StfConfiguration stfConfiguration)
+        internal object SetConfig(Dictionary<string, StfConfigurationAttribute> userConfig, StfConfiguration stfConfiguration)
         {
             var t = this.currentFieldSet.GetType();
 

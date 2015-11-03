@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConfigInfo.cs" company="Mir Software">
+// <copyright file="StfConfigurationAttribute.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -16,15 +16,15 @@ namespace Mir.Stf.Utilities
     /// The config info.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class ConfigInfo : Attribute
+    public class StfConfigurationAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConfigInfo"/> class.
+        /// Initializes a new instance of the <see cref="StfConfigurationAttribute"/> class.
         /// </summary>
         /// <param name="configKeyPath">
         /// The config key path.
         /// </param>
-        public ConfigInfo(string configKeyPath)
+        public StfConfigurationAttribute(string configKeyPath)
         {
             this.ConfigKeyPath = configKeyPath;
             this.Version = "1.0";

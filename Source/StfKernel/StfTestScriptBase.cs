@@ -93,11 +93,11 @@ namespace Mir.Stf
                 {
                     var headerCaption = TestContext.DataRow.Table.Columns[index].Caption;
 
-                    this.MyLogger.LogInfo(string.Format("Column[{0}]=[{1}]", headerCaption, TestContext.DataRow[headerCaption]));
+                    MyLogger.LogInfo(string.Format("Column[{0}]=[{1}]", headerCaption, TestContext.DataRow[headerCaption]));
                 }
             }
 
-            this.SetUpArchiver(TestContext.TestName);
+            SetUpArchiver(TestContext.TestName);
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
