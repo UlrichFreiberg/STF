@@ -8,6 +8,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Mir.Stf.Utilities.Interfaces;
+
 namespace Mir.Stf.Utilities
 {
     /// <summary>
@@ -18,6 +20,6 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets or sets the my logger.
         /// </summary>
-        StfLogger MyLogger { get; set; }
+        IStfLogger MyLogger { get; set; }
     }
 }

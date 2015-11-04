@@ -10,6 +10,7 @@
 
 using System;
 using Mir.Stf.Utilities;
+using Mir.Stf.Utilities.Interfaces;
 using Stf.Unittests.UnitTestPluginTypes;
 
 namespace Stf.Unittests
@@ -46,7 +47,7 @@ namespace Stf.Unittests
         /// <summary>
         /// Gets or sets the my logger.
         /// </summary>
-        public StfLogger MyLogger { get; set; }
+        public IStfLogger MyLogger { get; set; }
 
         /// <summary>
         /// The init.

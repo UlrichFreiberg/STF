@@ -16,6 +16,7 @@ using System.Reflection;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using Mir.Stf.Utilities.Extensions;
+using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
@@ -43,7 +44,7 @@ namespace Mir.Stf.Utilities
         /// <param name="stfConfiguration">
         /// The stf Configuration.
         /// </param>
-        public StfPluginLoader(StfLogger stfLogger, StfConfiguration stfConfiguration)
+        public StfPluginLoader(IStfLogger stfLogger, StfConfiguration stfConfiguration)
         {
             PluginLogger = stfLogger;
             StfConfiguration = stfConfiguration;
@@ -54,7 +55,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets or sets the plugin logger.
         /// </summary>
-        private StfLogger PluginLogger { get; set; }
+        private IStfLogger PluginLogger { get; set; }
 
         /// <summary>
         /// Gets or sets the stf configuration.

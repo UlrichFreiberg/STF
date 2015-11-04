@@ -18,7 +18,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger.
     /// </summary>
-    public partial class StfLogger : IStfLoggerScreenshots
+    public partial class StfLogger
     {
         /// <summary>
         /// The utilities.

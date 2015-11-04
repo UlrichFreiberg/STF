@@ -12,6 +12,7 @@ using System;
 using System.IO;
 using Mir.Stf.KernelUtils;
 using Mir.Stf.Utilities;
+using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf
 {
@@ -78,7 +79,7 @@ namespace Mir.Stf
         /// <summary>
         /// Gets or sets the Stf logger.
         /// </summary>
-        private StfLogger KernelLogger { get; set; }
+        private IStfLogger KernelLogger { get; set; }
 
         /// <summary>
         /// Gets or sets the stf container.

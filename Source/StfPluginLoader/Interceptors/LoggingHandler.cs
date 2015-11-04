@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Text;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using Mir.Stf.Utilities.Extensions;
+using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities.Interceptors
 {
@@ -24,7 +25,7 @@ namespace Mir.Stf.Utilities.Interceptors
         /// <summary>
         /// The stf logger.
         /// </summary>
-        private readonly StfLogger stfLogger;
+        private readonly IStfLogger stfLogger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoggingHandler"/> class.
@@ -32,7 +33,7 @@ namespace Mir.Stf.Utilities.Interceptors
         /// <param name="stfLogger">
         /// The stf logger.
         /// </param>
-        public LoggingHandler(StfLogger stfLogger)
+        public LoggingHandler(IStfLogger stfLogger)
         {
             this.stfLogger = stfLogger;
         }
@@ -191,29 +192,6 @@ namespace Mir.Stf.Utilities.Interceptors
         }
 
         /// <summary>
-        /// The log property message.
-        /// </summary>
-        /// <param name="propertyName">
-        /// The property name.
-        /// </param>
-        /// <param name="templateMessage">
-        /// The template message.
-        /// </param>
-        /// <param name="value">
-        /// The value.
-        /// </param>
-        private void LogPropertyMessage(string propertyName, string templateMessage, object value)
-        {
-            if (value == null)
-            {
-                value = string.Empty;
-            }
-
-            var propName = propertyName.Replace("get_", string.Empty).Replace("set_", string.Empty);
-            stfLogger.LogInfo(string.Format(templateMessage, propName, value));
-        }
-
-        /// <summary>
         /// The get method type.
         /// </summary>
         /// <param name="methodName">
@@ -279,6 +257,5 @@ namespace Mir.Stf.Utilities.Interceptors
             var methodInfo = methodBase as MethodInfo;
             return methodInfo == null ? string.Empty : methodInfo.ReturnType.Name;
         }
-
     }
 }

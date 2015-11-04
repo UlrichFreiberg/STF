@@ -16,7 +16,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger. The <c>IStfLoggerPerformanceManagement</c> part.
     /// </summary>
-    public partial class StfLogger : IStfLoggerPerformanceManagement
+    public partial class StfLogger
     {
         /// <summary>
         /// Used for indicating performance issues - if not logging, then something takes a long time:-)

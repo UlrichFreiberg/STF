@@ -16,6 +16,23 @@ namespace Mir.Stf.Utilities.Interfaces
     public interface IStfLoggerCallStackManagement
     {
         /// <summary>
+        /// The log function enter.
+        /// </summary>
+        /// <param name="loglevel">
+        /// The loglevel.
+        /// </param>
+        /// <param name="nameOfReturnType">
+        /// The name of return type.
+        /// </param>
+        /// <param name="functionName">
+        /// The function name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName);
+
+        /// <summary>
         /// The log function enter. Should be called/inserted when entering a model/adapter function.
         /// </summary>
         /// <param name="loglevel">
@@ -34,6 +51,20 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="int"/>.
         /// </returns>
         int LogFunctionEnter(StfLogLevel loglevel, string nameOfReturnType, string functionName, object[] argValues);
+
+        /// <summary>
+        /// The log function exit.
+        /// </summary>
+        /// <param name="loglevel">
+        /// The loglevel.
+        /// </param>
+        /// <param name="functionName">
+        /// The function name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogFunctionExit(StfLogLevel loglevel, string functionName);
 
         /// <summary>
         /// The log function exit. Should be called/inserted when exiting a model/adapter function.

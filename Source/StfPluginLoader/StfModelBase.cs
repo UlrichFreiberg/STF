@@ -25,7 +25,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets or sets the my logger.
         /// </summary>
-        public StfLogger MyLogger { get; set; }
+        public IStfLogger MyLogger { get; set; }
 
         /// <summary>
         /// The get.

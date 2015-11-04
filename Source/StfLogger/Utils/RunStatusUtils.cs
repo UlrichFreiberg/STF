@@ -37,10 +37,13 @@ namespace Mir.Stf.Utilities.Utils
         }
 
         /// <summary>
+        /// The get run status.
         /// </summary>
         /// <param name="logFilename">
+        /// The log filename.
         /// </param>
         /// <returns>
+        /// The Dictionary.
         /// </returns>
         public static Dictionary<StfLogLevel, int> GetRunStatus(string logFilename)
         {

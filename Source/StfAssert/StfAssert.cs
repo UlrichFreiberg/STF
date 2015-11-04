@@ -11,10 +11,8 @@
 namespace Mir.Stf.Utilities
 {
     using System;
-
+    using Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Mir.Stf.Utilities.Interfaces;
 
     /// <summary>
     /// The stf assert.
@@ -32,7 +30,7 @@ namespace Mir.Stf.Utilities
         /// <param name="logger">
         /// The logger.
         /// </param>
-        public StfAssert(StfLogger logger) : this()
+        public StfAssert(IStfLogger logger) : this()
         {
             AssertLogger = logger;
         }
@@ -49,7 +47,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets or sets the assert logger.
         /// </summary>
-        public StfLogger AssertLogger { get; set; }
+        public IStfLogger AssertLogger { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether enable negative testing.
@@ -92,12 +90,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("IsTrue: value True");
+                msg = "IsTrue: value True";
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("IsTrue: value False");
+                msg = "IsTrue: value False";
                 this.AssertFail(testStep, msg);
             }
 
@@ -123,12 +121,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("IsFalse: value False");
+                msg = "IsFalse: value False";
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("IsFalse: value True");
+                msg = "IsFalse: value True";
                 this.AssertFail(testStep, msg);
             }
 

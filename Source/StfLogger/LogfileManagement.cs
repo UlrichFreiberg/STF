@@ -22,7 +22,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger. the <see cref="IStfLoggerLogfileManagement"/> part
     /// </summary>
-    public partial class StfLogger : IStfLoggerLogfileManagement
+    public partial class StfLogger : IStfLogger
     {
         /// <summary>
         /// The log file name.

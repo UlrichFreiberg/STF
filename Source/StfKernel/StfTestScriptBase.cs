@@ -12,12 +12,13 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mir.Stf.Utilities;
+using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf
 {
     using System;
 
-    using Mir.Stf.Utilities.Configuration;
+    using Utilities.Configuration;
 
     /// <summary>
     /// BaseClass for all Stf test scripts.
@@ -42,7 +43,7 @@ namespace Mir.Stf
         /// <summary>
         /// Gets the Stf logger.
         /// </summary>
-        public StfLogger MyLogger { get; private set; }
+        public IStfLogger MyLogger { get; private set; }
 
         /// <summary>
         /// Gets the Stf Archiver
@@ -62,7 +63,7 @@ namespace Mir.Stf
         [TestInitialize]
         public void BaseTestInitialize()
         {
-            MyLogger = Get<StfLogger>();
+            MyLogger = Get<IStfLogger>();
             MyLogger.LogTitle = TestContext.TestName;
 
             var logFilePostfix = string.Empty;

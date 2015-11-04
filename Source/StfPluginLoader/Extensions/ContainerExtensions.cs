@@ -246,7 +246,7 @@ namespace Mir.Stf.Utilities.Extensions
                 .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(theType.FullName))
                 .AddCallHandler<LoggingHandler>(
                     new ContainerControlledLifetimeManager(),
-                    new InjectionConstructor(new ResolvedParameter<StfLogger>()),
+                    new InjectionConstructor(new ResolvedParameter<IStfLogger>()),
                     new InjectionProperty("Order", 1));
 
             return injectionMembers;

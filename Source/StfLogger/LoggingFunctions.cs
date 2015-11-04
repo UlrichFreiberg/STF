@@ -19,7 +19,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger. The <see cref="IStfLoggerLoggingFunctions"/> part.
     /// </summary>
-    public partial class StfLogger : IStfLoggerLoggingFunctions
+    public partial class StfLogger
     {
         /// <summary>
         /// The _message id.

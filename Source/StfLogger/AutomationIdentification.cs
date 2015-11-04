@@ -15,7 +15,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result logger. The <see cref="IStfLoggerAutomationIdentification"/> part.
     /// </summary>
-    public partial class StfLogger : IStfLoggerAutomationIdentification
+    public partial class StfLogger
     {
         /// <summary>
         /// The log automation id object func.

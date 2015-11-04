@@ -17,7 +17,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger. The <see cref="IStfLoggerCallStackManagement"/> part
     /// </summary>
-    public partial class StfLogger : IStfLoggerCallStackManagement
+    public partial class StfLogger
     {
         /// <summary>
         /// The _call stack.

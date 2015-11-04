@@ -15,7 +15,7 @@ namespace Mir.Stf.Utilities
     /// <summary>
     /// The test result html logger.
     /// </summary>
-    public partial class StfLogger : IStfLoggerTestScriptHeaders
+    public partial class StfLogger
     {
         /// <summary>
         /// Gets or sets the name of Current Test
