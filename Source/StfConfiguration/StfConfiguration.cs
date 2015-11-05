@@ -310,7 +310,7 @@ namespace Mir.Stf.Utilities
             value = string.Empty;
             try
             {
-                value = GetKeyValue(keyName);
+                value = GetConfigValue(keyName);
             }
             catch (Exception)
             {

@@ -8,6 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.CodeDom;
 using Mir.Stf;
 using Mir.Stf.Utilities;
 
@@ -298,6 +299,16 @@ namespace UnitTest
 
             MyAssert.IsTrue("MyLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
             MyAssert.FileExists("MyLogger.CreateSummaryLog", summaryFilename);
+        }
+
+        /// <summary>
+        /// The test method exception thrown in test is caught in cleanup.
+        /// </summary>
+        [TestMethod, ExpectedException(typeof(AssertFailedException))]
+        public void TestMethodExceptionThrownInTestIsCaughtInCleanup()
+        {
+            MyLogger.LogInfo("This is a message before assert failed exception error");
+            throw new AssertFailedException();
         }
     }
 }

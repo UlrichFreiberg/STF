@@ -33,6 +33,7 @@
       <AnalyzerSettings>
         <CollectionProperty Name="Hungarian">
           <Value>db</Value>
+          <Value>es</Value>
           <Value>ft</Value>
           <Value>ms</Value>
           <Value>ny</Value>

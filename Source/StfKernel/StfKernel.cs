@@ -16,8 +16,6 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf
 {
-    using Utilities.Configuration;
-
     /// <summary>
     /// The stf kernel.
     /// </summary>
@@ -34,6 +32,7 @@ namespace Mir.Stf
         public StfKernel()
         {
             StfTextUtils = new StfTextUtils();
+            StfExecutionUtils = new StfExecutionUtils();
 
             // setup needed kernel directories
             KernelSetupKernelDirectories();
@@ -55,6 +54,11 @@ namespace Mir.Stf
         /// Gets or sets the stf text utils - where string stuff to remember is stored.
         /// </summary>
         public StfTextUtils StfTextUtils { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stf execution utils.
+        /// </summary>
+        public StfExecutionUtils StfExecutionUtils { get; set; }
 
         /// <summary>
         /// Gets or sets the stf root.

@@ -9,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mir.Stf.Utilities;
@@ -86,7 +87,7 @@ namespace Mir.Stf
             var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
 
             MyLogger.FileName = logFilename;
-            MyAssert = new StfAssert(this.MyLogger);
+            MyAssert = new StfAssert(MyLogger);
 
             if (TestDataDriven())
             {
@@ -102,6 +103,8 @@ namespace Mir.Stf
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
+            
+            KeepComputerAlive();
         }
 
         /// <summary>
@@ -111,6 +114,12 @@ namespace Mir.Stf
         public void BaseTestCleanup()
         {
             LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
+
+            if (TestContext.CurrentTestOutcome != UnitTestOutcome.Passed)
+            {
+                MyLogger.LogError("Test failed");
+            }
+
             MyLogger.CloseLogFile();
 
             MyArchiver.AddFile(MyLogger.FileName);
@@ -221,6 +230,39 @@ namespace Mir.Stf
         private void ArchiveFilesIfNecessary()
         {
             MyArchiver.PerformArchive();
+        }
+
+        /// <summary>
+        /// The keep computer alive.
+        /// </summary>
+        private void KeepComputerAlive()
+        {
+            var conf = Get<StfConfiguration>();
+            var configPath = "Configuration.StfKernel.KeepMachineAwakeDuringTests";
+            string keepAliveValue;
+
+            if (!conf.TryGetKeyValue(configPath, out keepAliveValue))
+            {
+                MyLogger.LogInternal(string.Format("Not keeping machine alive. Missing key {0}", configPath));
+            }
+
+            bool keepAwake;
+            if (!bool.TryParse(keepAliveValue, out keepAwake))
+            {
+                MyLogger.LogInternal(string.Format("Invalid boolean value [{0}] for key [{1}]", keepAliveValue, configPath));
+            }
+
+            if (!keepAwake)
+            {
+                return;
+            }
+
+            // TODO: this should be done async/in a task/in another thread continually
+            var success = StfExecutionUtils.TryKeepComputerAlive();
+            if (!success)
+            {
+                MyLogger.LogInternal("Not able to keep machine alive for test");
+            }
         }
     }
 }
