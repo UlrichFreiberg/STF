@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Minor bugfixes</releaseNotes>
+    <releaseNotes>Breaking change in IStfPlugin, IStfModelBase and IStfAdapterBase interfaces. They now contain a property with IStfLogger, before it was StfLogger</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
