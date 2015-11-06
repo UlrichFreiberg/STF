@@ -38,7 +38,7 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the name of ZipFile if the archive should be zipped.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.ZipFilename", DefaultValue = null)]
+        [StfConfiguration("Configuration.StfKernel.StfArchiver.ZipFilename", DefaultValue = @"StfArchive.zip")]
         public string ZipFilename { get; set; }
 
         /// <summary>

@@ -211,9 +211,10 @@ namespace Mir.Stf
             {
                 stfConfiguration.LoadUserConfiguration(archiverConfiguration);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                ////TODO: do something intelligent here
+                var msg = string.Format("Something went wrong while loading user configuration for archiver: {0}", exception.Message);
+                MyLogger.LogError(msg);
             }
 
             archiverConfiguration.ArchiveTopDir = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveTopDir);
