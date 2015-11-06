@@ -28,6 +28,9 @@
 
             <!-- Whether log entries with newlines will be mapped to html tag BR -->
             <key name="MapNewlinesToBr" value="false" />
+
+            <!-- Reset the idle timer for the logger thread to prevent the system from sleeping or starting screensaver. Value in minutes where 0 or below disables the idle timer reset -->
+            <key name="KeepAliveInterval" value="5" />
         </section>
     </section>
 </configuration>

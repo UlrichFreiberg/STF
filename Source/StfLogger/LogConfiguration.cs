@@ -34,6 +34,7 @@ namespace Mir.Stf.Utilities
             PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
             ScreenshotOnLogFail = Settings.Setting("ScreenshotOnLogFail", true);
             MapNewlinesToBr = Settings.Setting("MapNewlinesToBr", true);
+            KeepAliveInterval = Settings.Setting("KeepAliveInterval", 5);
 
             const StfLogLevel DefaultLoglevel = StfLogLevel.Internal;
             var logLevelString = Settings.Setting("LogLevel", DefaultLoglevel.ToString());
@@ -95,6 +96,11 @@ namespace Mir.Stf.Utilities
         public bool MapNewlinesToBr { get; set; }
 
         /// <summary>
+        /// Gets or sets the keep alive interval.
+        /// </summary>
+        public int KeepAliveInterval { get; set; }
+
+        /// <summary>
         /// The string to log level.
         /// </summary>
         /// <param name="loglevelString">
@@ -103,7 +109,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="LogLevel"/>.
         /// </returns>
-        internal StfLogLevel? StringToLogLevel(string loglevelString)
+        private StfLogLevel? StringToLogLevel(string loglevelString)
         {
             StfLogLevel? retVal = null;
 

@@ -59,5 +59,10 @@ namespace Mir.Stf.Utilities.Configuration
         /// Gets or sets a value indicating whether log entries with newlines will be mapped to html tag BR 
         /// </summary>
         bool MapNewlinesToBr { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keep alive interval.
+        /// </summary>
+        int KeepAliveInterval { get; set; }
     }
 }

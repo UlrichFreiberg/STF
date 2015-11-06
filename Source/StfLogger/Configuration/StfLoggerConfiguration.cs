@@ -68,5 +68,11 @@ namespace Mir.Stf.Utilities.Configuration
         /// </summary>
         [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.MapNewlinesToBr", DefaultValue = "false")]
         public bool MapNewlinesToBr { get; set; }
+
+        /// <summary>
+        /// Gets or sets the keep alive interval.
+        /// </summary>
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.KeepAliveInterval", DefaultValue = "5")]
+        public int KeepAliveInterval { get; set; }
     }
 }

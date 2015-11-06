@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KernelUtils\StfExecutionUtils.cs" />
     <Compile Include="KernelUtils\StfTextUtils.cs" />
     <Compile Include="StfKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

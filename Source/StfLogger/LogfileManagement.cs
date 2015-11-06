@@ -59,6 +59,7 @@ namespace Mir.Stf.Utilities
             LogInfoDetails = new Dictionary<string, string>();
             AddLoglevelToRunReport = new Dictionary<StfLogLevel, bool>();
             NumberOfLoglevelMessages = new Dictionary<StfLogLevel, int>();
+            ThreadUtils = new ThreadUtils();
 
             foreach (StfLogLevel loglevel in Enum.GetValues(typeof(StfLogLevel)))
             {

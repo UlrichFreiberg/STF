@@ -320,6 +320,8 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private int LogOneHtmlMessage(StfLogLevel loglevel, string message)
         {
+            ResetIdleTimer();
+
             string htmlLine;
 
             if (!this.AddLoglevelToRunReport[loglevel])

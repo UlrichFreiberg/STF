@@ -1,17 +1,17 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfExecutionUtils.cs" company="Mir Software">
+// <copyright file="ThreadUtils.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the StfExecutionUtils type.
+//   The execution state.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
 using System.Runtime.InteropServices;
 
-namespace Mir.Stf.KernelUtils
+namespace Mir.Stf.Utilities.Utils
 {
     /// <summary>
     /// The execution state.
@@ -41,20 +41,17 @@ namespace Mir.Stf.KernelUtils
     }
 
     /// <summary>
-    /// The execution utils.
+    /// The thread utils.
     /// </summary>
-    public class StfExecutionUtils
+    public class ThreadUtils
     {
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
-
         /// <summary>
         /// The try keep computer alive.
         /// </summary>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool TryKeepComputerAlive()
+        public bool ResetIdleTimerForThread()
         {
             EXECUTION_STATE state;
             try
@@ -68,5 +65,8 @@ namespace Mir.Stf.KernelUtils
 
             return state != 0;
         }
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
     }
 }

@@ -2,7 +2,6 @@
 <configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
   <section name="StfKernel">
     <key name="PluginPath" value="%STF_ROOT%\Plugins\" />
-    <key name="KeepMachineAwakeDuringTests" value="true" />
     <section name="StfArchiver">
       <key name="ArchiveTestResults" value="false" />
       <key name="ArchiveDestination" value="" />
