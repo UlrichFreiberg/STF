@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Breaking change in IStfPlugin, IStfModelBase and IStfAdapterBase interfaces. They now contain a property with IStfLogger, before it was StfLogger</releaseNotes>
+    <releaseNotes>Logger is now able to keep system awake (prevent sleep or screensaver) if configured to do so</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
