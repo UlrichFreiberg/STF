@@ -15,6 +15,7 @@ namespace Mir.Stf.Utilities
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
+    using System.Reflection;
 
     using Configuration;
 
@@ -240,15 +241,11 @@ namespace Mir.Stf.Utilities
 
             Configuration = new StfArchiverConfiguration();
 
-            Configuration.TempDirectory = Configuration.GetDefaultValue("TempDirectory");
-            Configuration.ArchiveDestination = Configuration.GetDefaultValue("ArchiveDestination");
-            Configuration.ZipFilename = Configuration.GetDefaultValue("ZipFilename");
-            Configuration.UseLoginNameInPath = Configuration.GetDefaultValue("UseLoginNameInPath");
-            Configuration.UseDateTimeInPath = Configuration.GetDefaultValue("UseDateTimeInPath");
-            Configuration.UseTestNameInPath = Configuration.GetDefaultValue("UseTestNameInPath");
-            Configuration.DoArchiveToZipfile = Configuration.GetDefaultValue("DoArchiveToZipfile");
-            Configuration.DoArchiveFoldersAndFiles = Configuration.GetDefaultValue("DoArchiveFoldersAndFiles");
-            Configuration.ArchiveTopDir = Configuration.GetDefaultValue("ArchiveTopDir");
+            var properties = Configuration.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            foreach (var property in properties)
+            {
+                property.SetValue(Configuration, Configuration.GetDefaultValue(property.Name));
+            }
         }
 
         /// <summary>
