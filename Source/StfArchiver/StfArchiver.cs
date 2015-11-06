@@ -238,25 +238,17 @@ namespace Mir.Stf.Utilities
                 return;
             }
 
-            var tempPath = Path.GetTempPath();
-            var tempDirLeaf = string.Format(
-                                        "StfArchiver_{0}_{1}",
-                                        Environment.UserName,
-                                        DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss"));
-            var tempDir = Path.Combine(tempPath, tempDirLeaf);
+            Configuration = new StfArchiverConfiguration();
 
-            Configuration = new StfArchiverConfiguration
-            {
-                TempDirectory = tempDir,
-                ArchiveDestination = string.Empty,
-                ZipFilename = "StfArchive.zip",
-                UseLoginNameInPath = "true",
-                UseDateTimeInPath = "true",
-                UseTestNameInPath = "true",
-                DoArchiveToZipfile = "true",
-                DoArchiveFoldersAndFiles = "true",
-                ArchiveTopDir = @"C:\temp\Stf\StfArchive"
-            };
+            Configuration.TempDirectory = Configuration.GetDefaultValue("TempDirectory");
+            Configuration.ArchiveDestination = Configuration.GetDefaultValue("ArchiveDestination");
+            Configuration.ZipFilename = Configuration.GetDefaultValue("ZipFilename");
+            Configuration.UseLoginNameInPath = Configuration.GetDefaultValue("UseLoginNameInPath");
+            Configuration.UseDateTimeInPath = Configuration.GetDefaultValue("UseDateTimeInPath");
+            Configuration.UseTestNameInPath = Configuration.GetDefaultValue("UseTestNameInPath");
+            Configuration.DoArchiveToZipfile = Configuration.GetDefaultValue("DoArchiveToZipfile");
+            Configuration.DoArchiveFoldersAndFiles = Configuration.GetDefaultValue("DoArchiveFoldersAndFiles");
+            Configuration.ArchiveTopDir = Configuration.GetDefaultValue("ArchiveTopDir");
         }
 
         /// <summary>

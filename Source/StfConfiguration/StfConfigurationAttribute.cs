@@ -12,6 +12,8 @@ using System;
 
 namespace Mir.Stf.Utilities
 {
+    using System.Linq;
+
     /// <summary>
     /// The config info.
     /// </summary>
@@ -26,9 +28,9 @@ namespace Mir.Stf.Utilities
         /// </param>
         public StfConfigurationAttribute(string configKeyPath)
         {
-            this.ConfigKeyPath = configKeyPath;
-            this.Version = "1.0";
-            this.DefaultValue = string.Empty;
+            ConfigKeyPath = configKeyPath;
+            Version = "1.0";
+            DefaultValue = string.Empty;
         }
 
         /// <summary>
@@ -45,5 +47,16 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the version.
         /// </summary>
         public string Version { get; set; }
+    }
+
+    public static class StfConfigurationAttributeExtensions
+    {
+        public static string GetDefaultValue(this object instance, string propertyName) 
+        {
+            var attrType = typeof(StfConfigurationAttribute);
+            var property = instance.GetType().GetProperty(propertyName);
+
+            return ((StfConfigurationAttribute)property.GetCustomAttributes(attrType, false).First()).DefaultValue;
+        }
     }
 }
