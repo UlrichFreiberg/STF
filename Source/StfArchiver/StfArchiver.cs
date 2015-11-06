@@ -78,7 +78,7 @@ namespace Mir.Stf.Utilities
             FilesToArchive = new List<string>();
             DirectoriesToArchive = new List<string>();
 
-            CheckArchiveConfiguration();
+            SetDefaultConfiguration();
             SetDefaultArchiveDestination(testname);
             SetDefaultZipFilename(testname);
 
@@ -231,7 +231,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// If no configuration is provided, then create a default one.
         /// </summary>
-        private void CheckArchiveConfiguration()
+        private void SetDefaultConfiguration()
         {
             if (Configuration != null)
             {

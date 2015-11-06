@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Logger is now able to keep system awake (prevent sleep or screensaver) if configured to do so</releaseNotes>
+    <releaseNotes>Removed inclusion of template config file for the logger in Nuget package</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
