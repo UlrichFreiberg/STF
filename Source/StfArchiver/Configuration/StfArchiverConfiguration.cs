@@ -8,6 +8,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace Mir.Stf.Utilities.Configuration
 {
     /// <summary>
@@ -48,7 +50,7 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the temp directory.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.TempDirectory")]
+        [StfConfiguration("Configuration.StfKernel.StfArchiver.TempDirectory", DefaultValue = @"c:\temp\Stf\Temp")]
         public string TempDirectory { get; set; }
 
         /// <summary>
