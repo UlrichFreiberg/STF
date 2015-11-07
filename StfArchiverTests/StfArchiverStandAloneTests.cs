@@ -72,10 +72,15 @@ namespace StfArchiverTests
             var stfArchiver = new StfArchiver(TestContext.TestName);
             const string ZipFilename = @"c:\temp\Stf\StfArchiver.zip";
 
+            File.Delete(ZipFilename);
+            Assert.IsFalse(File.Exists(ZipFilename));
+
             stfArchiver.AddDirectory(@"C:\Temp\Stf\Config");
             stfArchiver.Configuration.ZipFilename = ZipFilename;
-            stfArchiver.PerformArchive();
+            stfArchiver.Configuration.DoArchiveFoldersAndFiles = false;
+            stfArchiver.Configuration.DoArchiveToZipfile = true;
 
+            Assert.IsTrue(stfArchiver.PerformArchive());
             Assert.IsTrue(File.Exists(ZipFilename));
         }
     }

@@ -28,7 +28,7 @@ namespace StfArchiverTests
         [TestMethod]
         public void TestPerformArchiveZeroAndOneFile()
         {
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = false;
+            MyArchiver.Configuration.DoArchiveFoldersAndFiles = true;
             MyArchiver.Configuration.DoArchiveToZipfile = false;
 
             var emptyStatusTxt = MyArchiver.Status();
@@ -55,8 +55,6 @@ namespace StfArchiverTests
             Assert.AreEqual(ExpectedStatusTxt, oneFileStatusTxt);
 
             MyArchiver.PerformArchive();
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = false;
-            MyArchiver.Configuration.DoArchiveToZipfile = false;
         }
 
         /// <summary>
@@ -67,14 +65,14 @@ namespace StfArchiverTests
         {
             const string ZipFilename = @"c:\temp\Stf\StfArchiver.zip";
 
+            File.Delete(ZipFilename);
+            Assert.IsFalse(File.Exists(ZipFilename));
+
             MyArchiver.AddDirectory(@"C:\Temp\Stf\Config");
             MyArchiver.Configuration.ZipFilename = ZipFilename;
             MyArchiver.PerformArchive();
 
             Assert.IsTrue(File.Exists(ZipFilename));
-
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = false;
-            MyArchiver.Configuration.DoArchiveToZipfile = false;
         }
     }
 }
