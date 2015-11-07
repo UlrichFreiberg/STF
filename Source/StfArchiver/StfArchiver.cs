@@ -161,22 +161,28 @@ namespace Mir.Stf.Utilities
                 File.Copy(filename, destFilename);
             }
 
-            if (!Directory.Exists(Configuration.ArchiveDestination))
-            {
-                Directory.CreateDirectory(Configuration.ArchiveDestination);
-            }
-
+            retVal = true;
             if (Configuration.DoArchiveFoldersAndFiles)
             {
+                if (!Directory.Exists(Configuration.ArchiveDestination))
+                {
+                    Directory.CreateDirectory(Configuration.ArchiveDestination);
+                }
+
                 // TODO: Generate filelist.txt and place it in the DestinationDir
 
                 // TODO: Let configuration control if to MirrorDir
-                RoboCopyWrapper.MirrorDir(Configuration.TempDirectory, Configuration.ArchiveDestination);
+                if (RoboCopyWrapper.MirrorDir(Configuration.TempDirectory, Configuration.ArchiveDestination)  <= 0)
+                {
+                    retVal = false;
+                }
             }
 
-            if (Configuration.DoArchiveFoldersAndFiles)
+            if (Configuration.DoArchiveToZipfile)
             {
-                retVal = retVal && ZipDestination();
+                var zipRetVal = ZipDestination();
+
+                retVal = retVal && zipRetVal;
             }
 
             return retVal;
@@ -257,6 +263,13 @@ namespace Mir.Stf.Utilities
             if (File.Exists(Configuration.ZipFilename))
             {
                 File.Delete(Configuration.ZipFilename);
+            }
+
+            // make sure the dir for the zip file exists
+            var dirname = new FileInfo(Configuration.ZipFilename).DirectoryName;
+            if (!Directory.Exists(dirname))
+            {
+                Directory.CreateDirectory(dirname);
             }
 
             ZipFile.CreateFromDirectory(Configuration.TempDirectory, Configuration.ZipFilename);

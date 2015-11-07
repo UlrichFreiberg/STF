@@ -27,7 +27,7 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets wether or not to Archive to zip file
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.DoArchiveToZipfile", DefaultValue = "false")]
+        [StfConfiguration("Configuration.StfKernel.StfArchiver.DoArchiveToZipfile", DefaultValue = "true")]
         public bool DoArchiveToZipfile { get; set; }
 
         /// <summary>

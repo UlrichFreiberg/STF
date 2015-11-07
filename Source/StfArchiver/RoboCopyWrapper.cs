@@ -14,6 +14,7 @@ namespace Mir.Stf.Utilities
     using System.Diagnostics;
     using System.IO;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading;
 
     // from http://codereview.stackexchange.com/questions/19386/resilient-wrapper-for-robocopy-in-c
@@ -173,10 +174,22 @@ namespace Mir.Stf.Utilities
 
         public static int MirrorDir(string sourceDirectory, string destinationDirectory)
         {
-            var sourceDirname = new DirectoryInfo(sourceDirectory).Name;
-            var destinationDirname = Path.Combine(destinationDirectory, sourceDirname);
-            var robocopyCmdline = string.Format(" \"{0}\" \"{1}\" /MIR ", sourceDirectory, destinationDirname);
+            var sourceDirname = sourceDirectory;
+            var dirname = new DirectoryInfo(sourceDirectory).Name;
+            var destinationDirname = Path.Combine(destinationDirectory, dirname);
 
+            // ensure the directories ends on a "\"
+            if (Regex.Match(sourceDirname, @"[^\\]$").Success)
+            {
+                sourceDirname += @"\";
+            }
+
+            if (Regex.Match(destinationDirname, @"[^\\]$").Success)
+            {
+                destinationDirname += @"\";
+            }
+
+            var robocopyCmdline = string.Format(" \"{0}\\\" \"{1}\\\" /MIR ", sourceDirname, destinationDirname);
             var retVal = CopyFiles(robocopyCmdline, 5);
             return retVal;
         }
