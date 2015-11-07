@@ -130,14 +130,15 @@ namespace Mir.Stf.Utilities
         {
             var retVal = true;
 
-            if (!Directory.Exists(Configuration.TempDirectory))
+            var tempArchiveDir = Path.Combine(Configuration.TempDirectory, Guid.NewGuid().ToString());
+            if (!Directory.Exists(tempArchiveDir))
             {
-                Directory.CreateDirectory(Configuration.TempDirectory);
+                Directory.CreateDirectory(tempArchiveDir);
             }
 
             foreach (var directory in DirectoriesToArchive)
             {
-                if (RoboCopyWrapper.MirrorDir(directory, Configuration.TempDirectory) <= 0)
+                if (RoboCopyWrapper.MirrorDir(directory, tempArchiveDir) <= 0)
                 {
                     retVal = false;
                 }
@@ -151,7 +152,7 @@ namespace Mir.Stf.Utilities
                     continue;
                 }
 
-                var destFilename = Path.Combine(Configuration.TempDirectory, filenameNoPath);
+                var destFilename = Path.Combine(tempArchiveDir, filenameNoPath);
 
                 if (File.Exists(destFilename))
                 {
@@ -172,7 +173,7 @@ namespace Mir.Stf.Utilities
                 // TODO: Generate filelist.txt and place it in the DestinationDir
 
                 // TODO: Let configuration control if to MirrorDir
-                if (RoboCopyWrapper.MirrorDir(Configuration.TempDirectory, Configuration.ArchiveDestination)  <= 0)
+                if (RoboCopyWrapper.MirrorDir(tempArchiveDir, Configuration.ArchiveDestination) <= 0)
                 {
                     retVal = false;
                 }
@@ -180,10 +181,13 @@ namespace Mir.Stf.Utilities
 
             if (Configuration.DoArchiveToZipfile)
             {
-                var zipRetVal = ZipDestination();
+                var zipRetVal = ZipDirectory(tempArchiveDir, Configuration.ZipFilename);
 
                 retVal = retVal && zipRetVal;
             }
+
+            // remove the temp archive directory
+            Directory.Delete(tempArchiveDir, true);
 
             return retVal;
         }
@@ -253,26 +257,26 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// Indication of success
         /// </returns>
-        private bool ZipDestination()
+        private bool ZipDirectory(string directoryToZip, string zipFilename)
         {
             if (string.IsNullOrEmpty(Configuration.ZipFilename))
             {
                 return false;
             }
 
-            if (File.Exists(Configuration.ZipFilename))
+            if (File.Exists(zipFilename))
             {
-                File.Delete(Configuration.ZipFilename);
+                File.Delete(zipFilename);
             }
 
             // make sure the dir for the zip file exists
-            var dirname = new FileInfo(Configuration.ZipFilename).DirectoryName;
-            if (!Directory.Exists(dirname))
+            var zipfileDirname = new FileInfo(zipFilename).DirectoryName ?? @"c:\temp\StfZipFilenameError";
+            if (!Directory.Exists(zipfileDirname))
             {
-                Directory.CreateDirectory(dirname);
+                Directory.CreateDirectory(zipfileDirname);
             }
 
-            ZipFile.CreateFromDirectory(Configuration.TempDirectory, Configuration.ZipFilename);
+            ZipFile.CreateFromDirectory(directoryToZip, Configuration.ZipFilename);
             return true;
         }
 
