@@ -118,6 +118,7 @@ namespace Mir.Stf
                 MyLogger.LogError("Test failed");
             }
 
+            MyLogger.LogInfo(MyArchiver.Status());
             MyLogger.CloseLogFile();
 
             MyArchiver.AddFile(MyLogger.FileName);
