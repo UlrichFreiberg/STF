@@ -30,13 +30,5 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool CloseLogFile();
-
-        /// <summary>
-        /// Archive <c>this</c> log file.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        bool ArchiveThisLogFile();
     }
 }

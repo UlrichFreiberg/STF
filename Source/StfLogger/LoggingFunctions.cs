@@ -331,7 +331,7 @@ namespace Mir.Stf.Utilities
 
             if (messageId == 0)
             {
-                if (!Init())
+                if (!InitLogfile())
                 {
                     Console.WriteLine(@"Coulnd't initialise the logfile");
                 }

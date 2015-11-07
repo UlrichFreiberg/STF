@@ -10,6 +10,9 @@
 
 namespace Mir.Stf.Utilities.Configuration
 {
+    using System.ComponentModel;
+    using System.Reflection;
+
     /// <summary>
     /// The stf logger configuration object
     /// </summary>
@@ -74,5 +77,30 @@ namespace Mir.Stf.Utilities.Configuration
         /// </summary>
         [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.KeepAliveInterval", DefaultValue = "5")]
         public int KeepAliveInterval { get; set; }
+
+        public StfLoggerConfiguration()
+        {
+            this.InitializeWithDefaultValues();
+        }
+
+        internal void InitializeWithDefaultValues()
+        {
+            var properties = this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+            foreach (var property in properties)
+            {
+                var propertyDefaultValue = this.GetDefaultValue(property.Name);
+
+                if (property.PropertyType == typeof(string))
+                {
+                    property.SetValue(this, propertyDefaultValue);
+                    continue;
+                }
+
+                // TODO: should be in tryCatch
+                var castedNewValue = TypeDescriptor.GetConverter(property.PropertyType).ConvertFromInvariantString(propertyDefaultValue);
+                property.SetValue(this, castedNewValue);
+            }
+        }
     }
 }

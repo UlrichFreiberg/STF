@@ -9,7 +9,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.IO;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mir.Stf.Utilities;
@@ -29,13 +28,6 @@ namespace Mir.Stf
     [TestClass]
     public class StfTestScriptBase : StfKernel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StfTestScriptBase"/> class.
-        /// </summary>
-        public StfTestScriptBase()
-        {
-        }
-
         /// <summary>
         /// Gets the Stf Asserter.
         /// </summary>
@@ -65,7 +57,7 @@ namespace Mir.Stf
         public void BaseTestInitialize()
         {
             MyLogger = Get<IStfLogger>();
-            MyLogger.LogTitle = TestContext.TestName;
+            MyLogger.Configuration.LogTitle = TestContext.TestName;
 
             var logFilePostfix = string.Empty;
             var iterationNo = DataRowIndex();
@@ -131,9 +123,10 @@ namespace Mir.Stf
                 {
                     var myStfSummeryLogger = new StfSummeryLogger();
                     var summeryLogfileLogDirname = Path.GetDirectoryName(MyLogger.FileName);
-                    var summeryLogfileLogFilename = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", ".html");
+                    var myLoggerFileName = Path.GetFileName(MyLogger.FileName) ?? string.Empty;
+                    var summeryLogfileLogFilename = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", ".html");
                     var summeryLogfilename = string.Format(@"{0}\SummeryLogfile_{1}", summeryLogfileLogDirname, summeryLogfileLogFilename);
-                    var summeryLogfileLogfilePattern = Regex.Replace(Path.GetFileName(MyLogger.FileName), @"_[0-9]+\.html", "_*");
+                    var summeryLogfileLogfilePattern = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", "_*");
 
                     myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
 

@@ -51,7 +51,6 @@
     </Compile>
     <Compile Include="Configuration\IStfLoggerConfiguration.cs" />
     <Compile Include="Configuration\StfLoggerConfiguration.cs" />
-    <Compile Include="ILogConfiguration.cs" />
     <Compile Include="Interfaces\IStfLoggerAutomationIdentification.cs">
       <SubType>Code</SubType>
     </Compile>

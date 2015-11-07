@@ -9,6 +9,8 @@ using System.Collections.Generic;
 
 namespace Mir.Stf.Utilities.Interfaces
 {
+    using Mir.Stf.Utilities.Configuration;
+
     /// <summary>
     /// An interface for the StfLogger
     /// </summary>
@@ -20,15 +22,12 @@ namespace Mir.Stf.Utilities.Interfaces
                                   IStfLoggerScreenshots,
                                   IStfLoggerTestScriptHeaders
     {
+        IStfLoggerConfiguration Configuration { get; set; }
+
         /// <summary>
         /// Gets the number of loglevel messages.
         /// </summary>
         Dictionary<StfLogLevel, int> NumberOfLoglevelMessages { get; }
-
-        /// <summary>
-        /// Gets the configuration for the logfile.
-        /// </summary>
-        LogConfiguration Configuration { get; }
 
         /// <summary>
         /// Gets Details about Environment, Test Agent (the current machine - OS, versions of Software), Date
@@ -39,16 +38,6 @@ namespace Mir.Stf.Utilities.Interfaces
         /// Gets or sets the current log level.
         /// </summary>
         int CurrentLogLevel { get; set; }
-
-        /// <summary>
-        /// Gets or sets the build archive log file path.
-        /// </summary>
-        int BuildArchiveLogFilePath { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Title used in the header of the logfile
-        /// </summary>
-        string LogTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the path to the resulting logfile

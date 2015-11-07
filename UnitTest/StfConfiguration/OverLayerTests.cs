@@ -35,8 +35,8 @@ namespace Tests
 
             var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
-            dumpTree(overLayed, @"overLayed.xml");
-            dumpTree(conf12, @"expected.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(conf12, @"expected.xml");
 
             Assert.IsTrue(conf12.Identical(conf12, overLayed));
         }
@@ -53,8 +53,8 @@ namespace Tests
             var conf23 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config23.xml");
 
             var overLayed = stfConfiguration.OverLay(conf2, conf3);
-            dumpTree(overLayed, @"overLayed.xml");
-            dumpTree(conf23, @"expected.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(conf23, @"expected.xml");
 
             Assert.IsTrue(conf2.Identical(conf23, overLayed));
         }
@@ -70,8 +70,8 @@ namespace Tests
 
             var overLayed = stfConfiguration.OverLay(conf2, null);
 
-            dumpTree(overLayed, @"overLayed.xml");
-            dumpTree(conf2, @"expected.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(conf2, @"expected.xml");
             
             Assert.IsTrue(conf2.Identical(conf2, overLayed));
         }
@@ -87,8 +87,8 @@ namespace Tests
 
             var overLayed = stfConfiguration.OverLay(null, conf2);
 
-            dumpTree(overLayed, @"overLayed.xml");
-            dumpTree(conf2, @"expected.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(conf2, @"expected.xml");
 
             Assert.IsTrue(conf2.Identical(conf2, overLayed));
         }
@@ -105,8 +105,8 @@ namespace Tests
 
             var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
-            dumpTree(overLayed, @"overLayed.xml");
-            dumpTree(conf2, @"expected.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(conf2, @"expected.xml");
             
             Assert.IsTrue(conf2.Identical(conf2, overLayed));
         }
@@ -123,8 +123,8 @@ namespace Tests
 
             var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
-            dumpTree(overLayed, @"overLayed.xml");
-            dumpTree(conf2, @"expected.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(conf2, @"expected.xml");
 
             Assert.IsTrue(conf2.Identical(conf2, overLayed));
         }
@@ -141,8 +141,8 @@ namespace Tests
 
             var overLayed = stfConfiguration.OverLay(conf1, conf2);
 
-            dumpTree(overLayed, @"overLayed.xml");
-            dumpTree(conf2, @"expected.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(conf2, @"expected.xml");
             
             Assert.IsTrue(conf2.Identical(conf2, overLayed));
         }
@@ -162,17 +162,17 @@ namespace Tests
                 var conf = stfConfiguration.LoadConfig(configFile);
                 var confCopy = conf.MakeCopy();
 
-                dumpTree(conf, "Original" + configFile.Replace(@".\", string.Empty));
-                dumpTree(confCopy, "Copy" + configFile.Replace(@".\", string.Empty));
+                DumpTree(conf, "Original" + configFile.Replace(@".\", string.Empty));
+                DumpTree(confCopy, "Copy" + configFile.Replace(@".\", string.Empty));
 
                 Assert.IsTrue(conf.Identical(conf, confCopy));
             }
         }
 
-        private void dumpTree(Section Section2Dump, string fileName)
+        private void DumpTree(Section section2Dump, string fileName)
         {
             var dumpFile = Path.Combine(@"c:\temp\", TestContext.TestName + "_" + fileName);
-            Section2Dump.DumpSection(Section.DumpAs.AsXml, dumpFile);
+            section2Dump.DumpSection(Section.DumpAs.AsXml, dumpFile);
         }
     }
 }

@@ -24,11 +24,6 @@ namespace Mir.Stf.Utilities
         private DateTime timeOfLastMessage;
 
         /// <summary>
-        /// Gets or sets a value indicating how many seconds should pass, before isuueing a logWarning.
-        /// </summary>
-        public int AlertLongInterval { get; set; }
-
-        /// <summary>
         /// The check for performance alert.
         /// </summary>
         public void CheckForPerformanceAlert()
@@ -36,7 +31,7 @@ namespace Mir.Stf.Utilities
             var elapsedTime = DateTime.Now - this.timeOfLastMessage;
             this.timeOfLastMessage = DateTime.Now;
 
-            if (elapsedTime.Seconds > AlertLongInterval)
+            if (elapsedTime.Seconds > Configuration.AlertLongInterval)
             {
                 LogPerformanceAlert(elapsedTime.TotalSeconds);
             }

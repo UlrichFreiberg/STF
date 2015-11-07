@@ -19,6 +19,8 @@ using Mir.Stf.Utilities.Utils;
 
 namespace Mir.Stf.Utilities
 {
+    using Mir.Stf.Utilities.Configuration;
+
     /// <summary>
     /// The test result html logger. the <see cref="IStfLoggerLogfileManagement"/> part
     /// </summary>
@@ -39,6 +41,19 @@ namespace Mir.Stf.Utilities
         /// </summary>
         private bool overwriteLogFile;
 
+        public StfLogger(IStfLoggerConfiguration config)
+        {
+            Configuration = config;
+            Init();
+        }
+
+        public StfLogger(IStfLoggerConfiguration config, string logfileName)
+        {
+            Configuration = config;
+            Init();
+            FileName = logfileName;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StfLogger"/> class.
         /// </summary>
@@ -46,8 +61,8 @@ namespace Mir.Stf.Utilities
         /// The archive log file.
         /// </param>
         public StfLogger(string logfileName)
-            : this()
         {
+            Init();
             FileName = logfileName;
         }
 
@@ -55,6 +70,14 @@ namespace Mir.Stf.Utilities
         /// Initializes a new instance of the <see cref="StfLogger"/> class.
         /// </summary>
         public StfLogger()
+        {
+            Init();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfLogger"/> class.
+        /// </summary>
+        public bool Init()
         {
             LogInfoDetails = new Dictionary<string, string>();
             AddLoglevelToRunReport = new Dictionary<StfLogLevel, bool>();
@@ -69,32 +92,38 @@ namespace Mir.Stf.Utilities
 
             LogFileHandle = new LogfileWriter { OverwriteLogFile = this.OverwriteLogFile };
 
-            // Set according to the configuration
-            Configuration = new LogConfiguration();
+            SetDefaultConfiguration();
+
             FileName = Configuration.LogFileName;
             this.LogLevel = Configuration.LogLevel;
             OverwriteLogFile = Configuration.OverwriteLogFile;
-            LogToFile = Configuration.LogToFile;
-            LogTitle = Configuration.LogTitle;
-            AlertLongInterval = Configuration.AlertLongInterval;
-            PathToLogoImageFile = Configuration.PathToLogoImageFile;
 
             // setting the default AID logging function
             LogAutomationIdObjectUserFunction =
                 (level, obj, message) => LogOneHtmlMessage(level, string.Format("AutomationId: [{0}] - Message: [{1}]", obj.ToString(), message));
 
             LogFileInitialized = false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// If no configuration is provided, then create a default one.
+        /// </summary>
+        private void SetDefaultConfiguration()
+        {
+            if (Configuration != null)
+            {
+                return;
+            }
+
+            Configuration = new StfLoggerConfiguration();
         }
 
         /// <summary>
         /// Gets the Number Messages per Loglevel - to the finishing TestStatus
         /// </summary>
         public Dictionary<StfLogLevel, int> NumberOfLoglevelMessages { get; private set; }
-
-        /// <summary>
-        /// Gets the configuration for the logfile.
-        /// </summary>
-        public LogConfiguration Configuration { get; private set; }
 
         /// <summary>
         /// Gets Details about Environment, Test Agent (the current machine - OS, versions of Software), Date
@@ -105,16 +134,6 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the current log level.
         /// </summary>
         public int CurrentLogLevel { get; set; }
-
-        /// <summary>
-        /// Gets or sets the build archive log file path.
-        /// </summary>
-        public int BuildArchiveLogFilePath { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Title used in the header of the logfile
-        /// </summary>
-        public string LogTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the path to the resulting logfile
@@ -193,11 +212,6 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// Gets or sets a value indicating the path to the Logo file.
-        /// </summary>
-        public string PathToLogoImageFile { get; set; }
-
-        /// <summary>
         /// Gets or sets the directory for the logfile to be archived - to where should it be archived
         /// </summary>
         public string ArchiveDirecory { get; set; }
@@ -216,12 +230,6 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the _log file handle.
         /// </summary>
         private LogfileWriter LogFileHandle { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether Logging is disabled. 
-        /// It gets enabled when LogfileName property is set. />
-        /// </summary>
-        private bool LogToFile { get; set; }
 
         /// <summary>
         /// Gets or sets whether we do log for a given log level?
@@ -269,17 +277,6 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// The archive this log file.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool ArchiveThisLogFile()
-        {
-            return false;
-        }
-
-        /// <summary>
         ///   reads in the JavaScript functions for the logfile buttons etc
         /// </summary>
         /// <returns>A string representing the JS that controls the logger</returns>
@@ -307,7 +304,7 @@ namespace Mir.Stf.Utilities
             else
             {
                 retVal = openBody.ToString();
-                retVal = retVal.Replace("LOGFILETITLE", LogTitle);
+                retVal = retVal.Replace("LOGFILETITLE", Configuration.LogTitle);
             }
 
             return retVal;
@@ -345,7 +342,7 @@ namespace Mir.Stf.Utilities
             htmlLine += "<html>\n";
             htmlLine += "  <head>\n";
             htmlLine += "    <meta charset=\"utf-8\" />\n";
-            htmlLine += string.Format("    <title>{0}</title>\n", LogTitle);
+            htmlLine += string.Format("    <title>{0}</title>\n", Configuration.LogTitle);
             htmlLine += "    <style type=\"text/css\">\n";
             htmlLine += GetStyleSheet();
             htmlLine += "    </style>\n<script type=\"text/javascript\">";
@@ -384,7 +381,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool Init()
+        private bool InitLogfile()
         {
             var userName = string.Format("{0}\\{1}", Environment.UserDomainName, Environment.UserName);
 
@@ -395,7 +392,6 @@ namespace Mir.Stf.Utilities
 
             OverwriteLogFile = Configuration.OverwriteLogFile;
             TestName = "TestName_Not_Set";
-            LogToFile = Configuration.LogToFile;
             this.LogLevel = Configuration.LogLevel;
 
             if (LogFileHandle.Initialized)
@@ -440,7 +436,7 @@ namespace Mir.Stf.Utilities
         private string GetBase64ImageForLogo()
         {
             byte[] imageAsBytes;
-            if (!TryGetImageAsBytes(out imageAsBytes, PathToLogoImageFile))
+            if (!TryGetImageAsBytes(out imageAsBytes, Configuration.PathToLogoImageFile))
             {
                 return "No image for logo available";
             }
