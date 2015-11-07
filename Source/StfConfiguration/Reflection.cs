@@ -14,6 +14,8 @@ using System.Reflection;
 
 namespace Mir.Stf.Utilities
 {
+    using System.ComponentModel;
+
     /// <summary>
     /// The reflection.
     /// </summary>
@@ -22,7 +24,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The current field set.
         /// </summary>
-        private object currentFieldSet;
+        private readonly object currentFieldSet;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Reflection"/> class.
@@ -55,7 +57,6 @@ namespace Mir.Stf.Utilities
 
             foreach (var property in props)
             {
-                var value = property.GetValue(this.currentFieldSet);
                 var configAttributes = property.GetCustomAttributes<StfConfigurationAttribute>(true).FirstOrDefault();
 
                 dict.Add(property.Name, configAttributes);
@@ -83,10 +84,17 @@ namespace Mir.Stf.Utilities
             foreach (var uc in userConfig)
             {
                 var property = t.GetProperty(uc.Key);
-                var currentValue = property.GetValue(currentFieldSet);
                 var newValue = stfConfiguration.GetConfigValue(uc.Value.ConfigKeyPath, uc.Value.DefaultValue);
 
-                property.SetValue(currentFieldSet, newValue);
+                if (property.PropertyType == typeof(string))
+                {
+                    property.SetValue(currentFieldSet, newValue);
+                    continue;
+                }
+
+                // TODO: should be in tryCatch
+                var castedNewValue = TypeDescriptor.GetConverter(property.PropertyType).ConvertFromInvariantString(newValue);
+                property.SetValue(currentFieldSet, castedNewValue);
             }
 
             return currentFieldSet;
