@@ -21,55 +21,55 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets wether or not to Archive folders and files
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.DoArchiveFoldersAndFiles", DefaultValue = "false")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.DoArchiveFoldersAndFiles", DefaultValue = "false")]
         public bool DoArchiveFoldersAndFiles { get; set; }
 
         /// <summary>
         /// Gets or sets wether or not to Archive to zip file
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.DoArchiveToZipfile", DefaultValue = "true")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.DoArchiveToZipfile", DefaultValue = "true")]
         public bool DoArchiveToZipfile { get; set; }
 
         /// <summary>
         /// Gets or sets the destination to archive 
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.ArchiveDestination")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.ArchiveDestination")]
         public string ArchiveDestination { get; set; }
 
         /// <summary>
         /// Gets or sets the name of ZipFile if the archive should be zipped.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.ZipFilename", DefaultValue = @"StfArchive.zip")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.ZipFilename", DefaultValue = @"StfArchive.zip")]
         public string ZipFilename { get; set; }
 
         /// <summary>
         /// Gets or sets the archive top dir.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.ArchiveTopDir", DefaultValue = @"c:\temp\Stf\StfArchive")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.ArchiveTopDir", DefaultValue = @"c:\temp\Stf\StfArchive")]
         public string ArchiveTopDir { get; set; }
 
         /// <summary>
         /// Gets or sets the temp directory.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.TempDirectory", DefaultValue = @"c:\temp\Stf\Temp")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.TempDirectory", DefaultValue = @"c:\temp\Stf\Temp")]
         public string TempDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets the use date time in path.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.UseDateTimeInPath", DefaultValue = "true")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.UseDateTimeInPath", DefaultValue = "true")]
         public string UseDateTimeInPath { get; set; }
 
         /// <summary>
         /// Gets or sets the use test name in path.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.UseTestnameInPath", DefaultValue = "true")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.UseTestnameInPath", DefaultValue = "true")]
         public string UseTestNameInPath { get; set; }
 
         /// <summary>
         /// Gets or sets the use LoginName in path.
         /// </summary>
-        [StfConfiguration("Configuration.StfKernel.StfArchiver.UseLoginNameInPath", DefaultValue = "true")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.UseLoginNameInPath", DefaultValue = "true")]
         public string UseLoginNameInPath { get; set; }
 
         public StfArchiverConfiguration()
@@ -80,6 +80,7 @@ namespace Mir.Stf.Utilities.Configuration
         internal void InitializeWithDefaultValues()
         {
             var properties = this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
             foreach (var property in properties)
             {
                 var propertyDefaultValue = this.GetDefaultValue(property.Name);
