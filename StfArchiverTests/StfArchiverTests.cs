@@ -15,7 +15,6 @@ namespace StfArchiverTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf;
-    using Mir.Stf.Utilities;
 
     /// <summary>
     /// Stf Archiver Tests
@@ -29,6 +28,9 @@ namespace StfArchiverTests
         [TestMethod]
         public void TestPerformArchiveZeroAndOneFile()
         {
+            MyArchiver.Configuration.DoArchiveFoldersAndFiles = false;
+            MyArchiver.Configuration.DoArchiveToZipfile = false;
+
             var emptyStatusTxt = MyArchiver.Status();
             Assert.AreEqual("Nothing to Archive", emptyStatusTxt);
 
@@ -38,8 +40,6 @@ namespace StfArchiverTests
             Assert.AreEqual(ExpectedStatusTxt, oneFileStatusTxt);
 
             MyArchiver.PerformArchive();
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = "False";
-            MyArchiver.Configuration.DoArchiveToZipfile = "False";
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace StfArchiverTests
             Assert.AreEqual(ExpectedStatusTxt, oneFileStatusTxt);
 
             MyArchiver.PerformArchive();
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = "False";
-            MyArchiver.Configuration.DoArchiveToZipfile = "False";
+            MyArchiver.Configuration.DoArchiveFoldersAndFiles = false;
+            MyArchiver.Configuration.DoArchiveToZipfile = false;
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace StfArchiverTests
 
             Assert.IsTrue(File.Exists(ZipFilename));
 
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = "False";
-            MyArchiver.Configuration.DoArchiveToZipfile = "False";
+            MyArchiver.Configuration.DoArchiveFoldersAndFiles = false;
+            MyArchiver.Configuration.DoArchiveToZipfile = false;
         }
     }
 }

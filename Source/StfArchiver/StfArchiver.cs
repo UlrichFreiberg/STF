@@ -15,7 +15,6 @@ namespace Mir.Stf.Utilities
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
-    using System.Reflection;
 
     using Configuration;
 
@@ -167,7 +166,7 @@ namespace Mir.Stf.Utilities
                 Directory.CreateDirectory(Configuration.ArchiveDestination);
             }
 
-            if (InferBoolValue(Configuration.DoArchiveFoldersAndFiles))
+            if (Configuration.DoArchiveFoldersAndFiles)
             {
                 // TODO: Generate filelist.txt and place it in the DestinationDir
 
@@ -175,7 +174,7 @@ namespace Mir.Stf.Utilities
                 RoboCopyWrapper.MirrorDir(Configuration.TempDirectory, Configuration.ArchiveDestination);
             }
 
-            if (InferBoolValue(Configuration.DoArchiveFoldersAndFiles))
+            if (Configuration.DoArchiveFoldersAndFiles)
             {
                 retVal = retVal && ZipDestination();
             }
@@ -240,12 +239,6 @@ namespace Mir.Stf.Utilities
             }
 
             Configuration = new StfArchiverConfiguration();
-
-            var properties = Configuration.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
-            foreach (var property in properties)
-            {
-                property.SetValue(Configuration, Configuration.GetDefaultValue(property.Name));
-            }
         }
 
         /// <summary>
@@ -278,7 +271,7 @@ namespace Mir.Stf.Utilities
         /// </param>
         private void SetDefaultZipFilename(string testname)
         {
-            if (!InferBoolValue(Configuration.DoArchiveToZipfile))
+            if (!Configuration.DoArchiveToZipfile)
             {
                 Configuration.ZipFilename = string.Empty;
                 return;

@@ -18,12 +18,12 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets wether or not to Archive folders and files
         /// </summary>
-        string DoArchiveFoldersAndFiles { get; set; }
+        bool DoArchiveFoldersAndFiles { get; set; }
 
         /// <summary>
         /// Gets or sets wether or not to Archive to zip file
         /// </summary>
-        string DoArchiveToZipfile { get; set; }
+        bool DoArchiveToZipfile { get; set; }
 
         /// <summary>
         /// Gets or sets the destination to archive 

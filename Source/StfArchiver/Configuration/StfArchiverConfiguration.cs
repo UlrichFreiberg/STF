@@ -8,10 +8,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.ComponentModel;
-
 namespace Mir.Stf.Utilities.Configuration
 {
+    using System.ComponentModel;
+    using System.Reflection;
+
     /// <summary>
     /// The stf archiver configuration object
     /// </summary>
@@ -21,13 +22,13 @@ namespace Mir.Stf.Utilities.Configuration
         /// Gets or sets wether or not to Archive folders and files
         /// </summary>
         [StfConfiguration("Configuration.StfKernel.StfArchiver.DoArchiveFoldersAndFiles", DefaultValue = "false")]
-        public string DoArchiveFoldersAndFiles { get; set; }
+        public bool DoArchiveFoldersAndFiles { get; set; }
 
         /// <summary>
         /// Gets or sets wether or not to Archive to zip file
         /// </summary>
         [StfConfiguration("Configuration.StfKernel.StfArchiver.DoArchiveToZipfile", DefaultValue = "false")]
-        public string DoArchiveToZipfile { get; set; }
+        public bool DoArchiveToZipfile { get; set; }
 
         /// <summary>
         /// Gets or sets the destination to archive 
@@ -70,5 +71,29 @@ namespace Mir.Stf.Utilities.Configuration
         /// </summary>
         [StfConfiguration("Configuration.StfKernel.StfArchiver.UseLoginNameInPath", DefaultValue = "true")]
         public string UseLoginNameInPath { get; set; }
+
+        public StfArchiverConfiguration()
+        {
+            this.InitializeWithDefaultValues();
+        }
+
+        internal void InitializeWithDefaultValues()
+        {
+            var properties = this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            foreach (var property in properties)
+            {
+                var propertyDefaultValue = this.GetDefaultValue(property.Name);
+
+                if (property.PropertyType == typeof(string))
+                {
+                    property.SetValue(this, propertyDefaultValue);
+                    continue;
+                }
+
+                // TODO: should be in tryCatch
+                var castedNewValue = TypeDescriptor.GetConverter(property.PropertyType).ConvertFromInvariantString(propertyDefaultValue);
+                property.SetValue(this, castedNewValue);
+            }
+        }
     }
 }
