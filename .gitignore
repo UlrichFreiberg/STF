@@ -6,3 +6,4 @@ Thumbs.db
 *.user
 **/packages/**
 **/TestResults/**
+*.nupkg
