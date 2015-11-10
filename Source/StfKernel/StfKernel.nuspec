@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Removed inclusion of template config file for the logger in Nuget package</releaseNotes>
+    <releaseNotes>Logger configuration no longer depending on app.config</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
