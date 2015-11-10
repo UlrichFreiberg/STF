@@ -585,7 +585,7 @@ namespace Mir.Stf.Utilities
                 return;
             }
 
-            var length = string.Format("{0:%h} hour(s), {0:%m} minute(s), {0:%s} second(s)", duration);
+            var length = string.Format("{0:%h} hour(s), {0:%m} minute(s), {0:%s}.{0:%f} second(s)", duration);
             LogKeyValue("Test duration", length, "Test duration");
         }
     }
