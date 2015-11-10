@@ -309,7 +309,8 @@ namespace Mir.Stf.Utilities
             }
 
             var fileNameFormat = "{0}.PluginSettings.Xml";
-            var pluginPathFileName = string.Format("{0}\\{1}", pluginPath, Path.GetFileName(assembly.Location));
+            
+            var pluginPathFileName = Path.Combine(pluginPath, Path.GetFileName(assembly.Location));
 
             if (pluginPathFileName == assembly.Location)
             {
