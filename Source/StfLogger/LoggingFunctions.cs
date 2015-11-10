@@ -400,7 +400,7 @@ namespace Mir.Stf.Utilities
             }
 
             NumberOfLoglevelMessages[loglevel]++;
-            this.LogFileHandle.Write(htmlLine);
+            LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }
     }

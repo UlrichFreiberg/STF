@@ -11,6 +11,18 @@
       <key name="UseDateTimeInPath" value="true" />
       <key name="UseTestnameInPath" value="true" />
     </section>
+    <section name="StfLogger">
+      <key name="OverwriteLogFile" value="true" />
+      <key name="LogToFile" value="true" />
+      <key name="LogTitle" value="LogTitle" />
+      <key name="LogFileName" value="c:\temp\Ovid_defaultlog.html" />
+      <key name="AlertLongInterval" value="true" />
+      <key name="LogLevel" value="debug" />
+      <key name="PathToLogoImageFile" value="" />
+      <key name="ScreenshotOnLogFail" value="true" />
+      <key name="MapNewlinesToBr" value="false" />
+      <key name="KeepAliveInterval" value="5" />
+    </section>
   </section>
   <section name="Environments" defaultsection="ENV1">
     <section name="ENV1"></section>

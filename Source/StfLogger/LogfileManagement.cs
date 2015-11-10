@@ -19,7 +19,7 @@ using Mir.Stf.Utilities.Utils;
 
 namespace Mir.Stf.Utilities
 {
-    using Mir.Stf.Utilities.Configuration;
+    using Configuration;
 
     /// <summary>
     /// The test result html logger. the <see cref="IStfLoggerLogfileManagement"/> part
@@ -41,12 +41,27 @@ namespace Mir.Stf.Utilities
         /// </summary>
         private bool overwriteLogFile;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfLogger"/> class.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
         public StfLogger(IStfLoggerConfiguration config)
         {
             Configuration = config;
             Init();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfLogger"/> class.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        /// <param name="logfileName">
+        /// The logfile name.
+        /// </param>
         public StfLogger(IStfLoggerConfiguration config, string logfileName)
         {
             Configuration = config;
@@ -72,52 +87,6 @@ namespace Mir.Stf.Utilities
         public StfLogger()
         {
             Init();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StfLogger"/> class.
-        /// </summary>
-        public bool Init()
-        {
-            LogInfoDetails = new Dictionary<string, string>();
-            AddLoglevelToRunReport = new Dictionary<StfLogLevel, bool>();
-            NumberOfLoglevelMessages = new Dictionary<StfLogLevel, int>();
-            ThreadUtils = new ThreadUtils();
-
-            foreach (StfLogLevel loglevel in Enum.GetValues(typeof(StfLogLevel)))
-            {
-                NumberOfLoglevelMessages.Add(loglevel, 0);
-                AddLoglevelToRunReport.Add(loglevel, true);
-            }
-
-            LogFileHandle = new LogfileWriter { OverwriteLogFile = this.OverwriteLogFile };
-
-            SetDefaultConfiguration();
-
-            FileName = Configuration.LogFileName;
-            this.LogLevel = Configuration.LogLevel;
-            OverwriteLogFile = Configuration.OverwriteLogFile;
-
-            // setting the default AID logging function
-            LogAutomationIdObjectUserFunction =
-                (level, obj, message) => LogOneHtmlMessage(level, string.Format("AutomationId: [{0}] - Message: [{1}]", obj.ToString(), message));
-
-            LogFileInitialized = false;
-
-            return true;
-        }
-
-        /// <summary>
-        /// If no configuration is provided, then create a default one.
-        /// </summary>
-        private void SetDefaultConfiguration()
-        {
-            if (Configuration != null)
-            {
-                return;
-            }
-
-            Configuration = new StfLoggerConfiguration();
         }
 
         /// <summary>
@@ -246,6 +215,47 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// Gets or sets the time of first log message.
+        /// </summary>
+        private DateTime TimeOfFirstLogMessage { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfLogger"/> class.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Init()
+        {
+            LogInfoDetails = new Dictionary<string, string>();
+            AddLoglevelToRunReport = new Dictionary<StfLogLevel, bool>();
+            NumberOfLoglevelMessages = new Dictionary<StfLogLevel, int>();
+            ThreadUtils = new ThreadUtils();
+
+            foreach (StfLogLevel loglevel in Enum.GetValues(typeof(StfLogLevel)))
+            {
+                NumberOfLoglevelMessages.Add(loglevel, 0);
+                AddLoglevelToRunReport.Add(loglevel, true);
+            }
+
+            LogFileHandle = new LogfileWriter { OverwriteLogFile = this.OverwriteLogFile };
+
+            SetDefaultConfiguration();
+
+            FileName = Configuration.LogFileName;
+            this.LogLevel = Configuration.LogLevel;
+            OverwriteLogFile = Configuration.OverwriteLogFile;
+
+            // setting the default AID logging function
+            LogAutomationIdObjectUserFunction =
+                (level, obj, message) => LogOneHtmlMessage(level, string.Format("AutomationId: [{0}] - Message: [{1}]", obj.ToString(), message));
+
+            LogFileInitialized = false;
+
+            return true;
+        }
+
+        /// <summary>
         /// Have we logged a Error or Fail? 
         /// </summary>
         /// <returns>
@@ -286,6 +296,19 @@ namespace Mir.Stf.Utilities
             var retVal = loggerJs == null ? "<error>No Logger JS section defined</error>" : loggerJs.ToString();
 
             return retVal;
+        }
+
+        /// <summary>
+        /// If no configuration is provided, then create a default one.
+        /// </summary>
+        private void SetDefaultConfiguration()
+        {
+            if (Configuration != null)
+            {
+                return;
+            }
+
+            Configuration = new StfLoggerConfiguration();
         }
 
         /// <summary>
@@ -362,6 +385,8 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool EndHtmlLogFile()
         {
+            LogTestDuration();
+
             LogKeyValue("Passed", NumberOfLoglevelMessages[StfLogLevel.Pass].ToString(), "Passed Tests");
             LogKeyValue("Failed", NumberOfLoglevelMessages[StfLogLevel.Fail].ToString(), "Failed Tests");
             LogKeyValue("Errors", NumberOfLoglevelMessages[StfLogLevel.Error].ToString(), "Errors logged");
@@ -411,6 +436,8 @@ namespace Mir.Stf.Utilities
 
             LogFileInitialized = true;
             LogTrace(string.Format("Log Initiated at [{0}]", FileName));
+
+            TimeOfFirstLogMessage = DateTime.Now;
 
             LogKeyValue("Environment", "TODO_ENVIRONMENT", "Configuration.EnvironmentName");
             LogKeyValue("OS", Environment.OSVersion.ToString(), string.Empty);
@@ -522,6 +549,44 @@ namespace Mir.Stf.Utilities
             }
             
             return true;
+        }
+
+        /// <summary>
+        /// The get testduration.
+        /// </summary>
+        /// <param name="duration">
+        /// The duration.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool GetTestduration(out TimeSpan duration)
+        {
+            duration = TimeSpan.FromSeconds(0);
+
+            if (TimeOfFirstLogMessage == default(DateTime))
+            {
+                return false;
+            }
+
+            duration = DateTime.Now - TimeOfFirstLogMessage;
+
+            return true;
+        }
+
+        /// <summary>
+        /// The log test duration.
+        /// </summary>
+        private void LogTestDuration()
+        {
+            TimeSpan duration;
+            if (!GetTestduration(out duration))
+            {
+                return;
+            }
+
+            var length = string.Format("{0:%h} hour(s), {0:%m} minute(s), {0:%s} second(s)", duration);
+            LogKeyValue("Test duration", length, "Test duration");
         }
     }
 }

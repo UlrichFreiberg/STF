@@ -19,9 +19,17 @@ namespace Mir.Stf.Utilities.Configuration
     public class StfLoggerConfiguration : IStfLoggerConfiguration
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="StfLoggerConfiguration"/> class.
+        /// </summary>
+        public StfLoggerConfiguration()
+        {
+            InitializeWithDefaultValues();
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether overwrite log file.
         /// </summary>
-        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.OverwriteLogFile", DefaultValue = "false")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.OverwriteLogFile", DefaultValue = "true")]
         public bool OverwriteLogFile { get; set; }
 
         /// <summary>
@@ -78,12 +86,10 @@ namespace Mir.Stf.Utilities.Configuration
         [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.KeepAliveInterval", DefaultValue = "5")]
         public int KeepAliveInterval { get; set; }
 
-        public StfLoggerConfiguration()
-        {
-            this.InitializeWithDefaultValues();
-        }
-
-        internal void InitializeWithDefaultValues()
+        /// <summary>
+        /// The initialize with default values.
+        /// </summary>
+        private void InitializeWithDefaultValues()
         {
             var properties = this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
 
