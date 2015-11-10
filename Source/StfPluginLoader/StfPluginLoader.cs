@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using Mir.Stf.Utilities.Extensions;
@@ -127,7 +128,7 @@ namespace Mir.Stf.Utilities
                 }
             }
 
-            OverlayPluginSettings();
+            OverlayPluginSettings(stfPluginPath);
 
             return container.Registrations.Count();
         }
@@ -228,10 +229,13 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The overlay plugin settings.
         /// </summary>
+        /// <param name="pluginPath">
+        /// The plugin Path.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool OverlayPluginSettings()
+        private bool OverlayPluginSettings(string pluginPath)
         {
             if (PluginAssemblies.Count == 0)
             {
@@ -239,18 +243,22 @@ namespace Mir.Stf.Utilities
             }
 
             var success = true;
-            var fileNameFormat = "{0}.PluginSettings.Xml";
+
             foreach (var assembly in PluginAssemblies)
             {
-                var settingsFile = string.Format(fileNameFormat, assembly.Location);
-                if (!File.Exists(settingsFile))
-                {
-                    continue;
-                }
+                var locations = GetPluginSettingsPaths(pluginPath, assembly);
 
-                if (!PerformOverlay(settingsFile))
+                foreach (var settingsFile in locations)
                 {
-                    success = false;
+                    if (!File.Exists(settingsFile))
+                    {
+                        continue;
+                    }
+
+                    if (!PerformOverlay(settingsFile))
+                    {
+                        success = false;
+                    }
                 }
             }
 
@@ -279,6 +287,42 @@ namespace Mir.Stf.Utilities
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// The get plugin settings paths.
+        /// </summary>
+        /// <param name="pluginPath">
+        /// The plugin path.
+        /// </param>
+        /// <param name="assembly">
+        /// The assembly.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/>.
+        /// </returns>
+        private IList<string> GetPluginSettingsPaths(string pluginPath, Assembly assembly)
+        {
+            if (Regex.Match(pluginPath, @"^\.$").Success)
+            {
+                pluginPath = Directory.GetCurrentDirectory();
+            }
+
+            var fileNameFormat = "{0}.PluginSettings.Xml";
+            var pluginPathFileName = string.Format("{0}\\{1}", pluginPath, Path.GetFileName(assembly.Location));
+
+            if (pluginPathFileName == assembly.Location)
+            {
+                return new List<string> { string.Format(fileNameFormat, pluginPathFileName) };
+            }
+
+            var locations = new List<string>
+                {
+                    string.Format(fileNameFormat, pluginPathFileName),
+                    string.Format(fileNameFormat, assembly.Location)
+                };
+
+            return locations;
         }
     }
 }

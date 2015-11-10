@@ -48,6 +48,7 @@ namespace Mir.Stf
         /// information about and functionality for the current test run.
         /// The test context instance is set by the MsTestFrame work
         /// </summary>
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public TestContext TestContext { get; set; }
 
         /// <summary>
