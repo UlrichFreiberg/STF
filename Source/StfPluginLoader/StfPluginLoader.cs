@@ -232,17 +232,12 @@ namespace Mir.Stf.Utilities
         /// <param name="pluginPath">
         /// The plugin Path.
         /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool OverlayPluginSettings(string pluginPath)
+        private void OverlayPluginSettings(string pluginPath)
         {
             if (PluginAssemblies.Count == 0)
             {
-                return false;
+                PluginLogger.LogInternal("No plugins detected so no pluginsettings to overlay");
             }
-
-            var success = true;
 
             foreach (var assembly in PluginAssemblies)
             {
@@ -252,17 +247,16 @@ namespace Mir.Stf.Utilities
                 {
                     if (!File.Exists(settingsFile))
                     {
+                        PluginLogger.LogInternal(string.Format("Plugin settings file [{0}] does not exist", settingsFile));
                         continue;
                     }
 
                     if (!PerformOverlay(settingsFile))
                     {
-                        success = false;
+                        PluginLogger.LogInternal(string.Format("Failed to overlay [{0}]. Check config file", settingsFile));
                     }
                 }
             }
-
-            return success;
         }
 
         /// <summary>
@@ -312,18 +306,16 @@ namespace Mir.Stf.Utilities
             
             var pluginPathFileName = Path.Combine(pluginPath, Path.GetFileName(assembly.Location));
 
+            var settingsPaths = new List<string> { string.Format(fileNameFormat, pluginPathFileName) };
+
             if (pluginPathFileName == assembly.Location)
             {
-                return new List<string> { string.Format(fileNameFormat, pluginPathFileName) };
+                return settingsPaths;
             }
 
-            var locations = new List<string>
-                {
-                    string.Format(fileNameFormat, pluginPathFileName),
-                    string.Format(fileNameFormat, assembly.Location)
-                };
+            settingsPaths.Add(string.Format(fileNameFormat, assembly.Location));
 
-            return locations;
+            return settingsPaths;
         }
     }
 }
