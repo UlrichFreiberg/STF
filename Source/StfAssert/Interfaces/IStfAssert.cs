@@ -296,6 +296,10 @@ namespace Mir.Stf.Utilities.Interfaces
         /// </returns>
         bool FolderNotExists(string testStep, string foldernameAndPath);
 
+        bool FilesDoesDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond);
+        bool FilesDoesNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond);
+
+
         /// <summary>
         /// Asserts that a expression is True
         /// </summary>

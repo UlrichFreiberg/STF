@@ -75,6 +75,12 @@
       <Name>StfLogger</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\CaptureSame01.jpg" />
+    <Content Include="TestData\CaptureSame02.jpg" />
+    <Content Include="TestData\OneCharFile.txt" />
+    <Content Include="TestData\zerofile.txt" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
