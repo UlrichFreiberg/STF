@@ -38,7 +38,9 @@ namespace Mir.Stf
 
             // lets get a logger and a configuration
             KernelLogger = new StfLogger { Configuration = { LogFileName = Path.Combine(StfLogDir, @"KernelLogger.html") } };
-            StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
+
+            // get the configuration together
+            AssemblyStfConfiguration();
 
             // Any plugins for us?
             PluginLoader = new StfPluginLoader(KernelLogger, StfConfiguration);
@@ -47,6 +49,23 @@ namespace Mir.Stf
 
             // now all configurations are loaded, we can set the Environment.
             StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
+        }
+
+        private void AssemblyStfConfiguration()
+        {
+            // if a Machine configuration exists overlay it 
+            // FileLocation: StfRoot - @"Machine_StfConfiguration.xml"
+
+            StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
+
+            // if a TestSuite Setting configuration exists overlay it
+            // FileLocation: CurrentTestDirectory - @"TestSuite_StfConfiguration.xml"
+
+            // if a TestCase Setting configuration exists overlay it
+            // FileLocation: CurrentTestDirectory - @"TestCase_StfConfiguration.xml"
+
+            // if a User Setting configuration exists overlay it
+            // FileLocation: CurrentTestDirectory - @"User_StfConfiguration.xml"
         }
 
         /// <summary>
