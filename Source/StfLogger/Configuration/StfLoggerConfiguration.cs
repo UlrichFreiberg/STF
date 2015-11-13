@@ -77,7 +77,7 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets a value indicating whether map newlines to br.
         /// </summary>
-        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.MapNewlinesToBr", DefaultValue = "false")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.MapNewlinesToBr", DefaultValue = "true")]
         public bool MapNewlinesToBr { get; set; }
 
         /// <summary>
