@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>New assertmethods that can determine if two files are different</releaseNotes>
+    <releaseNotes>Added Assert method for missing implementation (to be able to explicitly signal in the htmllog when there's a missing implementation)</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
