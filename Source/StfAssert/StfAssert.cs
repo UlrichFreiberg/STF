@@ -179,6 +179,22 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// Used in testscripts to indicate missing implementation of models or testscripts.
+        /// </summary>
+        /// <param name="msg">
+        /// Details on what is missing
+        /// </param>
+        /// <returns>
+        /// Always returns false.
+        /// </returns>
+        public bool MissingImplementation(string msg)
+        {
+            AssertFail("Missing implementation", msg);
+            
+            return false;
+        }
+
+        /// <summary>
         /// The assert pass.
         /// </summary>
         /// <param name="testStep">

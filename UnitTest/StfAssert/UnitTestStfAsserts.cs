@@ -52,6 +52,17 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test method assert missing implementation.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAssertMissingImplementation()
+        {
+            Assert.IsFalse(MyAssert.MissingImplementation(string.Empty));
+            Assert.IsFalse(MyAssert.MissingImplementation(null));
+            Assert.IsFalse(MyAssert.MissingImplementation("There's a missing implementation"));
+        }
+
+        /// <summary>
         /// The test assert throws true.
         /// </summary>
         [TestMethod]
