@@ -42,8 +42,6 @@ namespace UnitTest
             Assert.IsTrue(MyAssert.FileContains("TestStepName 4", UnitTestFile, "t[eE]st"));
         }
 
-
-
         /// <summary>
         /// The test method assert FileExists.
         /// </summary>
@@ -112,7 +110,7 @@ namespace UnitTest
 
             Assert.IsFalse(MyAssert.FolderExists("TestStepName 1", UnitTestDir));
 
-            var testDir = Directory.CreateDirectory(UnitTestDir);
+            Directory.CreateDirectory(UnitTestDir);
             Assert.IsTrue(MyAssert.FolderExists("TestStepName 2", UnitTestDir));
         }
 
@@ -133,10 +131,13 @@ namespace UnitTest
 
             Assert.IsTrue(MyAssert.FolderNotExists("TestStepName 1", UnitTestDir));
 
-            var testDir = Directory.CreateDirectory(UnitTestDir);
+            Directory.CreateDirectory(UnitTestDir);
             Assert.IsFalse(MyAssert.FolderNotExists("TestStepName 2", UnitTestDir));
         }
 
+        /// <summary>
+        /// The test method assert files differ 01.
+        /// </summary>
         [TestMethod]
         public void TestMethodAssertFilesDiffer01()
         {
@@ -145,44 +146,53 @@ namespace UnitTest
 
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsTrue(MyAssert.FilesDoesDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
-            Assert.IsFalse(MyAssert.FilesDoesNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsTrue(MyAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsFalse(MyAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
         }
 
+        /// <summary>
+        /// The test method assert files differ 02.
+        /// </summary>
         [TestMethod]
         public void TestMethodAssertFilesDiffer02()
         {
-            const string UnitTestFile1 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\zerofile.txt";
-            const string UnitTestFile2 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\zerofile.txt";
+            const string UnitTestFile1 = @"TestData\zerofile.txt";
+            const string UnitTestFile2 = @"TestData\zerofile.txt";
 
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsFalse(MyAssert.FilesDoesDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
-            Assert.IsTrue(MyAssert.FilesDoesNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsFalse(MyAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsTrue(MyAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
         }
 
+        /// <summary>
+        /// The test method assert files diff 03.
+        /// </summary>
         [TestMethod]
         public void TestMethodAssertFilesDiff03()
         {
-            const string UnitTestFile1 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\zerofile.txt";
-            const string UnitTestFile2 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\OneCharFile.txt";
+            const string UnitTestFile1 = @"TestData\zerofile.txt";
+            const string UnitTestFile2 = @"TestData\OneCharFile.txt";
 
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsTrue(MyAssert.FilesDoesDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
-            Assert.IsFalse(MyAssert.FilesDoesNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsTrue(MyAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsFalse(MyAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
         }
 
+        /// <summary>
+        /// The test method assert files diff 04.
+        /// </summary>
         [TestMethod]
         public void TestMethodAssertFilesDiff04()
         {
-            const string UnitTestFile1 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\CaptureSame01.jpg";
-            const string UnitTestFile2 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\CaptureSame02.jpg";
+            const string UnitTestFile1 = @"TestData\CaptureSame01.jpg";
+            const string UnitTestFile2 = @"TestData\CaptureSame02.jpg";
 
             MyAssert.EnableNegativeTesting = true;
 
-            Assert.IsTrue(MyAssert.FilesDoesNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
-            Assert.IsFalse(MyAssert.FilesDoesDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsTrue(MyAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+            Assert.IsFalse(MyAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
         }
     }
 }

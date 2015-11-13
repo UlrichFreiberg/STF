@@ -13,8 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace Mir.Stf.Utilities
 {
-    using System;
-
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -189,19 +187,21 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// Asserts that two files differ
+        /// The files do differ.
         /// </summary>
         /// <param name="testStep">
-        /// Name of the test step in the test script
+        /// The test step.
         /// </param>
         /// <param name="filenameAndPathFirst">
+        /// The filename and path first.
         /// </param>
         /// <param name="filenameAndPathSecond">
+        /// The filename and path second.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool FilesDoesDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
+        public bool FilesDoDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
             string msg;
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
@@ -209,21 +209,21 @@ namespace Mir.Stf.Utilities
 
             if (!fileInfoFirst.Exists)
             {
-                msg = string.Format("FilesDoesDiffer: [{0}] Does Not exist", filenameAndPathFirst);
+                msg = string.Format("FilesDoDiffer: [{0}] Does Not exist", filenameAndPathFirst);
                 this.AssertFail(testStep, msg);
                 return true;
             }
 
             if (!fileInfoSecond.Exists)
             {
-                msg = string.Format("FilesDoesDiffer: [{0}] Does Not exist", filenameAndPathSecond);
+                msg = string.Format("FilesDoDiffer: [{0}] Does Not exist", filenameAndPathSecond);
                 this.AssertFail(testStep, msg);
                 return true;
             }
 
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
-                msg = string.Format("FilesDoesDiffer: [{0}] and [{1}] does Not have the same length", filenameAndPathFirst, filenameAndPathSecond);
+                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] does Not have the same length", filenameAndPathFirst, filenameAndPathSecond);
                 this.AssertFail(testStep, msg);
                 return true;
             }
@@ -231,7 +231,7 @@ namespace Mir.Stf.Utilities
             var diffPosition = FileCompare(filenameAndPathFirst, filenameAndPathSecond);
             if (diffPosition == 0)
             {
-                msg = string.Format("FilesDoesNotDiffer: [{0}] and [{1}] doesn't differ byte-per-byte", filenameAndPathFirst, filenameAndPathSecond, diffPosition);
+                msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] doesn't differ byte-per-byte", filenameAndPathFirst, filenameAndPathSecond);
                 this.AssertFail(testStep, msg);
                 return false;
             }
@@ -240,19 +240,21 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// Asserts that two files differ
+        /// The files do not differ.
         /// </summary>
         /// <param name="testStep">
-        /// Name of the test step in the test script
+        /// The test step.
         /// </param>
         /// <param name="filenameAndPathFirst">
+        /// The filename and path first.
         /// </param>
         /// <param name="filenameAndPathSecond">
+        /// The filename and path second.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool FilesDoesNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
+        public bool FilesDoNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
             string msg;
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
@@ -260,21 +262,21 @@ namespace Mir.Stf.Utilities
 
             if (!fileInfoFirst.Exists)
             {
-                msg = string.Format("FilesDoesNotDiffer: [{0}] Does Not exist", filenameAndPathFirst);
+                msg = string.Format("FilesDoNotDiffer: [{0}] Does Not exist", filenameAndPathFirst);
                 this.AssertFail(testStep, msg);
                 return false;
             }
 
             if (!fileInfoSecond.Exists)
             {
-                msg = string.Format("FilesDoesNotDiffer: [{0}] Does Not exist", filenameAndPathSecond);
+                msg = string.Format("FilesDoNotDiffer: [{0}] Does Not exist", filenameAndPathSecond);
                 this.AssertFail(testStep, msg);
                 return false;
             }
 
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
-                msg = string.Format("FilesDoesNotDiffer: [{0}] and [{1}] does have the same length", filenameAndPathFirst, filenameAndPathSecond);
+                msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] does have the same length", filenameAndPathFirst, filenameAndPathSecond);
                 this.AssertFail(testStep, msg);
                 return false;
             }
@@ -282,7 +284,7 @@ namespace Mir.Stf.Utilities
             var diffPosition = FileCompare(filenameAndPathFirst, filenameAndPathSecond);
             if (diffPosition > 0)
             {
-                msg = string.Format("FilesDoesDiffer: [{0}] and [{1}] differ at [{2}]", filenameAndPathFirst, filenameAndPathSecond, diffPosition);
+                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] differ at [{2}]", filenameAndPathFirst, filenameAndPathSecond, diffPosition);
                 this.AssertFail(testStep, msg);
                 return false;
             }
@@ -290,16 +292,27 @@ namespace Mir.Stf.Utilities
             return true;
         }
 
-        // Inspired from http://stackoverflow.com/questions/7931304/comparing-two-files-in-c-sharp
-        // This method accepts two strings the represent two files to 
-        // compare. A return value of 0 indicates that the contents of the files
-        // are the same. A return value of any other value indicates that the 
-        // files are not the same.
-        private Int64 FileCompare(string file1, string file2)
+        /// <summary>
+        /// The file compare. Inspired from http://stackoverflow.com/questions/7931304/comparing-two-files-in-c-sharp
+        /// This method accepts two strings the represent two files to 
+        /// compare. A return value of 0 indicates that the contents of the files
+        /// are the same. A return value of any other value indicates that the 
+        /// files are not the same.
+        /// </summary>
+        /// <param name="file1">
+        /// The file 1.
+        /// </param>
+        /// <param name="file2">
+        /// The file 2.
+        /// </param>
+        /// <returns>
+        /// The <see cref="long"/>.
+        /// </returns>
+        private long FileCompare(string file1, string file2)
         {
             int file1Byte;
             int file2Byte;
-            Int64 diffPosition = 0;
+            long diffPosition = 0;
 
             // Determine if the same file was referenced two times.
             if (file1 == file2)

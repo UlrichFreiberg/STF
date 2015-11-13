@@ -12,7 +12,7 @@ namespace Mir.Stf.Utilities.Interfaces
 {
     using System;
 
-    using Mir.Stf.Utilities;
+    using Utilities;
 
     /// <summary>
     /// The <see cref="StfAssert"/> interface.
@@ -296,8 +296,39 @@ namespace Mir.Stf.Utilities.Interfaces
         /// </returns>
         bool FolderNotExists(string testStep, string foldernameAndPath);
 
-        bool FilesDoesDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond);
-        bool FilesDoesNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond);
+        /// <summary>
+        /// The files do differ.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="filenameAndPathFirst">
+        /// The filename and path first.
+        /// </param>
+        /// <param name="filenameAndPathSecond">
+        /// The filename and path second.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool FilesDoDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond);
+
+        /// <summary>
+        /// The files do not differ.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="filenameAndPathFirst">
+        /// The filename and path first.
+        /// </param>
+        /// <param name="filenameAndPathSecond">
+        /// The filename and path second.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool FilesDoNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond);
 
 
         /// <summary>
