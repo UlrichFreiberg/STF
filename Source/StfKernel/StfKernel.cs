@@ -16,6 +16,8 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf
 {
+    using Mir.Stf.Utilities.Configuration;
+
     /// <summary>
     /// The stf kernel.
     /// </summary>
@@ -37,7 +39,9 @@ namespace Mir.Stf
             KernelSetupKernelDirectories();
 
             // lets get a logger and a configuration
-            KernelLogger = new StfLogger { Configuration = { LogFileName = Path.Combine(StfLogDir, @"KernelLogger.html") } };
+            var kernelLoggerFilename = Path.Combine(StfLogDir, @"KernelLogger.html");
+            var kernelLoggerConfiguration = new StfLoggerConfiguration { LogFileName = kernelLoggerFilename };
+            KernelLogger = new StfLogger { Configuration = kernelLoggerConfiguration };
 
             // get the configuration together
             AssemblyStfConfiguration();
@@ -53,19 +57,11 @@ namespace Mir.Stf
 
         private void AssemblyStfConfiguration()
         {
-            // if a Machine configuration exists overlay it 
-            // FileLocation: StfRoot - @"Machine_StfConfiguration.xml"
+            OverlayStfConfigurationOneType(StfRoot, ConfigurationFileType.Machine);
 
             StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
 
-            // if a TestSuite Setting configuration exists overlay it
-            // FileLocation: CurrentTestDirectory - @"TestSuite_StfConfiguration.xml"
-
-            // if a TestCase Setting configuration exists overlay it
-            // FileLocation: CurrentTestDirectory - @"TestCase_StfConfiguration.xml"
-
-            // if a User Setting configuration exists overlay it
-            // FileLocation: CurrentTestDirectory - @"User_StfConfiguration.xml"
+            OverlayStfConfiguration(StfConfigDir);
         }
 
         /// <summary>
@@ -224,6 +220,68 @@ namespace Mir.Stf
             StfRoot = CheckForNeededKernelDirectory(@"Stf_Root", @"C:\temp\Stf");
             StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
             StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
+        }
+
+        private enum ConfigurationFileType
+        {
+            Machine,
+            User,
+            Testcase,
+            Testsuite
+        }
+
+        private bool OverlayStfConfiguration(string directoryName)
+        {
+            var retVal = true;
+
+            if (!Directory.Exists(directoryName))
+            {
+                return true;
+            }
+
+            // retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.Machine);
+            retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.Testsuite);
+            retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.Testcase);
+            retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.User);
+
+            return retVal;
+        }
+
+        private bool OverlayStfConfigurationOneType(string directoryName, ConfigurationFileType configurationFileType)
+        {
+            string configFilename;
+
+            if (!Directory.Exists(directoryName))
+            {
+                return true;
+            }
+
+            switch (configurationFileType)
+            {
+                case ConfigurationFileType.Machine:
+                    configFilename = "StfConfiguration_Machine.xml";
+                    break;
+                case ConfigurationFileType.User:
+                    configFilename = "StfConfiguration_User.xml";
+                    break;
+                case ConfigurationFileType.Testcase:
+                    configFilename = "StfConfiguration_TestCase.xml";
+                    break;
+                case ConfigurationFileType.Testsuite:
+                    configFilename = "StfConfiguration_TestSuite.xml";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("configurationFileType", configurationFileType, null);
+            }
+
+            var fileLocation = Path.Combine(directoryName, configFilename);
+            if (!File.Exists(fileLocation))
+            {
+                return true;
+            }
+
+            StfConfiguration.OverLay(fileLocation);
+            return true;
         }
     }
 }
