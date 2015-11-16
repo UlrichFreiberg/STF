@@ -46,7 +46,7 @@ namespace Stf.Unittests
         /// <summary>
         /// Gets or sets the my logger.
         /// </summary>
-        public IStfLogger MyLogger { get; set; }
+        public IStfLogger StfLogger { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether is initialized.

@@ -26,8 +26,8 @@ namespace UnitTest
         [TestInitialize]
         public void TestInitialize()
         {
-            this.MyLogger.LogInfo("DatadrivenStfLoggerTest TestInitialize");
-            MyAssert.EnableNegativeTesting = true;
+            this.StfLogger.LogInfo("DatadrivenStfLoggerTest TestInitialize");
+            StfAssert.EnableNegativeTesting = true;
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.IsTrue("FailPass", failPass);
+            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.IsTrue("FailPass", failPass);
+            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.IsTrue("FailPass", failPass);
+            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -86,8 +86,8 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            MyAssert.IsTrue("FailPass", failPass);
+            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfAssert.IsTrue("FailPass", failPass);
         }
 
         /// <summary>
@@ -100,15 +100,15 @@ namespace UnitTest
             var iteration = (int)TestContext.DataRow["Iteration"];
             var message = (string)TestContext.DataRow["Message"];
 
-            MyLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
 
             // need to close the logfile, in order to check the content of the logfile...
-            MyLogger.CloseLogFile();
+            StfLogger.CloseLogFile();
 
             // we want to fail, if FileContains fails
-            MyAssert.EnableNegativeTesting = false;
+            StfAssert.EnableNegativeTesting = false;
 
-            MyAssert.FileContains(iteration.ToString(), MyLogger.FileName, message);
+            StfAssert.FileContains(iteration.ToString(), StfLogger.FileName, message);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace UnitTest
         [TestCleanup]
         public void TestCleanup()
         {
-            this.MyLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
+            this.StfLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
         }
 
         /// <summary>

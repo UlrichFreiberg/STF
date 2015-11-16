@@ -28,18 +28,18 @@ namespace StfArchiverTests
         [TestMethod]
         public void TestPerformArchiveZeroAndOneFile()
         {
-            MyArchiver.Configuration.DoArchiveFoldersAndFiles = true;
-            MyArchiver.Configuration.DoArchiveToZipfile = false;
+            StfArchiver.Configuration.DoArchiveFoldersAndFiles = true;
+            StfArchiver.Configuration.DoArchiveToZipfile = false;
 
-            var emptyStatusTxt = MyArchiver.Status();
+            var emptyStatusTxt = StfArchiver.Status();
             Assert.AreEqual("Nothing to Archive", emptyStatusTxt);
 
-            MyArchiver.AddFile(@"C:\Temp\Stf\Config\StfConfiguration.xml");
-            var oneFileStatusTxt = MyArchiver.Status();
+            StfArchiver.AddFile(@"C:\Temp\Stf\Config\StfConfiguration.xml");
+            var oneFileStatusTxt = StfArchiver.Status();
             const string ExpectedStatusTxt = "Files to archive\n\tC:\\Temp\\Stf\\Config\\StfConfiguration.xml\n";
             Assert.AreEqual(ExpectedStatusTxt, oneFileStatusTxt);
 
-            MyArchiver.PerformArchive();
+            StfArchiver.PerformArchive();
         }
 
         /// <summary>
@@ -48,13 +48,13 @@ namespace StfArchiverTests
         [TestMethod]
         public void TestPerformArchiveOneDirectory()
         {
-            MyArchiver.AddDirectory(@"C:\Temp\Stf\Config");
+            StfArchiver.AddDirectory(@"C:\Temp\Stf\Config");
 
-            var oneFileStatusTxt = MyArchiver.Status();
+            var oneFileStatusTxt = StfArchiver.Status();
             const string ExpectedStatusTxt = "Directories to archive\n\tC:\\Temp\\Stf\\Config\n";
             Assert.AreEqual(ExpectedStatusTxt, oneFileStatusTxt);
 
-            MyArchiver.PerformArchive();
+            StfArchiver.PerformArchive();
         }
 
         /// <summary>
@@ -68,9 +68,9 @@ namespace StfArchiverTests
             File.Delete(ZipFilename);
             Assert.IsFalse(File.Exists(ZipFilename));
 
-            MyArchiver.AddDirectory(@"C:\Temp\Stf\Config");
-            MyArchiver.Configuration.ZipFilename = ZipFilename;
-            MyArchiver.PerformArchive();
+            StfArchiver.AddDirectory(@"C:\Temp\Stf\Config");
+            StfArchiver.Configuration.ZipFilename = ZipFilename;
+            StfArchiver.PerformArchive();
 
             Assert.IsTrue(File.Exists(ZipFilename));
         }

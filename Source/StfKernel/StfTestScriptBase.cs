@@ -22,8 +22,8 @@ namespace Mir.Stf
 
     /// <summary>
     /// BaseClass for all Stf test scripts.
-    /// The class will set up the right <see cref="StfLogger"/> (MyLogger)
-    /// and instantiate the <see cref="StfAssert"/> (MyAssert)
+    /// The class will set up the right <see cref="Utilities.StfLogger"/> (StfLogger)
+    /// and instantiate the <see cref="Utilities.StfAssert"/> (StfAssert)
     /// </summary>
     [TestClass]
     public class StfTestScriptBase : StfKernel
@@ -31,17 +31,17 @@ namespace Mir.Stf
         /// <summary>
         /// Gets the Stf Asserter.
         /// </summary>
-        public StfAssert MyAssert { get; private set; }
+        public StfAssert StfAssert { get; private set; }
 
         /// <summary>
         /// Gets the Stf logger.
         /// </summary>
-        public IStfLogger MyLogger { get; private set; }
+        public IStfLogger StfLogger { get; private set; }
 
         /// <summary>
         /// Gets the Stf Archiver
         /// </summary>
-        public StfArchiver MyArchiver { get; private set; }
+        public StfArchiver StfArchiver { get; private set; }
 
         /// <summary>
         /// Gets or sets the test context which provides
@@ -57,12 +57,12 @@ namespace Mir.Stf
         [TestInitialize]
         public void BaseTestInitialize()
         {
-            MyLogger = Get<IStfLogger>();
+            StfLogger = Get<IStfLogger>();
 
             // We're getting the instance of the logger and logging a link to the kernel logger
-            var kernelLogFilePath = MyLogger.FileName;
+            var kernelLogFilePath = StfLogger.FileName;
             
-            MyLogger.Configuration.LogTitle = TestContext.TestName;
+            StfLogger.Configuration.LogTitle = TestContext.TestName;
 
             var logFilePostfix = string.Empty;
             var iterationNo = DataRowIndex();
@@ -83,9 +83,9 @@ namespace Mir.Stf
 
             var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
 
-            MyLogger.FileName = logFilename;
+            StfLogger.FileName = logFilename;
 
-            MyAssert = new StfAssert(MyLogger);
+            StfAssert = new StfAssert(StfLogger);
 
             if (TestDataDriven())
             {
@@ -93,7 +93,7 @@ namespace Mir.Stf
                 {
                     var headerCaption = TestContext.DataRow.Table.Columns[index].Caption;
 
-                    MyLogger.LogInfo(string.Format("Column[{0}]=[{1}]", headerCaption, TestContext.DataRow[headerCaption]));
+                    StfLogger.LogInfo(string.Format("Column[{0}]=[{1}]", headerCaption, TestContext.DataRow[headerCaption]));
                 }
             }
 
@@ -113,13 +113,13 @@ namespace Mir.Stf
 
             if (TestContext.CurrentTestOutcome != UnitTestOutcome.Passed)
             {
-                MyLogger.LogError("Test failed");
+                StfLogger.LogError("Test failed");
             }
 
-            MyLogger.LogInfo(MyArchiver.Status());
-            MyLogger.CloseLogFile();
+            StfLogger.LogInfo(StfArchiver.Status());
+            StfLogger.CloseLogFile();
 
-            MyArchiver.AddFile(MyLogger.FileName);
+            StfArchiver.AddFile(StfLogger.FileName);
 
             if (TestDataDriven())
             {
@@ -128,22 +128,22 @@ namespace Mir.Stf
                 if (iterationNo == TestContext.DataRow.Table.Rows.Count - 1)
                 {
                     var myStfSummeryLogger = new StfSummeryLogger();
-                    var summeryLogfileLogDirname = Path.GetDirectoryName(MyLogger.FileName);
-                    var myLoggerFileName = Path.GetFileName(MyLogger.FileName) ?? string.Empty;
+                    var summeryLogfileLogDirname = Path.GetDirectoryName(StfLogger.FileName);
+                    var myLoggerFileName = Path.GetFileName(StfLogger.FileName) ?? string.Empty;
                     var summeryLogfileLogFilename = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", ".html");
                     var summeryLogfilename = string.Format(@"{0}\SummeryLogfile_{1}", summeryLogfileLogDirname, summeryLogfileLogFilename);
                     var summeryLogfileLogfilePattern = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", "_*");
 
                     myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
 
-                    MyArchiver.AddFile(summeryLogfilename);
-                    MyArchiver.PerformArchive();
+                    StfArchiver.AddFile(summeryLogfilename);
+                    StfArchiver.PerformArchive();
                 }
 
                 return;
             }
 
-            MyArchiver.PerformArchive();
+            StfArchiver.PerformArchive();
         }
 
         /// <summary>
@@ -157,12 +157,12 @@ namespace Mir.Stf
         /// </param>
         private void LogKeyValues(string kernelLogfilePath, string iterationStatus)
         {
-            MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
-            MyLogger.LogKeyValue("Kernel Logger", kernelLogfilePath, "Kernel Logger");
-            MyLogger.LogKeyValue("Testname", TestContext.TestName, "Name of test");
+            StfLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
+            StfLogger.LogKeyValue("Kernel Logger", kernelLogfilePath, "Kernel Logger");
+            StfLogger.LogKeyValue("Testname", TestContext.TestName, "Name of test");
 
             var configuration = Get<StfConfiguration>();
-            MyLogger.LogKeyValue("Environment", configuration.Environment, "Configuration.EnvironmentName");
+            StfLogger.LogKeyValue("Environment", configuration.Environment, "Configuration.EnvironmentName");
         }
 
         /// <summary>
@@ -173,11 +173,11 @@ namespace Mir.Stf
         /// </param>
         private void LogBaseClassMessage(string message)
         {
-            var oldLoglevel = MyLogger.LogLevel;
+            var oldLoglevel = StfLogger.LogLevel;
 
-            MyLogger.LogLevel = StfLogLevel.Internal;
-            MyLogger.LogInternal(message);
-            MyLogger.LogLevel = oldLoglevel;
+            StfLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogInternal(message);
+            StfLogger.LogLevel = oldLoglevel;
         }
 
         /// <summary>
@@ -233,13 +233,13 @@ namespace Mir.Stf
             catch (Exception exception)
             {
                 var msg = string.Format("Something went wrong while loading user configuration for archiver: {0}", exception.Message);
-                MyLogger.LogError(msg);
+                StfLogger.LogError(msg);
             }
 
             archiverConfiguration.ArchiveTopDir = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveTopDir);
             archiverConfiguration.ArchiveDestination = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveDestination);
             archiverConfiguration.TempDirectory = StfTextUtils.ExpandVariables(archiverConfiguration.TempDirectory);
-            MyArchiver = new StfArchiver(archiverConfiguration, testName);
+            StfArchiver = new StfArchiver(archiverConfiguration, testName);
         }
     }
 }

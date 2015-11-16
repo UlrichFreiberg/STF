@@ -26,49 +26,49 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertStrings()
         {
-            MyAssert.EnableNegativeTesting = true;
+            StfAssert.EnableNegativeTesting = true;
 
-            Assert.IsTrue(MyAssert.StringContains("TestStepName 1", "Hejsa", "Hej"));
-            Assert.IsFalse(MyAssert.StringContains("TestStepName 2", "Hejsa", "Bent"));
+            Assert.IsTrue(StfAssert.StringContains("TestStepName 1", "Hejsa", "Hej"));
+            Assert.IsFalse(StfAssert.StringContains("TestStepName 2", "Hejsa", "Bent"));
 
-            Assert.IsTrue(MyAssert.StringDoesNotContain("TestStepName 3", "Hejsa", "Bent"));
-            Assert.IsFalse(MyAssert.StringDoesNotContain("TestStepName 4", "Hejsa", "Hej"));
+            Assert.IsTrue(StfAssert.StringDoesNotContain("TestStepName 3", "Hejsa", "Bent"));
+            Assert.IsFalse(StfAssert.StringDoesNotContain("TestStepName 4", "Hejsa", "Hej"));
 
-            Assert.IsTrue(MyAssert.StringMatches("TestStepName 5", "Hejsa", "^He.*"));
-            Assert.IsFalse(MyAssert.StringMatches("TestStepName 6", "Hejsa", "Nix.*"));
+            Assert.IsTrue(StfAssert.StringMatches("TestStepName 5", "Hejsa", "^He.*"));
+            Assert.IsFalse(StfAssert.StringMatches("TestStepName 6", "Hejsa", "Nix.*"));
 
-            Assert.IsTrue(MyAssert.StringDoesNotMatch("TestStepName 7", "Hejsa", "Nix.*"));
-            Assert.IsFalse(MyAssert.StringDoesNotMatch("TestStepName 8", "Hejsa", "^He.*"));
+            Assert.IsTrue(StfAssert.StringDoesNotMatch("TestStepName 7", "Hejsa", "Nix.*"));
+            Assert.IsFalse(StfAssert.StringDoesNotMatch("TestStepName 8", "Hejsa", "^He.*"));
 
-            Assert.IsTrue(MyAssert.StringStartsWith("TestStepName 9", "Hejsa", "He"));
-            Assert.IsFalse(MyAssert.StringStartsWith("TestStepName 10", "Hejsa", "hej"));
+            Assert.IsTrue(StfAssert.StringStartsWith("TestStepName 9", "Hejsa", "He"));
+            Assert.IsFalse(StfAssert.StringStartsWith("TestStepName 10", "Hejsa", "hej"));
 
-            Assert.IsTrue(MyAssert.StringDoesNotStartWith("TestStepName 11", "Hejsa", "hej"));
-            Assert.IsFalse(MyAssert.StringDoesNotStartWith("TestStepName 12", "Hejsa", "He"));
+            Assert.IsTrue(StfAssert.StringDoesNotStartWith("TestStepName 11", "Hejsa", "hej"));
+            Assert.IsFalse(StfAssert.StringDoesNotStartWith("TestStepName 12", "Hejsa", "He"));
 
-            Assert.IsTrue(MyAssert.StringEndsWith("TestStepName 13", "Hejsa", "jsa"));
-            Assert.IsFalse(MyAssert.StringEndsWith("TestStepName 14", "Hejsa", "Hej"));
+            Assert.IsTrue(StfAssert.StringEndsWith("TestStepName 13", "Hejsa", "jsa"));
+            Assert.IsFalse(StfAssert.StringEndsWith("TestStepName 14", "Hejsa", "Hej"));
 
-            Assert.IsTrue(MyAssert.StringDoesNotEndsWith("TestStepName 15", "Hejsa", "Bent"));
-            Assert.IsFalse(MyAssert.StringDoesNotEndsWith("TestStepName 16", "Hejsa", "ejsa"));
+            Assert.IsTrue(StfAssert.StringDoesNotEndsWith("TestStepName 15", "Hejsa", "Bent"));
+            Assert.IsFalse(StfAssert.StringDoesNotEndsWith("TestStepName 16", "Hejsa", "ejsa"));
 
-            Assert.IsTrue(MyAssert.StringEquals("TestStepName 17", "Hejsa", "Hejsa"));
-            Assert.IsFalse(MyAssert.StringEquals("TestStepName 18", "Hejsa", "hejsa"));
+            Assert.IsTrue(StfAssert.StringEquals("TestStepName 17", "Hejsa", "Hejsa"));
+            Assert.IsFalse(StfAssert.StringEquals("TestStepName 18", "Hejsa", "hejsa"));
 
-            Assert.IsTrue(MyAssert.StringNotEquals("TestStepName 19", "Hejsa", "hejsa"));
-            Assert.IsFalse(MyAssert.StringNotEquals("TestStepName 20", "Hejsa", "Hejsa"));
+            Assert.IsTrue(StfAssert.StringNotEquals("TestStepName 19", "Hejsa", "hejsa"));
+            Assert.IsFalse(StfAssert.StringNotEquals("TestStepName 20", "Hejsa", "Hejsa"));
 
-            Assert.IsTrue(MyAssert.StringEqualsCi("TestStepName 21", "Hejsa", "hejsa"));
-            Assert.IsFalse(MyAssert.StringEqualsCi("TestStepName 22", "Hejsa", "hej"));
+            Assert.IsTrue(StfAssert.StringEqualsCi("TestStepName 21", "Hejsa", "hejsa"));
+            Assert.IsFalse(StfAssert.StringEqualsCi("TestStepName 22", "Hejsa", "hej"));
 
-            Assert.IsTrue(MyAssert.StringNotEqualsCi("TestStepName 23", "Hejsa", "hejs"));
-            Assert.IsFalse(MyAssert.StringNotEqualsCi("TestStepName 24", "Hejsa", "hejsa"));
+            Assert.IsTrue(StfAssert.StringNotEqualsCi("TestStepName 23", "Hejsa", "hejs"));
+            Assert.IsFalse(StfAssert.StringNotEqualsCi("TestStepName 24", "Hejsa", "hejsa"));
 
-            Assert.IsTrue(MyAssert.StringEmpty("TestStepName 25", string.Empty));
-            Assert.IsFalse(MyAssert.StringEmpty("TestStepName 26", "Hejsa"));
+            Assert.IsTrue(StfAssert.StringEmpty("TestStepName 25", string.Empty));
+            Assert.IsFalse(StfAssert.StringEmpty("TestStepName 26", "Hejsa"));
 
-            Assert.IsTrue(MyAssert.StringNotEmpty("TestStepName 27", "Hejsa"));
-            Assert.IsFalse(MyAssert.StringNotEmpty("TestStepName 28", string.Empty));
+            Assert.IsTrue(StfAssert.StringNotEmpty("TestStepName 27", "Hejsa"));
+            Assert.IsFalse(StfAssert.StringNotEmpty("TestStepName 28", string.Empty));
         }
     }
 }

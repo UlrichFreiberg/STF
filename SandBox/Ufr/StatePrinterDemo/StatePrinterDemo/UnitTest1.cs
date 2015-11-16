@@ -13,9 +13,11 @@ namespace StatePrinterDemo
             var testObj1 = new { Col = 10, Name = "NameOfIt1", Row = 15 };
             var testObj2 = new Test1 { Col = 20, Name = "NameOfIt2", Row = 25 };
             var logger = new LoggerForTestOutputValues
-                             {
-                                 LogFilename = @"c:\temp\stf\temp\LoggerForTestOutputValues.csv"
-                             };
+            {
+                LogFilename = @"c:\temp\stf\temp\LoggerForTestOutputValues.csv",
+                FieldSeperator = ","
+            };
+
 
             logger.LogTestOutputValues(testObj1);
             logger.LogTestOutputValues(testObj2);

@@ -158,7 +158,7 @@ namespace Mir.Stf.Utilities.Extensions
 
             if (CheckTypeHasInterface<IStfLoggable>(typeToRegister))
             {
-                injectionMembers.Add(new InjectionProperty("MyLogger"));
+                injectionMembers.Add(new InjectionProperty("StfLogger"));
             }
 
             return injectionMembers;

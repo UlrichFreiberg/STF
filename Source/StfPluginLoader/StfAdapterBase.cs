@@ -20,7 +20,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets or sets the my logger.
         /// </summary>
-        public IStfLogger MyLogger { get; set; }
+        public IStfLogger StfLogger { get; set; }
 
         /// <summary>
         /// Gets or sets the stf container.
@@ -49,7 +49,7 @@ namespace Mir.Stf.Utilities
         /// </param>
         public void Log(string logMessage)
         {
-            MyLogger.LogDebug(logMessage);
+            StfLogger.LogDebug(logMessage);
         }
 
         /// <summary>

@@ -27,8 +27,8 @@ namespace UnitTest
         [TestInitialize]
         public void TestInitialize()
         {
-            MyAssert.EnableNegativeTesting = true;
-            this.MyLogger.LogInfo("UnitTestStfAsserts TestInitialize");
+            StfAssert.EnableNegativeTesting = true;
+            this.StfLogger.LogInfo("UnitTestStfAsserts TestInitialize");
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertTrue()
         {
-            Assert.IsTrue(this.MyAssert.IsTrue("true", true));
-            Assert.IsFalse(this.MyAssert.IsTrue("false", false));
+            Assert.IsTrue(this.StfAssert.IsTrue("true", true));
+            Assert.IsFalse(this.StfAssert.IsTrue("false", false));
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertFalse()
         {
-            Assert.IsFalse(this.MyAssert.IsFalse("true", true));
-            Assert.IsTrue(this.MyAssert.IsFalse("false", false));
+            Assert.IsFalse(this.StfAssert.IsFalse("true", true));
+            Assert.IsTrue(this.StfAssert.IsFalse("false", false));
         }
 
         /// <summary>
@@ -57,9 +57,9 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertMissingImplementation()
         {
-            Assert.IsFalse(MyAssert.MissingImplementation(string.Empty));
-            Assert.IsFalse(MyAssert.MissingImplementation(null));
-            Assert.IsFalse(MyAssert.MissingImplementation("There's a missing implementation"));
+            Assert.IsFalse(StfAssert.MissingImplementation(string.Empty));
+            Assert.IsFalse(StfAssert.MissingImplementation(null));
+            Assert.IsFalse(StfAssert.MissingImplementation("There's a missing implementation"));
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertThrows()
         {
-            Assert.IsTrue(this.MyAssert.AssertThrows<NotImplementedException>("true", ThrowNotImplementedException));
-            Assert.IsFalse(this.MyAssert.AssertThrows<ArgumentException>("false", ThrowNotImplementedException));
+            Assert.IsTrue(this.StfAssert.AssertThrows<NotImplementedException>("true", ThrowNotImplementedException));
+            Assert.IsFalse(this.StfAssert.AssertThrows<ArgumentException>("false", ThrowNotImplementedException));
         }
 
         /// <summary>
@@ -78,11 +78,11 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertThrowsLambda()
         {
-            Assert.IsTrue(this.MyAssert.AssertThrows<ApplicationException>(
+            Assert.IsTrue(this.StfAssert.AssertThrows<ApplicationException>(
                 "true",
                 () => MethodWithParamCanThrow<ApplicationException>(true)));
             
-            Assert.IsFalse(this.MyAssert.AssertThrows<ApplicationException>(
+            Assert.IsFalse(this.StfAssert.AssertThrows<ApplicationException>(
                 "false",
                 () => MethodWithParamCanThrow<ApplicationException>(false)));
         }
@@ -93,7 +93,7 @@ namespace UnitTest
         [TestCleanup]
         public void TestCleanup()
         {
-            this.MyLogger.LogInfo("UnitTestStfAsserts TestCleanup");
+            this.StfLogger.LogInfo("UnitTestStfAsserts TestCleanup");
         }
 
         /// <summary>

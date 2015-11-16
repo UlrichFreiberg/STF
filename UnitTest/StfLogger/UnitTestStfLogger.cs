@@ -41,41 +41,41 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAllLogType()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogLevel = StfLogLevel.Internal;
 
-            MyLogger.LogError("LogError");
-            MyLogger.LogWarning("LogWarning");
-            MyLogger.LogInfo("LogInfo");
-            MyLogger.LogDebug("LogDebug");
+            StfLogger.LogError("LogError");
+            StfLogger.LogWarning("LogWarning");
+            StfLogger.LogInfo("LogInfo");
+            StfLogger.LogDebug("LogDebug");
 
             // normal logging functions - models and adapters
-            MyLogger.LogTrace("LogTrace");
-            MyLogger.LogInternal("LogInternal");
+            StfLogger.LogTrace("LogTrace");
+            StfLogger.LogInternal("LogInternal");
 
             // Header logging functions - testscripts
-            MyLogger.LogHeader("LogHeader");
-            MyLogger.LogSubHeader("LogSubHeader");
+            StfLogger.LogHeader("LogHeader");
+            StfLogger.LogSubHeader("LogSubHeader");
 
-            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction", new object[] { "arg1", "arg2", "arg3" });
-            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction", 42);
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction", new object[] { "arg1", "arg2", "arg3" });
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction", 42);
 
-            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunctionShort");
-            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunctionShort");
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunctionShort");
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunctionShort");
 
             // used solely by Assert functions
-            MyLogger.LogPass("testStepName LogPass", "LogPass");
-            MyLogger.LogFail("testStepName LogFail", "LogFail");
+            StfLogger.LogPass("testStepName LogPass", "LogPass");
+            StfLogger.LogFail("testStepName LogFail", "LogFail");
 
-            MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
+            StfLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
 
-            MyLogger.LogGetEnter(StfLogLevel.Info, "MyTestProperty");
-            MyLogger.LogGetExit(StfLogLevel.Info, "MyTestProperty", MyLogger);
-            MyLogger.LogSetEnter(StfLogLevel.Info, "MyTestProperty", MyLogger);
-            MyLogger.LogSetExit(StfLogLevel.Info, "MyTestProperty", MyLogger);
+            StfLogger.LogGetEnter(StfLogLevel.Info, "MyTestProperty");
+            StfLogger.LogGetExit(StfLogLevel.Info, "MyTestProperty", StfLogger);
+            StfLogger.LogSetEnter(StfLogLevel.Info, "MyTestProperty", StfLogger);
+            StfLogger.LogSetExit(StfLogLevel.Info, "MyTestProperty", StfLogger);
 
-            MyLogger.LogAutomationIdObject(StfLogLevel.Internal, MyLogger, "Using MyLogger as AID for test");
+            StfLogger.LogAutomationIdObject(StfLogLevel.Internal, StfLogger, "Using StfLogger as AID for test");
 
-            MyLogger.SetRunStatus();
+            StfLogger.SetRunStatus();
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodLotsOfEntries()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogLevel = StfLogLevel.Internal;
 
             for (int i = 0; i < 75; i++)
             {
-                MyLogger.LogInfo(string.Format("LogInfo Nr {0}", i));
+                StfLogger.LogInfo(string.Format("LogInfo Nr {0}", i));
             }
 
-            MyLogger.CloseLogFile();
+            StfLogger.CloseLogFile();
         }
 
         /// <summary>
@@ -100,42 +100,42 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodCallStack()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogLevel = StfLogLevel.Internal;
 
-            MyLogger.LogInfo("NameOfFunction_L0A");
-            MyLogger.LogInfo("NameOfFunction_L0B");
+            StfLogger.LogInfo("NameOfFunction_L0A");
+            StfLogger.LogInfo("NameOfFunction_L0B");
 
-            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L1");
-            MyLogger.LogInfo("NameOfFunction_L1A");
-            MyLogger.LogInfo("NameOfFunction_L1B");
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L1");
+            StfLogger.LogInfo("NameOfFunction_L1A");
+            StfLogger.LogInfo("NameOfFunction_L1B");
 
-            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L2");
-            MyLogger.LogInfo("NameOfFunction_L2A");
-            MyLogger.LogInfo("NameOfFunction_L2B");
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L2");
+            StfLogger.LogInfo("NameOfFunction_L2A");
+            StfLogger.LogInfo("NameOfFunction_L2B");
 
-            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L3");
-            MyLogger.LogInfo("NameOfFunction_L3A");
-            MyLogger.LogInfo("NameOfFunction_L3B");
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L3");
+            StfLogger.LogInfo("NameOfFunction_L3A");
+            StfLogger.LogInfo("NameOfFunction_L3B");
 
-            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L3");
-            MyLogger.LogInfo("NameOfFunction_L2A");
-            MyLogger.LogInfo("NameOfFunction_L2B");
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L3");
+            StfLogger.LogInfo("NameOfFunction_L2A");
+            StfLogger.LogInfo("NameOfFunction_L2B");
 
-            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L2");
-            MyLogger.LogInfo("NameOfFunction_L1A");
-            MyLogger.LogInfo("NameOfFunction_L1B");
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L2");
+            StfLogger.LogInfo("NameOfFunction_L1A");
+            StfLogger.LogInfo("NameOfFunction_L1B");
 
-            MyLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L2");
-            MyLogger.LogInfo("NameOfFunction_L2A");
-            MyLogger.LogInfo("NameOfFunction_L2B");
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction_L2");
+            StfLogger.LogInfo("NameOfFunction_L2A");
+            StfLogger.LogInfo("NameOfFunction_L2B");
 
-            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L2");
-            MyLogger.LogInfo("NameOfFunction_L1A");
-            MyLogger.LogInfo("NameOfFunction_L1B");
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L2");
+            StfLogger.LogInfo("NameOfFunction_L1A");
+            StfLogger.LogInfo("NameOfFunction_L1B");
 
-            MyLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L1");
-            MyLogger.LogInfo("NameOfFunction_L0A");
-            MyLogger.LogInfo("NameOfFunction_L0B");
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction_L1");
+            StfLogger.LogInfo("NameOfFunction_L0A");
+            StfLogger.LogInfo("NameOfFunction_L0B");
         }
 
         /// <summary>
@@ -144,11 +144,11 @@ namespace UnitTest
         [TestMethod]
         public void TestLogScreenshot()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogLevel = StfLogLevel.Internal;
 
-            MyLogger.LogTrace("Just before a screenshot is taken");
-            MyLogger.LogScreenshot(StfLogLevel.Debug, "Grabbed screenshot");
-            MyLogger.LogTrace("right after a screenshot is taken");
+            StfLogger.LogTrace("Just before a screenshot is taken");
+            StfLogger.LogScreenshot(StfLogLevel.Debug, "Grabbed screenshot");
+            StfLogger.LogTrace("right after a screenshot is taken");
         }
 
         /// <summary>
@@ -157,11 +157,11 @@ namespace UnitTest
         [TestMethod, ExpectedException(typeof(NotImplementedException))]
         public void TestLogAllWindows()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogLevel = StfLogLevel.Internal;
 
-            MyLogger.LogTrace("Just before logging all windows");
-            MyLogger.LogAllWindows(StfLogLevel.Info, "Grabbed all windows");
-            MyLogger.LogTrace("right after logging all windows");
+            StfLogger.LogTrace("Just before logging all windows");
+            StfLogger.LogAllWindows(StfLogLevel.Info, "Grabbed all windows");
+            StfLogger.LogTrace("right after logging all windows");
         }
 
         /// <summary>
@@ -170,11 +170,11 @@ namespace UnitTest
         [TestMethod]
         public void TestLogFileWriter()
         {
-            MyLogger.FileName = @"c:\temp\unittestlogger.html";
-            MyLogger.FileName = @"c:\temp\unittestlogger2.html";
-            MyLogger.FileName = @"c:\temp\unittestlogger3.html";
+            StfLogger.FileName = @"c:\temp\unittestlogger.html";
+            StfLogger.FileName = @"c:\temp\unittestlogger2.html";
+            StfLogger.FileName = @"c:\temp\unittestlogger3.html";
 
-            MyLogger.CloseLogFile();
+            StfLogger.CloseLogFile();
         }
 
         /// <summary>
@@ -183,18 +183,18 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAsserts()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
-            MyAssert.EnableNegativeTesting = true;
+            StfLogger.LogLevel = StfLogLevel.Internal;
+            StfAssert.EnableNegativeTesting = true;
 
-            MyAssert.IsTrue("True Value for IsTrue", true);
-            MyAssert.IsTrue("False Value for IsTrue", false);
-            MyAssert.IsTrue("2 > 3 Value for IsTrue", 2 > 3);
-            MyAssert.IsTrue("3 > 2 Value for IsTrue", 3 > 2);
+            StfAssert.IsTrue("True Value for IsTrue", true);
+            StfAssert.IsTrue("False Value for IsTrue", false);
+            StfAssert.IsTrue("2 > 3 Value for IsTrue", 2 > 3);
+            StfAssert.IsTrue("3 > 2 Value for IsTrue", 3 > 2);
 
-            MyAssert.IsFalse("True Value for IsFalse", true);
-            MyAssert.IsFalse("False Value for IsFalse", false);
-            MyAssert.IsFalse("2 > 3 Value for IsFalse", 2 > 3);
-            MyAssert.IsFalse("3 > 2 Value for IsFalse", 3 > 2);
+            StfAssert.IsFalse("True Value for IsFalse", true);
+            StfAssert.IsFalse("False Value for IsFalse", false);
+            StfAssert.IsFalse("2 > 3 Value for IsFalse", 2 > 3);
+            StfAssert.IsFalse("3 > 2 Value for IsFalse", 3 > 2);
         }
 
         /// <summary>
@@ -203,13 +203,13 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodKeyValues()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogLevel = StfLogLevel.Internal;
 
-            MyLogger.LogKeyValue("Bent", "42", "First value for Bent");
-            MyLogger.LogKeyValue("Bent", "43", "Second value for Bent - this is the only one that should be shown in the list");
+            StfLogger.LogKeyValue("Bent", "42", "First value for Bent");
+            StfLogger.LogKeyValue("Bent", "43", "Second value for Bent - this is the only one that should be shown in the list");
 
-            MyLogger.LogKeyValue("File Url", @"File://c:/Temp/Stf", @"An explorer should pop up show c:\temp\Stf");
-            MyLogger.LogKeyValue("Web Url", "Http://www.testautomation.dk", "A browser should pop up show testautomation.dk");
+            StfLogger.LogKeyValue("File Url", @"File://c:/Temp/Stf", @"An explorer should pop up show c:\temp\Stf");
+            StfLogger.LogKeyValue("Web Url", "Http://www.testautomation.dk", "A browser should pop up show testautomation.dk");
         }
 
         /// <summary>
@@ -218,11 +218,11 @@ namespace UnitTest
         [TestMethod]
         public void TestScreenshotOnLogFail()
         {
-            MyLogger.LogLevel = StfLogLevel.Internal;
-            MyLogger.LogFail("Screenshot on log fail on by default", string.Empty);
+            StfLogger.LogLevel = StfLogLevel.Internal;
+            StfLogger.LogFail("Screenshot on log fail on by default", string.Empty);
 
-            MyLogger.Configuration.ScreenshotOnLogFail = false;
-            MyLogger.LogFail("Screenshot on log fail turned off. No screenshot logged.", string.Empty);
+            StfLogger.Configuration.ScreenshotOnLogFail = false;
+            StfLogger.LogFail("Screenshot on log fail turned off. No screenshot logged.", string.Empty);
         }
 
         /// <summary>
@@ -231,10 +231,10 @@ namespace UnitTest
         [TestMethod]
         public void TestLogTextWithNewlines()
         {
-            MyLogger.LogLevel = StfLogLevel.Info;
-            MyLogger.LogInfo("Single line 1");
-            MyLogger.LogInfo(string.Format("Entering Multi line{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
-            MyLogger.LogInfo("Single line 2");
+            StfLogger.LogLevel = StfLogLevel.Info;
+            StfLogger.LogInfo("Single line 1");
+            StfLogger.LogInfo(string.Format("Entering Multi line{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            StfLogger.LogInfo("Single line 2");
         }
 
         /// <summary>
@@ -243,11 +243,11 @@ namespace UnitTest
         [TestMethod]
         public void TestLogTextWithNewlinesAndRegex()
         {
-            MyLogger.LogLevel = StfLogLevel.Info;
-            MyLogger.LogInfo("Single line 1");
-            MyLogger.LogInfo(string.Format("Entering [Multi line1{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
-            MyLogger.LogInfo("Single line 2");
-            MyLogger.LogInfo(string.Format("Entering [Multi line2{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            StfLogger.LogLevel = StfLogLevel.Info;
+            StfLogger.LogInfo("Single line 1");
+            StfLogger.LogInfo(string.Format("Entering [Multi line1{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            StfLogger.LogInfo("Single line 2");
+            StfLogger.LogInfo(string.Format("Entering [Multi line2{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
         }
 
         /// <summary>
@@ -256,17 +256,17 @@ namespace UnitTest
         [TestMethod]
         public void TestLogTextWithXmlContent()
         {
-            MyLogger.LogLevel = StfLogLevel.Info;
-            MyLogger.LogInfo("Using Escape");
-            MyLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}<xmltag>{0}<xmltags>{0}", Environment.NewLine)));
-            MyLogger.LogInfo("Using PrettyXml");
+            StfLogger.LogLevel = StfLogLevel.Info;
+            StfLogger.LogInfo("Using Escape");
+            StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}<xmltag>{0}<xmltags>{0}", Environment.NewLine)));
+            StfLogger.LogInfo("Using PrettyXml");
 
             // TODO: Missing playing a bit with the XmlUtils
             var prettyXml = "<xmltags><xmltag>return newline                  </xmltag></xmltags>";
-            MyLogger.LogInfo(prettyXml);
+            StfLogger.LogInfo(prettyXml);
 
-            MyLogger.LogInfo("Using PrettyXml and Escape");
-            MyLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}</xmltag>{0}</xmltags>{0}", Environment.NewLine)));
+            StfLogger.LogInfo("Using PrettyXml and Escape");
+            StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}</xmltag>{0}</xmltags>{0}", Environment.NewLine)));
         }
 
    
@@ -276,15 +276,15 @@ namespace UnitTest
         [TestMethod]
         public void TestLogTextWithNewManyLines()
         {
-            MyLogger.LogLevel = StfLogLevel.Info;
-            MyLogger.LogInfo("Single line 1");
-            MyLogger.LogInfo(string.Format("Entering [Multi line1{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
-            MyLogger.LogInfo("Single line 2");
-            MyLogger.LogInfo(string.Format("Entering [Multi line2{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
-            MyLogger.LogInfo("Single line 3");
-            MyLogger.LogInfo(string.Format("Entering [Multi line3{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
-            MyLogger.LogInfo("Single line 4");
-            MyLogger.LogInfo(string.Format("Entering [Multi line4{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            StfLogger.LogLevel = StfLogLevel.Info;
+            StfLogger.LogInfo("Single line 1");
+            StfLogger.LogInfo(string.Format("Entering [Multi line1{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            StfLogger.LogInfo("Single line 2");
+            StfLogger.LogInfo(string.Format("Entering [Multi line2{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            StfLogger.LogInfo("Single line 3");
+            StfLogger.LogInfo(string.Format("Entering [Multi line3{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
+            StfLogger.LogInfo("Single line 4");
+            StfLogger.LogInfo(string.Format("Entering [Multi line4{0}Second row{0}Third row{0}{0}Blank line above{0}Last line", Environment.NewLine));
         }
 
         /// <summary>
@@ -297,8 +297,8 @@ namespace UnitTest
             var summaryFilename = Path.Combine(StfTextUtils.GetVariable("Stf_LogDir"), "TestMethodSummaryLogger_SummeryLog.html");
             var oneSummeryLogger = new StfSummeryLogger();
 
-            MyAssert.IsTrue("MyLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
-            MyAssert.FileExists("MyLogger.CreateSummaryLog", summaryFilename);
+            StfAssert.IsTrue("StfLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
+            StfAssert.FileExists("StfLogger.CreateSummaryLog", summaryFilename);
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace UnitTest
         [TestMethod, ExpectedException(typeof(AssertFailedException))]
         public void TestMethodExceptionThrownInTestIsCaughtInCleanup()
         {
-            MyLogger.LogInfo("This is a message before assert failed exception error");
+            StfLogger.LogInfo("This is a message before assert failed exception error");
             throw new AssertFailedException();
         }
     }
