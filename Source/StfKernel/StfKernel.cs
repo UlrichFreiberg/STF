@@ -16,7 +16,7 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf
 {
-    using Mir.Stf.Utilities.Configuration;
+    using Utilities.Configuration;
 
     /// <summary>
     /// The stf kernel.
@@ -41,10 +41,10 @@ namespace Mir.Stf
             // lets get a logger and a configuration
             var kernelLoggerFilename = Path.Combine(StfLogDir, @"KernelLogger.html");
             var kernelLoggerConfiguration = new StfLoggerConfiguration { LogFileName = kernelLoggerFilename };
-            KernelLogger = new StfLogger { Configuration = kernelLoggerConfiguration };
+            KernelLogger = new StfLogger(kernelLoggerConfiguration);
 
             // get the configuration together
-            AssemblyStfConfiguration();
+            AssembleStfConfiguration();
 
             // Any plugins for us?
             PluginLoader = new StfPluginLoader(KernelLogger, StfConfiguration);
@@ -55,13 +55,30 @@ namespace Mir.Stf
             StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
         }
 
-        private void AssemblyStfConfiguration()
+        /// <summary>
+        /// The configuration file type.
+        /// </summary>
+        private enum ConfigurationFileType
         {
-            OverlayStfConfigurationOneType(StfRoot, ConfigurationFileType.Machine);
+            /// <summary>
+            /// The machine.
+            /// </summary>
+            Machine,
 
-            StfConfiguration = new StfConfiguration(Path.Combine(StfConfigDir, @"StfConfiguration.xml"));
+            /// <summary>
+            /// The user.
+            /// </summary>
+            User,
 
-            OverlayStfConfiguration(StfConfigDir);
+            /// <summary>
+            /// The testcase.
+            /// </summary>
+            Testcase,
+
+            /// <summary>
+            /// The testsuite.
+            /// </summary>
+            Testsuite
         }
 
         /// <summary>
@@ -173,6 +190,26 @@ namespace Mir.Stf
         }
 
         /// <summary>
+        /// The assembly stf configuration.
+        /// </summary>
+        private void AssembleStfConfiguration()
+        {
+            var stfConfigurationFile = Path.Combine(StfConfigDir, @"StfConfiguration.xml");
+
+            if (File.Exists(stfConfigurationFile))
+            {
+                StfConfiguration = new StfConfiguration(stfConfigurationFile);
+            }
+            else
+            {
+                StfConfiguration = new StfConfiguration();
+            }
+
+            OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
+            OverlayStfConfiguration(Environment.CurrentDirectory);
+        }
+
+        /// <summary>
         /// Check For Needed Kernel Directory - like configDir
         /// </summary>
         /// <param name="dirVariableName">
@@ -222,38 +259,44 @@ namespace Mir.Stf
             StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
         }
 
-        private enum ConfigurationFileType
+        /// <summary>
+        /// The overlay stf configuration.
+        /// </summary>
+        /// <param name="directoryName">
+        /// The directory name.
+        /// </param>
+        private void OverlayStfConfiguration(string directoryName)
         {
-            Machine,
-            User,
-            Testcase,
-            Testsuite
-        }
-
-        private bool OverlayStfConfiguration(string directoryName)
-        {
-            var retVal = true;
-
             if (!Directory.Exists(directoryName))
             {
-                return true;
+                return;
             }
 
-            // retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.Machine);
-            retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.Testsuite);
-            retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.Testcase);
-            retVal = retVal && OverlayStfConfigurationOneType(directoryName, ConfigurationFileType.User);
-
-            return retVal;
+            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Machine);
+            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testsuite);
+            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testcase);
+            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.User);
         }
 
-        private bool OverlayStfConfigurationOneType(string directoryName, ConfigurationFileType configurationFileType)
+        /// <summary>
+        /// The overlay stf configuration for one setting type.
+        /// </summary>
+        /// <param name="directoryName">
+        /// The directory name.
+        /// </param>
+        /// <param name="configurationFileType">
+        /// The configuration file type.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Exception if configurationfiletype unrecognized
+        /// </exception>
+        private void OverlayStfConfigurationForOneSettingType(string directoryName, ConfigurationFileType configurationFileType)
         {
             string configFilename;
 
             if (!Directory.Exists(directoryName))
             {
-                return true;
+                return;
             }
 
             switch (configurationFileType)
@@ -277,11 +320,12 @@ namespace Mir.Stf
             var fileLocation = Path.Combine(directoryName, configFilename);
             if (!File.Exists(fileLocation))
             {
-                return true;
+                return;
             }
 
+            KernelLogger.LogInternal(string.Format("Applying configuration found at [{0}]", fileLocation));
+
             StfConfiguration.OverLay(fileLocation);
-            return true;
         }
     }
 }
