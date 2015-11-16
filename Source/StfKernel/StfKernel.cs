@@ -40,7 +40,12 @@ namespace Mir.Stf
 
             // lets get a logger and a configuration
             var kernelLoggerFilename = Path.Combine(StfLogDir, @"KernelLogger.html");
-            var kernelLoggerConfiguration = new StfLoggerConfiguration { LogFileName = kernelLoggerFilename };
+            var kernelLoggerConfiguration = new StfLoggerConfiguration
+            {
+                LogFileName = kernelLoggerFilename,
+                LogLevel = StfLogLevel.Internal
+            };
+
             KernelLogger = new StfLogger(kernelLoggerConfiguration);
 
             // get the configuration together
@@ -320,6 +325,7 @@ namespace Mir.Stf
             var fileLocation = Path.Combine(directoryName, configFilename);
             if (!File.Exists(fileLocation))
             {
+                KernelLogger.LogInternal(string.Format("Configuration file [{0}] does not exist, so not overlaying", fileLocation));
                 return;
             }
 
