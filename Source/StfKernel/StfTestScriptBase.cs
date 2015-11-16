@@ -58,6 +58,10 @@ namespace Mir.Stf
         public void BaseTestInitialize()
         {
             MyLogger = Get<IStfLogger>();
+
+            // We're getting the instance of the logger and logging a link to the kernel logger
+            var kernelLogFilePath = MyLogger.FileName;
+            
             MyLogger.Configuration.LogTitle = TestContext.TestName;
 
             var logFilePostfix = string.Empty;
@@ -80,6 +84,7 @@ namespace Mir.Stf
             var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
 
             MyLogger.FileName = logFilename;
+
             MyAssert = new StfAssert(MyLogger);
 
             if (TestDataDriven())
@@ -95,7 +100,7 @@ namespace Mir.Stf
             SetUpArchiver(TestContext.TestName);
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
-            MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
+            LogKeyValues(kernelLogFilePath, iterationStatus);
         }
 
         /// <summary>
@@ -132,13 +137,32 @@ namespace Mir.Stf
                     myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
 
                     MyArchiver.AddFile(summeryLogfilename);
-                    ArchiveFilesIfNecessary();
+                    MyArchiver.PerformArchive();
                 }
 
                 return;
             }
 
-            ArchiveFilesIfNecessary();
+            MyArchiver.PerformArchive();
+        }
+
+        /// <summary>
+        /// The log key values.
+        /// </summary>
+        /// <param name="kernelLogfilePath">
+        /// The kernel logfile path.
+        /// </param>
+        /// <param name="iterationStatus">
+        /// The iteration status.
+        /// </param>
+        private void LogKeyValues(string kernelLogfilePath, string iterationStatus)
+        {
+            MyLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
+            MyLogger.LogKeyValue("Kernel Logger", kernelLogfilePath, "Kernel Logger");
+            MyLogger.LogKeyValue("Testname", TestContext.TestName, "Name of test");
+
+            var configuration = Get<StfConfiguration>();
+            MyLogger.LogKeyValue("Environment", configuration.Environment, "Configuration.EnvironmentName");
         }
 
         /// <summary>
@@ -216,14 +240,6 @@ namespace Mir.Stf
             archiverConfiguration.ArchiveDestination = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveDestination);
             archiverConfiguration.TempDirectory = StfTextUtils.ExpandVariables(archiverConfiguration.TempDirectory);
             MyArchiver = new StfArchiver(archiverConfiguration, testName);
-        }
-
-        /// <summary>
-        /// The archive files if necessary.
-        /// </summary>
-        private void ArchiveFilesIfNecessary()
-        {
-            MyArchiver.PerformArchive();
         }
     }
 }
