@@ -203,40 +203,40 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool FilesDoDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
-            string msg;
+            var msg = string.Format("FilesDoDiffer: [{0}] differs from [{1}]", filenameAndPathFirst, filenameAndPathSecond);
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
             var fileInfoSecond = new FileInfo(filenameAndPathSecond);
 
             if (!fileInfoFirst.Exists)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] Does Not exist", filenameAndPathFirst);
-                this.AssertFail(testStep, msg);
+                msg = string.Format("FilesDoDiffer: [{0}] does not exist", filenameAndPathFirst);
+                AssertFail(testStep, msg);
                 return true;
             }
 
             if (!fileInfoSecond.Exists)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] Does Not exist", filenameAndPathSecond);
-                this.AssertFail(testStep, msg);
+                msg = string.Format("FilesDoDiffer: [{0}] does not exist", filenameAndPathSecond);
+                AssertFail(testStep, msg);
                 return true;
             }
 
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] does Not have the same length", filenameAndPathFirst, filenameAndPathSecond);
-                this.AssertFail(testStep, msg);
+                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] does not have the same length", filenameAndPathFirst, filenameAndPathSecond);
+                AssertFail(testStep, msg);
                 return true;
             }
 
             var diffPosition = FileCompare(filenameAndPathFirst, filenameAndPathSecond);
             if (diffPosition == 0)
             {
-                msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] doesn't differ byte-per-byte", filenameAndPathFirst, filenameAndPathSecond);
-                this.AssertFail(testStep, msg);
+                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] doesn't differ byte-per-byte", filenameAndPathFirst, filenameAndPathSecond);
+                AssertFail(testStep, msg);
                 return false;
             }
 
-            return true;
+            return AssertPass(testStep, msg);
         }
 
         /// <summary>
@@ -256,20 +256,20 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool FilesDoNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
-            string msg;
+            var msg = string.Format("FilesDoNotDiffer: [{0}] does not differ from [{1}]", filenameAndPathFirst, filenameAndPathSecond);
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
             var fileInfoSecond = new FileInfo(filenameAndPathSecond);
 
             if (!fileInfoFirst.Exists)
             {
-                msg = string.Format("FilesDoNotDiffer: [{0}] Does Not exist", filenameAndPathFirst);
+                msg = string.Format("FilesDoNotDiffer: [{0}] does not exist", filenameAndPathFirst);
                 this.AssertFail(testStep, msg);
                 return false;
             }
 
             if (!fileInfoSecond.Exists)
             {
-                msg = string.Format("FilesDoNotDiffer: [{0}] Does Not exist", filenameAndPathSecond);
+                msg = string.Format("FilesDoNotDiffer: [{0}] does not exist", filenameAndPathSecond);
                 this.AssertFail(testStep, msg);
                 return false;
             }
@@ -284,12 +284,12 @@ namespace Mir.Stf.Utilities
             var diffPosition = FileCompare(filenameAndPathFirst, filenameAndPathSecond);
             if (diffPosition > 0)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] differ at [{2}]", filenameAndPathFirst, filenameAndPathSecond, diffPosition);
+                msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] differ at [{2}]", filenameAndPathFirst, filenameAndPathSecond, diffPosition);
                 this.AssertFail(testStep, msg);
                 return false;
             }
 
-            return true;
+            return AssertPass(testStep, msg);
         }
 
         /// <summary>

@@ -56,13 +56,13 @@ namespace Mir.Stf.Utilities
         {
             get
             {
-                return this.enableNegativeTesting;
+                return enableNegativeTesting;
             }
 
             set
             {
-                this.AssertLogger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value));
-                this.enableNegativeTesting = value;
+                AssertLogger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value));
+                enableNegativeTesting = value;
             }
         }
 
@@ -91,12 +91,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = "IsTrue: value True";
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = "IsTrue: value False";
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -122,12 +122,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = "IsFalse: value False";
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = "IsFalse: value True";
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -208,7 +208,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool AssertPass(string testStep, string message)
         {
-            this.AssertLogger.LogPass(testStep, message);
+            AssertLogger.LogPass(testStep, message);
             return true;
         }
 
@@ -226,7 +226,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool AssertFail(string testStep, string message)
         {
-            this.AssertLogger.LogFail(testStep, message);
+            AssertLogger.LogFail(testStep, message);
 
             if (!enableNegativeTesting)
             {
