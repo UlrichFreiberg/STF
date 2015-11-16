@@ -270,6 +270,8 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool PerformOverlay(string settingsFilePath)
         {
+            PluginLogger.LogInternal(string.Format("Overlaying plugin settings found at [{0}]", settingsFilePath));
+
             try
             {
                 StfConfiguration.OverLay(settingsFilePath);
