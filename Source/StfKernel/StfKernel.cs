@@ -325,7 +325,7 @@ namespace Mir.Stf
             var fileLocation = Path.Combine(directoryName, configFilename);
             if (!File.Exists(fileLocation))
             {
-                KernelLogger.LogInternal(string.Format("Configuration file [{0}] does not exist, so not overlaying", fileLocation));
+                KernelLogger.LogInternal(string.Format("Skipping Configuration file [{0}]: It does not exist, so not overlaying", fileLocation));
                 return;
             }
 

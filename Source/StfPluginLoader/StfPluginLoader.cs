@@ -247,7 +247,7 @@ namespace Mir.Stf.Utilities
                 {
                     if (!File.Exists(settingsFile))
                     {
-                        PluginLogger.LogInternal(string.Format("Plugin settings file [{0}] does not exist", settingsFile));
+                        PluginLogger.LogInternal(string.Format("Skipping plugin settings file [{0}]: It does not exist", settingsFile));
                         continue;
                     }
 
@@ -270,7 +270,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool PerformOverlay(string settingsFilePath)
         {
-            PluginLogger.LogInternal(string.Format("Overlaying plugin settings found at [{0}]", settingsFilePath));
+            PluginLogger.LogInternal(string.Format("Applying plugin settings: [{0}]", settingsFilePath));
 
             try
             {
