@@ -58,6 +58,8 @@ namespace Mir.Stf
 
             // now all configurations are loaded, we can set the Environment.
             StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
+
+            LoadConfigurationForStfTypes();
         }
 
         /// <summary>
@@ -212,6 +214,15 @@ namespace Mir.Stf
 
             OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
             OverlayStfConfiguration(Environment.CurrentDirectory);
+        }
+
+        /// <summary>
+        /// The set configuration for stf types. Loads configuration for 
+        /// the stf types that were created by the kernel from the resolved configuration
+        /// </summary>
+        private void LoadConfigurationForStfTypes()
+        {
+            StfConfiguration.LoadUserConfiguration(KernelLogger.Configuration);
         }
 
         /// <summary>

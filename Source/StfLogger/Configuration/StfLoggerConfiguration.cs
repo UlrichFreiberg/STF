@@ -47,7 +47,7 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the log file name.
         /// </summary>
-        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.LogFileName", DefaultValue = @"c:\temp\Ovid_defaultlog.html")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.LogFileName", DefaultValue = @"C:\Temp\Stf\KernelLogger.html")]
         public string LogFileName { get; set; }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the log level.
         /// </summary>
-        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.LogLevel", DefaultValue = "Info")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.LogLevel", DefaultValue = "Internal")]
         public StfLogLevel LogLevel { get; set; }
 
         /// <summary>

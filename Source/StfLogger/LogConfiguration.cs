@@ -10,13 +10,16 @@
 
 namespace Mir.Stf.Utilities
 {
-    using Mir.Stf.Utilities.Configuration;
+    using Configuration;
 
     /// <summary>
     /// The log configuration.
     /// </summary>
     public partial class StfLogger
     {
+        /// <summary>
+        /// Gets or sets the configuration.
+        /// </summary>
         public IStfLoggerConfiguration Configuration { get; set; }
     }
 }

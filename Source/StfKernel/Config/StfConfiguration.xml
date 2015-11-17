@@ -15,12 +15,12 @@
       <key name="OverwriteLogFile" value="true" />
       <key name="LogToFile" value="true" />
       <key name="LogTitle" value="LogTitle" />
-      <key name="LogFileName" value="c:\temp\Ovid_defaultlog.html" />
-      <key name="AlertLongInterval" value="true" />
-      <key name="LogLevel" value="debug" />
-      <key name="PathToLogoImageFile" value="" />
+      <key name="LogFileName" value="c:\temp\stf\KernelLogger.html" />
+      <key name="AlertLongInterval" value="30000" />
+      <key name="LogLevel" value="internal" />
+      <key name="PathToLogoImageFile" value="Resources\42.jpg" />
       <key name="ScreenshotOnLogFail" value="true" />
-      <key name="MapNewlinesToBr" value="false" />
+      <key name="MapNewlinesToBr" value="true" />
       <key name="KeepAliveInterval" value="5" />
     </section>
   </section>
