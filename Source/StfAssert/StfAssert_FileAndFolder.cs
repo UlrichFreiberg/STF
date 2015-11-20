@@ -156,6 +156,41 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// Asserts that a folder (directory) exists
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="foldernameAndPath">
+        /// Path to the folder
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool DirectoryExists(string testStep, string foldernameAndPath)
+        {
+            return FolderExists(testStep, foldernameAndPath);
+        }
+
+        /// <summary>
+        /// Asserts that a folder (directory) does NOT exists
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="foldernameAndPath">
+        /// Path to the folder
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool DirectoryNotExists(string testStep, string foldernameAndPath)
+        {
+            return FolderNotExists(testStep, foldernameAndPath);
+        }
+
+
+        /// <summary>
         /// Asserts that a file doesn't exists
         /// </summary>
         /// <param name="testStep">
