@@ -108,7 +108,16 @@ namespace Mir.Stf.Utilities.Utils
                     return false;
                 }
 
-                File.Delete(this.LogFileName);
+                try
+                {
+                    File.Delete(this.LogFileName);
+                }
+                catch (IOException)
+                {
+                    Console.WriteLine(@"Unable to delete [{0}]. Looks like it is still in use", LogFileName);
+                    throw;
+                }
+                
                 if (File.Exists(this.LogFileName))
                 {
                     Console.WriteLine(@"File [{0}] exists and couldn't be deleted", LogFileName);

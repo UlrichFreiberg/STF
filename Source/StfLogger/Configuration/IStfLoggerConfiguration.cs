@@ -18,6 +18,10 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets a value indicating whether overwrite log file.
         /// </summary>
+        /// <remarks>
+        /// To set this value from xml configuration, insert a value with the
+        /// following path: Configuration.StfKernel.StfLogger.OverwriteLogFile
+        /// </remarks>
         bool OverwriteLogFile { get; set; }
 
         /// <summary>

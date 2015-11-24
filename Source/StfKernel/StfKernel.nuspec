@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Logging on all loglevels when using the Kernel Logger</releaseNotes>
+    <releaseNotes>Kernel now loading logger config values from resolved configuration</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
