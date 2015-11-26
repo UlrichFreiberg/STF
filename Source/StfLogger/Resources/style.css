@@ -40,8 +40,8 @@ ul#logfileinfo {
 div#header {
     padding: 15px;
     font-family: "Lucida Sans Unicode","Lucida Grande";
-    color: rgb(152, 45, 58);
-    background-color: #EFEBEF;
+    color: #HeaderForegroundColor#;
+    background-color: #HeaderBackgroundColor#;
     width: 100%;
     position: fixed;
     top: 0;

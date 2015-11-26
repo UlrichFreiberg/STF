@@ -68,5 +68,25 @@ namespace Mir.Stf.Utilities.Configuration
         /// Gets or sets the keep alive interval.
         /// </summary>
         int KeepAliveInterval { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body background color.
+        /// </summary>
+        string BodyBackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body foreground color.
+        /// </summary>
+        string BodyForegroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header background color.
+        /// </summary>
+        string HeaderBackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header foreground color.
+        /// </summary>
+        string HeaderForegroundColor { get; set; }
     }
 }

@@ -360,6 +360,10 @@ namespace Mir.Stf.Utilities
             var retVal = styleSheet.ToString();
             retVal = retVal.Replace("#IMAGELOGO#", GetBase64ImageForLogo());
 
+            // TODO: Use a regular expression to find this to avoid errors in CSS
+            retVal = retVal.Replace("#HeaderForegroundColor#", Configuration.HeaderForegroundColor);
+            retVal = retVal.Replace("#HeaderBackgroundColor#", Configuration.HeaderBackgroundColor);
+
             return retVal;
         }
 

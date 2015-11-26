@@ -87,6 +87,30 @@ namespace Mir.Stf.Utilities.Configuration
         public int KeepAliveInterval { get; set; }
 
         /// <summary>
+        /// Gets or sets the body background color.
+        /// </summary>
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.BodyBackgroundColor", DefaultValue = "white")]
+        public string BodyBackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body foreground color.
+        /// </summary>
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.BodyForegroundColor", DefaultValue = "black")]
+        public string BodyForegroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header background color.
+        /// </summary>
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.HeaderBackgroundColor", DefaultValue = "#EFEBEF")]
+        public string HeaderBackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header foreground color.
+        /// </summary>
+        [StfConfigurationAttribute("Configuration.StfKernel.StfLogger.HeaderForegroundColor", DefaultValue = "rgb(152, 45, 58)")]
+        public string HeaderForegroundColor { get; set; }
+
+        /// <summary>
         /// The initialize with default values.
         /// </summary>
         private void InitializeWithDefaultValues()
