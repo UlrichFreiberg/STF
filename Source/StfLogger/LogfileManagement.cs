@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text;
 using Mir.Stf.Utilities.Interfaces;
 using Mir.Stf.Utilities.Properties;
 using Mir.Stf.Utilities.Utils;
@@ -173,8 +174,18 @@ namespace Mir.Stf.Utilities
                         break;
                     case StfLogLevel.Internal:
                         break;
+                    case StfLogLevel.Header:
+                        break;
+                    case StfLogLevel.SubHeader:
+                        break;
+                    case StfLogLevel.Pass:
+                        break;
+                    case StfLogLevel.Fail:
+                        break;
+                    case StfLogLevel.KeyValue:
+                        break;
                     default:
-                        Console.WriteLine(@"Internal Error: Unknown loglevel meet");
+                        Console.WriteLine(@"Internal Error: Unknown loglevel met");
                         break;
                 }
             }

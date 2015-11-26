@@ -119,6 +119,8 @@ namespace Mir.Stf
             StfLogger.LogInfo(StfArchiver.Status());
             StfLogger.CloseLogFile();
 
+            TestContext.AddResultFile(StfLogger.FileName);
+
             StfArchiver.AddFile(StfLogger.FileName);
 
             if (TestDataDriven())
@@ -135,6 +137,8 @@ namespace Mir.Stf
                     var summeryLogfileLogfilePattern = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", "_*");
 
                     myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
+
+                    TestContext.AddResultFile(summeryLogfilename);
 
                     StfArchiver.AddFile(summeryLogfilename);
                     StfArchiver.PerformArchive();
