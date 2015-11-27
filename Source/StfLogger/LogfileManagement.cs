@@ -600,8 +600,40 @@ namespace Mir.Stf.Utilities
                 return;
             }
 
-            var length = string.Format("{0:%h} hour(s), {0:%m} minute(s), {0:%s}.{0:%f} second(s)", duration);
+            var length = GetDurationMessage(duration);
             LogKeyValue("Test duration", length, "Test duration");
+        }
+
+        /// <summary>
+        /// The get duration message.
+        /// </summary>
+        /// <param name="duration">
+        /// The duration.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetDurationMessage(TimeSpan duration)
+        {
+            var stringBuilder = new StringBuilder();
+
+            var hourS = duration.Hours > 1 ? "s" : string.Empty;
+            var minuteS = duration.Minutes > 1 ? "s" : string.Empty;
+            var secondS = duration.Seconds > 1 ? "s" : string.Empty;
+
+            if (duration.Hours > 0)
+            {
+                stringBuilder.Append(string.Format("{0:%h} hour{1}, ", duration, hourS));
+            }
+
+            if (duration.Minutes > 0)
+            {
+                stringBuilder.Append(string.Format("{0:%m} minute{1}, ", duration, minuteS));
+            }
+
+            stringBuilder.Append(string.Format("{0:%s}.{0:%f} second{1}", duration, secondS));
+
+            return stringBuilder.ToString();
         }
     }
 }

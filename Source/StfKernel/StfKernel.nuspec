@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Kernel now loading logger config values from resolved configuration</releaseNotes>
+    <releaseNotes>Set logger header foreground and background colors from configuration</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
