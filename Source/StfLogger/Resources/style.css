@@ -30,6 +30,7 @@ ul#logfileinfo {
     border-left: 5px solid #EFEBEF;
     border-right: 5px solid #EFEBEF;
     background-color: white;
+    color: black;
     font-size: 0.75em;
     list-style-type: none;
     position: fixed;
