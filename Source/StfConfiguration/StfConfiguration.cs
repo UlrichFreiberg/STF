@@ -397,7 +397,7 @@ namespace Mir.Stf.Utilities
             section.DefaultSection = string.Empty;
             while (reader.MoveToNextAttribute())
             {
-                switch (reader.Name)
+                switch (reader.Name.ToLower())
                 {
                     case "name":
                         section.SectionName = reader.Value;
@@ -423,7 +423,7 @@ namespace Mir.Stf.Utilities
 
             while (reader.MoveToNextAttribute())
             {
-                switch (reader.Name)
+                switch (reader.Name.ToLower())
                 {
                     case "name":
                         newKey.KeyName = reader.Value;

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
+
+    <section name="Users" default="%DOMAINUSER%" finally="UserNotThere">
+        <section name="Ulrich">
+            <key name="Username" value="User_Ulrich" />
+            <key name="Password" value="U777" />
+        </section>
+        <section name="Kasper">
+            <key name="Username" value="User_Kasper" />
+            <key name="Password" value="K999" />
+        </section>
+    </section>
+    
+</configuration>

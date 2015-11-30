@@ -42,6 +42,14 @@ namespace Mir.Stf.Utilities
                     return section.Keys[keyName].KeyValue;
                 }
 
+                if (!string.IsNullOrEmpty(section.DefaultSection))
+                {
+                    var tryDefaultKeyName = string.Format("{0}.{1}", section.DefaultSection, keyName);
+                    var retVal = GetKey(section, tryDefaultKeyName);
+
+                    return retVal;
+                }
+
                 var errMsg = string.Format("Section [{0}] have no matching key [{1}]", section.SectionName, keyName);
                 throw new ArgumentOutOfRangeException(keyName, errMsg);
             }
@@ -51,12 +59,21 @@ namespace Mir.Stf.Utilities
             if (string.CompareOrdinal(section.SectionName, sectionName) == 0)
             {
                 // we found the section that should hold the key
-                return this.GetKey(section, this.GetKeyName(keyName));
+                return GetKey(section, GetKeyName(keyName));
             }
 
             if (section.Sections.ContainsKey(sectionName))
             {
-                return this.GetKey(section.Sections[sectionName], this.GetKeyName(keyName));
+                return GetKey(section.Sections[sectionName], GetKeyName(keyName));
+            }
+
+            if (!string.IsNullOrEmpty(section.DefaultSection))
+            {
+                if (section.Sections.ContainsKey(section.DefaultSection))
+                {
+                    var retVal = GetKey(section.Sections[section.DefaultSection], keyName);
+                    return retVal;
+                }
             }
 
             throw new ArgumentOutOfRangeException(keyName, "Section not found");
