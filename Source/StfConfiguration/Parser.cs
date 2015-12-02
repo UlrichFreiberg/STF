@@ -19,6 +19,11 @@ namespace Mir.Stf.Utilities
     public class Parser
     {
         /// <summary>
+        /// Delegate used to expand defaultSection and values. Default a Environment.ExpandVariables is used, but it can overriden for you needs.
+        /// </summary>
+        public StfConfiguration.EvaluateKeyValueDelegate EvaluateKeyValue { get; set; }
+
+        /// <summary>
         /// Gets the value of a key within a section tree.
         /// </summary>
         /// <param name="section">
@@ -44,7 +49,8 @@ namespace Mir.Stf.Utilities
 
                 if (!string.IsNullOrEmpty(section.DefaultSection))
                 {
-                    var tryDefaultKeyName = string.Format("{0}.{1}", section.DefaultSection, keyName);
+                    var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
+                    var tryDefaultKeyName = string.Format("{0}.{1}", defaultSection, keyName);
                     var retVal = GetKey(section, tryDefaultKeyName);
 
                     return retVal;
@@ -69,9 +75,11 @@ namespace Mir.Stf.Utilities
 
             if (!string.IsNullOrEmpty(section.DefaultSection))
             {
-                if (section.Sections.ContainsKey(section.DefaultSection))
+                var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
+
+                if (section.Sections.ContainsKey(defaultSection))
                 {
-                    var retVal = GetKey(section.Sections[section.DefaultSection], keyName);
+                    var retVal = GetKey(section.Sections[defaultSection], keyName);
                     return retVal;
                 }
             }

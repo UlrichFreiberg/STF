@@ -84,6 +84,7 @@
     <Content Include="TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml" />
     <Content Include="TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml" />
     <Content Include="TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml" />
+    <Content Include="TestData\Defaulting\DefaultSectionWithVariable.xml" />
     <Content Include="TestData\Defaulting\NoDefaultSection.xml" />
     <Content Include="TestData\Defaulting\DefaultSectionFinallyNotPresent.xml" />
     <Content Include="TestData\Defaulting\DefaultSection.xml" />

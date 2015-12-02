@@ -15,6 +15,7 @@ using System.Xml;
 namespace Mir.Stf.Utilities
 {
     using System;
+    using System.Dynamic;
     using System.IO;
 
     /// <summary>
@@ -53,6 +54,7 @@ namespace Mir.Stf.Utilities
         public StfConfiguration(string configFileName)
         {
             LoadConfig(configFileName);
+            EvaluateKeyValue = System.Environment.ExpandEnvironmentVariables;
         }
 
         /// <summary>
@@ -61,6 +63,17 @@ namespace Mir.Stf.Utilities
         public StfConfiguration()
         {
         }
+
+
+        /// <summary>
+        /// Delegate used to expand defaultSection and values. 
+        /// </summary>
+        public delegate string EvaluateKeyValueDelegate(string keyValue);
+
+        /// <summary>
+        /// Delegate used to expand variables etc. Default is 'System.Environment.ExpandEnvironmentVariables'. It can overriden for you needs.
+        /// </summary>
+        public EvaluateKeyValueDelegate EvaluateKeyValue { get; set; }
 
         /// <summary>
         /// Gets or sets the current Environment.
@@ -262,7 +275,14 @@ namespace Mir.Stf.Utilities
         {
             if (currentlyLoadedSection != null)
             {
-                return GetKeyValue(currentlyLoadedSection, keyName);
+                var retVal = GetKeyValue(currentlyLoadedSection, keyName);
+
+                if (EvaluateKeyValue != null)
+                {
+                    retVal = EvaluateKeyValue(retVal);                    
+                }
+
+                return retVal;
             }
 
             var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
@@ -285,7 +305,8 @@ namespace Mir.Stf.Utilities
         {
             if (currentlyLoadedSection != null)
             {
-                var parser = new Parser();
+                var parser = new Parser { EvaluateKeyValue = this.EvaluateKeyValue };
+
                 return parser.GetKey(section, keyName);
             }
 

@@ -58,5 +58,31 @@ namespace Tests
             StfAssert.AreEqual("Username is Kasper", "User_Kasper", kUsername);
             StfAssert.AreEqual("Password for Kasper is K999", "K999", kPassword);
         }
+
+                [TestMethod]
+        public void TestDefaultDefaultSectionWithVariables()
+        {
+            System.Environment.SetEnvironmentVariable("STFUSERNAME", "Bent");
+
+            // Load a configuration in StfConfiguration
+            var stfConfiguration = new StfConfiguration(@"TestData\Defaulting\DefaultSectionWithVariable.xml");
+
+            var dUsername = stfConfiguration.GetKeyValue("Users.Username");
+            var dPassword = stfConfiguration.GetKeyValue("Users.Password");
+            StfAssert.AreEqual("Default Username is User_Bent", "User_Bent", dUsername);
+            StfAssert.AreEqual("Default Password is K999", "B42", dPassword);
+
+            var uUsername = stfConfiguration.GetKeyValue("Users.Ulrich.Username");
+            var uPassword = stfConfiguration.GetKeyValue("Users.Ulrich.Password");
+            var kUsername = stfConfiguration.GetKeyValue("Users.Kasper.Username");
+            var kPassword = stfConfiguration.GetKeyValue("Users.Kasper.Password");
+
+            StfAssert.AreEqual("Username is User_Ulrich", "User_Ulrich", uUsername);
+            StfAssert.AreEqual("Password for Ulrich is U777", "U777", uPassword);
+            StfAssert.AreEqual("Username is Kasper", "User_Kasper", kUsername);
+            StfAssert.AreEqual("Password for Kasper is K999", "K999", kPassword);
+        }
+
+        
     }
 }

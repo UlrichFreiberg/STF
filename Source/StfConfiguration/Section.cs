@@ -125,8 +125,8 @@ namespace Mir.Stf.Utilities
         {
             var retVal = new Section
             {
-                SectionName = this.SectionName,
-                DefaultSection = this.DefaultSection
+                SectionName = SectionName,
+                DefaultSection = DefaultSection
             };
 
             foreach (var childNode in this.Sections)
@@ -288,7 +288,7 @@ namespace Mir.Stf.Utilities
                 throw new Exception("Cant CreateAtribute");
             }
 
-            attribute.Value = this.DefaultSection;
+            attribute.Value = DefaultSection;
             sectionNode.Attributes.Append(attribute);
             rootNode.AppendChild(sectionNode);
 
