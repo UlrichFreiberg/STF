@@ -42,7 +42,14 @@ namespace Mir.Stf.Utilities.Extensions
             var pluginObject = returnObject as IStfPlugin;
             if (pluginObject != null)
             {
-                pluginObject.Init();
+                if (!pluginObject.Init())
+                {
+                    throw new TypeInitializationException(
+                        pluginObject.GetType().FullName,
+                        new Exception(string.Format(
+                            "Init returned false for StfPlugin: {0}",
+                            pluginObject.GetType().Name)));
+                }
             }
 
             return returnObject;
