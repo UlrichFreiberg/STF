@@ -23,10 +23,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message describing the error
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogError(string message);
+        int LogError(string message, params object[] args);
 
         /// <summary>
         /// Logging one warning <paramref name="message"/>.
@@ -34,11 +37,14 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// C:\Users\Ulrich\Documents\GitHub\StfLogger\StfLogger\Interfaces\IStfLoggerLoggingFunctions.cs
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogWarning(string message);
+        int LogWarning(string message, params object[] args);
 
         /// <summary>
         /// Logging one info <paramref name="message"/>.
@@ -46,10 +52,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogInfo(string message);
+        int LogInfo(string message, params object[] args);
 
         /// <summary>
         /// Logging one debug <paramref name="message"/>.
@@ -57,10 +66,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogDebug(string message);
+        int LogDebug(string message, params object[] args);
 
         // normal logging functions - models and adapters
 
@@ -70,10 +82,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogTrace(string message);
+        int LogTrace(string message, params object[] args);
 
         /// <summary>
         /// Logging one <c>internal</c> <paramref name="message"/>.
@@ -81,10 +96,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogInternal(string message);
+        int LogInternal(string message, params object[] args);
 
         // used solely by Assert functions
 
@@ -97,10 +115,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// Further information related to the passing test step - if any.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogPass(string testStepName, string message);
+        int LogPass(string testStepName, string message, params object[] args);
 
         /// <summary>
         /// Logging a test step assertion did fail.
@@ -111,10 +132,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// Further information related to the failing test step - if any.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogFail(string testStepName, string message);
+        int LogFail(string testStepName, string message, params object[] args);
 
         /// <summary>
         /// Logging a KeyValue pair - as you see fit. The logger will log some, that are generally useful - like OS
@@ -129,10 +153,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="message">
         /// Further information related to the KeyValue pair - if any.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogKeyValue(string key, string value, string message);
+        int LogKeyValue(string key, string value, string message, params object[] args);
 
         // Headers in test scripts
 
@@ -142,10 +169,13 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="headerMessage">
         /// The header message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogHeader(string headerMessage);
+        int LogHeader(string headerMessage, params object[] args);
 
         /// <summary>
         /// Insert a sub header in the log file - makes it easier to overview the logfile
@@ -153,9 +183,12 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <param name="subHeaderMessage">
         /// The sub header message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        int LogSubHeader(string subHeaderMessage);
+        int LogSubHeader(string subHeaderMessage, params object[] args);
     }
 }

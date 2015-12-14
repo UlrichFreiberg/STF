@@ -14,7 +14,7 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
-    using System.Text.RegularExpressions;
+    using Mir.Stf.Utilities.Utils;
 
     /// <summary>
     /// The test result html logger. The <see cref="IStfLoggerLoggingFunctions"/> part.
@@ -34,20 +34,16 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The message describing the error
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogError(string message)
+        public int LogError(string message, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.Error, message);
+            return LogOneHtmlMessage(StfLogLevel.Error, message, args);
         }
-
-        /*
-        public int Error(string message)
-        {
-            return LogError(message);
-        }
-*/
 
         /// <summary>
         /// Logging one warning <paramref name="message"/>.
@@ -55,20 +51,16 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogWarning(string message)
+        public int LogWarning(string message, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.Warning, message);
+            return LogOneHtmlMessage(StfLogLevel.Warning, message, args);
         }
-
-        /*
-        public int Warning(string message)
-        {
-            return LogWarning(message);
-        }
-*/
 
         /// <summary>
         /// Logging one info <paramref name="message"/>.
@@ -76,20 +68,16 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogInfo(string message)
+        public int LogInfo(string message, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.Info, message);
+            return LogOneHtmlMessage(StfLogLevel.Info, message, args);
         }
-
-        /*
-        public int Info(string message)
-        {
-            return LogInfo(message);
-        }
-*/
 
         /// <summary>
         /// Logging one debug <paramref name="message"/>.
@@ -97,20 +85,16 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogDebug(string message)
+        public int LogDebug(string message, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.Debug, message);
+            return LogOneHtmlMessage(StfLogLevel.Debug, message, args);
         }
-
-        /*
-        public int Debug(string message)
-        {
-            return LogDebug(message);
-        }
-*/
 
         /// <summary>
         /// Logging one trace <paramref name="message"/>.
@@ -118,20 +102,17 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogTrace(string message)
+        public int LogTrace(string message, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.Trace, message);
+            return LogOneHtmlMessage(StfLogLevel.Trace, message, args);
         }
 
-        /*
-                public int Trace(string message)
-                {
-                    return LogTrace(message);
-                }
-        */
         #endregion
 
         #region "Header logging functions - test scripts"
@@ -142,20 +123,16 @@ namespace Mir.Stf.Utilities
         /// <param name="headerMessage">
         /// The header Message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogHeader(string headerMessage)
+        public int LogHeader(string headerMessage, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.Header, headerMessage);
+            return LogOneHtmlMessage(StfLogLevel.Header, headerMessage, args);
         }
-
-        /*
-        public int Header(string message)
-        {
-            return LogHeader(message);
-        }
-*/
 
         /// <summary>
         /// Insert a sub header in the log file - makes it easier to overview the logfile
@@ -163,20 +140,17 @@ namespace Mir.Stf.Utilities
         /// <param name="subHeaderMessage">
         /// The sub header message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogSubHeader(string subHeaderMessage)
+        public int LogSubHeader(string subHeaderMessage, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.SubHeader, subHeaderMessage);
+            return LogOneHtmlMessage(StfLogLevel.SubHeader, subHeaderMessage, args);
         }
 
-        /*
-        public int SubHeader(string message)
-        {
-            return LogSubHeader(message);
-        }
-*/
         #endregion
 
         #region "normal logging functions - models and adapters"
@@ -187,20 +161,17 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogInternal(string message)
+        public int LogInternal(string message, params object[] args)
         {
-            return LogOneHtmlMessage(StfLogLevel.Internal, message);
+            return LogOneHtmlMessage(StfLogLevel.Internal, message, args);
         }
 
-        /*
-        public int Internal(string message)
-        {
-            return LogInternal(message);
-        }
-*/
         #endregion
 
         #region "used solely by Assert functions"
@@ -214,22 +185,20 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// Further information related to the passing test step - if any.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogPass(string testStepName, string message)
+        public int LogPass(string testStepName, string message, params object[] args)
         {
+            message = message.StfFormatString(args);
+
             var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
 
             return LogOneHtmlMessage(StfLogLevel.Pass, tempNeedsToBeReworkedMessage);
         }
-
-        /*
-        public int Pass(string testStepName, string message)
-        {
-            return LogPass(testStepName, message);
-        }
-*/
 
         /// <summary>
         /// Logging a test step assertion did fail.
@@ -240,11 +209,16 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// Further information related to the failing test step - if any.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogFail(string testStepName, string message)
+        public int LogFail(string testStepName, string message, params object[] args)
         {
+            message = message.StfFormatString(args);
+
             var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
             const StfLogLevel TheLogLevel = StfLogLevel.Fail;
             var length = 0;
@@ -257,12 +231,6 @@ namespace Mir.Stf.Utilities
             return length + LogOneHtmlMessage(TheLogLevel, tempNeedsToBeReworkedMessage);
         }
 
-        /*
-        public int Fail(string testStepName, string message)
-        {
-            return LogFail(testStepName, message);
-        }
-*/
         #endregion
 
         /// <summary>
@@ -278,18 +246,21 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// Further information related to the KeyValue pair - if any.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogKeyValue(string key, string value, string message)
+        public int LogKeyValue(string key, string value, string message, params object[] args)
         {
-            string htmlLine;
-
-            htmlLine = string.Format("<div class=\"line keyvalue\">\n");
+            message = message.StfFormatString(args);
+            
+            var htmlLine = "<div class=\"line keyvalue\">\n";
             htmlLine += string.Format("   <div class=\"el key\">{0}</div>\n", key);
             htmlLine += string.Format("   <div class=\"el value\">{0}</div>\n", value);
             htmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
-            htmlLine += string.Format("</div>\n");
+            htmlLine += "</div>\n";
 
             this.LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
@@ -315,10 +286,13 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The Message.
         /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        private int LogOneHtmlMessage(StfLogLevel loglevel, string message)
+        private int LogOneHtmlMessage(StfLogLevel loglevel, string message, params object[] args)
         {
             ResetIdleTimer();
 
@@ -348,6 +322,8 @@ namespace Mir.Stf.Utilities
             logLevelString = logLevelString.ToLower();
 
             CheckForPerformanceAlert();
+
+            message = message.StfFormatString(args);
 
             if (Configuration.MapNewlinesToBr)
             {
@@ -395,7 +371,7 @@ namespace Mir.Stf.Utilities
                     htmlLine += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
                     htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", IndentString());
                     htmlLine += string.Format("    <div class=\"el msg\">{0}</div>\n", message);
-                    htmlLine += string.Format("</div>\n");
+                    htmlLine += "</div>\n";
                     break;
             }
 
