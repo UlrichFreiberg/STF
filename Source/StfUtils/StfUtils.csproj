@@ -46,6 +46,7 @@
     <Compile Include="FileUtilities\FileUtils.cs" />
     <Compile Include="Interfaces\IFileUtils.cs" />
     <Compile Include="Interfaces\IRetryerUtils.cs" />
+    <Compile Include="Interfaces\IXmlUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ITableUtils.cs" />
     <Compile Include="RetryerUtilities\RetryerUtils.cs" />

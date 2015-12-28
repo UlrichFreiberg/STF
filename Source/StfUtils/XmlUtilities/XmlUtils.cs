@@ -29,7 +29,7 @@ namespace Mir.Stf.Utilities.XmlUtilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string PrettyXml(string xml)
+        public string PrettyXml(string xml)
         {
             var stringBuilder = new StringBuilder();
 
@@ -62,7 +62,7 @@ namespace Mir.Stf.Utilities.XmlUtilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string PrettyPrint(string xml)
+        public string PrettyPrint(string xml)
         {
             var result = string.Empty;
 
