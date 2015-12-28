@@ -1,13 +1,34 @@
-﻿using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="XmlUtils.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
+// </copyright>
+// <summary>
+//   Defines the XmlUtils type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Mir.Stf.Utilities
+namespace Mir.Stf.Utilities.XmlUtilities
 {
     using System.IO;
+    using System.Text;
     using System.Xml;
     using System.Xml.Linq;
 
-    class XmlUtils
+    /// <summary>
+    /// The xml utils.
+    /// </summary>
+    public class XmlUtils
     {
+        /// <summary>
+        /// The pretty xml.
+        /// </summary>
+        /// <param name="xml">
+        /// The xml.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public static string PrettyXml(string xml)
         {
             var stringBuilder = new StringBuilder();
@@ -32,9 +53,18 @@ namespace Mir.Stf.Utilities
             return stringBuilder.ToString();
         }
 
+        /// <summary>
+        /// The pretty print.
+        /// </summary>
+        /// <param name="xml">
+        /// The xml.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public static string PrettyPrint(string xml)
         {
-            string result = "";
+            var result = string.Empty;
 
             var memoryStream = new MemoryStream();
             var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.Unicode);
@@ -73,6 +103,5 @@ namespace Mir.Stf.Utilities
 
             return result;
         }
-
     }
 }

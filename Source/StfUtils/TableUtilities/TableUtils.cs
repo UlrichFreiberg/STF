@@ -8,18 +8,21 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Dynamic;
-using Slapper;
-
-namespace Mir.Stf.Utilities.TableUtils
+namespace Mir.Stf.Utilities.TableUtilities
 {
+    using System.Collections.Generic;
+    using System.Dynamic;
     using System.Reflection;
+
+    using Mir.Stf.Utilities.Interfaces;
+    using Mir.Stf.Utilities.TableUtils;
+
+    using Slapper;
 
     /// <summary>
     /// The web table header description.
     /// </summary>
-    public class TableUtils
+    public class TableUtils : ITableUtils
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TableUtils"/> class. 
