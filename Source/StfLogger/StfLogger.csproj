@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="Utils\RunStatusUtils.cs" />
     <Compile Include="Utils\ScreenshotUtilities.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\ThreadUtils.cs" />
   </ItemGroup>
   <ItemGroup>

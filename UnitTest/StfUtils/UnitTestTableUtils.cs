@@ -13,6 +13,8 @@ using Mir.Stf.Utilities.TableUtils;
 
 namespace UnitTest
 {
+    using Mir.Stf.Utilities.TableUtilities;
+
     /// <summary>
     /// The unit test 1.
     /// </summary>

@@ -8,13 +8,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.CodeDom;
 using Mir.Stf;
 using Mir.Stf.Utilities;
 
 namespace UnitTest
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -67,6 +67,49 @@ namespace UnitTest
             StfLogger.LogFail("testStepName LogFail", "LogFail");
 
             StfLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
+
+            StfLogger.LogGetEnter(StfLogLevel.Info, "MyTestProperty");
+            StfLogger.LogGetExit(StfLogLevel.Info, "MyTestProperty", StfLogger);
+            StfLogger.LogSetEnter(StfLogLevel.Info, "MyTestProperty", StfLogger);
+            StfLogger.LogSetExit(StfLogLevel.Info, "MyTestProperty", StfLogger);
+
+            StfLogger.LogAutomationIdObject(StfLogLevel.Internal, StfLogger, "Using StfLogger as AID for test");
+
+            StfLogger.SetRunStatus();
+        }
+
+        /// <summary>
+        /// The test method all log type with formatting.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAllLogTypeWithFormatting()
+        {
+            StfLogger.LogLevel = StfLogLevel.Internal;
+
+            StfLogger.LogError("{0}", "LogError");
+            StfLogger.LogWarning("{0}", "LogWarning");
+            StfLogger.LogInfo("{0}", "LogInfo");
+            StfLogger.LogDebug("{0}", "LogDebug");
+            StfLogger.LogTrace("{0}", "LogTrace");
+            StfLogger.LogInternal("{0}", "LogInternal");
+            StfLogger.LogHeader("{0}", "LogHeader");
+            StfLogger.LogSubHeader("{0}", "LogSubHeader");
+
+            StfLogger.LogError("{0} - {1}", "LogError", new List<string>());
+            StfLogger.LogWarning("{0} - {1}", "LogWarning", new { Test = "Test" });
+            StfLogger.LogInfo("{0} - {1} - {2}", "LogInfo", 42, 84);
+
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunction", new object[] { "arg1", "arg2", "arg3" });
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunction", 42);
+
+            StfLogger.LogFunctionEnter(StfLogLevel.Info, "Int", "NameOfFunctionShort");
+            StfLogger.LogFunctionExit(StfLogLevel.Info, "NameOfFunctionShort");
+
+            // used solely by Assert functions
+            StfLogger.LogPass("testStepName LogPass", "{0}", "LogPass");
+            StfLogger.LogFail("testStepName LogFail", "{0}", "LogFail");
+
+            StfLogger.LogKeyValue("SomeKey", "SomeValue", "{0}", "LogKeyValue");
 
             StfLogger.LogGetEnter(StfLogLevel.Info, "MyTestProperty");
             StfLogger.LogGetExit(StfLogLevel.Info, "MyTestProperty", StfLogger);
@@ -269,7 +312,6 @@ namespace UnitTest
             StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}</xmltag>{0}</xmltags>{0}", Environment.NewLine)));
         }
 
-   
         /// <summary>
         /// The test log text with new many lines.
         /// </summary>
