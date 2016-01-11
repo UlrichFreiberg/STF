@@ -1,4 +1,14 @@
-﻿using System.Collections.Generic;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Predicate.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
 
 namespace Predicate
 {
@@ -29,17 +39,14 @@ namespace Predicate
             {
                 var propertyValue = property.GetValue(filterClass);
                 var propertyType = property.PropertyType;
-                var nullable = !propertyType.IsValueType
-                               || propertyType.IsGenericType
-                               && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>);
+                var propertyName = property.Name;
+                var nullable = !propertyType.IsValueType || (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>));
 
                 if (propertyValue == null || !nullable)
                 {
                     continue;
                 }
 
-                var propertyName = property.Name;
-    
                 // check for an attribute override...
                 foreach (var attribute in property.GetCustomAttributes(true))
                 {

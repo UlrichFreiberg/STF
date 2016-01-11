@@ -5,7 +5,9 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Predicate", "Predicate\Predicate.csproj", "{0E460554-648F-4C4A-B7D3-2B284FCADE73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{B14ADCFC-25E6-413E-A4DA-F7F53D8DFC5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredidcateTests", "UnitTestProject1\PredidcateTests.csproj", "{B14ADCFC-25E6-413E-A4DA-F7F53D8DFC5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicLinqTests", "DynamicLinqTests\DynamicLinqTests.csproj", "{FE133ECE-9159-43D5-BAFC-29DA9F6CAB36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B14ADCFC-25E6-413E-A4DA-F7F53D8DFC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B14ADCFC-25E6-413E-A4DA-F7F53D8DFC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B14ADCFC-25E6-413E-A4DA-F7F53D8DFC5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE133ECE-9159-43D5-BAFC-29DA9F6CAB36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE133ECE-9159-43D5-BAFC-29DA9F6CAB36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE133ECE-9159-43D5-BAFC-29DA9F6CAB36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE133ECE-9159-43D5-BAFC-29DA9F6CAB36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
