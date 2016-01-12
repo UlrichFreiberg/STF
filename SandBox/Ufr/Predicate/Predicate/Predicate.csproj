@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Predicate.cs" />
     <Compile Include="PredicateMapAttribute.cs" />
+    <Compile Include="PredicatePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
