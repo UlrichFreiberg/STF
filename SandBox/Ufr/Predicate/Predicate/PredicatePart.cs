@@ -11,28 +11,41 @@
 
 namespace Predicate
 {
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// Class to handle parts of a predicate
     /// </summary>
     public class PredicatePart
     {
         /// <summary>
-        /// The predicate string
         /// </summary>
-        private string predicate;
+        /// <param name="predicateExpr">
+        /// </param>
+        public PredicatePart(string predicateExpr = null)
+        {
+            if (!string.IsNullOrEmpty(predicateExpr))
+            {
+                PredicateExpr = predicateExpr;                
+            }
+
+            var matches = Regex.Match(PredicateExpr, "(?<Qualifier>[^=]+)=(?<Value>.*)");
+
+            if (!matches.Success)
+            {
+                Quantifier = null;
+                Value = null;
+                return;
+            }
+
+            Quantifier = matches.Groups["Qualifier"].Value.Trim();
+            Value = matches.Groups["Value"].Value.Trim();
+        }
 
         /// <summary>
+        /// Gets or sets the predicate expression as a string
         /// </summary>
-        /// <param name="predicate">
-        /// </param>
-        public PredicatePart(string predicate)
-        {
-            this.predicate = predicate;
-            var tokens = predicate.Split('=');
-
-            Quantifier = tokens.Length <= 0 ? string.Empty : tokens[0];
-            Value = tokens.Length <= 1 ? string.Empty : tokens[1];
-        }
+        public string PredicateExpr { get; set; }
 
         /// <summary>
         /// Gets or sets the Left Hand side of the predicate

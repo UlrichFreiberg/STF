@@ -33,7 +33,6 @@ namespace PredidcateTests
                                  };
 
             var predicate = new Predicate();
-
             PeopleFilter filter;
             List<People> result;
 
@@ -46,6 +45,25 @@ namespace PredidcateTests
             result = predicate.FilterList(peopleList, filter);
             StfAssert.IsTrue("Found", result.Any());
             StfAssert.AreEqual("Found", result.FirstOrDefault().Age, 43);
+        }
+
+        [TestMethod]
+        public void TestMethodPredicatePart()
+        {
+            var predicate = new PredicatePart("Age = 42");
+
+            StfAssert.AreEqual("Quantifier", predicate.Quantifier, "Age");
+            StfAssert.AreEqual("Value", predicate.Value, "42");
+            StfAssert.AreEqual("PredicateExpr", predicate.PredicateExpr, "Age = 42");
+        }
+
+        [TestMethod]
+        public void TestMethodParsePredicate()
+        {
+            var predicate = new Predicate();
+            var filter = predicate.ParsePredicate<PeopleFilter>("Age = 42");
+
+            StfAssert.AreEqual("Found", filter.AgeFilter, 42);
         }
     }
 }

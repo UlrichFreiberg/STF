@@ -13,8 +13,13 @@ using System.Collections.Generic;
 namespace Predicate
 {
     using System;
+    using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Linq.Dynamic;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Utility class to handle predicates towards a list
@@ -65,7 +70,7 @@ namespace Predicate
         /// The filtered list
         /// </returns>
         public List<TEntity> FilterList<TEntity, TFilter>(List<TEntity> listOfEntities, TFilter filterClass)
-            where TEntity : new() 
+            where TEntity : new()
             where TFilter : TEntity
         {
             //// foreach property in filterClass
@@ -117,9 +122,12 @@ namespace Predicate
 
         /// <summary>
         /// Returns a Filter initialized accordingly to a string predicate 
+        ///     foreach predicate in the predicate list
+        ///         find the property in filterClass
+        ///             set the filtvalue to the predicate value part
         /// </summary>
-        /// <param name="predicate">
-        /// The predicate
+        /// <param name="predicateList">
+        /// The list of predicates
         /// </param>
         /// <typeparam name="TFilter">
         /// The filter class
@@ -127,38 +135,120 @@ namespace Predicate
         /// <returns>
         /// A initialized filter
         /// </returns>
-        public TFilter ParsePredicate<TFilter>(string predicate) where TFilter : new()
+        public TFilter ParsePredicate<TFilter>(string predicateList = null) where TFilter : new()
         {
-            //// foreach predicate in the predicate list
-            ////     find the property in filterClass
-            ////     set the filtvalue to the predicate value part
-             
-            // TODO: Implement:-)
-            return new TFilter();
+            var retVal = new TFilter();
+            var properties = typeof(TFilter).GetProperties();
+
+            if (!string.IsNullOrEmpty(predicateList))
+            {
+                PredicateList = predicateList;
+            }
+
+            foreach (var predicatePart in Predicates())
+            {
+                var propertyName = predicatePart.Quantifier;
+                var property = properties.FirstOrDefault(pp => pp.Name == propertyName);
+
+                // did we find the correspondig property in the filterClass?
+                if (property != null)
+                {
+                    var propertyType = property.PropertyType;
+                    var nullable = !propertyType.IsValueType
+                                   || (propertyType.IsGenericType
+                                       && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>));
+
+                    // for a property to be a filter property it needs to be nullable
+                    if (nullable)
+                    {
+                        SetPropertyValue(propertyType, predicatePart.Value, property, retVal);
+                        continue;
+                    }
+                }
+
+                // hmm, no (nullable) filter property found, 
+                // then another property is pointing to a non-nullable property - anotated with PredicateMapAttribute
+                foreach (var prop in properties)
+                {
+                    // check for an attribute override...
+                    if (prop.GetCustomAttributes(true)
+                        .OfType<PredicateMapAttribute>()
+                        .Select(entityPropertyAttribute => entityPropertyAttribute.EntityProperty)
+                            .Any(mappedPropertyName => mappedPropertyName == predicatePart.Quantifier))
+                    {
+                        SetPropertyValue(prop.PropertyType, predicatePart.Value, prop, retVal);
+                        break;
+                    }
+                }
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="propertyType">
+        /// </param>
+        /// <param name="predicatePart">
+        /// </param>
+        /// <param name="property">
+        /// </param>
+        /// <param name="retVal">
+        /// </param>
+        /// <typeparam name="TFilter">
+        /// </typeparam>
+        private void SetPropertyValue<TFilter>(
+            Type propertyType,
+            string value,
+            PropertyInfo property,
+            TFilter retVal) where TFilter : new()
+        {
+            // Read more here http://stackoverflow.com/questions/2961656/generic-tryparse
+            try
+            {
+                var val = TypeDescriptor.GetConverter(propertyType).ConvertFromString(value);
+
+                property.SetValue(retVal, val);
+            }
+            catch
+            {
+                ;
+            }
         }
 
         /// <summary>
         /// Enumerate all the predicate parts of the overall predicate
         /// </summary>
+        /// <param name="predicateList">
+        /// List of predicates
+        /// </param>
         /// <returns>
         /// A predicate part
         /// </returns>
-        public IEnumerable<PredicatePart> Predicates()
+        public IEnumerable<PredicatePart> Predicates(string predicateList = null)
         {
-            if (!string.IsNullOrEmpty(PredicateList))
+            if (!string.IsNullOrEmpty(predicateList))
             {
-                var predicates = PredicateList.Split(';');
+                PredicateList = predicateList;
+            }
 
-                foreach (var predicate in predicates)
-                {
-                    var retVal = new PredicatePart(predicate);
+            if (string.IsNullOrEmpty(PredicateList))
+            {
+                yield break;
+            }
 
-                    yield return retVal;
-                }
+            var predicates = PredicateList.Split(';');
+
+            foreach (var retVal in predicates.Select(pred => new PredicatePart(pred)))
+            {
+                yield return retVal;
             }
         }
 
         /// <summary>
+        ///     Generate the predicate from the given filter class.
+        ///         foreach nullable property with a value in filter 
+        ///             Generate a predicate part "LHS = RHS"
         /// </summary>
         /// <param name="filter">
         /// </param>
@@ -168,11 +258,33 @@ namespace Predicate
         /// </returns>
         public string GeneratePredicate<TFilter>(TFilter filter)
         {
-            //// foreach nullable property with a value in filter 
-            ////     Generate a predicate part "LHS = RHS"
-
             // TODO: Implement:-)
-            return "NeedsToBeImplemented";            
+            return "NeedsToBeImplemented";
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="filename">
+        /// </param>
+        /// <returns>
+        /// </returns>
+        public string ReadPredicateFromFile(string filename)
+        {
+            var content = File.ReadAllText(filename);
+
+            // get rid of comments
+            var retVal = Regex.Replace(content, "'.*", string.Empty);
+
+            // remove all newlines
+            retVal = Regex.Replace(retVal, @"\s*[\r\n]+", ";", RegexOptions.Multiline);
+
+            // remove empty predicate
+            retVal = Regex.Replace(retVal, @";;+", ";");
+            retVal = Regex.Replace(retVal, @"^;", string.Empty);
+            retVal = Regex.Replace(retVal, @";$", string.Empty);
+
+            PredicateList = retVal;
+            return PredicateList;
         }
     }
 }
