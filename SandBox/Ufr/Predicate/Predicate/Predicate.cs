@@ -18,7 +18,6 @@ namespace Predicate
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -189,7 +188,8 @@ namespace Predicate
         /// </summary>
         /// <param name="propertyType">
         /// </param>
-        /// <param name="predicatePart">
+        /// <param name="value">
+        /// The value to set
         /// </param>
         /// <param name="property">
         /// </param>
@@ -250,16 +250,52 @@ namespace Predicate
         ///         foreach nullable property with a value in filter 
         ///             Generate a predicate part "LHS = RHS"
         /// </summary>
-        /// <param name="filter">
+        /// <param name="filterClass">
+        /// The class containing the filter
         /// </param>
         /// <typeparam name="TFilter">
         /// </typeparam>
         /// <returns>
         /// </returns>
-        public string GeneratePredicate<TFilter>(TFilter filter)
+        public string GeneratePredicate<TFilter>(TFilter filterClass)
         {
-            // TODO: Implement:-)
-            return "NeedsToBeImplemented";
+            var properties = typeof (TFilter).GetProperties();
+            var retVal = string.Empty;
+            var seperator = string.Empty;
+
+            foreach (var property in properties)
+            {
+                var propertyValue = property.GetValue(filterClass);
+                var propertyType = property.PropertyType;
+                var propertyName = property.Name;
+                var nullable = !propertyType.IsValueType ||
+                               (propertyType.IsGenericType &&
+                                propertyType.GetGenericTypeDefinition() == typeof (Nullable<>));
+
+                if (propertyValue == null || !nullable)
+                {
+                    continue;
+                }
+
+                // check for an attribute override...
+                foreach (var attribute in property.GetCustomAttributes(true))
+                {
+                    var mapAttribute = attribute as PredicateMapAttribute;
+                    if (mapAttribute != null)
+                    {
+                        var entityPropertyAttribute = mapAttribute;
+
+                        propertyName = entityPropertyAttribute.EntityProperty;
+                        break;
+                    }
+                }
+
+                var predicatePart = string.Format("{0}={1}", propertyName, propertyValue);
+                retVal = string.Format("{0}{1}{2}", retVal, seperator, predicatePart);
+                seperator = " ; ";
+            }
+
+            return retVal;
         }
 
         /// <summary>
