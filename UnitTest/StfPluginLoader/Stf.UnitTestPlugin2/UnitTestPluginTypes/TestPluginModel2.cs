@@ -58,5 +58,19 @@ namespace Stf.Unittests.UnitTestPluginTypes
         {
             return string.Format("{0}={1}", param1, param2);
         }
+
+        /// <summary>
+        /// The equals.
+        /// </summary>
+        /// <param name="other">
+        /// The other.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Equals(ITestPluginModel2 other)
+        {
+            return other.TestProp == TestProp;
+        }
     }
 }

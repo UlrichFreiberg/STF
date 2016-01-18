@@ -18,6 +18,10 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities.Extensions
 {
+    using System.Reflection;
+
+    using Mir.Stf.Utilities.Attributes;
+
     /// <summary>
     /// The container extensions.
     /// </summary>
@@ -78,7 +82,7 @@ namespace Mir.Stf.Utilities.Extensions
             ((List<InjectionMember>)injectionMembers)
                 .AddRange(ConfigureForInterceptionIfNecessary(container, typeFrom, typeTo));
 
-            container.RegisterType(typeFrom, typeTo, injectionMembers.ToArray());
+            RegisterType(container, typeFrom, typeTo, injectionMembers.ToArray());
         }
 
         /// <summary>
@@ -93,7 +97,7 @@ namespace Mir.Stf.Utilities.Extensions
         public static void RegisterMyType(this IUnityContainer container, Type typeToRegister)
         {
             var injectionMembers = GetInjectionMembers(typeToRegister);
-            container.RegisterType(typeToRegister, injectionMembers.ToArray());
+            RegisterType(container, typeToRegister, injectionMembers.ToArray());
         }
 
         /// <summary>
@@ -143,6 +147,24 @@ namespace Mir.Stf.Utilities.Extensions
         {
             var theInterface = theType.GetInterface(typeof(T).Name);
             return theInterface != null;
+        }
+
+        /// <summary>
+        /// The check type has attribute.
+        /// </summary>
+        /// <param name="theType">
+        /// The the type.
+        /// </param>
+        /// <typeparam name="T">
+        /// The attribute to check for
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private static bool CheckTypeHasAttribute<T>(Type theType) where T : Attribute
+        {
+            var attribute = theType.GetCustomAttribute<T>();
+            return attribute != null;
         }
 
         /// <summary>
@@ -257,6 +279,65 @@ namespace Mir.Stf.Utilities.Extensions
                     new InjectionProperty("Order", 1));
 
             return injectionMembers;
+        }
+
+        /// <summary>
+        /// The register type.
+        /// </summary>
+        /// <param name="container">
+        /// The container.
+        /// </param>
+        /// <param name="typeFrom">
+        /// The type from.
+        /// </param>
+        /// <param name="typeTo">
+        /// The type to.
+        /// </param>
+        /// <param name="injectionMembers">
+        /// The injection members.
+        /// </param>
+        private static void RegisterType(
+            IUnityContainer container,
+            Type typeFrom,
+            Type typeTo,
+            IList<InjectionMember> injectionMembers)
+        {
+            if (CheckTypeHasAttribute<StfSingletonAttribute>(typeFrom) || 
+                CheckTypeHasAttribute<StfSingletonAttribute>(typeTo))
+            {
+                container.RegisterType(typeFrom, typeTo, new ContainerControlledLifetimeManager(), injectionMembers.ToArray());
+            }
+            else
+            {
+                container.RegisterType(typeFrom, typeTo, injectionMembers.ToArray());
+            }
+        }
+
+        /// <summary>
+        /// The register type.
+        /// </summary>
+        /// <param name="container">
+        /// The container.
+        /// </param>
+        /// <param name="typeToRegister">
+        /// The type to register.
+        /// </param>
+        /// <param name="injectionMembers">
+        /// The injection members.
+        /// </param>
+        private static void RegisterType(
+            IUnityContainer container,
+            Type typeToRegister,
+            IList<InjectionMember> injectionMembers)
+        {
+            if (CheckTypeHasAttribute<StfSingletonAttribute>(typeToRegister))
+            {
+                container.RegisterType(typeToRegister, new ContainerControlledLifetimeManager(), injectionMembers.ToArray());
+            }
+            else
+            {
+                container.RegisterType(typeToRegister, injectionMembers.ToArray());
+            }
         }
     }
 }

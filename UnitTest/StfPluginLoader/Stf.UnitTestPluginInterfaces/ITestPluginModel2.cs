@@ -10,10 +10,12 @@
 
 namespace Stf.Unittests
 {
+    using System;
+
     /// <summary>
     /// The TestPlugin2Model interface.
     /// </summary>
-    public interface ITestPluginModel2
+    public interface ITestPluginModel2 : IEquatable<ITestPluginModel2>
     {
         /// <summary>
         /// Gets or sets the test prop.

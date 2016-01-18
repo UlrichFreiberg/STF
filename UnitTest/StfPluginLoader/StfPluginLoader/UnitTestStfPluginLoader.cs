@@ -293,5 +293,40 @@ namespace UnitTest
                 // ReSharper disable once UnusedVariable
                 () => { var stfUnitTestPlugin2 = (StfUnitTestPlugin2)sp2; });
         }
+
+        /// <summary>
+        /// The test stf plugin loader registers singleton correctly.
+        /// </summary>
+        [TestMethod]
+        public void TestStfPluginLoaderRegistersSingletonCorrectly()
+        {
+            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
+
+            var sp2 = Get<IStfUnitTestPlugin2>();
+            StfAssert.IsNotNull("sp2 != null", sp2);
+
+            var pluginObject1 = Get<ITestPluginModel2>();
+            pluginObject1.TestProp = "Changed";
+
+            var pluginObject2 = Get<ITestPluginModel2>();
+
+            StfAssert.IsFalse("TestpluginModel is not a singleton", pluginObject1.Equals(pluginObject2));
+            StfAssert.StringEquals("Object with default value", "Default", pluginObject2.TestProp);
+            StfAssert.StringEquals("Object with changed value", "Changed", pluginObject1.TestProp);
+
+            var singletonObject = Get<IStfSingletonPluginType>();
+            
+            StfAssert.IsFalse("Singleton bool is false", singletonObject.SingletonBool);
+            StfAssert.AreEqual("SingletonInteger is 1", 1, singletonObject.SingletonInteger);
+
+            singletonObject.SingletonBool = true;
+            singletonObject.SingletonInteger++;
+
+            var singletonObject2 = Get<IStfSingletonPluginType>();
+
+            StfAssert.IsTrue("Singleton object is a singleton", singletonObject2.Equals(singletonObject));
+            StfAssert.IsTrue("Singleton is true", singletonObject2.SingletonBool);
+            StfAssert.AreEqual("SingletonInteger is 2", 2, singletonObject2.SingletonInteger);
+        }
     }
 }

@@ -46,6 +46,14 @@ namespace Mir.Stf.Utilities
         void RegisterTypes(Dictionary<Type, Type> dictionary);
 
         /// <summary>
+        /// The register instance.
+        /// </summary>
+        /// <param name="instance">
+        /// The instance.
+        /// </param>
+        void RegisterInstance(object instance);
+
+        /// <summary>
         /// The get.
         /// </summary>
         /// <typeparam name="T">

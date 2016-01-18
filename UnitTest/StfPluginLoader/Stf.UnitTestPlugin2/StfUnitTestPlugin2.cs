@@ -64,6 +64,7 @@ namespace Stf.Unittests
                 StfContainer.RegisterType<ITestPluginAdapter, TestPluginAdapter>();
                 StfContainer.RegisterType<TestPluginTypeWithoutInterface>();
                 StfContainer.RegisterType<TestAdapterWithoutInterface>();
+                StfContainer.RegisterType<IStfSingletonPluginType, StfSingletonPluginType>();
             }
             catch (Exception)
             {

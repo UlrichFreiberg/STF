@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IStfSingletonPluginType.cs" />
     <Compile Include="ITestPluginModel2.cs" />
     <Compile Include="ITestPluginAdapter.cs" />
     <Compile Include="ITestPluginModel.cs" />

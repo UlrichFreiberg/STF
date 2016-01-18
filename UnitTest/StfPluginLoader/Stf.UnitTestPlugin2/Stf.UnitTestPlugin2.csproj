@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="StfUnitTestPlugin2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestPluginTypes\StfSingletonPluginType.cs" />
     <Compile Include="UnitTestPluginTypes\TestAdapterWithoutInterface.cs" />
     <Compile Include="UnitTestPluginTypes\TestPluginModel2.cs" />
     <Compile Include="UnitTestPluginTypes\TestPluginAdapter.cs" />

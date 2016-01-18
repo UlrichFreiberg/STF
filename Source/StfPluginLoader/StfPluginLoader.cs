@@ -21,6 +21,8 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
+    using Mir.Stf.Utilities.Attributes;
+
     /// <summary>
     /// The stf plugin loader.
     /// </summary>
@@ -193,6 +195,7 @@ namespace Mir.Stf.Utilities
         {
             var interfaceName = string.Format("I{0}", typeToRegister.Name);
             var mainInterface = typeToRegister.GetInterface(interfaceName);
+
             if (mainInterface == null)
             {
                 container.RegisterType(

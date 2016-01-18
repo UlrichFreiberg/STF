@@ -64,6 +64,17 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// The register instance.
+        /// </summary>
+        /// <param name="instance">
+        /// The instance.
+        /// </param>
+        public void RegisterInstance(object instance)
+        {
+            container.RegisterInstance(instance);
+        }
+
+        /// <summary>
         /// The register type.
         /// </summary>
         /// <typeparam name="TFrom">
