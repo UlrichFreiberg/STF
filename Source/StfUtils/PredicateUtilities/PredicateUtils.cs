@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Predicate.cs" company="Mir Software">
+// <copyright file="PredicateUtils.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -8,11 +8,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-
-namespace Predicate
+namespace Mir.Stf.Utilities.PredicateUtilities
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
@@ -23,13 +22,15 @@ namespace Predicate
     /// <summary>
     /// Utility class to handle predicates towards a list
     /// </summary>
-    public class Predicate
+    public class PredicateUtils
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="PredicateUtils"/> class. 
         /// </summary>
         /// <param name="predicateList">
+        /// A list of predicates
         /// </param>
-        public Predicate(string predicateList = null)
+        public PredicateUtils(string predicateList = null)
         {
             PredicateList = predicateList;
         }
@@ -104,14 +105,15 @@ namespace Predicate
                     }
                 }
 
-                var predicate = string.Format("{0} = @0", propertyName);
+                var predicateExpression = string.Format("{0} = @0", propertyName);
 
                 try
                 {
-                    retVal = retVal.Where(predicate, propertyValue).ToList();
+                    retVal = retVal.Where(predicateExpression, propertyValue).ToList();
                 }
                 catch (Exception ex)
                 {
+                    // TODO: Should be logged - when we have the StfLogger:-)
                     ;
                 }
             }
@@ -144,9 +146,9 @@ namespace Predicate
                 PredicateList = predicateList;
             }
 
-            foreach (var predicatePart in Predicates())
+            foreach (var predicateExpression in Predicates())
             {
-                var propertyName = predicatePart.Quantifier;
+                var propertyName = predicateExpression.LeftHandSide;
                 var property = properties.FirstOrDefault(pp => pp.Name == propertyName);
 
                 // did we find the correspondig property in the filterClass?
@@ -160,7 +162,7 @@ namespace Predicate
                     // for a property to be a filter property it needs to be nullable
                     if (nullable)
                     {
-                        SetPropertyValue(propertyType, predicatePart.Value, property, retVal);
+                        SetPropertyValue(propertyType, predicateExpression.RightHandSide, property, retVal);
                         continue;
                     }
                 }
@@ -173,47 +175,15 @@ namespace Predicate
                     if (prop.GetCustomAttributes(true)
                         .OfType<PredicateMapAttribute>()
                         .Select(entityPropertyAttribute => entityPropertyAttribute.EntityProperty)
-                            .Any(mappedPropertyName => mappedPropertyName == predicatePart.Quantifier))
+                            .Any(mappedPropertyName => mappedPropertyName == predicateExpression.LeftHandSide))
                     {
-                        SetPropertyValue(prop.PropertyType, predicatePart.Value, prop, retVal);
+                        SetPropertyValue(prop.PropertyType, predicateExpression.RightHandSide, prop, retVal);
                         break;
                     }
                 }
             }
 
             return retVal;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="propertyType">
-        /// </param>
-        /// <param name="value">
-        /// The value to set
-        /// </param>
-        /// <param name="property">
-        /// </param>
-        /// <param name="retVal">
-        /// </param>
-        /// <typeparam name="TFilter">
-        /// </typeparam>
-        private void SetPropertyValue<TFilter>(
-            Type propertyType,
-            string value,
-            PropertyInfo property,
-            TFilter retVal) where TFilter : new()
-        {
-            // Read more here http://stackoverflow.com/questions/2961656/generic-tryparse
-            try
-            {
-                var val = TypeDescriptor.GetConverter(propertyType).ConvertFromString(value);
-
-                property.SetValue(retVal, val);
-            }
-            catch
-            {
-                ;
-            }
         }
 
         /// <summary>
@@ -225,7 +195,7 @@ namespace Predicate
         /// <returns>
         /// A predicate part
         /// </returns>
-        public IEnumerable<PredicatePart> Predicates(string predicateList = null)
+        public IEnumerable<PredicateExpression> Predicates(string predicateList = null)
         {
             if (!string.IsNullOrEmpty(predicateList))
             {
@@ -239,7 +209,7 @@ namespace Predicate
 
             var predicates = PredicateList.Split(';');
 
-            foreach (var retVal in predicates.Select(pred => new PredicatePart(pred)))
+            foreach (var retVal in predicates.Select(pred => new PredicateExpression(pred)))
             {
                 yield return retVal;
             }
@@ -254,12 +224,14 @@ namespace Predicate
         /// The class containing the filter
         /// </param>
         /// <typeparam name="TFilter">
+        /// An object that represents a predicate. All nullable properties with a value are treated as predicates.
         /// </typeparam>
         /// <returns>
+        /// The generated Predicate
         /// </returns>
         public string GeneratePredicate<TFilter>(TFilter filterClass)
         {
-            var properties = typeof (TFilter).GetProperties();
+            var properties = typeof(TFilter).GetProperties();
             var retVal = string.Empty;
             var seperator = string.Empty;
 
@@ -270,7 +242,7 @@ namespace Predicate
                 var propertyName = property.Name;
                 var nullable = !propertyType.IsValueType ||
                                (propertyType.IsGenericType &&
-                                propertyType.GetGenericTypeDefinition() == typeof (Nullable<>));
+                                propertyType.GetGenericTypeDefinition() == typeof(Nullable<>));
 
                 if (propertyValue == null || !nullable)
                 {
@@ -299,10 +271,13 @@ namespace Predicate
         }
 
         /// <summary>
+        /// Reads a predicate from a file. The file may contain comments 
         /// </summary>
         /// <param name="filename">
+        /// The name of the file
         /// </param>
         /// <returns>
+        /// The normalized predicate string. A series of LHS operator RHS seperated by ';'
         /// </returns>
         public string ReadPredicateFromFile(string filename)
         {
@@ -321,6 +296,44 @@ namespace Predicate
 
             PredicateList = retVal;
             return PredicateList;
+        }
+
+        /// <summary>
+        /// Sets a property in an object
+        /// </summary>
+        /// <param name="propertyType">
+        /// Type of the property to set
+        /// </param>
+        /// <param name="value">
+        /// The value to set
+        /// </param>
+        /// <param name="property">
+        /// Information around the property to set
+        /// </param>
+        /// <param name="filter">
+        /// The object containing the property to set
+        /// </param>
+        /// <typeparam name="TFilter">
+        /// A type containing nullable properties representing a filter
+        /// </typeparam>
+        private void SetPropertyValue<TFilter>(
+            Type propertyType,
+            string value,
+            PropertyInfo property,
+            TFilter filter) where TFilter : new()
+        {
+            // Read more here http://stackoverflow.com/questions/2961656/generic-tryparse
+            try
+            {
+                var val = TypeDescriptor.GetConverter(propertyType).ConvertFromString(value);
+
+                property.SetValue(filter, val);
+            }
+            catch
+            {
+                // TODO: Should be logged - when we have the StfLogger:-)
+                ;
+            }
         }
     }
 }

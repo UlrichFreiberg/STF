@@ -8,11 +8,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mir.Stf.Utilities.TableUtils;
-
-namespace UnitTest
+namespace UnitTest.TableUtils
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using Mir.Stf.Utilities.TableUtilities;
 
     /// <summary>

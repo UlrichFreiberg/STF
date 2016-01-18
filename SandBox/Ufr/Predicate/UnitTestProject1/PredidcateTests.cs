@@ -65,5 +65,35 @@ namespace PredidcateTests
 
             StfAssert.AreEqual("Found", filter.AgeFilter, 42);
         }
+
+        [TestMethod]
+        public void TestMethodGeneratePredicate1()
+        {
+            var predicate = new Predicate();
+            var filterClass = new PeopleFilter {Height = 182};
+            var filter = predicate.GeneratePredicate<PeopleFilter>(filterClass);
+
+            StfAssert.AreEqual("Found", filter, "Height=182");
+        }
+
+        [TestMethod]
+        public void TestMethodGeneratePredicate2()
+        {
+            var predicate = new Predicate();
+            var filterClass = new PeopleFilter { Height = 182, Age = 42 };
+            var filter = predicate.GeneratePredicate<PeopleFilter>(filterClass);
+
+            StfAssert.AreEqual("Found", filter, "Height=182");
+        }
+
+        [TestMethod]
+        public void TestMethodGeneratePredicate3()
+        {
+            var predicate = new Predicate();
+            var filterClass = new PeopleFilter { Height = 182, AgeFilter = 42 };
+            var filter = predicate.GeneratePredicate<PeopleFilter>(filterClass);
+
+            StfAssert.AreEqual("Found", filter, "Age=42 ; Height=182");
+        }
     }
 }
