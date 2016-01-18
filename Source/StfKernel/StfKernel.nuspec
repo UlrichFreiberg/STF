@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Set logger header foreground and background colors from configuration</releaseNotes>
+    <releaseNotes>Added predicate filter utils and singleton type registration capabilities</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>
