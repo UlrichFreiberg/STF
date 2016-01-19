@@ -29,7 +29,19 @@ namespace Mir.Stf.Utilities.Utils
         /// </returns>
         public static string StfFormatString(this string theString, params object[] args)
         {
-            return string.IsNullOrEmpty(theString) ? string.Empty : string.Format(theString, args);
+            var retVal = string.Empty;
+
+            if (string.IsNullOrEmpty(theString))
+            {
+                return retVal;
+            }
+
+            if (args == null || args.Length <= 0)
+            {
+                return theString;
+            }
+
+            return string.Format(theString, args);
         }
     }
 }
