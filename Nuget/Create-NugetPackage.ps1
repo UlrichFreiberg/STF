@@ -2,6 +2,9 @@
     [switch] $PushPackage
 )
 
+$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
+$Stf_Root = (Resolve-Path "$scriptPath\..\").Path
+$NuGetExe = (Resolve-Path "$Stf_Root\Nuget\Nuget.exe").Path
 
 ##########################################################################
 # Get the name of the nuget package (changes with every new version)
@@ -60,12 +63,12 @@ Push-Location $stfKernelPath
 
 # Receiving 500 error code when trying to push symbols package to symbolsource
 #nuget pack $kernelProjName -IncludeReferencedProjects -Symbols
-nuget pack $kernelProjName -IncludeReferencedProjects
+& $NuGetExe pack $kernelProjName -IncludeReferencedProjects
 
 if ($PushPackage)
 {
     $packageName = Get-PackageName
-    nuget push $packageName
+    & $NuGetExe push $packageName
 }
 
 Pop-Location
