@@ -111,10 +111,9 @@ namespace Mir.Stf.Utilities.PredicateUtilities
                 {
                     retVal = retVal.Where(predicateExpression, propertyValue).ToList();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // TODO: Should be logged - when we have the StfLogger:-)
-                    ;
                 }
             }
 
@@ -332,7 +331,6 @@ namespace Mir.Stf.Utilities.PredicateUtilities
             catch
             {
                 // TODO: Should be logged - when we have the StfLogger:-)
-                ;
             }
         }
     }
