@@ -10,6 +10,8 @@
 
 namespace Mir.Stf.Utilities.Utils
 {
+    using System;
+
     /// <summary>
     /// The string extensions.
     /// </summary>
@@ -41,7 +43,16 @@ namespace Mir.Stf.Utilities.Utils
                 return theString;
             }
 
-            return string.Format(theString, args);
+            try
+            {
+                retVal = string.Format(theString, args);
+            }
+            catch (Exception)
+            {
+                // just don't break
+            }
+
+            return retVal;
         }
     }
 }
