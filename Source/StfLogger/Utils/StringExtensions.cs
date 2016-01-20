@@ -43,6 +43,8 @@ namespace Mir.Stf.Utilities.Utils
                 return theString;
             }
 
+            retVal = theString;
+
             try
             {
                 retVal = string.Format(theString, args);
