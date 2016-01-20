@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("StfUtils")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Mir Stf Utilities")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Mir Software")]
 [assembly: AssemblyProduct("StfUtils")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
@@ -32,8 +32,12 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.84.60119")]
-[assembly: AssemblyFileVersion("1.0.84.60119")]
+[assembly: AssemblyVersion("1.0.88.60120")]
+[assembly: AssemblyFileVersion("1.0.88.60120")]
+
+
+
+
 
 
 

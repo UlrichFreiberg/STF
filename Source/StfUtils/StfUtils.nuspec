@@ -3,14 +3,14 @@
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
-    <title>Mir.Stf</title>
+    <title>Mir.Stf.Utils</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
 	<licenseUrl>http://www.perlfoundation.org/artistic_license_2_0</licenseUrl>
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added predicate filter utils and singleton type registration capabilities</releaseNotes>
+    <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2016</copyright>
   </metadata>
 </package>
