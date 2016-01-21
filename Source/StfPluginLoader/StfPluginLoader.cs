@@ -21,8 +21,6 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
-    using Mir.Stf.Utilities.Attributes;
-
     /// <summary>
     /// The stf plugin loader.
     /// </summary>
@@ -92,6 +90,8 @@ namespace Mir.Stf.Utilities
                 return 0;
             }
 
+            PluginLogger.LogInternal("looking for plugins at [{0}]", stfPluginPath);
+
             var patterns = pluginPatterns.Split(';');
             foreach (var pattern in patterns)
             {
@@ -131,6 +131,8 @@ namespace Mir.Stf.Utilities
             }
 
             OverlayPluginSettings(stfPluginPath);
+
+            PluginLogger.LogInternal("Done looking for plugins");
 
             return container.Registrations.Count();
         }
@@ -198,6 +200,8 @@ namespace Mir.Stf.Utilities
 
             if (mainInterface == null)
             {
+                PluginLogger.LogInternal("Registering type [{0}] with no matching interface", typeToRegister.Name);
+
                 container.RegisterType(
                     typeToRegister, 
                     new InjectionProperty("StfContainer"),
@@ -205,6 +209,8 @@ namespace Mir.Stf.Utilities
                 
                 return;
             }
+
+            PluginLogger.LogInternal("Registering type [{0}] that has matching interface [{1}]", typeToRegister.Name, interfaceName);
             
             container.RegisterMyType(mainInterface, typeToRegister);
         }
