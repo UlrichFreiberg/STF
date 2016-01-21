@@ -28,7 +28,7 @@ namespace UnitTest
         public void TestInitialize()
         {
             StfAssert.EnableNegativeTesting = true;
-            this.StfLogger.LogInfo("UnitTestStfAsserts TestInitialize");
+            StfLogger.LogInfo("UnitTestStfAsserts TestInitialize");
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertTrue()
         {
-            Assert.IsTrue(this.StfAssert.IsTrue("true", true));
-            Assert.IsFalse(this.StfAssert.IsTrue("false", false));
+            Assert.IsTrue(StfAssert.IsTrue("true", true));
+            Assert.IsFalse(StfAssert.IsTrue("false", false));
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertFalse()
         {
-            Assert.IsFalse(this.StfAssert.IsFalse("true", true));
-            Assert.IsTrue(this.StfAssert.IsFalse("false", false));
+            Assert.IsFalse(StfAssert.IsFalse("true", true));
+            Assert.IsTrue(StfAssert.IsFalse("false", false));
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertThrows()
         {
-            Assert.IsTrue(this.StfAssert.AssertThrows<NotImplementedException>("true", ThrowNotImplementedException));
-            Assert.IsFalse(this.StfAssert.AssertThrows<ArgumentException>("false", ThrowNotImplementedException));
+            Assert.IsTrue(StfAssert.AssertThrows<NotImplementedException>("true", ThrowNotImplementedException));
+            Assert.IsFalse(StfAssert.AssertThrows<ArgumentException>("false", ThrowNotImplementedException));
         }
 
         /// <summary>
@@ -78,11 +78,11 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertThrowsLambda()
         {
-            Assert.IsTrue(this.StfAssert.AssertThrows<ApplicationException>(
+            Assert.IsTrue(StfAssert.AssertThrows<ApplicationException>(
                 "true",
                 () => MethodWithParamCanThrow<ApplicationException>(true)));
             
-            Assert.IsFalse(this.StfAssert.AssertThrows<ApplicationException>(
+            Assert.IsFalse(StfAssert.AssertThrows<ApplicationException>(
                 "false",
                 () => MethodWithParamCanThrow<ApplicationException>(false)));
         }
@@ -93,7 +93,9 @@ namespace UnitTest
         [TestCleanup]
         public void TestCleanup()
         {
-            this.StfLogger.LogInfo("UnitTestStfAsserts TestCleanup");
+            // Setting to true again resets the failure count
+            StfAssert.EnableNegativeTesting = true;
+            StfLogger.LogInfo("UnitTestStfAsserts TestCleanup");
         }
 
         /// <summary>

@@ -23,6 +23,26 @@ namespace UnitTest
     public class UnitTestStfAssertEquality : StfTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            StfAssert.EnableNegativeTesting = true;
+            StfLogger.Configuration.ScreenshotOnLogFail = false;
+        }
+
+        /// <summary>
+        /// The test cleanup.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            // setting to true agains resets failure count
+            StfAssert.EnableNegativeTesting = true;
+        }
+
+        /// <summary>
         /// The test method assert equals.
         /// </summary>
         [TestMethod]
@@ -30,9 +50,6 @@ namespace UnitTest
         {
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
-
-            StfAssert.EnableNegativeTesting = true;
-            StfLogger.Configuration.ScreenshotOnLogFail = false;
 
             Assert.IsTrue(StfAssert.AreEqual("1 = 1", 1, 1));
             Assert.IsFalse(StfAssert.AreEqual("1 = 1.0", 1, 1.0));
@@ -61,8 +78,6 @@ namespace UnitTest
         {
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
-
-            StfAssert.EnableNegativeTesting = true;
 
             Assert.IsTrue(StfAssert.GreaterThan("2 > 1", 2, 1));
             Assert.IsTrue(StfAssert.GreaterThan("2.0 > 1", 2.0, 1));
@@ -95,8 +110,6 @@ namespace UnitTest
         {
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
-
-            StfAssert.EnableNegativeTesting = true;
 
             Assert.IsFalse(StfAssert.LessThan("2 < 1", 2, 1));
             Assert.IsFalse(StfAssert.LessThan("2.0 < 1", 2.0, 1));

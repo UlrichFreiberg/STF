@@ -23,6 +23,26 @@ namespace UnitTest
     public class UnitTestStfAssertFileAndFolder : StfTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            StfAssert.EnableNegativeTesting = true;
+            StfLogger.Configuration.ScreenshotOnLogFail = false;
+        }
+
+        /// <summary>
+        /// The test cleanup.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            // setting to true agains resets failure count
+            StfAssert.EnableNegativeTesting = true;
+        }
+
+        /// <summary>
         /// The test method assert FileContains.
         /// </summary>
         [TestMethod]
@@ -30,8 +50,6 @@ namespace UnitTest
         {
             const string UnitTestFile = @"c:\temp\TestMethodAssertFileContains.txt";
             var testFile = File.CreateText(UnitTestFile);
-
-            StfAssert.EnableNegativeTesting = true;
 
             testFile.WriteLine("one line of test data");
             testFile.Close();
@@ -50,8 +68,6 @@ namespace UnitTest
         public void TestMethodAssertFileExists()
         {
             const string UnitTestFile = @"c:\temp\TestMethodAssertFileContains.txt";
-
-            StfAssert.EnableNegativeTesting = true;
 
             if (File.Exists(UnitTestFile))
             {
@@ -76,8 +92,6 @@ namespace UnitTest
         {
             const string UnitTestFile = @"c:\temp\TestMethodAssertFileNotExists.txt";
 
-            StfAssert.EnableNegativeTesting = true;
-
             if (File.Exists(UnitTestFile))
             {
                 File.Delete(UnitTestFile);
@@ -101,8 +115,6 @@ namespace UnitTest
         {
             const string UnitTestDir = @"c:\temp\TestMethodAssertFolderExists";
 
-            StfAssert.EnableNegativeTesting = true;
-
             if (Directory.Exists(UnitTestDir))
             {
                 Directory.Delete(UnitTestDir);
@@ -121,8 +133,6 @@ namespace UnitTest
         public void TestMethodAssertFolderNotExists()
         {
             const string UnitTestDir = @"c:\temp\TestMethodAssertFolderNotExists";
-
-            StfAssert.EnableNegativeTesting = true;
 
             if (Directory.Exists(UnitTestDir))
             {
@@ -144,8 +154,6 @@ namespace UnitTest
             const string UnitTestFile1 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\TestMethodAssertFileNotExists1.xml";
             const string UnitTestFile2 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\TestMethodAssertFileNotExists2.xml";
 
-            StfAssert.EnableNegativeTesting = true;
-
             Assert.IsTrue(StfAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
             Assert.IsFalse(StfAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
         }
@@ -158,8 +166,6 @@ namespace UnitTest
         {
             const string UnitTestFile1 = @"TestData\zerofile.txt";
             const string UnitTestFile2 = @"TestData\zerofile.txt";
-
-            StfAssert.EnableNegativeTesting = true;
 
             Assert.IsFalse(StfAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
             Assert.IsTrue(StfAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
@@ -174,8 +180,6 @@ namespace UnitTest
             const string UnitTestFile1 = @"TestData\zerofile.txt";
             const string UnitTestFile2 = @"TestData\OneCharFile.txt";
 
-            StfAssert.EnableNegativeTesting = true;
-
             Assert.IsTrue(StfAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
             Assert.IsFalse(StfAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
         }
@@ -188,8 +192,6 @@ namespace UnitTest
         {
             const string UnitTestFile1 = @"TestData\CaptureSame01.jpg";
             const string UnitTestFile2 = @"TestData\CaptureSame02.jpg";
-
-            StfAssert.EnableNegativeTesting = true;
 
             Assert.IsTrue(StfAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
             Assert.IsFalse(StfAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));

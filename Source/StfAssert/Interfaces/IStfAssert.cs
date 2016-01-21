@@ -31,6 +31,16 @@ namespace Mir.Stf.Utilities.Interfaces
         string LastMessage { get; }
 
         /// <summary>
+        /// Gets the current failures.
+        /// </summary>
+        int CurrentFailures { get; }
+
+        /// <summary>
+        /// Gets the current passes.
+        /// </summary>
+        int CurrentPasses { get; }
+
+        /// <summary>
         /// Assert if two values are the same. Values and objects can be compared.
         /// </summary>
         /// <typeparam name="T1">

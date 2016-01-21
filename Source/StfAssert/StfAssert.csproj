@@ -48,6 +48,7 @@
     <Compile Include="StfAssert_FileAndFolder.cs" />
     <Compile Include="StfAssert_Object.cs" />
     <Compile Include="StfStringAssert.cs" />
+    <Compile Include="Utilities\AssertStats.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StfLogger\StfLogger.csproj">

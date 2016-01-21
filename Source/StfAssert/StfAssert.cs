@@ -14,6 +14,8 @@ namespace Mir.Stf.Utilities
     using Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Mir.Stf.Utilities.Utilities;
+
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -33,6 +35,8 @@ namespace Mir.Stf.Utilities
         public StfAssert(IStfLogger logger) : this()
         {
             AssertLogger = logger;
+            LastMessage = "Initialized with logger";
+            Stats = new AssertStats();
         }
 
         /// <summary>
@@ -61,8 +65,35 @@ namespace Mir.Stf.Utilities
 
             set
             {
-                AssertLogger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value));
+                AssertLogger.LogTrace("EnableNegativeTesting set to [{0}]", value);
                 enableNegativeTesting = value;
+
+                if (value)
+                {
+                    Stats = new AssertStats();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the current failures.
+        /// </summary>
+        public int CurrentFailures
+        {
+            get
+            {
+                return Stats.AssertFailedCount;
+            }
+        }
+
+        /// <summary>
+        /// Gets the current passes.
+        /// </summary>
+        public int CurrentPasses
+        {
+            get
+            {
+                return Stats.AssertPassCount;
             }
         }
 
@@ -70,6 +101,11 @@ namespace Mir.Stf.Utilities
         /// Gets the last message.
         /// </summary>
         public string LastMessage { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the stats.
+        /// </summary>
+        private AssertStats Stats { get; set; }
 
         /// <summary>
         /// Asserts that a expression is True
@@ -209,6 +245,7 @@ namespace Mir.Stf.Utilities
         private bool AssertPass(string testStep, string message)
         {
             AssertLogger.LogPass(testStep, message);
+            Stats.AssertPassCount++;
             return true;
         }
 
@@ -227,6 +264,7 @@ namespace Mir.Stf.Utilities
         private bool AssertFail(string testStep, string message)
         {
             AssertLogger.LogFail(testStep, message);
+            Stats.AssertFailedCount++;
 
             if (!enableNegativeTesting)
             {

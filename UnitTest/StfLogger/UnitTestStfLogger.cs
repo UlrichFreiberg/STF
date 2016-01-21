@@ -238,6 +238,9 @@ namespace UnitTest
             StfAssert.IsFalse("False Value for IsFalse", false);
             StfAssert.IsFalse("2 > 3 Value for IsFalse", 2 > 3);
             StfAssert.IsFalse("3 > 2 Value for IsFalse", 3 > 2);
+
+            // setting to true resets count of failures
+            StfAssert.EnableNegativeTesting = true;
         }
 
         /// <summary>

@@ -111,7 +111,9 @@ namespace Mir.Stf
         {
             LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
 
-            if (TestContext.CurrentTestOutcome != UnitTestOutcome.Passed)
+            var testFailed = TestContext.CurrentTestOutcome != UnitTestOutcome.Passed;
+
+            if (testFailed)
             {
                 StfLogger.LogError("Test failed");
             }
@@ -148,6 +150,16 @@ namespace Mir.Stf
             }
 
             StfArchiver.PerformArchive();
+
+            if (!testFailed && StfAssert.CurrentFailures > 0)
+            {
+                var msg = string.Format(
+                    "Testmethod [{0}] failed. Number of asserts that failed: [{1}]",
+                    TestContext.TestName,
+                    StfAssert.CurrentFailures);
+
+                throw new AssertFailedException(msg);
+            }
         }
 
         /// <summary>

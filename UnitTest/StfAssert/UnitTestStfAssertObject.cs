@@ -23,13 +23,31 @@ namespace UnitTest
     public class UnitTestStfAssertObject : StfTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            StfAssert.EnableNegativeTesting = true;
+            StfLogger.Configuration.ScreenshotOnLogFail = false;
+        }
+
+        /// <summary>
+        /// The test cleanup.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            // setting to true agains resets failure count
+            StfAssert.EnableNegativeTesting = true;
+        }
+
+        /// <summary>
         /// The test method assert equals.
         /// </summary>
         [TestMethod]
         public void TestMethodAssertIsObject()
         {
-            StfAssert.EnableNegativeTesting = true;
-
             Assert.IsFalse(StfAssert.IsObject("An integer", 1));
             Assert.IsTrue(StfAssert.IsObject("A string", "1"));
             Assert.IsTrue(StfAssert.IsObject("An object", new object()));
@@ -43,8 +61,6 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertIsInstanceOf()
         {
-            StfAssert.EnableNegativeTesting = true;
-
             Assert.IsFalse(StfAssert.IsInstanceOfType("An integer", 1, Type.GetType("int")));
             Assert.IsTrue(StfAssert.IsInstanceOfType("A string", "1", Type.GetType(typeof(string).FullName)));
             Assert.IsTrue(StfAssert.IsInstanceOfType("An object", new object(), Type.GetType(typeof(object).FullName)));

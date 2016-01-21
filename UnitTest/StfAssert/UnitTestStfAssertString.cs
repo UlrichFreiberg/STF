@@ -21,13 +21,31 @@ namespace UnitTest
     public class UnitTestStfAssertString : StfTestScriptBase
     {
         /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            StfAssert.EnableNegativeTesting = true;
+            StfLogger.Configuration.ScreenshotOnLogFail = false;
+        }
+
+        /// <summary>
+        /// The test cleanup.
+        /// </summary>
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            // setting to true agains resets failure count
+            StfAssert.EnableNegativeTesting = true;
+        }
+
+        /// <summary>
         /// The test method assert strings.
         /// </summary>
         [TestMethod]
         public void TestMethodAssertStrings()
         {
-            StfAssert.EnableNegativeTesting = true;
-
             Assert.IsTrue(StfAssert.StringContains("TestStepName 1", "Hejsa", "Hej"));
             Assert.IsFalse(StfAssert.StringContains("TestStepName 2", "Hejsa", "Bent"));
 
