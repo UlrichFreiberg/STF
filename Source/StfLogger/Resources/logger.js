@@ -4,7 +4,7 @@ var lastAnchor = "";
 var PassCount = 1;
 var FailCount = 1;
 var ErrorCount = 1;
-var WarnCount = 1;
+var WarningCount = 1;
 var InfoCount = 1;
 var DebugCount = 1;
 var TraceCount = 1;
@@ -146,7 +146,7 @@ function toggleAll() {
         //toggleButton("passBtn", "Show", "Show Pass") 
         //toggleButton("failBtn", "Show", "Show Fail") 
         toggleButton("errorBtn", "Show", "Show Error");
-        toggleButton("warnBtn", "Show", "Show Warn");
+        toggleButton("warningBtn", "Show", "Show Warning");
         toggleButton("infoBtn", "Show", "Show Info");
         toggleButton("debugBtn", "Show", "Show Debug");
         toggleButton("traceBtn", "Show", "Show Trace");
@@ -157,7 +157,7 @@ function toggleAll() {
         toggleButton("passBtn", "Hide", "Hide Pass");
         toggleButton("failBtn", "Hide", "Hide Fail");
         toggleButton("errorBtn", "Hide", "Hide Error");
-        toggleButton("warnBtn", "Hide", "Hide Warn");
+        toggleButton("warningBtn", "Hide", "Hide Warning");
         toggleButton("infoBtn", "Hide", "Hide Info");
         toggleButton("debugBtn", "Hide", "Hide Debug");
         toggleButton("traceBtn", "Hide", "Hide Trace");
@@ -261,18 +261,17 @@ function initButtons() {
     }
 
     PassCount = initButtonCount("pass");
-    FailCount = initButtonCount("fail")
-    ErrorCount = initButtonCount("error")
-    WarnCount = initButtonCount("warn")
-    InfoCount = initButtonCount("info")
-    DebugCount = initButtonCount("debug")
-    TraceCount = initButtonCount("trace")
-    InternalCount = initButtonCount("internal")
-
+    FailCount = initButtonCount("fail");
+    ErrorCount = initButtonCount("error");
+    WarningCount = initButtonCount("warning");
+    InfoCount = initButtonCount("info");
+    DebugCount = initButtonCount("debug");
+    TraceCount = initButtonCount("trace");
+    InternalCount = initButtonCount("internal");
     hideButtonByDisplayCount("passBtn", PassCount);
     hideButtonByDisplayCount("failBtn", FailCount);
     hideButtonByDisplayCount("errorBtn", ErrorCount);
-    hideButtonByDisplayCount("warnBtn", WarnCount);
+    hideButtonByDisplayCount("warningBtn", WarningCount);
     hideButtonByDisplayCount("infoBtn", InfoCount);
     hideButtonByDisplayCount("debugBtn", DebugCount);
     hideButtonByDisplayCount("traceBtn", TraceCount);

@@ -117,7 +117,7 @@ namespace Mir.Stf.Utilities.Properties {
         ///var PassCount = 1;
         ///var FailCount = 1;
         ///var ErrorCount = 1;
-        ///var WarnCount = 1;
+        ///var WarningCount = 1;
         ///var InfoCount = 1;
         ///var DebugCount = 1;
         ///var TraceCount = 1;
