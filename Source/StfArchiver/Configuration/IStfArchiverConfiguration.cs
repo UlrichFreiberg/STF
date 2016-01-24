@@ -16,12 +16,12 @@ namespace Mir.Stf.Utilities.Configuration
     public interface IStfArchiverConfiguration
     {
         /// <summary>
-        /// Gets or sets wether or not to Archive folders and files
+        /// Gets or sets a value indicating whether or not to Archive folders and files
         /// </summary>
         bool DoArchiveFoldersAndFiles { get; set; }
 
         /// <summary>
-        /// Gets or sets wether or not to Archive to zip file
+        /// Gets or sets a value indicating whether or not to Archive to zip file
         /// </summary>
         bool DoArchiveToZipfile { get; set; }
 
@@ -59,5 +59,15 @@ namespace Mir.Stf.Utilities.Configuration
         /// Gets or sets the use test name in path.
         /// </summary>
         string UseTestNameInPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use DateNow in path.
+        /// </summary>
+        string UseDateNowInPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the order of directories to use in archive path.
+        /// </summary>
+        string DirectoryOrderInPath { get; set; }
     }
 }

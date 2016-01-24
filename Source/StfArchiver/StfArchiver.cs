@@ -312,33 +312,61 @@ namespace Mir.Stf.Utilities
         /// </param>
         private void SetDefaultArchiveDestination(string testname)
         {
+            // if allready set then dont do any defaulting
             if (!string.IsNullOrEmpty(Configuration.ArchiveDestination))
             {
                 return;
             }
 
-            var currentUser = Environment.UserName;
-            var unique = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
-            const string DefaultArchiveTopDir = @"c:\temp\stf\archiveDir";
+            testname = SetDefaultIfNull(testname, "DefaultTestDir");
 
-            if (string.IsNullOrEmpty(Configuration.ArchiveTopDir))
+            var arr = Configuration.DirectoryOrderInPath.Split(';');
+
+            for (var i = 0; i < arr.Length; i++)
             {
-                Configuration.ArchiveTopDir = DefaultArchiveTopDir;
+                switch (arr[i].Trim().ToLower())
+                {
+                    case "t":
+                    case "testname":
+                        AddToPath(Configuration.UseTestNameInPath, testname);
+                        break;
+
+                    case "l":
+                    case "u":
+                    case "loginname":
+                    case "username":
+                        AddToPath(Configuration.UseLoginNameInPath, Environment.UserName);
+                        break;
+
+                    case "d":
+                    case "date":
+                    case "datenow":
+                        AddToPath(Configuration.UseDateNowInPath, DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss"));
+                        break;
+                }                
+            }
+        }
+
+        /// <summary>
+        /// Checks is string is empty - if so it return the default value
+        /// </summary>
+        /// <param name="source">
+        /// the string to check
+        /// </param>
+        /// <param name="defaultValue">
+        /// The default value
+        /// </param>
+        /// <returns>
+        /// The string
+        /// </returns>
+        private string SetDefaultIfNull(string source, string defaultValue)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                source = defaultValue;
             }
 
-            if (!Directory.Exists(Configuration.ArchiveTopDir))
-            {
-                Directory.CreateDirectory(Configuration.ArchiveTopDir);
-            }
-
-            if (string.IsNullOrEmpty(testname))
-            {
-                testname = "DefaultTestDir";
-            }
-
-            AddToPath(Configuration.UseLoginNameInPath, currentUser);
-            AddToPath(Configuration.UseLoginNameInPath, testname);
-            AddToPath(Configuration.UseLoginNameInPath, unique);
+            return source;
         }
 
         /// <summary>

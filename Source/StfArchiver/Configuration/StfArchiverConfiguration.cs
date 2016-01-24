@@ -19,13 +19,13 @@ namespace Mir.Stf.Utilities.Configuration
     public class StfArchiverConfiguration : IStfArchiverConfiguration
     {
         /// <summary>
-        /// Gets or sets wether or not to Archive folders and files
+        /// Gets or sets a value indicating whether or not to Archive folders and files
         /// </summary>
         [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.DoArchiveFoldersAndFiles", DefaultValue = "false")]
         public bool DoArchiveFoldersAndFiles { get; set; }
 
         /// <summary>
-        /// Gets or sets wether or not to Archive to zip file
+        /// Gets or sets a value indicating whether or not to Archive to zip file
         /// </summary>
         [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.DoArchiveToZipfile", DefaultValue = "true")]
         public bool DoArchiveToZipfile { get; set; }
@@ -71,6 +71,18 @@ namespace Mir.Stf.Utilities.Configuration
         /// </summary>
         [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.UseLoginNameInPath", DefaultValue = "true")]
         public string UseLoginNameInPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the use DateNow in path.
+        /// </summary>
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.UseDateNowInPath", DefaultValue = "true")]
+        public string UseDateNowInPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the order of directories to use in archive path.
+        /// </summary>
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.DirectoryOrderInPath", DefaultValue = "username;testname;datenow")]
+        public string DirectoryOrderInPath { get; set; }
 
         public StfArchiverConfiguration()
         {
