@@ -75,8 +75,6 @@ switch ($TypeOfPackage)
     'Utils' {
         $csprojLocation = $stfUtilsPath
         $projectFile = $utilsProjName
-        Write-InfoMessage 'Creating the Utils package is disabled temporarily because it made Nuget resolve it as a dependency for Kernel'
-        return
     }
     Default { 
         Write-InfoMessage 'No type of package defined! Not creating nuget package'

@@ -66,10 +66,6 @@
       <Project>{dfff16ec-8e3e-48d1-a247-b7ba7208231e}</Project>
       <Name>StfPluginLoader</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StfUtils\StfUtils.csproj">
-      <Project>{8a46e8a4-0dd5-4bbd-a990-40ec4c715eb0}</Project>
-      <Name>StfUtils</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Mir.Stf.Templates\StfConfiguration.xml.Template" />

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Mir.Stf.Utils</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+	<licenseUrl>http://www.perlfoundation.org/artistic_license_2_0</licenseUrl>
+    <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release of stf utils</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+  </metadata>
+</package>
