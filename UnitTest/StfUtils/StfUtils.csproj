@@ -36,7 +36,67 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mir.Stf.Kernel, Version=1.0.98.60125, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.98.60125\lib\net45\Mir.Stf.Kernel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mir.Stf.Utilities.StfArchiver, Version=1.0.98.60125, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.98.60125\lib\net45\Mir.Stf.Utilities.StfArchiver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mir.Stf.Utilities.StfAssert, Version=1.0.98.60125, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.98.60125\lib\net45\Mir.Stf.Utilities.StfAssert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mir.Stf.Utilities.StfConfiguration, Version=1.0.98.60125, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.98.60125\lib\net45\Mir.Stf.Utilities.StfConfiguration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mir.Stf.Utilities.StfLogger, Version=1.0.98.60125, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.98.60125\lib\net45\Mir.Stf.Utilities.StfLogger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mir.Stf.Utilities.StfPlugin, Version=1.0.98.60125, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.98.60125\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mir.Stf.Utilities.StfUtils, Version=1.0.95.60121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.98.60125\lib\net45\Mir.Stf.Utilities.StfUtils.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Slapper, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Slapper.AutoMapper.1.0.0.6\lib\Slapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -59,18 +119,7 @@
     <Compile Include="PredicateUtils\UnitTestPredicateUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\StfAssert\StfAssert.csproj">
-      <Project>{6933e0af-0e2a-48d2-8660-2c939b3db6fb}</Project>
-      <Name>StfAssert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\StfKernel\StfKernel.csproj">
-      <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
-      <Name>StfKernel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\StfUtils\StfUtils.csproj">
-      <Project>{8a46e8a4-0dd5-4bbd-a990-40ec4c715eb0}</Project>
-      <Name>StfUtils</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
