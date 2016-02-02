@@ -12,7 +12,7 @@ namespace Mir.Stf.Utilities.Interfaces
 {
     using System.Collections.Generic;
 
-    using Mir.Stf.Utilities.TableUtils;
+    using Mir.Stf.Utilities.TableUtilities;
 
     /// <summary>
     /// The TableUtils interface.

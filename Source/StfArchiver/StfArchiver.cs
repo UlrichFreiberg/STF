@@ -128,7 +128,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool PerformArchive()
         {
-            var retVal = true;
+            bool retVal;
 
             var tempArchiveDir = Path.Combine(Configuration.TempDirectory, Guid.NewGuid().ToString());
             if (!Directory.Exists(tempArchiveDir))
@@ -254,6 +254,12 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Zip up the destination directory
         /// </summary>
+        /// <param name="directoryToZip">
+        /// The directory To Zip.
+        /// </param>
+        /// <param name="zipFilename">
+        /// The zip Filename.
+        /// </param>
         /// <returns>
         /// Indication of success
         /// </returns>

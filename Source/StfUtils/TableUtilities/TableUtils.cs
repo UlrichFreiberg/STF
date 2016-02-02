@@ -15,7 +15,6 @@ namespace Mir.Stf.Utilities.TableUtilities
     using System.Reflection;
 
     using Mir.Stf.Utilities.Interfaces;
-    using Mir.Stf.Utilities.TableUtils;
 
     using Slapper;
 

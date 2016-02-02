@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Mir.Stf.Utilities.TableUtils
+namespace Mir.Stf.Utilities.TableUtilities
 {
     /// <summary>
     /// The header column info.

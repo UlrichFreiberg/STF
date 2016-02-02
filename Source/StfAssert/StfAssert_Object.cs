@@ -36,7 +36,7 @@ namespace Mir.Stf.Utilities
 
             if (actual == null)
             {
-                msg = string.Format("IsObject: Null is Not an object ");
+                msg = "IsObject: Null is Not an object ";
                 this.AssertFail(testStep, msg);
                 return false;
             }
@@ -46,12 +46,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("IsObject: is an object ");
+                msg = "IsObject: is an object ";
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("IsObject: is Not an object ");
+                msg = "IsObject: is Not an object ";
                 this.AssertFail(testStep, msg);
             }
 
@@ -148,12 +148,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("IsNotNull: 'actual' Is not null");
+                msg = "IsNotNull: \'actual\' Is not null";
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("IsNotNull: 'actual' Is null");
+                msg = "IsNotNull: \'actual\' Is null";
                 this.AssertFail(testStep, msg);
             }
 
@@ -179,7 +179,7 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("IsNull: object Is null");
+                msg = "IsNull: object Is null";
                 this.AssertPass(testStep, msg);
             }
             else
@@ -210,12 +210,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("HasValue: Has a value");
+                msg = "HasValue: Has a value";
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("HasValue: Has no value");
+                msg = "HasValue: Has no value";
                 this.AssertFail(testStep, msg);
             }
 
@@ -241,12 +241,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("HasNoValue: Has no value");
+                msg = "HasNoValue: Has no value";
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("HasNoValue: Has a value");
+                msg = "HasNoValue: Has a value";
                 this.AssertFail(testStep, msg);
             }
 

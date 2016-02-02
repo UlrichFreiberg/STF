@@ -19,7 +19,7 @@ namespace Mir.Stf.Utilities.PredicateUtilities
     public class PredicateExpression
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableUtils"/> class. 
+        /// Initializes a new instance of the <see cref="PredicateExpression"/> class. 
         /// </summary>
         /// <param name="predicateExpr">
         /// A predicate expression LHS = RHS

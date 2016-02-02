@@ -189,7 +189,6 @@ namespace Mir.Stf.Utilities
             return FolderNotExists(testStep, foldernameAndPath);
         }
 
-
         /// <summary>
         /// Asserts that a file doesn't exists
         /// </summary>
