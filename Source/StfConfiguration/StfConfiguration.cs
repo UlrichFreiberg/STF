@@ -15,7 +15,6 @@ using System.Xml;
 namespace Mir.Stf.Utilities
 {
     using System;
-    using System.Dynamic;
     using System.IO;
 
     /// <summary>
@@ -64,14 +63,19 @@ namespace Mir.Stf.Utilities
         {
         }
 
-
         /// <summary>
-        /// Delegate used to expand defaultSection and values. 
+        /// The evaluate key value delegate.
         /// </summary>
+        /// <param name="keyValue">
+        /// The key value.
+        /// </param>
+        /// <returns>
+        /// Delegate used to expand defaultSection and values. 
+        /// </returns>
         public delegate string EvaluateKeyValueDelegate(string keyValue);
 
         /// <summary>
-        /// Delegate used to expand variables etc. Default is 'System.Environment.ExpandEnvironmentVariables'. It can overriden for you needs.
+        /// Gets or sets the evaluate key value.
         /// </summary>
         public EvaluateKeyValueDelegate EvaluateKeyValue { get; set; }
 
@@ -305,7 +309,7 @@ namespace Mir.Stf.Utilities
         {
             if (currentlyLoadedSection != null)
             {
-                var parser = new Parser { EvaluateKeyValue = this.EvaluateKeyValue };
+                var parser = new Parser { EvaluateKeyValue = EvaluateKeyValue };
 
                 return parser.GetKey(section, keyName);
             }

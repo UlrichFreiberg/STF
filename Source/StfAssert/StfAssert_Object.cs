@@ -37,7 +37,7 @@ namespace Mir.Stf.Utilities
             if (actual == null)
             {
                 msg = "IsObject: Null is Not an object ";
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
                 return false;
             }
 
@@ -47,12 +47,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = "IsObject: is an object ";
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = "IsObject: is Not an object ";
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -82,13 +82,13 @@ namespace Mir.Stf.Utilities
             {
                 Assert.IsInstanceOfType(value, expectedType);
                 msg = string.Format("IsInstanceOfType: [{0}] is of type [{1}]", value, expectedType);
-                retVal = this.AssertPass(testStep, msg);
+                retVal = AssertPass(testStep, msg);
             }
             catch (AssertFailedException ex)
             {
                 retVal = false;
                 msg = ex.Message;
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -118,12 +118,12 @@ namespace Mir.Stf.Utilities
             {
                 Assert.IsInstanceOfType(value, expectedType);
                 msg = string.Format("IsInstanceOfType: [{0}] is of type [{1}]", value, expectedType);
-                retVal = this.AssertFail(testStep, msg);
+                retVal = AssertFail(testStep, msg);
             }
             catch (AssertFailedException)
             {
                 msg = string.Format("IsInstanceOfType: [{0}] is NOT of type [{1}]", value, expectedType);
-                retVal = this.AssertPass(testStep, msg);
+                retVal = AssertPass(testStep, msg);
             }
 
             return retVal;
@@ -149,12 +149,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = "IsNotNull: \'actual\' Is not null";
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = "IsNotNull: \'actual\' Is null";
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -180,12 +180,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = "IsNull: object Is null";
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("IsNull:'{0}' Is not null", actual);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -211,12 +211,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = "HasValue: Has a value";
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = "HasValue: Has no value";
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -242,12 +242,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = "HasNoValue: Has no value";
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = "HasNoValue: Has a value";
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;

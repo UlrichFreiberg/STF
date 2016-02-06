@@ -19,7 +19,7 @@ namespace Mir.Stf.Utilities
     public class Parser
     {
         /// <summary>
-        /// Delegate used to expand defaultSection and values. Default a Environment.ExpandVariables is used, but it can overriden for you needs.
+        /// Gets or sets s delegate used to expand defaultSection and values. Default a Environment.ExpandVariables is used, but it can overriden for you needs.
         /// </summary>
         public StfConfiguration.EvaluateKeyValueDelegate EvaluateKeyValue { get; set; }
 
@@ -60,7 +60,7 @@ namespace Mir.Stf.Utilities
                 throw new ArgumentOutOfRangeException(keyName, errMsg);
             }
 
-            var sectionName = this.GetSectionName(keyName);
+            var sectionName = GetSectionName(keyName);
 
             if (string.CompareOrdinal(section.SectionName, sectionName) == 0)
             {

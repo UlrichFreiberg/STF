@@ -262,7 +262,7 @@ namespace Mir.Stf.Utilities
             htmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
             htmlLine += "</div>\n";
 
-            this.LogFileHandle.Write(htmlLine);
+            LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }
 
@@ -274,7 +274,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private string GetNextMessageId()
         {
-            return string.Format("m{0}", this.messageId++);
+            return string.Format("m{0}", messageId++);
         }
 
         /// <summary>
@@ -298,7 +298,7 @@ namespace Mir.Stf.Utilities
 
             string htmlLine;
 
-            if (!this.AddLoglevelToRunReport[loglevel])
+            if (!AddLoglevelToRunReport[loglevel])
             {
                 return -1;
             }
@@ -367,7 +367,7 @@ namespace Mir.Stf.Utilities
                         logLevelString);
                     htmlLine += string.Format(
                         "    <div class=\"el time\">{0}</div>\n",
-                        this.timeOfLastMessage.ToString("HH:mm:ss"));
+                        timeOfLastMessage.ToString("HH:mm:ss"));
                     htmlLine += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
                     htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", IndentString());
                     htmlLine += string.Format("    <div class=\"el msg\">{0}</div>\n", message);

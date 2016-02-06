@@ -42,17 +42,20 @@ namespace Mir.Stf.Utilities
         public bool AreEqual<T1, T2>(string testStep, T1 expected, T2 actual)
         {
             var retVal = true;
-            var msg = string.Format("AreEqual: [{0}] Are Equal to [{1}]", expected, actual);
 
             try
             {
+                var msg = string.Format("AreEqual: [{0}] Are Equal to [{1}]", expected, actual);
+
                 Assert.AreEqual(expected, actual);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             catch (AssertFailedException)
             {
+                var msg = string.Format("AreEqual: [{0}] Are Not Equal to [{1}]", expected, actual);
+
                 retVal = false;
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -76,17 +79,20 @@ namespace Mir.Stf.Utilities
         public bool AreNotEqual(string testStep, object expected, object actual)
         {
             bool retVal;
-            var msg = string.Format("AreNotEqual: [{0}] Not Equal to [{1}]", expected, actual);
 
             try
             {
+                var msg = string.Format("AreNotEqual: [{0}] Not Equal to [{1}]", expected, actual);
+
                 Assert.AreNotEqual(expected, actual);
-                retVal = this.AssertPass(testStep, msg);
+                retVal = AssertPass(testStep, msg);
             }
             catch (AssertFailedException)
             {
+                var msg = string.Format("AreNotEqual: [{0}] Are Equal to [{1}]", expected, actual);
+
                 retVal = false;
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -121,7 +127,7 @@ namespace Mir.Stf.Utilities
             var compareVal = 0;
 
             // TODO:what to return if we cannot compare the objects?
-            if (!this.AssertComareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
+            if (!AssertCompareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
             {
                 return false;
             }
@@ -131,12 +137,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = string.Format("GreaterThan: [{0}] is greater than [{1}]", leftHandSide, rightHandSide);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("GreaterThan: [{0}] is Not greater than [{1}]", leftHandSide, rightHandSide);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -171,7 +177,7 @@ namespace Mir.Stf.Utilities
             var compareVal = 0;
 
             // TODO:what to return if we cannot compare the objects?
-            if (!this.AssertComareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
+            if (!AssertCompareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
             {
                 return false;
             }
@@ -181,12 +187,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = string.Format("LessThan: [{0}] is less than [{1}]", leftHandSide, rightHandSide);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("LessThan: [{0}] is Not less than [{1}]", leftHandSide, rightHandSide);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -216,7 +222,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool AssertComareTo<T1, T2>(T1 leftHandSide, T2 rightHandSide, ref string msg, ref int compareVal)
+        private bool AssertCompareTo<T1, T2>(T1 leftHandSide, T2 rightHandSide, ref string msg, ref int compareVal)
             where T1 : IConvertible, IComparable
             where T2 : IConvertible, IComparable
         {

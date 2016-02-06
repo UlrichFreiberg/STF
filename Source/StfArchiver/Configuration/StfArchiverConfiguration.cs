@@ -19,6 +19,14 @@ namespace Mir.Stf.Utilities.Configuration
     public class StfArchiverConfiguration : IStfArchiverConfiguration
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="StfArchiverConfiguration"/> class.
+        /// </summary>
+        public StfArchiverConfiguration()
+        {
+            InitializeWithDefaultValues();
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether or not to Archive folders and files
         /// </summary>
         [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.DoArchiveFoldersAndFiles", DefaultValue = "false")]
@@ -84,11 +92,9 @@ namespace Mir.Stf.Utilities.Configuration
         [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.DirectoryOrderInPath", DefaultValue = "username;testname;datenow")]
         public string DirectoryOrderInPath { get; set; }
 
-        public StfArchiverConfiguration()
-        {
-            this.InitializeWithDefaultValues();
-        }
-
+        /// <summary>
+        /// The initialize with default values.
+        /// </summary>
         internal void InitializeWithDefaultValues()
         {
             var properties = this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);

@@ -38,12 +38,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = string.Format("FileExists: [{0}] Does exist", filenameAndPath);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("FileExists: [{0}] Does Not exist", filenameAndPath);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -71,7 +71,7 @@ namespace Mir.Stf.Utilities
             if (!File.Exists(filenameAndPath))
             {
                 msg = string.Format("FileContains: [{0}] Does Not exist", filenameAndPath);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
                 return false;
             }
 
@@ -82,12 +82,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = string.Format("FileContains: [{0}] Does contain [{1}]", filenameAndPath, pattern);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("FileContains: [{0}] Does Not contain [{1}]", filenameAndPath, pattern);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -113,12 +113,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = string.Format("FolderExists: [{0}] Does exist", foldernameAndPath);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("FolderExists: [{0}] Does Not exist", foldernameAndPath);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -144,12 +144,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = string.Format("FolderNotExists: [{0}] Does Not exist", foldernameAndPath);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("FolderNotExists: [{0}] Does exist", foldernameAndPath);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -209,12 +209,12 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 msg = string.Format("FileNotExists: [{0}] Does Not exist", filenameAndPath);
-                this.AssertPass(testStep, msg);
+                AssertPass(testStep, msg);
             }
             else
             {
                 msg = string.Format("FileNotExists: [{0}] Does exist", filenameAndPath);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -297,21 +297,21 @@ namespace Mir.Stf.Utilities
             if (!fileInfoFirst.Exists)
             {
                 msg = string.Format("FilesDoNotDiffer: [{0}] does not exist", filenameAndPathFirst);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
                 return false;
             }
 
             if (!fileInfoSecond.Exists)
             {
                 msg = string.Format("FilesDoNotDiffer: [{0}] does not exist", filenameAndPathSecond);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
                 return false;
             }
 
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
                 msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] does have the same length", filenameAndPathFirst, filenameAndPathSecond);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
                 return false;
             }
 
@@ -319,7 +319,7 @@ namespace Mir.Stf.Utilities
             if (diffPosition > 0)
             {
                 msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] differ at [{2}]", filenameAndPathFirst, filenameAndPathSecond, diffPosition);
-                this.AssertFail(testStep, msg);
+                AssertFail(testStep, msg);
                 return false;
             }
 
