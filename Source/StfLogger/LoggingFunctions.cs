@@ -14,6 +14,10 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+
     using Mir.Stf.Utilities.Utils;
 
     /// <summary>
@@ -77,6 +81,22 @@ namespace Mir.Stf.Utilities
         public int LogInfo(string message, params object[] args)
         {
             return LogOneHtmlMessage(StfLogLevel.Info, message, args);
+        }
+
+        /// <summary>
+        /// The log xml message.
+        /// </summary>
+        /// <param name="xmlMessage">
+        /// The xml message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public int LogXmlMessage(string xmlMessage)
+        {
+            var formatedXml = PrettyPrint(xmlMessage);
+
+            return LogOneHtmlMessage(StfLogLevel.Info, formatedXml, null);                        
         }
 
         /// <summary>
@@ -330,21 +350,26 @@ namespace Mir.Stf.Utilities
                 var count = message.Count(f => f == '\n');
                 if (count > 1)
                 {
-                    var indexOfFirstLine = message.IndexOf(Environment.NewLine, StringComparison.Ordinal);
-                    if (indexOfFirstLine > 0)
-                    {
-                        var multilineId = string.Format("multiLineId_{0}", messageIdString);
-                        var firstLine = message.Substring(0, indexOfFirstLine);
-                        var restOfMessage = message.Substring(indexOfFirstLine);
+                    var firstLineIndexOf = message.IndexOf(Environment.NewLine, StringComparison.Ordinal);
 
+                    if (firstLineIndexOf > 0)
+                    {
+                        var firstLineOfMessage = message.Substring(0, firstLineIndexOf);
+                        var multilineId = string.Format("multiLineId_{0}", messageIdString);
+                        var firstLoggedLine = string.Format("{0}{1}", Environment.NewLine, System.Security.SecurityElement.Escape(firstLineOfMessage));
                         var multiLineSection =
                             string.Format(
-                                "<a class=\"left\" href=\"javascript:toggle_messege('{0}')\" id='href_about'> {1} </a>",
+                                  "<a class=\"left\" href=\"javascript:toggle_messege('{0}')\" id='href_about'> {1} "
+                                + "</a>"
+                                + "    <div id='{0}' class='hide' style=\"display:none;\">"
+                                + "       </br>" 
+                                + "       <xmp>"
+                                + "{2}"
+                                + "       </xmp>" 
+                                + "    </div>",
                                 multilineId,
-                                firstLine);
-                        multiLineSection += string.Format("    <div id='{0}' class='hide' style=\"display:none;\">", multilineId);
-                        multiLineSection += restOfMessage.Replace("\n", "<br/>");
-                        multiLineSection += "    </div>";
+                                firstLoggedLine,
+                                message);
 
                         message = multiLineSection;
                     }
@@ -378,6 +403,59 @@ namespace Mir.Stf.Utilities
             NumberOfLoglevelMessages[loglevel]++;
             LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
+        }
+
+        /// <summary>
+        /// The pretty print.
+        /// See http://stackoverflow.com/questions/1123718/format-xml-string-to-print-friendly-xml-string
+        /// </summary>
+        /// <param name="xml">
+        /// The xml.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string PrettyPrint(string xml)
+        {
+            var result = string.Empty;
+
+            var memoryStream = new MemoryStream();
+            var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.Unicode);
+            var xmlDocument = new XmlDocument();
+
+            try
+            {
+                // Load the XmlDocument with the XML.
+                xmlDocument.LoadXml(xml);
+
+                xmlTextWriter.Formatting = Formatting.Indented;
+
+                // Write the XML into a formatting XmlTextWriter
+                xmlDocument.WriteContentTo(xmlTextWriter);
+                xmlTextWriter.Flush();
+                memoryStream.Flush();
+
+                // Have to rewind the MemoryStream in order to read
+                // its contents.
+                memoryStream.Position = 0;
+
+                // Read MemoryStream contents into a StreamReader.
+                var streamReader = new StreamReader(memoryStream);
+
+                // Extract the text from the StreamReader.
+                var formattedXml = streamReader.ReadToEnd();
+
+                result = formattedXml;
+            }
+            catch (XmlException ex)
+            {
+                LogError("You tried to log an XML message - something is not right: [{0}]", ex.Message);
+            }
+
+            memoryStream.Close();
+            xmlTextWriter.Close();
+
+            return result;
         }
     }
 }

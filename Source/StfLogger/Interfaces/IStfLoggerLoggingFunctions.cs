@@ -190,5 +190,16 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="int"/>.
         /// </returns>
         int LogSubHeader(string subHeaderMessage, params object[] args);
+
+        /// <summary>
+        /// The log xml message.
+        /// </summary>
+        /// <param name="xmlMessage">
+        /// The xml message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogXmlMessage(string xmlMessage);
     }
 }

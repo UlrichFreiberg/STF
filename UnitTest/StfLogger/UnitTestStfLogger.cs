@@ -304,15 +304,24 @@ namespace UnitTest
         {
             StfLogger.LogLevel = StfLogLevel.Info;
             StfLogger.LogInfo("Using Escape");
-            StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}<xmltag>{0}<xmltags>{0}", Environment.NewLine)));
-            StfLogger.LogInfo("Using PrettyXml");
+            //// StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format(@"<xmltags>{0}<xmltag>{0}Line 1{0}   Three Space indent{0}{0}<xmltag>{0}<xmltags>{0}", Environment.NewLine)));
+            StfLogger.LogInfo(string.Format(@"<xmltags>{0}   <xmltag>{0}      Line 1{0}      Six Space indent{0}   <xmltag>{0}<xmltags>{0}", Environment.NewLine));
 
-            // TODO: Missing playing a bit with the XmlUtils
             var prettyXml = "<xmltags><xmltag>return newline                  </xmltag></xmltags>";
             StfLogger.LogInfo(prettyXml);
 
             StfLogger.LogInfo("Using PrettyXml and Escape");
             StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}</xmltag>{0}</xmltags>{0}", Environment.NewLine)));
+        }
+
+        /// <summary>
+        /// The test screenshot on log fail.
+        /// </summary>
+        [TestMethod]
+        public void TestLogXmlMessage()
+        {
+            StfLogger.LogInfo("Using PrettyXml - per LogXmlMessage");
+            StfLogger.LogXmlMessage(string.Format(@"<xmltags><xmltag>Line 1 </xmltag><xmltag>Six Space indent</xmltag></xmltags>"));
         }
 
         /// <summary>
