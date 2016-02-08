@@ -85,6 +85,8 @@ namespace Mir.Stf
 
             StfLogger.FileName = logFilename;
 
+            TestContext.AddResultFile(StfLogger.FileName);
+
             StfAssert = new StfAssert(StfLogger);
 
             if (TestDataDriven())
@@ -120,8 +122,6 @@ namespace Mir.Stf
 
             StfLogger.LogInfo(StfArchiver.Status());
             StfLogger.CloseLogFile();
-
-            TestContext.AddResultFile(StfLogger.FileName);
 
             StfArchiver.AddFile(StfLogger.FileName);
 
