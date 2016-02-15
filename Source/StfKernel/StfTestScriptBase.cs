@@ -103,6 +103,7 @@ namespace Mir.Stf
                 if (!TestResultFiles.Contains(StfLogger.FileName))
                 {
                     TestContext.AddResultFile(StfLogger.FileName);
+                    TestResultFiles.Add(StfLogger.FileName);
                 }
 
                 for (var index = 0; index < TestContext.DataRow.Table.Columns.Count; index++)
