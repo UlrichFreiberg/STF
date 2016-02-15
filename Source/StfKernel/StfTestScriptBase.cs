@@ -51,7 +51,7 @@ namespace Mir.Stf
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public TestContext TestContext { get; set; }
 
-        static List<string> TestResultFiles;
+        private static List<string> TestResultFiles;
 
         /// <summary>
         /// The TestInitialize for <see cref="StfTestScriptBase"/>.
