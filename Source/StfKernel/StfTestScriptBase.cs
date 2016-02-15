@@ -17,7 +17,7 @@ using Mir.Stf.Utilities.Interfaces;
 namespace Mir.Stf
 {
     using System;
-
+    using System.Collections.Generic;
     using Utilities.Configuration;
 
     /// <summary>
@@ -51,6 +51,8 @@ namespace Mir.Stf
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public TestContext TestContext { get; set; }
 
+        static List<string> TestResultFiles;
+
         /// <summary>
         /// The TestInitialize for <see cref="StfTestScriptBase"/>.
         /// </summary>
@@ -61,12 +63,17 @@ namespace Mir.Stf
 
             // We're getting the instance of the logger and logging a link to the kernel logger
             var kernelLogFilePath = StfLogger.FileName;
-            
+
             StfLogger.Configuration.LogTitle = TestContext.TestName;
 
             var logFilePostfix = string.Empty;
             var iterationNo = DataRowIndex();
             var iterationStatus = "Not datadriven";
+
+            if (iterationNo == 0)
+            {
+                TestResultFiles = new List<string>();
+            }
 
             if (iterationNo >= 0)
             {
@@ -85,12 +92,19 @@ namespace Mir.Stf
 
             StfLogger.FileName = logFilename;
 
-            TestContext.AddResultFile(StfLogger.FileName);
-
             StfAssert = new StfAssert(StfLogger);
 
-            if (TestDataDriven())
+            if (!TestDataDriven())
             {
+                TestContext.AddResultFile(StfLogger.FileName);
+            }
+            else
+            {
+                if (!TestResultFiles.Contains(StfLogger.FileName))
+                {
+                    TestContext.AddResultFile(StfLogger.FileName);
+                }
+
                 for (var index = 0; index < TestContext.DataRow.Table.Columns.Count; index++)
                 {
                     var headerCaption = TestContext.DataRow.Table.Columns[index].Caption;
