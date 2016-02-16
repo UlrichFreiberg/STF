@@ -104,6 +104,9 @@ namespace Mir.Stf.Utilities.Interceptors
                     "Encountered error [{0}] when invoking [{1}]", 
                     result.Exception.Message,
                     input.MethodBase.Name));
+
+                stfLogger.LogDebug(result.Exception.StackTrace);
+                stfLogger.LogScreenshot(StfLogLevel.Error, "Error encountered");
             }
             else
             {
