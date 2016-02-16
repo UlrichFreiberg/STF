@@ -92,7 +92,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public int LogFunctionExit(StfLogLevel loglevel, string functionName, object returnValue)
         {
-            var poppedName = this.callStack.Pop();
+            var poppedName = callStack.Pop();
             var message = string.Format("< Exited [{0}] returning [{1}]", poppedName, returnValue);
 
             return LogOneHtmlMessage(loglevel, message);
@@ -134,7 +134,9 @@ namespace Mir.Stf.Utilities
         public int LogGetEnter(StfLogLevel loglevel, string callingProperty)
         {
             var propName = GetLogFriendlyPropName(callingProperty);
-            var message = string.Format("Entering Get Property [{0}]", propName);
+            var message = string.Format("> Entering Get [{0}]", propName);
+
+            callStack.Push(propName);
 
             return LogOneHtmlMessage(loglevel, message);
         }
@@ -158,7 +160,9 @@ namespace Mir.Stf.Utilities
         {
             var propName = GetLogFriendlyPropName(callingProperty);
             var valueString = getValue == null ? "null" : getValue.ToString();
-            var message = string.Format("Exiting Get Property [{0}] with value [{1}]", propName, valueString);
+            var message = string.Format("< Exiting Get [{0}] with value [{1}]", propName, valueString);
+
+            callStack.Pop();
 
             return LogOneHtmlMessage(loglevel, message);
         }
@@ -182,7 +186,9 @@ namespace Mir.Stf.Utilities
         {
             var propName = GetLogFriendlyPropName(callingProperty);
             var valueString = setValue == null ? "null" : setValue.ToString();
-            var message = string.Format("Entering Set Property [{0}] with value [{1}]", propName, valueString);
+            var message = string.Format("> Entering Set [{0}] with value [{1}]", propName, valueString);
+
+            callStack.Push(propName);
 
             return LogOneHtmlMessage(loglevel, message);
         }
@@ -206,7 +212,9 @@ namespace Mir.Stf.Utilities
         {
             var propName = GetLogFriendlyPropName(callingProperty);
             var valueString = setValue == null ? "null" : setValue.ToString();
-            var message = string.Format("Exiting Set Property [{0}] after setting value [{1}]", propName, valueString);
+            var message = string.Format("< Exiting Set [{0}] after setting value [{1}]", propName, valueString);
+
+            callStack.Pop();
 
             return LogOneHtmlMessage(loglevel, message);
         }
