@@ -18,6 +18,8 @@ namespace Mir.Stf
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+
     using Utilities.Configuration;
 
     /// <summary>
@@ -28,6 +30,11 @@ namespace Mir.Stf
     [TestClass]
     public class StfTestScriptBase : StfKernel
     {
+        /// <summary>
+        /// The test result files.
+        /// </summary>
+        private static List<string> testResultFiles;
+
         /// <summary>
         /// Gets the Stf Asserter.
         /// </summary>
@@ -51,8 +58,6 @@ namespace Mir.Stf
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public TestContext TestContext { get; set; }
 
-        private static List<string> TestResultFiles;
-
         /// <summary>
         /// The TestInitialize for <see cref="StfTestScriptBase"/>.
         /// </summary>
@@ -72,7 +77,7 @@ namespace Mir.Stf
 
             if (iterationNo == 0)
             {
-                TestResultFiles = new List<string>();
+                testResultFiles = new List<string>();
             }
 
             if (iterationNo >= 0)
@@ -100,10 +105,11 @@ namespace Mir.Stf
             }
             else
             {
-                if (!TestResultFiles.Contains(StfLogger.FileName))
+                if (!testResultFiles.Contains(StfLogger.FileName))
                 {
-                    TestContext.AddResultFile(StfLogger.FileName);
-                    TestResultFiles.Add(StfLogger.FileName);
+                    // When datadriven we're defer adding resultfiles to testcontext until the last iteration
+                    // This prevents MsTest from adding duplicate result files
+                    testResultFiles.Add(StfLogger.FileName);
                 }
 
                 for (var index = 0; index < TestContext.DataRow.Table.Columns.Count; index++)
@@ -156,6 +162,7 @@ namespace Mir.Stf
                     myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
 
                     TestContext.AddResultFile(summeryLogfilename);
+                    AddResultfiles();
 
                     StfArchiver.AddFile(summeryLogfilename);
                     StfArchiver.PerformArchive();
@@ -174,6 +181,22 @@ namespace Mir.Stf
                     StfAssert.CurrentFailures);
 
                 throw new AssertFailedException(msg);
+            }
+        }
+
+        /// <summary>
+        /// The add resultfiles.
+        /// </summary>
+        private void AddResultfiles()
+        {
+            if (!testResultFiles.Any())
+            {
+                return;
+            }
+
+            foreach (var resultFile in testResultFiles)
+            {
+                TestContext.AddResultFile(resultFile);
             }
         }
 
