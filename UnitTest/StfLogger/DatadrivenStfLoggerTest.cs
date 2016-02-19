@@ -57,7 +57,7 @@ namespace UnitTest
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
             StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            StfAssert.IsTrue("FailPass", failPass);
+            Assert.IsTrue(StfAssert.IsTrue("FailPass", failPass) == failPass);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace UnitTest
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
             StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            StfAssert.IsTrue("FailPass", failPass);
+            Assert.IsTrue(StfAssert.IsTrue("FailPass", failPass) == failPass);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace UnitTest
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
             StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
-            StfAssert.IsTrue("FailPass", failPass);
+            Assert.IsTrue(StfAssert.IsTrue("FailPass", failPass) == failPass);
         }
 
         /// <summary>
@@ -118,6 +118,7 @@ namespace UnitTest
         public void TestCleanup()
         {
             this.StfLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
+            StfAssert.EnableNegativeTesting = true;
         }
 
         /// <summary>

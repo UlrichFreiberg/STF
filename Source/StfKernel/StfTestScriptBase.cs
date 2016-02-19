@@ -141,14 +141,18 @@ namespace Mir.Stf
                 StfLogger.LogError("Test failed");
             }
 
-            StfLogger.LogInfo(StfArchiver.Status());
-            StfLogger.CloseLogFile();
-
-            StfArchiver.AddFile(StfLogger.FileName);
-
-            if (TestDataDriven())
+            if (!TestDataDriven())
             {
+                StfArchiver.AddFile(StfLogger.FileName);
+                StfLogger.LogInfo(StfArchiver.Status());
+                StfLogger.CloseLogFile();
+                StfArchiver.PerformArchive();
+            }
+            else
+            {             
                 var iterationNo = DataRowIndex();
+
+                StfLogger.CloseLogFile();
 
                 if (iterationNo == TestContext.DataRow.Table.Rows.Count - 1)
                 {
@@ -167,11 +171,7 @@ namespace Mir.Stf
                     StfArchiver.AddFile(summeryLogfilename);
                     StfArchiver.PerformArchive();
                 }
-
-                return;
             }
-
-            StfArchiver.PerformArchive();
 
             if (!testFailed && StfAssert.CurrentFailures > 0)
             {
@@ -197,6 +197,7 @@ namespace Mir.Stf
             foreach (var resultFile in testResultFiles)
             {
                 TestContext.AddResultFile(resultFile);
+                StfArchiver.AddFile(resultFile);
             }
         }
 
