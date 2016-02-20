@@ -18,6 +18,11 @@ namespace Mir.Stf.Utilities
     public abstract class StfModelBase : IStfModelBase
     {
         /// <summary>
+        /// Gets or sets the model state.
+        /// </summary>
+        public StfModelState ModelState { get; set; }
+
+        /// <summary>
         /// Gets or sets the stf container.
         /// </summary>
         public IStfContainer StfContainer { get; set; }
