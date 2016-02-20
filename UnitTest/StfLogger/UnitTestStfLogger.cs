@@ -321,7 +321,7 @@ namespace UnitTest
         public void TestLogXmlMessage()
         {
             StfLogger.LogInfo("Using PrettyXml - per LogXmlMessage");
-            StfLogger.LogXmlMessage(string.Format(@"<xmltags><xmltag>Line 1 </xmltag><xmltag>Six Space indent</xmltag></xmltags>"));
+            StfLogger.LogXmlMessage(@"<xmltags><xmltag>Line 1 </xmltag><xmltag>Six Space indent</xmltag></xmltags>");
         }
 
         /// <summary>
