@@ -60,9 +60,7 @@ namespace Mir.Stf
             StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
 
             LoadConfigurationForStfTypes();
-
-            var configurationLogFilename = Path.Combine(StfLogDir, @"StfConfiguration.html");
-            StfConfiguration.SaveToFile(configurationLogFilename);
+            DumpStfConfiguration();
         }
 
         /// <summary>
@@ -197,6 +195,32 @@ namespace Mir.Stf
 
                 disposed = true;
             }
+        }
+
+        /// <summary>
+        /// The dump stf configuration.
+        /// </summary>
+        /// <param name="configurationLogFilename">
+        /// The configuration Log Filename.
+        /// </param>
+        protected void DumpStfConfiguration(string configurationLogFilename = null)
+        {
+            var content = "<body><xmp>";
+
+            content += StfConfiguration.ToString();
+            content += "</xmp></body>";
+
+            if (string.IsNullOrEmpty(configurationLogFilename))
+            {
+                configurationLogFilename = Path.Combine(StfLogDir, @"StfConfiguration.html");
+            }
+
+            if (File.Exists(configurationLogFilename))
+            {
+                File.Delete(configurationLogFilename);
+            }
+
+            File.WriteAllText(configurationLogFilename, content);
         }
 
         /// <summary>
