@@ -60,6 +60,9 @@ namespace Mir.Stf
             StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
 
             LoadConfigurationForStfTypes();
+
+            var configurationLogFilename = Path.Combine(StfLogDir, @"StfConfiguration.html");
+            StfConfiguration.SaveToFile(configurationLogFilename);
         }
 
         /// <summary>

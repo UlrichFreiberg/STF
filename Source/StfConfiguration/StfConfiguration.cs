@@ -346,6 +346,35 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// The to string.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public override string ToString()
+        {
+            var retVal = environmentConfiguration.DumpSection(Section.DumpAs.AsXml);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Save the configuration to file.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool SaveToFile(string fileName)
+        {
+            var retVal = currentlyLoadedSection.DumpSection(Section.DumpAs.AsXml, fileName);
+
+            return true; // TODO: better retrun value
+        }
+
+        /// <summary>
         /// Get sections for this root.
         /// </summary>
         /// <param name="currentSection">
