@@ -12,8 +12,6 @@ using System;
 
 namespace Mir.Stf.Utilities
 {
-    using System.Linq;
-
     /// <summary>
     /// The config info.
     /// </summary>
@@ -47,16 +45,5 @@ namespace Mir.Stf.Utilities
         /// Gets or sets the version.
         /// </summary>
         public string Version { get; set; }
-    }
-
-    public static class StfConfigurationAttributeExtensions
-    {
-        public static string GetDefaultValue(this object instance, string propertyName) 
-        {
-            var attrType = typeof(StfConfigurationAttribute);
-            var property = instance.GetType().GetProperty(propertyName);
-
-            return ((StfConfigurationAttribute)property.GetCustomAttributes(attrType, false).First()).DefaultValue;
-        }
     }
 }

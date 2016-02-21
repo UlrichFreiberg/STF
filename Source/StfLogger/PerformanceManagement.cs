@@ -9,7 +9,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {

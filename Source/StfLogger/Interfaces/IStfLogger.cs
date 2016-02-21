@@ -22,6 +22,9 @@ namespace Mir.Stf.Utilities.Interfaces
                                   IStfLoggerScreenshots,
                                   IStfLoggerTestScriptHeaders
     {
+        /// <summary>
+        /// Gets or sets the configuration.
+        /// </summary>
         IStfLoggerConfiguration Configuration { get; set; }
 
         /// <summary>

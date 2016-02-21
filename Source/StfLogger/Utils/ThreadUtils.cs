@@ -17,27 +17,27 @@ namespace Mir.Stf.Utilities.Utils
     /// The execution state.
     /// </summary>
     [Flags]
-    public enum EXECUTION_STATE : uint
+    public enum ExecutionState : uint
     {
         /// <summary>
         /// The e s_ awaymod e_ required.
         /// </summary>
-        ES_AWAYMODE_REQUIRED = 0x00000040,
+        EsAwaymodeRequired = 0x00000040,
 
         /// <summary>
         /// The e s_ continuous.
         /// </summary>
-        ES_CONTINUOUS = 0x80000000,
+        EsContinuous = 0x80000000,
 
         /// <summary>
         /// The e s_ displa y_ required.
         /// </summary>
-        ES_DISPLAY_REQUIRED = 0x00000002,
+        EsDisplayRequired = 0x00000002,
 
         /// <summary>
         /// The e s_ syste m_ required.
         /// </summary>
-        ES_SYSTEM_REQUIRED = 0x00000001
+        EsSystemRequired = 0x00000001
     }
 
     /// <summary>
@@ -53,10 +53,10 @@ namespace Mir.Stf.Utilities.Utils
         /// </returns>
         public bool ResetIdleTimerForThread()
         {
-            EXECUTION_STATE state;
+            ExecutionState state;
             try
             {
-                state = SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+                state = SetThreadExecutionState(ExecutionState.EsDisplayRequired | ExecutionState.EsSystemRequired | ExecutionState.EsContinuous);
             }
             catch (Exception)
             {
@@ -67,6 +67,6 @@ namespace Mir.Stf.Utilities.Utils
         }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
+        private static extern ExecutionState SetThreadExecutionState(ExecutionState esFlags);
     }
 }

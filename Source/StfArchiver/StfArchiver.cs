@@ -128,20 +128,15 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool PerformArchive()
         {
-            bool retVal;
-
             var tempArchiveDir = Path.Combine(Configuration.TempDirectory, Guid.NewGuid().ToString());
             if (!Directory.Exists(tempArchiveDir))
             {
                 Directory.CreateDirectory(tempArchiveDir);
             }
 
-            foreach (var directory in DirectoriesToArchive)
+            if (DirectoriesToArchive.Any(directory => RoboCopyWrapper.MirrorDir(directory, tempArchiveDir) <= 0))
             {
-                if (RoboCopyWrapper.MirrorDir(directory, tempArchiveDir) <= 0)
-                {
-                    retVal = false;
-                }
+                return false;
             }
 
             foreach (var filename in FilesToArchive)
@@ -162,7 +157,7 @@ namespace Mir.Stf.Utilities
                 File.Copy(filename, destFilename);
             }
 
-            retVal = true;
+            var retVal = true;
             if (Configuration.DoArchiveFoldersAndFiles)
             {
                 if (!Directory.Exists(Configuration.ArchiveDestination))

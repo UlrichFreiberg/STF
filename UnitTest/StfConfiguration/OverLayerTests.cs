@@ -169,6 +169,15 @@ namespace Tests
             }
         }
 
+        /// <summary>
+        /// The dump tree.
+        /// </summary>
+        /// <param name="section2Dump">
+        /// The section 2 dump.
+        /// </param>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
         private void DumpTree(Section section2Dump, string fileName)
         {
             var dumpFile = Path.Combine(@"c:\temp\", TestContext.TestName + "_" + fileName);
