@@ -15,11 +15,20 @@ using Mir.Stf.Utilities.Utils;
 
 namespace Mir.Stf.Utilities
 {
+    using System;
+    using System.Collections.Specialized;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// The summery logger.
     /// </summary>
     public class StfSummeryLogger
     {
+        /// <summary>
+        /// The summary log file writer.
+        /// </summary>
+        private LogfileWriter summaryLogFile;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StfSummeryLogger"/> class.
         /// </summary>
@@ -61,34 +70,102 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool CreateSummeryLog(string nameOfSummeryfile, string logDir, string filePattern)
         {
-            var summaryLogFile = new LogfileWriter { LogFileName = nameOfSummeryfile, OverwriteLogFile = true };
+            var logFiles = Directory.GetFiles(logDir, filePattern);
 
-            if (!InitializeSummeryLogFile(nameOfSummeryfile, summaryLogFile))
+            summaryLogFile = new LogfileWriter { LogFileName = nameOfSummeryfile, OverwriteLogFile = true };
+
+            if (logFiles.Length == 0)
+            {
+                return true;
+            }
+
+            // use the first logfile, to figure out how to setup the header for datadriven parameters
+            var dataDrivenParameters = GetDataDrivenParameter(logFiles[0]);
+            if (!OpenSummeryLogFile(nameOfSummeryfile, dataDrivenParameters))
             {
                 return false;
             }
 
-            foreach (var logFilename in Directory.GetFiles(logDir, filePattern))
+            foreach (var logfile in logFiles)
             {
-                var runStatus = RunStatusUtils.GetRunStatus(logFilename);
-                var tableFormatString = this.GetTableFormatString();
-                var tableRowId = GetTableRowId(runStatus);
+                var runStatus = RunStatusUtils.GetRunStatus(logfile);
 
-                var tableRow = string.Format(
-                    tableFormatString,
-                    tableRowId,
-                    logFilename,
-                    Path.GetFileName(logFilename),
-                    runStatus[StfLogLevel.Pass],
-                    runStatus[StfLogLevel.Fail],
-                    runStatus[StfLogLevel.Error],
-                    runStatus[StfLogLevel.Warning]);
-
-                summaryLogFile.Write(tableRow);
+                dataDrivenParameters = GetDataDrivenParameter(logfile);
+                LogSummeryForOneLogfile(logfile, runStatus, dataDrivenParameters);
             }
 
-            summaryLogFile.Write(this.GetTextResource("SummaryLoggerFooter"));
+            return CloseSummeryLogFile();
+        }
+
+        /// <summary>
+        /// The close summery log file.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool CloseSummeryLogFile()
+        {
+            summaryLogFile.Write(GetTextResource("SummaryLoggerFooter"));
             return summaryLogFile.Close();
+        }
+
+        /// <summary>
+        /// The log summery for one logfile.
+        /// </summary>
+        /// <param name="logfile">
+        /// The logfile.
+        /// </param>
+        /// <param name="runStatus">
+        /// The run status.
+        /// </param>
+        /// <param name="dataDrivenParameters">
+        /// The data driven parameters.
+        /// </param>
+        private void LogSummeryForOneLogfile(string logfile, Dictionary<StfLogLevel, int> runStatus, OrderedDictionary dataDrivenParameters)
+        {
+            var tableRowTestResult = GetTableRowTestResult(runStatus);
+            var tableFormatString = GetTableFormatString(dataDrivenParameters);
+            var tableRow = string.Format(
+                tableFormatString,
+                tableRowTestResult,
+                Path.GetFileName(logfile),
+                Path.GetFileName(logfile),
+                runStatus[StfLogLevel.Pass],
+                runStatus[StfLogLevel.Fail],
+                runStatus[StfLogLevel.Error],
+                runStatus[StfLogLevel.Warning]);
+
+            summaryLogFile.Write(tableRow);
+        }
+
+        /// <summary>
+        /// The get data driven parameter.
+        /// </summary>
+        /// <param name="logFilename">
+        /// The log filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="OrderedDictionary"/>.
+        /// </returns>
+        private OrderedDictionary GetDataDrivenParameter(string logFilename)
+        {
+            var retVal = new OrderedDictionary();
+            var content = File.ReadAllText(logFilename);
+
+            // <div class="el msg">Column[Message]=[Third and last iteration of datadriven test]</div>
+            var parameterRegexp = "<div class=\"el msg\">Column[[](?<Key>[^]]*)[]]=[[](?<Value>[^]]*)";
+            var match = Regex.Match(content, parameterRegexp, RegexOptions.Multiline);
+
+            while (match.Success)
+            {
+                var key = match.Groups["Key"].Value;
+                var value = match.Groups["Value"].Value;
+
+                retVal.Add(key, value);
+                match = match.NextMatch();
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -97,13 +174,13 @@ namespace Mir.Stf.Utilities
         /// <param name="nameOfSummeryfile">
         /// The name of summeryfile.
         /// </param>
-        /// <param name="summaryLogFile">
-        /// The summary log file.
+        /// <param name="dataDrivenParameters">
+        /// The data Driven Parameters.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool InitializeSummeryLogFile(string nameOfSummeryfile, LogfileWriter summaryLogFile)
+        private bool OpenSummeryLogFile(string nameOfSummeryfile, OrderedDictionary dataDrivenParameters)
         {
             var logHeader = this.GetTextResource("SummaryLoggerHeader");
 
@@ -114,8 +191,19 @@ namespace Mir.Stf.Utilities
 
             var logfileTitle = string.Format("SummaryLogger for {0}", Path.GetFileNameWithoutExtension(nameOfSummeryfile));
             logHeader = logHeader.Replace("LOGFILETITLE", logfileTitle);
-            summaryLogFile.Write(logHeader);
 
+            var headers = string.Empty;
+            var dataDrivenParametersKeys = new string[dataDrivenParameters.Count];
+
+            dataDrivenParameters.Keys.CopyTo(dataDrivenParametersKeys, 0);
+
+            for (var i = 0; i < dataDrivenParameters.Count; i++)
+            {
+                headers += string.Format("<th>{0}</th>{1}", dataDrivenParametersKeys[i], Environment.NewLine);
+            }
+
+            logHeader = logHeader.Replace("DATADRIVENPARAMETERS", headers);
+            summaryLogFile.Write(logHeader);
             return true;
         }
 
@@ -130,17 +218,11 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private string GetTextResource(string resourceName)
         {
-            string retVal;
             var resourceObject = Resources.ResourceManager.GetObject(resourceName);
 
-            if (resourceObject == null)
-            {
-                retVal = string.Format("<error>No {0} section file found</error>", resourceName);
-            }
-            else
-            {
-                retVal = resourceObject.ToString();
-            }
+            var retVal = resourceObject == null 
+                ? string.Format("<error>No {0} section file found</error>", resourceName) 
+                : resourceObject.ToString();
 
             return retVal;
         }
@@ -148,23 +230,36 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The get table format string.
         /// </summary>
+        /// <param name="dataDrivenParameters">
+        /// The data Driven Parameters.
+        /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string GetTableFormatString()
+        private string GetTableFormatString(OrderedDictionary dataDrivenParameters)
         {
-            int index = 0;
-            var retVal = "<tr id=\"{" + index++ + "}\">\n";
+            var index = 0;
+            var retVal = "<tr id=\"{" + index++ + "}\">" + Environment.NewLine;
 
-            retVal += "  <td>\n";
-            retVal += "    <a href=\"{" + index++ + "}\">{" + index++ + "}</a>\n";
-            retVal += "  </td>\n";
+            retVal += "  <td>" + Environment.NewLine;
+            retVal += "    <a href=\"{" + index++ + "}\">{" + index++ + "}</a>" + Environment.NewLine;
+            retVal += "  </td>" + Environment.NewLine;
             for (var i = 2; i < 6; i++)
             {
-                retVal += "  <td>{" + index++ + "}</td>\n";
+                retVal += "  <td>{" + index++ + "}</td>" + Environment.NewLine;
             }
 
-            retVal += "</tr>\n";
+            var dataDrivenParametersValues = new string[dataDrivenParameters.Count];
+
+            dataDrivenParameters.Values.CopyTo(dataDrivenParametersValues, 0);
+            for (var i = 0; i < dataDrivenParameters.Count; i++)
+            {
+                var value = dataDrivenParametersValues[i];
+
+                retVal += string.Format("<td>{0}</td>{1}", value, Environment.NewLine);
+            }
+
+            retVal += string.Format("</tr>{0}", Environment.NewLine);
 
             return retVal;
         }
@@ -178,7 +273,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string GetTableRowId(Dictionary<StfLogLevel, int> runResultStatus)
+        private string GetTableRowTestResult(Dictionary<StfLogLevel, int> runResultStatus)
         {
             if (runResultStatus[StfLogLevel.Fail] > 0)
             {
