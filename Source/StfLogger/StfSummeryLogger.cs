@@ -182,7 +182,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool OpenSummeryLogFile(string nameOfSummeryfile, OrderedDictionary dataDrivenParameters)
         {
-            var logHeader = this.GetTextResource("SummaryLoggerHeader");
+            var logHeader = GetTextResource("SummaryLoggerHeader");
 
             if (!summaryLogFile.Open())
             {
