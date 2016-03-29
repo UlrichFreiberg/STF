@@ -12,14 +12,19 @@ namespace Stf.Unittests
 {
     using System;
 
+    using Mir.Stf.Utilities;
+    using Mir.Stf.Utilities.Attributes;
+
     /// <summary>
     /// The TestPlugin2Model interface.
     /// </summary>
+    [StfInterfaceLogLevel(StfLogLevel.Debug)]
     public interface ITestPluginModel2 : IEquatable<ITestPluginModel2>
     {
         /// <summary>
         /// Gets or sets the test prop.
         /// </summary>
+        [StfMemberLogLevel(StfLogLevel.Trace)]
         string TestProp { get; set; }
 
         /// <summary>
@@ -42,6 +47,7 @@ namespace Stf.Unittests
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
+        [StfMemberLogLevel(StfLogLevel.Warning)]
         string TestPlugin2FuncWithParams(string param1, int param2);
     }
 }

@@ -79,6 +79,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\StfInterfaceLogLevelAttribute.cs" />
+    <Compile Include="Attributes\StfMemberLogLevelAttribute.cs" />
     <Compile Include="Attributes\StfSingletonAttribute.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />

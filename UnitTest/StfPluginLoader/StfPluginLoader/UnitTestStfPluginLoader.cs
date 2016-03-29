@@ -102,6 +102,8 @@ namespace UnitTest
             StfAssert.AreEqual("plugin2Type.TestProp", "Default", plugin2Type2.TestProp);
             plugin2Type2.TestProp = "NewValue";
             StfAssert.AreEqual("plugin2Type.TestProp", "NewValue", plugin2Type2.TestProp);
+
+            StfAssert.AreEqual("Plugin2Func", 203, plugin2Type2.TestPlugin2Func());
         }
 
         /// <summary>

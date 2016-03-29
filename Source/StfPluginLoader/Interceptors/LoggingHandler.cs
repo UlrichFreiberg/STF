@@ -17,6 +17,11 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities.Interceptors
 {
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
+    using Mir.Stf.Utilities.Attributes;
+
     /// <summary>
     /// The logging handler.
     /// </summary>
@@ -26,6 +31,11 @@ namespace Mir.Stf.Utilities.Interceptors
         /// The stf logger.
         /// </summary>
         private readonly IStfLogger stfLogger;
+
+        /// <summary>
+        /// The default log level.
+        /// </summary>
+        private StfLogLevel defaultLogLevel = StfLogLevel.Info;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoggingHandler"/> class.
@@ -94,7 +104,7 @@ namespace Mir.Stf.Utilities.Interceptors
         /// </returns>
         public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
         {
-            LogThisMessage(input.MethodBase.Name, LogMessageType.Enter, input.Inputs, GetReturnType(input.MethodBase), string.Empty);
+            LogThisMessage(input.MethodBase, LogMessageType.Enter, input.Inputs, GetReturnType(input.MethodBase), string.Empty);
 
             var result = getNext().Invoke(input, getNext);
 
@@ -110,7 +120,7 @@ namespace Mir.Stf.Utilities.Interceptors
             }
             else
             {
-                LogThisMessage(input.MethodBase.Name, LogMessageType.Exit, input.Inputs, GetReturnType(input.MethodBase), result.ReturnValue);
+                LogThisMessage(input.MethodBase, LogMessageType.Exit, input.Inputs, GetReturnType(input.MethodBase), result.ReturnValue);
             }
 
             return result;
@@ -119,8 +129,8 @@ namespace Mir.Stf.Utilities.Interceptors
         /// <summary>
         /// The log this message.
         /// </summary>
-        /// <param name="methodName">
-        /// The method name.
+        /// <param name="methodBase">
+        /// The method Base.
         /// </param>
         /// <param name="messageType">
         /// The message type.
@@ -138,23 +148,26 @@ namespace Mir.Stf.Utilities.Interceptors
         /// If unrecognized membertype
         /// </exception>
         private void LogThisMessage(
-            string methodName, 
+            MethodBase methodBase, 
             LogMessageType messageType, 
             IParameterCollection inputs,
             string returnTypeName, 
             object returnValue)
         {
+            var methodName = methodBase.Name;
             var typeOfMethod = GetTypeOfMember(methodName);
+            var loglevel = GetLogLevel(methodBase);
+
             switch (typeOfMethod)
             {
                 case MemberType.SetProperty:
                     switch (messageType)
                     {
                         case LogMessageType.Enter:
-                            stfLogger.LogSetEnter(StfLogLevel.Info, methodName, CreateStringFromParameterCollection(inputs));
+                            stfLogger.LogSetEnter(loglevel, methodName, CreateStringFromParameterCollection(inputs));
                             break;
                         case LogMessageType.Exit:
-                            stfLogger.LogSetExit(StfLogLevel.Info, methodName, CreateStringFromParameterCollection(inputs));
+                            stfLogger.LogSetExit(loglevel, methodName, CreateStringFromParameterCollection(inputs));
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
@@ -165,10 +178,10 @@ namespace Mir.Stf.Utilities.Interceptors
                     switch (messageType)
                     {
                         case LogMessageType.Enter:
-                            stfLogger.LogGetEnter(StfLogLevel.Info, methodName);
+                            stfLogger.LogGetEnter(loglevel, methodName);
                             break;
                         case LogMessageType.Exit:
-                            stfLogger.LogGetExit(StfLogLevel.Info, methodName, returnValue);
+                            stfLogger.LogGetExit(loglevel, methodName, returnValue);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
@@ -179,10 +192,10 @@ namespace Mir.Stf.Utilities.Interceptors
                     switch (messageType)
                     {
                         case LogMessageType.Enter:
-                            stfLogger.LogFunctionEnter(StfLogLevel.Info, returnTypeName, methodName, inputs.ToArray());
+                            stfLogger.LogFunctionEnter(loglevel, returnTypeName, methodName, inputs.ToArray());
                             break;
                         case LogMessageType.Exit:
-                            stfLogger.LogFunctionExit(StfLogLevel.Info, methodName, returnValue);
+                            stfLogger.LogFunctionExit(loglevel, methodName, returnValue);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
@@ -259,6 +272,144 @@ namespace Mir.Stf.Utilities.Interceptors
         {
             var methodInfo = methodBase as MethodInfo;
             return methodInfo == null ? string.Empty : methodInfo.ReturnType.Name;
+        }
+
+        /// <summary>
+        /// The get log level.
+        /// </summary>
+        /// <param name="methodBase">
+        /// The method base.
+        /// </param>
+        /// <returns>
+        /// The <see cref="StfLogLevel"/>.
+        /// </returns>
+        private StfLogLevel GetLogLevel(MethodBase methodBase)
+        {
+            var retVal = defaultLogLevel;
+
+            if (methodBase == null)
+            {
+                return retVal;
+            }
+
+            retVal = GetInterfaceLogLevel(methodBase.DeclaringType, retVal);
+
+            try
+            {
+                var memberLogLevel = methodBase.GetCustomAttribute<StfMemberLogLevelAttribute>();
+                retVal = memberLogLevel != null ? memberLogLevel.LogLevel : GetPropertyLogLevel(methodBase, retVal);
+            }
+            catch (Exception exception)
+            {
+                stfLogger.LogInternal("Exception caught getting loglevel: [{0}]", exception.Message);
+            }
+            
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get interface log level.
+        /// </summary>
+        /// <param name="declaringType">
+        /// The declaring type.
+        /// </param>
+        /// <param name="logLevel">
+        /// The log level.
+        /// </param>
+        /// <returns>
+        /// The <see cref="StfLogLevel"/>.
+        /// </returns>
+        private StfLogLevel GetInterfaceLogLevel(Type declaringType, StfLogLevel logLevel)
+        {
+            var retVal = logLevel;
+
+            if (declaringType == null)
+            {
+                return retVal;
+            }
+
+            try
+            {
+                var classLoglevel = declaringType.GetCustomAttribute<StfInterfaceLogLevelAttribute>();
+
+                if (classLoglevel != null)
+                {
+                    retVal = classLoglevel.LogLevel;
+                }
+            }
+            catch (Exception exception)
+            {
+                stfLogger.LogInternal("Exception caught getting interface loglevel: [{0}]", exception.Message);
+            }
+            
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get property log level.
+        /// </summary>
+        /// <param name="methodBase">
+        /// The method base.
+        /// </param>
+        /// <param name="logLevel">
+        /// The log level.
+        /// </param>
+        /// <returns>
+        /// The <see cref="StfLogLevel"/>.
+        /// </returns>
+        private StfLogLevel GetPropertyLogLevel(MethodBase methodBase, StfLogLevel logLevel)
+        {
+            var retVal = logLevel;
+
+            if (methodBase == null)
+            {
+                return retVal;
+            }
+
+            var match = Regex.Match(methodBase.Name, @"^(set_|get_)(?<PropertyName>[^\s].+)");
+
+            if (!match.Success)
+            {
+                return retVal;
+            }
+
+            var propertyName = match.Groups["PropertyName"].Value;
+            var declaringType = methodBase.DeclaringType;
+
+            if (declaringType == null)
+            {
+                return retVal;
+            }
+
+            PropertyInfo property;
+
+            try
+            {
+                property = declaringType.GetProperties().FirstOrDefault(p => p.Name.Equals(propertyName));
+            }
+            catch (Exception exception)
+            {
+                stfLogger.LogInternal(
+                    "Caught exception trying to get info for property with name [{0}]. Error message [{0}]",
+                    propertyName,
+                    exception.Message);
+
+                return retVal;
+            }
+
+            if (property == null)
+            {
+                return retVal;
+            }
+
+            var propertyLogLevel = property.GetCustomAttribute<StfMemberLogLevelAttribute>();
+
+            if (propertyLogLevel != null)
+            {
+                retVal = propertyLogLevel.LogLevel;
+            }
+
+            return retVal;
         }
     }
 }
