@@ -9,7 +9,7 @@
 			<button id="passBtn"          value="Hide" type="button" onclick="toggleLogElements('.pass',  'passBtn',  'Pass')" >Hide Pass</button>
 			<button id="failBtn"          value="Hide" type="button" onclick="toggleLogElements('.fail',  'failBtn',  'Fail')" >Hide Fail</button>
 			<button id="errorBtn"         value="Hide" type="button" onclick="toggleLogElements('.error', 'errorBtn', 'Error')">Hide Error</button>
-			<button id="warnBtn"          value="Hide" type="button" onclick="toggleLogElements('.warning',  'warnBtn',  'Warning')" >Hide Warn</button>
+			<button id="warnBtn"          value="Hide" type="button" onclick="toggleLogElements('.warning',  'warnBtn',  'Warning')" >Hide Warning</button>
 			<button id="infoBtn"          value="Show" type="button" onclick="toggleLogElements('.info',  'infoBtn',  'Info')" >Show Info</button>
 			<button id="debugBtn"         value="Show" type="button" onclick="toggleLogElements('.debug', 'debugBtn', 'Debug')">Show Debug</button>
 			<button id="traceBtn"         value="Show" type="button" onclick="toggleLogElements('.trace', 'traceBtn', 'Trace')">Show Trace</button>
