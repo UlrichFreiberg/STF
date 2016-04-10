@@ -92,10 +92,12 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public int LogFunctionExit(StfLogLevel loglevel, string functionName, object returnValue)
         {
-            var poppedName = callStack.Pop();
-            var message = string.Format("< Exited [{0}] returning [{1}]", poppedName, returnValue);
+            var message = string.Format("< Exited [{0}] returning [{1}]", functionName, returnValue);
+            var retVal = LogOneHtmlMessage(loglevel, message);
 
-            return LogOneHtmlMessage(loglevel, message);
+            callStack.Pop();
+
+            return retVal;
         }
 
         /// <summary>
@@ -162,9 +164,11 @@ namespace Mir.Stf.Utilities
             var valueString = getValue == null ? "null" : getValue.ToString();
             var message = string.Format("< Exiting Get [{0}] with value [{1}]", propName, valueString);
 
+            var retVal = LogOneHtmlMessage(loglevel, message);
+
             callStack.Pop();
 
-            return LogOneHtmlMessage(loglevel, message);
+            return retVal;
         }
 
         /// <summary>
@@ -214,9 +218,11 @@ namespace Mir.Stf.Utilities
             var valueString = setValue == null ? "null" : setValue.ToString();
             var message = string.Format("< Exiting Set [{0}] after setting value [{1}]", propName, valueString);
 
+            var retVal = LogOneHtmlMessage(loglevel, message);
+
             callStack.Pop();
 
-            return LogOneHtmlMessage(loglevel, message);
+            return retVal;
         }
 
         /// <summary>
