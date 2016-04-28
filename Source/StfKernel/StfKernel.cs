@@ -189,7 +189,10 @@ namespace Mir.Stf
                         KernelLogger.CloseLogFile();
                     }
 
-                    PluginLoader?.Dispose();
+                    if (PluginLoader != null)
+                    {
+                        PluginLoader.Dispose();
+                    }
                 }
 
                 disposed = true;
@@ -230,8 +233,11 @@ namespace Mir.Stf
             var stfConfigurationFile = Path.Combine(StfConfigDir, @"StfConfiguration.xml");
 
             StfConfiguration = File.Exists(stfConfigurationFile)
-                ? new StfConfiguration(stfConfigurationFile)
-                : new StfConfiguration();
+                               ? new StfConfiguration(stfConfigurationFile)
+                               : new StfConfiguration();
+
+            // need to be able to control something for plugins - like plugin path:-)
+            OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
         }
 
         /// <summary>
@@ -315,7 +321,6 @@ namespace Mir.Stf
                 return;
             }
 
-            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Machine);
             OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testsuite);
             OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testcase);
             OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.User);
