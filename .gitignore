@@ -7,3 +7,4 @@ Thumbs.db
 **/packages/**
 **/TestResults/**
 *.nupkg
+/.vs/config/applicationhost.config

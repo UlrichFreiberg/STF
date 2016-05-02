@@ -12,12 +12,14 @@ namespace Stf.Unittests
 {
     using System;
 
+    using Mir.Stf.Utilities;
     using Mir.Stf.Utilities.Attributes;
 
     /// <summary>
     /// The StfSingletonPluginType interface.
     /// </summary>
     [StfSingleton]
+    [StfInterfaceLogLevel(StfLogLevel.Internal)]
     public interface IStfSingletonPluginType : IEquatable<IStfSingletonPluginType>
     {
         /// <summary>
@@ -28,6 +30,7 @@ namespace Stf.Unittests
         /// <summary>
         /// Gets or sets a value indicating whether singleton bool.
         /// </summary>
+        [StfMemberLogLevel(StfLogLevel.Trace)]
         bool SingletonBool { get; set; }
     }
 }

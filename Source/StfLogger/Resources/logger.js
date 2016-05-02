@@ -146,7 +146,7 @@ function toggleAll() {
         //toggleButton("passBtn", "Show", "Show Pass") 
         //toggleButton("failBtn", "Show", "Show Fail") 
         toggleButton("errorBtn", "Show", "Show Error");
-        toggleButton("warningBtn", "Show", "Show Warning");
+        toggleButton("warnBtn", "Show", "Show Warning");
         toggleButton("infoBtn", "Show", "Show Info");
         toggleButton("debugBtn", "Show", "Show Debug");
         toggleButton("traceBtn", "Show", "Show Trace");
@@ -157,7 +157,7 @@ function toggleAll() {
         toggleButton("passBtn", "Hide", "Hide Pass");
         toggleButton("failBtn", "Hide", "Hide Fail");
         toggleButton("errorBtn", "Hide", "Hide Error");
-        toggleButton("warningBtn", "Hide", "Hide Warning");
+        toggleButton("warnBtn", "Hide", "Hide Warning");
         toggleButton("infoBtn", "Hide", "Hide Info");
         toggleButton("debugBtn", "Hide", "Hide Debug");
         toggleButton("traceBtn", "Hide", "Hide Trace");
@@ -271,7 +271,7 @@ function initButtons() {
     hideButtonByDisplayCount("passBtn", PassCount);
     hideButtonByDisplayCount("failBtn", FailCount);
     hideButtonByDisplayCount("errorBtn", ErrorCount);
-    hideButtonByDisplayCount("warningBtn", WarningCount);
+    hideButtonByDisplayCount("warnBtn", WarningCount);
     hideButtonByDisplayCount("infoBtn", InfoCount);
     hideButtonByDisplayCount("debugBtn", DebugCount);
     hideButtonByDisplayCount("traceBtn", TraceCount);

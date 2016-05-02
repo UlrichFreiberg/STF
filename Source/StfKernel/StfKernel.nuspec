@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/UlrichFreiberg/STF</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Fixed issue where if one was not careful after enabling negative testing, tests would be reported as passed by MSTest even if they actually failed</releaseNotes>
+    <releaseNotes>Added ability to control loglevels for classes and members with attributes</releaseNotes>
     <copyright>Copyright 2016</copyright>
   </metadata>
 </package>

@@ -48,13 +48,15 @@ namespace Mir.Stf
 
             KernelLogger = new StfLogger(kernelLoggerConfiguration);
 
-            // get the configuration together
-            AssembleStfConfiguration();
+            // get the initial configuration together
+            AssembleStfConfigurationBeforePlugins();
 
             // Any plugins for us?
             PluginLoader = new StfPluginLoader(KernelLogger, StfConfiguration);
             PluginLoader.RegisterInstance(typeof(StfConfiguration), StfConfiguration);
             PluginLoader.LoadStfPlugins(StfConfiguration.GetKeyValue("StfKernel.PluginPath"));
+
+            AssembleStfConfigurationAfterPlugins();
 
             // now all configurations are loaded, we can set the Environment.
             StfConfiguration.Environment = StfConfiguration.DefaultEnvironment;
@@ -226,19 +228,23 @@ namespace Mir.Stf
         /// <summary>
         /// The assembly stf configuration.
         /// </summary>
-        private void AssembleStfConfiguration()
+        private void AssembleStfConfigurationBeforePlugins()
         {
             var stfConfigurationFile = Path.Combine(StfConfigDir, @"StfConfiguration.xml");
 
-            if (File.Exists(stfConfigurationFile))
-            {
-                StfConfiguration = new StfConfiguration(stfConfigurationFile);
-            }
-            else
-            {
-                StfConfiguration = new StfConfiguration();
-            }
+            StfConfiguration = File.Exists(stfConfigurationFile)
+                               ? new StfConfiguration(stfConfigurationFile)
+                               : new StfConfiguration();
 
+            // need to be able to control something for plugins - like plugin path:-)
+            OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
+        }
+
+        /// <summary>
+        /// The assembly stf configuration.
+        /// </summary>
+        private void AssembleStfConfigurationAfterPlugins()
+        {
             OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
             OverlayStfConfiguration(Environment.CurrentDirectory);
         }
@@ -315,7 +321,6 @@ namespace Mir.Stf
                 return;
             }
 
-            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Machine);
             OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testsuite);
             OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testcase);
             OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.User);
