@@ -18,9 +18,6 @@ namespace Mir.Stf.Utilities
 
     using Configuration;
 
-    /// <summary>
-    /// Util to archive files and directories as evidence after a test run
-    /// </summary>
     public class StfArchiver
     {
         /// <summary>
