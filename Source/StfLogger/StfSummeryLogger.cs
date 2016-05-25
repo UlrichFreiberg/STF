@@ -256,6 +256,11 @@ namespace Mir.Stf.Utilities
             {
                 var value = dataDrivenParametersValues[i];
 
+                if (!string.IsNullOrEmpty(value))
+                {
+                    value = value.Replace("{", "{{").Replace("}", "}}");
+                }
+
                 retVal += string.Format("<td>{0}</td>{1}", value, Environment.NewLine);
             }
 

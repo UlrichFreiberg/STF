@@ -111,13 +111,21 @@ namespace UnitTest
             StfAssert.FileContains(iteration.ToString(), StfLogger.FileName, message);
         }
 
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "Data\\DataDriven.csv", "DataDriven#csv", DataAccessMethod.Sequential)]
+        public void DataDrivenSummaryLogTestEscapeCurlyParenthesisTest()
+        {
+            var testDescription = (string) TestContext.DataRow["Test Description"];
+            StfAssert.StringNotEmpty("Description not empty", testDescription);
+        }
+
         /// <summary>
         /// The test cleanup.
         /// </summary>
         [TestCleanup]
         public void TestCleanup()
         {
-            this.StfLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
+            StfLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
             StfAssert.EnableNegativeTesting = true;
         }
 
