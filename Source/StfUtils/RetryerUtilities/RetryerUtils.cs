@@ -147,7 +147,9 @@ namespace Mir.Stf.Utilities.RetryerUtilities
 
             for (var iteration = 1; iteration <= Attempts; iteration++)
             {
-                if (DateTime.Now.Subtract(startTime) < Duration)
+                var elapsed = DateTime.Now.Subtract(startTime);
+
+                if (elapsed > Duration)
                 {
                     return false;
                 }

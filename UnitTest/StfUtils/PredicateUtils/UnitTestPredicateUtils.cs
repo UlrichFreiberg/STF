@@ -22,7 +22,7 @@ namespace UnitTest.PredicateUtils
     /// UnitTests for PredicateUtils 
     /// </summary>
     [TestClass]
-    public class UnitTestPredicateUtils : StfTestScriptBase
+    public class UnitTestPredicateUtils
     {
         /// <summary>
         /// Test Predicate
@@ -41,13 +41,13 @@ namespace UnitTest.PredicateUtils
             var filter = new PeopleFilter { AgeFilter = 42 };
             var result = predicate.FilterList(peopleList, filter);
 
-            StfAssert.IsTrue("Found", result.Any());
-            StfAssert.AreEqual("Found", result.FirstOrDefault().Name, "Name2");
+            Assert.IsTrue(result.Any());
+            Assert.AreEqual(result.First().Name, "Name2");
 
             filter = new PeopleFilter { Name = "Name3" };
             result = predicate.FilterList(peopleList, filter);
-            StfAssert.IsTrue("Found", result.Any());
-            StfAssert.AreEqual("Found", result.FirstOrDefault().Age, 43);
+            Assert.IsTrue(result.Any());
+            Assert.AreEqual(result.First().Age, 43);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace UnitTest.PredicateUtils
         {
             var predicate = new PredicateExpression("Age = 42");
 
-            StfAssert.AreEqual("Quantifier", predicate.LeftHandSide, "Age");
-            StfAssert.AreEqual("Value", predicate.RightHandSide, "42");
-            StfAssert.AreEqual("PredicateExpr", predicate.PredicateExpr, "Age = 42");
+            Assert.AreEqual(predicate.LeftHandSide, "Age");
+            Assert.AreEqual(predicate.RightHandSide, "42");
+            Assert.AreEqual(predicate.PredicateExpr, "Age = 42");
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace UnitTest.PredicateUtils
             var predicateUtils = new PredicateUtils();
             var filter = predicateUtils.ParsePredicate<PeopleFilter>("Age = 42");
 
-            StfAssert.AreEqual("Found", filter.AgeFilter, 42);
+            Assert.AreEqual(filter.AgeFilter, 42);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace UnitTest.PredicateUtils
             var filterClass = new PeopleFilter { Height = 182 };
             var filter = predicate.GeneratePredicate(filterClass);
 
-            StfAssert.AreEqual("Found", filter, "Height=182");
+            Assert.AreEqual(filter, "Height=182");
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace UnitTest.PredicateUtils
             var filterClass = new PeopleFilter { Height = 182, Age = 42 };
             var filter = predicate.GeneratePredicate(filterClass);
 
-            StfAssert.AreEqual("Found", filter, "Height=182");
+            Assert.AreEqual(filter, "Height=182");
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace UnitTest.PredicateUtils
             var filterClass = new PeopleFilter { Height = 182, AgeFilter = 42 };
             var filter = predicate.GeneratePredicate(filterClass);
 
-            StfAssert.AreEqual("Found", filter, "Age=42 ; Height=182");
+            Assert.AreEqual(filter, "Age=42 ; Height=182");
         }
     }
 }
