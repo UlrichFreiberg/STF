@@ -102,6 +102,7 @@ namespace Mir.Stf
             if (!TestDataDriven())
             {
                 TestContext.AddResultFile(StfLogger.FileName);
+                TestContext.AddResultFile(kernelLogFilePath);
             }
             else
             {
@@ -110,6 +111,11 @@ namespace Mir.Stf
                     // When datadriven we're defer adding resultfiles to testcontext until the last iteration
                     // This prevents MsTest from adding duplicate result files
                     testResultFiles.Add(StfLogger.FileName);
+                }
+
+                if (!testResultFiles.Contains(kernelLogFilePath))
+                {
+                    testResultFiles.Add(kernelLogFilePath);
                 }
 
                 for (var index = 0; index < TestContext.DataRow.Table.Columns.Count; index++)

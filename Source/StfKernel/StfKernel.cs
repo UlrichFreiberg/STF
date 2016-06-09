@@ -39,9 +39,11 @@ namespace Mir.Stf
             KernelSetupKernelDirectories();
 
             // lets get a logger and a configuration
-            var kernelLoggerFilename = Path.Combine(StfLogDir, @"KernelLogger.html");
+            var uniqueKernelLoggerFilename = AppendUniquePartToFileName("KernelLogger.html");
+            var kernelLoggerFilename = Path.Combine(StfKernelLogDir, uniqueKernelLoggerFilename);
             var kernelLoggerConfiguration = new StfLoggerConfiguration
             {
+                LogTitle = "KernelLog",
                 LogFileName = kernelLoggerFilename,
                 LogLevel = StfLogLevel.Internal
             };
@@ -105,6 +107,11 @@ namespace Mir.Stf
         /// Gets or sets the stf log dir.
         /// </summary>
         public string StfLogDir { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stf kernel log dir.
+        /// </summary>
+        public string StfKernelLogDir { get; set; }
 
         /// <summary>
         /// Gets or sets the stf configuration directory
@@ -305,6 +312,7 @@ namespace Mir.Stf
         {
             StfRoot = CheckForNeededKernelDirectory(@"Stf_Root", @"C:\temp\Stf");
             StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
+            StfKernelLogDir = CheckForNeededKernelDirectory(@"Stf_KernelLogDir", Path.Combine(StfLogDir, "KernelLog"));
             StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
         }
 
@@ -375,6 +383,37 @@ namespace Mir.Stf
             KernelLogger.LogInternal(string.Format("Applying configuration found at [{0}]", fileLocation));
 
             StfConfiguration.OverLay(fileLocation);
+        }
+
+        /// <summary>
+        /// The get unique file name part.
+        /// </summary>
+        /// <param name="originalFilename">
+        /// The original Filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string AppendUniquePartToFileName(string originalFilename)
+        {
+            if (string.IsNullOrEmpty(originalFilename))
+            {
+                return originalFilename;
+            }
+
+            var filename = originalFilename;
+            var extension = string.Empty;
+
+            if (Path.HasExtension(originalFilename))
+            {
+                extension = Path.GetExtension(originalFilename);
+                filename = Path.GetFileNameWithoutExtension(originalFilename);
+            }
+
+            var uniquePart = Guid.NewGuid().ToString("N");
+            var retVal = string.Format("{0}_{1}{2}", filename, uniquePart, extension);
+
+            return retVal;
         }
     }
 }
