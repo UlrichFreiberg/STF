@@ -390,7 +390,7 @@ namespace Mir.Stf.Utilities.Interceptors
             catch (Exception exception)
             {
                 stfLogger.LogInternal(
-                    "Caught exception trying to get info for property with name [{0}]. Error message [{0}]",
+                    "Caught exception trying to get info for property with name [{0}]. Error message: [{1}]",
                     propertyName,
                     exception.Message);
 
