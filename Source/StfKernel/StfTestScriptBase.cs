@@ -36,6 +36,11 @@ namespace Mir.Stf
         private static List<string> testResultFiles;
 
         /// <summary>
+        /// The kernel log file path.
+        /// </summary>
+        private string kernelLogFilePath;
+
+        /// <summary>
         /// Gets the Stf Asserter.
         /// </summary>
         public StfAssert StfAssert { get; private set; }
@@ -67,7 +72,7 @@ namespace Mir.Stf
             StfLogger = Get<IStfLogger>();
 
             // We're getting the instance of the logger and logging a link to the kernel logger
-            var kernelLogFilePath = StfLogger.FileName;
+            kernelLogFilePath = StfLogger.FileName;
 
             StfLogger.Configuration.LogTitle = TestContext.TestName;
 
@@ -150,6 +155,7 @@ namespace Mir.Stf
             if (!TestDataDriven())
             {
                 StfArchiver.AddFile(StfLogger.FileName);
+                StfArchiver.AddFile(kernelLogFilePath);
                 StfLogger.LogInfo(StfArchiver.Status());
                 StfLogger.CloseLogFile();
                 StfArchiver.PerformArchive();
