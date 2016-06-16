@@ -97,7 +97,7 @@ namespace Mir.Stf.Utilities
 
             set
             {
-                // no need to change is same:-)
+                // no need to change if same:-)
                 if (environment == value)
                 {
                     return;
@@ -159,6 +159,7 @@ namespace Mir.Stf.Utilities
 
             // lets see if we should use the Environment configuration
             var pathToUse = configValuePath;
+
             if (!string.IsNullOrEmpty(Environment) && !IsAbsoluteConfigurationPath(ref pathToUse))
             {
                 configToUse = environmentConfiguration;
@@ -502,19 +503,20 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool IsAbsoluteConfigurationPath(ref string configPath)
         {
+            const string StartOfAbsolutePath = "Configuration.";
+
             if (string.IsNullOrEmpty(configPath))
             {
                 return false;
             }
 
-            var startOfAbsolutePath = "Configuration.";
-            if (configPath.StartsWith(startOfAbsolutePath, StringComparison.OrdinalIgnoreCase))
+            if (!configPath.StartsWith(StartOfAbsolutePath, StringComparison.OrdinalIgnoreCase))
             {
-                configPath = configPath.Replace(startOfAbsolutePath, string.Empty);
-                return true;
+                return false;
             }
 
-            return false;
+            configPath = configPath.Replace(StartOfAbsolutePath, string.Empty);
+            return true;
         }
     }
 }

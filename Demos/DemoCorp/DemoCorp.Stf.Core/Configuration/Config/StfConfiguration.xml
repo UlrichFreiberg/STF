@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
+  <section name="StfKernel">
+    <!--<key name="PluginPath" value="%STF_ROOT%\Plugins\" />-->
+    <key name="PluginPath" value="C:\Temp\Stf\StfBin" />
+    <key name="PluginPatterns" value="Mir.Stf.*.dll;DemoCorp.Stf.*.dll" />
+    <key name="ArchiveTestResults" value="true" />
+    <key name="ArchiveDestination" value="%STF_ROOT%\archiveDir" />
+    <section name="StfLogger">
+      <key name="PathToLogoImageFile" value="C:\temp\Stf\Images\DemoCorp.png" />
+      <key name="HeaderForegroundColor" value="white" />
+      <key name="HeaderBackgroundColor" value="rgba(13, 93, 140, 1)" />
+    </section>
+  </section>
+
+  <section name="TestScriptValues">
+    <key name="FileShare" value="\\DCD01HH-EVS01\SunTestTools\TestData\Templifier\DataScrubbing" />
+
+    <section name="TCID_839">
+      <key name="Directory" value="TCID_839" />
+    </section>
+  </section>
+
+  <section name="Environments" defaultsection="UAT">
+    <section name="UAT">
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="g90222">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon999" />
+        </section>
+        <section name="g90222-adm">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon999" />
+        </section>
+        <section name="m677106">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis22" />
+        </section>
+        <section name="m677106-adm">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis22" />
+        </section>
+        <section name="g90547">
+          <key name="Username" value="G90547" />
+          <key name="Password" value="Ballon333" />
+        </section>
+        <section name="g90547-adm">
+          <key name="Username" value="G90547" />
+          <key name="Password" value="Ballon333" />
+        </section>
+      </section>
+    </section>
+
+    <section name="Preprod">
+      <section name="DisplayTargets">
+      </section>
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="g90222">
+          <key name="Username" value="admin" />
+          <key name="Password" value="admin" />
+        </section>
+        <section name="g90547">
+          <key name="Username" value="admin" />
+          <key name="Password" value="admin" />
+        </section>
+      </section>
+    </section>
+
+    <section name="DEV1">
+      <section name="DisplayTargets">
+      </section>
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="g90222">
+          <key name="Username" value="g90222" />
+          <key name="Password" value="Ballon777" />
+        </section>
+        <section name="g90222-adm">
+          <key name="Username" value="G90547" />
+          <key name="Password" value="Ballon111" />
+        </section>
+        <section name="m677106">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis11" />
+        </section>
+        <section name="m677106-adm">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis11" />
+        </section>
+        <section name="g90547">
+          <key name="Username" value="G90547" />
+          <key name="Password" value="Ballon111" />
+        </section>
+        <section name="g90547-adm">
+          <key name="Username" value="G90547" />
+          <key name="Password" value="Ballon111" />
+        </section>
+      </section>
+    </section>
+
+    <section name="Sandbox">
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="g90222">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon999" />
+        </section>
+        <section name="g90222-adm">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon999" />
+        </section>
+        <section name="g90547">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon999" />
+        </section>
+        <section name="g90547-adm">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon999" />
+        </section>
+        <section name="m677106">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis22" />
+        </section>
+        <section name="m677106-adm">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis22" />
+        </section>
+      </section>
+    </section>
+    
+    <section name="DEV2">
+      <section name="DisplayTargets">
+      </section>
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="g90222">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon777" />
+        </section>
+        <section name="g90222-adm">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon777" />
+        </section>
+        <section name="m677106">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis11" />
+        </section>
+        <section name="m677106-adm">
+          <key name="Username" value="M677106" />
+          <key name="Password" value="Dlugopis11" />
+        </section>
+        <section name="g90547">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon777" />
+        </section>
+        <section name="g90547-adm">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon777" />
+        </section>
+      </section>
+    </section>
+
+    <section name="Localhost">
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="g90222">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon888" />
+        </section>
+        <section name="g90222-adm">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon888" />
+        </section>
+        <section name="g90547">
+          <key name="Username" value="G90547" />
+          <key name="Password" value="Ballon222" />
+        </section>
+        <section name="g90547-adm">
+          <key name="Username" value="G90547" />
+          <key name="Password" value="Ballon222" />
+        </section>
+      </section>
+    </section>
+
+    <section name="Prod">
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="g90222">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon666" />
+        </section>
+        <section name="g90547">
+          <key name="Username" value="G90222" />
+          <key name="Password" value="Ballon666" />
+        </section>
+      </section>
+    </section>
+
+  </section>
+
+</configuration>
