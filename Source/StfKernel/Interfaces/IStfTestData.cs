@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DataDriven
+namespace Mir.Stf.Interfaces
 {
     /// <summary>
     /// The StfTestData interface.
@@ -18,16 +18,21 @@ namespace DataDriven
         /// <summary>
         /// Gets or sets a value indicating whether ignore row.
         /// </summary>
-        bool IgnoreRow { get; set; }
+        bool StfIgnoreRow { get; set; }
 
         /// <summary>
         /// Gets or sets the log level.
         /// </summary>
-        string LogLevel { get; set; }
+        string StfLogLevel { get; set; }
 
         /// <summary>
         /// Gets or sets the environment.
         /// </summary>
-        string Environment { get; set; }
+        string StfEnvironment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the iteration.
+        /// </summary>
+        int StfIteration { get; set; }
     }
 }

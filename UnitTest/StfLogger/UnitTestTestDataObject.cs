@@ -1,33 +1,30 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStfTestData.cs" company="Mir Software">
+// <copyright file="UnitTestTestDataObject.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IStfTestData type.
+//   The unit test test data object.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DataDriven
+namespace UnitTest
 {
+    using Mir.Stf;
+
     /// <summary>
-    /// The StfTestData interface.
+    /// The unit test test data object.
     /// </summary>
-    public interface IStfTestData
+    public class UnitTestTestDataObject : StfTestDataBase
     {
         /// <summary>
-        /// Gets or sets a value indicating whether ignore row.
+        /// Gets or sets the iteration.
         /// </summary>
-        bool IgnoreRow { get; set; }
+        public string Message { get; set; }
 
         /// <summary>
-        /// Gets or sets the log level.
+        /// Gets or sets the iteration.
         /// </summary>
-        string LogLevel { get; set; }
-
-        /// <summary>
-        /// Gets or sets the environment.
-        /// </summary>
-        string Environment { get; set; }
+        public string Iteration { get; set; }
     }
 }

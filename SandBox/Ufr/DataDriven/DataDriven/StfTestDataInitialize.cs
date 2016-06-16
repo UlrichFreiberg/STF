@@ -32,7 +32,7 @@ namespace DataDriven
         /// <returns>
         /// The <see cref="T"/>.
         /// </returns>
-        public static T InitObject<T>(DataRow dataRow) where T : StfTestDataBase, new()
+        public static T InitObject<T>(T testdataObject = null) where T : IStfTestData, new()
         {
             var retVal = new T();
 
@@ -61,6 +61,11 @@ namespace DataDriven
             }
 
             return retVal;
+        }
+
+        public static T InitObject<T>(T testdataObject) where T : IStfTestData
+        {
+            
         }
     }
 }

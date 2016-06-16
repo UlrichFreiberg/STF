@@ -132,12 +132,12 @@ namespace Mir.Stf.Utilities
         {
             get
             {
-                return this.logLevel;
+                return logLevel;
             }
 
             set
             {
-                this.logLevel = value;
+                logLevel = value;
                 timeOfLastMessage = DateTime.Now;
 
                 foreach (StfLogLevel loglevel in Enum.GetValues(typeof(StfLogLevel)))
@@ -249,12 +249,12 @@ namespace Mir.Stf.Utilities
                 AddLoglevelToRunReport.Add(loglevel, true);
             }
 
-            LogFileHandle = new LogfileWriter { OverwriteLogFile = this.OverwriteLogFile };
+            LogFileHandle = new LogfileWriter { OverwriteLogFile = OverwriteLogFile };
 
             SetDefaultConfiguration();
 
             FileName = Configuration.LogFileName;
-            this.LogLevel = Configuration.LogLevel;
+            LogLevel = Configuration.LogLevel;
             OverwriteLogFile = Configuration.OverwriteLogFile;
 
             // setting the default AID logging function

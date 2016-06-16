@@ -111,12 +111,34 @@ namespace UnitTest
             StfAssert.FileContains(iteration.ToString(), StfLogger.FileName, message);
         }
 
+        /// <summary>
+        /// The data driven summary log test escape curly parenthesis test.
+        /// </summary>
         [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "Data\\DataDriven.csv", "DataDriven#csv", DataAccessMethod.Sequential)]
         public void DataDrivenSummaryLogTestEscapeCurlyParenthesisTest()
         {
-            var testDescription = (string) TestContext.DataRow["Test Description"];
+            var testDescription = (string)TestContext.DataRow["Test Description"];
             StfAssert.StringNotEmpty("Description not empty", testDescription);
+        }
+
+        /// <summary>
+        /// The datadriven with testdata object.
+        /// </summary>
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "Data\\Data.csv", "Data#csv", DataAccessMethod.Sequential)]
+        public void TestInitTestDataWithDataSource()
+        {
+            HelperDatadrivenWithTestdataObject();
+        }
+
+        /// <summary>
+        /// The test init test data without data source.
+        /// </summary>
+        [TestMethod]
+        public void TestInitTestDataWithoutDataSource()
+        {
+            HelperDatadrivenWithTestdataObject();
         }
 
         /// <summary>
@@ -127,6 +149,19 @@ namespace UnitTest
         {
             StfLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
             StfAssert.EnableNegativeTesting = true;
+        }
+
+        /// <summary>
+        /// The helper datadriven with testdata object.
+        /// </summary>
+        private void HelperDatadrivenWithTestdataObject()
+        {
+            var testdata = new UnitTestTestDataObject { Iteration = "-1" };
+
+            testdata = InitTestData<UnitTestTestDataObject>(testdata);
+
+            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", testdata.Iteration, testdata.Message));
+            StfAssert.AreEqual("Iteration", testdata.Iteration, testdata.StfIteration.ToString());
         }
 
         /// <summary>
