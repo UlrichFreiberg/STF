@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IStfTestData.cs" />
     <Compile Include="KernelUtils\StfTextUtils.cs" />
     <Compile Include="StfKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StfTestDataBase.cs" />
     <Compile Include="StfTestScriptBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +75,7 @@
   <ItemGroup>
     <None Include="Config\StfConfiguration.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>robocopy $(ProjectDir)Config C:\Temp\Stf\Config StfConfiguration.xml

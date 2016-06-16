@@ -19,5 +19,15 @@ namespace DataDriven
         /// Gets or sets a value indicating whether ignore row.
         /// </summary>
         bool IgnoreRow { get; set; }
+
+        /// <summary>
+        /// Gets or sets the log level.
+        /// </summary>
+        string LogLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the environment.
+        /// </summary>
+        string Environment { get; set; }
     }
 }

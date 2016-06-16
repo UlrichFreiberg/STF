@@ -18,7 +18,10 @@ namespace Mir.Stf
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
+
+    using Mir.Stf.Interfaces;
 
     using Utilities.Configuration;
 
@@ -80,12 +83,12 @@ namespace Mir.Stf
             var iterationNo = DataRowIndex();
             var iterationStatus = "Not datadriven";
 
-            if (iterationNo == 0)
+            if (iterationNo == 1)
             {
                 testResultFiles = new List<string>();
             }
 
-            if (iterationNo >= 0)
+            if (iterationNo >= 1)
             {
                 logFilePostfix = string.Format("_{0}", iterationNo);
                 iterationStatus = string.Format("Iteration {0}", iterationNo);
@@ -166,7 +169,7 @@ namespace Mir.Stf
 
                 StfLogger.CloseLogFile();
 
-                if (iterationNo == TestContext.DataRow.Table.Rows.Count - 1)
+                if (iterationNo == TestContext.DataRow.Table.Rows.Count)
                 {
                     var myStfSummeryLogger = new StfSummeryLogger();
                     var summeryLogfileLogDirname = Path.GetDirectoryName(StfLogger.FileName);
@@ -194,6 +197,67 @@ namespace Mir.Stf
 
                 throw new AssertFailedException(msg);
             }
+        }
+
+        /// <summary>
+        /// The init test data.
+        /// </summary>
+        /// <param name="testdataObject">
+        /// The testdata object.
+        /// </param>
+        /// <typeparam name="T">
+        /// The testdata object that should be filled with the values from the current row in the TestContext
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        protected T InitTestData<T>(T testdataObject = default(T)) where T : IStfTestData, new()
+        {
+            if (!TestDataDriven())
+            {
+                if (testdataObject != null)
+                {
+                    testdataObject.StfIteration = -1;
+                }
+
+                return testdataObject;
+            }
+
+            var retVal = new T();
+            var properties = typeof(T).GetProperties();
+            var dataRow = TestContext.DataRow;
+
+            retVal.StfIteration = DataRowIndex();
+
+            foreach (var row in dataRow.Table.Columns)
+            {
+                var propertyName = row.ToString();
+                var property = properties.FirstOrDefault(pp => pp.Name == propertyName);
+
+                // did we find the correspondig property in the testdata class?
+                if (property == null)
+                {
+                    continue;
+                }
+
+                var propertyType = property.PropertyType;
+                try
+                {
+                    var val = TypeDescriptor.GetConverter(propertyType).ConvertFromString(dataRow[propertyName].ToString());
+
+                    property.SetValue(retVal, val);
+                }
+                catch (Exception ex)
+                {
+                    StfLogger.LogInternal(
+                        "Caught error setting value for property [{0}] in testdata object [{1}]. Error: [{2}]",
+                        property.Name,
+                        typeof(T).Name,
+                        ex.Message);
+                }
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -263,7 +327,7 @@ namespace Mir.Stf
             }
 
             var currentIteration = TestContext.DataRow.Table.Rows.IndexOf(TestContext.DataRow);
-            return currentIteration;
+            return currentIteration + 1;
         }
 
         /// <summary>
