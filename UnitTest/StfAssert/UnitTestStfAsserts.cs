@@ -73,6 +73,18 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test method assert inconclusive.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAssertInconclusive()
+        {
+            Assert.IsTrue(StfAssert.IsInconclusive("Check is inconclusive", "Inconclusive"));
+            StfAssert.AreEqual("Current inconclusives", 1, StfAssert.CurrentInconclusives);
+            StfAssert.AreEqual("Current failures", 0, StfAssert.CurrentFailures);
+            StfAssert.AreEqual("Current passes", 2, StfAssert.CurrentPasses);
+        }
+
+        /// <summary>
         /// The test method assert throws lambda.
         /// </summary>
         [TestMethod]

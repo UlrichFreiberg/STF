@@ -36,18 +36,21 @@ namespace Mir.Stf.Utilities
             var runstats = string.Format(@"<span id=""runstatus"">{0}</span>", statusMsg);
 
             runstats += string.Format(
-                        "<div class=\"line runstats\" passed=\"{0}\" failed=\"{1}\" Errors=\"{2}\" Warnings=\"{3}\">",
+                        "<div class=\"line runstats\" passed=\"{0}\" failed=\"{1}\" Errors=\"{2}\" Warnings=\"{3}\" Inconclusives=\"{4}\">",
                         NumberOfLoglevelMessages[StfLogLevel.Pass],
                         NumberOfLoglevelMessages[StfLogLevel.Fail],
                         NumberOfLoglevelMessages[StfLogLevel.Error],
-                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
+                        NumberOfLoglevelMessages[StfLogLevel.Warning],
+                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive]);
 
             runstats += string.Format(
-                        "   {0} Passed, {1} Failed, {2} Errors, {3} Warnings",
+                        "   {0} Passed, {1} Failed, {2} Errors, {3} Warnings, {4} Inconclusives",
                         NumberOfLoglevelMessages[StfLogLevel.Pass],
                         NumberOfLoglevelMessages[StfLogLevel.Fail],
                         NumberOfLoglevelMessages[StfLogLevel.Error],
-                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
+                        NumberOfLoglevelMessages[StfLogLevel.Warning],
+                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive]);
+
             runstats += "</div>";
 
             LogOneHtmlMessage(logLevel, runstats);

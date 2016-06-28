@@ -182,6 +182,8 @@ namespace Mir.Stf.Utilities
                         break;
                     case StfLogLevel.Fail:
                         break;
+                    case StfLogLevel.Inconclusive:
+                        break;
                     case StfLogLevel.KeyValue:
                         break;
                     default:
@@ -404,6 +406,7 @@ namespace Mir.Stf.Utilities
 
             LogKeyValue("Passed", NumberOfLoglevelMessages[StfLogLevel.Pass].ToString(), "Passed Tests");
             LogKeyValue("Failed", NumberOfLoglevelMessages[StfLogLevel.Fail].ToString(), "Failed Tests");
+            LogKeyValue("Inconclusives", NumberOfLoglevelMessages[StfLogLevel.Inconclusive].ToString(), "Inconclusive Tests");
             LogKeyValue("Errors", NumberOfLoglevelMessages[StfLogLevel.Error].ToString(), "Errors logged");
             LogKeyValue("Warnings", NumberOfLoglevelMessages[StfLogLevel.Warning].ToString(), "Warnings logged");
 

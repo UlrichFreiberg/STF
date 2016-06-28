@@ -67,7 +67,12 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// The fail.
         /// </summary>
-        Fail, 
+        Fail,
+
+        /// <summary>
+        /// The inconclusive.
+        /// </summary>
+        Inconclusive,
 
         // ========================================
         // Level used to log keyvalues like OS, URL, VersionInfo etc...

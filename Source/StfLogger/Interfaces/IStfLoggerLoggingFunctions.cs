@@ -141,6 +141,23 @@ namespace Mir.Stf.Utilities.Interfaces
         int LogFail(string testStepName, string message, params object[] args);
 
         /// <summary>
+        /// The log inconclusive.
+        /// </summary>
+        /// <param name="testStepName">
+        /// The test Step Name.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogInconclusive(string testStepName, string message, params object[] args);
+
+        /// <summary>
         /// Logging a KeyValue pair - as you see fit. The logger will log some, that are generally useful - like OS
         /// Machine, CurrentDirectory etc..
         /// </summary>

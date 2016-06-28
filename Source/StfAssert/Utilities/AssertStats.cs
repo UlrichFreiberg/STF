@@ -22,6 +22,7 @@ namespace Mir.Stf.Utilities.Utilities
         {
             AssertFailedCount = 0;
             AssertPassCount = 0;
+            AssertInconclusiveCount = 0;
         }
 
         /// <summary>
@@ -33,5 +34,10 @@ namespace Mir.Stf.Utilities.Utilities
         /// Gets or sets the assert pass count.
         /// </summary>
         public int AssertPassCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the assert inconclusive count.
+        /// </summary>
+        public int AssertInconclusiveCount { get; set; }
     }
 }

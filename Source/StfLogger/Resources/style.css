@@ -84,7 +84,7 @@ div.el {
 }
 
 div.level {
-    width: 60px;
+    width: 90px;
     padding-right: 10px;
     text-transform: uppercase;
 }
@@ -97,7 +97,7 @@ div.info {
     color: black;
 }
 
-div.warn {
+div.warning {
     color: #868A08;
 }
 
@@ -112,6 +112,11 @@ div.pass {
 
 div.fail {
     color: red;
+    font-weight: bolder;
+}
+
+div.inconclusive {
+    color: #868A08;
     font-weight: bolder;
 }
 
@@ -143,7 +148,7 @@ div.runstats {
     display: block;
 }
 
-.warn {
+.warning {
     display: block;
 }
 
@@ -169,6 +174,7 @@ div.runstats {
 
 div.time {
     padding-right: 10px;
+    width: 60px
 }
 
 div.msg {

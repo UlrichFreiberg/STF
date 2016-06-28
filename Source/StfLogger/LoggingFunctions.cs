@@ -243,12 +243,38 @@ namespace Mir.Stf.Utilities
             const StfLogLevel TheLogLevel = StfLogLevel.Fail;
             var length = 0;
 
+            length = LogOneHtmlMessage(TheLogLevel, tempNeedsToBeReworkedMessage);
+
             if (Configuration.ScreenshotOnLogFail)
             {
                 length = LogScreenshot(TheLogLevel, string.Empty);
             }
 
-            return length + LogOneHtmlMessage(TheLogLevel, tempNeedsToBeReworkedMessage);
+            return length;
+        }
+
+        /// <summary>
+        /// The log inconclusive.
+        /// </summary>
+        /// <param name="testStepName">
+        /// The test Step Name.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public int LogInconclusive(string testStepName, string message, params object[] args)
+        {
+            message = message.StfFormatString(args);
+
+            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
+
+            return LogOneHtmlMessage(StfLogLevel.Inconclusive, tempNeedsToBeReworkedMessage);
         }
 
         #endregion

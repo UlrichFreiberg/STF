@@ -148,7 +148,8 @@ namespace Mir.Stf
         {
             LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
 
-            var testFailed = TestContext.CurrentTestOutcome != UnitTestOutcome.Passed;
+            var testFailed = TestContext.CurrentTestOutcome != UnitTestOutcome.Passed &&
+                             TestContext.CurrentTestOutcome != UnitTestOutcome.Inconclusive;
 
             if (testFailed)
             {
@@ -164,7 +165,7 @@ namespace Mir.Stf
                 StfArchiver.PerformArchive();
             }
             else
-            {             
+            {
                 var iterationNo = DataRowIndex();
 
                 StfLogger.CloseLogFile();
@@ -186,6 +187,16 @@ namespace Mir.Stf
                     StfArchiver.AddFile(summeryLogfilename);
                     StfArchiver.PerformArchive();
                 }
+            }
+
+            if (!testFailed && StfAssert.CurrentInconclusives > 0 && StfAssert.CurrentFailures <= 0)
+            {
+                var msg = string.Format(
+                    "Testmethod [{0}] is inconclusive. Number of inconclusive results: [{1}]",
+                    TestContext.TestName,
+                    StfAssert.CurrentInconclusives);
+
+                throw new AssertInconclusiveException(msg);
             }
 
             if (!testFailed && StfAssert.CurrentFailures > 0)

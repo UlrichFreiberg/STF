@@ -98,6 +98,17 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// Gets the current inconclusives.
+        /// </summary>
+        public int CurrentInconclusives
+        {
+            get
+            {
+                return Stats.AssertInconclusiveCount;
+            }
+        }
+
+        /// <summary>
         /// Gets the last message.
         /// </summary>
         public string LastMessage { get; private set; }
@@ -167,6 +178,32 @@ namespace Mir.Stf.Utilities
             }
 
             return retVal;
+        }
+
+        /// <summary>
+        /// The is inconclusive.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test Step.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool IsInconclusive(string testStep, string message)
+        {
+            AssertLogger.LogInconclusive(testStep, message);
+
+            Stats.AssertInconclusiveCount++;
+
+            if (!enableNegativeTesting)
+            {
+                throw new AssertInconclusiveException(message);
+            }
+
+            return true;
         }
 
         /// <summary>

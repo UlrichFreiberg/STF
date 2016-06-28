@@ -108,6 +108,7 @@ namespace UnitTest
             // used solely by Assert functions
             StfLogger.LogPass("testStepName LogPass", "{0}", "LogPass");
             StfLogger.LogFail("testStepName LogFail", "{0}", "LogFail");
+            StfLogger.LogInconclusive("testStepName LogInconclusive", "Inconclusive result: {0}", 1);
 
             StfLogger.LogKeyValue("SomeKey", "SomeValue", "{0}", "LogKeyValue");
 

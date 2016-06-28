@@ -41,6 +41,11 @@ namespace Mir.Stf.Utilities.Interfaces
         int CurrentPasses { get; }
 
         /// <summary>
+        /// Gets the current inconclusives.
+        /// </summary>
+        int CurrentInconclusives { get; }
+
+        /// <summary>
         /// Assert if two values are the same. Values and objects can be compared.
         /// </summary>
         /// <typeparam name="T1">
@@ -368,5 +373,19 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool IsFalse(string testStep, bool value);
+
+        /// <summary>
+        /// The is inconclusive.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test Step.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool IsInconclusive(string testStep, string message);
     }
 }
