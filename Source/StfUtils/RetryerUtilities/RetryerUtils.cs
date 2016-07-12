@@ -165,7 +165,11 @@ namespace Mir.Stf.Utilities.RetryerUtilities
                     var iterationTime = DateTime.Now - iterationStartTime;
                     var sleepTime = AttemptTime - iterationTime;
 
-                    Thread.Sleep(sleepTime);
+                    // the action might have taken more time, than one iteration try (AttemptTime)
+                    if (sleepTime.TotalMilliseconds > 0)
+                    {
+                        Thread.Sleep(sleepTime);
+                    }
                 }
             }
 
