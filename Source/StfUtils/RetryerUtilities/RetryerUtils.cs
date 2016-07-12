@@ -22,6 +22,16 @@ namespace Mir.Stf.Utilities.RetryerUtilities
     public class RetryerUtils : IRetryerUtils
     {
         /// <summary>
+        /// The action. Used when retying using a action
+        /// </summary>
+        private Action retrierAction;
+
+        /// <summary>
+        /// The function. Used when retying using a function
+        /// </summary>
+        private Func<bool> retrierFunction;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RetryerUtils"/> class.
         /// </summary>
         /// <param name="attempts">
@@ -38,6 +48,8 @@ namespace Mir.Stf.Utilities.RetryerUtilities
             Attempts = attempts;
             Duration = duration;
             AttemptTime = attemptTime;
+            retrierAction = null;
+            retrierFunction = null;
         }
 
         /// <summary>
@@ -48,6 +60,8 @@ namespace Mir.Stf.Utilities.RetryerUtilities
             Attempts = 3;
             Duration = TimeSpan.FromSeconds(10);
             AttemptTime = TimeSpan.FromSeconds(3);
+            retrierAction = null;
+            retrierFunction = null;
         }
 
         /// <summary>
@@ -83,11 +97,38 @@ namespace Mir.Stf.Utilities.RetryerUtilities
         /// </returns>
         public bool Retry(Action action, TimeSpan duration, int attempts)
         {
+            retrierAction = action;
             Duration = duration;
             Attempts = attempts;
             AttemptTime = BestGuessForAttemptTime();
 
-            var retVal = InternalRetry(action);
+            var retVal = InternalRetry();
+            return retVal;
+        }
+
+        /// <summary>
+        /// The retry.
+        /// </summary>
+        /// <param name="function">
+        /// The function.
+        /// </param>
+        /// <param name="duration">
+        /// The duration.
+        /// </param>
+        /// <param name="attempts">
+        /// The attempts.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Retry(Func<bool> function, TimeSpan duration, int attempts)
+        {
+            retrierFunction = function;
+            Duration = duration;
+            Attempts = attempts;
+            AttemptTime = BestGuessForAttemptTime();
+
+            var retVal = InternalRetry();
             return retVal;
         }
 
@@ -105,11 +146,29 @@ namespace Mir.Stf.Utilities.RetryerUtilities
         /// </returns>
         public bool Retry(Action action, TimeSpan duration)
         {
-            Duration = duration;
-            Attempts = BestGuessForAttempts();
-            AttemptTime = BestGuessForAttemptTime();
+            var attempts = BestGuessForAttempts();
+            var retVal = Retry(action, duration, attempts);
 
-            var retVal = InternalRetry(action);
+            return retVal;
+        }
+
+        /// <summary>
+        /// The retry.
+        /// </summary>
+        /// <param name="function">
+        /// The function.
+        /// </param>
+        /// <param name="duration">
+        /// The duration.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Retry(Func<bool> function, TimeSpan duration)
+        {
+            var attempts = BestGuessForAttempts();
+            var retVal = Retry(function, duration, attempts);
+
             return retVal;
         }
 
@@ -124,24 +183,36 @@ namespace Mir.Stf.Utilities.RetryerUtilities
         /// </returns>
         public bool Retry(Action action)
         {
-            Attempts = BestGuessForAttempts();
-            AttemptTime = BestGuessForAttemptTime();
-            Duration = BestGuessForDuration();
+            var duration = BestGuessForDuration();
+            var retVal = Retry(action, duration);
 
-            var retVal = InternalRetry(action);
+            return retVal;
+        }
+
+        /// <summary>
+        /// The retry.
+        /// </summary>
+        /// <param name="function">
+        /// The function.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Retry(Func<bool> function)
+        {
+            var duration = BestGuessForDuration();
+            var retVal = Retry(function, duration);
+
             return retVal;
         }
 
         /// <summary>
         /// The internal retry.
         /// </summary>
-        /// <param name="action">
-        /// The action.
-        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool InternalRetry(Action action)
+        private bool InternalRetry()
         {
             var startTime = DateTime.Now;
 
@@ -157,19 +228,34 @@ namespace Mir.Stf.Utilities.RetryerUtilities
                 var iterationStartTime = DateTime.Now;
                 try
                 {
-                    action();
-                    return true;
+                    if (retrierAction != null)
+                    {
+                        // we can only communicate with an action only by throwing an exception 
+                        // if something is not right - meaning for us to go for the next iteration
+                        retrierAction();
+
+                        return true;
+                    }
+
+                    if (retrierFunction != null)
+                    {
+                        var retVal = retrierFunction();
+
+                        return retVal;
+                    }
                 }
                 catch (Exception)
                 {
-                    var iterationTime = DateTime.Now - iterationStartTime;
-                    var sleepTime = AttemptTime - iterationTime;
+                    // Ignore
+                }
 
-                    // the action might have taken more time, than one iteration try (AttemptTime)
-                    if (sleepTime.TotalMilliseconds > 0)
-                    {
-                        Thread.Sleep(sleepTime);
-                    }
+                var iterationTime = DateTime.Now - iterationStartTime;
+                var sleepTime = AttemptTime - iterationTime;
+
+                // the action might have taken more time, than one iteration try (AttemptTime)
+                if (sleepTime.TotalMilliseconds > 0)
+                {
+                    Thread.Sleep(sleepTime);
                 }
             }
 
@@ -216,7 +302,7 @@ namespace Mir.Stf.Utilities.RetryerUtilities
             }
 
             var ticks = Math.Abs(Duration.Ticks / Attempts);
-            
+
             return TimeSpan.FromTicks(ticks);
         }
     }

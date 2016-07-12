@@ -37,6 +37,23 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <summary>
         /// The retry.
         /// </summary>
+        /// <param name="function">
+        /// A function delegate that return false, while not done, and true when done
+        /// </param>
+        /// <param name="duration">
+        /// The duration.
+        /// </param>
+        /// <param name="attempts">
+        /// The attempts.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool Retry(Func<bool> function, TimeSpan duration, int attempts);
+
+        /// <summary>
+        /// The retry.
+        /// </summary>
         /// <param name="action">
         /// The action.
         /// </param>
@@ -51,6 +68,20 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <summary>
         /// The retry.
         /// </summary>
+        /// <param name="function">
+        /// A function delegate that return false, while not done, and true when done
+        /// </param>
+        /// <param name="duration">
+        /// The duration.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool Retry(Func<bool> function, TimeSpan duration);
+
+        /// <summary>
+        /// The retry.
+        /// </summary>
         /// <param name="action">
         /// The action.
         /// </param>
@@ -58,5 +89,16 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool Retry(Action action);
+
+        /// <summary>
+        /// The retry.
+        /// </summary>
+        /// <param name="function">
+        /// A function delegate that return false, while not done, and true when done
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool Retry(Func<bool> function);
     }
 }
