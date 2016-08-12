@@ -12,8 +12,6 @@ namespace Mir.Stf.Utilities.Interfaces
 {
     using System;
 
-    using Utilities;
-
     /// <summary>
     /// The <see cref="StfAssert"/> interface.
     /// </summary>
@@ -211,7 +209,33 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool GreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
-            where T1 : IConvertible, IComparable where T2 : IConvertible, IComparable;
+            where T1 : IConvertible, IComparable 
+            where T2 : IConvertible, IComparable;
+
+        /// <summary>
+        /// Asserts whether the left hand side is equal to or greater than the right hand side
+        /// </summary>
+        /// <typeparam name="T1">
+        /// The type of the left value in a compare expression
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the right value in a compare expression
+        /// </typeparam>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="leftHandSide">
+        /// The value to the left in a compare expression
+        /// </param>
+        /// <param name="rightHandSide">
+        /// The value to the right in a compare expression
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool GreaterThanOrEqual<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+            where T1 : IConvertible, IComparable 
+            where T2 : IConvertible, IComparable;
 
         /// <summary>
         /// Asserts whether the left hand side is less than the right hand side
@@ -235,6 +259,31 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool LessThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+            where T1 : IConvertible, IComparable
+            where T2 : IConvertible, IComparable;
+
+        /// <summary>
+        /// Asserts whether the left hand side is equal to or less than the right hand side
+        /// </summary>
+        /// <typeparam name="T1">
+        /// The type of the left value in a compare expression
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the right value in a compare expression
+        /// </typeparam>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="leftHandSide">
+        /// The value to the left in a compare expression
+        /// </param>
+        /// <param name="rightHandSide">
+        /// The value to the right in a compare expression
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool LessThanOrEqual<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
             where T1 : IConvertible, IComparable
             where T2 : IConvertible, IComparable;
 

@@ -149,6 +149,54 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// Asserts whether the left hand side is equal to or greater than the right hand side
+        /// </summary>
+        /// <typeparam name="T1">
+        /// The type of the left value in a compare expression
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the right value in a compare expression
+        /// </typeparam>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="leftHandSide">
+        /// The value to the left in a compare expression
+        /// </param>
+        /// <param name="rightHandSide">
+        /// The value to the right in a compare expression
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool GreaterThanOrEqual<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide) where T1 : IConvertible, IComparable where T2 : IConvertible, IComparable
+        {
+            var msg = string.Empty;
+            var compareVal = 0;
+
+            // TODO:what to return if we cannot compare the objects?
+            if (!AssertCompareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
+            {
+                return false;
+            }
+
+            var retVal = compareVal >= 0;
+
+            if (retVal)
+            {
+                msg = string.Format("GreaterThanOrEqual: [{0}] is equal to or greater than [{1}]", leftHandSide, rightHandSide);
+                AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("GreaterThanOrEqual: [{0}] is not equal to or greater than [{1}]", leftHandSide, rightHandSide);
+                AssertFail(testStep, msg);
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Asserts whether the left hand side is less than the right hand side
         /// </summary>
         /// <typeparam name="T1">
@@ -192,6 +240,54 @@ namespace Mir.Stf.Utilities
             else
             {
                 msg = string.Format("LessThan: [{0}] is Not less than [{1}]", leftHandSide, rightHandSide);
+                AssertFail(testStep, msg);
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Asserts whether the left hand side is equal to or less than the right hand side
+        /// </summary>
+        /// <typeparam name="T1">
+        /// The type of the left value in a compare expression
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the right value in a compare expression
+        /// </typeparam>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="leftHandSide">
+        /// The value to the left in a compare expression
+        /// </param>
+        /// <param name="rightHandSide">
+        /// The value to the right in a compare expression
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool LessThanOrEqual<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide) where T1 : IConvertible, IComparable where T2 : IConvertible, IComparable
+        {
+            var msg = string.Empty;
+            var compareVal = 0;
+
+            // TODO:what to return if we cannot compare the objects?
+            if (!AssertCompareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
+            {
+                return false;
+            }
+
+            var retVal = compareVal <= 0;
+
+            if (retVal)
+            {
+                msg = string.Format("LessThanOrEqual: [{0}] is equal to or less than [{1}]", leftHandSide, rightHandSide);
+                AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("LessThan: [{0}] is not equal to or less than [{1}]", leftHandSide, rightHandSide);
                 AssertFail(testStep, msg);
             }
 

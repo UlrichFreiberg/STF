@@ -103,6 +103,40 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test method assert equalgreaterThan.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAssertEqualGreaterThan()
+        {
+            var obj1 = new DateTime(42);
+            var obj2 = new DateTime(4242);
+            var obj3 = new DateTime(42);
+
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("2 > 1", 2, 1));
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("2.0 > 1", 2.0, 1));
+            Assert.IsFalse(StfAssert.GreaterThanOrEqual("1 > \"2\"", 1, "2"));
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("1 > \"1.0\"", 1, "1.0"));
+
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("\"\" > \"\"", string.Empty, string.Empty));
+            Assert.IsFalse(StfAssert.GreaterThanOrEqual("\"\" > \" \"", string.Empty, " "));
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("\" \" > \" \"", " ", string.Empty));
+            Assert.IsFalse(StfAssert.GreaterThanOrEqual("\"a\" > \"A\"", "a", "A"));
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("\"A\" > \"a\"", "A", "a"));
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("\"string\" > \"string\"", "string", "string"));
+
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("obj1 = obj1", obj1, obj1));
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("obj1 = obj3", obj1, obj3));
+            Assert.IsFalse(StfAssert.GreaterThanOrEqual("obj1 = obj2", obj1, obj2));
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("obj2 = obj1", obj2, obj1));
+
+            // fail scenarios
+            Assert.IsFalse(StfAssert.GreaterThanOrEqual("obj1 = 1", obj1, 1));
+
+            // a bit funky - the object obj1 is converted to string, and then the strings are compared.
+            Assert.IsTrue(StfAssert.GreaterThanOrEqual("obj1 = \"string\"", obj1, "string"));
+        }
+
+        /// <summary>
         /// The test method assert LessThan.
         /// </summary>
         [TestMethod]
@@ -132,6 +166,40 @@ namespace UnitTest
 
             // a bit funky - the object obj1 is converted to string, and then the strings are compared.
             Assert.IsFalse(StfAssert.LessThan("obj1 = \"string\"", obj1, "string"));
+        }
+
+        /// <summary>
+        /// The test method assert LessThanOrEqual.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAssertEqualLessThan()
+        {
+            var obj1 = new DateTime(42);
+            var obj2 = new DateTime(4242);
+
+            Assert.IsFalse(StfAssert.LessThanOrEqual("2 < 1", 2, 1));
+            Assert.IsFalse(StfAssert.LessThanOrEqual("2.0 < 1", 2.0, 1));
+            Assert.IsTrue(StfAssert.LessThanOrEqual("1 < \"2\"", 1, "2"));
+            Assert.IsFalse(StfAssert.LessThanOrEqual("1 < \"1.0\"", 1, "1.0"));
+            Assert.IsTrue(StfAssert.LessThanOrEqual("1 < 1.0", 1, 1.0));
+            Assert.IsTrue(StfAssert.LessThanOrEqual("1.0 < 1", 1.0, 1));
+
+            Assert.IsTrue(StfAssert.LessThanOrEqual("\"\" < \"\"", string.Empty, string.Empty));
+            Assert.IsTrue(StfAssert.LessThanOrEqual("\"\" < \" \"", string.Empty, " "));
+            Assert.IsFalse(StfAssert.LessThanOrEqual("\" \" < \" \"", " ", string.Empty));
+            Assert.IsTrue(StfAssert.LessThanOrEqual("\"a\" < \"A\"", "a", "A"));
+            Assert.IsFalse(StfAssert.LessThanOrEqual("\"A\" < \"a\"", "A", "a"));
+            Assert.IsTrue(StfAssert.LessThanOrEqual("\"string\" < \"string\"", "string", "string"));
+
+            Assert.IsTrue(StfAssert.LessThanOrEqual("obj1 < obj1", obj1, obj1));
+            Assert.IsTrue(StfAssert.LessThanOrEqual("obj1 < obj2", obj1, obj2));
+            Assert.IsFalse(StfAssert.LessThanOrEqual("obj2 < obj1", obj2, obj1));
+
+            // fail scenarios
+            Assert.IsFalse(StfAssert.LessThanOrEqual("obj1 = 1", obj1, 1));
+
+            // a bit funky - the object obj1 is converted to string, and then the strings are compared.
+            Assert.IsFalse(StfAssert.LessThanOrEqual("obj1 = \"string\"", obj1, "string"));
         }
     }
 }
