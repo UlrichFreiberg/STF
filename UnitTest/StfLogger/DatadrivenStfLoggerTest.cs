@@ -10,6 +10,8 @@
 
 namespace UnitTest
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf;
@@ -58,6 +60,16 @@ namespace UnitTest
 
             StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
             Assert.IsTrue(StfAssert.IsTrue("FailPass", failPass) == failPass);
+        }
+
+        /// <summary>
+        /// Test of data driven Test. Data has three lines - first line fail - others pass
+        /// </summary>
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_10lines.csv", "Data_SummeryLog_10lines#csv", DataAccessMethod.Sequential)]
+        public void DatadrivenLoggerTest10Lines()
+        {
+            StfLogger.LogInfo(string.Format("Iteration [{0}]", DateTime.Now));
         }
 
         /// <summary>

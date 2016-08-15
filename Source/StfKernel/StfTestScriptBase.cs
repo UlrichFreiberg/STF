@@ -90,7 +90,9 @@ namespace Mir.Stf
 
             if (iterationNo >= 1)
             {
-                logFilePostfix = string.Format("_{0}", iterationNo);
+                var numberOfIterations = TestContext.DataRow.Table.Rows.Count;
+
+                logFilePostfix = GetlogFilePostfix(numberOfIterations, iterationNo);
                 iterationStatus = string.Format("Iteration {0}", iterationNo);
             }
 
@@ -267,6 +269,28 @@ namespace Mir.Stf
                         ex.Message);
                 }
             }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The getlog file postfix. Takes into account the number of iteration overall. 
+        /// Used as part of the log file name - includes leading zeros for better sorting
+        /// </summary>
+        /// <param name="numberOfIterations">
+        /// The number of iterations overall for this test.
+        /// </param>
+        /// <param name="iterationNo">
+        /// The current iteration number.
+        /// </param>
+        /// <returns>
+        /// a string like "_007" for the seventh iteration of a series of test for 100+ tests
+        /// </returns>
+        private string GetlogFilePostfix(int numberOfIterations, int iterationNo)
+        {
+            var digits = Math.Floor(Math.Log10(numberOfIterations)) + 1;
+            var format = string.Format("_{{0:D{0}}}", digits);
+            var retVal = string.Format(format, iterationNo);
 
             return retVal;
         }
