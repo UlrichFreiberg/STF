@@ -19,6 +19,7 @@ namespace Mir.Stf
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data;
     using System.Linq;
 
     using Mir.Stf.Interfaces;
@@ -406,6 +407,49 @@ namespace Mir.Stf
             archiverConfiguration.ArchiveDestination = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveDestination);
             archiverConfiguration.TempDirectory = StfTextUtils.ExpandVariables(archiverConfiguration.TempDirectory);
             StfArchiver = new StfArchiver(archiverConfiguration, testName);
+        }
+
+        /// <summary>
+        /// The check if iteration should be ignored.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool CheckIfIterationShouldBeIgnored()
+        {
+            var dataRow = TestContext.DataRow;
+
+            string ignoreRowValue;
+
+            try
+            {
+                ignoreRowValue = dataRow.Field<string>("StfIgnoreRow");
+            }
+            catch (Exception)
+            {
+                // slurp - catch all TODO: Some log statement?
+                return false;
+            }
+
+            bool retVal;
+
+            if (!bool.TryParse(ignoreRowValue, out retVal))
+            {
+                return false;
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The do clean up and throw inconclusive.
+        /// </summary>
+        private void DoCleanUpAndThrowInconclusive()
+        {
+            BaseTestCleanup();
+
+            // TODO: Get the configuration in to determine whether to log or to throw. Logging should be done before basetestcleanup
+            throw new AssertInconclusiveException("Ignoring row");
         }
     }
 }
