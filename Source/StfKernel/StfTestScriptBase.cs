@@ -419,6 +419,11 @@ namespace Mir.Stf
         {
             var dataRow = TestContext.DataRow;
 
+            if (dataRow == null)
+            {
+                return false;
+            }
+
             string ignoreRowValue;
 
             try

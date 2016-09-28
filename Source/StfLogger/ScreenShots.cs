@@ -100,7 +100,7 @@ namespace Mir.Stf.Utilities
         /// The log one image.
         /// </summary>
         /// <param name="level">
-        /// The log level.
+        /// The level.
         /// </param>
         /// <param name="imageFile">
         /// The image file.
@@ -113,7 +113,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private int LogOneImage(StfLogLevel level, string imageFile, string message)
         {
-            if (!this.AddLoglevelToRunReport[level])
+            if (!AddLoglevelToRunReport[level])
             {
                 return -1;
             }
@@ -123,13 +123,13 @@ namespace Mir.Stf.Utilities
             logLevelString = logLevelString.ToLower();
 
             var html = string.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} image\">\n", messageIdString, logLevelString);
-            html += string.Format("    <div class=\"el time\">{0}</div>\n", DateTime.Now.ToString("HH:mm:ss"));
+            html += string.Format("    <div class=\"el time\">{0:HH:mm:ss}</div>\n", DateTime.Now);
             html += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
             html += string.Format("    <div class=\"el msg\">{0}</div>\n", message);
-            html += string.Format("    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{0}\" src=\"data:image/png;base64, {1}\"</p>", message, imageFile);
+            html += string.Format("    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{0}\" src=\"data:image/png;base64, {1}\" /></p>", message, imageFile);
             html += "</div>\n";
 
-            this.LogFileHandle.Write(html);
+            LogFileHandle.Write(html);
 
             return html.Length;
         }
