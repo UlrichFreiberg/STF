@@ -81,20 +81,91 @@ namespace Mir.Stf.Utilities
 
             // use the first logfile, to figure out how to setup the header for datadriven parameters
             var dataDrivenParameters = GetDataDrivenParameter(logFiles[0]);
+
             if (!OpenSummeryLogFile(nameOfSummeryfile, dataDrivenParameters))
             {
                 return false;
             }
 
+            // we use the value for the first logfile, to control the column for the rest of the logfiles.
+            // In that way we dont need to set it for all data rows
+            var iterationDescriptionColumnToUse = GetIterationDescriptionColumn(dataDrivenParameters);
             foreach (var logfile in logFiles)
             {
                 var runStatus = RunStatusUtils.GetRunStatus(logfile);
 
                 dataDrivenParameters = GetDataDrivenParameter(logfile);
-                LogSummeryForOneLogfile(logfile, runStatus, dataDrivenParameters);
+
+                var iterationDescription = GetIterationDescription(iterationDescriptionColumnToUse, logfile, dataDrivenParameters);
+
+                LogSummeryForOneLogfile(logfile, runStatus, dataDrivenParameters, iterationDescription);
             }
 
             return CloseSummeryLogFile();
+        }
+
+        /// <summary>
+        /// The get iteration description.
+        /// </summary>
+        /// <param name="columnToUse">
+        /// The column to use.
+        /// </param>
+        /// <param name="logfile">
+        /// The logfile.
+        /// </param>
+        /// <param name="dataDrivenParameters">
+        /// The data driven parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetIterationDescription(string columnToUse, string logfile, OrderedDictionary dataDrivenParameters)
+        {
+            string columnValue;
+            string retVal;
+
+            // are we using a column redirect?
+            if (!string.IsNullOrEmpty(columnToUse))
+            {
+                columnValue = dataDrivenParameters[columnToUse].ToString();
+                retVal = !string.IsNullOrEmpty(columnValue) ? columnValue : Path.GetFileName(logfile);
+
+                return retVal;
+            }
+
+            if (!dataDrivenParameters.Contains("StfIterationDescription"))
+            {
+                return Path.GetFileName(logfile);
+            }
+
+            columnValue = dataDrivenParameters["StfIterationDescription"].ToString();
+            retVal = !string.IsNullOrEmpty(columnValue) ? columnValue : Path.GetFileName(logfile);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get iteration description column.
+        /// </summary>
+        /// <param name="dataDrivenParameters">
+        /// The data driven parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetIterationDescriptionColumn(OrderedDictionary dataDrivenParameters)
+        {
+            if (dataDrivenParameters == null || !dataDrivenParameters.Contains("StfIterationDescription"))
+            {
+                return null;
+            }
+
+            var column = dataDrivenParameters["StfIterationDescription"].ToString();
+
+            // if the column contains something that does not exists as an column, then it isn't a column redirect
+            var retVal = dataDrivenParameters.Contains(column) ? column : null;
+
+            return retVal;
         }
 
         /// <summary>
@@ -121,15 +192,24 @@ namespace Mir.Stf.Utilities
         /// <param name="dataDrivenParameters">
         /// The data driven parameters.
         /// </param>
-        private void LogSummeryForOneLogfile(string logfile, Dictionary<StfLogLevel, int> runStatus, OrderedDictionary dataDrivenParameters)
+        /// <param name="iterationDescription">
+        /// The iteration Description.
+        /// </param>
+        private void LogSummeryForOneLogfile(
+                        string logfile,
+                        Dictionary<StfLogLevel, int> runStatus,
+                        OrderedDictionary dataDrivenParameters,
+                        string iterationDescription = null)
         {
             var tableRowTestResult = GetTableRowTestResult(runStatus);
             var tableFormatString = GetTableFormatString(dataDrivenParameters);
+            var logFileName = Path.GetFileName(logfile);
             var tableRow = string.Format(
                 tableFormatString,
                 tableRowTestResult,
-                Path.GetFileName(logfile),
-                Path.GetFileName(logfile),
+                iterationDescription ?? logFileName,
+                logFileName,
+                logFileName,
                 runStatus[StfLogLevel.Pass],
                 runStatus[StfLogLevel.Fail],
                 runStatus[StfLogLevel.Error],
@@ -220,8 +300,8 @@ namespace Mir.Stf.Utilities
         {
             var resourceObject = Resources.ResourceManager.GetObject(resourceName);
 
-            var retVal = resourceObject == null 
-                ? string.Format("<error>No {0} section file found</error>", resourceName) 
+            var retVal = resourceObject == null
+                ? string.Format("<error>No {0} section file found</error>", resourceName)
                 : resourceObject.ToString();
 
             return retVal;
@@ -239,7 +319,7 @@ namespace Mir.Stf.Utilities
         private string GetTableFormatString(OrderedDictionary dataDrivenParameters)
         {
             var index = 0;
-            var retVal = "<tr id=\"{" + index++ + "}\">" + Environment.NewLine;
+            var retVal = "<tr id=\"{" + index++ + "}\" description=\"{" + index++ + "}\">" + Environment.NewLine;
 
             retVal += "  <td>" + Environment.NewLine;
             retVal += "    <a href=\"{" + index++ + "}\">{" + index++ + "}</a>" + Environment.NewLine;
