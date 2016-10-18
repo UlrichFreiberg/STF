@@ -36,20 +36,20 @@ namespace Mir.Stf.Utilities
             var runstats = string.Format(@"<span id=""runstatus"">{0}</span>", statusMsg);
 
             runstats += string.Format(
-                        "<div class=\"line runstats\" passed=\"{0}\" failed=\"{1}\" Errors=\"{2}\" Warnings=\"{3}\" Inconclusives=\"{4}\">",
+                        "<div class=\"line runstats\" Passed=\"{0}\" Failed=\"{1}\" Inconclusive=\"{2}\" Errors=\"{3}\" Warnings=\"{4}\">",
                         NumberOfLoglevelMessages[StfLogLevel.Pass],
                         NumberOfLoglevelMessages[StfLogLevel.Fail],
+                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive],
                         NumberOfLoglevelMessages[StfLogLevel.Error],
-                        NumberOfLoglevelMessages[StfLogLevel.Warning],
-                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive]);
+                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
 
             runstats += string.Format(
-                        "   {0} Passed, {1} Failed, {2} Errors, {3} Warnings, {4} Inconclusives",
+                        "   {0} Passed, {1} Failed, {2} Inconclusive, {3} Errors, {4} Warnings",
                         NumberOfLoglevelMessages[StfLogLevel.Pass],
                         NumberOfLoglevelMessages[StfLogLevel.Fail],
+                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive],
                         NumberOfLoglevelMessages[StfLogLevel.Error],
-                        NumberOfLoglevelMessages[StfLogLevel.Warning],
-                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive]);
+                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
 
             runstats += "</div>";
 

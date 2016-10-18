@@ -212,6 +212,7 @@ namespace Mir.Stf.Utilities
                 logFileName,
                 runStatus[StfLogLevel.Pass],
                 runStatus[StfLogLevel.Fail],
+                runStatus[StfLogLevel.Inconclusive],
                 runStatus[StfLogLevel.Error],
                 runStatus[StfLogLevel.Warning]);
 
@@ -324,7 +325,7 @@ namespace Mir.Stf.Utilities
             retVal += "  <td>" + Environment.NewLine;
             retVal += "    <a href=\"{" + index++ + "}\">{" + index++ + "}</a>" + Environment.NewLine;
             retVal += "  </td>" + Environment.NewLine;
-            for (var i = 2; i < 6; i++)
+            for (var i = 2; i < 7; i++)
             {
                 retVal += "  <td>{" + index++ + "}</td>" + Environment.NewLine;
             }
@@ -363,6 +364,11 @@ namespace Mir.Stf.Utilities
             if (runResultStatus[StfLogLevel.Fail] > 0)
             {
                 return "testresultfail";
+            }
+
+            if (runResultStatus[StfLogLevel.Inconclusive] > 0)
+            {
+                return "testresultinconclusive";
             }
 
             if (runResultStatus[StfLogLevel.Error] > 0)

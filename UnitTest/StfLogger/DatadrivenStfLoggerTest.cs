@@ -48,6 +48,35 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// Test of data driven Test. Data has three lines - all pass
+        /// </summary>
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\DataDriven.csv", "DataDriven#csv", DataAccessMethod.Sequential)]
+        public void TestLogAllTypesOfOutcome()
+        {
+            var iteration = StfIterationNo;
+
+            switch (iteration)
+            {
+                case 1:
+                    StfAssert.IsTrue("Pass", true);
+                    break;
+                case 2:
+                    StfAssert.IsTrue("Fail", false);
+                    break;
+                case 3:
+                    StfAssert.IsInconclusive("Inconclusive", "Inconclusive");
+                    break;
+                case 4:
+                    StfLogger.LogWarning("Warning", "Warning");
+                    break;
+                case 5:
+                    StfLogger.LogError("Error", "Error");
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Test of data driven Test. Data has three lines - first line fail - others pass
         /// </summary>
         [TestMethod]

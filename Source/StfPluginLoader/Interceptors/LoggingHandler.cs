@@ -245,13 +245,16 @@ namespace Mir.Stf.Utilities.Interceptors
 
             var formattedString = "{0}, ";
             var stringBuilder = new StringBuilder();
-            foreach (var param in parameterCollection)
+
+            for (var index = 0; index < parameterCollection.Count; index++)
             {
-                if (parameterCollection.IndexOf(param) + 1 == parameterCollection.Count ||
-                    parameterCollection.Count == 1)
+                // if the last parameter, we dont want a postfixed ','
+                if (index == parameterCollection.Count - 1)
                 {
                     formattedString = "{0}";
                 }
+
+                var param = parameterCollection[index];
 
                 stringBuilder.Append(string.Format(formattedString, param));
             }

@@ -79,22 +79,22 @@ namespace Mir.Stf
             kernelLogFilePath = StfLogger.FileName;
 
             StfLogger.Configuration.LogTitle = TestContext.TestName;
+            StfIterationNo = DataRowIndex();
 
             var logFilePostfix = string.Empty;
-            var iterationNo = DataRowIndex();
             var iterationStatus = "Not datadriven";
 
-            if (iterationNo == 1)
+            if (StfIterationNo == 1)
             {
                 testResultFiles = new List<string>();
             }
 
-            if (iterationNo >= 1)
+            if (StfIterationNo >= 1)
             {
                 var numberOfIterations = TestContext.DataRow.Table.Rows.Count;
 
-                logFilePostfix = GetlogFilePostfix(numberOfIterations, iterationNo);
-                iterationStatus = string.Format("Iteration {0}", iterationNo);
+                logFilePostfix = GetlogFilePostfix(numberOfIterations, StfIterationNo);
+                iterationStatus = string.Format("Iteration {0}", StfIterationNo);
             }
 
             var logdir = Path.Combine(StfLogDir, TestContext.TestName);
@@ -169,11 +169,11 @@ namespace Mir.Stf
             }
             else
             {
-                var iterationNo = DataRowIndex();
+                StfIterationNo = DataRowIndex();
 
                 StfLogger.CloseLogFile();
 
-                if (iterationNo == TestContext.DataRow.Table.Rows.Count)
+                if (StfIterationNo == TestContext.DataRow.Table.Rows.Count)
                 {
                     var myStfSummeryLogger = new StfSummeryLogger();
                     var summeryLogfileLogDirname = Path.GetDirectoryName(StfLogger.FileName);
@@ -212,6 +212,8 @@ namespace Mir.Stf
                 throw new AssertFailedException(msg);
             }
         }
+
+        protected int StfIterationNo { get; set; }
 
         /// <summary>
         /// The init test data.

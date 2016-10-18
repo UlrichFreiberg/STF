@@ -241,7 +241,11 @@ namespace Mir.Stf.Utilities.RetryerUtilities
                     {
                         var retVal = retrierFunction();
 
-                        return retVal;
+                        if (retVal)
+                        {
+                            // Mom I'm done...
+                            return true;
+                        }
                     }
                 }
                 catch (Exception)

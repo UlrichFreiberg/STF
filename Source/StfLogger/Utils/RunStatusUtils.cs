@@ -29,9 +29,9 @@ namespace Mir.Stf.Utilities.Utils
         public static string GetLoglineStatRegexp()
         {
             // One runstats logline looks like:
-            // <div class="line runstats" passed="0" failed="0" Errors="0" Warnings="0">
+            // <div class="line runstats" passed="0" failed="0" inconclusive="0" Errors="0" Warnings="0">
             const string Regexp =
-                "div class=\"line runstats\" passed=\"(?<pass>[0-9]+)\" failed=\"(?<fail>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
+                "div class=\"line runstats\" Passed=\"(?<pass>[0-9]+)\" Failed=\"(?<fail>[0-9]+)\" Inconclusive=\"(?<inconclusive>[0-9]+)\" Errors=\"(?<error>[0-9]+)\" Warnings=\"(?<warning>[0-9]+)\"";
 
             return Regexp;
         }
@@ -56,6 +56,7 @@ namespace Mir.Stf.Utilities.Utils
 
             retVal.Add(StfLogLevel.Pass, 0);
             retVal.Add(StfLogLevel.Fail, 0);
+            retVal.Add(StfLogLevel.Inconclusive, 0);
             retVal.Add(StfLogLevel.Error, 0);
             retVal.Add(StfLogLevel.Warning, 0);
 
@@ -63,6 +64,7 @@ namespace Mir.Stf.Utilities.Utils
             {
                 retVal[StfLogLevel.Pass] = int.Parse(matches[0].Groups["pass"].Value);
                 retVal[StfLogLevel.Fail] = int.Parse(matches[0].Groups["fail"].Value);
+                retVal[StfLogLevel.Inconclusive] = int.Parse(matches[0].Groups["inconclusive"].Value);
                 retVal[StfLogLevel.Error] = int.Parse(matches[0].Groups["error"].Value);
                 retVal[StfLogLevel.Warning] = int.Parse(matches[0].Groups["warning"].Value);
             }
