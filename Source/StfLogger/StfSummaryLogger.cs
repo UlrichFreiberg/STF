@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfSummeryLogger.cs" company="Mir Software">
+// <copyright file="StfSummaryLogger.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -20,9 +20,9 @@ namespace Mir.Stf.Utilities
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// The summery logger.
+    /// The summary logger.
     /// </summary>
-    public class StfSummeryLogger
+    public class StfSummaryLogger
     {
         /// <summary>
         /// The summary log file writer.
@@ -30,10 +30,10 @@ namespace Mir.Stf.Utilities
         private LogfileWriter summaryLogFile;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StfSummeryLogger"/> class.
+        /// Initializes a new instance of the <see cref="StfSummaryLogger"/> class.
         /// </summary>
-        /// <param name="nameOfSummeryfile">
-        /// The name of summeryfile.
+        /// <param name="nameOfSummaryfile">
+        /// The name of summaryfile.
         /// </param>
         /// <param name="logDir">
         /// The log dir.
@@ -41,23 +41,23 @@ namespace Mir.Stf.Utilities
         /// <param name="filePattern">
         /// The file pattern.
         /// </param>
-        public StfSummeryLogger(string nameOfSummeryfile, string logDir, string filePattern)
+        public StfSummaryLogger(string nameOfSummaryfile, string logDir, string filePattern)
         {
-            CreateSummeryLog(nameOfSummeryfile, logDir, filePattern);
+            CreateSummaryLog(nameOfSummaryfile, logDir, filePattern);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StfSummeryLogger"/> class.
+        /// Initializes a new instance of the <see cref="StfSummaryLogger"/> class.
         /// </summary>
-        public StfSummeryLogger()
+        public StfSummaryLogger()
         {
         }
 
         /// <summary>
-        /// The create summery log.
+        /// The create summary log.
         /// </summary>
-        /// <param name="nameOfSummeryfile">
-        /// The name of summeryfile.
+        /// <param name="nameOfSummaryfile">
+        /// The name of summaryfile.
         /// </param>
         /// <param name="logDir">
         /// The log dir.
@@ -68,11 +68,11 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool CreateSummeryLog(string nameOfSummeryfile, string logDir, string filePattern)
+        public bool CreateSummaryLog(string nameOfSummaryfile, string logDir, string filePattern)
         {
             var logFiles = Directory.GetFiles(logDir, filePattern);
 
-            summaryLogFile = new LogfileWriter { LogFileName = nameOfSummeryfile, OverwriteLogFile = true };
+            summaryLogFile = new LogfileWriter { LogFileName = nameOfSummaryfile, OverwriteLogFile = true };
 
             if (logFiles.Length == 0)
             {
@@ -82,7 +82,7 @@ namespace Mir.Stf.Utilities
             // use the first logfile, to figure out how to setup the header for datadriven parameters
             var dataDrivenParameters = GetDataDrivenParameter(logFiles[0]);
 
-            if (!OpenSummeryLogFile(nameOfSummeryfile, dataDrivenParameters))
+            if (!OpenSummaryLogFile(nameOfSummaryfile, dataDrivenParameters))
             {
                 return false;
             }
@@ -98,10 +98,10 @@ namespace Mir.Stf.Utilities
 
                 var iterationDescription = GetIterationDescription(iterationDescriptionColumnToUse, logfile, dataDrivenParameters);
 
-                LogSummeryForOneLogfile(logfile, runStatus, dataDrivenParameters, iterationDescription);
+                LogSummaryForOneLogfile(logfile, runStatus, dataDrivenParameters, iterationDescription);
             }
 
-            return CloseSummeryLogFile();
+            return CloseSummaryLogFile();
         }
 
         /// <summary>
@@ -169,19 +169,19 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// The close summery log file.
+        /// The close summary log file.
         /// </summary>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool CloseSummeryLogFile()
+        private bool CloseSummaryLogFile()
         {
             summaryLogFile.Write(GetTextResource("SummaryLoggerFooter"));
             return summaryLogFile.Close();
         }
 
         /// <summary>
-        /// The log summery for one logfile.
+        /// The log summary for one logfile.
         /// </summary>
         /// <param name="logfile">
         /// The logfile.
@@ -195,7 +195,7 @@ namespace Mir.Stf.Utilities
         /// <param name="iterationDescription">
         /// The iteration Description.
         /// </param>
-        private void LogSummeryForOneLogfile(
+        private void LogSummaryForOneLogfile(
                         string logfile,
                         Dictionary<StfLogLevel, int> runStatus,
                         OrderedDictionary dataDrivenParameters,
@@ -250,10 +250,10 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// The initialize summery log file.
+        /// The initialize summary log file.
         /// </summary>
-        /// <param name="nameOfSummeryfile">
-        /// The name of summeryfile.
+        /// <param name="nameOfSummaryfile">
+        /// The name of summaryfile.
         /// </param>
         /// <param name="dataDrivenParameters">
         /// The data Driven Parameters.
@@ -261,7 +261,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool OpenSummeryLogFile(string nameOfSummeryfile, OrderedDictionary dataDrivenParameters)
+        private bool OpenSummaryLogFile(string nameOfSummaryfile, OrderedDictionary dataDrivenParameters)
         {
             var logHeader = GetTextResource("SummaryLoggerHeader");
 
@@ -270,7 +270,7 @@ namespace Mir.Stf.Utilities
                 return false;
             }
 
-            var logfileTitle = string.Format("SummaryLogger for {0}", Path.GetFileNameWithoutExtension(nameOfSummeryfile));
+            var logfileTitle = string.Format("SummaryLogger for {0}", Path.GetFileNameWithoutExtension(nameOfSummaryfile));
             logHeader = logHeader.Replace("LOGFILETITLE", logfileTitle);
 
             var headers = string.Empty;

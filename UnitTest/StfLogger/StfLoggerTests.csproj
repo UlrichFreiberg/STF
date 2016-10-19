@@ -79,19 +79,19 @@
     <None Include="Data\DataDriven.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Data_SummeryLog_10lines.csv">
+    <None Include="Data\Data_SummaryLog_10lines.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Data_SummeryLog_3lines_allpass.csv">
+    <None Include="Data\Data_SummaryLog_3lines_allpass.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Data_SummeryLog_3lines_line1fail.csv">
+    <None Include="Data\Data_SummaryLog_3lines_line1fail.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Data_SummeryLog_3lines_line2fail.csv">
+    <None Include="Data\Data_SummaryLog_3lines_line2fail.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Data_SummeryLog_3lines_line3fail.csv">
+    <None Include="Data\Data_SummaryLog_3lines_line3fail.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Data.csv">

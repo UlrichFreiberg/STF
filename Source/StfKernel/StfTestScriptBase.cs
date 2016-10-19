@@ -175,19 +175,19 @@ namespace Mir.Stf
 
                 if (StfIterationNo == TestContext.DataRow.Table.Rows.Count)
                 {
-                    var myStfSummeryLogger = new StfSummeryLogger();
-                    var summeryLogfileLogDirname = Path.GetDirectoryName(StfLogger.FileName);
+                    var myStfSummaryLogger = new StfSummaryLogger();
+                    var summaryLogfileLogDirname = Path.GetDirectoryName(StfLogger.FileName);
                     var myLoggerFileName = Path.GetFileName(StfLogger.FileName) ?? string.Empty;
-                    var summeryLogfileLogFilename = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", ".html");
-                    var summeryLogfilename = string.Format(@"{0}\SummeryLogfile_{1}", summeryLogfileLogDirname, summeryLogfileLogFilename);
-                    var summeryLogfileLogfilePattern = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", "_*");
+                    var summaryLogfileLogFilename = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", ".html");
+                    var summaryLogfilename = string.Format(@"{0}\SummaryLogfile_{1}", summaryLogfileLogDirname, summaryLogfileLogFilename);
+                    var summaryLogfileLogfilePattern = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", "_*");
 
-                    myStfSummeryLogger.CreateSummeryLog(summeryLogfilename, summeryLogfileLogDirname, summeryLogfileLogfilePattern);
+                    myStfSummaryLogger.CreateSummaryLog(summaryLogfilename, summaryLogfileLogDirname, summaryLogfileLogfilePattern);
 
-                    TestContext.AddResultFile(summeryLogfilename);
+                    TestContext.AddResultFile(summaryLogfilename);
                     AddResultfiles();
 
-                    StfArchiver.AddFile(summeryLogfilename);
+                    StfArchiver.AddFile(summaryLogfilename);
                     StfArchiver.PerformArchive();
                 }
             }

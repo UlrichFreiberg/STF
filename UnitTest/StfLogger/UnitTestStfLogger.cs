@@ -349,10 +349,10 @@ namespace UnitTest
         public void TestMethodSummaryLogger()
         {
             var logDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @".\Data"));
-            var summaryFilename = Path.Combine(StfTextUtils.GetVariable("Stf_LogDir"), "TestMethodSummaryLogger_SummeryLog.html");
-            var oneSummeryLogger = new StfSummeryLogger();
+            var summaryFilename = Path.Combine(StfTextUtils.GetVariable("Stf_LogDir"), "TestMethodSummaryLogger_SummaryLog.html");
+            var oneSummaryLogger = new StfSummaryLogger();
 
-            StfAssert.IsTrue("StfLogger.CreateSummeryLog", oneSummeryLogger.CreateSummeryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
+            StfAssert.IsTrue("StfLogger.CreateSummaryLog", oneSummaryLogger.CreateSummaryLog(summaryFilename, logDir, "DatadrivenLoggerTest_*.html"));
             StfAssert.FileExists("StfLogger.CreateSummaryLog", summaryFilename);
         }
 

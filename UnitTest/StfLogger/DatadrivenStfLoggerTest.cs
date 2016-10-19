@@ -36,7 +36,7 @@ namespace UnitTest
         /// Test of data driven Test. Data has three lines - all pass
         /// </summary>
         [TestMethod]
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_allpass.csv", "Data_SummeryLog_3lines_allpass#csv", DataAccessMethod.Sequential)]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummaryLog_3lines_allpass.csv", "Data_SummaryLog_3lines_allpass#csv", DataAccessMethod.Sequential)]
         public void DatadrivenLoggerTest3LinesAllpass()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
@@ -80,7 +80,7 @@ namespace UnitTest
         /// Test of data driven Test. Data has three lines - first line fail - others pass
         /// </summary>
         [TestMethod]
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_line1fail.csv", "Data_SummeryLog_3lines_line1fail#csv", DataAccessMethod.Sequential)]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummaryLog_3lines_line1fail.csv", "Data_SummaryLog_3lines_line1fail#csv", DataAccessMethod.Sequential)]
         public void DatadrivenLoggerTest3LinesLine1Fail()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
@@ -95,7 +95,7 @@ namespace UnitTest
         /// Test of data driven Test. Data has three lines - first line fail - others pass
         /// </summary>
         [TestMethod]
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_10lines.csv", "Data_SummeryLog_10lines#csv", DataAccessMethod.Sequential)]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummaryLog_10lines.csv", "Data_SummaryLog_10lines#csv", DataAccessMethod.Sequential)]
         public void DatadrivenLoggerTest10Lines()
         {
             StfLogger.LogInfo(string.Format("Iteration [{0}]", DateTime.Now));
@@ -105,7 +105,7 @@ namespace UnitTest
         /// Test of data driven Test. Data has three lines - second line fail - others pass
         /// </summary>
         [TestMethod]
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_line2fail.csv", "Data_SummeryLog_3lines_line2fail#csv", DataAccessMethod.Sequential)]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummaryLog_3lines_line2fail.csv", "Data_SummaryLog_3lines_line2fail#csv", DataAccessMethod.Sequential)]
         public void DatadrivenLoggerTest3LinesLine2Fail()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
@@ -120,7 +120,7 @@ namespace UnitTest
         /// Test of data driven Test. Data has three lines - third line fail - others pass
         /// </summary>
         [TestMethod]
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummeryLog_3lines_line3fail.csv", "Data_SummeryLog_3lines_line3fail#csv", DataAccessMethod.Sequential)]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummaryLog_3lines_line3fail.csv", "Data_SummaryLog_3lines_line3fail#csv", DataAccessMethod.Sequential)]
         public void DatadrivenLoggerTest3LinesLine3Fail()
         {
             var iteration = (int)TestContext.DataRow["Iteration"];
