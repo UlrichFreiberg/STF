@@ -183,6 +183,19 @@ namespace Mir.Stf.Utilities
             return retVal;
         }
 
+        public bool SetConfigValue(string configValuePath, string value)
+        {
+            if (currentlyLoadedSection != null)
+            {
+                var parser = new Parser { EvaluateKeyValue = EvaluateKeyValue };
+
+                return parser.SetValue(currentlyLoadedSection, configValuePath, value);
+            }
+
+            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", configValuePath);
+            throw new ArgumentOutOfRangeException(configValuePath, errMsg);
+        }
+
         /// <summary>
         /// Loads a config file into a configuration tree.
         /// </summary>

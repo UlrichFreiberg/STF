@@ -233,6 +233,35 @@ namespace Mir.Stf
         }
 
         /// <summary>
+        /// Set a configuration value in the configuration
+        /// </summary>
+        /// <param name="configKeyPath">
+        /// The path the configuration key
+        /// </param>
+        /// <param name="value">
+        /// The value to set
+        /// </param>
+        /// <returns>
+        /// A bool indicating whether it was possible to set the configuration value
+        /// </returns>
+        protected bool SetConfigurationValue(string configKeyPath, string value)
+        {
+            bool retVal;
+
+            try
+            {
+                retVal = StfConfiguration.SetConfigValue(configKeyPath, value);
+            }
+            catch (Exception ex)
+            {
+                KernelLogger.LogDebug("Failed to set configuration. Got exception: [{0}]", ex.Message);
+                retVal = false;
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
         /// The assembly stf configuration.
         /// </summary>
         private void AssembleStfConfigurationBeforePlugins()

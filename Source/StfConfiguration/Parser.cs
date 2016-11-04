@@ -87,6 +87,35 @@ namespace Mir.Stf.Utilities
             throw new ArgumentOutOfRangeException(keyName, "Section not found");
         }
 
+        internal bool SetValue(Section section, string keyName, string value)
+        {
+            if (IsLeaf(keyName))
+            {
+                if (section.Keys.ContainsKey(keyName))
+                {
+                    section.Keys[keyName].KeyValue = value;
+                    return true;
+                }
+
+                return false;
+            }
+
+            var sectionName = GetSectionName(keyName);
+
+            if (string.CompareOrdinal(section.SectionName, sectionName) == 0)
+            {
+                // we found the section that should hold the key
+                return SetValue(section, GetKeyName(keyName), value);
+            }
+
+            if (section.Sections.ContainsKey(sectionName))
+            {
+                return SetValue(section.Sections[sectionName], GetKeyName(keyName), value);
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Checks if a keyName is a leaf.
         /// </summary>

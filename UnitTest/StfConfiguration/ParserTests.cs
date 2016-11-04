@@ -27,7 +27,7 @@ namespace Tests
             Assert.AreEqual("config_key1value", key1Value);
         }
 
-                [TestMethod]
+        [TestMethod]
         public void ParserSimpleVariable_2()
         {
             var stfConfiguration = new StfConfiguration();

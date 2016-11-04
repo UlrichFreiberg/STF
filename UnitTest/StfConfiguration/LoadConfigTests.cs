@@ -54,6 +54,43 @@ namespace Tests
             Assert.AreEqual(0, sectionTotest.Sections.Count);
         }
 
+        [TestMethod]
+        public void TestSetValue()
+        {
+            // Load a configuration in StfConfiguration
+            var stfConfiguration = new StfConfiguration(@"TestData\Defaulting\NoDefaultSection.xml");
+
+            var uUsername = stfConfiguration.GetKeyValue("Users.Ulrich.Username");
+            var uPassword = stfConfiguration.GetKeyValue("Users.Ulrich.Password");
+            var kUsername = stfConfiguration.GetKeyValue("Users.Kasper.Username");
+            var kPassword = stfConfiguration.GetKeyValue("Users.Kasper.Password");
+
+            StfAssert.AreEqual("Username is Ulrich", "User_Ulrich", uUsername);
+            StfAssert.AreEqual("Password for Ulrich is U777", "U777", uPassword);
+            StfAssert.AreEqual("Username is Kasper", "User_Kasper", kUsername);
+            StfAssert.AreEqual("Password for Kasper is K999", "K999", kPassword);
+
+            StfAssert.IsTrue("Setting config value", stfConfiguration.SetConfigValue("Users.Ulrich.Username", "New_Ulrich"));
+            StfAssert.AreEqual("Username for Ulrich updated", "New_Ulrich",
+                stfConfiguration.GetKeyValue("Users.Ulrich.Username"));
+
+            StfAssert.IsTrue("Setting config value", stfConfiguration.SetConfigValue("Users.Ulrich.Password", "Super1234"));
+            StfAssert.AreEqual("Password for Ulrich updated", "Super1234",
+                stfConfiguration.GetKeyValue("Users.Ulrich.Password"));
+        }
+
+        [TestMethod]
+        public void TestSetValueOnExistingKey()
+        {
+            var stfConfiguration = new StfConfiguration(@"TestData\Defaulting\NoDefaultSection.xml");
+
+            StfAssert.IsFalse("Trying to set non existing value",
+                stfConfiguration.SetConfigValue("Users.Ulrich.FortyTwo", "New_Ulrich"));
+
+            string configValue;
+            StfAssert.IsFalse("Can't get value", stfConfiguration.TryGetKeyValue("Users.Ulrich.FortyTwo", out configValue));
+        }
+
         /// <summary>
         /// Test of load config with 1 section 1 key.
         /// </summary>
