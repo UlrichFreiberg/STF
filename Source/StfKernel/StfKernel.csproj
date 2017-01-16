@@ -33,6 +33,7 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reflection.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IStfTestData.cs" />
     <Compile Include="KernelUtils\StfTextUtils.cs" />
+    <Compile Include="StfTestDataAttribute.cs" />
     <Compile Include="StfKernel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StfTestDataBase.cs" />

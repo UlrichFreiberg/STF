@@ -26,5 +26,8 @@ namespace UnitTest
         /// Gets or sets the iteration.
         /// </summary>
         public string Iteration { get; set; }
+
+        [StfTestData("COLUMN MAP TEST")]
+        public string ColumnTest { get; set; }
     }
 }

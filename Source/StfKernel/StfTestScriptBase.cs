@@ -9,6 +9,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mir.Stf.Utilities;
@@ -241,16 +242,23 @@ namespace Mir.Stf
 
             var retVal = new T();
             var properties = typeof(T).GetProperties();
+            var attributedProperties = properties.Where(prop => prop.IsDefined(typeof (StfTestDataAttribute), false)).ToList();
             var dataRow = TestContext.DataRow;
 
             retVal.StfIteration = DataRowIndex();
 
-            foreach (var row in dataRow.Table.Columns)
+            foreach (var columnName in dataRow.Table.Columns)
             {
-                var propertyName = row.ToString();
+                var propertyName = columnName.ToString();
                 var property = properties.FirstOrDefault(pp => pp.Name == propertyName);
 
                 // did we find the correspondig property in the testdata class?
+                if (property == null && attributedProperties.Any())
+                {
+                    // hmm, lets see if there is a map for this column...
+                    property = attributedProperties.FirstOrDefault(pp => pp.GetCustomAttribute<StfTestDataAttribute>().ColumnName == propertyName);
+                }
+
                 if (property == null)
                 {
                     continue;

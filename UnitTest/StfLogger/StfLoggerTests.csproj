@@ -76,6 +76,9 @@
     <None Include="..\..\Source\StfLogger\App.config">
       <Link>App.config</Link>
     </None>
+    <None Include="Data\DataMapped.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\DataDriven.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

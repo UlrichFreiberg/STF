@@ -174,6 +174,25 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The datadriven with testdata object.
+        /// </summary>
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "Data\\DataMapped.csv", "DataMapped#csv", DataAccessMethod.Sequential)]
+        public void TestInitTestDataWithDataSourceMapped()
+        {
+            var testData = HelperDatadrivenWithTestdataObject();
+
+            if (testData.StfIteration == 1)
+            {
+                StfAssert.AreEqual("Mapped Column Value match", "Column421", testData.ColumnTest);
+            }
+            else
+            {
+                StfAssert.StringEmpty("Mapped Column Value Empty", testData.ColumnTest);
+            }            
+        }
+
+        /// <summary>
         /// The test init test data without data source.
         /// </summary>
         [TestMethod]
@@ -195,7 +214,7 @@ namespace UnitTest
         /// <summary>
         /// The helper datadriven with testdata object.
         /// </summary>
-        private void HelperDatadrivenWithTestdataObject()
+        private UnitTestTestDataObject HelperDatadrivenWithTestdataObject()
         {
             var testdata = new UnitTestTestDataObject { Iteration = "-1" };
 
@@ -203,6 +222,8 @@ namespace UnitTest
 
             StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", testdata.Iteration, testdata.Message));
             StfAssert.AreEqual("Iteration", testdata.Iteration, testdata.StfIteration.ToString());
+
+            return testdata;
         }
 
         /// <summary>
