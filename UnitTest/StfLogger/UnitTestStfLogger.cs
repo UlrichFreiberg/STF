@@ -241,7 +241,7 @@ namespace UnitTest
             StfAssert.IsFalse("3 > 2 Value for IsFalse", 3 > 2);
 
             // setting to true resets count of failures
-            StfAssert.EnableNegativeTesting = true;
+            StfAssert.ResetStatistics();
         }
 
         /// <summary>

@@ -39,7 +39,7 @@ namespace UnitTest
         public void TestCleanup()
         {
             // setting to true agains resets failure count
-            StfAssert.EnableNegativeTesting = true;
+            StfAssert.ResetStatistics();
         }
 
         /// <summary>

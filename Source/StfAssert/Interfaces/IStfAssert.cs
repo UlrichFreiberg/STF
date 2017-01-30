@@ -24,6 +24,12 @@ namespace Mir.Stf.Utilities.Interfaces
         bool EnableNegativeTesting { get; set; }
 
         /// <summary>
+        /// Reset all statistics for Error, Warning, pass, fail, and inconclusive. Typically used when retry'ing stuff
+        /// </summary>
+        /// <returns>Success if able to reset stats</returns>
+        bool ResetStatistics();
+
+        /// <summary>
         /// Gets the last message reported - used by Unit tests 
         /// </summary>
         string LastMessage { get; }

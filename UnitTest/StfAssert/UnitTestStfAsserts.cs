@@ -106,7 +106,7 @@ namespace UnitTest
         public void TestCleanup()
         {
             // Setting to true again resets the failure count
-            StfAssert.EnableNegativeTesting = true;
+            StfAssert.ResetStatistics();
             StfLogger.LogInfo("UnitTestStfAsserts TestCleanup");
         }
 

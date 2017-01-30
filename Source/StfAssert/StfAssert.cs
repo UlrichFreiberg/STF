@@ -14,7 +14,7 @@ namespace Mir.Stf.Utilities
     using Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf.Utilities.Utilities;
+    using Utilities;
 
     /// <summary>
     /// The stf assert.
@@ -67,12 +67,24 @@ namespace Mir.Stf.Utilities
             {
                 AssertLogger.LogTrace("EnableNegativeTesting set to [{0}]", value);
                 enableNegativeTesting = value;
-
-                if (value)
-                {
-                    Stats = new AssertStats();
-                }
             }
+        }
+
+        /// <summary>
+        /// Reset all statistics for Error, Warning, pass, fail, and inconclusive. Typically used when retry'ing stuff
+        /// </summary>
+        /// <returns>Success if able to reset stats</returns>
+        public bool ResetStatistics()
+        {
+            Stats = new AssertStats();
+            AssertLogger.LogTrace("Statistics resat as requested");
+            AssertLogger.NumberOfLoglevelMessages[StfLogLevel.Error] = 0;
+            AssertLogger.NumberOfLoglevelMessages[StfLogLevel.Warning] = 0;
+            AssertLogger.NumberOfLoglevelMessages[StfLogLevel.Inconclusive] = 0;
+            AssertLogger.NumberOfLoglevelMessages[StfLogLevel.Fail] = 0;
+            AssertLogger.NumberOfLoglevelMessages[StfLogLevel.Pass] = 0;
+
+            return true;
         }
 
         /// <summary>
@@ -225,7 +237,7 @@ namespace Mir.Stf.Utilities
         {
             var isExpected = false;
             var expectedTypeName = string.Empty;
-            
+
             try
             {
                 action();
@@ -263,7 +275,7 @@ namespace Mir.Stf.Utilities
         public bool MissingImplementation(string msg)
         {
             AssertFail("Missing implementation", msg);
-            
+
             return false;
         }
 

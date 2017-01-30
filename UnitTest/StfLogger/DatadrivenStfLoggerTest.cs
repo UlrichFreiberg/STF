@@ -28,7 +28,7 @@ namespace UnitTest
         [TestInitialize]
         public void TestInitialize()
         {
-            this.StfLogger.LogInfo("DatadrivenStfLoggerTest TestInitialize");
+            StfLogger.LogInfo("DatadrivenStfLoggerTest TestInitialize");
             StfAssert.EnableNegativeTesting = true;
         }
 
@@ -208,7 +208,7 @@ namespace UnitTest
         public void TestCleanup()
         {
             StfLogger.LogInfo("DatadrivenStfLoggerTest TestCleanup");
-            StfAssert.EnableNegativeTesting = true;
+            StfAssert.ResetStatistics();
         }
 
         /// <summary>
