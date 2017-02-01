@@ -42,8 +42,8 @@ namespace Mir.Stf.Utilities.Extensions
         public static T ResolveType<T>(this IUnityContainer container)
         {
             var returnObject = container.Resolve<T>();
-
             var pluginObject = returnObject as IStfPlugin;
+
             if (pluginObject != null)
             {
                 if (!pluginObject.Init())

@@ -43,7 +43,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public T Get<T>()
         {
-            return StfContainer.Get<T>();
+            return StfContainer == null ? default(T) : StfContainer.Get<T>();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Mir.Stf.Utilities
         /// </param>
         public void Log(string logMessage)
         {
-            StfLogger.LogInfo(logMessage);
+            StfLogger?.LogInfo(logMessage);
         }
 
         /// <summary>
