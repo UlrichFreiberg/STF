@@ -3,6 +3,19 @@
 <head>
     <title>LOGFILETITLE</title>
     <style>
+		.runstats {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		}
+
+		.legend {
+			margin-bottom: 5px;
+		}
+
+		.legend-cell {
+			padding-left: 4px;
+			padding-right: 4px;
+		}
+		
         #testresultpass {
             background-color: lightgreen
 		}
@@ -52,7 +65,31 @@
 
 </head>
 <body>
-    <h1 id="logtitle">LOGFILETITLE</h1>
+    <h2 id="logtitle" class="runstats">LOGFILETITLE</h2>
+	<table class="runstats legend">
+		<tbody>
+			<tr>
+				<td class="legend-cell">
+					Color legend:
+				</td>
+				<td class="legend-cell" id="testresultpass">
+					Pass
+				</td>
+				<td class="legend-cell" id="testresultfail">
+					Fail
+				</td>
+				<td class="legend-cell" id="testresultinconclusive">
+					Inconclusive
+				</td>
+				<td class="legend-cell" id="testresulterror">
+					Error
+				</td>
+				<td class="legend-cell" id="testresultwarning">
+					Warning
+				</td>
+			</tr>
+		</tbody>
+	</table>
     <table id="RunStats">
         <tr>
             <th>Iteration</th>
