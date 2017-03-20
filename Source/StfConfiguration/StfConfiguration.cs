@@ -183,6 +183,18 @@ namespace Mir.Stf.Utilities
             return retVal;
         }
 
+        /// <summary>
+        /// The set config value.
+        /// </summary>
+        /// <param name="configValuePath">
+        /// The config value path.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool SetConfigValue(string configValuePath, string value)
         {
             var configToUse = currentlyLoadedSection;
@@ -346,6 +358,24 @@ namespace Mir.Stf.Utilities
             throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
+        /// <summary>
+        /// The set key value.
+        /// </summary>
+        /// <param name="section">
+        /// The section.
+        /// </param>
+        /// <param name="keyName">
+        /// The key name.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Exception if no section is currently loaded
+        /// </exception>
         public bool SetKeyValue(Section section, string keyName, string value)
         {
             if (currentlyLoadedSection != null)
@@ -410,7 +440,14 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool SaveToFile(string fileName)
         {
-            var retVal = currentlyLoadedSection.DumpSection(Section.DumpAs.AsXml, fileName);
+            try
+            {
+                currentlyLoadedSection.DumpSection(Section.DumpAs.AsXml, fileName);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
 
             return true; // TODO: better retrun value
         }
