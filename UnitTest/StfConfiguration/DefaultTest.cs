@@ -59,7 +59,34 @@ namespace Tests
             StfAssert.AreEqual("Password for Kasper is K999", "K999", kPassword);
         }
 
-                [TestMethod]
+        [TestMethod]
+        public void TestDefaultGetSetConfigValues()
+        {
+            // Load a configuration in StfConfiguration
+            var stfConfiguration = new StfConfiguration(@"TestData\Defaulting\DefaultSectionWithEnvironments.xml");
+
+            stfConfiguration.Environment = stfConfiguration.DefaultEnvironment;
+
+            var dUsername = stfConfiguration.GetConfigValue("Users.Username");
+            var dPassword = stfConfiguration.GetConfigValue("Users.Password");
+
+            StfAssert.AreEqual("Default Username is User_Kasper", "User_Kasper", dUsername);
+            StfAssert.AreEqual("Default Password is K999", "K999", dPassword);
+
+            var newUserName = "User_Kasper_Updated";
+            var newUserPassword = "K999_Updated";
+
+            stfConfiguration.SetConfigValue("Users.Username", newUserName);
+            stfConfiguration.SetConfigValue("Users.Password", newUserPassword);
+
+            dUsername = stfConfiguration.GetConfigValue("Users.Username");
+            dPassword = stfConfiguration.GetConfigValue("Users.Password");
+
+            StfAssert.AreEqual("Default Username is updated", newUserName, dUsername);
+            StfAssert.AreEqual("Default Password is updated", newUserPassword, dPassword);
+        }
+
+        [TestMethod]
         public void TestDefaultDefaultSectionWithVariables()
         {
             System.Environment.SetEnvironmentVariable("STFUSERNAME", "Bent");

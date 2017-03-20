@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
+  <section name="Environments" defaultSection="Env1">   
+    <section name="Env1">
+      <section name="Users" defaultSection="UserPasswordConfig">
+          <section name="UserPasswordConfig" defaultSection="Kasper">
+              <section name="Ulrich">
+                  <key name="Username" value="User_Ulrich" />
+                  <key name="Password" value="U777" />
+              </section>
+              <section name="Kasper">
+                  <key name="Username" value="User_Kasper" />
+                  <key name="Password" value="K999" />
+              </section>
+          </section>
+          <section name="PincodeConfig" defaultSection="Ulrich">
+              <section name="Ulrich">
+                  <key name="Pin" value="4277" />
+              </section>
+              <section name="Kasper">
+                  <key name="Pin" value="4299" />
+              </section>
+          </section>
+      </section>
+    </section>
+    <section name="Env2">
+      <section name="Users" defaultSection="UserPasswordConfig">
+        <section name="UserPasswordConfig" defaultSection="Kasper">
+          <section name="Ulrich">
+            <key name="Username" value="User_Ulrich_Env2" />
+            <key name="Password" value="U777_Env2" />
+          </section>
+          <section name="Kasper">
+            <key name="Username" value="User_Kasper_Env2" />
+            <key name="Password" value="K999_Env2" />
+          </section>
+        </section>
+        <section name="PincodeConfig" defaultSection="Ulrich">
+          <section name="Ulrich">
+            <key name="Pin" value="4277_Env2" />
+          </section>
+          <section name="Kasper">
+            <key name="Pin" value="4299_Env2" />
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</configuration>

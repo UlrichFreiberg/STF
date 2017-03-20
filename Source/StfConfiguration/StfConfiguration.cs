@@ -185,15 +185,29 @@ namespace Mir.Stf.Utilities
 
         public bool SetConfigValue(string configValuePath, string value)
         {
-            if (currentlyLoadedSection != null)
-            {
-                var parser = new Parser { EvaluateKeyValue = EvaluateKeyValue };
+            var configToUse = currentlyLoadedSection;
+            bool retVal;
 
-                return parser.SetValue(currentlyLoadedSection, configValuePath, value);
+            // lets see if we should use the Environment configuration
+            var pathToUse = configValuePath;
+
+            if (!string.IsNullOrEmpty(Environment) && !IsAbsoluteConfigurationPath(ref pathToUse))
+            {
+                configToUse = environmentConfiguration;
             }
 
-            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", configValuePath);
-            throw new ArgumentOutOfRangeException(configValuePath, errMsg);
+            try
+            {
+                retVal = SetKeyValue(configToUse, pathToUse, value);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", configValuePath);
+
+                throw new ArgumentOutOfRangeException(configValuePath, errMsg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -256,9 +270,9 @@ namespace Mir.Stf.Utilities
 
             // the overlayer handles if arguments are null
             currentlyLoadedSection = overLayer.OverLay(currentlyLoadedSection, overlay);
-            
+
             Environment = DefaultEnvironment;
-            
+
             return currentlyLoadedSection;
         }
 
@@ -297,7 +311,7 @@ namespace Mir.Stf.Utilities
 
                 if (EvaluateKeyValue != null)
                 {
-                    retVal = EvaluateKeyValue(retVal);                    
+                    retVal = EvaluateKeyValue(retVal);
                 }
 
                 return retVal;
@@ -326,6 +340,19 @@ namespace Mir.Stf.Utilities
                 var parser = new Parser { EvaluateKeyValue = EvaluateKeyValue };
 
                 return parser.GetKey(section, keyName);
+            }
+
+            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            throw new ArgumentOutOfRangeException(keyName, errMsg);
+        }
+
+        public bool SetKeyValue(Section section, string keyName, string value)
+        {
+            if (currentlyLoadedSection != null)
+            {
+                var parser = new Parser { EvaluateKeyValue = EvaluateKeyValue };
+
+                return parser.SetValue(section, keyName, value);
             }
 
             var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);

@@ -14,10 +14,10 @@ namespace Mir.Stf.Utilities.TableUtilities
     using System.Dynamic;
     using System.Reflection;
 
-    using Mir.Stf.Utilities.Interfaces;
+    using Interfaces;
 
     using Slapper;
-
+    using System.Linq;
     /// <summary>
     /// The web table header description.
     /// </summary>
@@ -37,6 +37,7 @@ namespace Mir.Stf.Utilities.TableUtilities
             for (var i = 0; i < header.Length; i++)
             {
                 var entry = new TableHeaderColumnInfo { Index = i, Name = header[i] };
+
                 Columns.Add(entry);
                 AddProperty(entry.Name);
             }
@@ -120,8 +121,11 @@ namespace Mir.Stf.Utilities.TableUtilities
         /// </returns>
         public T Projection<T>() where T : class
         {
+            CheckIdProperty<T>();
+
             // Act
             var retVal = AutoMapper.MapDynamic<T>(RowType) as T;
+
             return retVal;
         }
 
@@ -142,9 +146,11 @@ namespace Mir.Stf.Utilities.TableUtilities
         /// </returns>
         public T Projection<T>(T initializeMe, string[] row) where T : class
         {
-            var projectionObject = Projection<T>(row);
+            CheckIdProperty<T>();
 
+            var projectionObject = Projection<T>(row);
             var fields = initializeMe.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+
             foreach (var field in fields)
             {
                 field.SetValue(initializeMe, field.GetValue(projectionObject));
@@ -167,10 +173,29 @@ namespace Mir.Stf.Utilities.TableUtilities
         /// </returns>
         public T Projection<T>(string[] row) where T : class
         {
+            CheckIdProperty<T>();
             GetRowType(row);
 
             var retVal = AutoMapper.MapDynamic<T>(RowType) as T;
+
             return retVal;
+        }
+
+        /// <summary>
+        /// Due to a bug/feature in Slapper the object to project cant be named ID
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        private void CheckIdProperty<T>()
+        {
+            var props = typeof(T).GetProperties();
+            var idProp = props.Any(p => p.Name.Equals("id", System.StringComparison.InvariantCultureIgnoreCase));
+
+            if (idProp)
+            {
+                var msg = string.Format("{0} does not allow a property called 'ID'. Please use a mapping", GetType().Name);
+
+                throw new System.Exception(msg);
+            }
         }
     }
 }

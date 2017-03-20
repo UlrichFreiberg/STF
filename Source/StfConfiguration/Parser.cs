@@ -97,6 +97,15 @@ namespace Mir.Stf.Utilities
                     return true;
                 }
 
+                if (!string.IsNullOrEmpty(section.DefaultSection))
+                {
+                    var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
+                    var tryDefaultKeyName = string.Format("{0}.{1}", defaultSection, keyName);
+                    var retVal = SetValue(section, tryDefaultKeyName, value);
+
+                    return retVal;
+                }
+
                 return false;
             }
 
@@ -111,6 +120,17 @@ namespace Mir.Stf.Utilities
             if (section.Sections.ContainsKey(sectionName))
             {
                 return SetValue(section.Sections[sectionName], GetKeyName(keyName), value);
+            }
+
+            if (!string.IsNullOrEmpty(section.DefaultSection))
+            {
+                var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
+
+                if (section.Sections.ContainsKey(defaultSection))
+                {
+                    var retVal = SetValue(section.Sections[defaultSection], keyName, value);
+                    return retVal;
+                }
             }
 
             return false;
