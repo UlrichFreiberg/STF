@@ -53,13 +53,13 @@ namespace Mir.Stf.Utilities.Configuration
         /// <summary>
         /// Gets or sets the archive top dir.
         /// </summary>
-        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.ArchiveTopDir", DefaultValue = @"c:\temp\Stf\StfArchive")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.ArchiveTopDir", DefaultValue = @"%STF_ROOT%\StfArchive")]
         public string ArchiveTopDir { get; set; }
 
         /// <summary>
         /// Gets or sets the temp directory.
         /// </summary>
-        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.TempDirectory", DefaultValue = @"c:\temp\Stf\Temp")]
+        [StfConfigurationAttribute("Configuration.StfKernel.StfArchiver.TempDirectory", DefaultValue = @"%STF_ROOT%\Temp")]
         public string TempDirectory { get; set; }
 
         /// <summary>

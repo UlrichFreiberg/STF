@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\StfConfigurationException.cs" />
     <Compile Include="Interfaces\IStfTestData.cs" />
     <Compile Include="KernelUtils\StfTextUtils.cs" />
     <Compile Include="StfTestDataAttribute.cs" />

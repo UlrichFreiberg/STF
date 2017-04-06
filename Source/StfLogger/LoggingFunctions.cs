@@ -364,6 +364,7 @@ namespace Mir.Stf.Utilities
 
             var messageIdString = GetNextMessageId();
             var logLevelString = Enum.GetName(typeof(StfLogLevel), loglevel) ?? "Unknown StfLogLevel";
+            var convertedToFoldableMessage = false;
 
             logLevelString = logLevelString.ToLower();
 
@@ -381,25 +382,17 @@ namespace Mir.Stf.Utilities
                     if (firstLineIndexOf > 0)
                     {
                         var firstLineOfMessage = message.Substring(0, firstLineIndexOf);
-                        var multilineId = string.Format("multiLineId_{0}", messageIdString);
                         var firstLoggedLine = string.Format("{0}{1}", Environment.NewLine, System.Security.SecurityElement.Escape(firstLineOfMessage));
-                        var multiLineSection =
-                            string.Format(
-                                  "<a class=\"left\" href=\"javascript:toggle_messege('{0}')\" id='href_about'> {1} "
-                                + "</a>"
-                                + "    <div id='{0}' class='hide' style=\"display:none;\">"
-                                + "       </br>" 
-                                + "       <xmp>"
-                                + "{2}"
-                                + "       </xmp>" 
-                                + "    </div>",
-                                multilineId,
-                                firstLoggedLine,
-                                message);
 
-                        message = multiLineSection;
+                        message = GetMultilineMessage(messageIdString, firstLoggedLine, message);
+                        convertedToFoldableMessage = true;
                     }
                 }
+            }
+
+            if (ShouldMessageBeConvertedToClickable(message) && !convertedToFoldableMessage)
+            {
+                // todo: Implement :-)
             }
 
             switch (loglevel)
@@ -482,6 +475,62 @@ namespace Mir.Stf.Utilities
             xmlTextWriter.Close();
 
             return result;
+        }
+
+        /// <summary>
+        /// The get multiline message.
+        /// </summary>
+        /// <param name="messageIdString">
+        /// The message Id String.
+        /// </param>
+        /// <param name="firstLoggedLine">
+        /// The first Logged Line.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetMultilineMessage(string messageIdString, string firstLoggedLine, string message)
+        {
+            var multilineId = $"multiLineId_{messageIdString}";
+            var retVal =
+                string.Format(
+                    "<a class=\"left\" href=\"javascript:toggle_messege('{0}')\" id='href_about'> {1} " 
+                    + "</a>"
+                    + "    <div id='{0}' class='hide' style=\"display:none;\">" 
+                    + "       </br>" 
+                    + "       <xmp>"
+                    + "{2}" 
+                    + "       </xmp>" 
+                    + "    </div>",
+                    multilineId,
+                    firstLoggedLine,
+                    message);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The should message be converted to clickable.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool ShouldMessageBeConvertedToClickable(string message)
+        {
+            if (Configuration.ConvertToFoldableThreshold == -1 || string.IsNullOrEmpty(message))
+            {
+                return false;
+            }
+
+            var retval = message.Length > Configuration.ConvertToFoldableThreshold;
+
+            return retval;
         }
     }
 }

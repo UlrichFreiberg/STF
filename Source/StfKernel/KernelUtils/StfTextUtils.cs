@@ -38,6 +38,11 @@ namespace Mir.Stf.KernelUtils
         /// </returns>
         public bool Register(string keyName, string keyValue)
         {
+            if (string.IsNullOrWhiteSpace(keyName))
+            {
+                return false;
+            }
+
             if (dict.ContainsKey(keyName))
             {
                 dict[keyName] = keyValue;

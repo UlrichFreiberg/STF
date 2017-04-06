@@ -49,7 +49,7 @@ namespace UnitTest
         public void TestMethodPluginSettingsOverlayed()
         {
             var configuration = Get<StfConfiguration>();
-            StfAssert.AreEqual("DefaulEnvironment == ENV1", "ENV1", configuration.DefaultEnvironment);
+            StfAssert.AreEqual("DefaulEnvironment == TESTENVIRONMENT1", "TESTENVIRONMENT1", configuration.DefaultEnvironment);
             
             LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
 
@@ -67,7 +67,7 @@ namespace UnitTest
         public void TestMethodPlugin2SettingsOverlayed()
         {
             var configuration = Get<StfConfiguration>();
-            StfAssert.AreEqual("DefaulEnvironment == ENV1", "ENV1", configuration.DefaultEnvironment);
+            StfAssert.AreEqual("DefaulEnvironment == TESTENVIRONMENT1", "TESTENVIRONMENT1", configuration.DefaultEnvironment);
 
             LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
 

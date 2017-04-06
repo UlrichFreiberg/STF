@@ -108,7 +108,6 @@ namespace Mir.Stf
             var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
 
             StfLogger.FileName = logFilename;
-
             StfAssert = new StfAssert(StfLogger);
 
             if (!TestDataDriven())
@@ -337,6 +336,7 @@ namespace Mir.Stf
             StfLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
             StfLogger.LogKeyValue("Kernel Logger", kernelLogfilePath, "Kernel Logger");
             StfLogger.LogKeyValue("Testname", TestContext.TestName, "Name of test");
+            StfLogger.LogKeyValue("Stf Root", StfRoot, "The Stf Root directory");
 
             var configuration = Get<StfConfiguration>();
             StfLogger.LogKeyValue("Environment", configuration.Environment, "Configuration.EnvironmentName");

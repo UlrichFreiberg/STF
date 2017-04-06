@@ -65,6 +65,12 @@ namespace Mir.Stf.Utilities.Configuration
         bool MapNewlinesToBr { get; set; }
 
         /// <summary>
+        /// Gets or sets the convert to foldable threshold. The max number of chars before a log entry is converted to 
+        /// a log entry that is displayed and hidden when clicked upon
+        /// </summary>
+        int ConvertToFoldableThreshold { get; set; }
+
+        /// <summary>
         /// Gets or sets the keep alive interval.
         /// </summary>
         int KeepAliveInterval { get; set; }

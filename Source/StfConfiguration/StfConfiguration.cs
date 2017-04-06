@@ -131,7 +131,7 @@ namespace Mir.Stf.Utilities
         {
             get
             {
-                if (!currentlyLoadedSection.Sections.ContainsKey("Environments"))
+                if (currentlyLoadedSection == null || !currentlyLoadedSection.Sections.ContainsKey("Environments"))
                 {
                     return null;
                 }

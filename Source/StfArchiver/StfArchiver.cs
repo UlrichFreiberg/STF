@@ -126,6 +126,7 @@ namespace Mir.Stf.Utilities
         public bool PerformArchive()
         {
             var tempArchiveDir = Path.Combine(Configuration.TempDirectory, Guid.NewGuid().ToString());
+
             if (!Directory.Exists(tempArchiveDir))
             {
                 Directory.CreateDirectory(tempArchiveDir);
@@ -139,6 +140,7 @@ namespace Mir.Stf.Utilities
             foreach (var filename in FilesToArchive)
             {
                 var filenameNoPath = Path.GetFileName(filename);
+
                 if (filenameNoPath == null)
                 {
                     continue;
@@ -155,6 +157,7 @@ namespace Mir.Stf.Utilities
             }
 
             var retVal = true;
+
             if (Configuration.DoArchiveFoldersAndFiles)
             {
                 if (!Directory.Exists(Configuration.ArchiveDestination))
