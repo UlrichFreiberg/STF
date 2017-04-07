@@ -3,7 +3,7 @@
 
   <section name="Environments" defaultsection="ENV2">
     <key name="k1" value="config1_key1value"/>
-    <section name="ENV1">
+    <section name="TESTENVIRONMENT1">
       <section name="UnitTestPlugin1">
         <key name="UnitTestPlugin1Key" value="ENV1_Value"/>
       </section>
