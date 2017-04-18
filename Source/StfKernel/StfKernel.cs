@@ -62,7 +62,7 @@ namespace Mir.Stf
 
             string pluginPath;
 
-            if (StfConfiguration.TryGetKeyValue("StfKernel.PluginPath", out pluginPath))
+            if (StfConfiguration.TryGetKeyValue("Configuration.StfKernel.PluginPath", out pluginPath))
             {
                 // TODO: Check for existing config file. If file not found then create default template configuration
                 PluginLoader.LoadStfPlugins(pluginPath);
