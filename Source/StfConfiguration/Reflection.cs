@@ -46,23 +46,27 @@ namespace Mir.Stf.Utilities
         /// </returns>
         internal Dictionary<string, StfConfigurationAttribute> GetConfigPropertiesFromType()
         {
-            if (this.currentFieldSet == null)
+            var retVal = new Dictionary<string, StfConfigurationAttribute>();
+
+            if (currentFieldSet == null)
             {
-                return new Dictionary<string, StfConfigurationAttribute>();
+                return retVal;
             }
 
             var currentFieldSetype = currentFieldSet.GetType();
             var props = currentFieldSetype.GetProperties();
-            var dict = new Dictionary<string, StfConfigurationAttribute>();
 
             foreach (var property in props)
             {
                 var configAttributes = property.GetCustomAttributes<StfConfigurationAttribute>(true).FirstOrDefault();
 
-                dict.Add(property.Name, configAttributes);
+                if (configAttributes != null)
+                {
+                    retVal.Add(property.Name, configAttributes);
+                }
             }
 
-            return dict;
+            return retVal;
         }
 
         /// <summary>
@@ -81,20 +85,24 @@ namespace Mir.Stf.Utilities
         {
             var t = this.currentFieldSet.GetType();
 
-            foreach (var uc in userConfig)
+            if (userConfig != null)
             {
-                var property = t.GetProperty(uc.Key);
-                var newValue = stfConfiguration.GetConfigValue(uc.Value.ConfigKeyPath, uc.Value.DefaultValue);
-
-                if (property.PropertyType == typeof(string))
+                foreach (var uc in userConfig)
                 {
-                    property.SetValue(currentFieldSet, newValue);
-                    continue;
-                }
+                    var property = t.GetProperty(uc.Key);
+                    var newValue = stfConfiguration.GetConfigValue(uc.Value.ConfigKeyPath, uc.Value.DefaultValue);
 
-                // TODO: should be in tryCatch
-                var castedNewValue = TypeDescriptor.GetConverter(property.PropertyType).ConvertFromInvariantString(newValue);
-                property.SetValue(currentFieldSet, castedNewValue);
+                    if (property.PropertyType == typeof (string))
+                    {
+                        property.SetValue(currentFieldSet, newValue);
+                        continue;
+                    }
+
+                    // TODO: should be in tryCatch
+                    var castedNewValue =
+                        TypeDescriptor.GetConverter(property.PropertyType).ConvertFromInvariantString(newValue);
+                    property.SetValue(currentFieldSet, castedNewValue);
+                }
             }
 
             return currentFieldSet;
