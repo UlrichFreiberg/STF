@@ -23,7 +23,7 @@ namespace Mir.Stf
     using System.Data;
     using System.Linq;
 
-    using Mir.Stf.Interfaces;
+    using Interfaces;
 
     using Utilities.Configuration;
 
@@ -95,7 +95,7 @@ namespace Mir.Stf
                 var numberOfIterations = TestContext.DataRow.Table.Rows.Count;
 
                 logFilePostfix = GetlogFilePostfix(numberOfIterations, StfIterationNo);
-                iterationStatus = string.Format("Iteration {0}", StfIterationNo);
+                iterationStatus = $"Iteration {StfIterationNo}";
             }
 
             var logdir = Path.Combine(StfLogDir, TestContext.TestName);
@@ -105,7 +105,7 @@ namespace Mir.Stf
                 Directory.CreateDirectory(logdir);
             }
 
-            var logFilename = string.Format("{0}{1}.html", Path.Combine(logdir, TestContext.TestName), logFilePostfix);
+            var logFilename = $"{Path.Combine(logdir, TestContext.TestName)}{logFilePostfix}.html";
 
             StfLogger.FileName = logFilename;
             StfAssert = new StfAssert(StfLogger);
@@ -133,7 +133,7 @@ namespace Mir.Stf
                 {
                     var headerCaption = TestContext.DataRow.Table.Columns[index].Caption;
 
-                    StfLogger.LogInfo(string.Format("Column[{0}]=[{1}]", headerCaption, TestContext.DataRow[headerCaption]));
+                    StfLogger.LogInfo($"Column[{headerCaption}]=[{TestContext.DataRow[headerCaption]}]");
                 }
             }
 
@@ -179,7 +179,7 @@ namespace Mir.Stf
                     var summaryLogfileLogDirname = Path.GetDirectoryName(StfLogger.FileName);
                     var myLoggerFileName = Path.GetFileName(StfLogger.FileName) ?? string.Empty;
                     var summaryLogfileLogFilename = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", ".html");
-                    var summaryLogfilename = string.Format(@"{0}\SummaryLogfile_{1}", summaryLogfileLogDirname, summaryLogfileLogFilename);
+                    var summaryLogfilename = $@"{summaryLogfileLogDirname}\SummaryLogfile_{summaryLogfileLogFilename}";
                     var summaryLogfileLogfilePattern = Regex.Replace(myLoggerFileName, @"_[0-9]+\.html", "_*");
 
                     myStfSummaryLogger.CreateSummaryLog(summaryLogfilename, summaryLogfileLogDirname, summaryLogfileLogfilePattern);
@@ -194,26 +194,39 @@ namespace Mir.Stf
 
             if (!testFailed && StfAssert.CurrentInconclusives > 0 && StfAssert.CurrentFailures <= 0)
             {
-                var msg = string.Format(
-                    "Testmethod [{0}] is inconclusive. Number of inconclusive results: [{1}]",
-                    TestContext.TestName,
-                    StfAssert.CurrentInconclusives);
+                var msg = $"Testmethod [{TestContext.TestName}] is inconclusive. Number of inconclusive results: [{StfAssert.CurrentInconclusives}]";
 
                 throw new AssertInconclusiveException(msg);
             }
 
             if (!testFailed && StfAssert.CurrentFailures > 0)
             {
-                var msg = string.Format(
-                    "Testmethod [{0}] failed. Number of asserts that failed: [{1}]",
-                    TestContext.TestName,
-                    StfAssert.CurrentFailures);
+                var msg = $"Testmethod [{TestContext.TestName}] failed. Number of asserts that failed: [{StfAssert.CurrentFailures}]";
 
                 throw new AssertFailedException(msg);
             }
         }
 
         protected int StfIterationNo { get; set; }
+
+        /// <summary>
+        /// Returns true if Stf believe this iteration should be ignore. 
+        /// Used for data driven tests - controlled by a data column value named StfIgnoreRow.
+        /// For not datadriven it returns false
+        /// </summary>
+        /// <returns></returns>
+        protected bool StfIgnoreRow()
+        {
+            if (!TestDataDriven())
+            {
+                return false;
+            }
+
+            var stfIgnoreRow = (string) TestContext.DataRow["StfIgnoreRow"];
+            var retVal = InferBoolValue(stfIgnoreRow);
+
+            return retVal;
+        }
 
         /// <summary>
         /// The init test data.
@@ -299,7 +312,7 @@ namespace Mir.Stf
         private string GetlogFilePostfix(int numberOfIterations, int iterationNo)
         {
             var digits = Math.Floor(Math.Log10(numberOfIterations)) + 1;
-            var format = string.Format("_{{0:D{0}}}", digits);
+            var format = $"_{{0:D{digits}}}";
             var retVal = string.Format(format, iterationNo);
 
             return retVal;
@@ -384,12 +397,7 @@ namespace Mir.Stf
         /// </returns>
         private bool TestDataDriven()
         {
-            if (TestContext.DataRow == null)
-            {
-                return false;
-            }
-
-            return TestContext.DataRow.Table.Rows.Count > 0;
+            return TestContext.DataRow?.Table.Rows.Count > 0;
         }
 
         /// <summary>
@@ -409,7 +417,7 @@ namespace Mir.Stf
             }
             catch (Exception exception)
             {
-                var msg = string.Format("Something went wrong while loading user configuration for archiver: {0}", exception.Message);
+                var msg = $"Something went wrong while loading user configuration for archiver: {exception.Message}";
                 StfLogger.LogError(msg);
             }
 
@@ -465,6 +473,28 @@ namespace Mir.Stf
 
             // TODO: Get the configuration in to determine whether to log or to throw. Logging should be done before basetestcleanup
             throw new AssertInconclusiveException("Ignoring row");
+        }
+
+        /// <summary>
+        /// Take a string and see if a boolean true can be parsed - if not, then return false
+        /// </summary>
+        /// <param name="value">
+        /// the string to parse
+        /// </param>
+        /// <returns>
+        /// true, if a boolean true can be parsed - if not, then return false
+        /// </returns>
+        private bool InferBoolValue(string value)
+        {
+            switch (value)
+            {
+                case "1":
+                case "yes":
+                case "true":
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
