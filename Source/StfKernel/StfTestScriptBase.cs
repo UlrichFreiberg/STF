@@ -20,7 +20,6 @@ namespace Mir.Stf
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data;
     using System.Linq;
 
     using Interfaces;
@@ -67,6 +66,28 @@ namespace Mir.Stf
         /// </summary>
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public TestContext TestContext { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stf iteration no.
+        /// </summary>
+        protected int StfIterationNo { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether Stf believe this iteration should be ignore. 
+        /// Used for data driven tests - controlled by a data column value named StfIgnoreRow.
+        /// For not datadriven it returns false
+        /// </summary>
+        /// <returns></returns>
+        protected bool StfIgnoreRow
+        {
+            get
+            {
+                var stfIgnoreRow = DataRowColumnValue("StfIgnoreRow");
+                var retVal = InferBoolValue(stfIgnoreRow);
+
+                return retVal;
+            }
+        }
 
         /// <summary>
         /// The TestInitialize for <see cref="StfTestScriptBase"/>.
@@ -207,23 +228,39 @@ namespace Mir.Stf
             }
         }
 
-        protected int StfIterationNo { get; set; }
+        /// <summary>
+        /// The data row column exists.
+        /// </summary>
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected bool DataRowColumnExists(string columnName)
+        {
+            var retVal = TestContext.DataRow?.Table.Columns.Contains(columnName) ?? false;
+
+            return retVal;
+        }
 
         /// <summary>
-        /// Returns true if Stf believe this iteration should be ignore. 
-        /// Used for data driven tests - controlled by a data column value named StfIgnoreRow.
-        /// For not datadriven it returns false
+        /// The data row column value.
         /// </summary>
-        /// <returns></returns>
-        protected bool StfIgnoreRow()
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        protected string DataRowColumnValue(string columnName)
         {
-            if (!TestDataDriven())
+            if (!DataRowColumnExists(columnName))
             {
-                return false;
+                return null;
             }
 
-            var stfIgnoreRow = (string) TestContext.DataRow["StfIgnoreRow"];
-            var retVal = InferBoolValue(stfIgnoreRow);
+            var retVal = TestContext.DataRow[columnName].ToString();
 
             return retVal;
         }
@@ -254,7 +291,7 @@ namespace Mir.Stf
 
             var retVal = new T();
             var properties = typeof(T).GetProperties();
-            var attributedProperties = properties.Where(prop => prop.IsDefined(typeof (StfTestDataAttribute), false)).ToList();
+            var attributedProperties = properties.Where(prop => prop.IsDefined(typeof(StfTestDataAttribute), false)).ToList();
             var dataRow = TestContext.DataRow;
 
             retVal.StfIteration = DataRowIndex();
@@ -425,43 +462,6 @@ namespace Mir.Stf
             archiverConfiguration.ArchiveDestination = StfTextUtils.ExpandVariables(archiverConfiguration.ArchiveDestination);
             archiverConfiguration.TempDirectory = StfTextUtils.ExpandVariables(archiverConfiguration.TempDirectory);
             StfArchiver = new StfArchiver(archiverConfiguration, testName);
-        }
-
-        /// <summary>
-        /// The check if iteration should be ignored.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool CheckIfIterationShouldBeIgnored()
-        {
-            var dataRow = TestContext.DataRow;
-
-            if (dataRow == null)
-            {
-                return false;
-            }
-
-            string ignoreRowValue;
-
-            try
-            {
-                ignoreRowValue = dataRow.Field<string>("StfIgnoreRow");
-            }
-            catch (Exception)
-            {
-                // slurp - catch all TODO: Some log statement?
-                return false;
-            }
-
-            bool retVal;
-
-            if (!bool.TryParse(ignoreRowValue, out retVal))
-            {
-                return false;
-            }
-
-            return retVal;
         }
 
         /// <summary>

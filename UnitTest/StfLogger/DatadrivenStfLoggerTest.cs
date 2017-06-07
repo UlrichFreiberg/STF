@@ -43,7 +43,7 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfLogger.LogInfo($"Iteration [{iteration}]: {message}");
             StfAssert.IsTrue("FailPass", failPass);
         }
 
@@ -87,7 +87,7 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfLogger.LogInfo($"Iteration [{iteration}]: {message}");
             Assert.IsTrue(StfAssert.IsTrue("FailPass", failPass) == failPass);
         }
 
@@ -98,7 +98,7 @@ namespace UnitTest
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\Data_SummaryLog_10lines.csv", "Data_SummaryLog_10lines#csv", DataAccessMethod.Sequential)]
         public void DatadrivenLoggerTest10Lines()
         {
-            StfLogger.LogInfo(string.Format("Iteration [{0}]", DateTime.Now));
+            StfLogger.LogInfo($"Iteration [{DateTime.Now}]");
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfLogger.LogInfo($"Iteration [{iteration}]: {message}");
             Assert.IsTrue(StfAssert.IsTrue("FailPass", failPass) == failPass);
         }
 
@@ -127,7 +127,7 @@ namespace UnitTest
             var message = (string)TestContext.DataRow["Message"];
             var failPass = ConvertToBool((string)TestContext.DataRow["FailPass"]);
 
-            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfLogger.LogInfo($"Iteration [{iteration}]: {message}");
             Assert.IsTrue(StfAssert.IsTrue("FailPass", failPass) == failPass);
         }
 
@@ -141,7 +141,7 @@ namespace UnitTest
             var iteration = (int)TestContext.DataRow["Iteration"];
             var message = (string)TestContext.DataRow["Message"];
 
-            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", iteration, message));
+            StfLogger.LogInfo($"Iteration [{iteration}]: {message}");
 
             // need to close the logfile, in order to check the content of the logfile...
             StfLogger.CloseLogFile();
@@ -193,6 +193,53 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test stf ignore data driven no stf ignore.
+        /// </summary>
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\TestStfIgnoreDataDrivenNoStfIgnore.csv", "TestStfIgnoreDataDrivenNoStfIgnore#csv", DataAccessMethod.Sequential)]
+        public void TestStfIgnoreDataDrivenNoStfIgnore()
+        {
+            if (StfIgnoreRow)
+            {
+                StfAssert.IsTrue("Must be false", false);
+                return;
+            }
+
+            StfAssert.AreEqual("StfRowNowIgnored", DataRowColumnValue("Bob"), 42);
+        }
+
+        /// <summary>
+        /// The test stf ignore data driven with stf ignore.
+        /// </summary>
+        [TestMethod]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", @"Data\TestStfIgnoreDataDrivenWithStfIgnore.csv", "TestStfIgnoreDataDrivenWithStfIgnore#csv", DataAccessMethod.Sequential)]
+        public void TestStfIgnoreDataDrivenWithStfIgnore()
+        {
+            if (StfIgnoreRow)
+            {
+                StfAssert.AreEqual("StfRowNowIgnored", DataRowColumnValue("Bob"), 21);
+                return;
+            }
+
+            StfAssert.AreEqual("StfRowNowIgnored", DataRowColumnValue("Bob"), 42);
+        }
+
+        /// <summary>
+        /// The test stf ignore not data driven.
+        /// </summary>
+        [TestMethod]
+        public void TestStfIgnoreNotDataDriven()
+        {
+            if (StfIgnoreRow)
+            {
+                StfAssert.IsTrue("Must be false", false);
+                return;
+            }
+
+            StfAssert.IsTrue("Must be true", true);
+        }
+
+        /// <summary>
         /// The test init test data without data source.
         /// </summary>
         [TestMethod]
@@ -214,13 +261,16 @@ namespace UnitTest
         /// <summary>
         /// The helper datadriven with testdata object.
         /// </summary>
+        /// <returns>
+        /// The <see cref="UnitTestTestDataObject"/>.
+        /// </returns>
         private UnitTestTestDataObject HelperDatadrivenWithTestdataObject()
         {
             var testdata = new UnitTestTestDataObject { Iteration = "-1" };
 
-            testdata = InitTestData<UnitTestTestDataObject>(testdata);
+            testdata = InitTestData(testdata);
 
-            StfLogger.LogInfo(string.Format("Iteration [{0}]: {1}", testdata.Iteration, testdata.Message));
+            StfLogger.LogInfo($"Iteration [{testdata.Iteration}]: {testdata.Message}");
             StfAssert.AreEqual("Iteration", testdata.Iteration, testdata.StfIteration.ToString());
 
             return testdata;
