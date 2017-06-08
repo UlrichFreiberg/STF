@@ -21,6 +21,7 @@ namespace Mir.Stf
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+    using System.Runtime.InteropServices;
 
     using Interfaces;
 
@@ -162,6 +163,11 @@ namespace Mir.Stf
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             LogKeyValues(kernelLogFilePath, iterationStatus);
+
+            if (StfIgnoreRow)
+            {
+                DoCleanUpAndThrowInconclusive("Row ignored due to StfIgnore is percieved true");
+            }
         }
 
         /// <summary>
@@ -172,8 +178,9 @@ namespace Mir.Stf
         {
             LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
 
-            var testFailed = TestContext.CurrentTestOutcome != UnitTestOutcome.Passed &&
-                             TestContext.CurrentTestOutcome != UnitTestOutcome.Inconclusive;
+            var testFailed = !StfIgnoreRow
+                          && TestContext.CurrentTestOutcome != UnitTestOutcome.Passed
+                          && TestContext.CurrentTestOutcome != UnitTestOutcome.Inconclusive;
 
             if (testFailed)
             {
@@ -211,6 +218,12 @@ namespace Mir.Stf
                     StfArchiver.AddFile(summaryLogfilename);
                     StfArchiver.PerformArchive();
                 }
+            }
+
+            if (StfIgnoreRow)
+            {
+                // DoCleanUpAndThrowInconclusive will do the throwing if needed
+                return;
             }
 
             if (!testFailed && StfAssert.CurrentInconclusives > 0 && StfAssert.CurrentFailures <= 0)
@@ -329,6 +342,9 @@ namespace Mir.Stf
                         ex.Message);
                 }
             }
+
+            // we might later alter stuff, so StfIgnoreRow also is triggered by StfIgnore
+            retVal.StfIgnoreRow = StfIgnoreRow;
 
             return retVal;
         }
@@ -467,11 +483,21 @@ namespace Mir.Stf
         /// <summary>
         /// The do clean up and throw inconclusive.
         /// </summary>
-        private void DoCleanUpAndThrowInconclusive()
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        private void DoCleanUpAndThrowInconclusive(string message)
         {
+            // gotta diable the throwing of the inconclusive exception from StfAsserter - othervise BaseTestCleanup() wont be called
+            var oldEnableNegativeTesting = StfAssert.EnableNegativeTesting;
+
+            StfAssert.EnableNegativeTesting = true;
+            StfAssert.IsInconclusive("TestCleanup", message);
+            StfAssert.EnableNegativeTesting = oldEnableNegativeTesting;
+
+            // this wont call the test script cleanup - fair enough as the test script test initialize wasn't called --> symmetry is maintained
             BaseTestCleanup();
 
-            // TODO: Get the configuration in to determine whether to log or to throw. Logging should be done before basetestcleanup
             throw new AssertInconclusiveException("Ignoring row");
         }
 
@@ -486,9 +512,15 @@ namespace Mir.Stf
         /// </returns>
         private bool InferBoolValue(string value)
         {
-            switch (value)
+            if (string.IsNullOrEmpty(value))
+            {
+                return false;
+            }
+
+            switch (value.ToLower())
             {
                 case "1":
+                case "ok":
                 case "yes":
                 case "true":
                     return true;

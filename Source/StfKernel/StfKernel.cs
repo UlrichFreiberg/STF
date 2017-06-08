@@ -53,7 +53,7 @@ namespace Mir.Stf
 
             KernelLogger = new StfLogger(kernelLoggerConfiguration);
 
-            // get the initial configuration together
+            // get the initial configuration together - at this point in time: Only the kernel configuration
             AssembleStfConfigurationBeforePlugins();
 
             // Any plugins for us?

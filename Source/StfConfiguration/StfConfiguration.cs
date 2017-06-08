@@ -404,6 +404,7 @@ namespace Mir.Stf.Utilities
         public bool TryGetKeyValue(string keyName, out string value)
         {
             value = string.Empty;
+
             try
             {
                 value = GetConfigValue(keyName);
