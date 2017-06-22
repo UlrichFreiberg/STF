@@ -21,6 +21,7 @@ namespace Mir.Stf.Utilities.Extensions
     using System.Reflection;
 
     using Mir.Stf.Utilities.Attributes;
+    using Mir.Stf.Utilities.Exceptions;
 
     /// <summary>
     /// The container extensions.
@@ -41,7 +42,19 @@ namespace Mir.Stf.Utilities.Extensions
         /// </returns>
         public static T ResolveType<T>(this IUnityContainer container)
         {
-            var returnObject = container.Resolve<T>();
+            T returnObject;
+
+            try
+            {
+                returnObject = container.Resolve<T>();
+            }
+            catch (Exception e)
+            {
+                var msg = $"Couldn't find the type [{typeof(T).Name}] in the StfContainer. Please register the type using RegisterType()";
+
+                throw new StfTypeResolutionException(msg, e);
+            }
+
             var pluginObject = returnObject as IStfPlugin;
 
             if (pluginObject != null)

@@ -16,6 +16,9 @@ using Stf.Unittests.UnitTestPluginTypes;
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mir.Stf.Utilities.Exceptions;
+
     using Stf.Unittests;
 
     /// <summary>
@@ -118,6 +121,16 @@ namespace UnitTest
             var sp2 = Get<IStfUnitTestPlugin2>();
             var pluginModel = sp2.StfContainer.Get<ITestPluginModel>();
             StfAssert.IsNotNull("Not null", pluginModel);
+        }
+
+        /// <summary>
+        /// The test method unknown type throws exception.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodUnknownTypeThrowsException()
+        {
+            StfAssert.AssertThrows<StfTypeResolutionException>("Resolve unknown for STF type", () => Get<StfTypeResolutionException>());
+            StfAssert.AssertThrows<StfTypeResolutionException>("Resolve unknown for STF type", () => Get<int>());
         }
 
         /// <summary>
