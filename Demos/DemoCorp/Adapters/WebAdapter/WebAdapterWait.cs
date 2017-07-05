@@ -43,7 +43,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
         /// </param>
         public void SetImplicitlyWait(TimeSpan timeSpan)
         {
-            DriverInternetExplorer.Manage().Timeouts().ImplicitlyWait(timeSpan);
+            WebDriver.Manage().Timeouts().ImplicitWait = timeSpan;
         }
 
         /// <summary>

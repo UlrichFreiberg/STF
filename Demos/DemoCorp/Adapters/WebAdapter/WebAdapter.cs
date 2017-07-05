@@ -19,6 +19,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
     using Mir.Stf.Utilities;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.IE;
 
     /// <summary>
@@ -37,9 +38,9 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
         public Version VersionInfo => new Version(1, 0, 0, 0);
 
         /// <summary>
-        /// Gets or sets the driver for Internet Explorer.
+        /// Gets or sets the driver for Browser.
         /// </summary>
-        private IWebDriver DriverInternetExplorer { get; set; }
+        private IWebDriver WebDriver { get; set; }
 
         /// <summary>
         /// The open url.
@@ -56,7 +57,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
 
             try
             {
-                DriverInternetExplorer.Navigate().GoToUrl(url);
+                this.WebDriver.Navigate().GoToUrl(url);
             }
             catch (Exception ex)
             {
@@ -116,7 +117,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
         /// </summary>
         public void GoBackOnePage()
         {
-            DriverInternetExplorer.Navigate().Back();
+            this.WebDriver.Navigate().Back();
         }
 
         /// <summary>
@@ -141,26 +142,79 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
                 }
             }
 
+            switch (Configuration.BrowserName.ToLower())
+            {
+                case "chrome":
+                    retVal = InitializeWebDriverChrome();
+                    break;
+                case "internetexplorer":
+                    retVal = InitializeWebDriverInternetExplorer();
+                    break;
+            }
+
+            StfLogger.LogDebug("Done initializing {0}. Successful: {1}", GetType().Name, retVal.ToString());
+
+            return retVal;
+        }
+        
+        private bool InitializeWebDriverChrome()
+        {
+            var retVal = true;
+            var driverOptions = GetChromeOptionsOptions();
+
+            try
+            {
+                var driverService = ChromeDriverService.CreateDefaultService(Configuration.DriverServerPath);
+
+                driverService.LogPath = DriverLogFile;
+                driverService.EnableVerboseLogging = true; //TODO get this right
+
+                WebDriver = new ChromeDriver(
+                                    driverService,
+                                    driverOptions,
+                                    TimeSpan.FromSeconds(Configuration.BrowserTimeout));
+                WebDriver.Manage().Window.Maximize();
+                ResetImplicitlyWait();
+            }
+            catch (Exception ex)
+            {
+                StfLogger.LogInternal($"Couldn't Initialize WebAdapter - got error [{ex.Message}]");
+                retVal = false;
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The initialize web driver internet explorer.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool InitializeWebDriverInternetExplorer()
+        {
+            var retVal = true;
             var driverOptions = GetInternetExplorerOptions();
 
             try
             {
                 var driverService = InternetExplorerDriverService.CreateDefaultService(Configuration.DriverServerPath);
 
-                driverService.LogFile = DriverLogFile;
-                driverService.LoggingLevel = GetDriverLoggingLevel();
+                driverService.LogFile = this.DriverLogFile;
+                driverService.LoggingLevel = this.GetDriverLoggingLevel();
 
-                DriverInternetExplorer = new InternetExplorerDriver(driverService, driverOptions, TimeSpan.FromSeconds(Configuration.BrowserTimeout));
-                DriverInternetExplorer.Manage().Window.Maximize();
+                WebDriver = new InternetExplorerDriver(
+                                    driverService,
+                                    driverOptions,
+                                    TimeSpan.FromSeconds(Configuration.BrowserTimeout));
+                WebDriver.Manage().Window.Maximize();
                 ResetImplicitlyWait();
             }
             catch (Exception ex)
             {
-                StfLogger.LogInternal(string.Format("Couldn't Initialize WebAdapter - got error [{0}]", ex.Message));
+                this.StfLogger.LogInternal($"Couldn't Initialize WebAdapter - got error [{ex.Message}]");
                 retVal = false;
             }
-
-            StfLogger.LogDebug("Done initializing {0}. Successful: {1}", GetType().Name, retVal.ToString());
 
             return retVal;
         }
@@ -170,7 +224,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
         /// </summary>
         public void CloseDown()
         {
-            DriverInternetExplorer.Quit();
+            this.WebDriver.Quit();
         }
 
         /// <summary>

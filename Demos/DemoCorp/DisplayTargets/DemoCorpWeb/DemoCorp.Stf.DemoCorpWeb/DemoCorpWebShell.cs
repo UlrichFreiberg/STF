@@ -68,6 +68,7 @@ namespace DemoCorp.Stf.DemoCorpWeb
         {
             // Press learn more
             var but = WebAdapter.FindElement(By.Id("LearnMore"));
+
             but.Click();
 
             var retVal = StfContainer.Get<ILearnMore>();
