@@ -78,7 +78,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
 
             try
             {
-                var actions = new Actions(this.WebDriver);
+                var actions = new Actions(WebDriver);
 
                 actions.DoubleClick(element).Build().Perform();
 

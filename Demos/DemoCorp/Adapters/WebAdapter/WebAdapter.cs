@@ -57,7 +57,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
 
             try
             {
-                this.WebDriver.Navigate().GoToUrl(url);
+                WebDriver.Navigate().GoToUrl(url);
             }
             catch (Exception ex)
             {
@@ -117,7 +117,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
         /// </summary>
         public void GoBackOnePage()
         {
-            this.WebDriver.Navigate().Back();
+            WebDriver.Navigate().Back();
         }
 
         /// <summary>
@@ -200,8 +200,8 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
             {
                 var driverService = InternetExplorerDriverService.CreateDefaultService(Configuration.DriverServerPath);
 
-                driverService.LogFile = this.DriverLogFile;
-                driverService.LoggingLevel = this.GetDriverLoggingLevel();
+                driverService.LogFile = DriverLogFile;
+                driverService.LoggingLevel = GetDriverLoggingLevel();
 
                 WebDriver = new InternetExplorerDriver(
                                     driverService,
@@ -212,9 +212,11 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
             }
             catch (Exception ex)
             {
-                this.StfLogger.LogInternal($"Couldn't Initialize WebAdapter - got error [{ex.Message}]");
+                StfLogger.LogInternal($"Couldn't Initialize WebAdapter - got error [{ex.Message}]");
                 retVal = false;
             }
+
+            StfLogger.LogDebug("Done initializing {0}. Successful: {1}", GetType().Name, retVal.ToString());
 
             return retVal;
         }
@@ -224,7 +226,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
         /// </summary>
         public void CloseDown()
         {
-            this.WebDriver.Quit();
+            WebDriver.Quit();
         }
 
         /// <summary>
