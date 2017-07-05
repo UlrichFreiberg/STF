@@ -29,13 +29,8 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// </summary>
         public WrapTrackWebShell()
         {
-            var currentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-            StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
             Name = "WrapTrackWebShell";
             VersionInfo = new Version(1, 0, 0, 0);
-
-            Login("ida88", "lk8dsafpUqwe");
         }
 
         /// <summary>
@@ -90,11 +85,11 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             var passwordElem = WebAdapter.FindElement(By.Id("input_pw"));
 
-            passwordElem.SendKeys(userName);
+            passwordElem.SendKeys(password);
 
             var loginButtonElem = WebAdapter.FindElement(By.Id("nav_"));
 
-            loginButtonElem.SendKeys(password);
+            loginButtonElem.Click();
 
             return true;
         }
@@ -129,8 +124,12 @@ namespace WrapTrack.Stf.WrapTrackWeb
 
             // get what I need - a WebAdapter:-)
             WebAdapter = StfContainer.Get<IWebAdapter>();
-
             WebAdapter.OpenUrl("http://WrapTrack.org/");
+
+            var currentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            StfLogger.LogKeyValue("Current Directory", currentDomainBaseDirectory, "Current Directory");
+            Login("ida88", "lk8dsafpUqwe");
 
             return true;
         }
