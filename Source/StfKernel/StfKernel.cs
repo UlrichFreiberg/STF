@@ -282,12 +282,21 @@ namespace Mir.Stf
 
             if (!File.Exists(stfConfigurationFile))
             {
+                KernelLogger.LogInfo($"StfConfiguration file not found - creating default [{stfConfigurationFile}]");
                 CreateDefaultStfConfigurationFile(stfConfigurationFile);
             }
 
-            StfConfiguration = File.Exists(stfConfigurationFile)
-                                   ? new StfConfiguration(stfConfigurationFile)
-                                   : new StfConfiguration();
+            if (File.Exists(stfConfigurationFile))
+            {
+                KernelLogger.LogInfo($"StfConfiguration created using [{stfConfigurationFile}]");
+                StfConfiguration = new StfConfiguration(stfConfigurationFile);
+            }
+            else
+            {
+                StfConfiguration = new StfConfiguration();
+                KernelLogger.LogInfo($"StfConfiguration created using no file as [{stfConfigurationFile}] doesn't exist");
+            }
+
 
             // need to be able to control something for plugins - like plugin path:-)
             OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
