@@ -1,28 +1,26 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IWrapTrackWebShell.cs" company="Mir Software">
+// <copyright file="Ime.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the IWrapTrackWebShell type.
+//   The Me interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces.Me
 {
-    using Mir.Stf.Utilities;
-
     /// <summary>
-    /// The WrapTrackWebShell interface.
+    /// The Me interface.
     /// </summary>
-    public interface IWrapTrackWebShell : IStfPlugin
+    public interface IMe
     {
         /// <summary>
-        /// The learn more.
+        /// The upload profile image.
         /// </summary>
         /// <returns>
-        /// The <see cref="IMinSamling"/>.
+        /// The <see cref="IUploadProfileImage"/>.
         /// </returns>
-        IMinSamling LearnMore();
+        IUploadProfileImage UploadProfileImage();
     }
 }

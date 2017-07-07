@@ -14,25 +14,32 @@ namespace WrapTrackWebTests
 
     using Mir.Stf;
 
+    using WrapTrack.Stf.WrapTrackWeb;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
     /// The main page tests.
     /// </summary>
     [TestClass]
-    public class MainPageTests : StfTestScriptBase
+    public class UploadTests : StfTestScriptBase
     {
         /// <summary>
         /// The test learn more.
         /// </summary>
         [TestMethod]
-        public void TestLogin()
+        public void TestUploadProfilePictExistingImage()
         {
             var wrapTrackShell = Get<IWrapTrackWebShell>();
-            var collection = wrapTrackShell.Collection();
+            var me = wrapTrackShell.Me();
+            var uploadProfileImage = me.UploadProfileImage();
+            var oldId = uploadProfileImage.Identification;
 
-            StfAssert.IsNotNull("wrapTrackShell", wrapTrackShell);
-            StfAssert.IsNotNull("collection", collection);
+            uploadProfileImage.FileName = @"C:\temp\TestData\Kurt.png";
+            uploadProfileImage.Upload();
+
+            var newId = uploadProfileImage.Identification;
+
+            StfAssert.AreNotEqual("New Picture Id", oldId, newId);
         }
     }
 }

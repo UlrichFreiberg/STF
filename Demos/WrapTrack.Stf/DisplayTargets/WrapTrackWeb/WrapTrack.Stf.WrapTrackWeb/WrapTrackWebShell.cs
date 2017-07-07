@@ -18,6 +18,11 @@ namespace WrapTrack.Stf.WrapTrackWeb
     using OpenQA.Selenium;
 
     using WrapTrack.Stf.Adapters.WebAdapter;
+    using WrapTrack.Stf.WrapTrackWeb.Explore;
+    using WrapTrack.Stf.WrapTrackWeb.Interfaces;
+    using WrapTrack.Stf.WrapTrackWeb.Me;
+
+    using IMe = WrapTrack.Stf.WrapTrackWeb.Interfaces.Me.IMe;
 
     /// <summary>
     /// The demo corp web shell.
@@ -62,7 +67,7 @@ namespace WrapTrack.Stf.WrapTrackWeb
         /// The learn more.
         /// </summary>
         /// <returns>
-        /// The <see cref="IMinSamling"/>.
+        /// Indication of success
         /// </returns>
         /// <summary>
         /// The login.
@@ -95,23 +100,6 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
-        /// The min samling.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IMinSamling"/>.
-        /// </returns>
-        public IMinSamling MinSamling()
-        {
-            // Press learn more
-            var but = WebAdapter.FindElement(By.Id("## MISSING ##"));
-            but.Click();
-
-            var retVal = StfContainer.Get<IMinSamling>();
-
-            return retVal;
-        }
-
-        /// <summary>
         /// The init.
         /// </summary>
         /// <returns>
@@ -120,7 +108,10 @@ namespace WrapTrack.Stf.WrapTrackWeb
         public bool Init()
         {
             // register my needed types
-            StfContainer.RegisterType<IMinSamling, MinSamling>();
+            StfContainer.RegisterType<ICollection, Collection>();
+            StfContainer.RegisterType<IMe, Me.Me>();
+            StfContainer.RegisterType<IExplorer, Explorer>();
+            StfContainer.RegisterType<IFaq, Faq.Faq>();
 
             // get what I need - a WebAdapter:-)
             WebAdapter = StfContainer.Get<IWebAdapter>();
@@ -135,14 +126,72 @@ namespace WrapTrack.Stf.WrapTrackWeb
         }
 
         /// <summary>
-        /// The learn more.
+        /// The collection.
         /// </summary>
         /// <returns>
-        /// The <see cref="IMinSamling"/>.
+        /// The <see cref="ICollection"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public IMinSamling LearnMore()
+        public ICollection Collection()
+        {
+            var but = WebAdapter.FindElement(By.Id("## MISSING ##"));
+            but.Click();
+
+            var retVal = StfContainer.Get<ICollection>();
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The me.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IMe"/>.
+        /// </returns>
+        public IMe Me()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The explorer.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IExplorer"/>.
+        /// </returns>
+        public IExplorer Explorer()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The market.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IMarket"/>.
+        /// </returns>
+        public IMarket Market()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The faq.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IFaq"/>.
+        /// </returns>
+        public IFaq Faq()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The logout.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Logout()
         {
             throw new NotImplementedException();
         }

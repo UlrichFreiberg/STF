@@ -94,10 +94,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IWrapTrackWebShell.cs" />
+    <Compile Include="Explore\Explorer.cs" />
+    <Compile Include="Faq\Faq.cs" />
+    <Compile Include="Interfaces\IExplorer.cs" />
+    <Compile Include="Interfaces\IFaq.cs" />
+    <Compile Include="Interfaces\IMarket.cs" />
+    <Compile Include="Interfaces\ICollection.cs" />
+    <Compile Include="Interfaces\IWrapTrackWebShell.cs" />
+    <Compile Include="Interfaces\Me\IMe.cs" />
+    <Compile Include="Interfaces\Me\IUploadProfileImage.cs" />
+    <Compile Include="Market\Market.cs" />
+    <Compile Include="Me\Collection.cs" />
+    <Compile Include="Me\Me.cs" />
     <Compile Include="WrapTrackWebShell.cs" />
-    <Compile Include="IMinSamling.cs" />
-    <Compile Include="MinSamling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

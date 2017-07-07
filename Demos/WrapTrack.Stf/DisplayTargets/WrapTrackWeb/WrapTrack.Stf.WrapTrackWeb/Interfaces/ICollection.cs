@@ -1,19 +1,19 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MinSamling.cs" company="Mir Software">
+// <copyright file="ICollection.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the LearnMore type.
+//   Defines the ILearnMore type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WrapTrack.Stf.WrapTrackWeb
+namespace WrapTrack.Stf.WrapTrackWeb.Interfaces
 {
     /// <summary>
-    /// The learn more.
+    /// The LearnMore interface.
     /// </summary>
-    public class MinSamling : IMinSamling
+    public interface ICollection
     {
     }
 }
