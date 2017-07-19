@@ -1,5 +1,5 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MainPageTests.cs" company="Mir Software">
+﻿// -----------------------------------------!---------------------------------------------------------------------------
+// <copyright file="UploadTests.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
@@ -14,7 +14,6 @@ namespace WrapTrackWebTests
 
     using Mir.Stf;
 
-    using WrapTrack.Stf.WrapTrackWeb;
     using WrapTrack.Stf.WrapTrackWeb.Interfaces;
 
     /// <summary>
