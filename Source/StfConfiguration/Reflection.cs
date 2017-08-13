@@ -14,6 +14,7 @@ using System.Reflection;
 
 namespace Mir.Stf.Utilities
 {
+    using System;
     using System.ComponentModel;
 
     /// <summary>
@@ -83,25 +84,35 @@ namespace Mir.Stf.Utilities
         /// </returns>
         internal object SetConfig(Dictionary<string, StfConfigurationAttribute> userConfig, StfConfiguration stfConfiguration)
         {
-            var t = this.currentFieldSet.GetType();
+            var type = currentFieldSet.GetType();
 
-            if (userConfig != null)
+            if (userConfig == null)
             {
-                foreach (var uc in userConfig)
+                return currentFieldSet;
+            }
+
+            foreach (var uc in userConfig)
+            {
+                var property = type.GetProperty(uc.Key);
+                var newValue = stfConfiguration.GetConfigValue(uc.Value.ConfigKeyPath, uc.Value.DefaultValue);
+
+                if (property.PropertyType == typeof(string))
                 {
-                    var property = t.GetProperty(uc.Key);
-                    var newValue = stfConfiguration.GetConfigValue(uc.Value.ConfigKeyPath, uc.Value.DefaultValue);
+                    property.SetValue(currentFieldSet, newValue);
+                    continue;
+                }
 
-                    if (property.PropertyType == typeof (string))
-                    {
-                        property.SetValue(currentFieldSet, newValue);
-                        continue;
-                    }
+                try
+                {
+                    var valueToSet = string.IsNullOrEmpty(newValue)
+                                   ? TypeDescriptor.GetDefaultProperty(property.PropertyType)
+                                   : TypeDescriptor.GetConverter(property.PropertyType).ConvertFromInvariantString(newValue);
 
-                    // TODO: should be in tryCatch
-                    var castedNewValue =
-                        TypeDescriptor.GetConverter(property.PropertyType).ConvertFromInvariantString(newValue);
-                    property.SetValue(currentFieldSet, castedNewValue);
+                    property.SetValue(currentFieldSet, valueToSet);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
                 }
             }
 

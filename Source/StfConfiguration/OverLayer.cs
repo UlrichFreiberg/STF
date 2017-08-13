@@ -44,7 +44,7 @@ namespace Mir.Stf.Utilities
                 return layer.MakeCopy();
             }
 
-            if (string.CompareOrdinal(core.SectionName, core.SectionName) != 0)
+            if (string.CompareOrdinal(core.SectionName, layer.SectionName) != 0)
             {
                 throw new Exception("Internal Error: SectionNames are not alike");
             }
@@ -61,7 +61,7 @@ namespace Mir.Stf.Utilities
                     AddSection(core, layer.Sections[section.Key]);
                 }
 
-                this.OverLay(core.Sections[section.Key], layer.Sections[section.Key]);
+                OverLay(core.Sections[section.Key], layer.Sections[section.Key]);
             }
 
             foreach (var key in layer.Keys)
@@ -88,19 +88,18 @@ namespace Mir.Stf.Utilities
         /// <param name="source">
         /// The source.
         /// </param>
-        /// <returns>
-        /// The <see cref="Section"/>.
-        /// </returns>
-        private Section AddSection(Section destination, Section source)
+        private void AddSection(Section destination, Section source)
         {
             if (destination == null)
             {
-                return source.MakeCopy();
+                source.MakeCopy();
+                return;
             }
 
             if (source == null)
             {
-                return destination.MakeCopy();
+                destination.MakeCopy();
+                return;
             }
 
             var newSection = new Section
@@ -108,6 +107,7 @@ namespace Mir.Stf.Utilities
                                      SectionName = source.SectionName,
                                      DefaultSection = source.DefaultSection
                                  };
+
             if (newSection == null)
             {
                 throw new Exception("Couldnt get a Section");
@@ -115,8 +115,6 @@ namespace Mir.Stf.Utilities
 
             newSection.Sections.Add(source.SectionName, source.MakeCopy());
             destination.Sections.Add(newSection.SectionName, newSection);
-
-            return newSection;
         }
 
         /// <summary>
@@ -129,25 +127,16 @@ namespace Mir.Stf.Utilities
         /// <param name="source">
         /// The source.
         /// </param>
-        /// <returns>
-        /// The <see cref="Key"/>.
-        /// </returns>
-        private Key AddKey(Section destination, Key source)
+        private void AddKey(Section destination, Key source)
         {
-            if (destination == null)
+            if (destination == null || source == null)
             {
-                return null;
-            }
-
-            if (source == null)
-            {
-                return null;
+                return;
             }
 
             var newKey = new Key { KeyName = source.KeyName, KeyValue = source.KeyValue };
 
             destination.Keys.Add(newKey.KeyName, newKey);
-            return newKey;
         }
     }
 }

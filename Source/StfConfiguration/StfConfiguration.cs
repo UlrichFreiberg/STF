@@ -236,11 +236,13 @@ namespace Mir.Stf.Utilities
             if (!File.Exists(fileName))
             {
                 var errMsg = $"Configuration File [{fileName}] doesn't exist";
+
                 throw new ArgumentOutOfRangeException(fileName, errMsg);
             }
 
             reader = new XmlTextReader(fileName);
             currentlyLoadedSection = GetSections();
+
             return currentlyLoadedSection;
         }
 
@@ -481,7 +483,8 @@ namespace Mir.Stf.Utilities
                                 break;
                             case "section":
                                 var section = HandleSection(new Section());
-                                currentSection.Sections.Add(section.SectionName, GetSections(section));
+
+                                SectionAddSection(currentSection, section);
                                 break;
                         }
 
@@ -493,6 +496,29 @@ namespace Mir.Stf.Utilities
             }
 
             return currentSection;
+        }
+
+        /// <summary>
+        /// Add a section to the current section collection - check for duplicate "add sections" - last "add section" wins.
+        /// </summary>
+        /// <param name="section">
+        /// The current/destination section.
+        /// </param>
+        /// <param name="sectionToAdd">
+        /// The source section to add.
+        /// </param>
+        private void SectionAddSection(Section section, Section sectionToAdd)
+        {
+            var sections = GetSections(sectionToAdd);
+            var sectionName = sectionToAdd.SectionName;
+
+            if (section.Sections.ContainsKey(sectionName))
+            {
+                section.Sections[sectionName] = sections;
+                return;
+            }
+
+            section.Sections.Add(sectionName, sections);
         }
 
         /// <summary>
@@ -528,6 +554,7 @@ namespace Mir.Stf.Utilities
         private Section HandleSection(Section section)
         {
             section.DefaultSection = string.Empty;
+
             while (reader.MoveToNextAttribute())
             {
                 switch (reader.Name.ToLower())
@@ -567,7 +594,29 @@ namespace Mir.Stf.Utilities
                 }
             }
 
-            section.Keys.Add(newKey.KeyName, newKey);
+            SectionAddKey(section, newKey);
+        }
+
+        /// <summary>
+        /// The current section add key.
+        /// </summary>
+        /// <param name="section">
+        /// The current section.
+        /// </param>
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        private void SectionAddKey(Section section, Key key)
+        {
+            var keyName = key.KeyName;
+
+            if (section.Keys.ContainsKey(keyName))
+            {
+                section.Keys[keyName] = key;
+                return;
+            }
+
+            section.Keys.Add(keyName, key);
         }
 
         /// <summary>

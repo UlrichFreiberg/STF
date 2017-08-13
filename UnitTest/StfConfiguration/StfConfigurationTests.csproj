@@ -81,9 +81,14 @@
     <Content Include="TestData\ConfigOverlay\Config2.xml" />
     <Content Include="TestData\ConfigOverlay\Config23.xml" />
     <Content Include="TestData\ConfigOverlay\Config3.xml" />
+    <Content Include="TestData\ConfigOverlay\ConfigWithDuplicatedKeyOverlay.xml" />
+    <Content Include="TestData\ConfigOverlay\ConfigWithDuplicatedKey.xml" />
     <Content Include="TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml" />
     <Content Include="TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml" />
     <Content Include="TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml" />
+    <Content Include="TestData\ConfigOverlay\ConfigWithDuplicatedSection.xml" />
+    <Content Include="TestData\ConfigOverlay\ConfigWithDuplicatedSectionExpected.xml" />
+    <Content Include="TestData\ConfigOverlay\ConfigWithDuplicatedSectionOverlay.xml" />
     <Content Include="TestData\Defaulting\DefaultSectionWithEnvironments.xml" />
     <Content Include="TestData\Defaulting\DefaultSectionWithVariable.xml" />
     <Content Include="TestData\Defaulting\NoDefaultSection.xml" />
