@@ -113,10 +113,7 @@ namespace Mir.Stf.Utilities
             }
             finally
             {
-                if (robocopy != null)
-                {
-                    robocopy.Close();
-                }
+                robocopy?.Close();
             }
         }
 

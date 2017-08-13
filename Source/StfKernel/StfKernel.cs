@@ -136,14 +136,14 @@ namespace Mir.Stf
         protected bool UseArchiver { get; set; }
 
         /// <summary>
-        /// Gets or sets the Stf logger.
+        /// Gets the Stf logger.
         /// </summary>
-        private IStfLogger KernelLogger { get; set; }
+        private IStfLogger KernelLogger { get; }
 
         /// <summary>
-        /// Gets or sets the stf container.
+        /// Gets the stf container.
         /// </summary>
-        private StfPluginLoader PluginLoader { get; set; }
+        private StfPluginLoader PluginLoader { get; }
 
         /// <summary>
         /// Gets or sets the stf configuration.
@@ -208,10 +208,7 @@ namespace Mir.Stf
                         KernelLogger.CloseLogFile();
                     }
 
-                    if (PluginLoader != null)
-                    {
-                        PluginLoader.Dispose();
-                    }
+                    PluginLoader?.Dispose();
                 }
 
                 disposed = true;
@@ -296,7 +293,6 @@ namespace Mir.Stf
                 StfConfiguration = new StfConfiguration();
                 KernelLogger.LogInfo($"StfConfiguration created using no file as [{stfConfigurationFile}] doesn't exist");
             }
-
 
             // need to be able to control something for plugins - like plugin path:-)
             OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
@@ -420,7 +416,7 @@ namespace Mir.Stf
             {
                 var msg = $"Can't create StfRoot. Tried [{DefaultStfRoot}] and [{defaultAlternativeStfRoot}]";
 
-                throw new StfConfigurationException("Can't create StfRoot");
+                throw new StfConfigurationException(msg);
             }
 
             StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
@@ -482,7 +478,7 @@ namespace Mir.Stf
                     configFilename = "StfConfiguration_TestSuite.xml";
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("configurationFileType", configurationFileType, null);
+                    throw new ArgumentOutOfRangeException(nameof(configurationFileType), configurationFileType, null);
             }
 
             var fileLocation = Path.Combine(directoryName, configFilename);

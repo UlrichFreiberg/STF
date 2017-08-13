@@ -27,10 +27,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets the utilities.
         /// </summary>
-        private ScreenshotUtilities Utilities 
-        {
-            get { return utilities ?? (utilities = new ScreenshotUtilities(this)); }
-        }
+        private ScreenshotUtilities Utilities => utilities ?? (utilities = new ScreenshotUtilities(this));
 
         /// <summary>
         /// The log all windows.

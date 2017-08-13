@@ -300,10 +300,7 @@ namespace Mir.Stf.Utilities
         private string GetTextResource(string resourceName)
         {
             var resourceObject = Resources.ResourceManager.GetObject(resourceName);
-
-            var retVal = resourceObject == null
-                ? $"<error>No {resourceName} section file found</error>"
-                             : resourceObject.ToString();
+            var retVal = resourceObject?.ToString() ?? $"<error>No {resourceName} section file found</error>";
 
             return retVal;
         }

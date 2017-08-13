@@ -239,11 +239,9 @@ namespace Mir.Stf.Utilities
         {
             message = message.StfFormatString(args);
 
-            var tempNeedsToBeReworkedMessage = $"TestStepName=[{testStepName}], message=[{message}]";
             const StfLogLevel TheLogLevel = StfLogLevel.Fail;
-            var length = 0;
-
-            length = LogOneHtmlMessage(TheLogLevel, tempNeedsToBeReworkedMessage);
+            var tempNeedsToBeReworkedMessage = $"TestStepName=[{testStepName}], message=[{message}]";
+            var length = LogOneHtmlMessage(TheLogLevel, tempNeedsToBeReworkedMessage);
 
             if (Configuration.ScreenshotOnLogFail)
             {
@@ -410,7 +408,7 @@ namespace Mir.Stf.Utilities
                         "<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n",
                         messageIdString,
                         logLevelString);
-                    htmlLine += $"    <div class=\"el time\">{timeOfLastMessage.ToString("HH:mm:ss")}</div>\n";
+                    htmlLine += $"    <div class=\"el time\">{timeOfLastMessage:HH:mm:ss}</div>\n";
                     htmlLine += $"    <div class=\"el level\">{logLevelString}</div>\n";
                     htmlLine += $"    <div class=\"el pad\">{IndentString()}</div>\n";
                     htmlLine += $"    <div class=\"el msg\">{message}</div>\n";

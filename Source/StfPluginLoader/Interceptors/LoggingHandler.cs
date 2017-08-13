@@ -28,14 +28,14 @@ namespace Mir.Stf.Utilities.Interceptors
     public class LoggingHandler : ICallHandler
     {
         /// <summary>
+        /// The default log level.
+        /// </summary>
+        private const StfLogLevel DefaultLogLevel = StfLogLevel.Info;
+
+        /// <summary>
         /// The stf logger.
         /// </summary>
         private readonly IStfLogger stfLogger;
-
-        /// <summary>
-        /// The default log level.
-        /// </summary>
-        private StfLogLevel defaultLogLevel = StfLogLevel.Info;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoggingHandler"/> class.
@@ -168,7 +168,7 @@ namespace Mir.Stf.Utilities.Interceptors
                             stfLogger.LogSetExit(loglevel, methodName, CreateStringFromParameterCollection(inputs));
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
+                            throw new ArgumentOutOfRangeException(nameof(messageType), messageType.ToString(), @"Unknown log message type");
                     }
 
                     break;
@@ -182,7 +182,7 @@ namespace Mir.Stf.Utilities.Interceptors
                             stfLogger.LogGetExit(loglevel, methodName, returnValue);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
+                            throw new ArgumentOutOfRangeException(nameof(messageType), messageType.ToString(), @"Unknown log message type");
                     }
 
                     break;
@@ -196,7 +196,7 @@ namespace Mir.Stf.Utilities.Interceptors
                             stfLogger.LogFunctionExit(loglevel, methodName, returnValue);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException(@"messageType", messageType.ToString(), @"Unknown log message type");
+                            throw new ArgumentOutOfRangeException(nameof(messageType), messageType.ToString(), @"Unknown log message type");
                     }
 
                     break;
@@ -286,7 +286,7 @@ namespace Mir.Stf.Utilities.Interceptors
         /// </returns>
         private StfLogLevel GetLogLevel(MethodBase methodBase)
         {
-            var retVal = defaultLogLevel;
+            var retVal = DefaultLogLevel;
 
             if (methodBase == null)
             {
@@ -298,7 +298,7 @@ namespace Mir.Stf.Utilities.Interceptors
             try
             {
                 var memberLogLevel = methodBase.GetCustomAttribute<StfMemberLogLevelAttribute>();
-                retVal = memberLogLevel != null ? memberLogLevel.LogLevel : GetPropertyLogLevel(methodBase, retVal);
+                retVal = memberLogLevel?.LogLevel ?? GetPropertyLogLevel(methodBase, retVal);
             }
             catch (Exception exception)
             {

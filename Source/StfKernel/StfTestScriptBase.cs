@@ -21,7 +21,6 @@ namespace Mir.Stf
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using System.Runtime.InteropServices;
 
     using Interfaces;
 

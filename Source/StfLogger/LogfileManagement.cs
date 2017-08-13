@@ -307,7 +307,7 @@ namespace Mir.Stf.Utilities
         private string GetJavaScript()
         {
             var loggerJs = Resources.ResourceManager.GetObject("logger");
-            var retVal = loggerJs == null ? "<error>No Logger JS section defined</error>" : loggerJs.ToString();
+            var retVal = loggerJs?.ToString() ?? "<error>No Logger JS section defined</error>";
 
             return retVal;
         }

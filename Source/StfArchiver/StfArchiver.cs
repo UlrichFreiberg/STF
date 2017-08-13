@@ -18,6 +18,9 @@ namespace Mir.Stf.Utilities
 
     using Configuration;
 
+    /// <summary>
+    /// The stf archiver.
+    /// </summary>
     public class StfArchiver
     {
         /// <summary>

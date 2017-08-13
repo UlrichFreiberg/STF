@@ -161,7 +161,7 @@ namespace Mir.Stf.Utilities
         public int LogGetExit(StfLogLevel loglevel, string callingProperty, object getValue)
         {
             var propName = GetLogFriendlyPropName(callingProperty);
-            var valueString = getValue == null ? "null" : getValue.ToString();
+            var valueString = getValue?.ToString() ?? "null";
             var message = $"< Exiting Get [{propName}] with value [{valueString}]";
 
             var retVal = LogOneHtmlMessage(loglevel, message);
@@ -189,7 +189,7 @@ namespace Mir.Stf.Utilities
         public int LogSetEnter(StfLogLevel loglevel, string callingProperty, object setValue)
         {
             var propName = GetLogFriendlyPropName(callingProperty);
-            var valueString = setValue == null ? "null" : setValue.ToString();
+            var valueString = setValue?.ToString() ?? "null";
             var message = $"> Entering Set [{propName}] with value [{valueString}]";
 
             callStack.Push(propName);
@@ -215,7 +215,7 @@ namespace Mir.Stf.Utilities
         public int LogSetExit(StfLogLevel loglevel, string callingProperty, object setValue)
         {
             var propName = GetLogFriendlyPropName(callingProperty);
-            var valueString = setValue == null ? "null" : setValue.ToString();
+            var valueString = setValue?.ToString() ?? "null";
             var message = $"< Exiting Set [{propName}] after setting value [{valueString}]";
 
             var retVal = LogOneHtmlMessage(loglevel, message);
