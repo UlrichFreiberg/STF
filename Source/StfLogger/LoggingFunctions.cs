@@ -215,7 +215,7 @@ namespace Mir.Stf.Utilities
         {
             message = message.StfFormatString(args);
 
-            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
+            var tempNeedsToBeReworkedMessage = $"TestStepName=[{testStepName}], message=[{message}]";
 
             return LogOneHtmlMessage(StfLogLevel.Pass, tempNeedsToBeReworkedMessage);
         }
@@ -239,7 +239,7 @@ namespace Mir.Stf.Utilities
         {
             message = message.StfFormatString(args);
 
-            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
+            var tempNeedsToBeReworkedMessage = $"TestStepName=[{testStepName}], message=[{message}]";
             const StfLogLevel TheLogLevel = StfLogLevel.Fail;
             var length = 0;
 
@@ -272,7 +272,7 @@ namespace Mir.Stf.Utilities
         {
             message = message.StfFormatString(args);
 
-            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
+            var tempNeedsToBeReworkedMessage = $"TestStepName=[{testStepName}], message=[{message}]";
 
             return LogOneHtmlMessage(StfLogLevel.Inconclusive, tempNeedsToBeReworkedMessage);
         }
@@ -303,9 +303,9 @@ namespace Mir.Stf.Utilities
             message = message.StfFormatString(args);
             
             var htmlLine = "<div class=\"line keyvalue\">\n";
-            htmlLine += string.Format("   <div class=\"el key\">{0}</div>\n", key);
-            htmlLine += string.Format("   <div class=\"el value\">{0}</div>\n", value);
-            htmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
+            htmlLine += $"   <div class=\"el key\">{key}</div>\n";
+            htmlLine += $"   <div class=\"el value\">{value}</div>\n";
+            htmlLine += $"   <div class=\"el msg\">{message}</div>\n";
             htmlLine += "</div>\n";
 
             LogFileHandle.Write(htmlLine);
@@ -320,7 +320,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private string GetNextMessageId()
         {
-            return string.Format("m{0}", messageId++);
+            return $"m{messageId++}";
         }
 
         /// <summary>
@@ -382,7 +382,8 @@ namespace Mir.Stf.Utilities
                     if (firstLineIndexOf > 0)
                     {
                         var firstLineOfMessage = message.Substring(0, firstLineIndexOf);
-                        var firstLoggedLine = string.Format("{0}{1}", Environment.NewLine, System.Security.SecurityElement.Escape(firstLineOfMessage));
+                        var firstLoggedLine =
+                            $"{Environment.NewLine}{System.Security.SecurityElement.Escape(firstLineOfMessage)}";
 
                         message = GetMultilineMessage(messageIdString, firstLoggedLine, message);
                         convertedToFoldableMessage = true;
@@ -398,10 +399,10 @@ namespace Mir.Stf.Utilities
             switch (loglevel)
             {
                 case StfLogLevel.Header:
-                    htmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", message);
+                    htmlLine = $"<div class=\"line logheader\">{message}</div>\n";
                     break;
                 case StfLogLevel.SubHeader:
-                    htmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", message);
+                    htmlLine = $"<div class=\"line logsubheader\">{message}</div>\n";
                     break;
 
                 default:
@@ -409,12 +410,10 @@ namespace Mir.Stf.Utilities
                         "<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n",
                         messageIdString,
                         logLevelString);
-                    htmlLine += string.Format(
-                        "    <div class=\"el time\">{0}</div>\n",
-                        timeOfLastMessage.ToString("HH:mm:ss"));
-                    htmlLine += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
-                    htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", IndentString());
-                    htmlLine += string.Format("    <div class=\"el msg\">{0}</div>\n", message);
+                    htmlLine += $"    <div class=\"el time\">{timeOfLastMessage.ToString("HH:mm:ss")}</div>\n";
+                    htmlLine += $"    <div class=\"el level\">{logLevelString}</div>\n";
+                    htmlLine += $"    <div class=\"el pad\">{IndentString()}</div>\n";
+                    htmlLine += $"    <div class=\"el msg\">{message}</div>\n";
                     htmlLine += "</div>\n";
                     break;
             }

@@ -63,9 +63,7 @@ namespace Mir.Stf.Utilities.Extensions
                 {
                     throw new TypeInitializationException(
                         pluginObject.GetType().FullName,
-                        new Exception(string.Format(
-                            "Init returned false for StfPlugin: {0}",
-                            pluginObject.GetType().Name)));
+                        new Exception($"Init returned false for StfPlugin: {pluginObject.GetType().Name}"));
                 }
             }
 
@@ -284,7 +282,7 @@ namespace Mir.Stf.Utilities.Extensions
             injectionMembers.Add(new Interceptor<InterfaceInterceptor>());
 
             container.Configure<Interception>()
-                .AddPolicy(string.Format("LoggingFor{0}", theType.Name))
+                .AddPolicy($"LoggingFor{theType.Name}")
                 .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(theType.FullName))
                 .AddCallHandler<LoggingHandler>(
                     new ContainerControlledLifetimeManager(),

@@ -55,11 +55,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Source\StfArchiver\StfArchiver.csproj">
+    <ProjectReference Include="..\..\Source\StfArchiver\StfArchiver.csproj">
       <Project>{de01eb76-5217-4d7d-917a-66c14a3335c0}</Project>
       <Name>StfArchiver</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Source\StfKernel\StfKernel.csproj">
+    <ProjectReference Include="..\..\Source\StfKernel\StfKernel.csproj">
       <Project>{469148AB-9343-4E38-BA46-013F12657B69}</Project>
       <Name>StfKernel</Name>
     </ProjectReference>

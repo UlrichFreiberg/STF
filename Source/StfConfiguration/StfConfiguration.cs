@@ -214,7 +214,7 @@ namespace Mir.Stf.Utilities
             }
             catch (ArgumentOutOfRangeException)
             {
-                var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", configValuePath);
+                var errMsg = $"No section is loaded - can't find matching key [{configValuePath}]";
 
                 throw new ArgumentOutOfRangeException(configValuePath, errMsg);
             }
@@ -235,7 +235,7 @@ namespace Mir.Stf.Utilities
         {
             if (!File.Exists(fileName))
             {
-                var errMsg = string.Format("Configuration File [{0}] doesn't exist", fileName);
+                var errMsg = $"Configuration File [{fileName}] doesn't exist";
                 throw new ArgumentOutOfRangeException(fileName, errMsg);
             }
 
@@ -329,7 +329,7 @@ namespace Mir.Stf.Utilities
                 return retVal;
             }
 
-            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            var errMsg = $"No section is loaded - can't find matching key [{keyName}]";
             throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
@@ -354,7 +354,7 @@ namespace Mir.Stf.Utilities
                 return parser.GetKey(section, keyName);
             }
 
-            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            var errMsg = $"No section is loaded - can't find matching key [{keyName}]";
             throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
@@ -385,7 +385,7 @@ namespace Mir.Stf.Utilities
                 return parser.SetValue(section, keyName, value);
             }
 
-            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            var errMsg = $"No section is loaded - can't find matching key [{keyName}]";
             throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 

@@ -132,7 +132,7 @@ namespace UnitTest
 
             for (int i = 0; i < 75; i++)
             {
-                StfLogger.LogInfo(string.Format("LogInfo Nr {0}", i));
+                StfLogger.LogInfo($"LogInfo Nr {i}");
             }
 
             StfLogger.CloseLogFile();

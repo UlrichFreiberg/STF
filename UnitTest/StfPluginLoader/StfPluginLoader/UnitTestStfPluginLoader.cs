@@ -52,33 +52,19 @@ namespace UnitTest
         public void TestMethodPluginSettingsOverlayed()
         {
             var configuration = Get<StfConfiguration>();
-            StfAssert.AreEqual("DefaulEnvironment == TESTENVIRONMENT1", "TESTENVIRONMENT1", configuration.DefaultEnvironment);
-            
+
+            // TODO: THis should not be part of the Unit Test - might have been changed my a machine config file
+            // StfAssert.AreEqual("DefaultEnvironment == TESTENVIRONMENT1", "TESTENVIRONMENT1", configuration.DefaultEnvironment);            
             LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
-
-            StfAssert.AreEqual("DefaulEnvironment == ENV2", "ENV2", configuration.DefaultEnvironment);
+            StfAssert.AreEqual("DefaultEnvironment == ENV2", "ENV2", configuration.DefaultEnvironment);
             
-            var env2Keyvalue = configuration.GetConfigValue("UnitTestPlugin1.UnitTestPlugin1Key");
-            StfAssert.IsNotNull("Key not null", env2Keyvalue);
-            StfAssert.AreEqual("ENV2 keyvalue", "ENV2_Value", env2Keyvalue);
-        }
+            var plugin1Keyvalue = configuration.GetConfigValue("UnitTestPlugin1.UnitTestPlugin1Key");
+            var plugin2Keyvalue = configuration.GetConfigValue("UnitTestPlugin2.UnitTestPlugin2Key");
 
-        /// <summary>
-        /// The test method plugin 2 settings overlayed.
-        /// </summary>
-        [TestMethod]
-        public void TestMethodPlugin2SettingsOverlayed()
-        {
-            var configuration = Get<StfConfiguration>();
-            StfAssert.AreEqual("DefaulEnvironment == TESTENVIRONMENT1", "TESTENVIRONMENT1", configuration.DefaultEnvironment);
-
-            LoadAdditionalStfPlugins(".", "Stf.UnitTestPlugin*.dll");
-
-            StfAssert.AreEqual("DefaulEnvironment == ENV2", "ENV2", configuration.DefaultEnvironment);
-
-            var env2Keyvalue = configuration.GetConfigValue("UnitTestPlugin2.UnitTestPlugin2Key");
-            StfAssert.IsNotNull("Key not null", env2Keyvalue);
-            StfAssert.AreEqual("ENV2 keyvalue", "ENV2_Value", env2Keyvalue);
+            StfAssert.IsNotNull("Key not null", plugin1Keyvalue);
+            StfAssert.AreEqual("Plugin-1 keyvalue", "ENV2_Value", plugin1Keyvalue);
+            StfAssert.IsNotNull("Key not null", plugin2Keyvalue);
+            StfAssert.AreEqual("Plugin-2 keyvalue", "ENV2_Value", plugin2Keyvalue);
         }
 
         /// <summary>

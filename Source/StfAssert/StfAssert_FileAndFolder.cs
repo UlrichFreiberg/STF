@@ -37,12 +37,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("FileExists: [{0}] Does exist", filenameAndPath);
+                msg = $"FileExists: [{filenameAndPath}] Does exist";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("FileExists: [{0}] Does Not exist", filenameAndPath);
+                msg = $"FileExists: [{filenameAndPath}] Does Not exist";
                 AssertFail(testStep, msg);
             }
 
@@ -70,7 +70,7 @@ namespace Mir.Stf.Utilities
 
             if (!File.Exists(filenameAndPath))
             {
-                msg = string.Format("FileContains: [{0}] Does Not exist", filenameAndPath);
+                msg = $"FileContains: [{filenameAndPath}] Does Not exist";
                 AssertFail(testStep, msg);
                 return false;
             }
@@ -81,12 +81,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("FileContains: [{0}] Does contain [{1}]", filenameAndPath, pattern);
+                msg = $"FileContains: [{filenameAndPath}] Does contain [{pattern}]";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("FileContains: [{0}] Does Not contain [{1}]", filenameAndPath, pattern);
+                msg = $"FileContains: [{filenameAndPath}] Does Not contain [{pattern}]";
                 AssertFail(testStep, msg);
             }
 
@@ -112,12 +112,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("FolderExists: [{0}] Does exist", foldernameAndPath);
+                msg = $"FolderExists: [{foldernameAndPath}] Does exist";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("FolderExists: [{0}] Does Not exist", foldernameAndPath);
+                msg = $"FolderExists: [{foldernameAndPath}] Does Not exist";
                 AssertFail(testStep, msg);
             }
 
@@ -143,12 +143,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("FolderNotExists: [{0}] Does Not exist", foldernameAndPath);
+                msg = $"FolderNotExists: [{foldernameAndPath}] Does Not exist";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("FolderNotExists: [{0}] Does exist", foldernameAndPath);
+                msg = $"FolderNotExists: [{foldernameAndPath}] Does exist";
                 AssertFail(testStep, msg);
             }
 
@@ -208,12 +208,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("FileNotExists: [{0}] Does Not exist", filenameAndPath);
+                msg = $"FileNotExists: [{filenameAndPath}] Does Not exist";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("FileNotExists: [{0}] Does exist", filenameAndPath);
+                msg = $"FileNotExists: [{filenameAndPath}] Does exist";
                 AssertFail(testStep, msg);
             }
 
@@ -237,27 +237,28 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool FilesDoDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
-            var msg = string.Format("FilesDoDiffer: [{0}] differs from [{1}]", filenameAndPathFirst, filenameAndPathSecond);
+            var msg = $"FilesDoDiffer: [{filenameAndPathFirst}] differs from [{filenameAndPathSecond}]";
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
             var fileInfoSecond = new FileInfo(filenameAndPathSecond);
 
             if (!fileInfoFirst.Exists)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] does not exist", filenameAndPathFirst);
+                msg = $"FilesDoDiffer: [{filenameAndPathFirst}] does not exist";
                 AssertFail(testStep, msg);
                 return true;
             }
 
             if (!fileInfoSecond.Exists)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] does not exist", filenameAndPathSecond);
+                msg = $"FilesDoDiffer: [{filenameAndPathSecond}] does not exist";
                 AssertFail(testStep, msg);
                 return true;
             }
 
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] does not have the same length", filenameAndPathFirst, filenameAndPathSecond);
+                msg =
+                    $"FilesDoDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] does not have the same length";
                 AssertFail(testStep, msg);
                 return true;
             }
@@ -265,7 +266,8 @@ namespace Mir.Stf.Utilities
             var diffPosition = FileCompare(filenameAndPathFirst, filenameAndPathSecond);
             if (diffPosition == 0)
             {
-                msg = string.Format("FilesDoDiffer: [{0}] and [{1}] doesn't differ byte-per-byte", filenameAndPathFirst, filenameAndPathSecond);
+                msg =
+                    $"FilesDoDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] doesn't differ byte-per-byte";
                 AssertFail(testStep, msg);
                 return false;
             }
@@ -290,27 +292,28 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool FilesDoNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
-            var msg = string.Format("FilesDoNotDiffer: [{0}] does not differ from [{1}]", filenameAndPathFirst, filenameAndPathSecond);
+            var msg = $"FilesDoNotDiffer: [{filenameAndPathFirst}] does not differ from [{filenameAndPathSecond}]";
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
             var fileInfoSecond = new FileInfo(filenameAndPathSecond);
 
             if (!fileInfoFirst.Exists)
             {
-                msg = string.Format("FilesDoNotDiffer: [{0}] does not exist", filenameAndPathFirst);
+                msg = $"FilesDoNotDiffer: [{filenameAndPathFirst}] does not exist";
                 AssertFail(testStep, msg);
                 return false;
             }
 
             if (!fileInfoSecond.Exists)
             {
-                msg = string.Format("FilesDoNotDiffer: [{0}] does not exist", filenameAndPathSecond);
+                msg = $"FilesDoNotDiffer: [{filenameAndPathSecond}] does not exist";
                 AssertFail(testStep, msg);
                 return false;
             }
 
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
-                msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] does have the same length", filenameAndPathFirst, filenameAndPathSecond);
+                msg =
+                    $"FilesDoNotDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] does have the same length";
                 AssertFail(testStep, msg);
                 return false;
             }
@@ -318,7 +321,8 @@ namespace Mir.Stf.Utilities
             var diffPosition = FileCompare(filenameAndPathFirst, filenameAndPathSecond);
             if (diffPosition > 0)
             {
-                msg = string.Format("FilesDoNotDiffer: [{0}] and [{1}] differ at [{2}]", filenameAndPathFirst, filenameAndPathSecond, diffPosition);
+                msg =
+                    $"FilesDoNotDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] differ at [{diffPosition}]";
                 AssertFail(testStep, msg);
                 return false;
             }

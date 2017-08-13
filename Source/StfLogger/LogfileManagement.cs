@@ -261,8 +261,9 @@ namespace Mir.Stf.Utilities
 
             // setting the default AID logging function
             LogAutomationIdObjectUserFunction =
-                (level, obj, message) => LogOneHtmlMessage(level, string.Format("AutomationId: [{0}] - Message: [{1}]", obj.ToString(), message));
-
+                (level, obj, message) => LogOneHtmlMessage(
+                                            level,
+                                            $"AutomationId: [{obj.ToString()}] - Message: [{message}]");
             LogFileInitialized = false;
 
             return true;
@@ -382,7 +383,7 @@ namespace Mir.Stf.Utilities
             htmlLine += "<html>\n";
             htmlLine += "  <head>\n";
             htmlLine += "    <meta charset=\"utf-8\" />\n";
-            htmlLine += string.Format("    <title>{0}</title>\n", Configuration.LogTitle);
+            htmlLine += $"    <title>{Configuration.LogTitle}</title>\n";
             htmlLine += "    <style type=\"text/css\">\n";
             htmlLine += GetStyleSheet();
             htmlLine += "    </style>\n<script type=\"text/javascript\">";
@@ -426,7 +427,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool InitLogfile()
         {
-            var userName = string.Format("{0}\\{1}", Environment.UserDomainName, Environment.UserName);
+            var userName = $"{Environment.UserDomainName}\\{Environment.UserName}";
 
             if (LogFileInitialized)
             {
@@ -453,7 +454,7 @@ namespace Mir.Stf.Utilities
             }
 
             LogFileInitialized = true;
-            LogTrace(string.Format("Log Initiated at [{0}]", FileName));
+            LogTrace($"Log Initiated at [{FileName}]");
 
             TimeOfFirstLogMessage = DateTime.Now;
 
@@ -626,12 +627,12 @@ namespace Mir.Stf.Utilities
 
             if (duration.Hours > 0)
             {
-                stringBuilder.Append(string.Format("{0:%h} hour{1}, ", duration, hourS));
+                stringBuilder.Append($"{duration:%h} hour{hourS}, ");
             }
 
             if (duration.Minutes > 0)
             {
-                stringBuilder.Append(string.Format("{0:%m} minute{1}, ", duration, minuteS));
+                stringBuilder.Append($"{duration:%m} minute{minuteS}, ");
             }
 
             stringBuilder.Append(string.Format("{0:%s}.{0:%f} second{1}", duration, secondS));

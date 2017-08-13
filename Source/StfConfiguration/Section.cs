@@ -215,10 +215,10 @@ namespace Mir.Stf.Utilities
         {
             var sb = new StringBuilder();
             var indentString = string.Empty.PadLeft(indent);
-            sb.AppendLine(string.Format("{0}KeyName:{1}, DefaultSection:{2}", indentString, SectionName, DefaultSection));
+            sb.AppendLine($"{indentString}KeyName:{SectionName}, DefaultSection:{DefaultSection}");
             if (Sections.Count > 0)
             {
-                sb.AppendLine(string.Format("{0}Sections", indentString));
+                sb.AppendLine($"{indentString}Sections");
             }
 
             foreach (var subSection in Sections)
@@ -228,13 +228,13 @@ namespace Mir.Stf.Utilities
 
             if (Keys.Count > 0)
             {
-                sb.AppendLine(string.Format("{0}Keys", indentString));
+                sb.AppendLine($"{indentString}Keys");
             }
 
             foreach (var key in Keys)
             {
                 indentString = string.Empty.PadLeft(indent + 2);
-                sb.AppendLine(string.Format("{0}{1}", indentString, key.Value));
+                sb.AppendLine($"{indentString}{key.Value}");
             }
 
             return sb.ToString();

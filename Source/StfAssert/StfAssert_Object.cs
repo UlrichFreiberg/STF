@@ -81,7 +81,7 @@ namespace Mir.Stf.Utilities
             try
             {
                 Assert.IsInstanceOfType(value, expectedType);
-                msg = string.Format("IsInstanceOfType: [{0}] is of type [{1}]", value, expectedType);
+                msg = $"IsInstanceOfType: [{value}] is of type [{expectedType}]";
                 retVal = AssertPass(testStep, msg);
             }
             catch (AssertFailedException ex)
@@ -117,12 +117,12 @@ namespace Mir.Stf.Utilities
             try
             {
                 Assert.IsInstanceOfType(value, expectedType);
-                msg = string.Format("IsInstanceOfType: [{0}] is of type [{1}]", value, expectedType);
+                msg = $"IsInstanceOfType: [{value}] is of type [{expectedType}]";
                 retVal = AssertFail(testStep, msg);
             }
             catch (AssertFailedException)
             {
-                msg = string.Format("IsInstanceOfType: [{0}] is NOT of type [{1}]", value, expectedType);
+                msg = $"IsInstanceOfType: [{value}] is NOT of type [{expectedType}]";
                 retVal = AssertPass(testStep, msg);
             }
 
@@ -184,7 +184,7 @@ namespace Mir.Stf.Utilities
             }
             else
             {
-                msg = string.Format("IsNull:'{0}' Is not null", actual);
+                msg = $"IsNull:'{actual}' Is not null";
                 AssertFail(testStep, msg);
             }
 

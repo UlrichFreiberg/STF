@@ -367,7 +367,7 @@ namespace Mir.Stf
         /// </returns>
         private string CheckForNeededKernelDirectory(string dirVariableName, string defaultValue = null)
         {
-            var directoryNameVariable = string.Format("%{0}%", dirVariableName);
+            var directoryNameVariable = $"%{dirVariableName}%";
             var directoryName = StfTextUtils.ExpandVariables(directoryNameVariable);
 
             // if unknown directory (the variable didn't got expanded), 
@@ -488,11 +488,12 @@ namespace Mir.Stf
             var fileLocation = Path.Combine(directoryName, configFilename);
             if (!File.Exists(fileLocation))
             {
-                KernelLogger.LogInternal(string.Format("Skipping Configuration file [{0}]: It does not exist, so not overlaying", fileLocation));
+                KernelLogger.LogInternal(
+                    $"Skipping Configuration file [{fileLocation}]: It does not exist, so not overlaying");
                 return;
             }
 
-            KernelLogger.LogInternal(string.Format("Applying configuration found at [{0}]", fileLocation));
+            KernelLogger.LogInternal($"Applying configuration found at [{fileLocation}]");
 
             StfConfiguration.OverLay(fileLocation);
         }
@@ -523,7 +524,7 @@ namespace Mir.Stf
             }
 
             var uniquePart = Guid.NewGuid().ToString("N");
-            var retVal = string.Format("{0}_{1}{2}", filename, uniquePart, extension);
+            var retVal = $"{filename}_{uniquePart}{extension}";
 
             return retVal;
         }

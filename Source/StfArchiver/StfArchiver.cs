@@ -98,7 +98,7 @@ namespace Mir.Stf.Utilities
 
                 retVal = DirectoriesToArchive.Aggregate(
                     retVal,
-                    (current, directory) => current + string.Format("\t{0}\n", directory));
+                    (current, directory) => current + $"\t{directory}\n");
             }
 
             if (FilesToArchive.Count > 0)
@@ -106,7 +106,7 @@ namespace Mir.Stf.Utilities
                 retVal += "Files to archive\n";
                 retVal = FilesToArchive.Aggregate(
                     retVal,
-                    (current, file) => current + string.Format("\t{0}\n", file));
+                    (current, file) => current + $"\t{file}\n");
             }
 
             if (string.IsNullOrEmpty(retVal))
@@ -295,7 +295,7 @@ namespace Mir.Stf.Utilities
                 return;
             }
 
-            var filename = string.Format("{0}.zip", testname);
+            var filename = $"{testname}.zip";
             if (!string.IsNullOrEmpty(Configuration.ZipFilename))
             {
                 filename = Path.GetFileName(Configuration.ZipFilename);

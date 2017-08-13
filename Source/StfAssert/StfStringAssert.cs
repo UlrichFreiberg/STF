@@ -72,7 +72,7 @@ namespace Mir.Stf.Utilities
 
             if (retVal == null)
             {
-                var message = string.Format("[{0}] contains [{1}]", value, substring);
+                var message = $"[{value}] contains [{substring}]";
                 AssertPass(testStep, message);
             }
             else
@@ -104,12 +104,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal != null)
             {
-                var message = string.Format("[{0}] don't contain [{1}]", value, substring);
+                var message = $"[{value}] don't contain [{substring}]";
                 AssertPass(testStep, message);
             }
             else
             {
-                var message = string.Format("[{0}] do contain [{1}]", value, substring);
+                var message = $"[{value}] do contain [{substring}]";
                 AssertFail(testStep, message);
             }
 
@@ -137,7 +137,7 @@ namespace Mir.Stf.Utilities
 
             if (retVal == null)
             {
-                var message = string.Format("[{0}] is matched by [{1}]", value, pattern);
+                var message = $"[{value}] is matched by [{pattern}]";
                 AssertPass(testStep, message);
             }
             else
@@ -169,7 +169,7 @@ namespace Mir.Stf.Utilities
 
             if (retVal == null)
             {
-                var message = string.Format("[{0}] is not matched by [{1}]", value, pattern);
+                var message = $"[{value}] is not matched by [{pattern}]";
                 AssertPass(testStep, message);
             }
             else
@@ -201,7 +201,7 @@ namespace Mir.Stf.Utilities
 
             if (retVal == null)
             {
-                var message = string.Format("[{0}] StartsWith [{1}]", value, substring);
+                var message = $"[{value}] StartsWith [{substring}]";
                 AssertPass(testStep, message);
             }
             else
@@ -233,12 +233,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal != null)
             {
-                var message = string.Format("[{0}] doesn't start with [{1}]", value, substring);
+                var message = $"[{value}] doesn't start with [{substring}]";
                 AssertPass(testStep, message);
             }
             else
             {
-                var message = string.Format("[{0}] do start with [{1}]", value, substring);
+                var message = $"[{value}] do start with [{substring}]";
                 AssertFail(testStep, message);
             }
 
@@ -266,7 +266,7 @@ namespace Mir.Stf.Utilities
 
             if (retVal == null)
             {
-                var message = string.Format("[{0}] EndsWith [{1}]", value, substring);
+                var message = $"[{value}] EndsWith [{substring}]";
                 AssertPass(testStep, message);
             }
             else
@@ -298,12 +298,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal != null)
             {
-                var message = string.Format("[{0}] doesn't ends with [{1}]", value, substring);
+                var message = $"[{value}] doesn't ends with [{substring}]";
                 AssertPass(testStep, message);
             }
             else
             {
-                var message = string.Format("[{0}] do ends with [{1}]", value, substring);
+                var message = $"[{value}] do ends with [{substring}]";
                 AssertFail(testStep, message);
             }
 
@@ -331,12 +331,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                var message = string.Format("[{0}] is equal to [{1}]", expected, actual);
+                var message = $"[{expected}] is equal to [{actual}]";
                 AssertPass(testStep, message);
             }
             else
             {
-                var message = string.Format("[{0}] is NOT equal to [{1}]", expected, actual);
+                var message = $"[{expected}] is NOT equal to [{actual}]";
                 AssertFail(testStep, message);
             }
 
@@ -384,12 +384,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                var message = string.Format("[{0}] is NOT equal to [{1}]", expected, actual);
+                var message = $"[{expected}] is NOT equal to [{actual}]";
                 AssertPass(testStep, message);
             }
             else
             {
-                var message = string.Format("[{0}] is equal to [{1}]", expected, actual);
+                var message = $"[{expected}] is equal to [{actual}]";
                 AssertFail(testStep, message);
             }
 
@@ -439,7 +439,7 @@ namespace Mir.Stf.Utilities
             }
             else
             {
-                var message = string.Format("[{0}] is NOT NullOrEmpty", actual);
+                var message = $"[{actual}] is NOT NullOrEmpty";
                 AssertFail(testStep, message);
             }
 
@@ -469,7 +469,7 @@ namespace Mir.Stf.Utilities
             }
             else
             {
-                var message = string.Format("[{0}] IS NullOrEmpty", actual);
+                var message = $"[{actual}] IS NullOrEmpty";
                 AssertFail(testStep, message);
             }
 

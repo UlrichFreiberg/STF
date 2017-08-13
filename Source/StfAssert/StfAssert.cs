@@ -248,15 +248,15 @@ namespace Mir.Stf.Utilities
                 expectedTypeName = exception.GetType().Name;
             }
 
-            var msg = string.Format("AssertThrows: Actual exception [{0}] is", expectedTypeName);
+            var msg = $"AssertThrows: Actual exception [{expectedTypeName}] is";
             if (isExpected)
             {
-                msg = string.Format("{0} of expected type [{1}]", msg, typeof(T).Name);
+                msg = $"{msg} of expected type [{typeof(T).Name}]";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("{0} not of expected type [{1}]", msg, typeof(T).Name);
+                msg = $"{msg} not of expected type [{typeof(T).Name}]";
                 AssertFail(testStep, msg);
             }
 

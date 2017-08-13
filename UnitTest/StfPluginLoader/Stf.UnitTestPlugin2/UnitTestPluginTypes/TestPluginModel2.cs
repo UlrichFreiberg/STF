@@ -56,7 +56,7 @@ namespace Stf.Unittests.UnitTestPluginTypes
         /// </returns>
         public string TestPlugin2FuncWithParams(string param1, int param2)
         {
-            return string.Format("{0}={1}", param1, param2);
+            return $"{param1}={param2}";
         }
 
         /// <summary>
