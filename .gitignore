@@ -2,6 +2,7 @@
 Thumbs.db
 *.suo
 **/bin/**
+**/StfBin/**
 **/obj/**
 *.user
 **/packages/**
