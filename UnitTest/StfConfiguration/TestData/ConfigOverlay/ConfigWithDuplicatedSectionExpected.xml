@@ -3,8 +3,8 @@
   
   <section name="SectionNameOuter" defaultsection="">
     <section name="SectionNameInner" defaultsection="">
-      <add key="KeyTwo" value="KeyTwoValue" />
-      <add key="KeyThree" value="KeyThreeValue" />
+      <key name="KeyTwo" value="KeyTwoValue" />
+      <key name="KeyThree" value="KeyThreeValue" />
     </section>
   </section>
 </configuration>

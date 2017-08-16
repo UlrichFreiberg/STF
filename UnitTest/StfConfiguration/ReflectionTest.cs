@@ -64,7 +64,7 @@ namespace Tests
             Assert.IsTrue(props.Count > 0, "Props collection is empty");
             Assert.AreEqual("config_key1value", tmc1.PropPublicString1);
             Assert.AreEqual("config_key2value", tmc1.PropPublicString2);
-            StfAssert.AreEqual("Bent", string.Empty, tmc1.Bent);
+            StfAssert.AreEqual("Bent", (string)null, tmc1.Bent);
         }
 
         /// <summary>

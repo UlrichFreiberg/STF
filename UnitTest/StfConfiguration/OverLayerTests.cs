@@ -216,7 +216,7 @@ namespace Tests
         /// </param>
         private void DumpTree(Section section2Dump, string fileName)
         {
-            var dumpFile = Path.Combine(@"c:\temp\", TestContext.TestName + "_" + fileName);
+            var dumpFile = Path.Combine(@"c:\temp\Stf\Temp", TestContext.TestName + "_" + fileName);
 
             section2Dump.DumpSection(Section.DumpAs.AsXml, dumpFile);
         }
