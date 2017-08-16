@@ -97,6 +97,8 @@ namespace Mir.Stf
         {
             StfLogger = Get<IStfLogger>();
 
+            var kernelLogErrors = CheckForFailedKernelLog(StfLogger);
+
             // We're getting the instance of the logger and logging a link to the kernel logger
             kernelLogFilePath = StfLogger.FileName;
 
@@ -162,6 +164,16 @@ namespace Mir.Stf
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             LogKeyValues(kernelLogFilePath, iterationStatus);
+
+            if (kernelLogErrors.Any())
+            {
+                foreach (var kernelLogError in kernelLogErrors)
+                {
+                    StfLogger.LogError(kernelLogError);
+                }
+
+                StfAssert.AreEqual("No Kernel log errors present", 0, kernelLogErrors.Count);
+            }
 
             if (StfIgnoreRow)
             {
@@ -344,6 +356,34 @@ namespace Mir.Stf
 
             // we might later alter stuff, so StfIgnoreRow also is triggered by StfIgnore
             retVal.StfIgnoreRow = StfIgnoreRow;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The check for failed kernel log.
+        /// </summary>
+        /// <param name="kernelLogger">
+        /// The kernel logger.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/> of errors encountered when the kernel was initializing and setting things up.
+        /// </returns>
+        private IList<string> CheckForFailedKernelLog(IStfLogger kernelLogger)
+        {
+            var retVal = new List<string>();
+            var failsToReport = kernelLogger.NumberOfLoglevelMessages[StfLogLevel.Fail] > 0;
+            var errorsToReport = kernelLogger.NumberOfLoglevelMessages[StfLogLevel.Error] > 0;
+
+            if (failsToReport)
+            {
+                retVal.Add("StfKernel encountered a failure. All bets are off");
+            }
+
+            if (errorsToReport)
+            {
+                retVal.Add("StfKernel encountered an error. All bets are off");
+            }
 
             return retVal;
         }
