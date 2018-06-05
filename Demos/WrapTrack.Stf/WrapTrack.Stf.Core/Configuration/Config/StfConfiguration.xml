@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
+  <section name="StfKernel">
+    <!--<key name="PluginPath" value="%STF_ROOT%\Plugins\" />-->
+    <key name="PluginPath" value="D:\Projects\STF\Demos\WrapTrack.Stf\StfBin" />
+    <key name="PluginPatterns" value="Mir.Stf.*.dll;WrapTrack.Stf.*.dll" />
+    <key name="ArchiveTestResults" value="true" />
+    <key name="ArchiveDestination" value="%STF_ROOT%\archiveDir" />
+    <section name="StfLogger">
+      <key name="PathToLogoImageFile" value="C:\temp\Stf\Images\WrapTrack.png" />
+      <key name="HeaderForegroundColor" value="white" />
+      <key name="HeaderBackgroundColor" value="rgba(13, 93, 140, 1)" />
+    </section>
+  </section>
+
+  <section name="Environments" defaultsection="UAT">
+    <section name="UAT">
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="Ulrich">
+          <key name="Username" value="ida88" />
+          <key name="Password" value="lk8dsafpUqwe" />
+        </section>
+      </section>
+    </section>
+
+    <section name="Preprod">
+      <section name="DisplayTargets">
+      </section>
+
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="Ulrich">
+          <key name="Username" value="ida88" />
+          <key name="Password" value="lk8dsafpUqwe" />
+        </section>
+      </section>
+    </section>
+
+    <section name="Prod">
+      <section name="Users" defaultsection="%USERNAME%">
+        <section name="Ulrich">
+          <key name="Username" value="ida88" />
+          <key name="Password" value="lk8dsafpUqwe" />
+        </section>
+      </section>
+    </section>
+
+  </section>
+
+</configuration>

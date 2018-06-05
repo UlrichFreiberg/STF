@@ -16,21 +16,21 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\StfBin\</OutputPath>
+    <OutputPath>..\..\StfBin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\StfBin\DemoCorp.Stf.Adapters.WebAdapter.xml</DocumentationFile>
+    <DocumentationFile>..\..\StfBin\DemoCorp.Stf.Adapters.WebAdapter.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\StfBin\</OutputPath>
+    <OutputPath>..\..\StfBin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\StfBin\DemoCorp.Stf.Adapters.WebAdapter.xml</DocumentationFile>
+    <DocumentationFile>..\..\StfBin\DemoCorp.Stf.Adapters.WebAdapter.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -58,28 +58,28 @@
       <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Kernel, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Kernel.dll</HintPath>
+    <Reference Include="Mir.Stf.Kernel, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Kernel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfArchiver, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfArchiver.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfArchiver, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfArchiver.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfAssert, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfAssert.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfAssert, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfAssert.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfConfiguration, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfConfiguration.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfConfiguration, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfConfiguration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfLogger, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfLogger.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfLogger, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfLogger.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfPlugin, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfPlugin, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -93,12 +93,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.53.0\lib\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Selenium.WebDriver.3.4.0\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Selenium.Support.2.53.0\lib\net40\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Selenium.Support.3.4.0\lib\net40\WebDriver.Support.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -123,6 +123,7 @@
   <ItemGroup>
     <Content Include="DemoCorp.Stf.Adapters.WebAdapter.dll.PluginSettings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

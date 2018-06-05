@@ -170,6 +170,42 @@ namespace Tests
         }
 
         /// <summary>
+        /// The over lay config with duplicated key.
+        /// </summary>
+        [TestMethod]
+        public void OverLayConfigWithDuplicatedKey()
+        {
+            var stfConfiguration = new StfConfiguration();
+            var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedKey.xml");
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedKeyOverlay.xml");
+            var overLayed = stfConfiguration.OverLay(conf1, conf2);
+
+            DumpTree(conf1, @"conf1.xml");
+            DumpTree(conf2, @"conf2.xml");
+            DumpTree(overLayed, @"overLayed.xml");
+
+            StfAssert.IsTrue("Comparing", overLayed.Identical(overLayed, overLayed));
+        }
+
+        /// <summary>
+        /// The over lay config with duplicated section.
+        /// </summary>
+        [TestMethod]
+        public void OverLayConfigWithDuplicatedSection()
+        {
+            var stfConfiguration = new StfConfiguration();
+            var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedSection.xml");
+            var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedSectionOverlay.xml");
+            var overLayed = stfConfiguration.OverLay(conf1, conf2);
+            var confExpected = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedSectionExpected.xml");
+
+            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(confExpected, @"confExpected.xml");
+
+            StfAssert.IsTrue("Comparing", confExpected.Identical(confExpected, overLayed));
+        }
+
+        /// <summary>
         /// The dump tree.
         /// </summary>
         /// <param name="section2Dump">
@@ -180,7 +216,8 @@ namespace Tests
         /// </param>
         private void DumpTree(Section section2Dump, string fileName)
         {
-            var dumpFile = Path.Combine(@"c:\temp\", TestContext.TestName + "_" + fileName);
+            var dumpFile = Path.Combine(@"c:\temp\Stf\Temp", TestContext.TestName + "_" + fileName);
+
             section2Dump.DumpSection(Section.DumpAs.AsXml, dumpFile);
         }
     }

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.dk/stfConfiguration" version="2013.04.21.0">
+  
+  <section name="SectionNameOuter" defaultsection="">
+    <!-- Duplicated section name -->
+    <section name="SectionNameInner" defaultsection="">
+      <key name="KeyThree" value="KeyThreeValue"/>
+    </section>
+  </section>
+</configuration>

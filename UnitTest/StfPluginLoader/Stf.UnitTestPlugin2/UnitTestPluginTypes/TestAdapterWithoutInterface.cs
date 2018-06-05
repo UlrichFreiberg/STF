@@ -8,7 +8,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Runtime.Remoting.Messaging;
 using Mir.Stf.Utilities;
 
 namespace Stf.Unittests.UnitTestPluginTypes

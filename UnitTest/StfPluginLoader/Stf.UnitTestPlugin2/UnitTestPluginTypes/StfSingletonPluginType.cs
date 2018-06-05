@@ -45,7 +45,14 @@ namespace Stf.Unittests.UnitTestPluginTypes
         /// </returns>
         public bool Equals(IStfSingletonPluginType other)
         {
-            return other.SingletonBool == SingletonBool && other.SingletonInteger == SingletonInteger;
+            if (other == null)
+            {
+                return false;
+            }
+
+            var retVal = other.SingletonBool == SingletonBool && other.SingletonInteger == SingletonInteger;
+
+            return retVal;
         }
     }
 }

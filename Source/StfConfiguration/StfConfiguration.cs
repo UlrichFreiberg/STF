@@ -214,7 +214,7 @@ namespace Mir.Stf.Utilities
             }
             catch (ArgumentOutOfRangeException)
             {
-                var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", configValuePath);
+                var errMsg = $"No section is loaded - can't find matching key [{configValuePath}]";
 
                 throw new ArgumentOutOfRangeException(configValuePath, errMsg);
             }
@@ -235,12 +235,14 @@ namespace Mir.Stf.Utilities
         {
             if (!File.Exists(fileName))
             {
-                var errMsg = string.Format("Configuration File [{0}] doesn't exist", fileName);
+                var errMsg = $"Configuration File [{fileName}] doesn't exist";
+
                 throw new ArgumentOutOfRangeException(fileName, errMsg);
             }
 
             reader = new XmlTextReader(fileName);
             currentlyLoadedSection = GetSections();
+
             return currentlyLoadedSection;
         }
 
@@ -329,7 +331,7 @@ namespace Mir.Stf.Utilities
                 return retVal;
             }
 
-            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            var errMsg = $"No section is loaded - can't find matching key [{keyName}]";
             throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
@@ -354,7 +356,7 @@ namespace Mir.Stf.Utilities
                 return parser.GetKey(section, keyName);
             }
 
-            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            var errMsg = $"No section is loaded - can't find matching key [{keyName}]";
             throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
@@ -385,7 +387,7 @@ namespace Mir.Stf.Utilities
                 return parser.SetValue(section, keyName, value);
             }
 
-            var errMsg = string.Format("No section is loaded - can't find matching key [{0}]", keyName);
+            var errMsg = $"No section is loaded - can't find matching key [{keyName}]";
             throw new ArgumentOutOfRangeException(keyName, errMsg);
         }
 
@@ -404,6 +406,7 @@ namespace Mir.Stf.Utilities
         public bool TryGetKeyValue(string keyName, out string value)
         {
             value = string.Empty;
+
             try
             {
                 value = GetConfigValue(keyName);
@@ -480,7 +483,8 @@ namespace Mir.Stf.Utilities
                                 break;
                             case "section":
                                 var section = HandleSection(new Section());
-                                currentSection.Sections.Add(section.SectionName, GetSections(section));
+
+                                SectionAddSection(currentSection, section);
                                 break;
                         }
 
@@ -492,6 +496,29 @@ namespace Mir.Stf.Utilities
             }
 
             return currentSection;
+        }
+
+        /// <summary>
+        /// Add a section to the current section collection - check for duplicate "add sections" - last "add section" wins.
+        /// </summary>
+        /// <param name="section">
+        /// The current/destination section.
+        /// </param>
+        /// <param name="sectionToAdd">
+        /// The source section to add.
+        /// </param>
+        private void SectionAddSection(Section section, Section sectionToAdd)
+        {
+            var sections = GetSections(sectionToAdd);
+            var sectionName = sectionToAdd.SectionName;
+
+            if (section.Sections.ContainsKey(sectionName))
+            {
+                section.Sections[sectionName] = sections;
+                return;
+            }
+
+            section.Sections.Add(sectionName, sections);
         }
 
         /// <summary>
@@ -527,6 +554,7 @@ namespace Mir.Stf.Utilities
         private Section HandleSection(Section section)
         {
             section.DefaultSection = string.Empty;
+
             while (reader.MoveToNextAttribute())
             {
                 switch (reader.Name.ToLower())
@@ -566,7 +594,29 @@ namespace Mir.Stf.Utilities
                 }
             }
 
-            section.Keys.Add(newKey.KeyName, newKey);
+            SectionAddKey(section, newKey);
+        }
+
+        /// <summary>
+        /// The current section add key.
+        /// </summary>
+        /// <param name="section">
+        /// The current section.
+        /// </param>
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        private void SectionAddKey(Section section, Key key)
+        {
+            var keyName = key.KeyName;
+
+            if (section.Keys.ContainsKey(keyName))
+            {
+                section.Keys[keyName] = key;
+                return;
+            }
+
+            section.Keys.Add(keyName, key);
         }
 
         /// <summary>

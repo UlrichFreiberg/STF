@@ -226,6 +226,7 @@ namespace Mir.Stf.Utilities.RetryerUtilities
                 }
 
                 var iterationStartTime = DateTime.Now;
+
                 try
                 {
                     if (retrierAction != null)
@@ -274,7 +275,6 @@ namespace Mir.Stf.Utilities.RetryerUtilities
         /// </returns>
         private TimeSpan BestGuessForDuration()
         {
-            // TODO: Look into configuration
             var ticks = Attempts * AttemptTime.Ticks;
 
             return TimeSpan.FromTicks(ticks);
@@ -288,8 +288,17 @@ namespace Mir.Stf.Utilities.RetryerUtilities
         /// </returns>
         private int BestGuessForAttempts()
         {
-            // TODO: Look into configuration
-            return 10;
+            if (Duration < TimeSpan.FromMinutes(1))
+            {
+                return 10;
+            }
+
+            if (Duration < TimeSpan.FromMinutes(10))
+            {
+                return 50;
+            }
+
+            return 200;
         }
 
         /// <summary>

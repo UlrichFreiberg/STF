@@ -45,14 +45,14 @@ namespace Mir.Stf.Utilities
 
             try
             {
-                var msg = string.Format("AreEqual: [{0}] Are Equal to [{1}]", expected, actual);
+                var msg = $"AreEqual: [{expected}] Are Equal to [{actual}]";
 
                 Assert.AreEqual(expected, actual);
                 AssertPass(testStep, msg);
             }
             catch (AssertFailedException)
             {
-                var msg = string.Format("AreEqual: [{0}] Are Not Equal to [{1}]", expected, actual);
+                var msg = $"AreEqual: [{expected}] Are Not Equal to [{actual}]";
 
                 retVal = false;
                 AssertFail(testStep, msg);
@@ -82,14 +82,14 @@ namespace Mir.Stf.Utilities
 
             try
             {
-                var msg = string.Format("AreNotEqual: [{0}] Not Equal to [{1}]", expected, actual);
+                var msg = $"AreNotEqual: [{expected}] Not Equal to [{actual}]";
 
                 Assert.AreNotEqual(expected, actual);
                 retVal = AssertPass(testStep, msg);
             }
             catch (AssertFailedException)
             {
-                var msg = string.Format("AreNotEqual: [{0}] Are Equal to [{1}]", expected, actual);
+                var msg = $"AreNotEqual: [{expected}] Are Equal to [{actual}]";
 
                 retVal = false;
                 AssertFail(testStep, msg);
@@ -136,12 +136,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("GreaterThan: [{0}] is greater than [{1}]", leftHandSide, rightHandSide);
+                msg = $"GreaterThan: [{leftHandSide}] is greater than [{rightHandSide}]";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("GreaterThan: [{0}] is Not greater than [{1}]", leftHandSide, rightHandSide);
+                msg = $"GreaterThan: [{leftHandSide}] is Not greater than [{rightHandSide}]";
                 AssertFail(testStep, msg);
             }
 
@@ -184,12 +184,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("GreaterThanOrEqual: [{0}] is equal to or greater than [{1}]", leftHandSide, rightHandSide);
+                msg = $"GreaterThanOrEqual: [{leftHandSide}] is equal to or greater than [{rightHandSide}]";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("GreaterThanOrEqual: [{0}] is not equal to or greater than [{1}]", leftHandSide, rightHandSide);
+                msg = $"GreaterThanOrEqual: [{leftHandSide}] is not equal to or greater than [{rightHandSide}]";
                 AssertFail(testStep, msg);
             }
 
@@ -234,12 +234,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("LessThan: [{0}] is less than [{1}]", leftHandSide, rightHandSide);
+                msg = $"LessThan: [{leftHandSide}] is less than [{rightHandSide}]";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("LessThan: [{0}] is Not less than [{1}]", leftHandSide, rightHandSide);
+                msg = $"LessThan: [{leftHandSide}] is Not less than [{rightHandSide}]";
                 AssertFail(testStep, msg);
             }
 
@@ -282,12 +282,12 @@ namespace Mir.Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("LessThanOrEqual: [{0}] is equal to or less than [{1}]", leftHandSide, rightHandSide);
+                msg = $"LessThanOrEqual: [{leftHandSide}] is equal to or less than [{rightHandSide}]";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("LessThan: [{0}] is not equal to or less than [{1}]", leftHandSide, rightHandSide);
+                msg = $"LessThan: [{leftHandSide}] is not equal to or less than [{rightHandSide}]";
                 AssertFail(testStep, msg);
             }
 

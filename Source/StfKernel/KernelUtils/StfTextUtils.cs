@@ -95,7 +95,7 @@ namespace Mir.Stf.KernelUtils
                     continue;
                 }
 
-                var replaceKey = string.Format("%{0}%", variable);
+                var replaceKey = $"%{variable}%";
                 var replaceValue = dict[variable];
 
                 line = line.Replace(replaceKey, replaceValue);
@@ -134,7 +134,7 @@ namespace Mir.Stf.KernelUtils
         /// </returns>
         public string GetVariableOrSetDefault(string variableName, string defaultValue)
         {
-            var variableExpandString = string.Format("%{0}%", variableName);
+            var variableExpandString = $"%{variableName}%";
             var variableValue = ExpandVariables(variableExpandString);
 
             // If no variable Value found, then default

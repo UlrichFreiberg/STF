@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://www.testautomation.com/yacf" version="2013.04.21.0">
+
+  <section name="Adapters">
+    <section name="WebAdapter">
+      <section name="Browsers" defaultsection="InternetExplorer">
+        <section name="InternetExplorer">
+          <key name="BrowserName" value="InternetExplorer" />
+          <key name="BrowserTimeout" value="180" />
+          <key name="WaitForControlReadyTimeout" value="15" />
+          <key name="DriverServerPath" value="C:\Temp\Stf\Selenium\IEDriverServer_Win32_3.4.0"/>
+          <key name="WaitTimeForProcessExit" value="500"/>
+          <key name="IgnoreProtectedModeSettings" value="true" />
+          <key name="DriverLogLevel" value="Fatal" />
+        </section>
+        <section name="Chrome">
+          <key name="BrowserName" value="Chrome" />
+          <key name="BrowserTimeout" value="180" />
+          <key name="WaitForControlReadyTimeout" value="15" />
+          <key name="DriverServerPath" value="C:\Temp\Stf\Selenium\Chromedriver_win32_2.30"/>
+          <key name="WaitTimeForProcessExit" value="500"/>
+        </section>
+      </section>
+    </section>
+  </section>
+
+</configuration>

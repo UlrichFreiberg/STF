@@ -16,6 +16,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
 
     using Mir.Stf.Utilities;
 
+    using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.IE;
 
     /// <summary>
@@ -38,19 +39,17 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
         {
             WebAdapterConfiguration retVal;
 
-            //// TODO: We should receive a browsername from the displaytarget using this webadapter
-            ////       so we can create the correct configuration object. Currently we support IE and IE only
-
             try
             {
                 var stfConfiguration = StfContainer.Get<StfConfiguration>();
+
                 retVal = new WebAdapterConfiguration();
 
                 stfConfiguration.LoadUserConfiguration(retVal);
             }
             catch (Exception ex)
             {
-                StfLogger.LogInternal(string.Format("Couldn't GetConfiguration - got error [{0}]", ex.Message));
+                StfLogger.LogInternal($"Couldn't GetConfiguration - got error [{ex.Message}]");
                 retVal = null;
             }
 
@@ -71,5 +70,12 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
 
             return retVal;
         }
-   }
+
+        private ChromeOptions GetChromeOptionsOptions()
+        {
+            var retVal = new ChromeOptions();
+
+            return retVal;
+        }
+    }
 }

@@ -113,10 +113,7 @@ namespace Mir.Stf.Utilities
             }
             finally
             {
-                if (robocopy != null)
-                {
-                    robocopy.Close();
-                }
+                robocopy?.Close();
             }
         }
 
@@ -149,7 +146,7 @@ namespace Mir.Stf.Utilities
                 destinationDirname += @"\";
             }
 
-            var robocopyCmdline = string.Format(" \"{0}\\\" \"{1}\\\" /MIR ", sourceDirname, destinationDirname);
+            var robocopyCmdline = $" \"{sourceDirname}\\\" \"{destinationDirname}\\\" /MIR ";
             var retVal = CopyFiles(robocopyCmdline, 5);
             return retVal;
         }

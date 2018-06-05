@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapTrack.Stf.Adapters.WebAdapter", "Adapters\WebAdapter\WrapTrack.Stf.Adapters.WebAdapter.csproj", "{DD71247B-DD57-46A8-9B8E-07C0041A5EE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{20B680DE-65C6-4148-9078-4436D4CFC79A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapTrack.Stf.Core", "WrapTrack.Stf.Core\WrapTrack.Stf.Core.csproj", "{31C88D4B-F626-4F49-B408-CD71563C9098}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DisplayTargets", "DisplayTargets", "{A06AD72F-23AA-40E7-8313-64C8E0BC1C87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{F3DA7D40-EF8D-45E7-A027-A0DC7FE89487}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapTrackWebTests", "UnitTests\WrapTrackWebTests\WrapTrackWebTests.csproj", "{4C59FC05-88B5-4B18-B19E-205BBEB88340}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WrapTrackWeb", "WrapTrackWeb", "{07BCBDE0-13B6-405F-B4DE-A08082187CAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapTrack.Stf.WrapTrackWeb", "DisplayTargets\WrapTrackWeb\WrapTrack.Stf.WrapTrackWeb\WrapTrack.Stf.WrapTrackWeb.csproj", "{A0D2EDD8-9747-4B00-A017-4A110E3755C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD71247B-DD57-46A8-9B8E-07C0041A5EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD71247B-DD57-46A8-9B8E-07C0041A5EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD71247B-DD57-46A8-9B8E-07C0041A5EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD71247B-DD57-46A8-9B8E-07C0041A5EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31C88D4B-F626-4F49-B408-CD71563C9098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31C88D4B-F626-4F49-B408-CD71563C9098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31C88D4B-F626-4F49-B408-CD71563C9098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31C88D4B-F626-4F49-B408-CD71563C9098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C59FC05-88B5-4B18-B19E-205BBEB88340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C59FC05-88B5-4B18-B19E-205BBEB88340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C59FC05-88B5-4B18-B19E-205BBEB88340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C59FC05-88B5-4B18-B19E-205BBEB88340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D2EDD8-9747-4B00-A017-4A110E3755C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D2EDD8-9747-4B00-A017-4A110E3755C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D2EDD8-9747-4B00-A017-4A110E3755C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D2EDD8-9747-4B00-A017-4A110E3755C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD71247B-DD57-46A8-9B8E-07C0041A5EE0} = {20B680DE-65C6-4148-9078-4436D4CFC79A}
+		{4C59FC05-88B5-4B18-B19E-205BBEB88340} = {F3DA7D40-EF8D-45E7-A027-A0DC7FE89487}
+		{07BCBDE0-13B6-405F-B4DE-A08082187CAF} = {A06AD72F-23AA-40E7-8313-64C8E0BC1C87}
+		{A0D2EDD8-9747-4B00-A017-4A110E3755C6} = {07BCBDE0-13B6-405F-B4DE-A08082187CAF}
+	EndGlobalSection
+EndGlobal

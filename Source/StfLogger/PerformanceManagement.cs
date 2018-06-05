@@ -47,7 +47,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public int LogPerformanceAlert(double elapsedTime)
         {
-            var performanceAlert = string.Format("PerfAlert: {0} seconds since last logEntry", elapsedTime);
+            var performanceAlert = $"PerfAlert: {elapsedTime} seconds since last logEntry";
 
             return LogWarning(performanceAlert);
         }

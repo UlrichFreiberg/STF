@@ -14,11 +14,17 @@ using Mir.Stf.Utilities;
 
 namespace Tests
 {
+    /// <summary>
+    /// The parser tests.
+    /// </summary>
     [TestClass]
     public class ParserTests : StfTestScriptBase
     {
+        /// <summary>
+        /// The parser simple variable_1.
+        /// </summary>
         [TestMethod]
-        public void ParserSimpleVariable_1()
+        public void ParserSimpleVariable1()
         {
             var stfConfiguration = new StfConfiguration();
             var conf = stfConfiguration.LoadConfig(@"TestData\Parser\parser1.xml");
@@ -27,8 +33,11 @@ namespace Tests
             Assert.AreEqual("config_key1value", key1Value);
         }
 
+        /// <summary>
+        /// The parser simple variable_2.
+        /// </summary>
         [TestMethod]
-        public void ParserSimpleVariable_2()
+        public void ParserSimpleVariable2()
         {
             var stfConfiguration = new StfConfiguration();
             var conf = stfConfiguration.LoadConfig(@"TestData\Parser\parser1.xml");
@@ -36,8 +45,5 @@ namespace Tests
             var key2Value = stfConfiguration.GetKeyValue(conf, "SectionName.SubSectionName.k2");
             Assert.AreEqual("config_key2value", key2Value);
         }
-
     }
-
-    
 }

@@ -270,7 +270,7 @@ namespace Mir.Stf.Utilities
                 return false;
             }
 
-            var logfileTitle = string.Format("SummaryLogger for {0}", Path.GetFileNameWithoutExtension(nameOfSummaryfile));
+            var logfileTitle = $"SummaryLogger for {Path.GetFileNameWithoutExtension(nameOfSummaryfile)}";
             logHeader = logHeader.Replace("LOGFILETITLE", logfileTitle);
 
             var headers = string.Empty;
@@ -280,7 +280,7 @@ namespace Mir.Stf.Utilities
 
             for (var i = 0; i < dataDrivenParameters.Count; i++)
             {
-                headers += string.Format("<th>{0}</th>{1}", dataDrivenParametersKeys[i], Environment.NewLine);
+                headers += $"<th>{dataDrivenParametersKeys[i]}</th>{Environment.NewLine}";
             }
 
             logHeader = logHeader.Replace("DATADRIVENPARAMETERS", headers);
@@ -300,10 +300,7 @@ namespace Mir.Stf.Utilities
         private string GetTextResource(string resourceName)
         {
             var resourceObject = Resources.ResourceManager.GetObject(resourceName);
-
-            var retVal = resourceObject == null
-                ? string.Format("<error>No {0} section file found</error>", resourceName)
-                : resourceObject.ToString();
+            var retVal = resourceObject?.ToString() ?? $"<error>No {resourceName} section file found</error>";
 
             return retVal;
         }
@@ -342,10 +339,10 @@ namespace Mir.Stf.Utilities
                     value = value.Replace("{", "{{").Replace("}", "}}");
                 }
 
-                retVal += string.Format("<td>{0}</td>{1}", value, Environment.NewLine);
+                retVal += $"<td>{value}</td>{Environment.NewLine}";
             }
 
-            retVal += string.Format("</tr>{0}", Environment.NewLine);
+            retVal += $"</tr>{Environment.NewLine}";
 
             return retVal;
         }

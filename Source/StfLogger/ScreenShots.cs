@@ -27,10 +27,7 @@ namespace Mir.Stf.Utilities
         /// <summary>
         /// Gets the utilities.
         /// </summary>
-        private ScreenshotUtilities Utilities 
-        {
-            get { return utilities ?? (utilities = new ScreenshotUtilities(this)); }
-        }
+        private ScreenshotUtilities Utilities => utilities ?? (utilities = new ScreenshotUtilities(this));
 
         /// <summary>
         /// The log all windows.
@@ -64,9 +61,11 @@ namespace Mir.Stf.Utilities
         public int LogScreenshot(StfLogLevel stfLogLevel, string message)
         {
             var length = 0;
+
             foreach (var screen in Screen.AllScreens)
             {
                 length += LogOneImage(stfLogLevel, Utilities.DoScreenshot(screen.Bounds), message);
+
                 if (length < 0)
                 {
                     break;
@@ -120,13 +119,15 @@ namespace Mir.Stf.Utilities
 
             var messageIdString = GetNextMessageId();
             var logLevelString = Enum.GetName(typeof(StfLogLevel), level) ?? "Unknown StfLogLevel";
+
             logLevelString = logLevelString.ToLower();
 
             var html = string.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} image\">\n", messageIdString, logLevelString);
-            html += string.Format("    <div class=\"el time\">{0:HH:mm:ss}</div>\n", DateTime.Now);
-            html += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
-            html += string.Format("    <div class=\"el msg\">{0}</div>\n", message);
-            html += string.Format("    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{0}\" src=\"data:image/png;base64, {1}\" /></p>", message, imageFile);
+
+            html += $"    <div class=\"el time\">{DateTime.Now:HH:mm:ss}</div>\n";
+            html += $"    <div class=\"el level\">{logLevelString}</div>\n";
+            html += $"    <div class=\"el msg\">{message}</div>\n";
+            html += $"    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{message}\" src=\"data:image/png;base64, {imageFile}\" /></p>";
             html += "</div>\n";
 
             LogFileHandle.Write(html);

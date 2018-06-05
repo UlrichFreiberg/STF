@@ -50,13 +50,13 @@ namespace Mir.Stf.Utilities
                 if (!string.IsNullOrEmpty(section.DefaultSection))
                 {
                     var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
-                    var tryDefaultKeyName = string.Format("{0}.{1}", defaultSection, keyName);
+                    var tryDefaultKeyName = $"{defaultSection}.{keyName}";
                     var retVal = GetKey(section, tryDefaultKeyName);
 
                     return retVal;
                 }
 
-                var errMsg = string.Format("Section [{0}] have no matching key [{1}]", section.SectionName, keyName);
+                var errMsg = $"Section [{section.SectionName}] have no matching key [{keyName}]";
                 throw new ArgumentOutOfRangeException(keyName, errMsg);
             }
 
@@ -100,7 +100,7 @@ namespace Mir.Stf.Utilities
                 if (!string.IsNullOrEmpty(section.DefaultSection))
                 {
                     var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
-                    var tryDefaultKeyName = string.Format("{0}.{1}", defaultSection, keyName);
+                    var tryDefaultKeyName = $"{defaultSection}.{keyName}";
                     var retVal = SetValue(section, tryDefaultKeyName, value);
 
                     return retVal;

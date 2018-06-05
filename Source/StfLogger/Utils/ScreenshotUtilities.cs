@@ -93,13 +93,13 @@ namespace Mir.Stf.Utilities.Utils
                 foreach (var process in procsWithWindows)
                 {
                     var base64Image = GetWindowImage(process.MainWindowHandle);
-                    windowImages.Add(string.Format("{0}: {1}", imageNo, process.MainWindowTitle), base64Image);
+                    windowImages.Add($"{imageNo}: {process.MainWindowTitle}", base64Image);
                     imageNo++;
                 }
             }
             catch (Exception exception)
             {
-                Logger.LogInternal(string.Format("Getting screenshots of all windows failed: {0}", exception.Message));
+                Logger.LogInternal($"Getting screenshots of all windows failed: {exception.Message}");
             }
 
             return windowImages;
@@ -141,7 +141,7 @@ namespace Mir.Stf.Utilities.Utils
             }
             catch (Exception exception)
             {
-                Logger.LogInternal(string.Format("Unable to grab image of window. Error message: {0}", exception.Message));
+                Logger.LogInternal($"Unable to grab image of window. Error message: {exception.Message}");
             }
 
             return imageString;
@@ -180,7 +180,7 @@ namespace Mir.Stf.Utilities.Utils
             catch (Exception exception)
             {
                 // TODO: Handle specific exceptions
-                Logger.LogInternal(string.Format("Failed to grab screen shot. Error message: {0}", exception.Message)); 
+                Logger.LogInternal($"Failed to grab screen shot. Error message: {exception.Message}"); 
             }
 
             return imageString;

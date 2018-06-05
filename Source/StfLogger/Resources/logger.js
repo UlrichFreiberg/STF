@@ -106,9 +106,9 @@ function loadKeyValueList() {
         var keyItemText = document.createTextNode(key + ": ");
         var valueItemText = document.createTextNode(value);
 
-        if ((value.toLowerCase().indexOf("http:") == 0)
-         || (value.toLowerCase().indexOf("td:") == 0)
-         || (value.toLowerCase().indexOf("file:") == 0)) {
+        if ((value.toLowerCase().indexOf("http:") === 0)
+         || (value.toLowerCase().indexOf("td:") === 0)
+         || (value.toLowerCase().indexOf("file:") === 0)) {
             var link = document.createElement("a");
             link.setAttribute("href", value);
             link.setAttribute("title", hoverMessage);

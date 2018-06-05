@@ -21,6 +21,7 @@ namespace Mir.Stf.Utilities.Extensions
     using System.Reflection;
 
     using Mir.Stf.Utilities.Attributes;
+    using Mir.Stf.Utilities.Exceptions;
 
     /// <summary>
     /// The container extensions.
@@ -41,7 +42,19 @@ namespace Mir.Stf.Utilities.Extensions
         /// </returns>
         public static T ResolveType<T>(this IUnityContainer container)
         {
-            var returnObject = container.Resolve<T>();
+            T returnObject;
+
+            try
+            {
+                returnObject = container.Resolve<T>();
+            }
+            catch (Exception e)
+            {
+                var msg = $"Couldn't find the type [{typeof(T).Name}] in the StfContainer. Please register the type using RegisterType()";
+
+                throw new StfTypeResolutionException(msg, e);
+            }
+
             var pluginObject = returnObject as IStfPlugin;
 
             if (pluginObject != null)
@@ -50,9 +63,7 @@ namespace Mir.Stf.Utilities.Extensions
                 {
                     throw new TypeInitializationException(
                         pluginObject.GetType().FullName,
-                        new Exception(string.Format(
-                            "Init returned false for StfPlugin: {0}",
-                            pluginObject.GetType().Name)));
+                        new Exception($"Init returned false for StfPlugin: {pluginObject.GetType().Name}"));
                 }
             }
 
@@ -271,7 +282,7 @@ namespace Mir.Stf.Utilities.Extensions
             injectionMembers.Add(new Interceptor<InterfaceInterceptor>());
 
             container.Configure<Interception>()
-                .AddPolicy(string.Format("LoggingFor{0}", theType.Name))
+                .AddPolicy($"LoggingFor{theType.Name}")
                 .AddMatchingRule<TypeMatchingRule>(new InjectionConstructor(theType.FullName))
                 .AddCallHandler<LoggingHandler>(
                     new ContainerControlledLifetimeManager(),

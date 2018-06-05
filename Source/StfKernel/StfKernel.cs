@@ -53,7 +53,7 @@ namespace Mir.Stf
 
             KernelLogger = new StfLogger(kernelLoggerConfiguration);
 
-            // get the initial configuration together
+            // get the initial configuration together - at this point in time: Only the kernel configuration
             AssembleStfConfigurationBeforePlugins();
 
             // Any plugins for us?
@@ -136,14 +136,14 @@ namespace Mir.Stf
         protected bool UseArchiver { get; set; }
 
         /// <summary>
-        /// Gets or sets the Stf logger.
+        /// Gets the Stf logger.
         /// </summary>
-        private IStfLogger KernelLogger { get; set; }
+        private IStfLogger KernelLogger { get; }
 
         /// <summary>
-        /// Gets or sets the stf container.
+        /// Gets the stf container.
         /// </summary>
-        private StfPluginLoader PluginLoader { get; set; }
+        private StfPluginLoader PluginLoader { get; }
 
         /// <summary>
         /// Gets or sets the stf configuration.
@@ -208,10 +208,7 @@ namespace Mir.Stf
                         KernelLogger.CloseLogFile();
                     }
 
-                    if (PluginLoader != null)
-                    {
-                        PluginLoader.Dispose();
-                    }
+                    PluginLoader?.Dispose();
                 }
 
                 disposed = true;
@@ -282,12 +279,20 @@ namespace Mir.Stf
 
             if (!File.Exists(stfConfigurationFile))
             {
+                KernelLogger.LogInfo($"StfConfiguration file not found - creating default [{stfConfigurationFile}]");
                 CreateDefaultStfConfigurationFile(stfConfigurationFile);
             }
 
-            StfConfiguration = File.Exists(stfConfigurationFile)
-                                   ? new StfConfiguration(stfConfigurationFile)
-                                   : new StfConfiguration();
+            if (File.Exists(stfConfigurationFile))
+            {
+                KernelLogger.LogInfo($"StfConfiguration created using [{stfConfigurationFile}]");
+                StfConfiguration = new StfConfiguration(stfConfigurationFile);
+            }
+            else
+            {
+                StfConfiguration = new StfConfiguration();
+                KernelLogger.LogInfo($"StfConfiguration created using no file as [{stfConfigurationFile}] doesn't exist");
+            }
 
             // need to be able to control something for plugins - like plugin path:-)
             OverlayStfConfigurationForOneSettingType(StfConfigDir, ConfigurationFileType.Machine);
@@ -358,7 +363,7 @@ namespace Mir.Stf
         /// </returns>
         private string CheckForNeededKernelDirectory(string dirVariableName, string defaultValue = null)
         {
-            var directoryNameVariable = string.Format("%{0}%", dirVariableName);
+            var directoryNameVariable = $"%{dirVariableName}%";
             var directoryName = StfTextUtils.ExpandVariables(directoryNameVariable);
 
             // if unknown directory (the variable didn't got expanded), 
@@ -411,7 +416,7 @@ namespace Mir.Stf
             {
                 var msg = $"Can't create StfRoot. Tried [{DefaultStfRoot}] and [{defaultAlternativeStfRoot}]";
 
-                throw new StfConfigurationException("Can't create StfRoot");
+                throw new StfConfigurationException(msg);
             }
 
             StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
@@ -473,17 +478,18 @@ namespace Mir.Stf
                     configFilename = "StfConfiguration_TestSuite.xml";
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("configurationFileType", configurationFileType, null);
+                    throw new ArgumentOutOfRangeException(nameof(configurationFileType), configurationFileType, null);
             }
 
             var fileLocation = Path.Combine(directoryName, configFilename);
             if (!File.Exists(fileLocation))
             {
-                KernelLogger.LogInternal(string.Format("Skipping Configuration file [{0}]: It does not exist, so not overlaying", fileLocation));
+                KernelLogger.LogInternal(
+                    $"Skipping Configuration file [{fileLocation}]: It does not exist, so not overlaying");
                 return;
             }
 
-            KernelLogger.LogInternal(string.Format("Applying configuration found at [{0}]", fileLocation));
+            KernelLogger.LogInternal($"Applying configuration found at [{fileLocation}]");
 
             StfConfiguration.OverLay(fileLocation);
         }
@@ -514,7 +520,7 @@ namespace Mir.Stf
             }
 
             var uniquePart = Guid.NewGuid().ToString("N");
-            var retVal = string.Format("{0}_{1}{2}", filename, uniquePart, extension);
+            var retVal = $"{filename}_{uniquePart}{extension}";
 
             return retVal;
         }

@@ -18,18 +18,9 @@ namespace Stf.Unittests.UnitTestPluginTypes
     public class TestPluginModel2 : StfModelBase, ITestPluginModel2
     {
         /// <summary>
-        /// The test prop.
-        /// </summary>
-        private string testProp = "Default";
-
-        /// <summary>
         /// Gets or sets the test prop.
         /// </summary>
-        public string TestProp
-        {
-            get { return testProp; }
-            set { testProp = value; }
-        }
+        public string TestProp { get; set; } = "Default";
 
         /// <summary>
         /// The test plugin 2 func.
@@ -56,7 +47,7 @@ namespace Stf.Unittests.UnitTestPluginTypes
         /// </returns>
         public string TestPlugin2FuncWithParams(string param1, int param2)
         {
-            return string.Format("{0}={1}", param1, param2);
+            return $"{param1}={param2}";
         }
 
         /// <summary>
@@ -70,7 +61,7 @@ namespace Stf.Unittests.UnitTestPluginTypes
         /// </returns>
         public bool Equals(ITestPluginModel2 other)
         {
-            return other.TestProp == TestProp;
+            return other != null && other.TestProp == TestProp;
         }
     }
 }

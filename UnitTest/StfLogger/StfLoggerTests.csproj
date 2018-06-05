@@ -100,6 +100,12 @@
     <None Include="Data\Data.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\TestStfIgnoreDataDrivenNoStfIgnore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\TestStfIgnoreDataDrivenWithStfIgnore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\DatadrivenLoggerTest_0.html">

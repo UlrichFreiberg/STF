@@ -36,7 +36,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
 
             try
             {
-                retVal = DriverInternetExplorer.FindElement(by);
+                retVal = WebDriver.FindElement(by);
             }
             catch (Exception ex)
             {
@@ -67,7 +67,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
             SetImplicitlyWait(1);
             try
             {
-                var webDriverWaiter = new WebDriverWait(DriverInternetExplorer, TimeSpan.FromSeconds(secondsToWait));
+                var webDriverWaiter = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(secondsToWait));
 
                 retVal = webDriverWaiter.Until(ExpectedConditions.ElementIsVisible(by));
             }
@@ -97,7 +97,7 @@ namespace DemoCorp.Stf.Adapters.WebAdapter
 
             try
             {
-                retVal = DriverInternetExplorer.FindElements(by);
+                retVal = WebDriver.FindElements(by);
             }
             catch (Exception ex)
             {

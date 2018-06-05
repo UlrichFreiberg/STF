@@ -54,22 +54,19 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// Gets or sets the plugin logger.
+        /// Gets the plugin logger.
         /// </summary>
-        private IStfLogger PluginLogger { get; set; }
+        private IStfLogger PluginLogger { get; }
 
         /// <summary>
-        /// Gets or sets the stf configuration.
+        /// Gets the stf configuration.
         /// </summary>
-        private StfConfiguration StfConfiguration { get; set; }
+        private StfConfiguration StfConfiguration { get; }
 
         /// <summary>
         /// Gets the plugin assemblies.
         /// </summary>
-        private IList<Assembly> PluginAssemblies
-        {
-            get { return pluginAssemblyList ?? (pluginAssemblyList = new List<Assembly>()); }
-        }
+        private IList<Assembly> PluginAssemblies => pluginAssemblyList ?? (pluginAssemblyList = new List<Assembly>());
 
         /// <summary>
         /// The load stf plugins.
@@ -90,7 +87,7 @@ namespace Mir.Stf.Utilities
                 return 0;
             }
 
-            PluginLogger.LogInternal("looking for plugins at [{0}]", stfPluginPath);
+            PluginLogger.LogHeader("looking for plugins at [{0}]", stfPluginPath);
 
             var patterns = pluginPatterns.Split(';');
             foreach (var pattern in patterns)
@@ -132,7 +129,7 @@ namespace Mir.Stf.Utilities
 
             OverlayPluginSettings(stfPluginPath);
 
-            PluginLogger.LogInternal("Done looking for plugins");
+            PluginLogger.LogInfo("Done looking for plugins");
 
             return container.Registrations.Count();
         }
@@ -195,12 +192,12 @@ namespace Mir.Stf.Utilities
         /// </param>
         private void RegisterPlugin(Type typeToRegister)
         {
-            var interfaceName = string.Format("I{0}", typeToRegister.Name);
+            var interfaceName = $"I{typeToRegister.Name}";
             var mainInterface = typeToRegister.GetInterface(interfaceName);
 
             if (mainInterface == null)
             {
-                PluginLogger.LogInternal("Registering type [{0}] with no matching interface", typeToRegister.Name);
+                PluginLogger.LogWarning("Registering type [{0}] with no matching interface", typeToRegister.Name);
 
                 container.RegisterType(
                     typeToRegister, 
@@ -210,7 +207,7 @@ namespace Mir.Stf.Utilities
                 return;
             }
 
-            PluginLogger.LogInternal("Registering type [{0}] that has matching interface [{1}]", typeToRegister.Name, interfaceName);
+            PluginLogger.LogInfo("Registering type [{0}] with matching interface [{1}]", typeToRegister.Name, interfaceName);
             
             container.RegisterMyType(mainInterface, typeToRegister);
         }
@@ -245,7 +242,7 @@ namespace Mir.Stf.Utilities
         {
             if (PluginAssemblies.Count == 0)
             {
-                PluginLogger.LogInternal("No plugins detected so no pluginsettings to overlay");
+                PluginLogger.LogInfo("No plugins detected so no pluginsettings to overlay");
             }
 
             foreach (var assembly in PluginAssemblies)
@@ -256,13 +253,13 @@ namespace Mir.Stf.Utilities
                 {
                     if (!File.Exists(settingsFile))
                     {
-                        PluginLogger.LogInternal(string.Format("Skipping plugin settings file [{0}]: It does not exist", settingsFile));
+                        PluginLogger.LogDebug($"Skipping plugin settings file [{settingsFile}]: It does not exist");
                         continue;
                     }
 
                     if (!PerformOverlay(settingsFile))
                     {
-                        PluginLogger.LogInternal(string.Format("Failed to overlay [{0}]. Check config file", settingsFile));
+                        PluginLogger.LogFail("OverlayPluginSettings", $"Failed to overlay [{settingsFile}]. Check config file");
                     }
                 }
             }
@@ -279,7 +276,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool PerformOverlay(string settingsFilePath)
         {
-            PluginLogger.LogInternal(string.Format("Applying plugin settings: [{0}]", settingsFilePath));
+            PluginLogger.LogInfo($"Applying plugin settings: [{settingsFilePath}]");
 
             try
             {
@@ -287,7 +284,8 @@ namespace Mir.Stf.Utilities
             }
             catch (Exception ex)
             {
-                PluginLogger.LogInternal(string.Format("Error when overlaying plugin settings: {0}", ex.Message));
+                PluginLogger.LogError($"Error when overlaying plugin settings: {ex.Message}");
+
                 return false;
             }
 
@@ -313,18 +311,24 @@ namespace Mir.Stf.Utilities
                 pluginPath = Directory.GetCurrentDirectory();
             }
 
-            var fileNameFormat = "{0}.PluginSettings.Xml";
-            
-            var pluginPathFileName = Path.Combine(pluginPath, Path.GetFileName(assembly.Location));
+            const string FileNameFormat = "{0}.PluginSettings.Xml";
+            var assemblyLocation = assembly.Location;
+            var pluginPathFileName = Path.GetFileName(assemblyLocation);
 
-            var settingsPaths = new List<string> { string.Format(fileNameFormat, pluginPathFileName) };
-
-            if (pluginPathFileName == assembly.Location)
+            if (string.IsNullOrEmpty(pluginPathFileName))
             {
-                return settingsPaths;
+                PluginLogger.LogError($"Couldn't get filename() of {assemblyLocation}");
+
+                return new List<string>();
             }
 
-            settingsPaths.Add(string.Format(fileNameFormat, assembly.Location));
+            var pluginPathFileNameFullPath = Path.Combine(pluginPath, pluginPathFileName);
+            var settingsPaths = new List<string> { string.Format(FileNameFormat, pluginPathFileNameFullPath) };
+
+            if (!pluginPathFileNameFullPath.Equals(assemblyLocation, StringComparison.CurrentCultureIgnoreCase))
+            {
+                settingsPaths.Add(string.Format(FileNameFormat, assembly.Location));
+            }
 
             return settingsPaths;
         }

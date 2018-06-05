@@ -33,23 +33,13 @@ namespace Mir.Stf.Utilities
         public bool SetRunStatus()
         {
             var statusMsg = GetStatusMsgAndSetLoglevel(out this.logLevel);
-            var runstats = string.Format(@"<span id=""runstatus"">{0}</span>", statusMsg);
+            var runstats = $@"<span id=""runstatus"">{statusMsg}</span>";
 
-            runstats += string.Format(
-                        "<div class=\"line runstats\" Passed=\"{0}\" Failed=\"{1}\" Inconclusive=\"{2}\" Errors=\"{3}\" Warnings=\"{4}\">",
-                        NumberOfLoglevelMessages[StfLogLevel.Pass],
-                        NumberOfLoglevelMessages[StfLogLevel.Fail],
-                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive],
-                        NumberOfLoglevelMessages[StfLogLevel.Error],
-                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
+            runstats +=
+                $"<div class=\"line runstats\" Passed=\"{NumberOfLoglevelMessages[StfLogLevel.Pass]}\" Failed=\"{NumberOfLoglevelMessages[StfLogLevel.Fail]}\" Inconclusive=\"{NumberOfLoglevelMessages[StfLogLevel.Inconclusive]}\" Errors=\"{NumberOfLoglevelMessages[StfLogLevel.Error]}\" Warnings=\"{NumberOfLoglevelMessages[StfLogLevel.Warning]}\">";
 
-            runstats += string.Format(
-                        "   {0} Passed, {1} Failed, {2} Inconclusive, {3} Errors, {4} Warnings",
-                        NumberOfLoglevelMessages[StfLogLevel.Pass],
-                        NumberOfLoglevelMessages[StfLogLevel.Fail],
-                        NumberOfLoglevelMessages[StfLogLevel.Inconclusive],
-                        NumberOfLoglevelMessages[StfLogLevel.Error],
-                        NumberOfLoglevelMessages[StfLogLevel.Warning]);
+            runstats +=
+                $"   {NumberOfLoglevelMessages[StfLogLevel.Pass]} Passed, {NumberOfLoglevelMessages[StfLogLevel.Fail]} Failed, {NumberOfLoglevelMessages[StfLogLevel.Inconclusive]} Inconclusive, {NumberOfLoglevelMessages[StfLogLevel.Error]} Errors, {NumberOfLoglevelMessages[StfLogLevel.Warning]} Warnings";
 
             runstats += "</div>";
 

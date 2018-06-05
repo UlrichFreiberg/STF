@@ -20,7 +20,6 @@ namespace Mir.Stf
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data;
     using System.Linq;
 
     using Interfaces;
@@ -69,12 +68,36 @@ namespace Mir.Stf
         public TestContext TestContext { get; set; }
 
         /// <summary>
+        /// Gets or sets the stf iteration no.
+        /// </summary>
+        protected int StfIterationNo { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether Stf believe this iteration should be ignore. 
+        /// Used for data driven tests - controlled by a data column value named StfIgnoreRow.
+        /// For not datadriven it returns false
+        /// </summary>
+        /// <returns></returns>
+        protected bool StfIgnoreRow
+        {
+            get
+            {
+                var stfIgnoreRow = DataRowColumnValue("StfIgnoreRow");
+                var retVal = InferBoolValue(stfIgnoreRow);
+
+                return retVal;
+            }
+        }
+
+        /// <summary>
         /// The TestInitialize for <see cref="StfTestScriptBase"/>.
         /// </summary>
         [TestInitialize]
         public void BaseTestInitialize()
         {
             StfLogger = Get<IStfLogger>();
+
+            var kernelLogErrors = CheckForFailedKernelLog(StfLogger);
 
             // We're getting the instance of the logger and logging a link to the kernel logger
             kernelLogFilePath = StfLogger.FileName;
@@ -141,6 +164,21 @@ namespace Mir.Stf
 
             LogBaseClassMessage("StfTestScriptBase TestInitialize");
             LogKeyValues(kernelLogFilePath, iterationStatus);
+
+            if (kernelLogErrors.Any())
+            {
+                foreach (var kernelLogError in kernelLogErrors)
+                {
+                    StfLogger.LogError(kernelLogError);
+                }
+
+                StfAssert.AreEqual("No Kernel log errors present", 0, kernelLogErrors.Count);
+            }
+
+            if (StfIgnoreRow)
+            {
+                DoCleanUpAndThrowInconclusive("Row ignored due to StfIgnore is percieved true");
+            }
         }
 
         /// <summary>
@@ -151,8 +189,9 @@ namespace Mir.Stf
         {
             LogBaseClassMessage("StfTestScriptBase BaseTestCleanup");
 
-            var testFailed = TestContext.CurrentTestOutcome != UnitTestOutcome.Passed &&
-                             TestContext.CurrentTestOutcome != UnitTestOutcome.Inconclusive;
+            var testFailed = !StfIgnoreRow
+                          && TestContext.CurrentTestOutcome != UnitTestOutcome.Passed
+                          && TestContext.CurrentTestOutcome != UnitTestOutcome.Inconclusive;
 
             if (testFailed)
             {
@@ -192,6 +231,12 @@ namespace Mir.Stf
                 }
             }
 
+            if (StfIgnoreRow)
+            {
+                // DoCleanUpAndThrowInconclusive will do the throwing if needed
+                return;
+            }
+
             if (!testFailed && StfAssert.CurrentInconclusives > 0 && StfAssert.CurrentFailures <= 0)
             {
                 var msg = $"Testmethod [{TestContext.TestName}] is inconclusive. Number of inconclusive results: [{StfAssert.CurrentInconclusives}]";
@@ -207,23 +252,39 @@ namespace Mir.Stf
             }
         }
 
-        protected int StfIterationNo { get; set; }
+        /// <summary>
+        /// The data row column exists.
+        /// </summary>
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected bool DataRowColumnExists(string columnName)
+        {
+            var retVal = TestContext.DataRow?.Table.Columns.Contains(columnName) ?? false;
+
+            return retVal;
+        }
 
         /// <summary>
-        /// Returns true if Stf believe this iteration should be ignore. 
-        /// Used for data driven tests - controlled by a data column value named StfIgnoreRow.
-        /// For not datadriven it returns false
+        /// The data row column value.
         /// </summary>
-        /// <returns></returns>
-        protected bool StfIgnoreRow()
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        protected string DataRowColumnValue(string columnName)
         {
-            if (!TestDataDriven())
+            if (!DataRowColumnExists(columnName))
             {
-                return false;
+                return null;
             }
 
-            var stfIgnoreRow = (string) TestContext.DataRow["StfIgnoreRow"];
-            var retVal = InferBoolValue(stfIgnoreRow);
+            var retVal = TestContext.DataRow[columnName].ToString();
 
             return retVal;
         }
@@ -254,7 +315,7 @@ namespace Mir.Stf
 
             var retVal = new T();
             var properties = typeof(T).GetProperties();
-            var attributedProperties = properties.Where(prop => prop.IsDefined(typeof (StfTestDataAttribute), false)).ToList();
+            var attributedProperties = properties.Where(prop => prop.IsDefined(typeof(StfTestDataAttribute), false)).ToList();
             var dataRow = TestContext.DataRow;
 
             retVal.StfIteration = DataRowIndex();
@@ -291,6 +352,37 @@ namespace Mir.Stf
                         typeof(T).Name,
                         ex.Message);
                 }
+            }
+
+            // we might later alter stuff, so StfIgnoreRow also is triggered by StfIgnore
+            retVal.StfIgnoreRow = StfIgnoreRow;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The check for failed kernel log.
+        /// </summary>
+        /// <param name="kernelLogger">
+        /// The kernel logger.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/> of errors encountered when the kernel was initializing and setting things up.
+        /// </returns>
+        private IList<string> CheckForFailedKernelLog(IStfLogger kernelLogger)
+        {
+            var retVal = new List<string>();
+            var failsToReport = kernelLogger.NumberOfLoglevelMessages[StfLogLevel.Fail] > 0;
+            var errorsToReport = kernelLogger.NumberOfLoglevelMessages[StfLogLevel.Error] > 0;
+
+            if (failsToReport)
+            {
+                retVal.Add("StfKernel encountered a failure. All bets are off");
+            }
+
+            if (errorsToReport)
+            {
+                retVal.Add("StfKernel encountered an error. All bets are off");
             }
 
             return retVal;
@@ -428,50 +520,23 @@ namespace Mir.Stf
         }
 
         /// <summary>
-        /// The check if iteration should be ignored.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool CheckIfIterationShouldBeIgnored()
-        {
-            var dataRow = TestContext.DataRow;
-
-            if (dataRow == null)
-            {
-                return false;
-            }
-
-            string ignoreRowValue;
-
-            try
-            {
-                ignoreRowValue = dataRow.Field<string>("StfIgnoreRow");
-            }
-            catch (Exception)
-            {
-                // slurp - catch all TODO: Some log statement?
-                return false;
-            }
-
-            bool retVal;
-
-            if (!bool.TryParse(ignoreRowValue, out retVal))
-            {
-                return false;
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
         /// The do clean up and throw inconclusive.
         /// </summary>
-        private void DoCleanUpAndThrowInconclusive()
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        private void DoCleanUpAndThrowInconclusive(string message)
         {
+            // gotta diable the throwing of the inconclusive exception from StfAsserter - othervise BaseTestCleanup() wont be called
+            var oldEnableNegativeTesting = StfAssert.EnableNegativeTesting;
+
+            StfAssert.EnableNegativeTesting = true;
+            StfAssert.IsInconclusive("TestCleanup", message);
+            StfAssert.EnableNegativeTesting = oldEnableNegativeTesting;
+
+            // this wont call the test script cleanup - fair enough as the test script test initialize wasn't called --> symmetry is maintained
             BaseTestCleanup();
 
-            // TODO: Get the configuration in to determine whether to log or to throw. Logging should be done before basetestcleanup
             throw new AssertInconclusiveException("Ignoring row");
         }
 
@@ -486,9 +551,15 @@ namespace Mir.Stf
         /// </returns>
         private bool InferBoolValue(string value)
         {
-            switch (value)
+            if (string.IsNullOrEmpty(value))
+            {
+                return false;
+            }
+
+            switch (value.ToLower())
             {
                 case "1":
+                case "ok":
                 case "yes":
                 case "true":
                     return true;

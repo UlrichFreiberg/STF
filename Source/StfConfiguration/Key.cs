@@ -40,7 +40,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public override string ToString()
         {
-            var txt = string.Format("KeyName:{0}, KeyValue:{1}", this.KeyName, this.KeyValue);
+            var txt = $"KeyName:{this.KeyName}, KeyValue:{this.KeyValue}";
             return txt;
         }
     }

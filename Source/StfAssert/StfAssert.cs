@@ -71,6 +71,31 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
+        /// Gets the current failures.
+        /// </summary>
+        public int CurrentFailures => Stats.AssertFailedCount;
+
+        /// <summary>
+        /// Gets the current passes.
+        /// </summary>
+        public int CurrentPasses => Stats.AssertPassCount;
+
+        /// <summary>
+        /// Gets the current inconclusives.
+        /// </summary>
+        public int CurrentInconclusives => Stats.AssertInconclusiveCount;
+
+        /// <summary>
+        /// Gets the last message.
+        /// </summary>
+        public string LastMessage { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the stats.
+        /// </summary>
+        private AssertStats Stats { get; set; }
+
+        /// <summary>
         /// Reset all statistics for Error, Warning, pass, fail, and inconclusive. Typically used when retry'ing stuff
         /// </summary>
         /// <returns>Success if able to reset stats</returns>
@@ -86,49 +111,6 @@ namespace Mir.Stf.Utilities
 
             return true;
         }
-
-        /// <summary>
-        /// Gets the current failures.
-        /// </summary>
-        public int CurrentFailures
-        {
-            get
-            {
-                return Stats.AssertFailedCount;
-            }
-        }
-
-        /// <summary>
-        /// Gets the current passes.
-        /// </summary>
-        public int CurrentPasses
-        {
-            get
-            {
-                return Stats.AssertPassCount;
-            }
-        }
-
-        /// <summary>
-        /// Gets the current inconclusives.
-        /// </summary>
-        public int CurrentInconclusives
-        {
-            get
-            {
-                return Stats.AssertInconclusiveCount;
-            }
-        }
-
-        /// <summary>
-        /// Gets the last message.
-        /// </summary>
-        public string LastMessage { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the stats.
-        /// </summary>
-        private AssertStats Stats { get; set; }
 
         /// <summary>
         /// Asserts that a expression is True
@@ -248,15 +230,15 @@ namespace Mir.Stf.Utilities
                 expectedTypeName = exception.GetType().Name;
             }
 
-            var msg = string.Format("AssertThrows: Actual exception [{0}] is", expectedTypeName);
+            var msg = $"AssertThrows: Actual exception [{expectedTypeName}] is";
             if (isExpected)
             {
-                msg = string.Format("{0} of expected type [{1}]", msg, typeof(T).Name);
+                msg = $"{msg} of expected type [{typeof(T).Name}]";
                 AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("{0} not of expected type [{1}]", msg, typeof(T).Name);
+                msg = $"{msg} not of expected type [{typeof(T).Name}]";
                 AssertFail(testStep, msg);
             }
 

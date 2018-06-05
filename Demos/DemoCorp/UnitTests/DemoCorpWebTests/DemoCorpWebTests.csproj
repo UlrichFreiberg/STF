@@ -59,28 +59,28 @@
       <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Kernel, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Kernel.dll</HintPath>
+    <Reference Include="Mir.Stf.Kernel, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Kernel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfArchiver, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfArchiver.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfArchiver, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfArchiver.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfAssert, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfAssert.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfAssert, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfAssert.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfConfiguration, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfConfiguration.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfConfiguration, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfConfiguration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfLogger, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfLogger.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfLogger, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfLogger.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mir.Stf.Utilities.StfPlugin, Version=1.0.135.60610, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.135.60610\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
+    <Reference Include="Mir.Stf.Utilities.StfPlugin, Version=1.0.164.6087, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.164.6087\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
