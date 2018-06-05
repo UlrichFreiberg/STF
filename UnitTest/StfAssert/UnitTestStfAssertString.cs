@@ -8,6 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using Mir.Stf;
 
 namespace UnitTest
@@ -20,6 +21,28 @@ namespace UnitTest
     [TestClass]
     public class UnitTestStfAssertString : StfTestScriptBase
     {
+        protected enum BinaryStringAssert
+        {
+            StringEquals,
+            StringEqualsCi,
+            StringNotEquals,
+            StringNotEqualsCi,
+            StringContains,
+            StringNotContains,
+            StringEndsWith,
+            StringDoesNotEndsWith,
+            StringMatches,
+            StringStartsWith,
+            StringDoesNotStartWith,
+            StringDoesNotMatch
+        }
+
+        protected enum UnaryStringAssert
+        {
+            StringEmpty,
+            StringNotEmpty
+        }
+
         /// <summary>
         /// The test initialize.
         /// </summary>
@@ -40,53 +63,312 @@ namespace UnitTest
             StfAssert.ResetStatistics();
         }
 
-        /// <summary>
-        /// The test method assert strings.
-        /// </summary>
         [TestMethod]
-        public void TestMethodAssertStrings()
+        public void TestStringEmpty()
         {
-            Assert.IsTrue(StfAssert.StringContains("TestStepName 1", "Hejsa", "Hej"));
-            Assert.IsFalse(StfAssert.StringContains("TestStepName 2", "Hejsa", "Bent"));
+            // String Empty
+            HelperUnaryAssert(UnaryStringAssert.StringEmpty, null, false);
+            HelperUnaryAssert(UnaryStringAssert.StringEmpty, string.Empty, true);
 
-            Assert.IsTrue(StfAssert.StringDoesNotContain("TestStepName 3", "Hejsa", "Bent"));
-            Assert.IsFalse(StfAssert.StringDoesNotContain("TestStepName 4", "Hejsa", "Hej"));
+            HelperUnaryAssert(UnaryStringAssert.StringEmpty, "Bob", false);
 
-            Assert.IsTrue(StfAssert.StringMatches("TestStepName 5", "Hejsa", "^He.*"));
-            Assert.IsFalse(StfAssert.StringMatches("TestStepName 6", "Hejsa", "Nix.*"));
+            // String Not Empty
+            HelperUnaryAssert(UnaryStringAssert.StringNotEmpty, null, false);
+            HelperUnaryAssert(UnaryStringAssert.StringNotEmpty, string.Empty, false);
 
-            Assert.IsTrue(StfAssert.StringDoesNotMatch("TestStepName 7", "Hejsa", "Nix.*"));
-            Assert.IsFalse(StfAssert.StringDoesNotMatch("TestStepName 8", "Hejsa", "^He.*"));
+            HelperUnaryAssert(UnaryStringAssert.StringNotEmpty, "Bob", true);
+        }
 
-            Assert.IsTrue(StfAssert.StringStartsWith("TestStepName 9", "Hejsa", "He"));
-            Assert.IsFalse(StfAssert.StringStartsWith("TestStepName 10", "Hejsa", "hej"));
+        [TestMethod]
+        public void TestStringEquals()
+        {
+            // Equals
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, null, null, true);
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, string.Empty, string.Empty, true);
 
-            Assert.IsTrue(StfAssert.StringDoesNotStartWith("TestStepName 11", "Hejsa", "hej"));
-            Assert.IsFalse(StfAssert.StringDoesNotStartWith("TestStepName 12", "Hejsa", "He"));
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, "Hejsa", null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, "Hejsa", string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, null, "Hejsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, string.Empty, "Hejsa", false);
 
-            Assert.IsTrue(StfAssert.StringEndsWith("TestStepName 13", "Hejsa", "jsa"));
-            Assert.IsFalse(StfAssert.StringEndsWith("TestStepName 14", "Hejsa", "Hej"));
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, "Hejsa", "Hejsa", true);
+            HelperBinaryAssert(BinaryStringAssert.StringEquals, "Hejsa", "hejsa", false);
 
-            Assert.IsTrue(StfAssert.StringDoesNotEndsWith("TestStepName 15", "Hejsa", "Bent"));
-            Assert.IsFalse(StfAssert.StringDoesNotEndsWith("TestStepName 16", "Hejsa", "ejsa"));
+            // NotEquals
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, null, string.Empty, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, string.Empty, null, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, string.Empty, string.Empty, false);
 
-            Assert.IsTrue(StfAssert.StringEquals("TestStepName 17", "Hejsa", "Hejsa"));
-            Assert.IsFalse(StfAssert.StringEquals("TestStepName 18", "Hejsa", "hejsa"));
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, "Hejsa", null, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, "Hejsa", string.Empty, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, null, "Hejsa", true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, string.Empty, "Hejsa", true);
 
-            Assert.IsTrue(StfAssert.StringNotEquals("TestStepName 19", "Hejsa", "hejsa"));
-            Assert.IsFalse(StfAssert.StringNotEquals("TestStepName 20", "Hejsa", "Hejsa"));
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, "Hejsa", "Hejsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEquals, "Hejsa", "hejsa", true);
 
-            Assert.IsTrue(StfAssert.StringEqualsCi("TestStepName 21", "Hejsa", "hejsa"));
-            Assert.IsFalse(StfAssert.StringEqualsCi("TestStepName 22", "Hejsa", "hej"));
+            // EqualsCI
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, null, null, true);
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, string.Empty, string.Empty, true);
 
-            Assert.IsTrue(StfAssert.StringNotEqualsCi("TestStepName 23", "Hejsa", "hejs"));
-            Assert.IsFalse(StfAssert.StringNotEqualsCi("TestStepName 24", "Hejsa", "hejsa"));
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, "Hejsa", null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, "Hejsa", string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, null, "Hejsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, string.Empty, "Hejsa", false);
 
-            Assert.IsTrue(StfAssert.StringEmpty("TestStepName 25", string.Empty));
-            Assert.IsFalse(StfAssert.StringEmpty("TestStepName 26", "Hejsa"));
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, "Hejsa", "Hejsa", true);
+            HelperBinaryAssert(BinaryStringAssert.StringEqualsCi, "Hejsa", "hejsa", true);
 
-            Assert.IsTrue(StfAssert.StringNotEmpty("TestStepName 27", "Hejsa"));
-            Assert.IsFalse(StfAssert.StringNotEmpty("TestStepName 28", string.Empty));
+            // NotEqualsCi
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, null, string.Empty, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, string.Empty, null, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, string.Empty, string.Empty, false);
+
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, "Hejsa", null, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, "Hejsa", string.Empty, true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, null, "Hejsa", true);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, string.Empty, "Hejsa", true);
+
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, "Hejsa", "Hejsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotEqualsCi, "Hejsa", "hejsa", false);
+        }
+
+        [TestMethod]
+        public void TestStringEndsWith()
+        {
+            // Ends With
+            HelperBinaryAssert(BinaryStringAssert.StringEndsWith, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEndsWith, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEndsWith, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringEndsWith, string.Empty, string.Empty, false);
+
+            HelperBinaryAssert(BinaryStringAssert.StringEndsWith, "Hejsa", "jsa", true);
+            HelperBinaryAssert(BinaryStringAssert.StringEndsWith, "Hejsa", "Hej", false);
+
+            // Does Not Ends With
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotEndsWith, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotEndsWith, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotEndsWith, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotEndsWith, string.Empty, string.Empty, false);
+                                                  
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotEndsWith, "Hejsa", "jsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotEndsWith, "Hejsa", "Hej", true);
+        }
+
+        [TestMethod]
+        public void TestStartWith()
+        {
+            // Start With
+            HelperBinaryAssert(BinaryStringAssert.StringStartsWith, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringStartsWith, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringStartsWith, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringStartsWith, string.Empty, string.Empty, false);
+                                                  
+            HelperBinaryAssert(BinaryStringAssert.StringStartsWith, "Hejsa", "jsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringStartsWith, "Hejsa", "Hej", true);
+
+            // Does Not Start With
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotStartWith, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotStartWith, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotStartWith, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotStartWith, string.Empty, string.Empty, false);
+                                                  
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotStartWith, "Hejsa", "jsa", true);
+            HelperBinaryAssert(BinaryStringAssert.StringDoesNotStartWith, "Hejsa", "Hej", false);
+        }
+
+        [TestMethod]
+        public void TestMatches()
+        {
+            HelperBinaryAssert(BinaryStringAssert.StringMatches, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringMatches, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringMatches, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringMatches, string.Empty, string.Empty, false);
+
+            HelperBinaryAssert(BinaryStringAssert.StringMatches, "Hejsa", "^He.*", true);
+            HelperBinaryAssert(BinaryStringAssert.StringMatches, "Hejsa", "Nix.*", false);
+        }
+
+        [TestMethod]
+        public void TestContains()
+        {
+            // StringContains
+            HelperBinaryAssert(BinaryStringAssert.StringContains, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, string.Empty, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, "Hejsa", null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, "Hejsa", string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, null, "Hejsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, string.Empty, "Hejsa", false);
+
+            HelperBinaryAssert(BinaryStringAssert.StringContains, "Hejsa", "Hej", true);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, "Hejsa", "ejs", true);
+            HelperBinaryAssert(BinaryStringAssert.StringContains, "Hejsa", "Bent", false);
+
+            // StringNotContains
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, null, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, null, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, string.Empty, null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, string.Empty, string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, "Hejsa", null, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, "Hejsa", string.Empty, false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, null, "Hejsa", false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, string.Empty, "Hejsa", false);
+
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, "Hejsa", "Hej", false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, "Hejsa", "ejs", false);
+            HelperBinaryAssert(BinaryStringAssert.StringNotContains, "Hejsa", "Bent", true);
+        }
+
+        private void HelperUnaryAssert(
+            UnaryStringAssert unaryStringAssert,
+            string argument,
+            bool expected)
+        {
+            Func<string, string, bool> stringAssertFunction;
+
+            switch (unaryStringAssert)
+            {
+                // Empty
+                case UnaryStringAssert.StringEmpty:
+                    stringAssertFunction = StfAssert.StringEmpty;
+                    break;
+                case UnaryStringAssert.StringNotEmpty:
+                    stringAssertFunction = StfAssert.StringNotEmpty;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(unaryStringAssert), unaryStringAssert, null);
+            }
+
+            var argumentValue = GetStringValueUnfoldEmptyNull(argument);
+            var testDescription = $"{unaryStringAssert}({argumentValue})";
+
+            StfLogger.LogSubHeader($"Unit Testing: {testDescription} --> Expecting {expected}");
+
+            var retVal = stringAssertFunction(testDescription, argument);
+
+            if (expected != retVal
+            )
+            {
+                StfLogger.LogSubHeader($"Unit Test Found an error for {testDescription}...");
+            }
+
+            if (expected)
+            {
+                Assert.IsTrue(retVal, "Unit Test Result");
+            }
+            else
+            {
+                Assert.IsFalse(retVal, "Unit Test Result");
+            }
+        }
+
+        private void HelperBinaryAssert(
+            BinaryStringAssert binaryStringAssert,
+            string arg1,
+            string arg2,
+            bool expected)
+        {
+            Func<string, string, string, bool> stringAssertFunction;
+
+            switch (
+                binaryStringAssert
+            )
+            {
+                // EQUALS
+                case BinaryStringAssert.StringEquals:
+                    stringAssertFunction = StfAssert.StringEquals;
+                    break;
+                case BinaryStringAssert.StringEqualsCi:
+                    stringAssertFunction = StfAssert.StringEqualsCi;
+                    break;
+                case BinaryStringAssert.StringNotEquals:
+                    stringAssertFunction = StfAssert.StringNotEquals;
+                    break;
+                case BinaryStringAssert.StringNotEqualsCi:
+                    stringAssertFunction = StfAssert.StringNotEqualsCi;
+                    break;
+
+                // CONTAINS
+                case BinaryStringAssert.StringContains:
+                    stringAssertFunction = StfAssert.StringContains;
+                    break;
+                case BinaryStringAssert.StringNotContains:
+                    stringAssertFunction = StfAssert.StringDoesNotContain;
+                    break;
+
+                // ENDS WITH
+                case BinaryStringAssert.StringEndsWith:
+                    stringAssertFunction = StfAssert.StringEndsWith;
+                    break;
+                case BinaryStringAssert.StringDoesNotEndsWith:
+                    stringAssertFunction = StfAssert.StringDoesNotEndsWith;
+                    break;
+
+                // STARTS WITH
+                case BinaryStringAssert.StringStartsWith:
+                    stringAssertFunction = StfAssert.StringStartsWith;
+                    break;
+                case BinaryStringAssert.StringDoesNotStartWith:
+                    stringAssertFunction = StfAssert.StringDoesNotStartWith;
+                    break;
+
+                // MATCHES
+                case BinaryStringAssert.StringMatches:
+                    stringAssertFunction = StfAssert.StringMatches;
+                    break;
+                case BinaryStringAssert.StringDoesNotMatch:
+                    stringAssertFunction = StfAssert.StringDoesNotMatch;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(binaryStringAssert), binaryStringAssert, null);
+            }
+
+            var arg1Value = GetStringValueUnfoldEmptyNull(arg1);
+            var arg2Value = GetStringValueUnfoldEmptyNull(arg2);
+            var testDescription = $"{binaryStringAssert}({arg1Value}, {arg2Value})";
+
+            StfLogger.LogSubHeader($"Unit Testing: {testDescription} --> Expecting {expected}");
+
+            var retVal = stringAssertFunction(testDescription, arg1, arg2);
+
+            if (expected != retVal)
+            {
+                StfLogger.LogSubHeader($"Unit Test Found an error for {testDescription}...");
+            }
+
+            if (expected)
+            {
+                Assert.IsTrue
+            (
+                retVal, "Unit Test Result");
+            }
+            else
+            {
+                Assert.IsFalse
+            (
+                retVal, "Unit Test Result");
+            }
+        }
+
+        private string GetStringValueUnfoldEmptyNull(string argument)
+        {
+            if (argument == null)
+            {
+                return "null";
+            }
+
+            var retVal = string.IsNullOrEmpty(argument) ? "Empty" : argument;
+
+            return retVal;
         }
     }
 }
