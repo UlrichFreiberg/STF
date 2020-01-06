@@ -32,13 +32,12 @@ namespace Tests
             var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config1.xml");
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
             var conf12 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config12.xml");
+            var overLay = stfConfiguration.OverLay(conf1, conf2);
 
-            var overLayed = stfConfiguration.OverLay(conf1, conf2);
-
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(conf12, @"expected.xml");
 
-            Assert.IsTrue(conf12.Identical(conf12, overLayed));
+            Assert.IsTrue(conf12.Identical(conf12, overLay));
         }
 
         /// <summary>
@@ -51,12 +50,12 @@ namespace Tests
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
             var conf3 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config3.xml");
             var conf23 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config23.xml");
+            var overLay = stfConfiguration.OverLay(conf2, conf3);
 
-            var overLayed = stfConfiguration.OverLay(conf2, conf3);
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(conf23, @"expected.xml");
 
-            Assert.IsTrue(conf2.Identical(conf23, overLayed));
+            Assert.IsTrue(conf2.Identical(conf23, overLay));
         }
 
         /// <summary>
@@ -67,13 +66,12 @@ namespace Tests
         {
             var stfConfiguration = new StfConfiguration();
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
+            var overLay = stfConfiguration.OverLay(conf2, null);
 
-            var overLayed = stfConfiguration.OverLay(conf2, null);
-
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(conf2, @"expected.xml");
             
-            Assert.IsTrue(conf2.Identical(conf2, overLayed));
+            Assert.IsTrue(conf2.Identical(conf2, overLay));
         }
 
         /// <summary>
@@ -84,13 +82,12 @@ namespace Tests
         {
             var stfConfiguration = new StfConfiguration();
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\Config2.xml");
+            var overLay = stfConfiguration.OverLay(null, conf2);
 
-            var overLayed = stfConfiguration.OverLay(null, conf2);
-
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(conf2, @"expected.xml");
 
-            Assert.IsTrue(conf2.Identical(conf2, overLayed));
+            Assert.IsTrue(conf2.Identical(conf2, overLay));
         }
 
         /// <summary>
@@ -103,12 +100,12 @@ namespace Tests
             var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigTwoSectionsSideBySide.xml");
 
-            var overLayed = stfConfiguration.OverLay(conf1, conf2);
+            var overLay = stfConfiguration.OverLay(conf1, conf2);
 
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(conf2, @"expected.xml");
             
-            Assert.IsTrue(conf2.Identical(conf2, overLayed));
+            Assert.IsTrue(conf2.Identical(conf2, overLay));
         }
 
         /// <summary>
@@ -120,13 +117,12 @@ namespace Tests
             var stfConfiguration = new StfConfiguration();
             var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSection.xml");
+            var overLay = stfConfiguration.OverLay(conf1, conf2);
 
-            var overLayed = stfConfiguration.OverLay(conf1, conf2);
-
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(conf2, @"expected.xml");
 
-            Assert.IsTrue(conf2.Identical(conf2, overLayed));
+            Assert.IsTrue(conf2.Identical(conf2, overLay));
         }
 
         /// <summary>
@@ -138,13 +134,12 @@ namespace Tests
             var stfConfiguration = new StfConfiguration();
             var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml");
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigOneSectionWithinOneSectionWithinOneSection.xml");
+            var overLay = stfConfiguration.OverLay(conf1, conf2);
 
-            var overLayed = stfConfiguration.OverLay(conf1, conf2);
-
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(conf2, @"expected.xml");
             
-            Assert.IsTrue(conf2.Identical(conf2, overLayed));
+            Assert.IsTrue(conf2.Identical(conf2, overLay));
         }
 
         /// <summary>
@@ -178,13 +173,13 @@ namespace Tests
             var stfConfiguration = new StfConfiguration();
             var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedKey.xml");
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedKeyOverlay.xml");
-            var overLayed = stfConfiguration.OverLay(conf1, conf2);
+            var overLay = stfConfiguration.OverLay(conf1, conf2);
 
             DumpTree(conf1, @"conf1.xml");
             DumpTree(conf2, @"conf2.xml");
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
 
-            StfAssert.IsTrue("Comparing", overLayed.Identical(overLayed, overLayed));
+            StfAssert.IsTrue("Comparing", overLay.Identical(overLay, overLay));
         }
 
         /// <summary>
@@ -196,13 +191,13 @@ namespace Tests
             var stfConfiguration = new StfConfiguration();
             var conf1 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedSection.xml");
             var conf2 = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedSectionOverlay.xml");
-            var overLayed = stfConfiguration.OverLay(conf1, conf2);
+            var overLay = stfConfiguration.OverLay(conf1, conf2);
             var confExpected = stfConfiguration.LoadConfig(@"TestData\ConfigOverlay\ConfigWithDuplicatedSectionExpected.xml");
 
-            DumpTree(overLayed, @"overLayed.xml");
+            DumpTree(overLay, @"overLay.xml");
             DumpTree(confExpected, @"confExpected.xml");
 
-            StfAssert.IsTrue("Comparing", confExpected.Identical(confExpected, overLayed));
+            StfAssert.IsTrue("Comparing", confExpected.Identical(confExpected, overLay));
         }
 
         /// <summary>
@@ -219,6 +214,7 @@ namespace Tests
             var dumpFile = Path.Combine(@"c:\temp\Stf\Temp", TestContext.TestName + "_" + fileName);
 
             section2Dump.DumpSection(Section.DumpAs.AsXml, dumpFile);
+            section2Dump.DumpSection(Section.DumpAs.AsText, dumpFile + ".txt");
         }
     }
 }
