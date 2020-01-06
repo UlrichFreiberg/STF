@@ -17,8 +17,6 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf
 {
-    using Mir.Stf.Exceptions;
-
     using Utilities.Configuration;
 
     /// <summary>
@@ -42,14 +40,14 @@ namespace Mir.Stf
             KernelSetupKernelDirectories();
 
             // lets get a logger and a configuration
-            var uniqueKernelLoggerFilename = AppendUniquePartToFileName("KernelLogger.html");
+            var uniqueKernelLoggerFilename = StfTextUtils.AppendUniquePartToFileName("KernelLogger.html");
             var kernelLoggerFilename = Path.Combine(StfKernelLogDir, uniqueKernelLoggerFilename);
             var kernelLoggerConfiguration = new StfLoggerConfiguration
-                                                {
-                                                    LogTitle = "KernelLog",
-                                                    LogFileName = kernelLoggerFilename,
-                                                    LogLevel = StfLogLevel.Internal
-                                                };
+            {
+                LogTitle = "KernelLog",
+                LogFileName = kernelLoggerFilename,
+                LogLevel = StfLogLevel.Internal
+            };
 
             KernelLogger = new StfLogger(kernelLoggerConfiguration);
 
@@ -60,9 +58,7 @@ namespace Mir.Stf
             PluginLoader = new StfPluginLoader(KernelLogger, StfConfiguration);
             PluginLoader.RegisterInstance(typeof(StfConfiguration), StfConfiguration);
 
-            string pluginPath;
-
-            if (StfConfiguration.TryGetKeyValue("Configuration.StfKernel.PluginPath", out pluginPath))
+            if (StfConfiguration.TryGetKeyValue("Configuration.StfKernel.PluginPath", out var pluginPath))
             {
                 // TODO: Check for existing config file. If file not found then create default template configuration
                 PluginLoader.LoadStfPlugins(pluginPath);
@@ -95,14 +91,14 @@ namespace Mir.Stf
             User,
 
             /// <summary>
-            /// The testcase.
+            /// The test case.
             /// </summary>
-            Testcase,
+            TestCase,
 
             /// <summary>
-            /// The testsuite.
+            /// The test suite.
             /// </summary>
-            Testsuite
+            TestSuite
         }
 
         /// <summary>
@@ -182,7 +178,7 @@ namespace Mir.Stf
         /// The plugin patterns
         /// </param>
         /// <returns>
-        /// A boolean indicating whether successfull
+        /// A boolean indicating whether successful
         /// </returns>
         protected bool LoadAdditionalStfPlugins(string directoryName, string pluginPatterns)
         {
@@ -219,26 +215,16 @@ namespace Mir.Stf
         /// The dump stf configuration.
         /// </summary>
         /// <param name="configurationLogFilename">
-        /// The configuration Log Filename.
+        /// The configuration log filename.
         /// </param>
         protected void DumpStfConfiguration(string configurationLogFilename = null)
         {
-            var content = "<body><xmp>";
-
-            content += StfConfiguration.ToString();
-            content += "</xmp></body>";
-
             if (string.IsNullOrEmpty(configurationLogFilename))
             {
-                configurationLogFilename = Path.Combine(StfLogDir, @"StfConfiguration.html");
+                configurationLogFilename = Path.Combine(StfLogDir, @"StfConfigurationDump");
             }
 
-            if (File.Exists(configurationLogFilename))
-            {
-                File.Delete(configurationLogFilename);
-            }
-
-            File.WriteAllText(configurationLogFilename, content);
+            StfConfiguration.DumpStfConfiguration(configurationLogFilename);
         }
 
         /// <summary>
@@ -271,6 +257,21 @@ namespace Mir.Stf
         }
 
         /// <summary>
+        /// The kernel setup kernel directories.
+        /// </summary>
+        private void KernelSetupKernelDirectories()
+        {
+            var stfKernelDirectories = new StfKernelDirectories(StfTextUtils);
+
+            StfRoot = stfKernelDirectories.GetStfRoot();
+
+            // Check or create the needed sub directories
+            StfLogDir = stfKernelDirectories.CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
+            StfKernelLogDir = stfKernelDirectories.CheckForNeededKernelDirectory(@"Stf_KernelLogDir", Path.Combine(StfLogDir, "KernelLog"));
+            StfConfigDir = stfKernelDirectories.CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
+        }
+
+        /// <summary>
         /// The assembly stf configuration.
         /// </summary>
         private void AssembleStfConfigurationBeforePlugins()
@@ -280,7 +281,11 @@ namespace Mir.Stf
             if (!File.Exists(stfConfigurationFile))
             {
                 KernelLogger.LogInfo($"StfConfiguration file not found - creating default [{stfConfigurationFile}]");
-                CreateDefaultStfConfigurationFile(stfConfigurationFile);
+
+                if (!CreateDefaultStfConfigurationFile(stfConfigurationFile))
+                {
+                    KernelLogger.LogInfo($"Couldn't create Default Configuration file not found - name [{stfConfigurationFile}]");
+                }
             }
 
             if (File.Exists(stfConfigurationFile))
@@ -350,81 +355,6 @@ namespace Mir.Stf
         }
 
         /// <summary>
-        /// Check For Needed Kernel Directory - like configDir
-        /// </summary>
-        /// <param name="dirVariableName">
-        /// What STF name should we remember this directory as
-        /// </param>
-        /// <param name="defaultValue">
-        /// default Value
-        /// </param>
-        /// <returns>
-        /// The path to the diretory
-        /// </returns>
-        private string CheckForNeededKernelDirectory(string dirVariableName, string defaultValue = null)
-        {
-            var directoryNameVariable = $"%{dirVariableName}%";
-            var directoryName = StfTextUtils.ExpandVariables(directoryNameVariable);
-
-            // if unknown directory (the variable didn't got expanded), 
-            // then use the default value...
-            if (directoryName == directoryNameVariable)
-            {
-                if (string.IsNullOrEmpty(defaultValue))
-                {
-                    return null;
-                }
-
-                // The default value might be using variables 
-                defaultValue = StfTextUtils.ExpandVariables(defaultValue);
-                directoryName = StfTextUtils.GetVariableOrSetDefault(dirVariableName, defaultValue);
-            }
-
-            // We need the directory - try to create it
-            if (!Directory.Exists(directoryName))
-            {
-                try
-                {
-                    Directory.CreateDirectory(directoryName);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(@"Couldn't create kernel directory at [{0}] - Got error: [{1}]", directoryName, ex.Message);
-                }
-            }
-
-            return Directory.Exists(directoryName) ? directoryName : null;
-        }
-
-        /// <summary>
-        /// The kernel setup kernel directories.
-        /// </summary>
-        private void KernelSetupKernelDirectories()
-        {
-            const string DefaultStfRoot = @"C:\temp\Stf";
-            var defaultAlternativeStfRoot = Path.Combine(Path.GetTempPath(), "Stf");
-
-            StfRoot = CheckForNeededKernelDirectory(@"Stf_Root", DefaultStfRoot);
-
-            if (string.IsNullOrWhiteSpace(StfRoot))
-            {
-                StfRoot = CheckForNeededKernelDirectory(null, defaultAlternativeStfRoot);
-                StfTextUtils.Register("Stf_Root", StfRoot);
-            }
-
-            if (string.IsNullOrWhiteSpace(StfRoot))
-            {
-                var msg = $"Can't create StfRoot. Tried [{DefaultStfRoot}] and [{defaultAlternativeStfRoot}]";
-
-                throw new StfConfigurationException(msg);
-            }
-
-            StfLogDir = CheckForNeededKernelDirectory(@"Stf_LogDir", Path.Combine(StfRoot, @"Logs"));
-            StfKernelLogDir = CheckForNeededKernelDirectory(@"Stf_KernelLogDir", Path.Combine(StfLogDir, "KernelLog"));
-            StfConfigDir = CheckForNeededKernelDirectory(@"Stf_ConfigDir", Path.Combine(StfRoot, @"Config"));
-        }
-
-        /// <summary>
         /// The overlay stf configuration.
         /// </summary>
         /// <param name="directoryName">
@@ -437,8 +367,8 @@ namespace Mir.Stf
                 return;
             }
 
-            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testsuite);
-            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.Testcase);
+            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.TestSuite);
+            OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.TestCase);
             OverlayStfConfigurationForOneSettingType(directoryName, ConfigurationFileType.User);
         }
 
@@ -452,7 +382,7 @@ namespace Mir.Stf
         /// The configuration file type.
         /// </param>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Exception if configurationfiletype unrecognized
+        /// Exception if configuration file type is unrecognized
         /// </exception>
         private void OverlayStfConfigurationForOneSettingType(string directoryName, ConfigurationFileType configurationFileType)
         {
@@ -471,10 +401,10 @@ namespace Mir.Stf
                 case ConfigurationFileType.User:
                     configFilename = "StfConfiguration_User.xml";
                     break;
-                case ConfigurationFileType.Testcase:
+                case ConfigurationFileType.TestCase:
                     configFilename = "StfConfiguration_TestCase.xml";
                     break;
-                case ConfigurationFileType.Testsuite:
+                case ConfigurationFileType.TestSuite:
                     configFilename = "StfConfiguration_TestSuite.xml";
                     break;
                 default:
@@ -482,47 +412,16 @@ namespace Mir.Stf
             }
 
             var fileLocation = Path.Combine(directoryName, configFilename);
+
             if (!File.Exists(fileLocation))
             {
-                KernelLogger.LogInternal(
-                    $"Skipping Configuration file [{fileLocation}]: It does not exist, so not overlaying");
+                KernelLogger.LogInternal($"Skipping Configuration file [{fileLocation}]: It does not exist, so not overlaying");
                 return;
             }
 
             KernelLogger.LogInternal($"Applying configuration found at [{fileLocation}]");
 
             StfConfiguration.OverLay(fileLocation);
-        }
-
-        /// <summary>
-        /// The get unique file name part.
-        /// </summary>
-        /// <param name="originalFilename">
-        /// The original Filename.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string AppendUniquePartToFileName(string originalFilename)
-        {
-            if (string.IsNullOrEmpty(originalFilename))
-            {
-                return originalFilename;
-            }
-
-            var filename = originalFilename;
-            var extension = string.Empty;
-
-            if (Path.HasExtension(originalFilename))
-            {
-                extension = Path.GetExtension(originalFilename);
-                filename = Path.GetFileNameWithoutExtension(originalFilename);
-            }
-
-            var uniquePart = Guid.NewGuid().ToString("N");
-            var retVal = $"{filename}_{uniquePart}{extension}";
-
-            return retVal;
         }
     }
 }

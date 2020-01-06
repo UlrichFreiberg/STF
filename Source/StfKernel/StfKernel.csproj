@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\StfConfigurationException.cs" />
     <Compile Include="Interfaces\IStfTestData.cs" />
+    <Compile Include="KernelUtils\StfKernelDirectories.cs" />
     <Compile Include="KernelUtils\StfTextUtils.cs" />
     <Compile Include="StfTestDataAttribute.cs" />
     <Compile Include="StfKernel.cs" />
