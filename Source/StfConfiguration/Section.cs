@@ -10,12 +10,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml;
 
 namespace Mir.Stf.Utilities
 {
+    using System.IO;
+
     /// <summary>
     /// The section. Contains sections or values
     /// </summary>
@@ -132,6 +133,7 @@ namespace Mir.Stf.Utilities
             foreach (var childNode in Sections)
             {
                 var childNodes = childNode.Value.MakeCopy();
+
                 retVal.Sections.Add(childNode.Key, childNodes);
             }
 
@@ -158,6 +160,7 @@ namespace Mir.Stf.Utilities
         public override string ToString()
         {
             var txt = DumpSection(DumpAs.AsText);
+
             return txt;
         }
 
@@ -173,9 +176,7 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string DumpSection(
-            DumpAs dumpAs,
-            string fileName = null)
+        public string DumpSection(DumpAs dumpAs, string fileName = null)
         {
             string retVal;
 
@@ -183,11 +184,18 @@ namespace Mir.Stf.Utilities
             {
                 case DumpAs.AsText:
                     retVal = DumpSectionAsText();
+
+                    // if the filename is given, then save the file - otherwise do not:-)
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        File.WriteAllText(fileName, retVal);
+                    }
+
                     break;
                 case DumpAs.AsXml:
                     var doc = DumpSectionAsXml();
 
-                    // if the filename is given, then save the file - othervise dont:-)
+                    // if the filename is given, then save the file - otherwise do not:-)
                     if (!string.IsNullOrEmpty(fileName))
                     {
                         doc.Save(fileName);
@@ -215,26 +223,28 @@ namespace Mir.Stf.Utilities
         {
             var sb = new StringBuilder();
             var indentString = string.Empty.PadLeft(indent);
-            sb.AppendLine($"{indentString}KeyName:{SectionName}, DefaultSection:{DefaultSection}");
-            if (Sections.Count > 0)
+
+            // root node is the configuration node - has no section name
+            if (indent == 0)
             {
-                sb.AppendLine($"{indentString}Sections");
+                sb.AppendLine("Configuration");
+            }
+            else
+            {
+                var sectionDefault = string.IsNullOrEmpty(DefaultSection) ? null : $", DefaultSection={DefaultSection}";
+
+                sb.AppendLine($"{indentString}({SectionName}{sectionDefault})");
             }
 
             foreach (var subSection in Sections)
             {
-                sb.Append(subSection.Value.DumpSectionAsText(indent + 2));
-            }
-
-            if (Keys.Count > 0)
-            {
-                sb.AppendLine($"{indentString}Keys");
+                sb.Append(subSection.Value.DumpSectionAsText(indent + 4));
             }
 
             foreach (var key in Keys)
             {
-                indentString = string.Empty.PadLeft(indent + 2);
-                sb.AppendLine($"{indentString}{key.Value}");
+                indentString = string.Empty.PadLeft(indent + 4);
+                sb.AppendLine($"{indentString}{key.Value?.KeyName} = {key.Value?.KeyValue}");
             }
 
             return sb.ToString();
@@ -261,50 +271,38 @@ namespace Mir.Stf.Utilities
                 xmlDumpDoc.AppendChild(rootNode);
             }
 
-            // if not the internal top section
-            if (string.IsNullOrEmpty(SectionName))
-            {
-                if (Sections.Count == 0)
-                {
-                    return xmlDumpDoc;
-                }
-
-                var firstKey = Sections.Keys.First();
-                var retVal = Sections[firstKey].DumpSectionAsXml(xmlDumpDoc, rootNode);
-
-                return retVal;
-            }
-
             if (rootNode == null)
             {
-                throw new Exception("rootNode shouldnt be null here");
+                throw new Exception("rootNode should not be null here");
             }
 
             var sectionNode = xmlDumpDoc.CreateElement("section");
             var attribute = xmlDumpDoc.CreateAttribute("name");
 
             attribute.Value = SectionName;
+
             if (sectionNode.Attributes == null)
             {
-                throw new Exception("Cant CreateAtribute");
+                throw new Exception("Can not create attribute");
             }
 
             sectionNode.Attributes.Append(attribute);
-            attribute = xmlDumpDoc.CreateAttribute("defaultsection");
-            if (sectionNode.Attributes == null)
+
+            // only add a default section is there is something to handle the default section
+            if (!string.IsNullOrEmpty(DefaultSection))
             {
-                throw new Exception("Cant CreateAtribute");
+                attribute = xmlDumpDoc.CreateAttribute("defaultsection");
+                attribute.Value = DefaultSection;
+                sectionNode.Attributes.Append(attribute);
             }
 
-            attribute.Value = DefaultSection;
-            sectionNode.Attributes.Append(attribute);
-            rootNode.AppendChild(sectionNode);
+            var sectionNodeAdded = rootNode.AppendChild(sectionNode);
 
             if (Sections.Count > 0)
             {
                 foreach (var subSection in Sections)
                 {
-                    subSection.Value.DumpSectionAsXml(xmlDumpDoc, sectionNode);
+                    subSection.Value.DumpSectionAsXml(xmlDumpDoc, sectionNodeAdded);
                 }
             }
 
