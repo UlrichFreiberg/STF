@@ -10,11 +10,13 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Practices.Unity;
+
 using Mir.Stf.Utilities.Extensions;
 
 namespace Mir.Stf.Utilities
 {
+    using Unity;
+
     /// <summary>
     /// The stf container.
     /// </summary>

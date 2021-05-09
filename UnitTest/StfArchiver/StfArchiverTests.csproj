@@ -66,6 +66,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="TestData\StfConfiguration.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -8,10 +8,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Microsoft.Practices.Unity.InterceptionExtension;
-
 namespace Mir.Stf.Utilities.Extensions
 {
+    using Unity.Interception.PolicyInjection.Pipeline;
+
     /// <summary>
     /// The collection extensions.
     /// </summary>

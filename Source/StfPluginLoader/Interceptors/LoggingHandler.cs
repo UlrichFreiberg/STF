@@ -11,7 +11,7 @@
 using System;
 using System.Reflection;
 using System.Text;
-using Microsoft.Practices.Unity.InterceptionExtension;
+
 using Mir.Stf.Utilities.Extensions;
 using Mir.Stf.Utilities.Interfaces;
 
@@ -21,6 +21,8 @@ namespace Mir.Stf.Utilities.Interceptors
     using System.Text.RegularExpressions;
 
     using Mir.Stf.Utilities.Attributes;
+
+    using Unity.Interception.PolicyInjection.Pipeline;
 
     /// <summary>
     /// The logging handler.

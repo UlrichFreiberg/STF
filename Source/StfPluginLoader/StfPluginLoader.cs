@@ -14,13 +14,16 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.InterceptionExtension;
+
 using Mir.Stf.Utilities.Extensions;
 using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
+    using Unity;
+    using Unity.Injection;
+    using Unity.Interception;
+
     /// <summary>
     /// The stf plugin loader.
     /// </summary>

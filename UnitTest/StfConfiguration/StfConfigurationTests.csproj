@@ -98,7 +98,9 @@
     <Content Include="TestData\Parser\parser1.xml" />
     <Content Include="TestData\Reflection\Reflection1.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

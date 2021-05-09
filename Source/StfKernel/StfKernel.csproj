@@ -75,6 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Mir.Stf.Templates\StfConfiguration.xml.Template" />
   </ItemGroup>
   <ItemGroup>
