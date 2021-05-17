@@ -60,8 +60,10 @@ namespace Mir.Stf.Utilities
                 {
                     AddSection(core, layer.Sections[section.Key]);
                 }
-
-                OverLay(core.Sections[section.Key], layer.Sections[section.Key]);
+                else
+                {
+                    OverLay(core.Sections[section.Key], layer.Sections[section.Key]);
+                }
             }
 
             foreach (var key in layer.Keys)
@@ -102,19 +104,8 @@ namespace Mir.Stf.Utilities
                 return;
             }
 
-            var newSection = new Section
-                                 {
-                                     SectionName = source.SectionName,
-                                     DefaultSection = source.DefaultSection
-                                 };
-
-            if (newSection == null)
-            {
-                throw new Exception("Couldnt get a Section");
-            }
-
-            newSection.Sections.Add(source.SectionName, source.MakeCopy());
-            destination.Sections.Add(newSection.SectionName, newSection);
+            destination.Sections.Add(source.SectionName, source.MakeCopy());
+            destination.Sections[source.SectionName].DefaultSection = source.DefaultSection;
         }
 
         /// <summary>

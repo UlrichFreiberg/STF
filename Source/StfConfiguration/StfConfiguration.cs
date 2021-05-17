@@ -267,7 +267,7 @@ namespace Mir.Stf.Utilities
         }
 
         /// <summary>
-        /// The overlayer used by the pluginloader. Meant to take a (plugin)settings
+        /// The overlayer used by the plugin loader. Meant to take a (plugin)settings
         /// and overlay the core configuration with a (plugin)settings.
         /// </summary>
         /// <param name="filename">
@@ -279,12 +279,11 @@ namespace Mir.Stf.Utilities
         public Section OverLay(string filename)
         {
             var overLayer = new OverLayer();
-            var stfconfiguration = new StfConfiguration();
-            var overlay = stfconfiguration.LoadConfig(filename);
+            var stfConfiguration = new StfConfiguration();
+            var overlay = stfConfiguration.LoadConfig(filename);
 
             // the overlayer handles if arguments are null
             currentlyLoadedSection = overLayer.OverLay(currentlyLoadedSection, overlay);
-
             Environment = DefaultEnvironment;
 
             return currentlyLoadedSection;
@@ -438,21 +437,38 @@ namespace Mir.Stf.Utilities
         /// <param name="fileName">
         /// The file name.
         /// </param>
+        /// <param name="dumpAs">
+        /// The dump As.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool SaveToFile(string fileName)
+        public bool SaveToFile(string fileName, Section.DumpAs dumpAs = Section.DumpAs.AsXml)
         {
             try
             {
-                currentlyLoadedSection.DumpSection(Section.DumpAs.AsXml, fileName);
+                environmentConfiguration.DumpSection(dumpAs, fileName);
             }
             catch (Exception)
             {
                 return false;
             }
 
-            return true; // TODO: better retrun value
+            return true; // TODO: better return value
+        }
+
+        /// <summary>
+        /// The dump stf configuration.
+        /// </summary>
+        /// <param name="dumpFilename">
+        /// The dump filename.
+        /// </param>
+        public void DumpStfConfiguration(string dumpFilename)
+        {
+            var dumpFilenameNoExtension = Path.ChangeExtension(dumpFilename, string.Empty);
+
+            DumpStfConfigurationAsXml(dumpFilenameNoExtension + "xml");
+            DumpStfConfigurationAsText(dumpFilenameNoExtension + "txt");
         }
 
         /// <summary>
@@ -644,6 +660,45 @@ namespace Mir.Stf.Utilities
 
             configPath = configPath.Replace(StartOfAbsolutePath, string.Empty);
             return true;
+        }
+
+        /// <summary>
+        /// The dump stf configuration.
+        /// </summary>
+        /// <param name="dumpFilename">
+        /// The configuration dump Filename.
+        /// </param>
+        private void DumpStfConfigurationAsXml(string dumpFilename)
+        {
+            var content = $"<body><xmp>{environmentConfiguration.DumpSection(Section.DumpAs.AsXml)}</xmp></body>";
+
+            if (File.Exists(dumpFilename))
+            {
+                File.Delete(dumpFilename);
+            }
+
+            var xDoc = new XmlDocument();
+
+            xDoc.LoadXml(content);
+            xDoc.Save(dumpFilename);
+        }
+
+        /// <summary>
+        /// The dump stf configuration as text.
+        /// </summary>
+        /// <param name="dumpFilename">
+        /// The dump filename.
+        /// </param>
+        private void DumpStfConfigurationAsText(string dumpFilename)
+        {
+            var content = environmentConfiguration.DumpSection(Section.DumpAs.AsText);
+
+            if (File.Exists(dumpFilename))
+            {
+                File.Delete(dumpFilename);
+            }
+
+            File.WriteAllText(dumpFilename, content);
         }
     }
 }

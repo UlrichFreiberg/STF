@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mir.Stf</RootNamespace>
     <AssemblyName>Mir.Stf.Kernel</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\StfConfigurationException.cs" />
     <Compile Include="Interfaces\IStfTestData.cs" />
+    <Compile Include="KernelUtils\StfKernelDirectories.cs" />
     <Compile Include="KernelUtils\StfTextUtils.cs" />
     <Compile Include="StfTestDataAttribute.cs" />
     <Compile Include="StfKernel.cs" />
@@ -73,6 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Mir.Stf.Templates\StfConfiguration.xml.Template" />
   </ItemGroup>
   <ItemGroup>

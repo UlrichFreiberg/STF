@@ -15,7 +15,7 @@ namespace Mir.Stf.Utilities.Interfaces
     /// </summary>
     public interface IStfStringAssert
     {
-#region Some wrapping of https://msdn.microsoft.com/en-us/library/microsoft.visualstudio.testtools.unittesting.stringassert.aspx
+        #region Some wrapping of https://msdn.microsoft.com/en-us/library/microsoft.visualstudio.testtools.unittesting.stringassert.aspx
 
         /// <summary>
         /// The string contains.
@@ -152,7 +152,7 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool StringDoesNotEndsWith(string testStep, string value, string substring);
-#endregion
+        #endregion
 
         /// <summary>
         /// Assert if two strings are the same - Case Insignificant
@@ -203,7 +203,7 @@ namespace Mir.Stf.Utilities.Interfaces
         bool StringEmpty(string testStep, string actual);
 
         /// <summary>
-        /// Asserts that a string is Not (Null or Empty)
+        /// Asserts that a string is Not Empty
         /// </summary>
         /// <param name="testStep">
         /// Name of the test step in the test script
@@ -215,5 +215,33 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool StringNotEmpty(string testStep, string actual);
+
+        /// <summary>
+        /// Asserts that a string is Null or Empty
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="actual">
+        /// Value that was actually experienced
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+
+        bool StringIsNullOrEmpty(string testStep, string actual);
+        /// <summary>
+        /// Asserts that a string is Not Null nor Empty
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="actual">
+        /// Value that was actually experienced
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool StringIsNotNullOrEmpty(string testStep, string actual);
     }
 }

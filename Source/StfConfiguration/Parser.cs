@@ -87,8 +87,26 @@ namespace Mir.Stf.Utilities
             throw new ArgumentOutOfRangeException(keyName, "Section not found");
         }
 
+        /// <summary>
+        /// The set value.
+        /// </summary>
+        /// <param name="section">
+        /// The section.
+        /// </param>
+        /// <param name="keyName">
+        /// The key name.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         internal bool SetValue(Section section, string keyName, string value)
         {
+            string defaultSection;
+            bool retVal;
+
             if (IsLeaf(keyName))
             {
                 if (section.Keys.ContainsKey(keyName))
@@ -97,16 +115,18 @@ namespace Mir.Stf.Utilities
                     return true;
                 }
 
-                if (!string.IsNullOrEmpty(section.DefaultSection))
+                if (string.IsNullOrEmpty(section.DefaultSection))
                 {
-                    var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
-                    var tryDefaultKeyName = $"{defaultSection}.{keyName}";
-                    var retVal = SetValue(section, tryDefaultKeyName, value);
-
-                    return retVal;
+                    return false;
                 }
 
-                return false;
+                defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
+
+                var tryDefaultKeyName = $"{defaultSection}.{keyName}";
+
+                retVal = SetValue(section, tryDefaultKeyName, value);
+
+                return retVal;
             }
 
             var sectionName = GetSectionName(keyName);
@@ -122,18 +142,21 @@ namespace Mir.Stf.Utilities
                 return SetValue(section.Sections[sectionName], GetKeyName(keyName), value);
             }
 
-            if (!string.IsNullOrEmpty(section.DefaultSection))
+            if (string.IsNullOrEmpty(section.DefaultSection))
             {
-                var defaultSection = (EvaluateKeyValue != null) ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
-
-                if (section.Sections.ContainsKey(defaultSection))
-                {
-                    var retVal = SetValue(section.Sections[defaultSection], keyName, value);
-                    return retVal;
-                }
+                return false;
             }
 
-            return false;
+            defaultSection = EvaluateKeyValue != null ? EvaluateKeyValue(section.DefaultSection) : section.DefaultSection;
+
+            if (!section.Sections.ContainsKey(defaultSection))
+            {
+                return false;
+            }
+
+            retVal = SetValue(section.Sections[defaultSection], keyName, value);
+
+            return retVal;
         }
 
         /// <summary>
@@ -183,6 +206,7 @@ namespace Mir.Stf.Utilities
 
             var nameMatch = regex.Match(keyName).Value;
             var name = nameMatch.Substring(1, nameMatch.Length - 1);
+
             return name;
         }
     }

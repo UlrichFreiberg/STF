@@ -14,6 +14,8 @@ using System.Text.RegularExpressions;
 
 namespace Mir.Stf.KernelUtils
 {
+    using System.IO;
+
     /// <summary>
     /// Utils for handling text for the kernel 
     /// </summary>
@@ -34,7 +36,7 @@ namespace Mir.Stf.KernelUtils
         /// the value of the key
         /// </param>
         /// <returns>
-        /// wether it succeeded or not
+        /// whether it succeeded or not
         /// </returns>
         public bool Register(string keyName, string keyValue)
         {
@@ -57,7 +59,7 @@ namespace Mir.Stf.KernelUtils
         /// Clear all notions of variables - like after an initialization
         /// </summary>
         /// <returns>
-        /// wether it succeeded or not
+        /// whether it succeeded or not
         /// </returns>
         public bool VariablesClear()
         {
@@ -145,6 +147,37 @@ namespace Mir.Stf.KernelUtils
             }
 
             return variableValue;
+        }
+
+        /// <summary>
+        /// The get unique file name part.
+        /// </summary>
+        /// <param name="originalFilename">
+        /// The original Filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string AppendUniquePartToFileName(string originalFilename)
+        {
+            if (string.IsNullOrEmpty(originalFilename))
+            {
+                return originalFilename;
+            }
+
+            var filename = originalFilename;
+            var extension = string.Empty;
+
+            if (Path.HasExtension(originalFilename))
+            {
+                extension = Path.GetExtension(originalFilename);
+                filename = Path.GetFileNameWithoutExtension(originalFilename);
+            }
+
+            var uniquePart = Guid.NewGuid().ToString("N");
+            var retVal = $"{filename}_{uniquePart}{extension}";
+
+            return retVal;
         }
     }
 }

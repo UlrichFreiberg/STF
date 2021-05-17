@@ -11,3 +11,4 @@ Thumbs.db
 **/TestResults/**
 *.nupkg
 /.vs/config/applicationhost.config
+/.vs/Stf/**

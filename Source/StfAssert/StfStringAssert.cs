@@ -8,6 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -28,27 +29,27 @@ namespace Mir.Stf.Utilities
             /// <summary>
             /// The contains.
             /// </summary>
-            Contains, 
+            Contains,
 
             /// <summary>
             /// The does not match.
             /// </summary>
-            DoesNotMatch, 
-
-            /// <summary>
-            /// The ends with.
-            /// </summary>
-            EndsWith, 
-
-            /// <summary>
-            /// The matches.
-            /// </summary>
-            Matches, 
+            DoesNotMatch,
 
             /// <summary>
             /// The starts with.
             /// </summary>
-            StartsWith
+            StartsWith,
+
+            /// <summary>
+            /// The ends with.
+            /// </summary>
+            EndsWith,
+
+            /// <summary>
+            /// The matches.
+            /// </summary>
+            Matches,
         }
 
         /// <summary>
@@ -70,18 +71,24 @@ namespace Mir.Stf.Utilities
         {
             var retVal = WrapperStringAsserts(StringAssertFunction.Contains, value, substring);
 
-            if (retVal == null)
+            if (!wrapperRetVal.HasValue)
             {
-                var message = $"[{value}] contains [{substring}]";
+                AssertFail(testStep, assertionMessage);
+                return false;
+            }
 
-                AssertPass(testStep, message);
+            var retVal = wrapperRetVal.Value;
+
+            if (retVal)
+            {
+                AssertPass(testStep, $"[{value}] contains [{substring}]");
             }
             else
             {
-                AssertFail(testStep, retVal);
+                AssertFail(testStep, assertionMessage);
             }
 
-            return retVal == null;
+            return retVal;
         }
 
         /// <summary>
@@ -101,9 +108,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotContain(string testStep, string value, string substring)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.Contains, value, substring);
+            string assertionMessage;
+            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.Contains, value, substring, out assertionMessage);
 
-            if (retVal != null)
+            if (!wrapperRetVal.HasValue)
+            {
+                AssertFail(testStep, assertionMessage);
+                return false;
+            }
+
+            var retVal = wrapperRetVal.Value;
+
+            if (retVal)
             {
                 var message = $"[{value}] don't contain [{substring}]";
 
@@ -116,7 +132,7 @@ namespace Mir.Stf.Utilities
                 AssertFail(testStep, message);
             }
 
-            return retVal != null;
+            return retVal;
         }
 
         /// <summary>
@@ -136,9 +152,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringMatches(string testStep, string value, string pattern)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.Matches, value, pattern);
+            string assertionMessage;
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.Matches, value, pattern, out assertionMessage);
 
-            if (retVal == null)
+            if (!wrapperRetVal.HasValue)
+            {
+                AssertFail(testStep, assertionMessage);
+                return false;
+            }
+
+            var retVal = wrapperRetVal.Value;
+
+            if (retVal)
             {
                 var message = $"[{value}] is matched by [{pattern}]";
 
@@ -146,10 +171,10 @@ namespace Mir.Stf.Utilities
             }
             else
             {
-                AssertFail(testStep, retVal);
+                AssertFail(testStep, assertionMessage);
             }
 
-            return retVal == null;
+            return retVal;
         }
 
         /// <summary>
@@ -169,9 +194,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotMatch(string testStep, string value, string pattern)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.DoesNotMatch, value, pattern);
+            string assertionMessage;
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.DoesNotMatch, value, pattern, out assertionMessage);
 
-            if (retVal == null)
+            if (!wrapperRetVal.HasValue)
+            {
+                AssertFail(testStep, assertionMessage);
+                return false;
+            }
+
+            var retVal = wrapperRetVal.Value;
+
+            if (!retVal)
             {
                 var message = $"[{value}] is not matched by [{pattern}]";
 
@@ -179,10 +213,10 @@ namespace Mir.Stf.Utilities
             }
             else
             {
-                AssertFail(testStep, retVal);
+                AssertFail(testStep, assertionMessage);
             }
 
-            return retVal == null;
+            return retVal;
         }
 
         /// <summary>
@@ -202,9 +236,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringStartsWith(string testStep, string value, string substring)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring);
+            string assertionMessage;
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring, out assertionMessage);
 
-            if (retVal == null)
+            if (!wrapperRetVal.HasValue)
+            {
+                AssertFail(testStep, assertionMessage);
+                return false;
+            }
+
+            var retVal = wrapperRetVal.Value;
+
+            if (retVal)
             {
                 var message = $"[{value}] StartsWith [{substring}]";
 
@@ -212,10 +255,10 @@ namespace Mir.Stf.Utilities
             }
             else
             {
-                AssertFail(testStep, retVal);
+                AssertFail(testStep, assertionMessage);
             }
 
-            return retVal == null;
+            return retVal;
         }
 
         /// <summary>
@@ -235,22 +278,31 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotStartWith(string testStep, string value, string substring)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring);
+            string assertionMessage;
+            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring, out assertionMessage);
 
-            if (retVal != null)
+            if (!wrapperRetVal.HasValue)
             {
-                var message = $"[{value}] doesn't start with [{substring}]";
-
-                AssertPass(testStep, message);
+                AssertFail(testStep, assertionMessage);
+                return false;
             }
-            else
+
+            var retVal = wrapperRetVal.Value;
+
+            if (retVal)
             {
                 var message = $"[{value}] do start with [{substring}]";
 
                 AssertFail(testStep, message);
             }
+            else
+            {
+                var message = $"[{value}] doesn't start with [{substring}]";
 
-            return retVal != null;
+                AssertPass(testStep, message);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -270,9 +322,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringEndsWith(string testStep, string value, string substring)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring);
+            string assertionMessage;
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring, out assertionMessage);
 
-            if (retVal == null)
+            if (!wrapperRetVal.HasValue)
+            {
+                AssertFail(testStep, assertionMessage);
+                return false;
+            }
+
+            var retVal = wrapperRetVal.Value;
+
+            if (retVal)
             {
                 var message = $"[{value}] EndsWith [{substring}]";
 
@@ -280,10 +341,10 @@ namespace Mir.Stf.Utilities
             }
             else
             {
-                AssertFail(testStep, retVal);
+                AssertFail(testStep, assertionMessage);
             }
 
-            return retVal == null;
+            return retVal;
         }
 
         /// <summary>
@@ -303,22 +364,27 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotEndsWith(string testStep, string value, string substring)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring);
+            string assertionMessage;
+            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring, out assertionMessage);
 
-            if (retVal != null)
+            if (!wrapperRetVal.HasValue)
             {
-                var message = $"[{value}] doesn't ends with [{substring}]";
+                AssertFail(testStep, assertionMessage);
+                return false;
+            }
 
-                AssertPass(testStep, message);
+            var retVal = wrapperRetVal.Value;
+
+            if (!retVal)
+            {
+                AssertFail(testStep, $"[{value}] do ends with [{substring}]");
             }
             else
             {
-                var message = $"[{value}] do ends with [{substring}]";
-
-                AssertFail(testStep, message);
+                AssertPass(testStep, $"[{value}] doesn't ends with [{substring}]");
             }
 
-            return retVal != null;
+            return retVal;
         }
 
         /// <summary>
@@ -338,24 +404,20 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringEquals(string testStep, string expected, string actual)
         {
-            var retVal = expected == actual;
+            var retVal = string.Compare(expected, actual, StringComparison.InvariantCulture) == 0;
 
             if (retVal)
             {
-                var message = $"[{expected}] is equal to [{actual}]";
-
-                AssertPass(testStep, message);
+                AssertPass(testStep, $"[{expected}] is equal to [{actual}]");
             }
             else
             {
-                var message = $"[{expected}] is NOT equal to [{actual}]";
-
-                AssertFail(testStep, message);
+                AssertFail(testStep, $"[{expected}] is NOT equal to [{actual}]");
             }
 
             return retVal;
         }
-        
+
         /// <summary>
         /// Asserts that two strings are equal - Case Insignificant
         /// </summary>
@@ -373,7 +435,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringEqualsCi(string testStep, string expected, string actual)
         {
-            return StringEquals(testStep, expected?.ToLower(), actual?.ToLower());
+            var retVal = string.Compare(expected, actual, StringComparison.InvariantCultureIgnoreCase) == 0;
+
+            if (retVal)
+            {
+                AssertPass(testStep, $"[{expected}] is equal to [{actual}]");
+            }
+            else
+            {
+                AssertFail(testStep, $"[{expected}] is NOT equal to [{actual}]");
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -393,19 +466,15 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringNotEquals(string testStep, string expected, string actual)
         {
-            var retVal = expected != actual;
+            var retVal = string.Compare(expected, actual, StringComparison.InvariantCulture) != 0;
 
             if (retVal)
             {
-                var message = $"[{expected}] is NOT equal to [{actual}]";
-
-                AssertPass(testStep, message);
+                AssertPass(testStep, $"[{expected}] is NOT equal to [{actual}]");
             }
             else
             {
-                var message = $"[{expected}] is equal to [{actual}]";
-
-                AssertFail(testStep, message);
+                AssertFail(testStep, $"[{expected}] is equal to [{actual}]");
             }
 
             return retVal;
@@ -428,7 +497,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringNotEqualsCi(string testStep, string expected, string actual)
         {
-            return StringNotEquals(testStep, expected?.ToLower(), actual?.ToLower());
+            var retVal = string.Compare(expected, actual, StringComparison.InvariantCultureIgnoreCase) != 0;
+
+            if (retVal)
+            {
+                AssertPass(testStep, $"[{expected}] is not equal to [{actual}]");
+            }
+            else
+            {
+                AssertFail(testStep, $"[{expected}] IS equal to [{actual}]");
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -443,21 +523,17 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool StringEmpty(string testStep, string actual)
+        public bool StringIsNullOrEmpty(string testStep, string actual)
         {
             var retVal = string.IsNullOrEmpty(actual);
 
             if (retVal)
             {
-                const string Message = "String is NullOrEmpty";
-
-                AssertPass(testStep, Message);
+                AssertPass(testStep, "String is NullOrEmpty");
             }
             else
             {
-                var message = $"[{actual}] is NOT NullOrEmpty";
-
-                AssertFail(testStep, message);
+                AssertFail(testStep, $"[{actual}] is NOT NullOrEmpty");
             }
 
             return retVal;
@@ -475,21 +551,73 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
+        public bool StringIsNotNullOrEmpty(string testStep, string actual)
+        {
+            var retVal = !string.IsNullOrEmpty(actual);
+
+            if (retVal)
+            {
+                AssertPass(testStep, "String is not NullOrEmpty");
+            }
+            else
+            {
+                AssertFail(testStep, $"[{actual}] IS NullOrEmpty");
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Asserts that a string is Empty
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="actual">
+        /// Value that was actually experienced
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool StringEmpty(string testStep, string actual)
+        {
+            var retVal = actual != null && string.IsNullOrEmpty(actual);
+
+            if (retVal)
+            {
+                AssertPass(testStep, "String is NullOrEmpty");
+            }
+            else
+            {
+                AssertFail(testStep, $"[{actual}] is NOT NullOrEmpty");
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Asserts that a string is Not or Empty
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="actual">
+        /// Value that was actually experienced
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool StringNotEmpty(string testStep, string actual)
         {
             var retVal = !string.IsNullOrEmpty(actual);
 
             if (retVal)
             {
-                var message = "String is not NullOrEmpty";
-
-                AssertPass(testStep, message);
+                AssertPass(testStep, "String is not NullOrEmpty");
             }
             else
             {
-                var message = $"[{actual}] IS NullOrEmpty";
-
-                AssertFail(testStep, message);
+                AssertFail(testStep, $"[{actual}] IS NullOrEmpty");
             }
 
             return retVal;
@@ -507,12 +635,31 @@ namespace Mir.Stf.Utilities
         /// <param name="argstring">
         /// The argstring.
         /// </param>
+        /// <param name="assertionMessage">
+        /// setting the message from Assert
+        /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// Wether or not the assertion failed
         /// </returns>
-        private string WrapperStringAsserts(StringAssertFunction function, string value, string argstring)
+        private bool? WrapperStringAsserts(StringAssertFunction function, string value, string argstring, out string assertionMessage)
         {
-            string retVal = null;
+            var retVal = true;
+
+            assertionMessage = null;
+
+            if (string.IsNullOrEmpty(value))
+            {
+                assertionMessage = $"Can not evaluate {function}, as actual is null or empty";
+
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(argstring))
+            {
+                assertionMessage = $"Can not evaluate {function}, as expected is null or empty";
+
+                return null;
+            }
 
             try
             {
@@ -537,7 +684,8 @@ namespace Mir.Stf.Utilities
             }
             catch (AssertFailedException ex)
             {
-                retVal = ex.Message;
+                assertionMessage = ex.Message;
+                retVal = false;
             }
 
             return retVal;

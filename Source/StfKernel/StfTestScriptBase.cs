@@ -440,7 +440,7 @@ namespace Mir.Stf
         {
             StfLogger.LogKeyValue("Test Iteration", iterationStatus, iterationStatus);
             StfLogger.LogKeyValue("Kernel Logger", kernelLogfilePath, "Kernel Logger");
-            StfLogger.LogKeyValue("Testname", TestContext.TestName, "Name of test");
+            StfLogger.LogKeyValue("Test Name", TestContext.TestName, "Name of test");
             StfLogger.LogKeyValue("Stf Root", StfRoot, "The Stf Root directory");
 
             var configuration = Get<StfConfiguration>();

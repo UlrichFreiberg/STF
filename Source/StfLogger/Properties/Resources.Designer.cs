@@ -19,7 +19,7 @@ namespace Mir.Stf.Utilities.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -123,12 +123,15 @@ namespace Mir.Stf.Utilities.Properties {
         ///var TraceCount = 1;
         ///var InternalCount = 1;
         ///
-        ///function getURLParameter(name) {
-        ///    return decodeURIComponent((new RegExp(&quot;[?|&amp;]&quot; + name + &quot;=&quot; + &quot;([^&amp;;]+?)(&amp;|#|;|$)&quot;).exec(location.search) || [, &quot;&quot;])[1].replace(/\+/g, &quot;%20&quot;)) || null;
-        ///}
+        ///var MessegeType = &quot;inline&quot;;
         ///
-        ///function toggleKeyValues() {
-        ///    if ( [rest of string was truncated]&quot;;.
+        ///function toggle_messege(messageId) {
+        ///    document.getElementById(messageId).style.display = MessegeType;
+        ///
+        ///    if (MessegeType === &quot;inline&quot;) {
+        ///        MessegeType = &quot;none&quot;;
+        ///    } else {
+        ///         [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string logger {
             get {
@@ -228,23 +231,29 @@ namespace Mir.Stf.Utilities.Properties {
         ///&lt;head&gt;
         ///    &lt;title&gt;LOGFILETITLE&lt;/title&gt;
         ///    &lt;style&gt;
+        ///		.runstats {
+        ///			font-family: &quot;Trebuchet MS&quot;, Arial, Helvetica, sans-serif;
+        ///		}
+        ///
+        ///		.legend {
+        ///			margin-bottom: 5px;
+        ///		}
+        ///
+        ///		.legend-cell {
+        ///			padding-left: 4px;
+        ///			padding-right: 4px;
+        ///		}
+        ///		
         ///        #testresultpass {
         ///            background-color: lightgreen
         ///		}
         ///        #testresultfail {
         ///            background-color: red
         ///		}
-        ///        #testresulterror {
-        ///            background-color: magenta
+        ///        #testresultinconclusive {
+        ///            background-color: orange
         ///		}
-        ///        #testresultwarning {
-        ///            background-color: yellow
-        ///		}
-        ///	
-        ///        #RunStats {
-        ///            font-family: &quot;Trebuchet MS&quot;, Arial, Helvetica, sans-serif;
-        ///            text-align: center;
-        ///            width: [rest of string was truncated]&quot;;.
+        ///        #te [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SummaryLoggerHeader {
             get {

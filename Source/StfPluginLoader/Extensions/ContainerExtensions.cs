@@ -11,8 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.InterceptionExtension;
+
 using Mir.Stf.Utilities.Interceptors;
 using Mir.Stf.Utilities.Interfaces;
 
@@ -22,6 +21,15 @@ namespace Mir.Stf.Utilities.Extensions
 
     using Mir.Stf.Utilities.Attributes;
     using Mir.Stf.Utilities.Exceptions;
+
+    using Unity;
+    using Unity.Injection;
+    using Unity.Interception;
+    using Unity.Interception.ContainerIntegration;
+    using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
+    using Unity.Interception.PolicyInjection;
+    using Unity.Interception.PolicyInjection.MatchingRules;
+    using Unity.Lifetime;
 
     /// <summary>
     /// The container extensions.

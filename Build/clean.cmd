@@ -99,6 +99,7 @@ if NOT "%1" == "" (
   call :delCacheFiles
   
   if /I %CL_DIR% == "STF_BIN"     call :delFiles
+  if /I %CL_DIR% == "StfBin"      call :delFiles
   if /I %CL_DIR% == "Release"     call :delFiles
   if /I %CL_DIR% == "Debug"       call :delFiles
   if /I %CL_DIR% == "obj"         call :delFiles
