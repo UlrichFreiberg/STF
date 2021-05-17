@@ -73,6 +73,7 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = $"[{value}] contains [{substring}]";
+
                 AssertPass(testStep, message);
             }
             else
@@ -105,11 +106,13 @@ namespace Mir.Stf.Utilities
             if (retVal != null)
             {
                 var message = $"[{value}] don't contain [{substring}]";
+
                 AssertPass(testStep, message);
             }
             else
             {
                 var message = $"[{value}] do contain [{substring}]";
+
                 AssertFail(testStep, message);
             }
 
@@ -138,6 +141,7 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = $"[{value}] is matched by [{pattern}]";
+
                 AssertPass(testStep, message);
             }
             else
@@ -170,6 +174,7 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = $"[{value}] is not matched by [{pattern}]";
+
                 AssertPass(testStep, message);
             }
             else
@@ -202,6 +207,7 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = $"[{value}] StartsWith [{substring}]";
+
                 AssertPass(testStep, message);
             }
             else
@@ -234,11 +240,13 @@ namespace Mir.Stf.Utilities
             if (retVal != null)
             {
                 var message = $"[{value}] doesn't start with [{substring}]";
+
                 AssertPass(testStep, message);
             }
             else
             {
                 var message = $"[{value}] do start with [{substring}]";
+
                 AssertFail(testStep, message);
             }
 
@@ -267,6 +275,7 @@ namespace Mir.Stf.Utilities
             if (retVal == null)
             {
                 var message = $"[{value}] EndsWith [{substring}]";
+
                 AssertPass(testStep, message);
             }
             else
@@ -299,11 +308,13 @@ namespace Mir.Stf.Utilities
             if (retVal != null)
             {
                 var message = $"[{value}] doesn't ends with [{substring}]";
+
                 AssertPass(testStep, message);
             }
             else
             {
                 var message = $"[{value}] do ends with [{substring}]";
+
                 AssertFail(testStep, message);
             }
 
@@ -332,11 +343,13 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 var message = $"[{expected}] is equal to [{actual}]";
+
                 AssertPass(testStep, message);
             }
             else
             {
                 var message = $"[{expected}] is NOT equal to [{actual}]";
+
                 AssertFail(testStep, message);
             }
 
@@ -360,7 +373,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringEqualsCi(string testStep, string expected, string actual)
         {
-            return StringEquals(testStep, expected.ToLower(), actual.ToLower());
+            return StringEquals(testStep, expected?.ToLower(), actual?.ToLower());
         }
 
         /// <summary>
@@ -380,16 +393,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringNotEquals(string testStep, string expected, string actual)
         {
-            bool retVal = expected != actual;
+            var retVal = expected != actual;
 
             if (retVal)
             {
                 var message = $"[{expected}] is NOT equal to [{actual}]";
+
                 AssertPass(testStep, message);
             }
             else
             {
                 var message = $"[{expected}] is equal to [{actual}]";
+
                 AssertFail(testStep, message);
             }
 
@@ -413,7 +428,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringNotEqualsCi(string testStep, string expected, string actual)
         {
-            return StringNotEquals(testStep, expected.ToLower(), actual.ToLower());
+            return StringNotEquals(testStep, expected?.ToLower(), actual?.ToLower());
         }
 
         /// <summary>
@@ -430,16 +445,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringEmpty(string testStep, string actual)
         {
-            bool retVal = string.IsNullOrEmpty(actual);
+            var retVal = string.IsNullOrEmpty(actual);
 
             if (retVal)
             {
-                var message = "String is NullOrEmpty";
-                AssertPass(testStep, message);
+                const string Message = "String is NullOrEmpty";
+
+                AssertPass(testStep, Message);
             }
             else
             {
                 var message = $"[{actual}] is NOT NullOrEmpty";
+
                 AssertFail(testStep, message);
             }
 
@@ -465,11 +482,13 @@ namespace Mir.Stf.Utilities
             if (retVal)
             {
                 var message = "String is not NullOrEmpty";
+
                 AssertPass(testStep, message);
             }
             else
             {
                 var message = $"[{actual}] IS NullOrEmpty";
+
                 AssertFail(testStep, message);
             }
 
@@ -494,6 +513,7 @@ namespace Mir.Stf.Utilities
         private string WrapperStringAsserts(StringAssertFunction function, string value, string argstring)
         {
             string retVal = null;
+
             try
             {
                 switch (function)
