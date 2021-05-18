@@ -52,27 +52,5 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool CopyFile(string sourceFilename, string destinationFilename);
-
-        /// <summary>
-        /// The get temp folder.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        string GetTempFolder();
-
-        /// <summary>
-        /// The mirror folder.
-        /// </summary>
-        /// <param name="sourceDirname">
-        /// The source dirname.
-        /// </param>
-        /// <param name="destinationDirname">
-        /// The destination dirname.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        bool MirrorFolder(string sourceDirname, string destinationDirname);
     }
 }

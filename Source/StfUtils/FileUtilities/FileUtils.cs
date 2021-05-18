@@ -12,6 +12,7 @@ namespace Mir.Stf.Utilities.FileUtilities
 {
     using System;
     using System.IO;
+    using System.Text.RegularExpressions;
 
     using Mir.Stf.Utilities.Interfaces;
 
@@ -91,36 +92,54 @@ namespace Mir.Stf.Utilities.FileUtilities
         }
 
         /// <summary>
-        /// The get temp folder.
+        /// Get uncommented filecontent.
         /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <param name="startOfCommentLine">
+        /// The string all comments starts with - rest of the line is treated as a comment.
+        /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string GetTempFolder()
+        public string GetCleanFilecontent(string fileName, string startOfCommentLine = "//")
         {
-            var tempDirname = Path.Combine(Environment.ExpandEnvironmentVariables("TEMP"), Guid.NewGuid().ToString());
+            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            {
+                return string.Empty;
+            }
 
-            Directory.CreateDirectory(tempDirname);
+            var content = File.ReadAllText(fileName);
+            var retVal = RemoveComments(content, startOfCommentLine);
 
-            return Directory.Exists(tempDirname) ? tempDirname : null;
+            return retVal;
         }
 
         /// <summary>
-        /// The mirror folder.
+        /// The remove comments.
         /// </summary>
-        /// <param name="sourceDirname">
-        /// The source dirname.
+        /// <param name="content">
+        /// The content.
         /// </param>
-        /// <param name="destinationDirname">
-        /// The destination dirname.
+        /// <param name="startOfCommentLine">
+        /// The string all comments starts with - rest of the line is treated as a comment.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// The <see cref="string"/>.
         /// </returns>
-        public bool MirrorFolder(string sourceDirname, string destinationDirname)
+        public string RemoveComments(string content, string startOfCommentLine = "//")
         {
-            // get to the RoboCopy Wrapper
-            return false;
+            // remove comments
+            content = Regex.Replace(content, $@"\s*{startOfCommentLine}.*", string.Empty);
+
+            // remove empty lines
+            content = Regex.Replace(content, @"[\r\n]+", Environment.NewLine, RegexOptions.Multiline);
+
+            // remove starting and ending empty lines (line one empty and/or last lines)
+            content = content.Trim();
+
+            return content;
         }
     }
 }
