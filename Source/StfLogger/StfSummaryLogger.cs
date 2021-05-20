@@ -90,6 +90,7 @@ namespace Mir.Stf.Utilities
             // we use the value for the first logfile, to control the column for the rest of the logfiles.
             // In that way we dont need to set it for all data rows
             var iterationDescriptionColumnToUse = GetIterationDescriptionColumn(dataDrivenParameters);
+
             foreach (var logfile in logFiles)
             {
                 var runStatus = RunStatusUtils.GetRunStatus(logfile);
@@ -177,6 +178,7 @@ namespace Mir.Stf.Utilities
         private bool CloseSummaryLogFile()
         {
             summaryLogFile.Write(GetTextResource("SummaryLoggerFooter"));
+
             return summaryLogFile.Close();
         }
 
@@ -233,7 +235,7 @@ namespace Mir.Stf.Utilities
             var retVal = new OrderedDictionary();
             var content = File.ReadAllText(logFilename);
 
-            // <div class="el msg">Column[Message]=[Third and last iteration of datadriven test]</div>
+            // lines like: <div class="el msg">Column[Message]=[Third and last iteration of datadriven test]</div>
             var parameterRegexp = "<div class=\"el msg\">Column[[](?<Key>[^]]*)[]]=[[](?<Value>[^]]*)";
             var match = Regex.Match(content, parameterRegexp, RegexOptions.Multiline);
 
@@ -271,6 +273,7 @@ namespace Mir.Stf.Utilities
             }
 
             var logfileTitle = $"SummaryLogger for {Path.GetFileNameWithoutExtension(nameOfSummaryfile)}";
+
             logHeader = logHeader.Replace("LOGFILETITLE", logfileTitle);
 
             var headers = string.Empty;
@@ -280,11 +283,16 @@ namespace Mir.Stf.Utilities
 
             for (var i = 0; i < dataDrivenParameters.Count; i++)
             {
-                headers += $"<th>{dataDrivenParametersKeys[i]}</th>{Environment.NewLine}";
+                var parameterKeyValue = dataDrivenParametersKeys[i];
+
+                // a paramter might be a XML snippet
+                parameterKeyValue = System.Security.SecurityElement.Escape(parameterKeyValue);
+                headers += $"{Indent(12)}<th>{parameterKeyValue}</th>{Environment.NewLine}";
             }
 
             logHeader = logHeader.Replace("DATADRIVENPARAMETERS", headers);
             summaryLogFile.Write(logHeader);
+
             return true;
         }
 
@@ -317,19 +325,21 @@ namespace Mir.Stf.Utilities
         private string GetTableFormatString(OrderedDictionary dataDrivenParameters)
         {
             var index = 0;
-            var retVal = "<tr id=\"{" + index++ + "}\" description=\"{" + index++ + "}\">" + Environment.NewLine;
+            var retVal = $"{Indent(12)}<tr id=\"{{{index++}}}\" description=\"{{{index++}}}\">{Environment.NewLine}";
 
-            retVal += "  <td>" + Environment.NewLine;
-            retVal += "    <a href=\"{" + index++ + "}\">{" + index++ + "}</a>" + Environment.NewLine;
-            retVal += "  </td>" + Environment.NewLine;
+            retVal += $"{Indent(16)}<td>{Environment.NewLine}";
+            retVal += $"{Indent(20)}<a href=\"{{{index++}}}\">{{{index++}}}</a>{Environment.NewLine}";
+            retVal += $"{Indent(16)}</td>{Environment.NewLine}";
+
             for (var i = 2; i < 7; i++)
             {
-                retVal += "  <td>{" + index++ + "}</td>" + Environment.NewLine;
+                retVal += $"{Indent(16)}<td>{{{index++}}}</td>{Environment.NewLine}";
             }
 
             var dataDrivenParametersValues = new string[dataDrivenParameters.Count];
 
             dataDrivenParameters.Values.CopyTo(dataDrivenParametersValues, 0);
+
             for (var i = 0; i < dataDrivenParameters.Count; i++)
             {
                 var value = dataDrivenParametersValues[i];
@@ -339,10 +349,13 @@ namespace Mir.Stf.Utilities
                     value = value.Replace("{", "{{").Replace("}", "}}");
                 }
 
-                retVal += $"<td>{value}</td>{Environment.NewLine}";
+                // a paramter might be a XML snippet
+                var parameterKeyValue = System.Security.SecurityElement.Escape(value);
+
+                retVal += $"{Indent(16)}<td>{parameterKeyValue}</td>{Environment.NewLine}";
             }
 
-            retVal += $"</tr>{Environment.NewLine}";
+            retVal += $"{Indent(12)}</tr>{Environment.NewLine}";
 
             return retVal;
         }
@@ -384,6 +397,22 @@ namespace Mir.Stf.Utilities
             }
 
             return "testresultUnknown";
+        }
+
+        /// <summary>
+        /// The indent.
+        /// </summary>
+        /// <param name="count">
+        /// The count.
+        /// </param>
+        /// <returns>
+        /// A string containg as many spaces as reqested
+        /// </returns>
+        private string Indent(int count)
+        {
+            var retVal = string.Empty.PadLeft(count > 0 ? count : 0);
+
+            return retVal;
         }
     }
 }

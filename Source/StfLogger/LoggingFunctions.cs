@@ -14,9 +14,9 @@ using Mir.Stf.Utilities.Interfaces;
 
 namespace Mir.Stf.Utilities
 {
-    using System.IO;
     using System.Text;
     using System.Xml;
+    using System.Xml.Linq;
 
     using Mir.Stf.Utilities.Utils;
 
@@ -94,9 +94,9 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public int LogXmlMessage(string xmlMessage)
         {
-            var formatedXml = PrettyPrint(xmlMessage);
+            var formatedXml = XmlPrettyPrint(xmlMessage);
 
-            return LogOneHtmlMessage(StfLogLevel.Info, formatedXml, null);                        
+            return LogOneHtmlMessage(StfLogLevel.Info, formatedXml, null);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace Mir.Stf.Utilities
         public int LogKeyValue(string key, string value, string message, params object[] args)
         {
             message = message.StfFormatString(args);
-            
+
             var htmlLine = "<div class=\"line keyvalue\">\n";
             htmlLine += $"   <div class=\"el key\">{key}</div>\n";
             htmlLine += $"   <div class=\"el value\">{value}</div>\n";
@@ -365,14 +365,13 @@ namespace Mir.Stf.Utilities
             var convertedToFoldableMessage = false;
 
             logLevelString = logLevelString.ToLower();
-
             CheckForPerformanceAlert();
-
             message = message.StfFormatString(args);
 
             if (Configuration.MapNewlinesToBr)
             {
                 var count = message.Count(f => f == '\n');
+
                 if (count > 1)
                 {
                     var firstLineIndexOf = message.IndexOf(Environment.NewLine, StringComparison.Ordinal);
@@ -380,8 +379,7 @@ namespace Mir.Stf.Utilities
                     if (firstLineIndexOf > 0)
                     {
                         var firstLineOfMessage = message.Substring(0, firstLineIndexOf);
-                        var firstLoggedLine =
-                            $"{Environment.NewLine}{System.Security.SecurityElement.Escape(firstLineOfMessage)}";
+                        var firstLoggedLine =$"{Environment.NewLine}{firstLineOfMessage}";
 
                         message = GetMultilineMessage(messageIdString, firstLoggedLine, message);
                         convertedToFoldableMessage = true;
@@ -418,12 +416,12 @@ namespace Mir.Stf.Utilities
 
             NumberOfLoglevelMessages[loglevel]++;
             LogFileHandle.Write(htmlLine);
+
             return htmlLine.Length;
         }
 
         /// <summary>
         /// The pretty print.
-        /// See http://stackoverflow.com/questions/1123718/format-xml-string-to-print-friendly-xml-string
         /// </summary>
         /// <param name="xml">
         /// The xml.
@@ -431,47 +429,35 @@ namespace Mir.Stf.Utilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string PrettyPrint(string xml)
+        private string XmlPrettyPrint(string xml)
         {
-            var result = string.Empty;
-
-            var memoryStream = new MemoryStream();
-            var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.Unicode);
-            var xmlDocument = new XmlDocument();
+            var strippedXml = xml.Replace(Environment.NewLine, string.Empty);
+            string retVal;
 
             try
             {
-                // Load the XmlDocument with the XML.
-                xmlDocument.LoadXml(xml);
+                var stringBuilder = new StringBuilder();
+                var xElement = XElement.Parse(strippedXml);
+                var xmlWriterSettings = new XmlWriterSettings
+                                            {
+                                                OmitXmlDeclaration = true,
+                                                Indent = true,
+                                                NewLineOnAttributes = true
+                                            };
 
-                xmlTextWriter.Formatting = Formatting.Indented;
+                using (var xmlWriter = XmlWriter.Create(stringBuilder, xmlWriterSettings))
+                {
+                    xElement.Save(xmlWriter);
+                }
 
-                // Write the XML into a formatting XmlTextWriter
-                xmlDocument.WriteContentTo(xmlTextWriter);
-                xmlTextWriter.Flush();
-                memoryStream.Flush();
-
-                // Have to rewind the MemoryStream in order to read
-                // its contents.
-                memoryStream.Position = 0;
-
-                // Read MemoryStream contents into a StreamReader.
-                var streamReader = new StreamReader(memoryStream);
-
-                // Extract the text from the StreamReader.
-                var formattedXml = streamReader.ReadToEnd();
-
-                result = formattedXml;
+                retVal = stringBuilder.ToString();
             }
-            catch (XmlException ex)
+            catch
             {
-                LogError("You tried to log an XML message - something is not right: [{0}]", ex.Message);
+                retVal = System.Security.SecurityElement.Escape(strippedXml);
             }
 
-            memoryStream.Close();
-            xmlTextWriter.Close();
-
-            return result;
+            return retVal;
         }
 
         /// <summary>
@@ -494,17 +480,16 @@ namespace Mir.Stf.Utilities
             var multilineId = $"multiLineId_{messageIdString}";
             var retVal =
                 string.Format(
-                    "<a class=\"left\" href=\"javascript:toggle_messege('{0}')\" id='href_about'> {1} " 
-                    + "</a>"
-                    + "    <div id='{0}' class='hide' style=\"display:none;\">" 
-                    + "       </br>" 
-                    + "       <xmp>"
-                    + "{2}" 
-                    + "       </xmp>" 
-                    + "    </div>",
+@"<a class=""left"" href=""javascript:toggle_messege('{0}')"" id='href_about'><pre>{1}</pre></a>
+<div id='{0}' class='hide' style=""display:none;"">
+<pre>
+<br/>
+{2}
+</pre>
+</div>",
                     multilineId,
-                    firstLoggedLine,
-                    message);
+                    System.Security.SecurityElement.Escape(firstLoggedLine),
+                    System.Security.SecurityElement.Escape(message));
 
             return retVal;
         }

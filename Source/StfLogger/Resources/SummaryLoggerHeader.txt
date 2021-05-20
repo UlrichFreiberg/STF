@@ -91,12 +91,13 @@
 		</tbody>
 	</table>
     <table id="RunStats">
-        <tr>
+        <thead>
             <th>Iteration</th>
             <th>Pass</th>
             <th>Fail</th>
             <th>Inconclusive</th>
             <th>Error</th>
             <th>Warning</th>
-            DATADRIVENPARAMETERS
-        </tr>
+DATADRIVENPARAMETERS
+        </thead>
+		<tbody>
