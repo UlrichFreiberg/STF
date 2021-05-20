@@ -54,10 +54,20 @@ namespace UnitTest
             testFile.WriteLine("one line of test data");
             testFile.Close();
 
+            // positive tests
+            Assert.IsTrue(StfAssert.FileContains("TestStep litteral string", UnitTestFile, "test"));
+            Assert.IsTrue(StfAssert.FileContains("TestStep regular regexp", UnitTestFile, "t[eE]st"));
             Assert.IsFalse(StfAssert.FileContains("TestStepName 1", @"c:\DoNotExists.nope", "A string"));
             Assert.IsFalse(StfAssert.FileContains("TestStepName 2", UnitTestFile, "Nothing Like it"));
-            Assert.IsTrue(StfAssert.FileContains("TestStepName 3", UnitTestFile, "test"));
-            Assert.IsTrue(StfAssert.FileContains("TestStepName 4", UnitTestFile, "t[eE]st"));
+
+            // null and empty strings returns false
+            Assert.IsFalse(StfAssert.FileContains("filename null, searchstring notNull", null, "A string"));
+            Assert.IsFalse(StfAssert.FileContains("filename null, searchstring Null", null, null));
+            Assert.IsFalse(StfAssert.FileContains("filename null, searchstring Empty", null, string.Empty));
+            Assert.IsFalse(StfAssert.FileContains("Not existing file, search string Null", @"c:\DoNotExists.nope", null));
+            Assert.IsFalse(StfAssert.FileContains("Not existing file, search string Empty ", @"c:\DoNotExists.nope", string.Empty));
+            Assert.IsFalse(StfAssert.FileContains("Existing file, search string Null", UnitTestFile, null));
+            Assert.IsFalse(StfAssert.FileContains("Existing file, search string Empty ", UnitTestFile, string.Empty));
         }
 
         /// <summary>
@@ -82,6 +92,10 @@ namespace UnitTest
             testFile.Close();
 
             Assert.IsTrue(StfAssert.FileExists("TestStepName 3", UnitTestFile));
+
+            // null and empty strings returns false
+            Assert.IsFalse(StfAssert.FileExists("filename null", null));
+            Assert.IsFalse(StfAssert.FileExists("filename Empty", string.Empty));
         }
 
         /// <summary>
@@ -104,13 +118,16 @@ namespace UnitTest
             testFile.Close();
 
             Assert.IsFalse(StfAssert.FileNotExists("TestStepName 2", UnitTestFile));
+
+            // null and empty strings returns false
+            Assert.IsTrue(StfAssert.FileNotExists("filename null", null));
+            Assert.IsTrue(StfAssert.FileNotExists("filename Empty", string.Empty));
         }
 
         /// <summary>
         /// The test method assert FolderExists.
         /// </summary>
         [TestMethod]
-
         public void TestMethodAssertFolderExists()
         {
             const string UnitTestDir = @"c:\temp\TestMethodAssertFolderExists";
@@ -124,6 +141,10 @@ namespace UnitTest
 
             Directory.CreateDirectory(UnitTestDir);
             Assert.IsTrue(StfAssert.FolderExists("TestStepName 2", UnitTestDir));
+
+            // null and empty strings returns false
+            Assert.IsFalse(StfAssert.FolderExists("foldername null", null));
+            Assert.IsFalse(StfAssert.FolderExists("foldername Empty", string.Empty));
         }
 
         /// <summary>
@@ -143,6 +164,35 @@ namespace UnitTest
 
             Directory.CreateDirectory(UnitTestDir);
             Assert.IsFalse(StfAssert.FolderNotExists("TestStepName 2", UnitTestDir));
+
+            // null and empty strings returns true
+            Assert.IsTrue(StfAssert.FolderNotExists("foldername null", null));
+            Assert.IsTrue(StfAssert.FolderNotExists("foldername Empty", string.Empty));
+        }
+
+        [TestMethod]
+        public void TestMethodAssertFilesDifferNullAndEmpty()
+        {
+            const string UnitTestFile1 = @"TestData\TestMethodAssertFileNotExists1.xml";
+
+            // null and empty strings returns false
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 null,    filename2 Null", null, null));
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 null,    filename2 Empty", null, string.Empty));
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 null,    filename2 notNull", null, UnitTestFile1));
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 Empty,   filename2 Null", string.Empty, null));
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 Empty,   filename2 Empty", string.Empty, string.Empty));
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 Empty,   filename2 notNull", string.Empty, UnitTestFile1));
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 notNull, filename2 Null", UnitTestFile1, null));
+            Assert.IsFalse(StfAssert.FilesDoDiffer("filename1 notNull, filename2 Empty", UnitTestFile1, string.Empty));
+
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 null,    filename2 Null", null, null));
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 null,    filename2 Empty", null, string.Empty));
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 null,    filename2 notNull", null, UnitTestFile1));
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 Empty,   filename2 Null", string.Empty, null));
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 Empty,   filename2 Empty", string.Empty, string.Empty));
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 Empty,   filename2 notNull", string.Empty, UnitTestFile1));
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 notNull, filename2 Null", UnitTestFile1, null));
+            Assert.IsFalse(StfAssert.FilesDoNotDiffer("filename1 notNull, filename2 Empty", UnitTestFile1, string.Empty));
         }
 
         /// <summary>
@@ -151,11 +201,22 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertFilesDiffer01()
         {
-            const string UnitTestFile1 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\TestMethodAssertFileNotExists1.xml";
-            const string UnitTestFile2 = @"D:\Projects\STF\UnitTest\StfAssert\TestData\TestMethodAssertFileNotExists2.xml";
+            const string UnitTestFile1 = @"TestData\TestMethodAssertFileNotExists1.xml";
+            const string UnitTestFile2 = @"TestData\TestMethodAssertFileNotExists2.xml";
 
             Assert.IsTrue(StfAssert.FilesDoDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
             Assert.IsFalse(StfAssert.FilesDoNotDiffer("TestStepName 1", UnitTestFile1, UnitTestFile2));
+
+            // null and empty strings returns false
+            Assert.IsFalse(StfAssert.FileContains("filename1 null, filename2 Null", null, null));
+            Assert.IsFalse(StfAssert.FileContains("filename1 null, filename2 Empty", null, string.Empty));
+            Assert.IsFalse(StfAssert.FileContains("filename1 null, filename2 notNull", null, UnitTestFile1));
+            Assert.IsFalse(StfAssert.FileContains("filename1 Empty, filename2 Null", string.Empty, null));
+            Assert.IsFalse(StfAssert.FileContains("filename1 Empty, filename2 Empty", string.Empty, string.Empty));
+            Assert.IsFalse(StfAssert.FileContains("filename1 Empty, filename2 notNull", string.Empty, UnitTestFile1));
+            Assert.IsFalse(StfAssert.FileContains("filename1 null, filename2 Null", UnitTestFile1, null));
+            Assert.IsFalse(StfAssert.FileContains("filename1 null, filename2 Empty", UnitTestFile1, string.Empty));
+            Assert.IsFalse(StfAssert.FileContains("filename1 null, filename2 notNull", UnitTestFile1, "A string"));
         }
 
         /// <summary>

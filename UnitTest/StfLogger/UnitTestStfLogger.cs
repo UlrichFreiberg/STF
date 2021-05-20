@@ -303,16 +303,40 @@ namespace UnitTest
         [TestMethod]
         public void TestLogTextWithXmlContent()
         {
+            var xmlToLog = string.Format(
+                    @"<xmltags>{0}<xmltag>{0}Line 1{0}      Six Space indent{0}</xmltag>{0}</xmltags>{0}",
+                    Environment.NewLine);
+
             StfLogger.LogLevel = StfLogLevel.Info;
-            StfLogger.LogInfo("Using Escape");
-            //// StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format(@"<xmltags>{0}<xmltag>{0}Line 1{0}   Three Space indent{0}{0}<xmltag>{0}<xmltags>{0}", Environment.NewLine)));
-            StfLogger.LogInfo(string.Format(@"<xmltags>{0}   <xmltag>{0}      Line 1{0}      Six Space indent{0}   <xmltag>{0}<xmltags>{0}", Environment.NewLine));
 
-            var prettyXml = "<xmltags><xmltag>return newline                  </xmltag></xmltags>";
-            StfLogger.LogInfo(prettyXml);
+            StfLogger.LogSubHeader("xml without anything");
+            StfLogger.LogInfo(xmlToLog);
 
-            StfLogger.LogInfo("Using PrettyXml and Escape");
-            StfLogger.LogInfo(System.Security.SecurityElement.Escape(string.Format("<xmltags>{0}<xmltag>{0}return <br/> newline{0}{0}</xmltag>{0}</xmltags>{0}", Environment.NewLine)));
+            StfLogger.LogSubHeader("Using Escape");
+            StfLogger.LogInfo(System.Security.SecurityElement.Escape(xmlToLog));
+
+            StfLogger.LogSubHeader("Using logXml");
+            StfLogger.LogXmlMessage(xmlToLog);
+        }
+
+        /// <summary>
+        /// The test screenshot on log fail.
+        /// </summary>
+        [TestMethod]
+        public void TestLogTextWithInvalidXmlContent()
+        {
+            var xmlToLog = string.Format(@"<xmltags>{0}<xmltag>{0}Line 1{0}      Six Space indent{0}</xmltag>{0}</WRONG_CLOSING_TAG>{0}", Environment.NewLine);
+
+            StfLogger.LogLevel = StfLogLevel.Info;
+
+            StfLogger.LogSubHeader("xml without anything");
+            StfLogger.LogInfo(xmlToLog);
+
+            StfLogger.LogSubHeader("Using Escape");
+            StfLogger.LogInfo(System.Security.SecurityElement.Escape(xmlToLog));
+
+            StfLogger.LogSubHeader("Using logXml");
+            StfLogger.LogXmlMessage(xmlToLog);
         }
 
         /// <summary>
