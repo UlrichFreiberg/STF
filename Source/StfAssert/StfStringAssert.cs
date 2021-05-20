@@ -69,7 +69,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringContains(string testStep, string value, string substring)
         {
-            var retVal = WrapperStringAsserts(StringAssertFunction.Contains, value, substring);
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.Contains, value, substring, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {
@@ -108,8 +108,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotContain(string testStep, string value, string substring)
         {
-            string assertionMessage;
-            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.Contains, value, substring, out assertionMessage);
+            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.Contains, value, substring, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {
@@ -152,8 +151,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringMatches(string testStep, string value, string pattern)
         {
-            string assertionMessage;
-            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.Matches, value, pattern, out assertionMessage);
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.Matches, value, pattern, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {
@@ -194,8 +192,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotMatch(string testStep, string value, string pattern)
         {
-            string assertionMessage;
-            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.DoesNotMatch, value, pattern, out assertionMessage);
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.DoesNotMatch, value, pattern, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {
@@ -236,8 +233,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringStartsWith(string testStep, string value, string substring)
         {
-            string assertionMessage;
-            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring, out assertionMessage);
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {
@@ -278,8 +274,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotStartWith(string testStep, string value, string substring)
         {
-            string assertionMessage;
-            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring, out assertionMessage);
+            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.StartsWith, value, substring, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {
@@ -322,8 +317,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringEndsWith(string testStep, string value, string substring)
         {
-            string assertionMessage;
-            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring, out assertionMessage);
+            var wrapperRetVal = WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {
@@ -364,8 +358,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool StringDoesNotEndsWith(string testStep, string value, string substring)
         {
-            string assertionMessage;
-            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring, out assertionMessage);
+            var wrapperRetVal = !WrapperStringAsserts(StringAssertFunction.EndsWith, value, substring, out var assertionMessage);
 
             if (!wrapperRetVal.HasValue)
             {

@@ -68,6 +68,20 @@ namespace Mir.Stf.Utilities
         {
             string msg;
 
+            if (string.IsNullOrEmpty(pattern))
+            {
+                msg = $"FileContains: pattern cannot be null nor empty";
+                AssertFail(testStep, msg);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(filenameAndPath))
+            {
+                msg = $"FileContains: filenameAndPath cannot be null nor empty";
+                AssertFail(testStep, msg);
+                return false;
+            }
+
             if (!File.Exists(filenameAndPath))
             {
                 msg = $"FileContains: [{filenameAndPath}] Does Not exist";
@@ -237,6 +251,12 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool FilesDoDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
+            if (string.IsNullOrEmpty(filenameAndPathFirst) || string.IsNullOrEmpty(filenameAndPathSecond))
+            {
+                AssertFail(testStep, $"FilesDoDiffer: file names cannot be null nor empty");
+                return false;
+            }
+
             var msg = $"FilesDoDiffer: [{filenameAndPathFirst}] differs from [{filenameAndPathSecond}]";
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
             var fileInfoSecond = new FileInfo(filenameAndPathSecond);
@@ -258,7 +278,7 @@ namespace Mir.Stf.Utilities
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
                 msg =
-                    $"FilesDoDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] does not have the same length";
+                    $"FilesDoDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] do not have the same length";
                 AssertFail(testStep, msg);
                 return true;
             }
@@ -266,8 +286,7 @@ namespace Mir.Stf.Utilities
             var diffPosition = FileCompare(filenameAndPathFirst, filenameAndPathSecond);
             if (diffPosition == 0)
             {
-                msg =
-                    $"FilesDoDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] doesn't differ byte-per-byte";
+                msg = $"FilesDoDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] do not differ byte-per-byte";
                 AssertFail(testStep, msg);
                 return false;
             }
@@ -292,6 +311,12 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public bool FilesDoNotDiffer(string testStep, string filenameAndPathFirst, string filenameAndPathSecond)
         {
+            if (string.IsNullOrEmpty(filenameAndPathFirst) || string.IsNullOrEmpty(filenameAndPathSecond))
+            {
+                AssertFail(testStep, $"FilesDoNotDiffer: file names cannot be null nor empty");
+                return false;
+            }
+
             var msg = $"FilesDoNotDiffer: [{filenameAndPathFirst}] does not differ from [{filenameAndPathSecond}]";
             var fileInfoFirst = new FileInfo(filenameAndPathFirst);
             var fileInfoSecond = new FileInfo(filenameAndPathSecond);
@@ -312,8 +337,7 @@ namespace Mir.Stf.Utilities
 
             if (fileInfoFirst.Length != fileInfoSecond.Length)
             {
-                msg =
-                    $"FilesDoNotDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] does have the same length";
+                msg = $"FilesDoNotDiffer: [{filenameAndPathFirst}] and [{filenameAndPathSecond}] does have the same length";
                 AssertFail(testStep, msg);
                 return false;
             }

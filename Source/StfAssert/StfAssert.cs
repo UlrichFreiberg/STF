@@ -22,9 +22,14 @@ namespace Mir.Stf.Utilities
     public partial class StfAssert : IStfAssert
     {
         /// <summary>
-        /// The m enable negative testing.
+        /// Backing field: enable negative testing.
         /// </summary>
         private bool enableNegativeTesting;
+
+        /// <summary>
+        /// Backing field: treat errors as warning.
+        /// </summary>
+        private bool treatFailsAsWarning;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StfAssert"/> class.
@@ -67,6 +72,26 @@ namespace Mir.Stf.Utilities
             {
                 AssertLogger.LogTrace("EnableNegativeTesting set to [{0}]", value);
                 enableNegativeTesting = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether treat fails as warning.
+        /// Sometimes, we want to fail without failing for real. Like when using the 
+        /// Asserter in a retrier context - we want to log errors, 
+        /// but errors should not count as errors - the whole point of the retrier
+        /// </summary>
+        public bool TreatFailsAsWarning
+        {
+            get
+            {
+                return treatFailsAsWarning;
+            }
+
+            set
+            {
+                AssertLogger.LogTrace("TreatFailsAsWarning set to [{0}]", value);
+                treatFailsAsWarning = value;
             }
         }
 
@@ -189,7 +214,6 @@ namespace Mir.Stf.Utilities
         public bool IsInconclusive(string testStep, string message)
         {
             AssertLogger.LogInconclusive(testStep, message);
-
             Stats.AssertInconclusiveCount++;
 
             if (!enableNegativeTesting)
@@ -231,6 +255,7 @@ namespace Mir.Stf.Utilities
             }
 
             var msg = $"AssertThrows: Actual exception [{expectedTypeName}] is";
+
             if (isExpected)
             {
                 msg = $"{msg} of expected type [{typeof(T).Name}]";
@@ -277,6 +302,7 @@ namespace Mir.Stf.Utilities
         {
             AssertLogger.LogPass(testStep, message);
             Stats.AssertPassCount++;
+
             return true;
         }
 
@@ -294,10 +320,18 @@ namespace Mir.Stf.Utilities
         /// </returns>
         private bool AssertFail(string testStep, string message)
         {
-            AssertLogger.LogFail(testStep, message);
-            Stats.AssertFailedCount++;
+            if (TreatFailsAsWarning)
+            {
+                AssertLogger.LogWarning(testStep, "TreatFailsAsWarning is true, so this AssertFail is not included in the error stats");
+            }
+            else
+            {
+                Stats.AssertFailedCount++;
+            }
 
-            if (!enableNegativeTesting)
+            AssertLogger.LogFail(testStep, message);
+
+            if (!EnableNegativeTesting)
             {
                 throw new AssertFailedException(message);
             }
