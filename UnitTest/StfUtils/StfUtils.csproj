@@ -97,6 +97,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="StringTransformationUtilities\UnitTestMapValuesFunction.cs" />
+    <Compile Include="StringTransformationUtilities\UnitTestSimpleFunctions.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestRegisterAllStuFunctionsForType.cs" />
     <Compile Include="UnitTestGetKeynameKeyvalueEntries.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestGetCleanFilecontent.cs" />
