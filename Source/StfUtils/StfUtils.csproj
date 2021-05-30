@@ -56,6 +56,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ITableUtils.cs" />
     <Compile Include="RetryerUtilities\RetryerUtils.cs" />
+    <Compile Include="StringTransformationUtilities\SelectFunction.cs" />
+    <Compile Include="StringTransformationUtilities\MapValuesFunction.cs" />
     <Compile Include="StringTransformationUtilities\SimpleFunctions.cs" />
     <Compile Include="StringTransformationUtilities\StringTransformationUtils.cs" />
     <Compile Include="TableUtilities\TableHeaderColumnInfo.cs" />

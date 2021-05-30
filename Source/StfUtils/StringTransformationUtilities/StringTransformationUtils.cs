@@ -32,6 +32,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             RegisterAllStuFunctionsForType(this);
             RegisterAllStuFunctionsForType(new SimpleFunctions());
             RegisterAllStuFunctionsForType(new MapValuesFunction());
+            RegisterAllStuFunctionsForType(new SelectFunction());
         }
 
         /// <summary>
