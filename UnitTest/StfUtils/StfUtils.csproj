@@ -97,6 +97,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="StringTransformationUtilities\UnitTestRegisterAllStuFunctionsForType.cs" />
     <Compile Include="UnitTestGetKeynameKeyvalueEntries.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestGetCleanFilecontent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
