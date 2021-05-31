@@ -67,7 +67,7 @@ namespace UnitTest.StringTransformationUtilities
                 dictOutcomes[actual]++;
             }
 
-            // TODO: Missing a evaluation of the distribution - for now we check all values are chooen
+            // TODO: Missing a evaluation of the distribution - for now we check all values are choosen
             Assert.AreEqual(dictOutcomes.Count, numberOfValues);
         }
 

@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NCalc, Version=3.5.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CoreCLR-NCalc.2.2.92\lib\net45\NCalc.dll</HintPath>
+    <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ncalc.1.3.8\lib\NCalc.dll</HintPath>
     </Reference>
     <Reference Include="Slapper, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Slapper.AutoMapper.2.0.4\lib\net47\Slapper.dll</HintPath>
@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ITableUtils.cs" />
     <Compile Include="RetryerUtilities\RetryerUtils.cs" />
+    <Compile Include="StringTransformationUtilities\CalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\SelectFunction.cs" />
     <Compile Include="StringTransformationUtilities\MapValuesFunction.cs" />
     <Compile Include="StringTransformationUtilities\SimpleFunctions.cs" />
