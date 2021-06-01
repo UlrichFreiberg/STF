@@ -30,7 +30,7 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool DeleteFile(string filename)
+        public bool DeleteFile(string filename, int ensureWaitSeconds = 30)
         {
             if (!File.Exists(filename))
             {
@@ -38,11 +38,23 @@ namespace Mir.Stf.Utilities.FileUtilities
             }
 
             File.Delete(filename);
-            return !File.Exists(filename);
+
+            var retrier = new RetryerUtilities.RetryerUtils();
+
+            var ok = retrier.Retry(
+                () => !File.Exists(filename),
+                TimeSpan.FromSeconds(ensureWaitSeconds));
+
+            return ok;
         }
 
         /// <summary>
         /// The create textfile.
+        /// cas
+        /// pkevkevin spacey films
+        /// ETH development smart contracts c#
+        /// 
+        /// 
         /// </summary>
         /// <param name="filename">
         /// The filename.
@@ -140,6 +152,49 @@ namespace Mir.Stf.Utilities.FileUtilities
             content = content.Trim();
 
             return content;
+        }
+
+        /// <summary>
+        /// The WriteAllText file.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <param name="text">
+        /// The text to write
+        /// </param>
+        /// <param name="ensureWaitSeconds">
+        /// Time to wait for write to complete in seconds
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool WriteAllTextFile(string filename, string textToWrite, int ensureWaitSeconds = 30)
+        {
+            var retVal = false;
+            try
+            {
+                var actualText = textToWrite ?? string.Empty;
+                File.WriteAllText(filename, actualText);
+
+                // TODO: retryer
+
+                // test size of file is correct 
+                var length = new System.IO.FileInfo(filename).Length;
+                retVal = (length == (long)actualText.Length) ? true : false;
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the error with message from exception
+                // TODO: Put error message in the standard ErrorMessage 
+                retVal = false;
+            }
+            finally
+            {
+                // log the value of retVal ???
+                // what else should we do here ?
+            }
+            return retVal;
         }
     }
 }

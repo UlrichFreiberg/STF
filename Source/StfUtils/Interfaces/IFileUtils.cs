@@ -26,7 +26,7 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool DeleteFile(string filename);
+        bool DeleteFile(string filename, int ensureWaitSeconds = 30);
 
         /// <summary>
         /// The create textfile.
@@ -52,5 +52,23 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="bool"/>.
         /// </returns>
         bool CopyFile(string sourceFilename, string destinationFilename);
+
+        /// <summary>
+        /// The WriteAllText file.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <param name="text">
+        /// The text to write
+        /// </param>
+        /// <param name="ensureWaitSeconds">
+        /// Time to wait for write to complete in seconds
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool WriteAllTextFile(string filename, string text, int ensureWaitSeconds = 30);
+
     }
 }
