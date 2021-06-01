@@ -16,32 +16,26 @@ namespace UnitTest.TextUtils
     using System.IO;
 
     [TestClass]
-    public class UnitTestDeleteFile
+    public class UnitTestWriteAllTextFile
     {
         [TestMethod]
-        public void TestDeleteFile()
+        public void TestWriteAllTextFile()
         {
-            Helper_DeleteFile(@"C:\temp\Nope.txt", "Not existing file - path correct", true);
-            Helper_DeleteFile(@"C:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect", true);
-
-            Helper_DeleteFile(@"C:\temp\CreateFirst.txt", "Existing file(create first) - path correct", true, true);
+            Helper_WriteAllTextFile(@"C:\temp\wallText1.txt", "Sfu text to write", true);
+            Helper_WriteAllTextFile(@"C:\temp\emptyText1.txt", string.Empty, true);
+            Helper_WriteAllTextFile(@"C:\temp\nullText1.txt", null, true);
 
             // Usual test
-            Helper_DeleteFile(null, "path is null", true);
-            Helper_DeleteFile(string.Empty, "path is empty", true);
+            Helper_WriteAllTextFile(null, "path is null", false);
+            Helper_WriteAllTextFile(string.Empty, "path is empty", false);
 
         }
 
-        private void Helper_DeleteFile(string filename, string testComment, bool expected, bool createFileFirst = false)
+        private void Helper_WriteAllTextFile(string filename, string testComment, bool expected)
         {
             var fileUtils = new FileUtils();
 
-            if (createFileFirst)
-            {
-                fileUtils.WriteAllTextFile(filename, "UnitTestStuff");
-            }
-
-            var actual = fileUtils.DeleteFile(filename);
+            var actual = fileUtils.WriteAllTextFile(filename, testComment);
 
             Assert.IsTrue(expected == actual);
         }

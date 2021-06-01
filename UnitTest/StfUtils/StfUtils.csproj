@@ -97,6 +97,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FileUtilities\FileUtils\UnitTestWriteAllTextFile.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSelectFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestMapValuesFunction.cs" />
