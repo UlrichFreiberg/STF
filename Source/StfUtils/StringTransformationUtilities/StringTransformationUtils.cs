@@ -29,8 +29,11 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             StuObjects = new Dictionary<string, object>();
             StuFunctions = new Dictionary<string, StuFunctionInfo>();
             
-            RegisterAllStuFunctionsForType(typeof(StringTransformationUtils));
+            RegisterAllStuFunctionsForType(this);
             RegisterAllStuFunctionsForType(new SimpleFunctions());
+            RegisterAllStuFunctionsForType(new MapValuesFunction());
+            RegisterAllStuFunctionsForType(new SelectFunction());
+            RegisterAllStuFunctionsForType(new CalcFunction());
         }
 
         /// <summary>

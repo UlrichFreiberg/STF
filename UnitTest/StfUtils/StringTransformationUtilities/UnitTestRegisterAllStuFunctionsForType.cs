@@ -28,22 +28,6 @@ namespace UnitTest.StringTransformationUtilities
         private readonly StringTransformationUtils stringTransformationUtils = new StringTransformationUtils();
 
         /// <summary>
-        /// The test stu simple functions.
-        /// </summary>
-        [TestMethod]
-        public void TestStuSimpleFunctions()
-        {
-            HelperTestBob("EMPTY", "HEJ", string.Empty);
-            HelperTestBob("EMPTY", string.Empty, string.Empty);
-            HelperTestBob("EMPTY", null, string.Empty);
-
-            HelperTestBob("SPACE", "5", "     ");
-            HelperTestBob("SPACE", "HEJ", " ");
-            HelperTestBob("SPACE", string.Empty, " ");
-            HelperTestBob("SPACE", null, " ");
-        }
-
-        /// <summary>
         /// The test register all stu functions for type.
         /// </summary>
         [TestMethod]
