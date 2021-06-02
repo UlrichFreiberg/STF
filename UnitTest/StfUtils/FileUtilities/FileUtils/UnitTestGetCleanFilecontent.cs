@@ -23,6 +23,10 @@ namespace UnitTest.TextUtils
         {
             Helper_GetCleanFilecontent("File With Header", "FileWithComments.txt");
             Helper_GetCleanFilecontent("File With no Header", "FileWithCommentsNoHeader.txt");
+
+            new FileUtils().GetCleanFilecontent(string.Empty);
+//            Helper_DeleteFile(string.Empty, "path is empty", true);
+
         }
 
         private void Helper_GetCleanFilecontent(string testStep, string inputFilename)

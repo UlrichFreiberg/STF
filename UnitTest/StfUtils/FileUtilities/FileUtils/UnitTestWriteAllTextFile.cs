@@ -21,9 +21,15 @@ namespace UnitTest.TextUtils
         [TestMethod]
         public void TestWriteAllTextFile()
         {
-            Helper_WriteAllTextFile(@"C:\temp\wallText1.txt", "Sfu text to write", true);
+            string standardTextToWrite = "Sfu text to write";
+
+            Helper_WriteAllTextFile(@"C:\temp\wallText1.txt", standardTextToWrite, true);
             Helper_WriteAllTextFile(@"C:\temp\emptyText1.txt", string.Empty, true);
             Helper_WriteAllTextFile(@"C:\temp\nullText1.txt", null, true);
+
+            Helper_WriteAllTextFile(@"QQ:\temp\baddriveText1.txt", standardTextToWrite, false);
+            Helper_WriteAllTextFile(@"C:\temp\folderNotExists\noFolderText1.txt", standardTextToWrite, false);
+            Helper_WriteAllTextFile(@"C:\temp\!\noFolderText1.txt", standardTextToWrite, false);
 
             // Usual test
             Helper_WriteAllTextFile(null, "path is null", false);

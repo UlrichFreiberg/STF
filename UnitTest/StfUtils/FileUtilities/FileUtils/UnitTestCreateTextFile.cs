@@ -16,24 +16,24 @@ namespace UnitTest.TextUtils
     using System.IO;
 
     [TestClass]
-    public class UnitTestDeleteFile
+    public class UnitTestCreateTextFile
     {
         [TestMethod]
-        public void TestDeleteFile()
+        public void TestCreateTextFile()
         {
-            Helper_DeleteFile(@"C:\temp\Nope.txt", "Not existing file - path correct", true);
-            Helper_DeleteFile(@"C:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect", true);
-            Helper_DeleteFile(@"QQQ:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect", true);
+            Helper_TestCreateTextFile(@"C:\temp\CreateTextFile.txt", "CreateTextFile - path correct", true);
 
-            Helper_DeleteFile(@"C:\temp\CreateFirst.txt", "Existing file(create first) - path correct", true, true);
+            Helper_TestCreateTextFile(@"C:\temp\FolderNotExist\Nope.txt", "Folder not exist", false);
+            Helper_TestCreateTextFile(@"QQQ:\temp\FolderNotExist\Nope.txt", "path incorrect format", false);
+
+            Helper_TestCreateTextFile(@"C:\temp\CreateFirst.txt", "Overwrite Existing file(create first) - path correct", true, true);
 
             // Usual test
-            Helper_DeleteFile(null, "path is null", true);
-            Helper_DeleteFile(string.Empty, "path is empty", true);
-
+            Helper_TestCreateTextFile(null, "path is null", false);
+            Helper_TestCreateTextFile(string.Empty, "path is empty", false);
         }
 
-        private void Helper_DeleteFile(string filename, string testComment, bool expected, bool createFileFirst = false)
+        private void Helper_TestCreateTextFile(string filename, string testComment, bool expected, bool createFileFirst = false)
         {
             var fileUtils = new FileUtils();
 
@@ -42,7 +42,8 @@ namespace UnitTest.TextUtils
                 fileUtils.WriteAllTextFile(filename, "UnitTestStuff");
             }
 
-            var actual = fileUtils.DeleteFile(filename);
+            var streamWriter = fileUtils.CreateTextfile(filename);
+            var actual = (streamWriter != null) ? true : false;
 
             Assert.IsTrue(expected == actual);
         }
