@@ -21,45 +21,153 @@ namespace Mir.Stf.Utilities.FileUtilities
     /// </summary>
     public class FileUtils : IFileUtils
     {
+
+        /// <summary>
+        /// The exists file.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <param name="ensureWaitSeconds">
+        /// The ensureWaitSeconds.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool ExistsFile(string filename, int ensureWaitSeconds = 30)
+        {
+            try
+            {
+                var retryer = new RetryerUtilities.RetryerUtils();
+
+                return retryer.Retry(
+                    () => File.Exists(filename),
+                    TimeSpan.FromSeconds(ensureWaitSeconds));
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the error with message from exception
+                // TODO: Put error message in the standard ErrorMessage 
+                return false;
+            }
+            finally
+            {
+                // log the value of retVal ???
+                // what else should we do here ?
+            }
+        }
+
+        /// <summary>
+        /// The not exists file.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <param name="ensureWaitSeconds">
+        /// The ensureWaitSeconds.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool NotExistsFile(string filename, int ensureWaitSeconds = 30)
+        {
+            try
+            {
+                var retryer = new RetryerUtilities.RetryerUtils();
+
+                return retryer.Retry(
+                    () => !File.Exists(filename),
+                    TimeSpan.FromSeconds(ensureWaitSeconds));
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the error with message from exception
+                // TODO: Put error message in the standard ErrorMessage 
+                return false;
+            }
+            finally
+            {
+                // log the value of retVal ???
+                // what else should we do here ?
+            }
+        }
+
         /// <summary>
         /// The delete file.
         /// </summary>
         /// <param name="filename">
         /// The filename.
         /// </param>
+        /// <param name="ensureWaitSeconds">
+        /// The ensureWaitSeconds.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool DeleteFile(string filename)
+        public bool DeleteFile(string filename, int ensureWaitSeconds = 30)
         {
-            if (!File.Exists(filename))
+            try
             {
-                return true;
-            }
+                if (!File.Exists(filename))
+                {
+                    return true;
+                }
 
-            File.Delete(filename);
-            return !File.Exists(filename);
+                File.Delete(filename);
+
+                return NotExistsFile(filename, ensureWaitSeconds);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the error with message from exception
+                // TODO: Put error message in the standard ErrorMessage 
+                return false;
+            }
+            finally
+            {
+                // log the value of retVal ???
+
+                // what else should we do here ?
+            }
         }
+
 
         /// <summary>
         /// The create textfile.
+        /// 
         /// </summary>
         /// <param name="filename">
         /// The filename.
         /// </param>
+        /// <param name="ensureWaitSeconds">
+        /// The ensureWaitSeconds.
+        /// </param>
         /// <returns>
         /// The <see cref="StreamWriter"/>.
         /// </returns>
-        public StreamWriter CreateTextfile(string filename) 
+        public StreamWriter CreateTextfile(string filename, int ensureWaitSeconds = 30)
         {
-            var streamWriter  = File.CreateText(filename);
+            StreamWriter streamWriter;
 
-            if (!File.Exists(filename))
+            try
             {
+                streamWriter = File.CreateText(filename);
+
+                return ExistsFile(filename) 
+                    ? streamWriter 
+                    : null;
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the error with message from exception
+                // TODO: Put error message in the standard ErrorMessage 
                 return null;
             }
-
-            return streamWriter;
+            finally
+            {
+                // log the value of retVal ???
+                // what else should we do here ?
+            }
         }
 
         /// <summary>
@@ -88,7 +196,7 @@ namespace Mir.Stf.Utilities.FileUtilities
 
             File.Copy(sourceFilename, destinationFilename);
 
-            return File.Exists(destinationFilename);
+            return ExistsFile(destinationFilename);
         }
 
         /// <summary>
@@ -140,6 +248,52 @@ namespace Mir.Stf.Utilities.FileUtilities
             content = content.Trim();
 
             return content;
+        }
+
+        /// <summary>
+        /// The WriteAllText file.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <param name="text">
+        /// The text to write
+        /// </param>
+        /// <param name="ensureWaitSeconds">
+        /// Time to wait for write to complete in seconds
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool WriteAllTextFile(string filename, string textToWrite, int ensureWaitSeconds = 30)
+        {
+            try
+            {
+                var actualText = textToWrite ?? string.Empty;
+                File.WriteAllText(filename, actualText);
+
+                if (!ExistsFile(filename))
+                {
+                    return false;
+                }
+
+                // test size of file is correct 
+                var length = new System.IO.FileInfo(filename).Length;
+                return (length == (long)actualText.Length) 
+                            ? true 
+                            : false;
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the error with message from exception
+                // TODO: Put error message in the standard ErrorMessage 
+                return false;
+            }
+            finally
+            {
+                // log the value of retVal ???
+                // what else should we do here ?
+            }
         }
     }
 }
