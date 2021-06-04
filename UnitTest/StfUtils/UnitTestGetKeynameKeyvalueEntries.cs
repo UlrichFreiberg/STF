@@ -8,29 +8,55 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace UnitTest.TextUtils
+namespace UnitTest
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Mir.Stf;
-    using Mir.Stf.Utilities.FileUtilities;
     using System.IO;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mir.Stf;
+    using Mir.Stf.Utilities.FileUtilities;
+
+    /// <summary>
+    /// The unit test get keyname keyvalue entries.
+    /// </summary>
     [TestClass]
     public class UnitTestGetKeynameKeyvalueEntries : StfTestScriptBase
     {
+        /// <summary>
+        /// The test read key value pairs from file.
+        /// </summary>
         [TestMethod]
         public void TestReadKeyValuePairsFromFile()
         {
             // keyName Case Ignore Case
-            Helper_ReadKeyValuePairsFromFile("File With two simple assignments", "Simple.txt");
-            Helper_ReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - CaseSignificant.txt");
+            HelperReadKeyValuePairsFromFile("File With two simple assignments", "Simple.txt");
+            HelperReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - CaseSignificant.txt");
 
             // keyName Case Significant
-            Helper_ReadKeyValuePairsFromFile("File With two simple assignments", "Simple.txt", keyNameIgnoreCase: false);
-            Helper_ReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - IgnoreCase.txt", keyNameIgnoreCase: false);
+            HelperReadKeyValuePairsFromFile("File With two simple assignments", "Simple.txt", keyNameIgnoreCase: false);
+            HelperReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - IgnoreCase.txt", keyNameIgnoreCase: false);
         }
 
-        private void Helper_ReadKeyValuePairsFromFile(string testStep, string inputFilename, string assignmentOperator = "=", string commentIndicator = "//", bool keyNameIgnoreCase = true)
+        /// <summary>
+        /// The helper read key value pairs from file.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="inputFilename">
+        /// The input filename.
+        /// </param>
+        /// <param name="assignmentOperator">
+        /// The assignment operator.
+        /// </param>
+        /// <param name="commentIndicator">
+        /// The comment indicator.
+        /// </param>
+        /// <param name="keyNameIgnoreCase">
+        /// The key name ignore case.
+        /// </param>
+        private void HelperReadKeyValuePairsFromFile(string testStep, string inputFilename, string assignmentOperator = "=", string commentIndicator = "//", bool keyNameIgnoreCase = true)
         {
             const string DataDir = @"D:\Projects\STF\UnitTest\StfUtils\TestData\FileUtils\KeyVauePairsUtils";
             var dataDirTemp = Path.Combine(DataDir, "Temp");
