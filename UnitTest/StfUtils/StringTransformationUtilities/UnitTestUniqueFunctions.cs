@@ -1,0 +1,89 @@
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UnitTestUniqueFunctions.cs" company="Mir Software">
+//   Copyright governed by Artistic license as described here:
+//          http://www.perlfoundation.org/artistic_license_2_0
+// </copyright>
+// <summary>
+//   Defines the UnitTest1 type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace UnitTest.StringTransformationUtilities
+{
+    using Mir.Stf.Utilities.StringTransformationUtilities;
+
+    /// <summary>
+    /// The unit test unique functions.
+    /// </summary>
+    [TestClass]
+    public class UnitTestUniqueFunctions
+    {
+        /// <summary>
+        /// The string transformation utils.
+        /// </summary>
+        private readonly StringTransformationUtils stringTransformationUtils = new StringTransformationUtils();
+
+        /// <summary>
+        /// The test stu unique functions.
+        /// </summary>
+        [TestMethod]
+        public void TestStuUniqueFunctions()
+        {
+            HelperTestGuid("GUID", "N", true);
+            HelperTestGuid("GUID", "D", true);
+            HelperTestGuid("GUID", "B", true);
+            HelperTestGuid("GUID", "P", true);
+            HelperTestGuid("GUID", "X", true);
+
+            HelperTestGuid("GUID", string.Empty, true);
+            HelperTestGuid("GUID", null, true);
+
+           // HelperTestGuid("GUID", "Q", false);
+        }
+
+        /// <summary>
+        /// The helper test unique functions.
+        /// </summary>
+        /// <param name="functionName">
+        /// The function name.
+        /// </param>
+        /// <param name="arg">
+        /// The arg.
+        /// </param>
+        /// <param name="expected">
+        /// The expected.
+        /// </param>
+        private void HelperTestUnique(string functionName, string arg, string checkinArg, bool expected)
+        {
+            var actual = stringTransformationUtils.EvaluateFunction(functionName, arg);
+
+            Assert.AreEqual(actual, expected);
+        }
+
+        /// <summary>
+        /// The helper test GUID functions.
+        /// </summary>
+        /// <param name="functionName">
+        /// The function name.
+        /// </param>
+        /// <param name="arg">
+        /// The arg.
+        /// </param>
+        /// <param name="expected">
+        /// The expected.
+        /// </param>
+        private void HelperTestGuid(string functionName, string arg, bool expected)
+        {
+            var formatArg = string.IsNullOrEmpty(arg) ? "D" : arg;
+
+            var guid = stringTransformationUtils.EvaluateFunction(functionName, arg);
+
+            var actual = System.Guid.TryParseExact(guid, formatArg, out var newGuid);
+            Assert.AreEqual(guid, newGuid.ToString(formatArg));
+            Assert.AreEqual(actual, expected);
+        }
+
+    }
+}

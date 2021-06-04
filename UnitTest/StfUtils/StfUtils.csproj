@@ -102,6 +102,7 @@
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSelectFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestMapValuesFunction.cs" />
+    <Compile Include="StringTransformationUtilities\UnitTestUniqueFunctions.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSimpleFunctions.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestRegisterAllStuFunctionsForType.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestDeleteFile.cs" />
