@@ -65,6 +65,7 @@
     <Compile Include="StringTransformationUtilities\CalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\SelectFunction.cs" />
     <Compile Include="StringTransformationUtilities\MapValuesFunction.cs" />
+    <Compile Include="StringTransformationUtilities\StringFunction.cs" />
     <Compile Include="StringTransformationUtilities\UniqueFunctions.cs" />
     <Compile Include="StringTransformationUtilities\SimpleFunctions.cs" />
     <Compile Include="StringTransformationUtilities\StringTransformationUtils.cs" />
