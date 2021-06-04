@@ -28,8 +28,8 @@ namespace UnitTest.FileUtilities.FileUtils
         [TestMethod]
         public void TestGetCleanFilecontent()
         {
-            HelperGetCleanFilecontent(null, "path is null", true);
-            HelperGetCleanFilecontent(string.Empty, "path is empty", true);
+            HelperGetCleanFilecontent(null, "path is null");
+            HelperGetCleanFilecontent(string.Empty, "path is empty");
 
             HelperGetCleanFilecontent("File With Header", "FileWithComments.txt");
             HelperGetCleanFilecontent("File With no Header", "FileWithCommentsNoHeader.txt");
