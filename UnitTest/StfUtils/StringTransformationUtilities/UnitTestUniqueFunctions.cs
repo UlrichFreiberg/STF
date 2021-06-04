@@ -40,26 +40,11 @@ namespace UnitTest.StringTransformationUtilities
             HelperTestGuid("GUID", string.Empty, true);
             HelperTestGuid("GUID", null, true);
 
-           // HelperTestGuid("GUID", "Q", false);
-        }
+            HelperTestGuid("GUID", "Q", false);
+            HelperTestGuid("GUID", "BX", false);
 
-        /// <summary>
-        /// The helper test unique functions.
-        /// </summary>
-        /// <param name="functionName">
-        /// The function name.
-        /// </param>
-        /// <param name="arg">
-        /// The arg.
-        /// </param>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        private void HelperTestUnique(string functionName, string arg, string checkinArg, bool expected)
-        {
-            var actual = stringTransformationUtils.EvaluateFunction(functionName, arg);
 
-            Assert.AreEqual(actual, expected);
+            // HelperTestGuid("GUID", "Q", false);
         }
 
         /// <summary>
@@ -76,12 +61,10 @@ namespace UnitTest.StringTransformationUtilities
         /// </param>
         private void HelperTestGuid(string functionName, string arg, bool expected)
         {
-            var formatArg = string.IsNullOrEmpty(arg) ? "D" : arg;
-
             var guid = stringTransformationUtils.EvaluateFunction(functionName, arg);
 
-            var actual = System.Guid.TryParseExact(guid, formatArg, out var newGuid);
-            Assert.AreEqual(guid, newGuid.ToString(formatArg));
+            var formatArg = string.IsNullOrEmpty(arg) ? "D" : arg;
+            var actual = System.Guid.TryParseExact(guid, formatArg, out _);
             Assert.AreEqual(actual, expected);
         }
 

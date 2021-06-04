@@ -32,7 +32,6 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </summary>
         public string GuidFormatString { get; set; }
 
-
         /// <summary>
         /// The stu uuid.
         /// </summary>
@@ -44,13 +43,15 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         {
             var format = string.IsNullOrEmpty(arg) ? GuidFormatString : arg;
 
-            if (!Regex.IsMatch(format, "[NDBPX]"))
+            if (!Regex.IsMatch(format, "^[NDBPX]$"))
             {
-                return string.Empty;
+                return null;
             }
 
             var guid = Guid.NewGuid();
-            return guid.ToString(format);
+            var retVal = guid.ToString(format);
+
+            return retVal;
         }
     }
 }
