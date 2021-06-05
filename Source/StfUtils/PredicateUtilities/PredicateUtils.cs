@@ -15,7 +15,6 @@ namespace Mir.Stf.Utilities.PredicateUtilities
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
-    using System.Linq.Dynamic;
     using System.Reflection;
     using System.Text.RegularExpressions;
 
@@ -69,7 +68,7 @@ namespace Mir.Stf.Utilities.PredicateUtilities
         /// <returns>
         /// The filtered list
         /// </returns>
-        public List<TEntity> FilterList<TEntity, TFilter>(List<TEntity> listOfEntities, TFilter filterClass)
+        public IEnumerable<TEntity> FilterList<TEntity, TFilter>(IEnumerable<TEntity> listOfEntities, TFilter filterClass)
             where TEntity : new()
             where TFilter : TEntity
         {
@@ -109,7 +108,8 @@ namespace Mir.Stf.Utilities.PredicateUtilities
 
                 try
                 {
-                    retVal = retVal.Where(predicateExpression, propertyValue).ToList();
+                    //retVal = retVal.Where(predicateExpression, propertyValue).ToList();
+                    retVal = retVal.Where(x => CompareOneElement(x, filterClass)).ToList();
                 }
                 catch (Exception)
                 {
@@ -295,6 +295,21 @@ namespace Mir.Stf.Utilities.PredicateUtilities
 
             PredicateList = retVal;
             return PredicateList;
+        }
+
+        private bool CompareOneElement<T>(T listElement, T searchSpec)
+        {
+            return true;
+            //var propsToCheck = typeof(T).GetProperties().Where(a => a.PropertyType == typeof(string) && a.CanRead);
+
+            //return source.Where(obj => {
+            //        foreach (PropertyInfo prop in propsToCheck)
+            //        {
+            //            string value = (string)prop.GetValue(obj);
+            //            if (value != null && value.ToLower().Contains(searchStrLower)) return true;
+            //        }
+            //        return false;
+            //    });
         }
 
         /// <summary>

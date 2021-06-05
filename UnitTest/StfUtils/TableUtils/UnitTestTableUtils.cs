@@ -18,7 +18,7 @@ namespace UnitTest.TableUtils
     /// The unit test 1.
     /// </summary>
     [TestClass]
-    public class UnitTestTableUtils
+    public class UnitTestTableUtils : UnitTestScriptBase
     {
         /// <summary>
         /// The test method 1.
@@ -29,7 +29,7 @@ namespace UnitTest.TableUtils
             string[] header = { "et", "to", "tre" };
             var wtu = new TableUtils(header);
 
-            Assert.IsTrue(wtu.Columns[0].Name == "et");
+            StfAssert.StringEquals("Et", wtu.Columns[0].Name, "et");
         }
 
         /// <summary>
@@ -42,10 +42,11 @@ namespace UnitTest.TableUtils
             var wtu = new TableUtils(header);
             var rowType = wtu.GetRowType();
 
-            Assert.IsTrue(rowType.gadeNavn == string.Empty);
+            StfAssert.StringEmpty("Empty", rowType.gadeNavn);
+
             rowType.gadeNavn = "Æblestien";
-            Assert.IsTrue(rowType.gadeNavn == "Æblestien");
-            Assert.IsTrue(wtu.Columns[0].Name == "fornavn");
+            StfAssert.StringEquals("Gadenavn", "Æblestien", rowType.gadeNavn);
+            StfAssert.StringEquals("fornavn", "fornavn", wtu.Columns[0].Name);
         }
 
         /// <summary>
@@ -59,8 +60,8 @@ namespace UnitTest.TableUtils
             var wtu = new TableUtils(header);
             var rowType = wtu.GetRowType(row);
 
-            Assert.IsTrue(rowType.gadeNavn == "Æblestien");
-            Assert.IsTrue(wtu.Columns[0].Name == "fornavn");
+            StfAssert.StringEquals("Æblestien", "Æblestien", rowType.gadeNavn);
+            StfAssert.StringEquals("fornavn", "fornavn", wtu.Columns[0].Name);
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace UnitTest.TableUtils
             var tableUtils = new TableUtils(header);
             var rowType = tableUtils.Projection<UnitTestProjection>(row);
 
-            Assert.IsTrue(rowType.Gadenavn == "Æblestien");
+            StfAssert.StringEquals("Æblestien", "Æblestien", rowType.Gadenavn);
         }
 
         /// <summary>

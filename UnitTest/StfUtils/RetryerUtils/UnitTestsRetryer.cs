@@ -19,7 +19,7 @@ namespace UnitTest.RetryerUtils
     /// The unit tests retryer.
     /// </summary>
     [TestClass]
-    public class UnitTestsRetryer
+    public class UnitTestsRetryer : UnitTestScriptBase
     {
         /// <summary>
         /// The simple success retryer test.
@@ -30,7 +30,7 @@ namespace UnitTest.RetryerUtils
             var retryerUtils = new RetryerUtils(5, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1));
             var success = retryerUtils.Retry(() => SimpleTestAction("Test"));
 
-            Assert.IsTrue(success);
+            StfAssert.IsTrue("Test", success);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace UnitTest.RetryerUtils
             var retryerUtils = new RetryerUtils(5, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1));
             var success = retryerUtils.Retry(() => SimpleTestFunction("wait", 3));
 
-            Assert.IsTrue(success);
+            StfAssert.IsTrue("Wait", success);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace UnitTest.RetryerUtils
             var retryerUtils = new RetryerUtils(5, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1));
             var success = retryerUtils.Retry(() => SimpleTestAction("NegativeTest"));
 
-            Assert.IsFalse(success);
+            StfAssert.IsFalse("NegativeTest", success);
         }
 
         /// <summary>
@@ -79,6 +79,21 @@ namespace UnitTest.RetryerUtils
             }
         }
 
+        /// <summary>
+        /// The simple test function.
+        /// </summary>
+        /// <param name="testParam">
+        /// The test param.
+        /// </param>
+        /// <param name="seconds">
+        /// The seconds.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// Throws exception is argument state it - used to test the retryer
+        /// </exception>
         private bool SimpleTestFunction(string testParam, int seconds)
         {
             switch (testParam)

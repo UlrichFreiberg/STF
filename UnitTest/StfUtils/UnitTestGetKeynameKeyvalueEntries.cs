@@ -21,7 +21,7 @@ namespace UnitTest
     /// The unit test get keyname keyvalue entries.
     /// </summary>
     [TestClass]
-    public class UnitTestGetKeynameKeyvalueEntries : StfTestScriptBase
+    public class UnitTestGetKeynameKeyvalueEntries : UnitTestScriptBase
     {
         /// <summary>
         /// The test read key value pairs from file.
@@ -29,13 +29,15 @@ namespace UnitTest
         [TestMethod]
         public void TestReadKeyValuePairsFromFile()
         {
+            StfLogger.Configuration.ScreenshotOnLogFail = false;
+
             // keyName Case Ignore Case
             HelperReadKeyValuePairsFromFile("File With two simple assignments", "Simple.txt");
-            HelperReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - CaseSignificant.txt");
+            HelperReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - CaseSignificant.txt", keyNameIgnoreCase: false);
 
             // keyName Case Significant
             HelperReadKeyValuePairsFromFile("File With two simple assignments", "Simple.txt", keyNameIgnoreCase: false);
-            HelperReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - IgnoreCase.txt", keyNameIgnoreCase: false);
+            HelperReadKeyValuePairsFromFile("File With two duplicate key assignments", "DuplicateKeys - IgnoreCase.txt");
         }
 
         /// <summary>
@@ -58,23 +60,19 @@ namespace UnitTest
         /// </param>
         private void HelperReadKeyValuePairsFromFile(string testStep, string inputFilename, string assignmentOperator = "=", string commentIndicator = "//", bool keyNameIgnoreCase = true)
         {
-            const string DataDir = @"D:\Projects\STF\UnitTest\StfUtils\TestData\FileUtils\KeyVauePairsUtils";
-            var dataDirTemp = Path.Combine(DataDir, "Temp");
-            var fileUtils = new FileUtils();
-            var absolutePathInput = Path.Combine(DataDir, inputFilename);
-            var absolutePathExpected = Path.Combine(DataDir, $@"Expected\{inputFilename}");
-            var tempInputPath = Path.Combine(dataDirTemp, inputFilename);
-            var tempActualPath = Path.Combine(dataDirTemp, $@"{inputFilename}-Actual.txt");
-            var tempExpectedPath = Path.Combine(dataDirTemp, $@"{inputFilename}-Expected.txt");
+            const string DataDir = @".\TestData\KeyValuePairsUtils";
 
-            // Setup Temp files
-            if (!Directory.Exists(dataDirTemp))
-            {
-                Directory.CreateDirectory(dataDirTemp);
-            }
+            StfLogger.LogHeader(testStep);
+            FileUtils.SetupTempResultFolders(DataDir);
 
-            fileUtils.CopyFile(absolutePathInput, tempInputPath);
-            fileUtils.CopyFile(absolutePathExpected, tempExpectedPath);
+            var absolutePathInput = FileUtils.GetTestCaseLocalFilePath(inputFilename);
+            var absolutePathExpected = FileUtils.GetTestCaseLocalFilePath($@"Expected\{inputFilename}");
+            var tempInputPath = FileUtils.GetTestCaseTempDirFilePath(inputFilename);
+            var tempActualPath = FileUtils.GetTestCaseTempDirFilePath($@"{inputFilename}-Actual.txt");
+            var tempExpectedPath = FileUtils.GetTestCaseTempDirFilePath($@"{inputFilename}-Expected.txt");
+
+            FileUtils.CopyFile(absolutePathInput, tempInputPath);
+            FileUtils.CopyFile(absolutePathExpected, tempExpectedPath);
 
             // generate Actual
             var keyNameValueUtils = new KeyValuePairUtils(assignmentOperator, commentIndicator, keyNameIgnoreCase);
