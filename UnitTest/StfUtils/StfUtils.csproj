@@ -37,29 +37,41 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
     <Reference Include="Mir.Stf.Kernel, Version=1.0.165.8167, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\StfBin\Mir.Stf.Kernel.dll</HintPath>
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="Mir.Stf.Utilities.StfArchiver, Version=1.0.165.8167, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\StfBin\Mir.Stf.Utilities.StfArchiver.dll</HintPath>
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Utilities.StfArchiver.dll</HintPath>
     </Reference>
     <Reference Include="Mir.Stf.Utilities.StfAssert, Version=1.0.165.8167, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\StfBin\Mir.Stf.Utilities.StfAssert.dll</HintPath>
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Utilities.StfAssert.dll</HintPath>
     </Reference>
     <Reference Include="Mir.Stf.Utilities.StfConfiguration, Version=1.0.165.8167, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\StfBin\Mir.Stf.Utilities.StfConfiguration.dll</HintPath>
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Utilities.StfConfiguration.dll</HintPath>
     </Reference>
     <Reference Include="Mir.Stf.Utilities.StfLogger, Version=1.0.165.8167, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\StfBin\Mir.Stf.Utilities.StfLogger.dll</HintPath>
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Utilities.StfLogger.dll</HintPath>
     </Reference>
     <Reference Include="Mir.Stf.Utilities.StfPlugin, Version=1.0.165.8167, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\StfBin\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
+      <HintPath>..\..\packages\Mir.Stf.Kernel.1.0.165.8167\lib\net45\Mir.Stf.Utilities.StfPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Slapper, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Slapper.AutoMapper.2.0.4\lib\net47\Slapper.dll</HintPath>
@@ -71,15 +83,6 @@
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.Abstractions.5.11.7\lib\net47\Unity.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.Container.5.11.11\lib\net47\Unity.Container.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Interception, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.Interception.5.11.1\lib\net47\Unity.Interception.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -111,6 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetryerUtils\UnitTestsRetryer.cs" />
     <Compile Include="TableUtils\UnitTestTableUtils.cs" />
+    <Compile Include="UnitTestScriptBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -123,7 +127,29 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestData\FileUtilities\" />
-    <Folder Include="TestData\FileUtils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\FileUtils\GetCleanFilecontent\Temp\path is null-Actual.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\KeyValuePairsUtils\DuplicateKeys - CaseSignificant.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\KeyValuePairsUtils\DuplicateKeys - IgnoreCase.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\KeyValuePairsUtils\Expected\DuplicateKeys - CaseSignificant.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\KeyValuePairsUtils\Expected\DuplicateKeys - IgnoreCase.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\KeyValuePairsUtils\Expected\Simple.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\KeyValuePairsUtils\Simple.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
