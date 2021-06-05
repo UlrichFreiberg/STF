@@ -1,0 +1,51 @@
+(1) Find TestCaseDirById()
+	- FileInfoCache 
+		- Get absolute directory path, 
+		- Update cache (TestRoot\FileInfoCache.txt) if TC not found, 
+		- Report errors like duplicate TcIds (TestRoot\FileInfoCache.err))
+	- Ensure Results and Temp folders exists
+	
+	
+(2) Evaluate Constants.txt
+	- Temp\Constants.list.txt (all constant files compiled into one file)
+		- include files resolved (marked for debug with comments)
+		
+	- Temp\Constants.resolved.txt
+		- values overlayed
+
+	- Results\Constants.transformed.txt (ready to load using KeyValuePairUtils)
+
+
+(3) Evaluate TestDataValues.txt
+	- Temp\TestDataValues.txt (all TestDataValue files compiled into one file)
+		- include files resolved (marked for debug with comments)
+
+	- Temp\TestDataValues.resolved.txt
+		- values overlayed
+
+	- Results\TestDataValues.transformed.txt (ready to load using KeyValuePairUtils)		
+		- values evaluated
+			- Constants applied (Results\Constants.transformed.txt)
+			- Simple functions called
+		
+
+(4) TestCaseInput.txt 
+	Values picked from TestDataValues and Constants - for solely use in test cases.
+	No evaluation of functions
+	To be shown in a WebUI
+	
+
+Questions:
+	When to evaluate Generator functions (input taken from generated values (FIN, TDM, ...)
+
+
+
+=================================
+Interface for TestDataManagement
+=================================
+GetLocalDirectoryPath(path, FileDirEnum = File)
+GetResultDirectoryPath(path, FileDirEnum = File)
+GetTempDirectoryPath(path, FileDirEnum = File)
+
+GetTestDataValue(keyName)
+Evaluate(string, OrderedDictionary)
