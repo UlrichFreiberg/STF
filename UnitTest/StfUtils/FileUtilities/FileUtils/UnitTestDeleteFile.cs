@@ -4,47 +4,61 @@
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   
+//   Defines the UnitTestDeleteFile type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace UnitTest.TextUtils
+namespace UnitTest.FileUtilities.FileUtils
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Mir.Stf;
-    using Mir.Stf.Utilities.FileUtilities;
-    using System.IO;
 
+    /// <summary>
+    /// The unit test delete file.
+    /// </summary>
     [TestClass]
-    public class UnitTestDeleteFile
+    public class UnitTestDeleteFile : UnitTestScriptBase
     {
+        /// <summary>
+        /// The test delete file.
+        /// </summary>
         [TestMethod]
         public void TestDeleteFile()
         {
-            Helper_DeleteFile(@"C:\temp\Nope.txt", "Not existing file - path correct", true);
-            Helper_DeleteFile(@"C:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect", true);
-            Helper_DeleteFile(@"QQQ:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect", true);
+            HelperDeleteFile(@"C:\temp\Nope.txt", "Not existing file - path correct");
+            HelperDeleteFile(@"C:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect");
+            HelperDeleteFile(@"QQQ:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect");
 
-            Helper_DeleteFile(@"C:\temp\CreateFirst.txt", "Existing file(create first) - path correct", true, true);
+            HelperDeleteFile(@"C:\temp\CreateFirst.txt", "Existing file(create first) - path correct", true, true);
 
             // Usual test
-            Helper_DeleteFile(null, "path is null", true);
-            Helper_DeleteFile(string.Empty, "path is empty", true);
-
+            HelperDeleteFile(null, "path is null");
+            HelperDeleteFile(string.Empty, "path is empty");
         }
 
-        private void Helper_DeleteFile(string filename, string testComment, bool expected, bool createFileFirst = false)
+        /// <summary>
+        /// The helper delete file.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <param name="testComment">
+        /// The test comment.
+        /// </param>
+        /// <param name="expected">
+        /// The expected.
+        /// </param>
+        /// <param name="createFileFirst">
+        /// The create file first.
+        /// </param>
+        private void HelperDeleteFile(string filename, string testComment, bool expected = true, bool createFileFirst = false)
         {
-            var fileUtils = new FileUtils();
+            StfLogger.LogHeader(testComment);
 
-            if (createFileFirst)
-            {
-                fileUtils.WriteAllTextFile(filename, "UnitTestStuff");
-            }
+            CreateFileUtilsTestFile(filename, createFileFirst);
 
-            var actual = fileUtils.DeleteFile(filename);
+            var actual = FileUtils.DeleteFile(filename);
 
-            Assert.IsTrue(expected == actual);
+            StfAssert.IsTrue(testComment, expected == actual);
         }
     }
 }

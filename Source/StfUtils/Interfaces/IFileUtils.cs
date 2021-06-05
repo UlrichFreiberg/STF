@@ -17,7 +17,6 @@ namespace Mir.Stf.Utilities.Interfaces
     /// </summary>
     public interface IFileUtils
     {
-
         /// <summary>
         /// The exists file.
         /// </summary>
@@ -72,7 +71,7 @@ namespace Mir.Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="StreamWriter"/>.
         /// </returns>
-        StreamWriter CreateTextfile(string filename, int ensureWaitSeconds = 30);
+        StreamWriter CreateText(string filename, int ensureWaitSeconds = 30);
 
         /// <summary>
         /// The copy file.
@@ -105,5 +104,51 @@ namespace Mir.Stf.Utilities.Interfaces
         /// </returns>
         bool WriteAllTextFile(string filename, string text, int ensureWaitSeconds = 30);
 
+        /// <summary>
+        /// The setup temp result folders.
+        /// </summary>
+        /// <param name="testCaseDirectory">
+        /// The test case directory.
+        /// </param>
+        /// <returns>
+        /// Indication of success
+        /// </returns>
+        bool SetupTempResultFolders(string testCaseDirectory);
+
+        /// <summary>
+        /// The get test case local file path.
+        /// </summary>
+        /// <param name="inputFilename">
+        /// The input filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string GetTestCaseLocalFilePath(string inputFilename);
+
+        /// <summary>
+        /// The get test case temp dir file path.
+        /// </summary>
+        /// <param name="inputFilename">
+        /// The input filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string GetTestCaseTempDirFilePath(string inputFilename);
+
+        /// <summary>
+        /// The get clean filecontent.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <param name="startOfCommentLine">
+        /// The start of comment line.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string GetCleanFilecontent(string fileName, string startOfCommentLine = "//");
     }
 }

@@ -4,7 +4,7 @@
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   
+//   The unit test get clean file content.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -14,16 +14,14 @@ namespace UnitTest.FileUtilities.FileUtils
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf.Utilities.FileUtilities;
-
     /// <summary>
     /// The unit test get clean file content.
     /// </summary>
     [TestClass]
-    public class UnitTestGetCleanFilecontent
+    public class UnitTestGetCleanFilecontent : UnitTestScriptBase
     {
         /// <summary>
-        /// The test get clean filecontent.
+        /// The test get clean file content.
         /// </summary>
         [TestMethod]
         public void TestGetCleanFilecontent()
@@ -36,7 +34,7 @@ namespace UnitTest.FileUtilities.FileUtils
         }
 
         /// <summary>
-        /// The helper get clean filecontent.
+        /// The helper get clean file content.
         /// </summary>
         /// <param name="testStep">
         /// The test step.
@@ -46,30 +44,27 @@ namespace UnitTest.FileUtilities.FileUtils
         /// </param>
         private void HelperGetCleanFilecontent(string testStep, string inputFilename)
         {
-            const string DataDir = @"D:\Projects\STF\UnitTest\StfUtils\TestData\FileUtils\GetCleanFilecontent";
-            var dataDirTemp = Path.Combine(DataDir, "Temp");
-            var fileUtils = new FileUtils();
+            StfLogger.LogHeader(testStep);
+            StfAssert.IsInconclusive(testStep, "Missing Data Files to be submitted to GIT");
+
+            FileUtils.SetupTempResultFolders(@".\TestData\FileUtils\GetCleanFilecontent");
+
             var expectedFilename = $"{inputFilename}.Expected.txt";
-            var absolutePathInput = Path.Combine(DataDir, inputFilename);
-            var absolutePathExpected = Path.Combine(DataDir, expectedFilename);
-            var tempInputPath = Path.Combine(dataDirTemp, inputFilename);
-            var tempActualPath = Path.Combine(dataDirTemp, $@"{inputFilename}-Actual.txt");
-            var tempExpectedPath = Path.Combine(dataDirTemp, $@"{inputFilename}-Expected.txt");
+            var absolutePathInput = FileUtils.GetTestCaseLocalFilePath(inputFilename);
+            var absolutePathExpected = FileUtils.GetTestCaseLocalFilePath(expectedFilename);
+            var tempInputPath = FileUtils.GetTestCaseTempDirFilePath(inputFilename);
+            var tempActualPath = FileUtils.GetTestCaseTempDirFilePath($@"{inputFilename}-Actual.txt");
+            var tempExpectedPath = FileUtils.GetTestCaseTempDirFilePath($@"{inputFilename}-Expected.txt");
 
-            // Setup Temp files
-            if (!Directory.Exists(dataDirTemp))
-            {
-                Directory.CreateDirectory(dataDirTemp);
-            }
-
-            fileUtils.CopyFile(absolutePathInput, tempInputPath);
-            fileUtils.CopyFile(absolutePathExpected, tempExpectedPath);
+            FileUtils.CopyFile(absolutePathInput, tempInputPath);
+            FileUtils.CopyFile(absolutePathExpected, tempExpectedPath);
 
             // generate Actual
-            var cleaned = fileUtils.GetCleanFilecontent(tempInputPath);
+            var actual = FileUtils.GetCleanFilecontent(tempInputPath);
 
-            File.WriteAllText(tempActualPath, cleaned);
-            //// TODO: this.StfAssert.FilesDoNotDiffer(testStep, tempExpectedPath, tempActualPath);
+            File.WriteAllText(tempActualPath, actual);
+
+            StfAssert.FilesDoNotDiffer(testStep, tempExpectedPath, tempActualPath);
         }
     }
 }

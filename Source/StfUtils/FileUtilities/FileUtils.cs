@@ -19,8 +19,22 @@ namespace Mir.Stf.Utilities.FileUtilities
     /// <summary>
     /// The file utils.
     /// </summary>
-    public class FileUtils : IFileUtils
+    public class FileUtils : StfUtilsBase, IFileUtils
     {
+        /// <summary>
+        /// Gets the test case directory.
+        /// </summary>
+        public string TestCaseDirectory { get; private set; }
+
+        /// <summary>
+        /// Gets the test case directory results.
+        /// </summary>
+        public string TestCaseDirectoryResults { get; private set; }
+
+        /// <summary>
+        /// Gets the test case directory temp.
+        /// </summary>
+        public string TestCaseDirectoryTemp { get; private set; }
 
         /// <summary>
         /// The exists file.
@@ -36,25 +50,27 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public bool ExistsFile(string filename, int ensureWaitSeconds = 30)
         {
+            var retVal = false;
+
             try
             {
                 var retryer = new RetryerUtilities.RetryerUtils();
 
-                return retryer.Retry(
+                retVal = retryer.Retry(
                     () => File.Exists(filename),
                     TimeSpan.FromSeconds(ensureWaitSeconds));
             }
             catch (Exception ex)
             {
-                // TODO: Log the error with message from exception
-                // TODO: Put error message in the standard ErrorMessage 
+                LogError($"ExistsFile: Got exception: [{ex}]");
                 return false;
             }
             finally
             {
-                // log the value of retVal ???
-                // what else should we do here ?
+                LogInfo($"ExistsFile: retVal is [{retVal}]");
             }
+
+            return retVal;
         }
 
         /// <summary>
@@ -71,25 +87,27 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public bool NotExistsFile(string filename, int ensureWaitSeconds = 30)
         {
+            var retVal = false;
+
             try
             {
                 var retryer = new RetryerUtilities.RetryerUtils();
 
-                return retryer.Retry(
+                retVal = retryer.Retry(
                     () => !File.Exists(filename),
                     TimeSpan.FromSeconds(ensureWaitSeconds));
             }
             catch (Exception ex)
             {
-                // TODO: Log the error with message from exception
-                // TODO: Put error message in the standard ErrorMessage 
+                LogError($"NotExistsFile: Got exception: [{ex}]");
                 return false;
             }
             finally
             {
-                // log the value of retVal ???
-                // what else should we do here ?
+                LogInfo($"NotExistsFile: retVal is [{retVal}]");
             }
+
+            return retVal;
         }
 
         /// <summary>
@@ -106,6 +124,8 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public bool DeleteFile(string filename, int ensureWaitSeconds = 30)
         {
+            var retVal = false;
+
             try
             {
                 if (!File.Exists(filename))
@@ -114,27 +134,25 @@ namespace Mir.Stf.Utilities.FileUtilities
                 }
 
                 File.Delete(filename);
-
-                return NotExistsFile(filename, ensureWaitSeconds);
+                retVal = NotExistsFile(filename, ensureWaitSeconds);
             }
             catch (Exception ex)
             {
                 // TODO: Log the error with message from exception
                 // TODO: Put error message in the standard ErrorMessage 
-                return false;
+                LogError($"DeleteFile: Get Ex: [{ex}]");
             }
             finally
             {
-                // log the value of retVal ???
-
-                // what else should we do here ?
+                // log the value of retVal
+                LogInfo($"DeleteFile: RetVal = [{retVal}]");
             }
+
+            return retVal;
         }
 
-
         /// <summary>
-        /// The create textfile.
-        /// 
+        /// The create text file.
         /// </summary>
         /// <param name="filename">
         /// The filename.
@@ -145,29 +163,33 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// <returns>
         /// The <see cref="StreamWriter"/>.
         /// </returns>
-        public StreamWriter CreateTextfile(string filename, int ensureWaitSeconds = 30)
+        public StreamWriter CreateText(string filename, int ensureWaitSeconds = 30)
         {
-            StreamWriter streamWriter;
+            StreamWriter retVal;
 
             try
             {
-                streamWriter = File.CreateText(filename);
+                retVal = File.CreateText(filename);
 
-                return ExistsFile(filename) 
-                    ? streamWriter 
-                    : null;
+                if (!ExistsFile(filename))
+                {
+                    retVal = null;
+                }
             }
             catch (Exception ex)
             {
                 // TODO: Log the error with message from exception
                 // TODO: Put error message in the standard ErrorMessage 
-                return null;
+                LogError($"DeleteFile: Got Ex: [{ex}]");
+                retVal = null;
             }
             finally
             {
-                // log the value of retVal ???
-                // what else should we do here ?
+                // log the value of retVal
+                LogInfo("DeleteFile: RetVal is not null");
             }
+
+            return retVal;
         }
 
         /// <summary>
@@ -184,23 +206,41 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public bool CopyFile(string sourceFilename, string destinationFilename)
         {
+            bool retVal;
+
             if (!File.Exists(sourceFilename))
             {
+                LogError($"CopyFile: Source file does not exist [{sourceFilename}]");
                 return false;
             }
 
             if (!DeleteFile(destinationFilename))
             {
+                LogError($"CopyFile: Couldn't delete destination file [{destinationFilename}]");
                 return false;
             }
 
-            File.Copy(sourceFilename, destinationFilename);
+            try
+            {
+                File.Copy(sourceFilename, destinationFilename);
+            }
+            catch (Exception ex)
+            {
+                LogError($"CopyFile: Got Ex: [{ex}]");
+            }
+            finally
+            {
+                retVal = ExistsFile(destinationFilename);
 
-            return ExistsFile(destinationFilename);
+                // log the value of retVal
+                LogInfo($"CopyFile: retVal = [{retVal}]");
+            }
+
+            return retVal;
         }
 
         /// <summary>
-        /// Get uncommented filecontent.
+        /// Get uncommented file content.
         /// </summary>
         /// <param name="fileName">
         /// The file name.
@@ -213,13 +253,36 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public string GetCleanFilecontent(string fileName, string startOfCommentLine = "//")
         {
-            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            string retVal = null;
+
+            if (!ExistsFile(fileName))
             {
-                return string.Empty;
+                return null;
             }
 
-            var content = File.ReadAllText(fileName);
-            var retVal = RemoveComments(content, startOfCommentLine);
+            try
+            {
+                var content = File.ReadAllText(fileName);
+
+                retVal = RemoveComments(content, startOfCommentLine);
+            }
+            catch (Exception ex)
+            {
+                LogError($"GetCleanFilecontent: Got Ex: [{ex}]");
+                return null;
+            }
+            finally
+            {
+                var maxLogText = retVal?.Length ?? 0;
+
+                if (maxLogText > 500)
+                {
+                    maxLogText = 500;
+                }
+
+                // log the value of retVal
+                LogInfo($"GetCleanFilecontent: First 500 character of file [{retVal?.Substring(0, maxLogText)}]");
+            }
 
             return retVal;
         }
@@ -238,6 +301,11 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public string RemoveComments(string content, string startOfCommentLine = "//")
         {
+            if (string.IsNullOrEmpty(content))
+            {
+                return content;
+            }
+
             // remove comments
             content = Regex.Replace(content, $@"\s*{startOfCommentLine}.*", string.Empty);
 
@@ -245,6 +313,7 @@ namespace Mir.Stf.Utilities.FileUtilities
             content = Regex.Replace(content, @"[\r\n]+", Environment.NewLine, RegexOptions.Multiline);
 
             // remove starting and ending empty lines (line one empty and/or last lines)
+            // we regard the content as one string
             content = content.Trim();
 
             return content;
@@ -256,8 +325,8 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// <param name="filename">
         /// The filename.
         /// </param>
-        /// <param name="text">
-        /// The text to write
+        /// <param name="textToWrite">
+        /// The text To Write.
         /// </param>
         /// <param name="ensureWaitSeconds">
         /// Time to wait for write to complete in seconds
@@ -267,9 +336,12 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public bool WriteAllTextFile(string filename, string textToWrite, int ensureWaitSeconds = 30)
         {
+            var retVal = false;
+
             try
             {
                 var actualText = textToWrite ?? string.Empty;
+
                 File.WriteAllText(filename, actualText);
 
                 if (!ExistsFile(filename))
@@ -278,22 +350,100 @@ namespace Mir.Stf.Utilities.FileUtilities
                 }
 
                 // test size of file is correct 
-                var length = new System.IO.FileInfo(filename).Length;
-                return (length == (long)actualText.Length) 
-                            ? true 
-                            : false;
+                var length = new FileInfo(filename).Length;
+
+                retVal = length == actualText.Length;
             }
             catch (Exception ex)
             {
-                // TODO: Log the error with message from exception
-                // TODO: Put error message in the standard ErrorMessage 
-                return false;
+                LogError($"WriteAllTextFile: Got Ex: [{ex}]");
             }
             finally
             {
-                // log the value of retVal ???
-                // what else should we do here ?
+                // log the value of retVal
+                LogInfo($"WriteAllTextFile: RetVal = [{retVal}]");
             }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The setup temp result folders.
+        /// </summary>
+        /// <param name="testCaseDirectory">
+        /// The test case directory.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool SetupTempResultFolders(string testCaseDirectory)
+        {
+            TestCaseDirectory = Path.IsPathRooted(testCaseDirectory)
+                              ? testCaseDirectory
+                              : Path.GetFullPath(testCaseDirectory);
+            TestCaseDirectoryTemp = Path.Combine(testCaseDirectory, "Temp");
+            TestCaseDirectoryResults = Path.Combine(testCaseDirectory, "Results");
+
+            LogInfo($"Setting up Temp and Result folder in [{TestCaseDirectory}]");
+
+            if (!Directory.Exists(TestCaseDirectoryTemp))
+            {
+                Directory.CreateDirectory(TestCaseDirectoryTemp);
+            }
+
+            if (!Directory.Exists(TestCaseDirectoryResults))
+            {
+                Directory.CreateDirectory(TestCaseDirectoryResults);
+            }
+
+            var retVal = Directory.Exists(TestCaseDirectoryTemp) && Directory.Exists(TestCaseDirectoryResults);
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get test case local file path.
+        /// </summary>
+        /// <param name="inputFilename">
+        /// The input filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string GetTestCaseLocalFilePath(string inputFilename)
+        {
+            var retVal = Path.Combine(TestCaseDirectory, inputFilename);
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get test case temp dir file path.
+        /// </summary>
+        /// <param name="inputFilename">
+        /// The input filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string GetTestCaseTempDirFilePath(string inputFilename)
+        {
+            var retVal = Path.Combine(TestCaseDirectoryTemp, inputFilename);
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get test case results dir file path.
+        /// </summary>
+        /// <param name="inputFilename">
+        /// The input filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string GetTestCaseResultsDirFilePath(string inputFilename)
+        {
+            var retVal = Path.Combine(TestCaseDirectoryResults, inputFilename);
+            return retVal;
         }
     }
 }
