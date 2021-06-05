@@ -20,7 +20,7 @@ namespace UnitTest.StringTransformationUtilities
     /// The unit test register all stu functions for type.
     /// </summary>
     [TestClass]
-    public class UnitTestRegisterAllStuFunctionsForType
+    public class UnitTestRegisterAllStuFunctionsForType : UnitTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.
@@ -56,7 +56,7 @@ namespace UnitTest.StringTransformationUtilities
         {
             var actual = stringTransformationUtils.EvaluateFunction(functionName, arg);
 
-            Assert.AreEqual(actual, expected);
+            StfAssert.AreEqual($"{functionName} - {arg}", expected, actual);
         }
     }
 
@@ -76,9 +76,10 @@ namespace UnitTest.StringTransformationUtilities
         /// The <see cref="string"/>.
         /// </returns>
         [StringTransformationUtilFunction("BOB")]
-        public string ImplmentationOfBob(string arg)
+        public string ImplementationOfBob(string arg)
         {
             var retVal = $"BOB [{arg}]";
+
             return retVal;
         }
     }

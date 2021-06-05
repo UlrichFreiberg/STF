@@ -13,13 +13,14 @@ using System.Collections.Generic;
 
 namespace Mir.Stf.Utilities.StringTransformationUtilities
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
+    using Mir.Stf.Utilities.Interfaces;
 
     /// <summary>
     /// The string transformation utils.
     /// </summary>
-    public class StringTransformationUtils
+    public class StringTransformationUtils : IStringTransformationUtils
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StringTransformationUtils"/> class.
@@ -41,8 +42,9 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// <summary>
         /// Gets or sets the stu objects. Dictionary for all the instances registered to STU
         /// </summary>
-        public Dictionary<string, object> StuObjects { get; set; }
+        internal Dictionary<string, object> StuObjects { get; set; }
 
+/*
         /// <summary>
         /// This is the signature for all String Transformation functions.
         /// </summary>
@@ -52,12 +54,13 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// <returns>
         /// The result of the evaluation - null for error, Empty for nothing
         /// </returns>
-        public delegate string StuFunction(string arg);
+        internal delegate string StuFunction(string arg);
+*/
 
         /// <summary>
         /// Gets the stu functions.
         /// </summary>
-        protected Dictionary<string, StuFunctionInfo> StuFunctions { get; }
+        internal Dictionary<string, StuFunctionInfo> StuFunctions { get; }
 
         /// <summary>
         /// The register all string functions for type.
@@ -124,45 +127,5 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
 
             return retVal;
         }
-    }
-
-    /// <summary>
-    /// The string transformation util function.
-    /// </summary>
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Reviewed. Suppression is OK here.")]
-    [AttributeUsage(AttributeTargets.Method)]
-    public class StringTransformationUtilFunction : Attribute
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StringTransformationUtilFunction"/> class.
-        /// </summary>
-        /// <param name="functionName">
-        /// The function name.
-        /// </param>
-        public StringTransformationUtilFunction(string functionName)
-        {
-            FunctionName = functionName;
-        }
-
-        /// <summary>
-        /// Gets or sets the function name.
-        /// </summary>
-        public string FunctionName { get; set; }
-    }
-
-    /// <summary>
-    /// The stu function info.
-    /// </summary>
-    public class StuFunctionInfo
-    {
-        /// <summary>
-        /// Gets or sets the stu function method info.
-        /// </summary>
-        public System.Reflection.MethodInfo StuFunctionMethodInfo { get; set; }
-
-        /// <summary>
-        /// Gets or sets the stu object.
-        /// </summary>
-        public object StuObject { get; set; }
     }
 }

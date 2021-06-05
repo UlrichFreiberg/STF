@@ -10,7 +10,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTest.StringTransformationUtilities
+namespace UnitTest.StringTransformationUtilities 
 {
     using Mir.Stf.Utilities.StringTransformationUtilities;
 
@@ -18,7 +18,7 @@ namespace UnitTest.StringTransformationUtilities
     /// The unit test simple functions.
     /// </summary>
     [TestClass]
-    public class UnitTestMapValuesFunction
+    public class UnitTestMapValuesFunction : UnitTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.
@@ -53,7 +53,7 @@ namespace UnitTest.StringTransformationUtilities
         {
             var actual = stringTransformationUtils.EvaluateFunction("MAPVALUES", arg);
 
-            Assert.AreEqual(actual, expected);
+            StfAssert.AreEqual(arg, expected, actual);
         }
     }
 }

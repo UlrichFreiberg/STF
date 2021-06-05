@@ -4,7 +4,7 @@
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the UnitTest1 type.
+//   The unit test unique functions.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ namespace UnitTest.StringTransformationUtilities
     /// The unit test unique functions.
     /// </summary>
     [TestClass]
-    public class UnitTestUniqueFunctions
+    public class UnitTestUniqueFunctions : UnitTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.
@@ -43,7 +43,6 @@ namespace UnitTest.StringTransformationUtilities
             HelperTestGuid("GUID", "Q", false);
             HelperTestGuid("GUID", "BX", false);
 
-
             // HelperTestGuid("GUID", "Q", false);
         }
 
@@ -62,11 +61,10 @@ namespace UnitTest.StringTransformationUtilities
         private void HelperTestGuid(string functionName, string arg, bool expected)
         {
             var guid = stringTransformationUtils.EvaluateFunction(functionName, arg);
-
             var formatArg = string.IsNullOrEmpty(arg) ? "D" : arg;
             var actual = System.Guid.TryParseExact(guid, formatArg, out _);
-            Assert.AreEqual(actual, expected);
-        }
 
+            StfAssert.AreEqual($"{functionName} - {arg}", expected, actual);
+        }
     }
 }

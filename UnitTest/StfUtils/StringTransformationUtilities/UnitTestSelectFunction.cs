@@ -20,7 +20,7 @@ namespace UnitTest.StringTransformationUtilities
     /// The unit test select function.
     /// </summary>
     [TestClass]
-    public class UnitTestSelectFunction
+    public class UnitTestSelectFunction : UnitTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.
@@ -67,8 +67,8 @@ namespace UnitTest.StringTransformationUtilities
                 dictOutcomes[actual]++;
             }
 
-            // TODO: Missing a evaluation of the distribution - for now we check all values are choosen
-            Assert.AreEqual(dictOutcomes.Count, numberOfValues);
+            // TODO: Missing a evaluation of the distribution - for now we check all values are chosen
+            StfAssert.AreEqual("all values are chosen", numberOfValues, dictOutcomes.Count);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace UnitTest.StringTransformationUtilities
         {
             var actual = stringTransformationUtils.EvaluateFunction("SELECT", arg);
 
-            Assert.AreEqual(actual, expected);
+            StfAssert.AreEqual(arg, expected, actual);
         }
     }
 }

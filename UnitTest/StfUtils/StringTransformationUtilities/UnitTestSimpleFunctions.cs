@@ -18,7 +18,7 @@ namespace UnitTest.StringTransformationUtilities
     /// The unit test simple functions.
     /// </summary>
     [TestClass]
-    public class UnitTestSimpleFunctions
+    public class UnitTestSimpleFunctions : UnitTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.
@@ -57,7 +57,7 @@ namespace UnitTest.StringTransformationUtilities
         {
             var actual = stringTransformationUtils.EvaluateFunction(functionName, arg);
 
-            Assert.AreEqual(actual, expected);
+            StfAssert.AreEqual(arg, expected, actual);
         }
     }
 }
