@@ -26,28 +26,64 @@ namespace UnitTest.StringTransformationUtilities
         private readonly StringTransformationUtils stringTransformationUtils = new StringTransformationUtils();
 
         /// <summary>
-        /// The test stu unique functions.
+        /// The test stu unique function for PadRight.
         /// </summary>
         [TestMethod]
-        public void TestStuStringFunction()
+        public void TestStuStringFunctionPadRight()
         {
             // Positive
-            HelperTestPadRight("A source", "14", "X", "A sourceXXXXXX");
+            HelperTestPad("PADRIGHT", "A source", "14", "X", "A sourceXXXXXX");
+            HelperTestPad("PADRIGHT", "A source", "8", "X", "A source");
 
             // Negative
-            HelperTestPadRight(string.Empty, "14", "X", null);
-            HelperTestPadRight(null, "14", "X", null);
+            HelperTestPad("PADRIGHT", string.Empty, "14", "X", null);
+            HelperTestPad("PADRIGHT", null, "14", "X", null);
 
-            HelperTestPadRight("A source", string.Empty, "X", null);
-            HelperTestPadRight("A source", null, "X", null);
+            HelperTestPad("PADRIGHT", "A source", string.Empty, "X", null);
+            HelperTestPad("PADRIGHT", "A source", null, "X", null);
 
-            HelperTestPadRight("A source", "14", string.Empty, "A source      ");
-            HelperTestPadRight("A source", "14", null, "A source      ");
+            HelperTestPad("PADRIGHT", "A source", "14", string.Empty, "A source      ");
+            HelperTestPad("PADRIGHT", "A source", "14", null, "A source      ");
+
+            HelperTestPad("PADRIGHT", "A source", "Q", "X", null);
+            HelperTestPad("PADRIGHT", "A source", "-1", "X", null);
+            HelperTestPad("PADRIGHT", "A source", "0", "X", null);
+            HelperTestPad("PADRIGHT", "A source", "6", "X", null);
         }
 
         /// <summary>
-        /// The helper test GUID functions.
+        /// The test stu unique function for PadLeft.
         /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionPadLeft()
+        {
+            // Positive
+            HelperTestPad("PADLEFT", "A source", "14", "X", "XXXXXXA source");
+            HelperTestPad("PADLEFT", "A source", "8", "X", "A source");
+
+            // Negative
+            HelperTestPad("PADLEFT", string.Empty, "14", "X", null);
+            HelperTestPad("PADLEFT", null, "14", "X", null);
+
+            HelperTestPad("PADLEFT", "A source", string.Empty, "X", null);
+            HelperTestPad("PADLEFT", "A source", null, "X", null);
+
+            HelperTestPad("PADLEFT", "A source", "14", string.Empty, "      A source");
+            HelperTestPad("PADLEFT", "A source", "14", null, "      A source");
+
+            HelperTestPad("PADLEFT", "A source", "Q", "X", null);
+            HelperTestPad("PADLEFT", "A source", "-1", "X", null);
+            HelperTestPad("PADLEFT", "A source", "0", "X", null);
+            HelperTestPad("PADLEFT", "A source", "6", "X", null);
+        }
+
+
+        /// <summary>
+        /// The helper test Pad.... functions.
+        /// </summary>
+        /// <param name="direction">
+        /// The direction of the padding PADRIGHT or PADLEFT
+        /// </param>
         /// <param name="source">
         /// The source string
         /// </param>
@@ -60,12 +96,12 @@ namespace UnitTest.StringTransformationUtilities
         /// <param name="expected">
         /// The expected value of the transformed string
         /// </param>
-        private void HelperTestPadRight(string source, string totalWidth, string paddingChar, string expected)
+        private void HelperTestPad(string direction, string source, string totalWidth, string paddingChar, string expected)
         {
-            var arg = $@"""PADRIGHT"" ""{source}"" ""{totalWidth}"" ""{paddingChar}""";
+            var arg = $@"""{direction}"" ""{source}"" ""{totalWidth}"" ""{paddingChar}""";
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
-            StfAssert.AreEqual("UnittestPadRight test actual / expected", expected, actual);
+            StfAssert.AreEqual($"Unittest {direction} test actual / expected", expected, actual);
         }
 
     }

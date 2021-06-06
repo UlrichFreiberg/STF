@@ -76,7 +76,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 case "Insert":
                     retVal = StuFunctionInsert(stuStringFunctionArgument);
                     break;
-                case "PadLeft":
+                case "PADLEFT":
                     retVal = StuFunctionPadLeft(stuStringFunctionArgument);
                     break;
                 case "PADRIGHT":
@@ -264,7 +264,47 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionPadLeft(string arg)
         {
-            return "[PadLeft]" + arg;
+            // "PadLeft" "Source" "TotalWidth" "PaddingChar"
+            // "PadLeft" "Source" "TotalWidth" "PaddingChar"
+            // "PadLeft" "Bo oB" "8" "x" --> "xxxBo oB"
+            // In a config.txt looks like:
+            //     "{STRING "PadLeft" "Bo oB" "8" "x"}
+            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TotalWidth>[^""]*)""(\s+""(?<PaddingChar>[^""]*)"")?";
+            var match = Regex.Match(arg, RegExp);
+
+            if (!match.Success)
+            {
+                return null;
+            }
+
+            var argSource = match.Groups["Source"].Value.Trim();
+            var argTotalWidth = match.Groups["TotalWidth"].Value.Trim();
+            var argPaddingChar = match.Groups["PaddingChar"].Value.Trim();
+
+            if (string.IsNullOrEmpty(argSource))
+            {
+                LogError("PadLeft: Source cannot be null or empty");
+                return null;
+            }
+
+            if (!int.TryParse(argTotalWidth, out var totalWidth))
+            {
+                LogError("PadLeft: totalWidth must be an int");
+                return null;
+            }
+
+            if (totalWidth < argSource.Length)
+            {
+                LogError("PadLeft: totalWidth must not be less than length of source");
+                return null;
+            }
+
+
+            var retVal = argPaddingChar.Length == 0
+                ? argSource.PadLeft(totalWidth)
+                : argSource.PadLeft(totalWidth, argPaddingChar[0]);
+
+            return retVal;
         }
 
         /// <summary>
@@ -280,7 +320,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         {
             // "PadRight" "Source" "TotalWidth" "PaddingChar"
             // "PadRight" "Source" "TotalWidth" "PaddingChar"
-            // "PadRight" "Bo oB" "8" "x" --> "xxxBo oB"
+            // "PadRight" "Bo oB" "8" "x" --> "Bo oBxxx"
             // In a config.txt looks like:
             //     "{STRING "PadRight" "Bo oB" "8" "x"}
             const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TotalWidth>[^""]*)""(\s+""(?<PaddingChar>[^""]*)"")?";
@@ -304,6 +344,12 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             if (!int.TryParse(argTotalWidth, out var totalWidth))
             {
                 LogError("PadRight: totalWidth must be an int");
+                return null;
+            }
+
+            if (totalWidth < argSource.Length)
+            {
+                LogError("PadRight: totalWidth must not be less than length of source");
                 return null;
             }
 

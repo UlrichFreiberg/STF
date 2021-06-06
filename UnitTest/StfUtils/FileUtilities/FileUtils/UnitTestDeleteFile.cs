@@ -28,7 +28,7 @@ namespace UnitTest.FileUtilities.FileUtils
             HelperDeleteFile(@"C:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect");
             HelperDeleteFile(@"QQQ:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect");
 
-            HelperDeleteFile(@"C:\temp\CreateFirst.txt", "Existing file(create first) - path correct", true, true);
+            HelperDeleteFile(@"C:\temp\CreateFirstDel.txt", "Existing file(create first) - path correct", true, true);
 
             // Usual test
             HelperDeleteFile(null, "path is null");
