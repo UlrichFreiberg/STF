@@ -105,6 +105,7 @@
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSelectFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestMapValuesFunction.cs" />
+    <Compile Include="StringTransformationUtilities\UnitTestStringFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestUniqueFunctions.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSimpleFunctions.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestRegisterAllStuFunctionsForType.cs" />
@@ -127,11 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestData\FileUtilities\" />
+    <Folder Include="TestData\FileUtils\GetCleanFilecontent\Temp\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\FileUtils\GetCleanFilecontent\Temp\path is null-Actual.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestData\KeyValuePairsUtils\DuplicateKeys - CaseSignificant.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

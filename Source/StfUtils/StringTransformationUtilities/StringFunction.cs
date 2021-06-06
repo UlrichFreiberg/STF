@@ -15,7 +15,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
     /// <summary>
     /// The string function. Wrapper for C# string functions
     /// </summary>
-    public class StringFunction
+    public class StringFunction : StfUtilsBase
     {
         /// <summary>
         /// The stu string.
@@ -29,7 +29,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         [StringTransformationUtilFunction("STRING")]
         public string StuString(string arg)
         {
-            const string RegExp = @"(?<StringFunction>""[^""]+"")(?<Arguments>.*)";
+            const string RegExp = @"""(?<StringFunction>[^""]+)""(?<Arguments>.*)";
             var match = Regex.Match(arg, RegExp);
 
             if (!match.Success)
@@ -79,7 +79,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 case "PadLeft":
                     retVal = StuFunctionPadLeft(stuStringFunctionArgument);
                     break;
-                case "PadRight":
+                case "PADRIGHT":
                     retVal = StuFunctionPadRight(stuStringFunctionArgument);
                     break;
                 case "Remove":
@@ -283,7 +283,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             // "PadRight" "Bo oB" "8" "x" --> "xxxBo oB"
             // In a config.txt looks like:
             //     "{STRING "PadRight" "Bo oB" "8" "x"}
-            const string RegExp = @"(?<Source>""[^""]+"")\s+(?<TotalWidth>""[^""]+"")(\s+(?<PaddingChar>""[^""]+""))?";
+            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TotalWidth>[^""]*)""(\s+""(?<PaddingChar>[^""]*)"")?";
             var match = Regex.Match(arg, RegExp);
 
             if (!match.Success)
@@ -295,8 +295,15 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             var argTotalWidth = match.Groups["TotalWidth"].Value.Trim();
             var argPaddingChar = match.Groups["PaddingChar"].Value.Trim();
 
+            if (string.IsNullOrEmpty(argSource))
+            {
+                LogError("PadRight: Source cannot be null or empty");
+                return null;
+            }
+
             if (!int.TryParse(argTotalWidth, out var totalWidth))
             {
+                LogError("PadRight: totalWidth must be an int");
                 return null;
             }
 
