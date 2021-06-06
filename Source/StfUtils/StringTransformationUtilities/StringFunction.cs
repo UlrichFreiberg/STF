@@ -88,10 +88,10 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 case "Replace":
                     retVal = StuFunctionReplace(stuStringFunctionArgument);
                     break;
-                case "ToLower":
+                case "TOLOWER":
                     retVal = StuFunctionToLower(stuStringFunctionArgument);
                     break;
-                case "ToUpper":
+                case "TOUPPER":
                     retVal = StuFunctionToUpper(stuStringFunctionArgument);
                     break;
             }
@@ -299,7 +299,6 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 return null;
             }
 
-
             var retVal = argPaddingChar.Length == 0
                 ? argSource.PadLeft(totalWidth)
                 : argSource.PadLeft(totalWidth, argPaddingChar[0]);
@@ -403,7 +402,21 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionToLower(string arg)
         {
-            var retVal = arg.ToLower();
+            // "ToLower" "Source"
+            // "TOLOWER" "Bo 12 ?!asoB" "bo 12 ?!asob"
+            // In a config.txt looks like:
+            //     "{STRING "TOLOWER" "Bo 12 ?!asoB"}
+            const string RegExp = @"""(?<Source>[^""]*)""";
+            var match = Regex.Match(arg, RegExp);
+
+            if (!match.Success)
+            {
+                return null;
+            }
+
+            var argSource = match.Groups["Source"].Value.Trim();
+
+            var retVal = argSource.ToLower();
 
             return retVal;
         }
@@ -419,7 +432,23 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionToUpper(string arg)
         {
-            return "[ToUpper]" + arg;
+            // "ToUpper" "Source"
+            // "TOUPPER" "Bo 12 ?!asoB" "Bo 12 ?!ASOB"
+            // In a config.txt looks like:
+            //     "{STRING "TOUPPER" "Bo 12 ?!asoB"}
+            const string RegExp = @"""(?<Source>[^""]*)""";
+            var match = Regex.Match(arg, RegExp);
+
+            if (!match.Success)
+            {
+                return null;
+            }
+
+            var argSource = match.Groups["Source"].Value.Trim();
+
+            var retVal = argSource.ToUpper();
+
+            return retVal;
         }
     }
 }

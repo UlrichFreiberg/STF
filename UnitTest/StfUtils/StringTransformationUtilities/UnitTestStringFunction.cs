@@ -77,6 +77,31 @@ namespace UnitTest.StringTransformationUtilities
             HelperTestPad("PADLEFT", "A source", "6", "X", null);
         }
 
+        /// <summary>
+        /// The test stu unique function for ToUpper.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionToUpper()
+        {
+            // Positive
+            HelperTestToCase("TOUPPER", "A 12soU!# rce", "A 12SOU!# RCE");
+
+            HelperTestToCase("TOUPPER", string.Empty, string.Empty);
+            HelperTestToCase("TOUPPER", null, string.Empty);
+        }
+
+        /// <summary>
+        /// The test stu unique function for ToLower.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionToLower()
+        {
+            // Positive
+            HelperTestToCase("TOLOWER", "A 12soU!# rcE", "a 12sou!# rce");
+
+            HelperTestToCase("TOLOWER", string.Empty, string.Empty);
+            HelperTestToCase("TOLOWER", null, string.Empty);
+        }
 
         /// <summary>
         /// The helper test Pad.... functions.
@@ -104,5 +129,24 @@ namespace UnitTest.StringTransformationUtilities
             StfAssert.AreEqual($"Unittest {direction} test actual / expected", expected, actual);
         }
 
+        /// <summary>
+        /// The helper test ToUpper.... function.
+        /// </summary>
+        /// <param name="toCase">
+        /// The toCase string TOUPPER or TOLOWER
+        /// </param>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="expected">
+        /// The expected string
+        /// </param>
+        private void HelperTestToCase(string toCase, string source, string expected)
+        {
+            var arg = $@"""{toCase}"" ""{source}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest {toCase} test actual / expected", expected, actual);
+        }
     }
 }
