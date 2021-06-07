@@ -32,23 +32,23 @@ namespace UnitTest.StringTransformationUtilities
         public void TestStuStringFunctionPadRight()
         {
             // Positive
-            HelperTestPad("PADRIGHT", "A source", "14", "X", "A sourceXXXXXX");
-            HelperTestPad("PADRIGHT", "A source", "8", "X", "A source");
+            HelperTestPad("PadRight", "A source", "14", "X", "A sourceXXXXXX");
+            HelperTestPad("PadRight", "A source", "8", "X", "A source");
 
             // Negative
-            HelperTestPad("PADRIGHT", string.Empty, "14", "X", null);
-            HelperTestPad("PADRIGHT", null, "14", "X", null);
+            HelperTestPad("PadRight", string.Empty, "14", "X", null);
+            HelperTestPad("PadRight", null, "14", "X", null);
 
-            HelperTestPad("PADRIGHT", "A source", string.Empty, "X", null);
-            HelperTestPad("PADRIGHT", "A source", null, "X", null);
+            HelperTestPad("PadRight", "A source", string.Empty, "X", null);
+            HelperTestPad("PadRight", "A source", null, "X", null);
 
-            HelperTestPad("PADRIGHT", "A source", "14", string.Empty, "A source      ");
-            HelperTestPad("PADRIGHT", "A source", "14", null, "A source      ");
+            HelperTestPad("PadRight", "A source", "14", string.Empty, "A source      ");
+            HelperTestPad("PadRight", "A source", "14", null, "A source      ");
 
-            HelperTestPad("PADRIGHT", "A source", "Q", "X", null);
-            HelperTestPad("PADRIGHT", "A source", "-1", "X", null);
-            HelperTestPad("PADRIGHT", "A source", "0", "X", null);
-            HelperTestPad("PADRIGHT", "A source", "6", "X", null);
+            HelperTestPad("PadRight", "A source", "Q", "X", null);
+            HelperTestPad("PadRight", "A source", "-1", "X", null);
+            HelperTestPad("PadRight", "A source", "0", "X", null);
+            HelperTestPad("PadRight", "A source", "6", "X", null);
         }
 
         /// <summary>
@@ -58,23 +58,23 @@ namespace UnitTest.StringTransformationUtilities
         public void TestStuStringFunctionPadLeft()
         {
             // Positive
-            HelperTestPad("PADLEFT", "A source", "14", "X", "XXXXXXA source");
-            HelperTestPad("PADLEFT", "A source", "8", "X", "A source");
+            HelperTestPad("PadLeft", "A source", "14", "X", "XXXXXXA source");
+            HelperTestPad("PadLeft", "A source", "8", "X", "A source");
 
             // Negative
-            HelperTestPad("PADLEFT", string.Empty, "14", "X", null);
-            HelperTestPad("PADLEFT", null, "14", "X", null);
+            HelperTestPad("PadLeft", string.Empty, "14", "X", null);
+            HelperTestPad("PadLeft", null, "14", "X", null);
 
-            HelperTestPad("PADLEFT", "A source", string.Empty, "X", null);
-            HelperTestPad("PADLEFT", "A source", null, "X", null);
+            HelperTestPad("PadLeft", "A source", string.Empty, "X", null);
+            HelperTestPad("PadLeft", "A source", null, "X", null);
 
-            HelperTestPad("PADLEFT", "A source", "14", string.Empty, "      A source");
-            HelperTestPad("PADLEFT", "A source", "14", null, "      A source");
+            HelperTestPad("PadLeft", "A source", "14", string.Empty, "      A source");
+            HelperTestPad("PadLeft", "A source", "14", null, "      A source");
 
-            HelperTestPad("PADLEFT", "A source", "Q", "X", null);
-            HelperTestPad("PADLEFT", "A source", "-1", "X", null);
-            HelperTestPad("PADLEFT", "A source", "0", "X", null);
-            HelperTestPad("PADLEFT", "A source", "6", "X", null);
+            HelperTestPad("PadLeft", "A source", "Q", "X", null);
+            HelperTestPad("PadLeft", "A source", "-1", "X", null);
+            HelperTestPad("PadLeft", "A source", "0", "X", null);
+            HelperTestPad("PadLeft", "A source", "6", "X", null);
         }
 
         /// <summary>
@@ -84,10 +84,10 @@ namespace UnitTest.StringTransformationUtilities
         public void TestStuStringFunctionToUpper()
         {
             // Positive
-            HelperTestToCase("TOUPPER", "A 12soU!# rce", "A 12SOU!# RCE");
+            HelperTestToCase("ToUpper", "A 12soU!# rce", "A 12SOU!# RCE");
 
-            HelperTestToCase("TOUPPER", string.Empty, string.Empty);
-            HelperTestToCase("TOUPPER", null, string.Empty);
+            HelperTestToCase("ToUpper", string.Empty, string.Empty);
+            HelperTestToCase("ToUpper", null, string.Empty);
         }
 
         /// <summary>
@@ -97,10 +97,10 @@ namespace UnitTest.StringTransformationUtilities
         public void TestStuStringFunctionToLower()
         {
             // Positive
-            HelperTestToCase("TOLOWER", "A 12soU!# rcE", "a 12sou!# rce");
+            HelperTestToCase("ToLower", "A 12soU!# rcE", "a 12sou!# rce");
 
-            HelperTestToCase("TOLOWER", string.Empty, string.Empty);
-            HelperTestToCase("TOLOWER", null, string.Empty);
+            HelperTestToCase("ToLower", string.Empty, string.Empty);
+            HelperTestToCase("ToLower", null, string.Empty);
         }
 
         /// <summary>
@@ -111,56 +111,56 @@ namespace UnitTest.StringTransformationUtilities
         {
             // Positive
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
-                "The Source string of this test",
+                "StartsWith",
+                "The Source string of 1 this test",
                 "The S",
                 "CS",
-                "The Source string of this test");
+                "The Source string of 1 this test");
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The S",
                 "The Source string of this test",
                 "CS",
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH", 
+                "StartsWith", 
                 "The Source string of this test", 
                 "The s", 
                 "CS", 
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 "The s",
                 "CI",
                 "The Source string of this test");
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 "The s",
                 string.Empty,
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 "The s",
                 null,
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 "The S",
                 string.Empty,
                 "The Source string of this test");
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 "The S",
                 null,
@@ -168,35 +168,35 @@ namespace UnitTest.StringTransformationUtilities
 
             // Negative
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 string.Empty,
                 "The s",
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 null,
                 "The s",
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 string.Empty,
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 null,
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "STARTSWITH",
+                "StartsWith",
                 "The Source string of this test",
                 "The S",
                 "CC",
@@ -211,56 +211,56 @@ namespace UnitTest.StringTransformationUtilities
         {
             // Positive
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s Test",
                 "CS",
                 "The Source string of this Test");
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "s Test",
                 "The Source string of this Test",
                 "CS",
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 "CS",
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 "CI",
                 "The Source string of this Test");
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 string.Empty,
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 null,
                 string.Empty);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s Test",
                 string.Empty,
                 "The Source string of this Test");
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s Test",
                 null,
@@ -268,35 +268,35 @@ namespace UnitTest.StringTransformationUtilities
 
             // Negative
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 string.Empty,
                 "s test",
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 null,
                 "s test",
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 string.Empty,
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 null,
                 "CI",
                 null);
 
             HelperTestStartsOrEndsWith(
-                "ENDSWITH",
+                "EndsWith",
                 "The Source string of this Test",
                 "s Test",
                 "CC",
@@ -307,7 +307,7 @@ namespace UnitTest.StringTransformationUtilities
         /// The helper test Pad.... functions.
         /// </summary>
         /// <param name="direction">
-        /// The direction of the padding PADRIGHT or PADLEFT
+        /// The direction of the padding PadRight or PadLeft
         /// </param>
         /// <param name="source">
         /// The source string
@@ -333,7 +333,7 @@ namespace UnitTest.StringTransformationUtilities
         /// The helper test ToUpper.... function.
         /// </summary>
         /// <param name="toCase">
-        /// The toCase string TOUPPER or TOLOWER
+        /// The toCase string ToUpper or ToLower
         /// </param>
         /// <param name="source">
         /// The source string
@@ -350,10 +350,10 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
-        /// The helper test startsWith and endsWith.... function.
+        /// The helper test StartsWith and EndsWith.... function.
         /// </summary>
         /// <param name="startsOrEndsWith">
-        /// The startsOrEndsWith string STARTSWITH or ENDSWITH
+        /// The startsOrEndsWith string StartsWith or EndsWith
         /// </param>
         /// <param name="source">
         /// The source string

@@ -68,19 +68,19 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 case "TrimStart":
                     retVal = StuFunctionTrimStart(stuStringFunctionArgument);
                     break;
-                case "ENDSWITH":
+                case "EndsWith":
                     retVal = StuFunctionEndsWith(stuStringFunctionArgument);
                     break;
-                case "STARTSWITH":
+                case "StartsWith":
                     retVal = StuFunctionStartsWith(stuStringFunctionArgument);
                     break;
                 case "Insert":
                     retVal = StuFunctionInsert(stuStringFunctionArgument);
                     break;
-                case "PADLEFT":
+                case "PadLeft":
                     retVal = StuFunctionPadLeft(stuStringFunctionArgument);
                     break;
-                case "PADRIGHT":
+                case "PadRight":
                     retVal = StuFunctionPadRight(stuStringFunctionArgument);
                     break;
                 case "Remove":
@@ -89,10 +89,10 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 case "Replace":
                     retVal = StuFunctionReplace(stuStringFunctionArgument);
                     break;
-                case "TOLOWER":
+                case "ToLower":
                     retVal = StuFunctionToLower(stuStringFunctionArgument);
                     break;
-                case "TOUPPER":
+                case "ToUpper":
                     retVal = StuFunctionToUpper(stuStringFunctionArgument);
                     break;
             }
@@ -227,8 +227,8 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             // "EndsWith" "Source" "TestString" "CaseSensitive"(optional, default is CaseSensitive)
             // "EndsWith" "Bo oB" "ob" "CS" --> string.empty
             // In a config.txt looks like:
-            //     "{STRING "StartsWith" "Bo oB" "ob" "CS"}   returns string.empty
-            //     "{STRING "StartsWith" "Bo oB" "ob" "CI"}   returns "Bo oB"
+            //     "{STRING "EndsWith" "Bo oB" "ob" "CS"}   returns string.empty
+            //     "{STRING "EndsWith" "Bo oB" "ob" "CI"}   returns "Bo oB"
             const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TestString>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
             var match = Regex.Match(arg, RegExp);
 
@@ -492,9 +492,9 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         private string StuFunctionToLower(string arg)
         {
             // "ToLower" "Source"
-            // "TOLOWER" "Bo 12 ?!asoB" "bo 12 ?!asob"
+            // "ToLower" "Bo 12 ?!asoB" "bo 12 ?!asob"
             // In a config.txt looks like:
-            //     "{STRING "TOLOWER" "Bo 12 ?!asoB"}
+            //     "{STRING "ToLower" "Bo 12 ?!asoB"}
             const string RegExp = @"""(?<Source>[^""]*)""";
             var match = Regex.Match(arg, RegExp);
 
@@ -522,9 +522,9 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         private string StuFunctionToUpper(string arg)
         {
             // "ToUpper" "Source"
-            // "TOUPPER" "Bo 12 ?!asoB" "Bo 12 ?!ASOB"
+            // "ToUpper" "Bo 12 ?!asoB" "Bo 12 ?!ASOB"
             // In a config.txt looks like:
-            //     "{STRING "TOUPPER" "Bo 12 ?!asoB"}
+            //     "{STRING "ToUpper" "Bo 12 ?!asoB"}
             const string RegExp = @"""(?<Source>[^""]*)""";
             var match = Regex.Match(arg, RegExp);
 
