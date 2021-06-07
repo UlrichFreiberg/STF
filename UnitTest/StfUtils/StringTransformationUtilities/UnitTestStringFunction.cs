@@ -104,6 +104,206 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu unique function for StartsWith.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionStartsWith()
+        {
+            // Positive
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                "The S",
+                "CS",
+                "The Source string of this test");
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The S",
+                "The Source string of this test",
+                "CS",
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH", 
+                "The Source string of this test", 
+                "The s", 
+                "CS", 
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                "The s",
+                "CI",
+                "The Source string of this test");
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                "The s",
+                string.Empty,
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                "The s",
+                null,
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                "The S",
+                string.Empty,
+                "The Source string of this test");
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                "The S",
+                null,
+                "The Source string of this test");
+
+            // Negative
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                string.Empty,
+                "The s",
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                null,
+                "The s",
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                string.Empty,
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                null,
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "STARTSWITH",
+                "The Source string of this test",
+                "The S",
+                "CC",
+                null);
+        }
+
+        /// <summary>
+        /// The test stu unique function for EndsWith.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionEndsWith()
+        {
+            // Positive
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s Test",
+                "CS",
+                "The Source string of this Test");
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "s Test",
+                "The Source string of this Test",
+                "CS",
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s test",
+                "CS",
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s test",
+                "CI",
+                "The Source string of this Test");
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s test",
+                string.Empty,
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s test",
+                null,
+                string.Empty);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s Test",
+                string.Empty,
+                "The Source string of this Test");
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s Test",
+                null,
+                "The Source string of this Test");
+
+            // Negative
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                string.Empty,
+                "s test",
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                null,
+                "s test",
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                string.Empty,
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                null,
+                "CI",
+                null);
+
+            HelperTestStartsOrEndsWith(
+                "ENDSWITH",
+                "The Source string of this Test",
+                "s Test",
+                "CC",
+                null);
+        }
+
+        /// <summary>
         /// The helper test Pad.... functions.
         /// </summary>
         /// <param name="direction">
@@ -147,6 +347,37 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest {toCase} test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test startsWith and endsWith.... function.
+        /// </summary>
+        /// <param name="startsOrEndsWith">
+        /// The startsOrEndsWith string STARTSWITH or ENDSWITH
+        /// </param>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="testString">
+        /// The test string
+        /// </param>
+        /// <param name="stringComparison">
+        /// The stringComparison string
+        /// </param>
+        /// <param name="expected">
+        /// The expected string
+        /// </param>
+        private void HelperTestStartsOrEndsWith(
+                                                string startsOrEndsWith,
+                                                string source,
+                                                string testString,
+                                                string stringComparison,
+                                                string expected)
+        {
+            var arg = $@"""{startsOrEndsWith}"" ""{source}"" ""{testString}"" ""{stringComparison}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest {startsOrEndsWith},{source},{testString},{stringComparison} test actual / expected", expected, actual);
         }
     }
 }

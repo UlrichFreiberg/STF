@@ -10,6 +10,7 @@
 
 namespace Mir.Stf.Utilities.StringTransformationUtilities
 {
+    using System;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -67,10 +68,10 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 case "TrimStart":
                     retVal = StuFunctionTrimStart(stuStringFunctionArgument);
                     break;
-                case "EndsWith":
+                case "ENDSWITH":
                     retVal = StuFunctionEndsWith(stuStringFunctionArgument);
                     break;
-                case "StartsWith":
+                case "STARTSWITH":
                     retVal = StuFunctionStartsWith(stuStringFunctionArgument);
                     break;
                 case "Insert":
@@ -219,10 +220,54 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
+        /// returns the source string if it does end with the testString
         /// </returns>
         private string StuFunctionEndsWith(string arg)
         {
-            return "[EndsWith]" + arg;
+            // "EndsWith" "Source" "TestString" "CaseSensitive"(optional, default is CaseSensitive)
+            // "EndsWith" "Bo oB" "ob" "CS" --> string.empty
+            // In a config.txt looks like:
+            //     "{STRING "StartsWith" "Bo oB" "ob" "CS"}   returns string.empty
+            //     "{STRING "StartsWith" "Bo oB" "ob" "CI"}   returns "Bo oB"
+            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TestString>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
+            var match = Regex.Match(arg, RegExp);
+
+            if (!match.Success)
+            {
+                return null;
+            }
+
+            var argSource = match.Groups["Source"].Value.Trim();
+            var argTestString = match.Groups["TestString"].Value.Trim();
+            var argStringComparison = match.Groups["StringComparison"].Value.Trim();
+
+            if (string.IsNullOrEmpty(argSource))
+            {
+                LogError("EndsWith: Source cannot be null or empty");
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(argTestString))
+            {
+                LogError("EndsWith: TestString cannot be null or empty");
+                return null;
+            }
+
+            var stringComparison = StringComparison.CurrentCultureIgnoreCase;
+            if (string.IsNullOrEmpty(argStringComparison) || argStringComparison == "CS")
+            {
+                stringComparison = StringComparison.CurrentCulture;
+            }
+            else if (argStringComparison != "CS" && argStringComparison != "CI")
+            {
+                LogError("EndsWith: stringComparison must be CS (Case Sensitive) or IC (Ignore Case)");
+                return null;
+            }
+
+            var isEndingWith = argSource.EndsWith(argTestString, stringComparison);
+            var retVal = isEndingWith ? argSource : string.Empty;
+
+            return retVal;
         }
 
         /// <summary>
@@ -233,10 +278,54 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
+        /// returns the source string if it does start with the testString
         /// </returns>
         private string StuFunctionStartsWith(string arg)
         {
-            return "[StartsWith]" + arg;
+            // "StartsWith" "Source" "TestString" "CaseSensitive"(optional, default is CaseSensitive)
+            // "StartsWith" "Bo oB" "bo" "CS" --> string.empty
+            // In a config.txt looks like:
+            //     "{STRING "StartsWith" "Bo oB" "bo" "CS"}   returns string.empty
+            //     "{STRING "StartsWith" "Bo oB" "bo" "CI"}   returns "Bo oB"
+            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TestString>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
+            var match = Regex.Match(arg, RegExp);
+
+            if (!match.Success)
+            {
+                return null;
+            }
+
+            var argSource = match.Groups["Source"].Value.Trim();
+            var argTestString = match.Groups["TestString"].Value.Trim();
+            var argStringComparison = match.Groups["StringComparison"].Value.Trim();
+
+            if (string.IsNullOrEmpty(argSource))
+            {
+                LogError("StartsWith: Source cannot be null or empty");
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(argTestString))
+            {
+                LogError("StartsWith: TestString cannot be null or empty");
+                return null;
+            }
+
+            var stringComparison = StringComparison.CurrentCultureIgnoreCase;
+            if (string.IsNullOrEmpty(argStringComparison) || argStringComparison == "CS")
+            {
+                stringComparison = StringComparison.CurrentCulture;
+            }
+            else if (argStringComparison != "CS" && argStringComparison != "CI")
+            {
+                LogError("StartsWith: stringComparison must be CS (Case Sensitive) or IC (Ignore Case)");
+                return null;
+            }
+
+            var isStartingWith = argSource.StartsWith(argTestString, stringComparison);
+            var retVal = isStartingWith ? argSource : string.Empty;
+
+            return retVal;
         }
 
         /// <summary>
