@@ -11,6 +11,7 @@
 namespace Mir.Stf.Utilities.StringTransformationUtilities
 {
     using System;
+    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -292,7 +293,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
 
             if (!match.Success)
             {
-                return null;
+                return StuBoolean.False.ToString();
             }
 
             var argSource = match.Groups["Source"].Value.Trim();
@@ -302,13 +303,13 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             if (string.IsNullOrEmpty(argSource))
             {
                 LogError("StartsWith: Source cannot be null or empty");
-                return null;
+                return StuBoolean.False.ToString();
             }
 
             if (string.IsNullOrEmpty(argTestString))
             {
                 LogError("StartsWith: TestString cannot be null or empty");
-                return null;
+                return StuBoolean.False.ToString();
             }
 
             var stringComparison = StringComparison.CurrentCultureIgnoreCase;
@@ -319,11 +320,11 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             else if (argStringComparison != "CS" && argStringComparison != "CI")
             {
                 LogError("StartsWith: stringComparison must be CS (Case Sensitive) or IC (Ignore Case)");
-                return null;
+                return StuBoolean.False.ToString();
             }
 
             var isStartingWith = argSource.StartsWith(argTestString, stringComparison);
-            var retVal = isStartingWith ? argSource : string.Empty;
+            var retVal = isStartingWith ? StuBoolean.True.ToString() : StuBoolean.False.ToString();
 
             return retVal;
         }
@@ -411,41 +412,51 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             // "PadRight" "Bo oB" "8" "x" --> "Bo oBxxx"
             // In a config.txt looks like:
             //     "{STRING "PadRight" "Bo oB" "8" "x"}
-            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TotalWidth>[^""]*)""(\s+""(?<PaddingChar>[^""]*)"")?";
-            var match = Regex.Match(arg, RegExp);
+            string retVal = null; 
 
-            if (!match.Success)
+            try
             {
-                return null;
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TotalWidth>[^""]*)""(\s+""(?<PaddingChar>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argTotalWidth = match.Groups["TotalWidth"].Value;
+                var argPaddingChar = match.Groups["PaddingChar"].Value;
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (!int.TryParse(argTotalWidth, out var totalWidth))
+                {
+                    LogError("PadRight: totalWidth must be an int");
+                    retVal = null;
+                    return retVal;
+                }
+
+                retVal = argPaddingChar.Length == 0
+                                 ? argSource.PadRight(totalWidth)
+                                 : argSource.PadRight(totalWidth, argPaddingChar[0]);
+
+                return retVal;
             }
-
-            var argSource = match.Groups["Source"].Value.Trim();
-            var argTotalWidth = match.Groups["TotalWidth"].Value.Trim();
-            var argPaddingChar = match.Groups["PaddingChar"].Value.Trim();
-
-            if (string.IsNullOrEmpty(argSource))
+            catch (Exception ex)
             {
-                LogError("PadRight: Source cannot be null or empty");
-                return null;
+                LogError($"PadRight: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
             }
-
-            if (!int.TryParse(argTotalWidth, out var totalWidth))
+            finally
             {
-                LogError("PadRight: totalWidth must be an int");
-                return null;
+                LogInfo($"PadRight: Finally retVal {retVal ?? "null"} ");
             }
-
-            if (totalWidth < argSource.Length)
-            {
-                LogError("PadRight: totalWidth must not be less than length of source");
-                return null;
-            }
-
-            var retVal = argPaddingChar.Length == 0
-                       ? argSource.PadRight(totalWidth)
-                       : argSource.PadRight(totalWidth, argPaddingChar[0]);
-
-            return retVal;
         }
 
         /// <summary>

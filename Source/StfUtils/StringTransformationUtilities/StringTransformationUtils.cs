@@ -18,6 +18,22 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
     using Mir.Stf.Utilities.Interfaces;
 
     /// <summary>
+    /// The stu boolean.
+    /// </summary>
+    public enum StuBoolean
+    {
+        /// <summary>
+        /// The true.
+        /// </summary>
+        True,
+
+        /// <summary>
+        /// The false.
+        /// </summary>
+        False
+    }
+
+    /// <summary>
     /// The string transformation utils.
     /// </summary>
     public class StringTransformationUtils : IStringTransformationUtils

@@ -32,23 +32,32 @@ namespace UnitTest.StringTransformationUtilities
         public void TestStuStringFunctionPadRight()
         {
             // Positive
-            HelperTestPad("PadRight", "A source", "14", "X", "A sourceXXXXXX");
-            HelperTestPad("PadRight", "A source", "8", "X", "A source");
+            HelperTestPad("PadRight", "Aaaa", "7", "X", "AaaaXXX", true);
+            HelperTestPad("PadRight", "Aaaa", "4", "X", "Aaaa", true);
+            HelperTestPad("PadRight", "A aa", "3", "X", "A aa");
+            HelperTestPad("PadRight", "Aa!a", "0", "X", "Aa!a");
+            HelperTestPad("PadRight", string.Empty, "0", "X", string.Empty, true);
+            HelperTestPad("PadRight", null, "0", "X", string.Empty, true);
+            HelperTestPad("PadRight", string.Empty, "4", "X", "XXXX", true);
+            HelperTestPad("PadRight", null, "5", "X", "XXXXX", true);
+            HelperTestPad("PadRight", "Aaaa", "7", " ", "Aaaa   ", true);
+
+            HelperTestPad("PadRight", " bbb", "4", "X", " bbb");
+            HelperTestPad("PadRight", " bbb", "7", "Q", " bbbQQQ");
+
+            HelperTestPad("PadRight", "ccc ", "4", "X", "ccc ");
+            HelperTestPad("PadRight", "ccc ", "7", "!", "ccc !!!");
+            HelperTestPad("PadRight", "c cc ", "7", " ", "c cc   ");
+
+            HelperTestPad("PadRight", "aaaa", "7", string.Empty, "aaaa   ", true);
+            HelperTestPad("PadRight", "aaaa", "7", null, "aaaa   ", true);
 
             // Negative
-            HelperTestPad("PadRight", string.Empty, "14", "X", null);
-            HelperTestPad("PadRight", null, "14", "X", null);
-
-            HelperTestPad("PadRight", "A source", string.Empty, "X", null);
-            HelperTestPad("PadRight", "A source", null, "X", null);
-
-            HelperTestPad("PadRight", "A source", "14", string.Empty, "A source      ");
-            HelperTestPad("PadRight", "A source", "14", null, "A source      ");
-
-            HelperTestPad("PadRight", "A source", "Q", "X", null);
-            HelperTestPad("PadRight", "A source", "-1", "X", null);
-            HelperTestPad("PadRight", "A source", "0", "X", null);
-            HelperTestPad("PadRight", "A source", "6", "X", null);
+            HelperTestPad("PadRight", "aaaa", "-1", "X", null);
+            HelperTestPad("PadRight", "aaaa", "Q", "X", null);
+            HelperTestPad("PadRight", "aaaa", "2147483647", "X", null);
+            HelperTestPad("PadRight", "aaaa", string.Empty, "X", null);
+            HelperTestPad("PadRight", "aaaa", null, "X", null);
         }
 
         /// <summary>
@@ -115,56 +124,49 @@ namespace UnitTest.StringTransformationUtilities
                 "The Source string of 1 this test",
                 "The S",
                 "CS",
-                "The Source string of 1 this test");
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
-                "The S",
+                "The s",
                 "The Source string of this test",
                 "CS",
-                string.Empty);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
-                "StartsWith", 
-                "The Source string of this test", 
-                "The s", 
-                "CS", 
-                string.Empty);
+                "StartsWith",
+                "The Source string of this test",
+                "The S",
+                "CI",
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The Source string of this test",
                 "The s",
                 "CI",
-                "The Source string of this test");
-
-            HelperTestStartsOrEndsWith(
-                "StartsWith",
-                "The Source string of this test",
-                "The s",
-                string.Empty,
-                string.Empty);
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The Source string of this test",
                 "The s",
                 null,
-                string.Empty);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The Source string of this test",
                 "The S",
                 string.Empty,
-                "The Source string of this test");
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The Source string of this test",
                 "The S",
                 null,
-                "The Source string of this test");
+                StuBoolean.True.ToString());
 
             // Negative
             HelperTestStartsOrEndsWith(
@@ -172,35 +174,35 @@ namespace UnitTest.StringTransformationUtilities
                 string.Empty,
                 "The s",
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 null,
                 "The s",
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The Source string of this test",
                 string.Empty,
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The Source string of this test",
                 null,
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The Source string of this test",
                 "The S",
                 "CC",
-                null);
+                StuBoolean.False.ToString());
         }
 
         /// <summary>
@@ -321,12 +323,19 @@ namespace UnitTest.StringTransformationUtilities
         /// <param name="expected">
         /// The expected value of the transformed string
         /// </param>
-        private void HelperTestPad(string direction, string source, string totalWidth, string paddingChar, string expected)
+        /// <param name="testLengthAgainstTotalWidth">
+        /// The test Length Against Total Width.
+        /// </param>
+        private void HelperTestPad(string direction, string source, string totalWidth, string paddingChar, string expected, bool testLengthAgainstTotalWidth = false)
         {
             var arg = $@"""{direction}"" ""{source}"" ""{totalWidth}"" ""{paddingChar}""";
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest {direction} test actual / expected", expected, actual);
+            if (testLengthAgainstTotalWidth)
+            {
+                StfAssert.AreEqual($"Unittest {direction} test actual length / total width", expected.Length.ToString(), totalWidth);
+            }
         }
 
         /// <summary>
