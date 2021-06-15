@@ -359,41 +359,51 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             // "PadLeft" "Bo oB" "8" "x" --> "xxxBo oB"
             // In a config.txt looks like:
             //     "{STRING "PadLeft" "Bo oB" "8" "x"}
-            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TotalWidth>[^""]*)""(\s+""(?<PaddingChar>[^""]*)"")?";
-            var match = Regex.Match(arg, RegExp);
+            string retVal = null;
 
-            if (!match.Success)
+            try
             {
-                return null;
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TotalWidth>[^""]*)""(\s+""(?<PaddingChar>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argTotalWidth = match.Groups["TotalWidth"].Value;
+                var argPaddingChar = match.Groups["PaddingChar"].Value;
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (!int.TryParse(argTotalWidth, out var totalWidth))
+                {
+                    LogError("PadLeft: totalWidth must be an int");
+                    retVal = null;
+                    return retVal;
+                }
+
+                retVal = argPaddingChar.Length == 0
+                             ? argSource.PadLeft(totalWidth)
+                             : argSource.PadLeft(totalWidth, argPaddingChar[0]);
+
+                return retVal;
             }
-
-            var argSource = match.Groups["Source"].Value.Trim();
-            var argTotalWidth = match.Groups["TotalWidth"].Value.Trim();
-            var argPaddingChar = match.Groups["PaddingChar"].Value.Trim();
-
-            if (string.IsNullOrEmpty(argSource))
+            catch (Exception ex)
             {
-                LogError("PadLeft: Source cannot be null or empty");
-                return null;
+                LogError($"PadLeft: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
             }
-
-            if (!int.TryParse(argTotalWidth, out var totalWidth))
+            finally
             {
-                LogError("PadLeft: totalWidth must be an int");
-                return null;
+                LogInfo($"PadLeft: Finally retVal {retVal ?? "null"} ");
             }
-
-            if (totalWidth < argSource.Length)
-            {
-                LogError("PadLeft: totalWidth must not be less than length of source");
-                return null;
-            }
-
-            var retVal = argPaddingChar.Length == 0
-                ? argSource.PadLeft(totalWidth)
-                : argSource.PadLeft(totalWidth, argPaddingChar[0]);
-
-            return retVal;
         }
 
         /// <summary>

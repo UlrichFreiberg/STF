@@ -67,23 +67,32 @@ namespace UnitTest.StringTransformationUtilities
         public void TestStuStringFunctionPadLeft()
         {
             // Positive
-            HelperTestPad("PadLeft", "A source", "14", "X", "XXXXXXA source");
-            HelperTestPad("PadLeft", "A source", "8", "X", "A source");
+            HelperTestPad("PadLeft", "Aaaa", "7", "X", "XXXAaaa", true);
+            HelperTestPad("PadLeft", "Aaaa", "4", "X", "Aaaa", true);
+            HelperTestPad("PadLeft", "A aa", "3", "X", "A aa");
+            HelperTestPad("PadLeft", "Aa!a", "0", "X", "Aa!a");
+            HelperTestPad("PadLeft", string.Empty, "0", "X", string.Empty, true);
+            HelperTestPad("PadLeft", null, "0", "X", string.Empty, true);
+            HelperTestPad("PadLeft", string.Empty, "4", "X", "XXXX", true);
+            HelperTestPad("PadLeft", null, "5", "X", "XXXXX", true);
+            HelperTestPad("PadLeft", "Aaaa", "7", " ", "   Aaaa", true);
+
+            HelperTestPad("PadLeft", " bbb", "4", "X", " bbb");
+            HelperTestPad("PadLeft", " bbb", "7", "Q", "QQQ bbb");
+
+            HelperTestPad("PadLeft", "ccc ", "4", "X", "ccc ");
+            HelperTestPad("PadLeft", "ccc ", "7", "!", "!!!ccc ");
+            HelperTestPad("PadLeft", "c cc ", "7", " ", "  c cc ");
+
+            HelperTestPad("PadLeft", "aaaa", "7", string.Empty, "   aaaa", true);
+            HelperTestPad("PadLeft", "aaaa", "7", null, "   aaaa", true);
 
             // Negative
-            HelperTestPad("PadLeft", string.Empty, "14", "X", null);
-            HelperTestPad("PadLeft", null, "14", "X", null);
-
-            HelperTestPad("PadLeft", "A source", string.Empty, "X", null);
-            HelperTestPad("PadLeft", "A source", null, "X", null);
-
-            HelperTestPad("PadLeft", "A source", "14", string.Empty, "      A source");
-            HelperTestPad("PadLeft", "A source", "14", null, "      A source");
-
-            HelperTestPad("PadLeft", "A source", "Q", "X", null);
-            HelperTestPad("PadLeft", "A source", "-1", "X", null);
-            HelperTestPad("PadLeft", "A source", "0", "X", null);
-            HelperTestPad("PadLeft", "A source", "6", "X", null);
+            HelperTestPad("PadLeft", "aaaa", "-1", "X", null);
+            HelperTestPad("PadLeft", "aaaa", "Q", "X", null);
+            HelperTestPad("PadLeft", "aaaa", "2147483647", "X", null);
+            HelperTestPad("PadLeft", "aaaa", string.Empty, "X", null);
+            HelperTestPad("PadLeft", "aaaa", null, "X", null);
         }
 
         /// <summary>
