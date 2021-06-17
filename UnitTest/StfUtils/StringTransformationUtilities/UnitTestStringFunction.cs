@@ -26,7 +26,27 @@ namespace UnitTest.StringTransformationUtilities
         private readonly StringTransformationUtils stringTransformationUtils = new StringTransformationUtils();
 
         /// <summary>
-        /// The test stu unique function for PadRight.
+        /// The test stu function for IndexOf.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionIndexOf()
+        {
+            // Positive
+            HelperTestIndexOf("The quick Brown Fox jumps", "qui", "1", "CS", "4");
+            HelperTestIndexOf("The quick Brown Fox jumps", "Qui", "1", "CS", "-1");
+            HelperTestIndexOf("The quick Brown Fox jumps", "Qui", "1", "CI", "4");
+            HelperTestIndexOf("The quick Brown Fox jumps", "qui", "8", "CS", "-1");
+            HelperTestIndexOf("The quick Brown Fox jumps", null, "3", "CI", "3");
+            HelperTestIndexOf("The quick Brown Fox jumps", string.Empty, "5", "CI", "5");
+
+            // Negative
+            HelperTestIndexOf("The quick Brown Fox jumps", "qui", "-1", "CS", "-1");
+            HelperTestIndexOf("The quick Brown Fox jumps", "qui", "26", "CS", "-1");
+            HelperTestIndexOf("The quick Brown Fox jumps", "qui", "A", "CS", "-1");
+        }
+
+        /// <summary>
+        /// The test stu  function for PadRight.
         /// </summary>
         [TestMethod]
         public void TestStuStringFunctionPadRight()
@@ -138,7 +158,7 @@ namespace UnitTest.StringTransformationUtilities
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The s",
-                "The Source string of this test",   
+                "The Source string of this test",
                 "CS",
                 StuBoolean.False.ToString());
 
@@ -386,16 +406,47 @@ namespace UnitTest.StringTransformationUtilities
         /// The expected string
         /// </param>
         private void HelperTestStartsOrEndsWith(
-                                                string startsOrEndsWith,
-                                                string source,
-                                                string testString,
-                                                string stringComparison,
-                                                string expected)
+            string startsOrEndsWith,
+            string source,
+            string testString,
+            string stringComparison,
+            string expected)
         {
             var arg = $@"""{startsOrEndsWith}"" ""{source}"" ""{testString}"" ""{stringComparison}""";
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest {startsOrEndsWith},{source},{testString},{stringComparison} test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test IndexOf function.
+        /// </summary>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="startIndex">
+        /// The start Index.
+        /// </param>
+        /// <param name="stringComparison">
+        /// The stringComparison string
+        /// </param>
+        /// <param name="expected">
+        /// The expected string
+        /// </param>
+        private void HelperTestIndexOf(
+            string source,
+            string value,
+            string startIndex,
+            string stringComparison,
+            string expected)
+        {
+            var arg = $@"""IndexOf"" ""{source}"" ""{value}"" ""{startIndex}"" ""{stringComparison}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest IndexOf,{source},{value}, {startIndex},{stringComparison} test actual / expected", expected, actual);
         }
     }
 }

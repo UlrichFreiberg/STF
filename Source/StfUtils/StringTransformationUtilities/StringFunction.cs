@@ -9,10 +9,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable RedundantAssignment
+// ReSharper disable ExpressionIsAlwaysNull
 namespace Mir.Stf.Utilities.StringTransformationUtilities
 {
     using System;
-    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -113,7 +113,76 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionIndexOf(string arg)
         {
-            return "[IndexOf]" + arg;
+            // "IndexOf" "Source" "TestString" "startIndex" ""CaseSensitive"(optional, default is CaseSensitive)
+            // no optional count parameter as in c# IndexOf
+            // "IndexOf" "Bo oB Bo" "ob" "2" "CS" --> "3"
+            // In a config.txt looks like:
+            //     "{STRING "IndexOf" "Bo oB Bo" "ob" "2" "CS"}   returns "-1"
+            //     "{STRING "IndexOf" "Bo oB Bo" "ob" "2" "CI"}   returns "3"
+            //     "{STRING "IndexOf" "Bo oB Bo" "ob" "4" "CI"}   returns "-1"
+            var retVal = "-1";
+            try
+            {
+                const string RegExp =
+                    @"""(?<Source>[^""]*)""\s+""(?<Value>[^""]*)""\s+""(?<StartIndex>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                var argSource = match.Groups["Source"].Value.Trim();
+                var argValue = match.Groups["Value"].Value.Trim();
+                var argStartIndex = match.Groups["StartIndex"].Value.Trim();
+                var argStringComparison = match.Groups["StringComparison"].Value.Trim();
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (!int.TryParse(argStartIndex, out var startIndex)
+                    || 
+                    startIndex < 0 
+                    ||
+                    startIndex > argSource.Length)
+                {
+                    LogError("IndexOf: startIndex must be a positive int less than length of Source");
+                    retVal = "-1";
+                    return retVal;
+                }
+
+                var stringComparison = StringComparison.CurrentCulture;
+
+                switch (argStringComparison)
+                {
+                    case "CS":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    case "CI":
+                        stringComparison = StringComparison.CurrentCultureIgnoreCase;
+                        break;
+                    case "":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    default:
+                        LogError($"EndsWith: invalid value for Case Sensitivity (CS or CI)");
+                        retVal = StuBoolean.False.ToString();
+                        return retVal;
+                }
+
+                retVal = argValue.Length == 0
+                             ? startIndex.ToString()
+                             : argSource.IndexOf(argValue, startIndex, stringComparison).ToString();
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"IndexOf: Exception {ex.Message} ");
+                retVal = "-1";
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"IndexOf: Finally retVal {retVal} ");
+            }
         }
 
         /// <summary>
@@ -283,7 +352,6 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                 retVal = isEndingWith ? StuBoolean.True.ToString() : StuBoolean.False.ToString();
 
                 return retVal;
-
             }
             catch (Exception ex)
             {
@@ -293,7 +361,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             }
             finally
             {
-                LogInfo($"EndsWith: Finally retVal {retVal ?? "null"} ");
+                LogInfo($"EndsWith: Finally retVal {retVal} ");
             }
         }
 
