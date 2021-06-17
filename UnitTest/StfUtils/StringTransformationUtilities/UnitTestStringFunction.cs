@@ -138,7 +138,7 @@ namespace UnitTest.StringTransformationUtilities
             HelperTestStartsOrEndsWith(
                 "StartsWith",
                 "The s",
-                "The Source string of this test",
+                "The Source string of this test",   
                 "CS",
                 StuBoolean.False.ToString());
 
@@ -226,56 +226,56 @@ namespace UnitTest.StringTransformationUtilities
                 "The Source string of this Test",
                 "s Test",
                 "CS",
-                "The Source string of this Test");
-
-            HelperTestStartsOrEndsWith(
-                "EndsWith",
-                "s Test",
-                "The Source string of this Test",
-                "CS",
-                string.Empty);
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 "CS",
-                string.Empty);
+                StuBoolean.False.ToString());
+
+            HelperTestStartsOrEndsWith(
+                "EndsWith",
+                "The Source string of this Test",
+                "s Test",
+                "CI",
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 "CI",
-                "The Source string of this Test");
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 string.Empty,
-                string.Empty);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 "s test",
                 null,
-                string.Empty);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 "s Test",
                 string.Empty,
-                "The Source string of this Test");
+                StuBoolean.True.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 "s Test",
                 null,
-                "The Source string of this Test");
+                StuBoolean.True.ToString());
 
             // Negative
             HelperTestStartsOrEndsWith(
@@ -283,35 +283,35 @@ namespace UnitTest.StringTransformationUtilities
                 string.Empty,
                 "s test",
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 null,
                 "s test",
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 string.Empty,
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 null,
                 "CI",
-                null);
+                StuBoolean.False.ToString());
 
             HelperTestStartsOrEndsWith(
                 "EndsWith",
                 "The Source string of this Test",
                 "s Test",
                 "CC",
-                null);
+                StuBoolean.False.ToString());
         }
 
         /// <summary>

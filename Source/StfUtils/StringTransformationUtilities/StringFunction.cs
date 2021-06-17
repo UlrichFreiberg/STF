@@ -8,6 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable RedundantAssignment
 namespace Mir.Stf.Utilities.StringTransformationUtilities
 {
     using System;
@@ -230,45 +231,70 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             // In a config.txt looks like:
             //     "{STRING "EndsWith" "Bo oB" "ob" "CS"}   returns string.empty
             //     "{STRING "EndsWith" "Bo oB" "ob" "CI"}   returns "Bo oB"
-            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TestString>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
-            var match = Regex.Match(arg, RegExp);
-
-            if (!match.Success)
+            var retVal = StuBoolean.False.ToString();
+            try
             {
-                return null;
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TestString>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    return StuBoolean.False.ToString();
+                }
+
+                var argSource = match.Groups["Source"].Value.Trim();
+                var argTestString = match.Groups["TestString"].Value.Trim();
+                var argStringComparison = match.Groups["StringComparison"].Value.Trim();
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    LogError("EndsWith: Source cannot be null or empty");
+                    retVal = StuBoolean.False.ToString();
+                    return retVal;
+                }
+
+                if (string.IsNullOrEmpty(argTestString))
+                {
+                    LogError("EndsWith: TestString cannot be null or empty");
+                    retVal = StuBoolean.False.ToString();
+                    return retVal;
+                }
+
+                var stringComparison = StringComparison.CurrentCulture;
+
+                switch (argStringComparison)
+                {
+                    case "CS":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    case "CI":
+                        stringComparison = StringComparison.CurrentCultureIgnoreCase;
+                        break;
+                    case "":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    default:
+                        LogError($"EndsWith: invalid value for Case Sensitivity (CS or CI)");
+                        retVal = StuBoolean.False.ToString();
+                        return retVal;
+                }
+
+                var isEndingWith = argSource.EndsWith(argTestString, stringComparison);
+                retVal = isEndingWith ? StuBoolean.True.ToString() : StuBoolean.False.ToString();
+
+                return retVal;
+
             }
-
-            var argSource = match.Groups["Source"].Value.Trim();
-            var argTestString = match.Groups["TestString"].Value.Trim();
-            var argStringComparison = match.Groups["StringComparison"].Value.Trim();
-
-            if (string.IsNullOrEmpty(argSource))
+            catch (Exception ex)
             {
-                LogError("EndsWith: Source cannot be null or empty");
-                return null;
+                LogError($"EndsWith: Exception {ex.Message} ");
+                retVal = StuBoolean.False.ToString();
+                return retVal;
             }
-
-            if (string.IsNullOrEmpty(argTestString))
+            finally
             {
-                LogError("EndsWith: TestString cannot be null or empty");
-                return null;
+                LogInfo($"EndsWith: Finally retVal {retVal ?? "null"} ");
             }
-
-            var stringComparison = StringComparison.CurrentCultureIgnoreCase;
-            if (string.IsNullOrEmpty(argStringComparison) || argStringComparison == "CS")
-            {
-                stringComparison = StringComparison.CurrentCulture;
-            }
-            else if (argStringComparison != "CS" && argStringComparison != "CI")
-            {
-                LogError("EndsWith: stringComparison must be CS (Case Sensitive) or IC (Ignore Case)");
-                return null;
-            }
-
-            var isEndingWith = argSource.EndsWith(argTestString, stringComparison);
-            var retVal = isEndingWith ? argSource : string.Empty;
-
-            return retVal;
         }
 
         /// <summary>
@@ -288,45 +314,69 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             // In a config.txt looks like:
             //     "{STRING "StartsWith" "Bo oB" "bo" "CS"}   returns string.empty
             //     "{STRING "StartsWith" "Bo oB" "bo" "CI"}   returns "Bo oB"
-            const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TestString>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
-            var match = Regex.Match(arg, RegExp);
-
-            if (!match.Success)
+            var retVal = StuBoolean.False.ToString();
+            try
             {
-                return StuBoolean.False.ToString();
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<TestString>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    return StuBoolean.False.ToString();
+                }
+
+                var argSource = match.Groups["Source"].Value.Trim();
+                var argTestString = match.Groups["TestString"].Value.Trim();
+                var argStringComparison = match.Groups["StringComparison"].Value.Trim();
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    LogError("StartsWith: Source cannot be null or empty");
+                    retVal = StuBoolean.False.ToString();
+                    return retVal;
+                }
+
+                if (string.IsNullOrEmpty(argTestString))
+                {
+                    LogError("StartsWith: TestString cannot be null or empty");
+                    retVal = StuBoolean.False.ToString();
+                    return retVal;
+                }
+
+                var stringComparison = StringComparison.CurrentCulture;
+
+                switch (argStringComparison)
+                {
+                    case "CS":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    case "CI":
+                        stringComparison = StringComparison.CurrentCultureIgnoreCase;
+                        break;
+                    case "":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    default:
+                        LogError($"StartsWith: invalid value for Case Sensitivity (CS or CI)");
+                        retVal = StuBoolean.False.ToString();
+                        return retVal;
+                }
+
+                var isStartingWith = argSource.StartsWith(argTestString, stringComparison);
+                retVal = isStartingWith ? StuBoolean.True.ToString() : StuBoolean.False.ToString();
+
+                return retVal;
             }
-
-            var argSource = match.Groups["Source"].Value.Trim();
-            var argTestString = match.Groups["TestString"].Value.Trim();
-            var argStringComparison = match.Groups["StringComparison"].Value.Trim();
-
-            if (string.IsNullOrEmpty(argSource))
+            catch (Exception ex)
             {
-                LogError("StartsWith: Source cannot be null or empty");
-                return StuBoolean.False.ToString();
+                LogError($"StartsWith: Exception {ex.Message} ");
+                retVal = StuBoolean.False.ToString();
+                return retVal;
             }
-
-            if (string.IsNullOrEmpty(argTestString))
+            finally
             {
-                LogError("StartsWith: TestString cannot be null or empty");
-                return StuBoolean.False.ToString();
+                LogInfo($"StartsWith: Finally retVal {retVal} ");
             }
-
-            var stringComparison = StringComparison.CurrentCultureIgnoreCase;
-            if (string.IsNullOrEmpty(argStringComparison) || argStringComparison == "CS")
-            {
-                stringComparison = StringComparison.CurrentCulture;
-            }
-            else if (argStringComparison != "CS" && argStringComparison != "CI")
-            {
-                LogError("StartsWith: stringComparison must be CS (Case Sensitive) or IC (Ignore Case)");
-                return StuBoolean.False.ToString();
-            }
-
-            var isStartingWith = argSource.StartsWith(argTestString, stringComparison);
-            var retVal = isStartingWith ? StuBoolean.True.ToString() : StuBoolean.False.ToString();
-
-            return retVal;
         }
 
         /// <summary>
