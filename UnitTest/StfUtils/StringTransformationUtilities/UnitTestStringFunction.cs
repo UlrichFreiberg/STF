@@ -46,6 +46,29 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu function for IndexOf.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionSubstring()
+        {
+            // Positive
+            HelperTestSubstring("The quick Brown Fox jumps", "1", "1", "h");
+            HelperTestSubstring("The quick Brown Fox jumps", "1", "4", "he q");
+            HelperTestSubstring("The quick Brown Fox jumps", "10", null, "Brown Fox jumps");
+            HelperTestSubstring(" The quick Brown Fox jumps ", "11", null, "Brown Fox jumps ");
+            HelperTestSubstring("The quick Brown Fox jumps", "10", "0", string.Empty);
+            HelperTestSubstring("The quick Brown Fox jumps", "10", string.Empty, "Brown Fox jumps");
+            HelperTestSubstring(" The quick Brown Fox jumps ", "15", "12", "n Fox jumps ");
+
+            // Negative
+            HelperTestSubstring(" The quick Brown Fox jumps ", "211", null, null);
+            HelperTestSubstring(" The quick Brown Fox jumps ", "15", "13", null);
+            HelperTestSubstring(" The quick Brown Fox jumps ", "-1", "1", null);
+            HelperTestSubstring(" The quick Brown Fox jumps ", "A", "1", null);
+            HelperTestSubstring(" The quick Brown Fox jumps ", "5", "-1", null);
+        }
+
+        /// <summary>
         /// The test stu  function for PadRight.
         /// </summary>
         [TestMethod]
@@ -447,6 +470,33 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest IndexOf,{source},{value}, {startIndex},{stringComparison} test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test Substring function.
+        /// </summary>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="startIndex">
+        /// The value.
+        /// </param>
+        /// <param name="length">
+        /// The start Index.
+        /// </param>
+        /// <param name="expected">
+        /// The expected string
+        /// </param>
+        private void HelperTestSubstring(
+            string source,
+            string startIndex,
+            string length,
+            string expected)
+        {
+            var arg = $@"""Substring"" ""{source}"" ""{startIndex}"" ""{length}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest Substring,{source}, {startIndex}, {length} test actual / expected", expected, actual);
         }
     }
 }

@@ -141,7 +141,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                     || 
                     startIndex < 0 
                     ||
-                    startIndex > argSource.Length)
+                    startIndex >= argSource.Length)
                 {
                     LogError("IndexOf: startIndex must be a positive int less than length of Source");
                     retVal = "-1";
@@ -196,7 +196,68 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionSubstring(string arg)
         {
-            return "[Substring]" + arg;
+            // "Substring" "Source" "startIndex" "length" 
+            // "Substring" "Bo oB Bo" "2" "2" --> " o"
+            // "Substring" "Bo oB Bo" "3" "4" --> "oB B"
+            // In a config.txt looks like:
+            //     "{STRING "IndexOf" "Bo oB Bo" "2" "2"}   returns " o"
+            //     "{STRING "IndexOf" "Bo oB Bo" "3" "4"}   returns "oB B"
+            string retVal = null;
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<StartIndex>[^""]*)""(\s+""(?<Length>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                var argSource = match.Groups["Source"].Value;
+                var argStartIndex = match.Groups["StartIndex"].Value.Trim();
+                var argLength = match.Groups["Length"].Value.Trim();
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (!int.TryParse(argStartIndex, out var startIndex)
+                    ||
+                    startIndex < 0
+                    ||
+                    startIndex > argSource.Length)
+                {
+                    LogError("Substring: startIndex must be a positive int less than length of Source");
+                    retVal = null;
+                    return retVal;
+                }
+
+                var length = 0;
+                if (string.IsNullOrEmpty(argLength))
+                {
+                    argLength = string.Empty;
+                }
+                else if (!int.TryParse(argLength, out length)
+                         ||
+                         length < 0)
+                {
+                    LogError("Substring: length (optional) must be a positive int less than length of Source");
+                    retVal = null;
+                    return retVal;
+                }
+
+                retVal = argLength.Length == 0
+                             ? argSource.Substring(startIndex)
+                             : argSource.Substring(startIndex, length);
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Substring: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"Substring: Finally retVal {retVal ?? "null"} ");
+            }
         }
 
         /// <summary>
