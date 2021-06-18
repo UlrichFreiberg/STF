@@ -69,6 +69,29 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu function for Compare.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionCompare()
+        {
+            // Positive
+            HelperTestCompare("BBBaaa", "BBBaaa", "CS", "0");
+            HelperTestCompare("BBBaaa", "BABaaa", "CS", "1");
+            HelperTestCompare("BBBaaa", "BCBaaa", "CS", "-1");
+            HelperTestCompare(string.Empty, "BBBaaa", "CS", "-1");
+            HelperTestCompare(null, "BBBaaa", "CS", "-1");
+            HelperTestCompare(string.Empty, string.Empty, "CS", "0");
+            HelperTestCompare(null, null, "CS", "0");
+            HelperTestCompare("BBBaaa", string.Empty, "CS", "1");
+            HelperTestCompare("BBBaaa", null, "CS", "1");
+            HelperTestCompare("BBBaaa", "BbBaaa", "CS", "1");
+            HelperTestCompare("BBBaaa", "BbBaaa", "CI", "0");
+
+            // Negative
+            HelperTestCompare("BBBaaa", "BCBaaa", "CA", null);
+        }
+
+        /// <summary>
         /// The test stu  function for PadRight.
         /// </summary>
         [TestMethod]
@@ -497,6 +520,33 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest Substring,{source}, {startIndex}, {length} test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test Compare function.
+        /// </summary>
+        /// <param name="sourceA">
+        /// The sourceA string
+        /// </param>
+        /// <param name="sourceB">
+        /// The source B.
+        /// </param>
+        /// <param name="stringComparison">
+        /// The string Comparison.
+        /// </param>
+        /// <param name="expected">
+        /// The expected string
+        /// </param>
+        private void HelperTestCompare(
+            string sourceA,
+            string sourceB,
+            string stringComparison,
+            string expected)
+        {
+            var arg = $@"""Compare"" ""{sourceA}"" ""{sourceB}"" ""{stringComparison}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest Compare,{sourceA}, {sourceB}, {stringComparison} test actual / expected", expected, actual);
         }
     }
 }

@@ -285,7 +285,61 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionCompare(string arg)
         {
-            return "[Compare]" + arg;
+            // "Compare" "SourceA" "SourceB" "CaseSensitive"(optional, default is CaseSensitive)
+            // "Compare" "Bo" "Co" "CS" --> Less than zero if A <  B , Zero if equal, Greater than zero if A > B                     
+            // In a config.txt looks like:
+            //     "{STRING "Compare" "Bo" "Co" "CS"}   returns "-1" 
+            //     "{STRING "Compare" "Bo" "Bo" "CI"}   returns "0"
+            //     "{STRING "Compare" "Bo" "bo" "CI"}   returns "0"
+            //     "{STRING "Compare" "Bo" "Ao" "CI"}   returns "1"
+            string retVal = null;
+            try
+            {
+                const string RegExp = @"""(?<SourceA>[^""]*)""\s+""(?<SourceB>[^""]*)""(\s+""(?<StringComparison>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    LogError("Compare: no regexp match");
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSourceA = match.Groups["SourceA"].Value;
+                var argSourceB = match.Groups["SourceB"].Value;
+                var argStringComparison = match.Groups["StringComparison"].Value.Trim();
+                var stringComparison = StringComparison.CurrentCulture;
+
+                switch (argStringComparison)
+                {
+                    case "CS":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    case "CI":
+                        stringComparison = StringComparison.CurrentCultureIgnoreCase;
+                        break;
+                    case "":
+                        stringComparison = StringComparison.CurrentCulture;
+                        break;
+                    default:
+                        LogError($"Compare: invalid value for Case Sensitivity (CS or CI)");
+                        retVal = null;
+                        return retVal;
+                }
+
+                retVal = string.Compare(argSourceA, argSourceB, stringComparison).ToString();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Compare: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"Compare: Finally retVal {retVal} ");
+            }
         }
 
         /// <summary>
