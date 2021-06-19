@@ -353,7 +353,42 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionLength(string arg)
         {
-            return "[Length]" + arg;
+            // "Length" "Source" 
+            // In a config.txt looks like:
+            //     "{STRING "Length" "Bo" }   returns "2" 
+            string retVal = "-1";
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    LogError("Length: no regexp match");
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                retVal = argSource.Length.ToString();
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Length: Exception {ex.Message} ");
+                retVal = "-1";
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"Length: Finally retVal {retVal} ");
+            }
         }
 
         /// <summary>

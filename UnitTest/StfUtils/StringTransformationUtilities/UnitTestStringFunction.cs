@@ -92,6 +92,19 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu function for Length.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionLength()
+        {
+            // Positive
+            HelperTestLength("BBBaaa", "6");
+            HelperTestLength(" BBBaaa ", "8");
+            HelperTestLength(string.Empty, "0");
+            HelperTestLength(null, "0");
+        }
+
+        /// <summary>
         /// The test stu  function for PadRight.
         /// </summary>
         [TestMethod]
@@ -547,6 +560,25 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest Compare,{sourceA}, {sourceB}, {stringComparison} test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test Length function.
+        /// </summary>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="expected">
+        /// The expected string
+        /// </param>
+        private void HelperTestLength(
+            string source,
+            string expected)
+        {
+            var arg = $@"""Length"" ""{source}"" ";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest Length,{source} test actual / expected", expected, actual);
         }
     }
 }
