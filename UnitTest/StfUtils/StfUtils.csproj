@@ -110,6 +110,8 @@
     <Compile Include="StringTransformationUtilities\UnitTestSimpleFunctions.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestRegisterAllStuFunctionsForType.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestDeleteFile.cs" />
+    <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestGetDirectoryPath.cs" />
+    <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestTestCaseDirectory.cs" />
     <Compile Include="UnitTestGetKeynameKeyvalueEntries.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestGetCleanFilecontent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,6 +149,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\KeyValuePairsUtils\Simple.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Results\UnitTestResultFile01.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Results\UnitTestResultFile02.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Temp\UnitTestTempFile01.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Temp\UnitTestTempFile02.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\UnitTestRootFile01.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\UnitTestRootFile02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
