@@ -129,6 +129,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Doc\" />
     <Folder Include="TestData\FileUtilities\" />
     <Folder Include="TestData\FileUtils\GetCleanFilecontent\Temp\" />
   </ItemGroup>
