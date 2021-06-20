@@ -402,7 +402,52 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionTrim(string arg)
         {
-            return "[Trim]" + arg;
+            // "Trim" "Source" "TrimChars"
+            // "Trim" ";Bo oB; " " .;," --> "Bo oB"
+            // In a config.txt looks like:
+            //     "{STRING "Trim" ";Bo oB" " .;,"}
+            string retVal = null;
+
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)""(\s+""(?<TrimChars>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argTrimChars = match.Groups["TrimChars"].Value;
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (string.IsNullOrEmpty(argTrimChars))
+                {
+                    argTrimChars = string.Empty;
+                }
+
+                retVal = argTrimChars.Length == 0
+                             ? argSource.Trim()
+                             : argSource.Trim(argTrimChars.ToCharArray());
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Trim: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"Trim: Finally retVal {retVal ?? "null"} ");
+            }
         }
 
         /// <summary>
@@ -416,7 +461,52 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionTrimEnd(string arg)
         {
-            return "[TrimEnd]" + arg;
+            // "TrimEnd" "Source" "TrimChars"
+            // "TrimEnd" "Bo oB; " " .;," --> "Bo oB"
+            // In a config.txt looks like:
+            //     "{STRING "TrimEnd" "Bo oB" " .;,"}
+            string retVal = null;
+
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)""(\s+""(?<TrimChars>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argTrimChars = match.Groups["TrimChars"].Value;
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (string.IsNullOrEmpty(argTrimChars))
+                {
+                    argTrimChars = string.Empty;
+                }
+
+                retVal = argTrimChars.Length == 0
+                             ? argSource.TrimEnd()
+                             : argSource.TrimEnd(argTrimChars.ToCharArray());
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"TrimEnd: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"TrimEnd: Finally retVal {retVal ?? "null"} ");
+            }
         }
 
         /// <summary>
@@ -430,7 +520,52 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionTrimStart(string arg)
         {
-            return "[TrimStart]" + arg;
+            // "TrimStart" "Source" "TrimChars"
+            // "TrimStart" ";Bo oB; " " .;," --> "Bo oB;"
+            // In a config.txt looks like:
+            //     "{STRING "TrimStart" ";Bo oB" " .;,"}
+            string retVal = null;
+
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)""(\s+""(?<TrimChars>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argTrimChars = match.Groups["TrimChars"].Value;
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (string.IsNullOrEmpty(argTrimChars))
+                {
+                    argTrimChars = string.Empty;
+                }
+
+                retVal = argTrimChars.Length == 0
+                             ? argSource.TrimStart()
+                             : argSource.TrimStart(argTrimChars.ToCharArray());
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"TrimStart: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"TrimStart: Finally retVal {retVal ?? "null"} ");
+            }
         }
 
         /// <summary>

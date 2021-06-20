@@ -105,6 +105,65 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu  function for TrimEnd.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionTrimEnd()
+        {
+            // Positive
+            HelperTestTrim("TrimEnd", "..Gone Fishing, Gone Away...", ".", "..Gone Fishing, Gone Away");
+            HelperTestTrim("TrimEnd", "..Gone Fishing, Gone Away..;.", ".;", "..Gone Fishing, Gone Away");
+            HelperTestTrim("TrimEnd", "..Gone Fishing, Gone Away..;. ", ".;", "..Gone Fishing, Gone Away..;. ");
+            HelperTestTrim("TrimEnd", "..Gone Fishing, Gone Away..; .", ".;", "..Gone Fishing, Gone Away..; ");
+
+            // Negative
+            HelperTestTrim("TrimEnd", string.Empty, ".", string.Empty);
+            HelperTestTrim("TrimEnd", null, ".", string.Empty);
+            HelperTestTrim("TrimEnd", "..Gone Fishing, Gone Away..;. ", string.Empty, "..Gone Fishing, Gone Away..;.");
+            HelperTestTrim("TrimEnd", "..Gone Fishing, Gone Away..;. ", null, "..Gone Fishing, Gone Away..;.");
+        }
+
+        /// <summary>
+        /// The test stu  function for TrimStart.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionTrimStart()
+        {
+            // Positive
+            HelperTestTrim("TrimStart", "..Gone Fishing, Gone Away...", ".", "Gone Fishing, Gone Away...");
+            HelperTestTrim("TrimStart", "..;.Gone Fishing, Gone Away..;.", ".;", "Gone Fishing, Gone Away..;.");
+            HelperTestTrim("TrimStart", " .;..Gone Fishing, Gone Away..;.", ".;", " .;..Gone Fishing, Gone Away..;.");
+            HelperTestTrim("TrimStart", ". ;..Gone Fishing, Gone Away..; .", ".;", " ;..Gone Fishing, Gone Away..; .");
+            HelperTestTrim("TrimStart", " .;..Gone Fishing, Gone Away..;. ", " .;", "Gone Fishing, Gone Away..;. ");
+
+            // Negative
+            HelperTestTrim("TrimStart", string.Empty, ".", string.Empty);
+            HelperTestTrim("TrimStart", null, ".", string.Empty);
+            HelperTestTrim("TrimStart", "  ..Gone Fishing, Gone Away..;. ", string.Empty, "..Gone Fishing, Gone Away..;. ");
+            HelperTestTrim("TrimStart", "  ..Gone Fishing, Gone Away..;. ", null, "..Gone Fishing, Gone Away..;. ");
+        }
+
+        /// <summary>
+        /// The test stu  function for Trim.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionTrim()
+        {
+            // Positive
+            HelperTestTrim("Trim", "..Gone Fishing, Gone Away...", ".", "Gone Fishing, Gone Away");
+            HelperTestTrim("Trim", "..;.Gone Fishing, Gone Away..;.", ".;", "Gone Fishing, Gone Away");
+            HelperTestTrim("Trim", " .;..Gone Fishing, Gone Away..;.", ".;", " .;..Gone Fishing, Gone Away");
+            HelperTestTrim("Trim", ". ;..Gone Fishing, Gone Away..; .", ".;", " ;..Gone Fishing, Gone Away..; ");
+            HelperTestTrim("Trim", " .;..Gone Fishing, Gone Away..;. ", " .;", "Gone Fishing, Gone Away");
+
+            // Negative
+            HelperTestTrim("Trim", string.Empty, ".", string.Empty);
+            HelperTestTrim("Trim", null, ".", string.Empty);
+            HelperTestTrim("Trim", "  ..Gone Fishing, Gone Away..;. ", string.Empty, "..Gone Fishing, Gone Away..;.");
+            HelperTestTrim("Trim", "  ..Gone Fishing, Gone Away..;. ", null, "..Gone Fishing, Gone Away..;.");
+        }
+
+        /// <summary>
         /// The test stu  function for PadRight.
         /// </summary>
         [TestMethod]
@@ -579,6 +638,29 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest Length,{source} test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test TrimEnd.... functions.
+        /// </summary>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="trimChars">
+        /// The trim Chars.
+        /// </param>
+        /// <param name="expected">
+        /// The expected value of the transformed string
+        /// </param>
+        private void HelperTestTrim(string direction, string source, string trimChars, string expected)
+        {
+            var arg = $@"""{direction}"" ""{source}"" ""{trimChars}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest TrimEnd test actual / expected", expected, actual);
         }
     }
 }
