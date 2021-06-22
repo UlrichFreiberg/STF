@@ -119,6 +119,11 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         /// </summary>
         public void RefreshCache()
         {
+            if (!Directory.Exists(RootFolder))
+            {
+                return;
+            }
+
             var directoryInfo = new DirectoryInfo(RootFolder);
             var directories = directoryInfo.GetDirectories("tc*", SearchOption.AllDirectories);
             var errorContent = new StringBuilder();
@@ -128,7 +133,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
             {
                 // we only want to save relative paths -
                 // In that way we avoids root contains something that could be interpreted as a Test case dir (when looking for TestCaseIds)
-                var testCaseFilePath = directory.FullName.Replace(RootFolder, string.Empty);
+                var testCaseFilePath = directory.FullName.Replace(RootFolder, ".");
                 var testCaseId = GetTestCaseId(testCaseFilePath);
 
                 if (testCaseId < 0)
@@ -277,7 +282,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
                 return retVal;
             }
 
-            retVal = Path.Combine(RootFolder, match.Value);
+            retVal = Path.GetFullPath(Path.Combine(RootFolder, match.Value));
 
             if (Directory.Exists(retVal))
             {

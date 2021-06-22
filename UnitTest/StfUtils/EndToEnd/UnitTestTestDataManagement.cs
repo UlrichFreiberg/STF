@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.EndToEnd
 {
-    using Mir.Stf.Utilities.FileUtilities;
+    using Mir.Stf.Utilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
