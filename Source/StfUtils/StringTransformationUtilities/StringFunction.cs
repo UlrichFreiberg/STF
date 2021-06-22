@@ -901,7 +901,43 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         {
             // "Replace" "Source" "Search" "Replace" "IgnoreCase=false/true"
             // "Replace" "BooB" "o" "Z" --> "BZZB"
-            return "[Replace]" + arg;
+            //     "{STRING "Replace" "BooB" "o" "Z" }   returns "BZZB"
+            string retVal = null;
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<OldValue>[^""]*)""\s+""(?<NewValue>[^""]*)""";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    return StuBoolean.False.ToString();
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argOldValue = match.Groups["OldValue"].Value;
+                var argNewValue = match.Groups["NewValue"].Value;
+
+                if (string.IsNullOrEmpty(argOldValue))
+                {
+                    LogError("OldValue: Source cannot be null or empty");
+                    retVal = null;
+                    return retVal;
+                }
+
+                retVal  = argSource.Replace(argOldValue, argNewValue);
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Replace: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"Replace: Finally retVal {retVal} ");
+            }
         }
 
         /// <summary>

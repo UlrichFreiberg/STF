@@ -453,6 +453,24 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu function for Replace.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionReplace()
+        {
+            // Positive
+            HelperTestReplace("AaAAbbBBcd", "A", "Z", "ZaZZbbBBcd");
+            HelperTestReplace("AaAAbbBBcd", "a", "Z", "AZAAbbBBcd");
+            HelperTestReplace("AaAAbbBBcd", "b", string.Empty, "AaAABBcd");
+            HelperTestReplace("AaAAbbBBcd", "c", null, "AaAAbbBBd");
+            HelperTestReplace(" AaAAbbBB c d ", "c", " ", " AaAAbbBB   d ");
+
+            // Negative
+            HelperTestReplace("AaAAbbBBcd", string.Empty, "Z", null);
+            HelperTestReplace("AaAAbbBBcd", null, "Z", null);
+        }
+
+        /// <summary>
         /// The helper test Pad.... functions.
         /// </summary>
         /// <param name="direction">
@@ -661,6 +679,29 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest TrimEnd test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test Pad.... functions.
+        /// </summary>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="oldValue">
+        /// The old Value.
+        /// </param>
+        /// <param name="newValue">
+        /// The new Value.
+        /// </param>
+        /// <param name="expected">
+        /// The expected value of the transformed string
+        /// </param>
+        private void HelperTestReplace(string source, string oldValue, string newValue, string expected)
+        {
+            var arg = $@"""Replace"" ""{source}"" ""{oldValue}"" ""{newValue}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest Replace test actual / expected", expected, actual);
         }
     }
 }
