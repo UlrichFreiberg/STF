@@ -100,6 +100,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EndToEnd\UnitTestTestDataManagement.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestCreateTextFile.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestWriteAllTextFile.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
@@ -112,6 +113,9 @@
     <Compile Include="FileUtilities\FileUtils\UnitTestDeleteFile.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestGetDirectoryPath.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestTestCaseDirectory.cs" />
+    <Content Include="TestData\EndToEnd\TestDataManagement\Tc4001\TestDataValues.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Compile Include="UnitTestGetKeynameKeyvalueEntries.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestGetCleanFilecontent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

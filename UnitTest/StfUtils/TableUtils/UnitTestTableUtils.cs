@@ -95,9 +95,9 @@ namespace UnitTest.TableUtils
             public string Gadenavn { get; set; }
 
             /// <summary>
-            /// Gets or sets the not used for prjection.
+            /// Gets or sets the not used for projection.
             /// </summary>
-            public string NotUsedForPrjection { get; set; }
+            public string NotUsedForProjection { get; set; }
         }
     }
 }

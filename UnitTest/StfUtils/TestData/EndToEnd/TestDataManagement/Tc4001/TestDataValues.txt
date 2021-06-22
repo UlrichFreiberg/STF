@@ -1,0 +1,3 @@
+﻿# simple test data values
+keyNameA = 42
+keyNameB = 43

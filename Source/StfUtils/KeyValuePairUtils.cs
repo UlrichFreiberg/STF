@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="KeyNameKeyValueUtils.cs" company="Mir Software">
+// <copyright file="KeyValuePairUtils.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the KeyNameKeyValueUtils type.
+//   The key value pair utils.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Mir.Stf.Utilities.FileUtilities
+namespace Mir.Stf.Utilities
 {
     using System;
     using System.Collections.Specialized;
@@ -16,8 +16,10 @@ namespace Mir.Stf.Utilities.FileUtilities
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using Mir.Stf.Utilities.FileUtilities;
+
     /// <summary>
-    /// The key value utils.
+    /// The key value pair utils.
     /// </summary>
     public class KeyValuePairUtils
     {
@@ -37,9 +39,8 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// The string all comments starts with - rest of the line is treated as a comment.
         /// Default is '//'
         /// </param>
-        /// </param>
         /// <param name="keyNameIgnoreCase">
-        ///  whether or now the key used for the dictionary is case significat or not.
+        ///  whether or now the key used for the dictionary is case significant or not.
         /// Default is true
         /// </param>
         public KeyValuePairUtils(string assignmentOperator = "=", string startOfCommentLine = "//", bool keyNameIgnoreCase = true)
@@ -52,13 +53,13 @@ namespace Mir.Stf.Utilities.FileUtilities
         }
 
         /// <summary>
-        /// The string all comments starts with - rest of the line is treated as a comment.
+        /// Gets the string all comments starts with - rest of the line is treated as a comment.
         /// Default is '//'
         /// </summary>
         public string StartOfCommentLine { get; }
 
         /// <summary>
-        /// Gets whether or now the key used for the dictionary is case significat or not. 
+        /// Gets a value indicating whether or note the key used for the dictionary is case significant or not. 
         /// Default is insignificant - to ignore case
         /// </summary>
         public bool KeyNameIgnoreCase { get; }
@@ -85,6 +86,21 @@ namespace Mir.Stf.Utilities.FileUtilities
             return retVal;
         }
 
+        /// <summary>
+        /// The save key value pairs to file.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <param name="dictionary">
+        /// The dictionary.
+        /// </param>
+        /// <param name="headerText">
+        /// The header text.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool SaveKeyValuePairsToFile(string fileName, OrderedDictionary dictionary, string headerText = null)
         {
             var newLine = Environment.NewLine;
@@ -128,10 +144,16 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         public OrderedDictionary GetKeyValuePairs(string rawContent)
         {
+            var retVal = new OrderedDictionary();
             var keyValueRegExp = $@"^\s*(?<KeyName>[^{AssignmentOperator}\n]+){AssignmentOperator}(?<KeyValue>[^\n]*)$";
             var content = fileUtils.RemoveComments(rawContent);
+
+            if (string.IsNullOrEmpty(content))
+            {
+                return retVal;
+            }
+
             var lines = Regex.Matches(content, keyValueRegExp, RegexOptions.Multiline);
-            var retVal = new OrderedDictionary();
 
             foreach (Match line in lines)
             {

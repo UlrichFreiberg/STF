@@ -61,12 +61,12 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         /// <summary>
         /// The test case result directory.
         /// </summary>
-        public string TestCaseResultsDirectory => testCaseResultsDirectory ?? (testCaseResultsDirectory = Path.Combine(TestCaseDirectory, "Results"));
+        public string TestCaseResultsDirectory => testCaseResultsDirectory ?? (testCaseResultsDirectory = string.IsNullOrEmpty(TestCaseDirectory) ? null : Path.Combine(TestCaseDirectory, "Results"));
 
         /// <summary>
         /// The test case temp directory.
         /// </summary>
-        public string TestCaseTempDirectory => testCaseTempDirectory ?? (testCaseTempDirectory = Path.Combine(TestCaseDirectory, "Temp"));
+        public string TestCaseTempDirectory => testCaseTempDirectory ?? (testCaseTempDirectory = string.IsNullOrEmpty(TestCaseDirectory) ? null : Path.Combine(TestCaseDirectory, "Temp"));
 
         /// <summary>
         /// The get test case root file path.
