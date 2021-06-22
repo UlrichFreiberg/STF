@@ -10,12 +10,9 @@
 
 namespace UnitTest
 {
-    using System.IO;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Mir.Stf;
-    using Mir.Stf.Utilities.FileUtilities;
+    using Mir.Stf.Utilities;
 
     /// <summary>
     /// The unit test get keyname keyvalue entries.
