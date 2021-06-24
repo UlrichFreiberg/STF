@@ -743,7 +743,52 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         private string StuFunctionInsert(string arg)
         {
-            return "[Insert]" + arg;
+            // "Insert" "Source" "StartIndex", "Value"
+            // "Insert" "BaoB" "2" "AA" --> "BaoAAB"
+            // In a config.txt looks like:
+            //     "{STRING "Insert" "BaoB" "2" "AA" }
+            string retVal = null;
+
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<StartIndex>[^""]*)""\s+""(?<Value>[^""]*)""";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argStartIndex = match.Groups["StartIndex"].Value.Trim();
+                var argValue = match.Groups["Value"].Value;
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (!int.TryParse(argStartIndex, out var startIndex))
+                {
+                    LogError("Insert: StartIndex must be an int");
+                    retVal = null;
+                    return retVal;
+                }
+
+                retVal = argSource.Insert(startIndex, argValue);
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Insert: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"Insert: Finally retVal {retVal ?? "null"} ");
+            }
         }
 
         /// <summary>

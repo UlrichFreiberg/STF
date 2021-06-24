@@ -498,6 +498,26 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu function for Insert.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionInsert()
+        {
+            // Positive
+            HelperTestInsert("A123456789A", "2", string.Empty, "A123456789A");
+            HelperTestInsert("A123456789A", "2", null, "A123456789A");
+            HelperTestInsert("A123456789A", "2", "AXAX", "A1AXAX23456789A");
+            HelperTestInsert(" A1 23456789A ", "3", "    ", " A1     23456789A ");
+            HelperTestInsert(string.Empty, "0", "1234", "1234");
+            HelperTestInsert(null, "0", "1234", "1234");
+
+            // Negative
+            HelperTestInsert("A123456789A", "-1", "A", null);
+            HelperTestInsert("A123456789A", "22", "A", null);
+            HelperTestInsert("A123456789A", "12", "A", null);
+        }
+
+        /// <summary>
         /// The helper test Pad.... functions.
         /// </summary>
         /// <param name="direction">
@@ -752,6 +772,29 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest Remove test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test Insert.... functions.
+        /// </summary>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="startIndex">
+        /// The startIndex Value.
+        /// </param>
+        /// <param name="value">
+        /// The value Value.
+        /// </param>
+        /// <param name="expected">
+        /// The expected value of the transformed string
+        /// </param>
+        private void HelperTestInsert(string source, string startIndex, string value, string expected)
+        {
+            var arg = $@"""Insert"" ""{source}"" ""{startIndex}"" ""{value}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest Insert test actual / expected", expected, actual);
         }
     }
 }
