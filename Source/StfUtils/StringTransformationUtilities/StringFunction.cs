@@ -884,8 +884,60 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         private string StuFunctionRemove(string arg)
         {
             // "Remove" "Source" "StringToRemove"
-            // "Remove" "BooB" "o" --> "BB"
-            return "[Remove]" + arg;
+            // "Remove" "BooB" "1" --> "BB"
+            // "Remove" "A123456789A" "2" "4" --> "A12789A"
+            // In a config.txt looks like:
+            //     "{STRING "Remove" "A123456789A" "2" "4" }
+            string retVal = null;
+
+            try
+            {
+                const string RegExp = @"""(?<Source>[^""]*)""\s+""(?<StartIndex>[^""]*)""(\s+""(?<Count>[^""]*)"")?";
+                var match = Regex.Match(arg, RegExp);
+
+                if (!match.Success)
+                {
+                    retVal = null;
+                    return retVal;
+                }
+
+                var argSource = match.Groups["Source"].Value;
+                var argStartIndex = match.Groups["StartIndex"].Value.Trim();
+                var argCount = match.Groups["Count"].Value.Trim();
+
+                if (string.IsNullOrEmpty(argSource))
+                {
+                    argSource = string.Empty;
+                }
+
+                if (!int.TryParse(argStartIndex, out var startIndex))
+                {
+                    LogError("Remove: StartIndex must be an int");
+                    retVal = null;
+                    return retVal;
+                }
+
+                if (!int.TryParse(argCount, out var count))
+                {
+                    argCount = string.Empty;
+                }
+
+                retVal = argCount.Length == 0
+                             ? argSource.Remove(startIndex)
+                             : argSource.Remove(startIndex, count);
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Remove: Exception {ex.Message} ");
+                retVal = null;
+                return retVal;
+            }
+            finally
+            {
+                LogInfo($"Remove: Finally retVal {retVal ?? "null"} ");
+            }
         }
 
         /// <summary>

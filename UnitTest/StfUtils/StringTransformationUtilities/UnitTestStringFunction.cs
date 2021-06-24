@@ -471,6 +471,33 @@ namespace UnitTest.StringTransformationUtilities
         }
 
         /// <summary>
+        /// The test stu function for Remove.
+        /// </summary>
+        [TestMethod]
+        public void TestStuStringFunctionRemove()
+        {
+            // Positive
+            HelperTestRemove("A123456789A", "2", string.Empty, "A1");
+            HelperTestRemove("A123456789A", "2", null, "A1");
+            HelperTestRemove("A123456789A", "2", "4", "A16789A");
+            HelperTestRemove("A123456789A", "10", "1", "A123456789");
+            HelperTestRemove("A123456789A", "11", "0", "A123456789A");
+            HelperTestRemove("A123456789A", "2", "0", "A123456789A");
+            HelperTestRemove(" A123456789A ", "2", "4", " A56789A ");
+            HelperTestRemove(" A1234 56789A ", "2", "4", " A 56789A ");
+
+            // Negative
+            HelperTestRemove(string.Empty, "0", "0", string.Empty);
+            HelperTestRemove(null, "0", "0", string.Empty);
+            HelperTestRemove("A123456789A", "40", "4", null);
+            HelperTestRemove("A123456789A", "11", "1", null);
+            HelperTestRemove("A123456789A", string.Empty, "4", null);
+            HelperTestRemove("A123456789A", null, "4", null);
+            HelperTestRemove("A123456789A", "-1", "-1", null);
+            HelperTestRemove("A123456789A", "4", "-1", null);
+        }
+
+        /// <summary>
         /// The helper test Pad.... functions.
         /// </summary>
         /// <param name="direction">
@@ -702,6 +729,29 @@ namespace UnitTest.StringTransformationUtilities
             var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
 
             StfAssert.AreEqual($"Unittest Replace test actual / expected", expected, actual);
+        }
+
+        /// <summary>
+        /// The helper test Remove.... functions.
+        /// </summary>
+        /// <param name="source">
+        /// The source string
+        /// </param>
+        /// <param name="startIndex">
+        /// The startIndex Value.
+        /// </param>
+        /// <param name="count">
+        /// The count Value.
+        /// </param>
+        /// <param name="expected">
+        /// The expected value of the transformed string
+        /// </param>
+        private void HelperTestRemove(string source, string startIndex, string count, string expected)
+        {
+            var arg = $@"""Remove"" ""{source}"" ""{startIndex}"" ""{count}""";
+            var actual = stringTransformationUtils.EvaluateFunction("STRING", arg);
+
+            StfAssert.AreEqual($"Unittest Remove test actual / expected", expected, actual);
         }
     }
 }
