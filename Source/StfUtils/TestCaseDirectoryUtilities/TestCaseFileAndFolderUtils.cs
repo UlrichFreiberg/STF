@@ -41,6 +41,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
             DirectoryUtils = new DirectoryUtils(rootFolder);
             TestCaseId = testCaseId;
             TestCaseDirectory = DirectoryUtils.GetTestCaseDirectoryPath(TestCaseId);
+            SetupTempAndResultsFolders();
         }
 
         /// <summary>
@@ -180,6 +181,22 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
             var retVal = SafeDirectoryDotGetFiles(TestCaseTempDirectory, relativeFilePath);
 
             return retVal;
+        }
+
+        /// <summary>
+        /// The setup temp and results folders.
+        /// </summary>
+        public void SetupTempAndResultsFolders()
+        {
+            if (!Directory.Exists(TestCaseTempDirectory))
+            {
+                Directory.CreateDirectory(TestCaseTempDirectory);
+            }
+
+            if (!Directory.Exists(TestCaseResultsDirectory))
+            {
+                Directory.CreateDirectory(TestCaseResultsDirectory);
+            }
         }
 
         /// <summary>
