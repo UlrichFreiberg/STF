@@ -52,6 +52,11 @@ namespace Mir.Stf.Utilities.FileUtilities
         {
             var retVal = false;
 
+            if (string.IsNullOrEmpty(filename))
+            {
+                return false;
+            }
+
             try
             {
                 var retryer = new RetryerUtilities.RetryerUtils();

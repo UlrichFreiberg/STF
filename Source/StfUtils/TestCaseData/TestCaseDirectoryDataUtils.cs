@@ -11,7 +11,9 @@
 namespace Mir.Stf.Utilities.TestCaseData
 {
     using System.Collections.Specialized;
+    using System.IO.Ports;
 
+    using Mir.Stf.Utilities.StringTransformationUtilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
@@ -46,6 +48,7 @@ namespace Mir.Stf.Utilities.TestCaseData
             TestDataValuesFilePath = TestCaseFileAndFolderUtils.GetTestCaseRootFilePath("TestDataValues.txt");
             ConstantsFilePath = TestCaseFileAndFolderUtils.GetTestCaseRootFilePath("Constants.txt");
             KeyValuePairUtils = new KeyValuePairUtils();
+            StringTransformationUtils = new StringTransformationUtils();
             Init();
         }
 
@@ -82,17 +85,22 @@ namespace Mir.Stf.Utilities.TestCaseData
         /// <summary>
         /// The constants dictionary.
         /// </summary>
-        public OrderedDictionary Constants => constantsDict ?? (constantsDict = GetConstantsValues());
+        public OrderedDictionary ConstantsDict => constantsDict ?? (constantsDict = GetConstantsValues());
 
         /// <summary>
         /// The constants dictionary.
         /// </summary>
-        public OrderedDictionary TestDataValues => testDataValuesDict ?? (testDataValuesDict = GetTestDataValuesDict());
+        public OrderedDictionary TestDataValuesDict => testDataValuesDict ?? (testDataValuesDict = GetTestDataValuesDict());
 
         /// <summary>
         /// Gets the test data.
         /// </summary>
         public OrderedDictionary TestData => KeyValuePairUtils.ReadKeyValuePairsFromFile(TestDataValuesFilePath);
+
+        /// <summary>
+        /// Gets or sets the string transformation utils.
+        /// </summary>
+        private StringTransformationUtils StringTransformationUtils { get; set; }
 
         /// <summary>
         /// The get test case input.
@@ -121,16 +129,15 @@ namespace Mir.Stf.Utilities.TestCaseData
         /// </returns>
         public string GetTestDataValue(string keyName)
         {
-            //// If (!TestDataValuesDict.ContainsKey(keyName)) {
-            ////     return null;
-            //// }
-            ////
-            //// var dictValue = TestDataValuesDict[keyName];
-            //// var retVal = Evaluate(dictValue)
-            ////
-            //// return retVal;
-            //// 
-            return "Not Implemented";
+            if (!TestDataValuesDict.Contains(keyName)) 
+            {
+                return null;
+            }
+
+            var dictValue = (string)TestDataValuesDict[keyName];
+            var retVal = Evaluate(dictValue);
+
+            return retVal;
         }
 
         /// <summary>
@@ -145,19 +152,16 @@ namespace Mir.Stf.Utilities.TestCaseData
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string Evaluate(string stringToEvaluate, OrderedDictionary dictFromCodeToOverlay)
+        public string Evaluate(string stringToEvaluate, OrderedDictionary dictFromCodeToOverlay = null)
         {
-            //// var tdvDict = KeyValuePairs.Overlay(TestDataValues, dictFromCodeToOverlay);
-            ////  
-            //// foreach '{SOMETHING}' in the stringToEvaluate {
-            ////     handle {CONSTANT} ;
-            ////     handle {TESTDATA} ;
-            ////     call StringTransformationUtils  
-            //// }
-            ////
-            //// return retVal;
-            //// 
-            return "Not Implemented";
+            var tdvDict = KeyValuePairUtils.OverlayDictionary(TestDataValuesDict, dictFromCodeToOverlay);
+
+            // TODO: register function handle for {CONSTANT} and {TESTDATA} ;
+            StringTransformationUtils.RegisterAllStuFunctionsForType(this);
+
+            var retVal = StringTransformationUtils.Evaluate(stringToEvaluate);
+
+            return retVal;
         }
 
         /// <summary>

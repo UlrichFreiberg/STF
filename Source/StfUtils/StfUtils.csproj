@@ -72,6 +72,7 @@
     <Compile Include="StringTransformationUtilities\StringTransformationUtils.cs" />
     <Compile Include="TableUtilities\TableHeaderColumnInfo.cs" />
     <Compile Include="TableUtilities\TableUtils.cs" />
+    <Compile Include="TestCaseData\TestCaseDirectoryDataUtils.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils.cs" />
     <Compile Include="TestCaseDirectoryUtilities\DirectoryUtils.cs" />
     <Compile Include="XmlUtilities\XmlUtils.cs" />

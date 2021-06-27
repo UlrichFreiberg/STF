@@ -111,6 +111,7 @@
     <Compile Include="StringTransformationUtilities\UnitTestSimpleFunctions.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestRegisterAllStuFunctionsForType.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestDeleteFile.cs" />
+    <Compile Include="TestCaseData\TestCaseDirectoryDataUtils\UnitTestGetTestDataValue.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestGetDirectoryPath.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestTestCaseDirectory.cs" />
     <Content Include="TestData\EndToEnd\TestDataManagement\Tc4001\TestDataValues.txt">
@@ -154,6 +155,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\KeyValuePairsUtils\Simple.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestCaseData\TestCaseDirectoryDataUtils\Tc4001\TestDataValues.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Results\UnitTestResultFile01.txt">

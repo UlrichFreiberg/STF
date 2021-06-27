@@ -143,5 +143,24 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
 
             return retVal;
         }
+
+        /// <summary>
+        /// The evaluate.
+        /// </summary>
+        /// <param name="stringToEvaluate">
+        /// The string to evaluate.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string Evaluate(string stringToEvaluate)
+        {
+            //// TODO:
+            //// Split the string and look for '{SOMEFUNCTION SOMEARGUMENTS}'
+            //// Continue in a loop until the string is unchanged or no more {} is found
+            var retVal = stringToEvaluate;
+
+            return retVal;
+        }
     }
 }
