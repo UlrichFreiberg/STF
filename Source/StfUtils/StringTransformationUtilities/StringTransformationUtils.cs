@@ -14,6 +14,7 @@ using System.Collections.Generic;
 namespace Mir.Stf.Utilities.StringTransformationUtilities
 {
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     using Mir.Stf.Utilities.Interfaces;
 
@@ -45,7 +46,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         {
             StuObjects = new Dictionary<string, object>();
             StuFunctions = new Dictionary<string, StuFunctionInfo>();
-            
+
             RegisterAllStuFunctionsForType(this);
             RegisterAllStuFunctionsForType(new SimpleFunctions());
             RegisterAllStuFunctionsForType(new MapValuesFunction());
@@ -60,18 +61,18 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </summary>
         internal Dictionary<string, object> StuObjects { get; set; }
 
-/*
-        /// <summary>
-        /// This is the signature for all String Transformation functions.
-        /// </summary>
-        /// <param name="arg">
-        /// The string af the first space in {BOB ......}
-        /// </param>
-        /// <returns>
-        /// The result of the evaluation - null for error, Empty for nothing
-        /// </returns>
-        internal delegate string StuFunction(string arg);
-*/
+        /*
+                /// <summary>
+                /// This is the signature for all String Transformation functions.
+                /// </summary>
+                /// <param name="arg">
+                /// The string af the first space in {BOB ......}
+                /// </param>
+                /// <returns>
+                /// The result of the evaluation - null for error, Empty for nothing
+                /// </returns>
+                internal delegate string StuFunction(string arg);
+        */
 
         /// <summary>
         /// Gets the stu functions.
@@ -155,10 +156,29 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// </returns>
         public string Evaluate(string stringToEvaluate)
         {
-            //// TODO:
-            //// Split the string and look for '{SOMEFUNCTION SOMEARGUMENTS}'
-            //// Continue in a loop until the string is unchanged or no more {} is found
+            const string CommandArgsExpression = @"{(?<Command>[^{}\s]+)\s*(?<Arguments>[^{}]*)}";
             var retVal = stringToEvaluate;
+            var matches = Regex.Matches(retVal, CommandArgsExpression, RegexOptions.Multiline);
+
+            foreach (Match match in matches)
+            {
+                var command = match.Groups["Command"].Value.Trim();
+                var arguments = match.Groups["Arguments"].Value.Trim();
+                var evaluatedValue = EvaluateFunction(command, arguments);
+
+                if (evaluatedValue != null)
+                {
+                    retVal = retVal.Replace(match.Value, evaluatedValue);
+                }
+            }
+
+            if (retVal.Equals(stringToEvaluate))
+            {
+                // there might be {} functions in there - but none we know of, so we are done for now
+                return retVal;
+            }
+
+            retVal = Evaluate(retVal);
 
             return retVal;
         }
