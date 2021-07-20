@@ -103,6 +103,7 @@
     <Compile Include="EndToEnd\UnitTestTestDataManagement.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestCreateTextFile.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestWriteAllTextFile.cs" />
+    <Compile Include="FileUtilities\TemplateConfigUtils\UnitTestNumberOfSteps.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSelectFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestMapValuesFunction.cs" />
@@ -139,10 +140,63 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Doc\" />
-    <Folder Include="TestData\FileUtilities\" />
     <Folder Include="TestData\FileUtils\GetCleanFilecontent\Temp\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4011\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4011\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4012\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4012\Config2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4012\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4021\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4021\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4021\Template2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Config2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Template2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Config2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Config3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Template2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Template3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\KeyValuePairsUtils\DuplicateKeys - CaseSignificant.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

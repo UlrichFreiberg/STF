@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="FileUtilities\FolderUtils.cs" />
     <Compile Include="FileUtilities\FileUtils.cs" />
+    <Compile Include="FileUtilities\TemplateConfig\StepInfo.cs" />
+    <Compile Include="FileUtilities\TemplateConfig\TemplateConfigUtils.cs" />
     <Compile Include="Interfaces\IFolderUtils.cs" />
     <Compile Include="KeyValuePairUtils.cs" />
     <Compile Include="Interfaces\IFileUtils.cs" />
