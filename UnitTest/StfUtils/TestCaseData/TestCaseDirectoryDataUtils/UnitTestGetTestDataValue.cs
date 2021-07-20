@@ -50,5 +50,57 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
 
             StfAssert.AreEqual("Expr 2 + 1", expected, actual);
         }
+
+        /// <summary>
+        /// The test get test data value expr.
+        /// </summary>
+        [TestMethod]
+        public void TestGetTestDataValueCalc()
+        {
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var actual = testCaseDirectoryDataUtils.GetTestDataValue("TwoAddOne");
+            var expected = "3";
+
+            StfAssert.AreEqual("Calc 2 + 1", expected, actual);
+        }
+
+        /// <summary>
+        /// The test get test data value substring.
+        /// </summary>
+        [TestMethod]
+        public void TestGetTestDataValueSubStr1()
+        {
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var actual = testCaseDirectoryDataUtils.GetTestDataValue("SubStr1");
+            var expected = "he q";
+
+            StfAssert.AreEqual("SubStr1", expected, actual);
+        }
+
+        /// <summary>
+        /// The test get test data value substring.
+        /// </summary>
+        [TestMethod]
+        public void TestGetTestDataValueSubStr2()
+        {
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var actual = testCaseDirectoryDataUtils.GetTestDataValue("SubStr2");
+            var expected = "he q";
+
+            StfAssert.AreEqual("SubStr2", expected, actual);
+        }
+
+        /// <summary>
+        /// The test get test data value substring.
+        /// </summary>
+        [TestMethod]
+        public void TestGetTestDataValueSubStr3()
+        {
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var actual = testCaseDirectoryDataUtils.GetTestDataValue("SubStr3");
+            var expected = "he q";
+
+            StfAssert.AreEqual("SubStr3", expected, actual);
+        }
     }
 }

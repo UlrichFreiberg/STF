@@ -115,6 +115,9 @@
     <Compile Include="TestCaseData\TestCaseDirectoryDataUtils\UnitTestGetTestDataValue.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestGetDirectoryPath.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestTestCaseDirectory.cs" />
+    <Content Include="TestData\EndToEnd\TestDataManagement\Tc4002\TestDataValues.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\EndToEnd\TestDataManagement\Tc4001\TestDataValues.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

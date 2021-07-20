@@ -1,3 +1,7 @@
 ﻿# simple test data values
 FourtyTwo = 42
 TwoPlusOne = {EXPR 2 + 1}
+TwoAddOne = {CALC 2 + 1}
+SubStr1 = {STRING "Substring" "The quick Brown Fox jumps" "1" "4"}
+SubStr2 = {STRING "Substring" "The quick Brown Fox jumps" "1" "{CALC 2 + 2}"}
+SubStr3 = {STRING "Substring" "The quick Brown Fox jumps" "{STRING "IndexOf" "The quick Brown Fox jumps" "he" "0"}" "{CALC 2 + 2}"}

@@ -39,5 +39,24 @@ namespace UnitTest.EndToEnd
                 StfLogger.LogInfo($"[{testDataKey}] has the value [{value}]");
             }
         }
+
+        /// <summary>
+        /// The test simple test data management.
+        /// </summary>
+        [TestMethod]
+        public void TestSimpleTestDataManagement2()
+        {
+            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(4002, @".\TestData\EndToEnd");
+            var testDataValuesFilePath = testCaseFileAndFolderUtils.GetTestCaseRootFilePath("TestDataValues.txt");
+            var keyValuePairUtils = new KeyValuePairUtils();
+            var testData = keyValuePairUtils.ReadKeyValuePairsFromFile(testDataValuesFilePath);
+
+            foreach (var testDataKey in testData.Keys) 
+            {
+                var value = testData[testDataKey];
+
+                StfLogger.LogInfo($"[{testDataKey}] has the value [{value}]");
+            }
+        }
     }
 }
