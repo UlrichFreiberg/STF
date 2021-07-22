@@ -38,6 +38,18 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test read key value pairs from file with different assignment operator.
+        /// </summary>
+        [TestMethod]
+        public void TestReadKeyValuePairsFromFileWithDifferentAssignmentOperator()
+        {
+            StfLogger.Configuration.ScreenshotOnLogFail = false;
+
+            // AssignmentOperator BECOMES
+            HelperReadKeyValuePairsFromFile("AssignmentOperator BECOMES", "SimpleAssignmentOperatorBECOMES.txt", "BECOMES");
+        }
+
+        /// <summary>
         /// The helper read key value pairs from file.
         /// </summary>
         /// <param name="testStep">

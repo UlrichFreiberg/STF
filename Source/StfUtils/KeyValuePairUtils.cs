@@ -145,7 +145,7 @@ namespace Mir.Stf.Utilities
         public OrderedDictionary GetKeyValuePairs(string rawContent)
         {
             var retVal = new OrderedDictionary();
-            var keyValueRegExp = $@"^\s*(?<KeyName>[^{AssignmentOperator}\n]+){AssignmentOperator}(?<KeyValue>[^\n]*)$";
+            var keyValueRegExp = $@"^\s*(?<KeyName>.+){AssignmentOperator}(?<KeyValue>[^\n]*)$";
             var content = fileUtils.RemoveComments(rawContent);
 
             if (string.IsNullOrEmpty(content))
