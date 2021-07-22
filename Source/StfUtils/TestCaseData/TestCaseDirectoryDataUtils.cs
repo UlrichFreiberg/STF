@@ -11,7 +11,6 @@
 namespace Mir.Stf.Utilities.TestCaseData
 {
     using System.Collections.Specialized;
-    using System.IO.Ports;
 
     using Mir.Stf.Utilities.StringTransformationUtilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;

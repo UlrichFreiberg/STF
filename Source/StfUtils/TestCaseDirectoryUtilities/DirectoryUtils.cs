@@ -282,7 +282,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
                 return retVal;
             }
 
-            retVal = Path.GetFullPath(Path.Combine(RootFolder, match.Value));
+            retVal = Path.GetFullPath(Path.Combine(RootFolder, match.Value.Trim()));
 
             if (Directory.Exists(retVal))
             {
