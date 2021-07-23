@@ -10,6 +10,7 @@
 
 namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
 {
+    using System;
     using System.IO;
 
     /// <summary>
@@ -186,17 +187,37 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         /// <summary>
         /// The setup temp and results folders.
         /// </summary>
-        public void SetupTempAndResultsFolders()
+        /// <returns>
+        /// Indication of success
+        /// </returns>
+        public bool SetupTempAndResultsFolders()
         {
-            if (!Directory.Exists(TestCaseTempDirectory))
+            if (!Directory.Exists(TestCaseDirectory))
             {
-                Directory.CreateDirectory(TestCaseTempDirectory);
+                return false;
             }
 
-            if (!Directory.Exists(TestCaseResultsDirectory))
+            try 
             {
-                Directory.CreateDirectory(TestCaseResultsDirectory);
+                if (!Directory.Exists(TestCaseTempDirectory))
+                {
+                    Directory.CreateDirectory(TestCaseTempDirectory);
+                }
+
+                if (!Directory.Exists(TestCaseResultsDirectory))
+                {
+                    Directory.CreateDirectory(TestCaseResultsDirectory);
+                }
             }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                return false;
+            }
+
+            var retVal = Directory.Exists(TestCaseTempDirectory) && Directory.Exists(TestCaseResultsDirectory);
+
+            return retVal;
         }
 
         /// <summary>

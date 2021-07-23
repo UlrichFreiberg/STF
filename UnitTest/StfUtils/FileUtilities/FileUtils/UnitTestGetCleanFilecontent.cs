@@ -26,11 +26,11 @@ namespace UnitTest.FileUtilities.FileUtils
         [TestMethod]
         public void TestGetCleanFilecontent()
         {
-            HelperGetCleanFilecontent(null, "path is null");
-            HelperGetCleanFilecontent(string.Empty, "path is empty");
+            HelperGetCleanFileContent(null, "path is null");
+            HelperGetCleanFileContent(string.Empty, "path is empty");
 
-            HelperGetCleanFilecontent("File With Header", "FileWithComments.txt");
-            HelperGetCleanFilecontent("File With no Header", "FileWithCommentsNoHeader.txt");
+            HelperGetCleanFileContent("File With Header", "FileWithComments.txt");
+            HelperGetCleanFileContent("File With no Header", "FileWithCommentsNoHeader.txt");
         }
 
         /// <summary>
@@ -42,12 +42,12 @@ namespace UnitTest.FileUtilities.FileUtils
         /// <param name="inputFilename">
         /// The input filename.
         /// </param>
-        private void HelperGetCleanFilecontent(string testStep, string inputFilename)
+        private void HelperGetCleanFileContent(string testStep, string inputFilename)
         {
             StfLogger.LogHeader(testStep);
             StfAssert.IsInconclusive(testStep, "Missing Data Files to be submitted to GIT");
 
-            FileUtils.SetupTempResultFolders(@".\TestData\FileUtils\GetCleanFilecontent");
+            FileUtils.SetupTempResultFolders(@".\TestData\FileUtils\GetCleanFileContent");
 
             var expectedFilename = $"{inputFilename}.Expected.txt";
             var absolutePathInput = FileUtils.GetTestCaseLocalFilePath(inputFilename);

@@ -209,10 +209,14 @@
     <Content Include="TestData\KeyValuePairsUtils\Expected\DuplicateKeys - IgnoreCase.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestData\KeyValuePairsUtils\Expected\SimpleAssignmentOperatorBECOMES.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\KeyValuePairsUtils\Expected\Simple.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\Simple.txt">
+    <Content Include="TestData\KeyValuePairsUtils\Simple.txt" />
+    <Content Include="TestData\KeyValuePairsUtils\SimpleAssignmentOperatorBECOMES.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\TestCaseData\TestCaseDirectoryDataUtils\Tc4001\TestDataValues.txt">
