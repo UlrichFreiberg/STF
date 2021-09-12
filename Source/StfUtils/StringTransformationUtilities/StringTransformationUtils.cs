@@ -54,6 +54,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
             RegisterAllStuFunctionsForType(new CalcFunction());
             RegisterAllStuFunctionsForType(new UniqueFunctions());
             RegisterAllStuFunctionsForType(new StringFunction());
+            RegisterAllStuFunctionsForType(new FormatFunction());
         }
 
         /// <summary>

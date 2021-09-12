@@ -35,6 +35,9 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         /// <summary>
         /// The stu uuid.
         /// </summary>
+        /// <param name="arg">
+        /// The arg.
+        /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
