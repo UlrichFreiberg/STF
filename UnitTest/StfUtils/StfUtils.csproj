@@ -105,6 +105,7 @@
     <Compile Include="FileUtilities\FileUtils\UnitTestWriteAllTextFile.cs" />
     <Compile Include="FileUtilities\TemplateConfigUtils\UnitTestNumberOfSteps.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
+    <Compile Include="StringTransformationUtilities\UnitTestFormatFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSelectFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestMapValuesFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestStringFunction.cs" />
