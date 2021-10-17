@@ -58,7 +58,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         public void TestGetTestDataValueCalc()
         {
             var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
-            var actual = testCaseDirectoryDataUtils.GetTestDataValue("TwoAddOne");
+            var actual = testCaseDirectoryDataUtils.GetTestDataValue("TwoPlusOne");
             var expected = "3";
 
             StfAssert.AreEqual("Calc 2 + 1", expected, actual);
