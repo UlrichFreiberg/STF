@@ -13,7 +13,6 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf.Utilities.FileUtilities;
-    using Mir.Stf.Utilities.FileUtilities.TemplateConfig;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
@@ -25,7 +24,7 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
         /// <summary>
         /// The unit test test data root.
         /// </summary>
-        private const string UnitTestTestDataRoot = @".\TestData\FileUtilities\TemplateConfigUtils";
+        private const string UnitTestTestDataRoot = @".\TestData\FileUtilities\TestCaseStepFilePathUtils";
 
         /// <summary>
         /// The test get test data value simple.
@@ -40,6 +39,9 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperNumberOfSteps("Three Template, Three Config", 4033, 3);
         }
 
+        /// <summary>
+        /// The test file paths simple.
+        /// </summary>
         [TestMethod]
         public void TestFilePathsSimple()
         {
@@ -95,6 +97,24 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
 
         }
 
+        /// <summary>
+        /// The helper file paths.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="testCaseId">
+        /// The test case id.
+        /// </param>
+        /// <param name="fileNameFilter">
+        /// The file name filter.
+        /// </param>
+        /// <param name="step">
+        /// The step.
+        /// </param>
+        /// <param name="expectedFilePath">
+        /// The expected file path.
+        /// </param>
         private void HelperFilePaths(
             string testStep, 
             int testCaseId, 
