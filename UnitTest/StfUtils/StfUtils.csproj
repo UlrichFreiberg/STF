@@ -280,6 +280,24 @@
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Template3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config2WithNoGap1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config4.extra.dots.12.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template2_Uscore3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template3 spaces 2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -95,6 +95,16 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Config.txt", 3, "Config.txt");
             HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Config.txt", 4, "Config4.txt");
 
+            StfLogger.LogHeader("Four Steps File Text, Three Template, Three Config");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Template.txt", 1, "Template.txt");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Template.txt", 2, "Template2_Uscore3.txt");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Template.txt", 3, "Template3 spaces 2.txt");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Template.txt", 4, "Template3 spaces 2.txt");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 1, "Config.txt");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 2, "Config2WithNoGap1.txt");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 3, "Config2WithNoGap1.txt");
+            HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 4, "Config4.extra.dots.12.txt");
+
         }
 
         /// <summary>
