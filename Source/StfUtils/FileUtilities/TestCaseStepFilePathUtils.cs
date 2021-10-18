@@ -123,7 +123,7 @@ namespace Mir.Stf.Utilities.FileUtilities
                 return null;
             }
 
-            var retVal = filePath.Replace(RootFolder, string.Empty)?.Trim('\\', ' ');
+            var retVal = filePath.Replace(RootFolder, string.Empty).Trim('\\', ' ');
 
             return retVal;
         }
@@ -142,7 +142,7 @@ namespace Mir.Stf.Utilities.FileUtilities
             var basename = Path.GetFileNameWithoutExtension(fileNameFilter);
             var extension = Path.GetExtension(fileNameFilter);
             var wildcard = $"{basename}*{extension}";
-            var retVal = Directory.GetFiles(RootFolder, wildcard);
+            var retVal = Directory.GetFiles(RootFolder, wildcard).OrderBy(fileName => fileName).ToArray();
 
             return retVal;
         }
@@ -155,6 +155,17 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// </returns>
         private bool InitFileArrays()
         {
+            bool CheckFirstFileIsNumberOne(int fileNo, string firstStepFilePath)
+            {
+                // Ensure it is a file name without digits
+                // The first in a file series always are without numbers
+                var fileFilterBasename = Path.GetFileNameWithoutExtension(FileNameFilters[fileNo]);
+                var fileName = Path.GetFileName(firstStepFilePath);
+                var candidateRegExp = $@"{fileFilterBasename}1?([^\d]|\.)";
+
+                return Regex.Match(fileName, candidateRegExp).Success;
+            }
+
             existingFilePaths = new string[FileNameFilters.Length][];
             testCaseStepFilePaths = new string[FileNameFilters.Length, MaxNumberOfSteps];
 
@@ -164,15 +175,20 @@ namespace Mir.Stf.Utilities.FileUtilities
 
                 if (filesForThisFileFilter.Length == 0)
                 {
-                    // no start file for this fileFilter
+                    // no files att all for this fileFilter
                     return false;
                 }
 
                 existingFilePaths[fileNo] = filesForThisFileFilter;
 
-                // TODO: missing to ensure it is a file name without digits (the first in a file series always are without numbers) 
+                if (!CheckFirstFileIsNumberOne(fileNo, filesForThisFileFilter[0]))
+                {
+                    // we do not have a correct first/initial file for this fileFilter 
+                    return false;
+                }
+
                 // we start with the first file for step 1
-                testCaseStepFilePaths[fileNo, 1] = existingFilePaths[fileNo][0];
+                testCaseStepFilePaths[fileNo, 1] = filesForThisFileFilter[0];
             }
 
             for (var step = 2; step <= MaxNumberOfSteps; step++)
