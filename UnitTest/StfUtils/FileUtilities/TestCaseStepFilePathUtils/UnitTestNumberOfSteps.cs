@@ -72,6 +72,27 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperFilePaths("Three Template, Three Config", 4033, "Config.txt", 1, "Config.txt");
             HelperFilePaths("Three Template, Three Config", 4033, "Config.txt", 2, "Config2.txt");
             HelperFilePaths("Three Template, Three Config", 4033, "Config.txt", 3, "Config3.txt");
+
+            StfLogger.LogHeader("Four Steps, Two Template, Three Config");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Template.txt", 1, "Template.txt");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Template.txt", 2, "Template.txt");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Template.txt", 3, "Template3.txt");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Template.txt", 4, "Template3.txt");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Config.txt", 1, "Config.txt");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Config.txt", 2, "Config2.txt");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Config.txt", 3, "Config2.txt");
+            HelperFilePaths("Four Steps, Two Template, Three Config", 4423, "Config.txt", 4, "Config4.txt");
+
+            StfLogger.LogHeader("Four Steps, Three Template, Two Config");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Template.txt", 1, "Template.txt");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Template.txt", 2, "Template2.txt");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Template.txt", 3, "Template3.txt");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Template.txt", 4, "Template3.txt");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Config.txt", 1, "Config.txt");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Config.txt", 2, "Config.txt");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Config.txt", 3, "Config.txt");
+            HelperFilePaths("Four Steps, Three Template, Two Config", 4432, "Config.txt", 4, "Config4.txt");
+
         }
 
         private void HelperFilePaths(
