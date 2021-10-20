@@ -104,6 +104,18 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 2, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 3, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 4, "Config4.extra.dots.12.txt");
+            /*
+            StfLogger.LogHeader("XML JSON, Three Template, One Config");
+            HelperFilePaths("XML JSON, Three Template, One Config", 4331, "Template.xml", 1, "Template.xml");
+            HelperFilePaths("XML JSON, Three Template, One Config", 4331, "Template2.txt", 2, "Template2.txt");
+            HelperFilePaths("XML JSON, Three Template, One Config", 4331, "Template3.xml", 3, "Template3.xml");
+            HelperFilePaths("XML JSON, Three Template, One Config", 4331, "Config.txt", 1, "Config.txt");
+            HelperFilePaths("XML JSON, Three Template, One Config", 4331, "Config.txt", 2, "Config.txt");
+            HelperFilePaths("XML JSON, Three Template, One Config", 4331, "Config.txt", 3, "Config.txt");
+*/
+            StfLogger.LogHeader("TXT XML JSON, Three Template, One Config");
+            HelperFilePaths("TXT XML JSON, Three Template, One Config", 43311, "Template.xml", 1, "Template.xml");
+            HelperFilePaths("TXT XML JSON, Three Template, One Config", 43311, "Template2.xml", 2, "Template2.xml");
 
         }
 
