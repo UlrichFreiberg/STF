@@ -104,7 +104,53 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 2, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 3, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 4, "Config4.extra.dots.12.txt");
+        }
 
+        /// <summary>
+        /// The test file paths three file filters.
+        /// </summary>
+        [TestMethod]
+        public void TestFilePathsThreeFileFilters()
+        {
+            StfLogger.LogHeader("One Template, One Config, One Tdv");
+            HelperThreeFileFilters("One, One, one", 43111, "Template.txt", 1, "Template.txt");
+            HelperThreeFileFilters("One, One, one", 43111, "Config.txt", 1, "Config.txt");
+            HelperThreeFileFilters("One, One, one", 43111, "TestDataValues.txt", 1, "TestDataValues.txt");
+        }
+
+        /// <summary>
+        /// The helper three file filters.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="testCaseId">
+        /// The test case id.
+        /// </param>
+        /// <param name="fileNameFilter">
+        /// The file name filter.
+        /// </param>
+        /// <param name="step">
+        /// The step.
+        /// </param>
+        /// <param name="expectedFilePath">
+        /// The expected file path.
+        /// </param>
+        private void HelperThreeFileFilters(
+            string testStep,
+            int testCaseId,
+            string fileNameFilter,
+            int step,
+            string expectedFilePath)
+        {
+            StfLogger.LogSubHeader(testStep);
+
+            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(testCaseId, UnitTestTestDataRoot);
+            var fileNameFilters = new[] { "Template.txt", "Config.txt", "TestDataValues.txt" };
+            var testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(testCaseFileAndFolderUtils.TestCaseDirectory, fileNameFilters);
+            var actual = testCaseStepFilePathUtils.GetFileNameForStep(fileNameFilter, step);
+
+            StfAssert.AreEqual(testStep, expectedFilePath, actual);
         }
 
         /// <summary>
@@ -126,11 +172,11 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
         /// The expected file path.
         /// </param>
         private void HelperFilePaths(
-            string testStep, 
-            int testCaseId, 
-            string fileNameFilter,
-            int step, 
-            string expectedFilePath)
+        string testStep,
+        int testCaseId,
+        string fileNameFilter,
+        int step,
+        string expectedFilePath)
         {
             StfLogger.LogSubHeader(testStep);
 

@@ -145,90 +145,6 @@
     <Folder Include="TestData\FileUtils\GetCleanFilecontent\Temp\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4011\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4011\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4012\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4012\Config2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4012\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4021\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4021\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4021\Template2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Config2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4022\Template2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Config2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Config3.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Template2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4033\Template3.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4423\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4423\Config2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4423\Config4.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4423\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4423\Template3.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4432\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4432\Config4.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4432\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4432\Template2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\FileUtilities\TemplateConfigUtils\Tc4432\Template3.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4011\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -263,6 +179,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Template2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\TestDataValues.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config.txt">
