@@ -104,6 +104,21 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 2, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 3, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 4, "Config4.extra.dots.12.txt");
+
+        }
+
+        /// <summary>
+        /// The test file paths different extensions filters.
+        /// </summary>
+        [TestMethod]
+        public void TestFilePathsDifferentExtensionsFilters()
+        {
+            StfLogger.LogHeader("TXT TXT XML, Four Template, One Config");
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 1, "Template.txt");
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 2, "Template2.txt");
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 3, "Template3.xml");
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 4, "Template4.txt");
+
         }
 
         /// <summary>

@@ -141,7 +141,8 @@ namespace Mir.Stf.Utilities.FileUtilities
         {
             var basename = Path.GetFileNameWithoutExtension(fileNameFilter);
             var extension = Path.GetExtension(fileNameFilter);
-            var wildcard = $"{basename}*{extension}";
+//            var wildcard = $"{basename}*{extension}";
+            var wildcard = $"{basename}*";
             var retVal = Directory.GetFiles(RootFolder, wildcard).OrderBy(fileName => fileName).ToArray();
 
             return retVal;

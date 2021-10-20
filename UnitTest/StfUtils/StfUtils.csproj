@@ -133,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template3.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\StfUtils\StfUtils.csproj">
@@ -188,6 +194,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\TestDataValues.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config.txt">
