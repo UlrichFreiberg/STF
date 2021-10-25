@@ -44,12 +44,18 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// <param name="fileNameFilters">
         /// The template file filters.
         /// </param>
-        public TestCaseStepFilePathUtils(string rootFolder, string[] fileNameFilters)
+        public TestCaseStepFilePathUtils(string rootFolder, string[] fileNameFilters, bool ignoreFileExtensions = false)
         {
             RootFolder = rootFolder;
             FileNameFilters = fileNameFilters;
+            IgnoreFileExtensions = ignoreFileExtensions;
             InitFileArrays();
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether ignore file extensions.
+        /// </summary>
+        public bool IgnoreFileExtensions { get; set; }
 
         /// <summary>
         /// Gets the file name filters.
@@ -141,8 +147,7 @@ namespace Mir.Stf.Utilities.FileUtilities
         {
             var basename = Path.GetFileNameWithoutExtension(fileNameFilter);
             var extension = Path.GetExtension(fileNameFilter);
-//            var wildcard = $"{basename}*{extension}";
-            var wildcard = $"{basename}*";
+            var wildcard = IgnoreFileExtensions ? $"{basename}*{extension}" : $"{basename}*";
             var retVal = Directory.GetFiles(RootFolder, wildcard).OrderBy(fileName => fileName).ToArray();
 
             return retVal;
@@ -162,7 +167,7 @@ namespace Mir.Stf.Utilities.FileUtilities
                 // The first in a file series always are without numbers
                 var fileFilterBasename = Path.GetFileNameWithoutExtension(FileNameFilters[fileNo]);
                 var fileName = Path.GetFileName(firstStepFilePath);
-                var candidateRegExp = $@"{fileFilterBasename}1?([^\d]|\.)";
+                var candidateRegExp = $@"^{fileFilterBasename}1?([^\d]|\.)";
 
                 return Regex.Match(fileName, candidateRegExp).Success;
             }

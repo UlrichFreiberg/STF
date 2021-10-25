@@ -114,10 +114,10 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
         public void TestFilePathsDifferentExtensionsFilters()
         {
             StfLogger.LogHeader("TXT TXT XML, Four Template, One Config");
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 1, "Template.txt");
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 2, "Template2.txt");
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 3, "Template3.xml");
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 4, "Template4.txt");
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 1, "Template.txt", true);
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 2, "Template2.txt", true);
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 3, "Template3.xml", true);
+            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 4, "Template4.txt", true);
 
         }
 
@@ -186,12 +186,16 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
         /// <param name="expectedFilePath">
         /// The expected file path.
         /// </param>
+        /// <param name="ignoreFileExtensions">
+        /// The ignore file extensions.
+        /// </param>
         private void HelperFilePaths(
         string testStep,
         int testCaseId,
         string fileNameFilter,
         int step,
-        string expectedFilePath)
+        string expectedFilePath,
+        bool ignoreFileExtensions = false)
         {
             StfLogger.LogSubHeader(testStep);
 
