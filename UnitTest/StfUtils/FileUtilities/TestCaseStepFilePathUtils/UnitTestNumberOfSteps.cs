@@ -104,21 +104,41 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 2, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 3, "Config2WithNoGap1.txt");
             HelperFilePaths("Four Steps File Text, Three Template, Three Config", 4433, "Config.txt", 4, "Config4.extra.dots.12.txt");
-
         }
 
         /// <summary>
-        /// The test file paths different extensions filters.
+        /// The test file paths different extensions filters for all steps in Test Case.
         /// </summary>
         [TestMethod]
-        public void TestFilePathsDifferentExtensionsFilters()
+        public void TestFilePathsDifferentExtensionsFiltersAllSteps()
         {
-            StfLogger.LogHeader("TXT TXT XML, Four Template, One Config");
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 1, "Template.txt", true);
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 2, "Template2.txt", true);
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 3, "Template3.xml", true);
-            HelperFilePaths("TXT TXT XML, Four Template, One Config", 4331, "Template.txt", 4, "Template4.txt", true);
+            var testCaseId = 4331;
+            const int NumSteps = 4;
+            var testCaseName = "Different File Extensions, all steps, Four Template, One Config";
+            var fileNameFilters = new[] { "Template", "Config.txt" };
 
+            string[,] expectedFilePaths = 
+                {
+                    { "Template.txt", "Config.txt" }, { "Template2.txt", "Config.txt" },
+                    { "Template3.xml", "Config.txt" }, { "Template4.txt", "Config.txt" }
+                };
+
+            StfLogger.LogHeader(testCaseName);
+            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(testCaseId, UnitTestTestDataRoot);
+            var testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(testCaseFileAndFolderUtils.TestCaseDirectory, fileNameFilters, true);
+
+            for (int stepNum = 1; stepNum <= NumSteps; stepNum++)
+            {
+                StfLogger.LogSubHeader($"Step {stepNum}");
+                for (var fileNameFilterNo = 0; fileNameFilterNo < fileNameFilters.Length; fileNameFilterNo++)
+                {
+                    var actual = testCaseStepFilePathUtils.GetFileNameForStep(fileNameFilters[fileNameFilterNo], stepNum);
+                    StfAssert.AreEqual(
+                        "FileNames for step are equal", 
+                                expectedFilePaths[stepNum - 1, fileNameFilterNo], 
+                                actual);
+                }
+            }
         }
 
         /// <summary>
@@ -186,16 +206,12 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
         /// <param name="expectedFilePath">
         /// The expected file path.
         /// </param>
-        /// <param name="ignoreFileExtensions">
-        /// The ignore file extensions.
-        /// </param>
         private void HelperFilePaths(
         string testStep,
         int testCaseId,
         string fileNameFilter,
         int step,
-        string expectedFilePath,
-        bool ignoreFileExtensions = false)
+        string expectedFilePath)
         {
             StfLogger.LogSubHeader(testStep);
 
