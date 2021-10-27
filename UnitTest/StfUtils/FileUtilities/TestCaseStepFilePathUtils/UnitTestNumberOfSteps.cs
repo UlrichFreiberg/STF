@@ -112,33 +112,40 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
         [TestMethod]
         public void TestFilePathsDifferentExtensionsFiltersAllSteps()
         {
-            var testCaseId = 4331;
+            var testCaseId = 43223;
             const int NumSteps = 4;
             var testCaseName = "Different File Extensions, all steps, Four Template, One Config";
             var fileNameFilters = new[] { "Template", "Config.txt" };
 
-            string[,] expectedFilePaths = 
+            string[,] expectedFilePaths =
                 {
                     { "Template.txt", "Config.txt" }, { "Template2.txt", "Config.txt" },
                     { "Template3.xml", "Config.txt" }, { "Template4.txt", "Config.txt" }
                 };
 
-            StfLogger.LogHeader(testCaseName);
-            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(testCaseId, UnitTestTestDataRoot);
-            var testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(testCaseFileAndFolderUtils.TestCaseDirectory, fileNameFilters, true);
+            HelperTestFilePathsAllSteps(testCaseName, testCaseId, fileNameFilters, NumSteps, expectedFilePaths);
+        }
 
-            for (int stepNum = 1; stepNum <= NumSteps; stepNum++)
-            {
-                StfLogger.LogSubHeader($"Step {stepNum}");
-                for (var fileNameFilterNo = 0; fileNameFilterNo < fileNameFilters.Length; fileNameFilterNo++)
+        /// <summary>
+        /// The test file paths different extensions filters for all steps in Test Case.
+        /// </summary>
+        [TestMethod]
+        public void TestFilePathsThreeFiltersAllSteps()
+        {
+            var testCaseId = 43223;
+            const int NumSteps = 4;
+            var testCaseName = "Different File Extensions, 3 Filters, all steps, 2 Template, 2 Config, 3TDV";
+            var fileNameFilters = new[] { "Template", "Config.txt", "TestDataValues.txt" };
+
+            string[,] expectedFilePaths =
                 {
-                    var actual = testCaseStepFilePathUtils.GetFileNameForStep(fileNameFilters[fileNameFilterNo], stepNum);
-                    StfAssert.AreEqual(
-                        "FileNames for step are equal", 
-                                expectedFilePaths[stepNum - 1, fileNameFilterNo], 
-                                actual);
-                }
-            }
+                    { "Template.xml", "Config.txt", "TestDataValues.txt" },
+                    { "Template2.txt", "Config.txt", "TestDataValues.txt" },
+                    { "Template2.txt", "Config3.txt", "TestDataValues3.txt" },
+                    { "Template4.json", "Config3.txt", "TestDataValues4.txt" }
+                };
+
+            HelperTestFilePathsAllSteps(testCaseName, testCaseId, fileNameFilters, NumSteps, expectedFilePaths);
         }
 
         /// <summary>
@@ -151,6 +158,52 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
             HelperThreeFileFilters("One, One, one", 43111, "Template.txt", 1, "Template.txt");
             HelperThreeFileFilters("One, One, one", 43111, "Config.txt", 1, "Config.txt");
             HelperThreeFileFilters("One, One, one", 43111, "TestDataValues.txt", 1, "TestDataValues.txt");
+        }
+
+        /// <summary>
+        /// The helper test file paths all steps.
+        /// </summary>
+        /// <param name="testCaseName">
+        /// The test case name.
+        /// </param>
+        /// <param name="testCaseId">
+        /// The test case id.
+        /// </param>
+        /// <param name="fileNameFilters">
+        /// The file name filters.
+        /// </param>
+        /// <param name="numSteps">
+        /// The num steps.
+        /// </param>
+        /// <param name="expectedFilePaths">
+        /// The expected file paths.
+        /// </param>
+        private void HelperTestFilePathsAllSteps(
+            string testCaseName,
+            int testCaseId,
+            string[] fileNameFilters,
+            int numSteps,
+            string[,] expectedFilePaths)
+        {
+            StfLogger.LogHeader(testCaseName);
+            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(testCaseId, UnitTestTestDataRoot);
+            var testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(
+                testCaseFileAndFolderUtils.TestCaseDirectory,
+                fileNameFilters,
+                true);
+
+            for (int stepNum = 1; stepNum <= numSteps; stepNum++)
+            {
+                StfLogger.LogSubHeader($"Step {stepNum}");
+                for (var fileNameFilterNo = 0; fileNameFilterNo < fileNameFilters.Length; fileNameFilterNo++)
+                {
+                    var actual = testCaseStepFilePathUtils.GetFileNameForStep(fileNameFilters[fileNameFilterNo], stepNum);
+                    StfAssert.AreEqual(
+                        "FileNames for step are equal",
+                        expectedFilePaths[stepNum - 1, fileNameFilterNo],
+                        actual);
+                }
+            }
         }
 
         /// <summary>

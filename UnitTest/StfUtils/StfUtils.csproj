@@ -133,6 +133,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Config3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template4.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
