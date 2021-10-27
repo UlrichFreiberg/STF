@@ -112,7 +112,7 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
         [TestMethod]
         public void TestFilePathsDifferentExtensionsFiltersAllSteps()
         {
-            var testCaseId = 43223;
+            var testCaseId = 4331;
             const int NumSteps = 4;
             var testCaseName = "Different File Extensions, all steps, Four Template, One Config";
             var fileNameFilters = new[] { "Template", "Config.txt" };
