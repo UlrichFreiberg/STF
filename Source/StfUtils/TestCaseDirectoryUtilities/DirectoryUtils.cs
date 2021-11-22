@@ -18,10 +18,12 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
     using System.Text;
     using System.Text.RegularExpressions;
 
+    using Mir.Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The directory utils.
     /// </summary>
-    public class DirectoryUtils
+    public class DirectoryUtils 
     {
         /// <summary>
         /// The cache info filename.
@@ -213,6 +215,67 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
             var testCaseInErrorFileRegExp = $@"TestCase\s+{testCaseId}\s+duplicated here";
             var match = Regex.Match(cacheContent, testCaseInErrorFileRegExp, RegexOptions.Multiline);
             var retVal = match.Success;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get test case folders paths from cache file
+        /// </summary>
+        /// <returns>
+        /// The test case folder paths
+        /// </returns>
+        public List<string> GetTestCaseFolderPathsFromCache()
+        {
+            var retVal = new List<string>();
+
+            if (!File.Exists(CacheInfoFilePath))
+            {
+                RefreshCache();
+
+                if (!File.Exists(CacheInfoFilePath))
+                {
+                    return null;
+                }
+            }
+
+            StreamReader reader = new StreamReader(CacheInfoFilePath);
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                retVal.Add(line);
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get test case Ids from cache file
+        /// </summary>
+        /// <returns>
+        /// The test case Ids
+        /// </returns>
+        public List<int> GetTestCaseIdsFromCache()
+        {
+            var retVal = new List<int>();
+
+            if (!File.Exists(CacheInfoFilePath))
+            {
+                RefreshCache();
+
+                if (!File.Exists(CacheInfoFilePath))
+                {
+                    return null;
+                }
+            }
+
+            StreamReader reader = new StreamReader(CacheInfoFilePath);
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                var tcId = GetTestCaseId(line);
+                retVal.Add(tcId);
+            }
 
             return retVal;
         }

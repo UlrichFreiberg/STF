@@ -32,7 +32,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         public void TestGetTestDataValueSimple()
         {
             var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
-            var actual = testCaseDirectoryDataUtils.GetTestDataValue("FourtyTwo");
+             var actual = testCaseDirectoryDataUtils.GetTestDataValue("FourtyTwo");
             var expected = "42";
 
             StfAssert.AreEqual("Simple FourtyTwo", expected, actual);

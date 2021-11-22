@@ -22,12 +22,12 @@ namespace Mir.Stf.Utilities
     public class StfUtilsBase
     {
         /// <summary>
-        /// Backing field
+        /// Backing field for StringTransformationUtils
         /// </summary>
         private IStringTransformationUtils stringTransformationUtils;
 
         /// <summary>
-        /// Backing field
+        /// Backing field for FileUtils
         /// </summary>
         private IFileUtils fileUtils;
 

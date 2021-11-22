@@ -105,6 +105,7 @@
     <Compile Include="FileUtilities\FileUtils\UnitTestWriteAllTextFile.cs" />
     <Compile Include="FileUtilities\TemplateConfigUtils\UnitTestNumberOfSteps.cs" />
     <Compile Include="FileUtilities\TestCaseStepFilePathUtils\UnitTestNumberOfSteps.cs" />
+    <Compile Include="StfTestUtilities\UnitTestStfTestUtilities.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestFormatFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSelectFunction.cs" />
@@ -315,6 +316,42 @@
     </Content>
     <Content Include="TestData\KeyValuePairsUtils\Simple.txt" />
     <Content Include="TestData\KeyValuePairsUtils\SimpleAssignmentOperatorBECOMES.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7001\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7001\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7002\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7002\Config2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7002\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7003\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7003\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7003\Template2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7004\Config.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7004\Config2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7004\Template.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\StfTestUtilities\Tc7004\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\TestCaseData\TestCaseDirectoryDataUtils\Tc4001\TestDataValues.txt">
