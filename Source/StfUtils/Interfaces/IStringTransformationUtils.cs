@@ -42,5 +42,16 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="string"/>.
         /// </returns>
         string EvaluateFunction(string functionName, string arg);
+
+        /// <summary>
+        /// The evaluate.
+        /// </summary>
+        /// <param name="stringToEvaluate">
+        /// The string to evaluate.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string Evaluate(string stringToEvaluate);
     }
 }

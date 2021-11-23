@@ -10,8 +10,13 @@
 
 namespace Mir.Stf.Utilities.StfTestUtilities
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Text.RegularExpressions;
 
+    using Mir.Stf.Utilities.FileUtilities;
+    using Mir.Stf.Utilities.StringTransformationUtilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
@@ -26,14 +31,39 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         private static readonly string DefaultRootFolder = @"C:\Temp\StfTestTool\TestData\StfTestUtilities";
 
         /// <summary>
+        /// Backing field for TestCaseFileAndFolderUtils
+        /// </summary>
+        private TestCaseFileAndFolderUtils testCaseFileAndFolderUtils;
+
+        /// <summary>
+        /// Backing field for TestCaseStepFilePathUtils
+        /// </summary>
+        private TestCaseStepFilePathUtils testCaseStepFilePathUtils;
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StfTestUtilities"/> class.
         /// </summary>
         /// <param name="rootFolder">
         /// The root folder.
         /// </param>
-        public StfTestUtilities(string rootFolder) : base()
+        public StfTestUtilities(string rootFolder)
         {
             RootFolder = rootFolder;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfTestUtilities"/> class.
+        /// </summary>
+        /// <param name="rootFolder">
+        /// The root folder.
+        /// </param>
+        /// <param name="testCaseId">
+        /// The test case id.
+        /// </param>
+        public StfTestUtilities(string rootFolder, int testCaseId) : this(rootFolder)
+        {
+            TestCaseId = testCaseId;
         }
 
         /// <summary>
@@ -44,9 +74,184 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="StfTestUtilities"/> class.
+        /// </summary>
+        /// <param name="testCaseId">
+        /// The test Case Id.
+        /// </param>
+        public StfTestUtilities(int testCaseId) : this(DefaultRootFolder, testCaseId)
+        {
+        }
+
+        /// <summary>
         /// Gets the root folder.
         /// </summary>
         public string RootFolder { get; }
+
+        /// <summary>
+        /// Gets the test case id.
+        /// </summary>
+        public int TestCaseId { get; }
+
+        /// <summary>
+        /// Gets the TestCaseFileAndFolderUtils
+        /// </summary>
+        public TestCaseFileAndFolderUtils TestCaseFileAndFolderUtils
+        {
+            get
+            {
+                if (TestCaseId == 0)
+                {
+                    LogError("TestCaseId may not be null when instantiating TestCaseFileAndFolderUtils");
+                    return null;
+                }
+                var retVal = testCaseFileAndFolderUtils ?? (testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(TestCaseId, RootFolder));
+
+                return retVal;
+            }
+        }
+
+        /// <summary>
+        /// Gets the TestCaseStepFilePathUtils
+        /// </summary>
+        public TestCaseStepFilePathUtils TestCaseStepFilePathUtils(string[] fileNameFilters, bool ignoreFileExtensions = false)
+        {
+            var retVal = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(TestCaseFileAndFolderUtils.TestCaseDirectory,
+                                                           fileNameFilters, 
+                                                           ignoreFileExtensions
+                                                           ));
+            return retVal;
+        }
+
+
+        /// <summary>
+        /// Generates all the steps in the test case
+        /// </summary>
+        /// <param name="fileNameFilters">
+        /// The file Name Filters.
+        /// </param>
+        /// <param name="ignoreFileExtensions">
+        /// The ignore File Extensions.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool GenerateAllSteps (string[] fileNameFilters, bool ignoreFileExtensions = false)
+        {
+            var retVal = false;
+            var tcSFPU = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(TestCaseFileAndFolderUtils.TestCaseDirectory,
+                                                           fileNameFilters,
+                                                           ignoreFileExtensions
+                                                       ));
+
+            if (tcSFPU == null)
+            {
+                LogError("Failed to setup TestCaseStepFilePathUtils");
+                retVal = false;
+                return retVal;
+            }
+
+
+            for (int stepNum = 1; stepNum <= testCaseStepFilePathUtils.NumberOfSteps; stepNum++)
+            {
+                var configFilePath = testCaseStepFilePathUtils.GetFilePathForStep(fileNameFilters[1], stepNum);
+                if (string.IsNullOrEmpty(configFilePath))
+                {
+                    retVal = false;
+                    return retVal;
+                }
+
+                var keyValuePairUtils = new KeyValuePairUtils("=");
+                var configDictionary = keyValuePairUtils.ReadKeyValuePairsFromFile(configFilePath);
+                if (configDictionary == null)
+                {
+                    LogError("Failed to setup configDictionary");
+                    retVal = false;
+                    return retVal;
+                }
+
+                var templateFilePath = testCaseStepFilePathUtils.GetFilePathForStep(fileNameFilters[0], stepNum);
+                var templateFileName = testCaseStepFilePathUtils.GetFileNameForStep(fileNameFilters[0], stepNum);
+                if (string.IsNullOrEmpty(templateFilePath)
+                    ||
+                    string.IsNullOrEmpty(templateFileName))
+                {
+                    LogError("Failed to setup templateFileName and/or Path");
+                    retVal = false;
+                    return retVal;
+                }
+
+                // Transform Template file with config values
+                var templateContent = FileUtils.GetCleanFilecontent(templateFilePath);
+
+                // loop through all config Keys and replace occurences in templateContent string 
+                // then write back to a file 
+                foreach (var key in configDictionary.Keys)
+                {
+                    var value = (string)configDictionary[key];
+
+                    var evaluatedValue = StringTransformationUtils.Evaluate(value);
+                    templateContent = Regex.Replace(
+                        templateContent,
+                        $"{key}.*$",
+                        $"{key} {evaluatedValue}",
+                        RegexOptions.Multiline);
+                }
+
+                var resultsFilePath = testCaseFileAndFolderUtils.GetTestCaseResultsFilePath($"{templateFileName}{".step"}{stepNum}{".results"}", false);
+                File.WriteAllText(resultsFilePath, templateContent);
+            }
+
+            retVal = true;
+            return retVal;
+        }
+
+        /// <summary>
+        /// The get test step results file path.
+        /// </summary>
+        /// <param name="fileNameFilters">
+        /// The file name filters.
+        /// </param>
+        /// <param name="stepNum">
+        /// The step num.
+        /// </param>
+        /// <param name="ignoreFileExtensions">
+        /// The ignore file extensions.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string GetTestStepResultsFilePath(string[] fileNameFilters, int stepNum, bool ignoreFileExtensions = false)
+        {
+            var retVal = String.Empty;
+            var tcSFPU = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(TestCaseFileAndFolderUtils.TestCaseDirectory,
+                                                           fileNameFilters,
+                                                           ignoreFileExtensions
+                                                       ));
+
+            if (tcSFPU == null)
+            {
+                LogError("Failed to setup TestCaseStepFilePathUtils");
+                retVal = String.Empty;
+                return retVal;
+            }
+
+            var templateFilePath = testCaseStepFilePathUtils.GetFilePathForStep(fileNameFilters[0], stepNum);
+            var templateFileName = testCaseStepFilePathUtils.GetFileNameForStep(fileNameFilters[0], stepNum);
+            if (string.IsNullOrEmpty(templateFilePath)
+                ||
+                string.IsNullOrEmpty(templateFileName))
+            {
+                LogError("Failed to setup templateFileName and/or Path");
+                retVal = String.Empty;
+                return retVal;
+            }
+
+            retVal = testCaseFileAndFolderUtils.GetTestCaseResultsFilePath($"{templateFileName}{".step"}{stepNum}{".results"}", true);
+
+            return retVal;
+        }
+
 
         /// <summary>
         /// The get test case folder paths from cache.

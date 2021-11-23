@@ -74,7 +74,7 @@ namespace Mir.Stf.Utilities
         /// <param name="message">
         /// The message.
         /// </param>
-        internal void LogError(string message)
+        protected void LogError(string message)
         {
             LogMessage("ERROR", message);
         }
