@@ -10,6 +10,8 @@
 
 namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
 {
+    using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Mir.Stf.Utilities.TestCaseData;
@@ -101,6 +103,20 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
             var expected = "he q";
 
             StfAssert.AreEqual("SubStr3", expected, actual);
+        }
+
+
+        /// <summary>
+        /// The test get test data value GUID
+        /// </summary>
+        [TestMethod]
+        public void TestGetTestDataValueGuid()
+        {
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var actual = testCaseDirectoryDataUtils.GetTestDataValue("GName");
+
+            var isGuid = Guid.TryParse(actual, out var _);
+            StfAssert.IsTrue("is the return from GName{GUID} a GUID", isGuid);
         }
     }
 }
