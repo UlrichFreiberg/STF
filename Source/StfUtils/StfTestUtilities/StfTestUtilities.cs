@@ -122,7 +122,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         }
 
         /// <summary>
-        /// Generates all the steps in the test case
+        /// Templifies all the steps in the test case
         /// </summary>
         /// <param name="fileNameFilters">
         /// The file Name Filters.
