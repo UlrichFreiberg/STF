@@ -16,7 +16,6 @@ namespace Mir.Stf.Utilities.StfTestUtilities
     using System.Text.RegularExpressions;
 
     using Mir.Stf.Utilities.FileUtilities;
-    using Mir.Stf.Utilities.StringTransformationUtilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
@@ -39,7 +38,6 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         /// Backing field for TestCaseStepFilePathUtils
         /// </summary>
         private TestCaseStepFilePathUtils testCaseStepFilePathUtils;
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StfTestUtilities"/> class.
@@ -74,16 +72,6 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StfTestUtilities"/> class.
-        /// </summary>
-        /// <param name="testCaseId">
-        /// The test Case Id.
-        /// </param>
-        public StfTestUtilities(int testCaseId) : this(DefaultRootFolder, testCaseId)
-        {
-        }
-
-        /// <summary>
         /// Gets the root folder.
         /// </summary>
         public string RootFolder { get; }
@@ -105,6 +93,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                     LogError("TestCaseId may not be null when instantiating TestCaseFileAndFolderUtils");
                     return null;
                 }
+
                 var retVal = testCaseFileAndFolderUtils ?? (testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(TestCaseId, RootFolder));
 
                 return retVal;
@@ -114,15 +103,23 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         /// <summary>
         /// Gets the TestCaseStepFilePathUtils
         /// </summary>
+        /// <param name="fileNameFilters">
+        /// The file Name Filters.
+        /// </param>
+        /// <param name="ignoreFileExtensions">
+        /// The ignore File Extensions.
+        /// </param>
+        /// <returns>
+        /// The <see cref="TestCaseStepFilePathUtils"/>.
+        /// </returns>
         public TestCaseStepFilePathUtils TestCaseStepFilePathUtils(string[] fileNameFilters, bool ignoreFileExtensions = false)
         {
-            var retVal = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(TestCaseFileAndFolderUtils.TestCaseDirectory,
-                                                           fileNameFilters, 
-                                                           ignoreFileExtensions
-                                                           ));
+            var retVal = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(
+                                                           TestCaseFileAndFolderUtils.TestCaseDirectory,
+                                                           fileNameFilters,
+                                                           ignoreFileExtensions));
             return retVal;
         }
-
 
         /// <summary>
         /// Generates all the steps in the test case
@@ -136,13 +133,13 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool GenerateAllSteps (string[] fileNameFilters, bool ignoreFileExtensions = false)
+        public bool TemplifyAllSteps(string[] fileNameFilters, bool ignoreFileExtensions = false)
         {
             var retVal = false;
-            var tcSFPU = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(TestCaseFileAndFolderUtils.TestCaseDirectory,
+            var tcSFPU = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(
+                                                           TestCaseFileAndFolderUtils.TestCaseDirectory,
                                                            fileNameFilters,
-                                                           ignoreFileExtensions
-                                                       ));
+                                                           ignoreFileExtensions));
 
             if (tcSFPU == null)
             {
@@ -150,7 +147,6 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                 retVal = false;
                 return retVal;
             }
-
 
             for (int stepNum = 1; stepNum <= testCaseStepFilePathUtils.NumberOfSteps; stepNum++)
             {
