@@ -10,11 +10,8 @@
 
 namespace Mir.Stf.Utilities.TestCaseData
 {
-    using System;
     using System.Collections.Specialized;
-
     using Mir.Stf.Utilities.Interfaces;
-    using Mir.Stf.Utilities.StfTestUtilities;
     using Mir.Stf.Utilities.StringTransformationUtilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
@@ -186,7 +183,6 @@ namespace Mir.Stf.Utilities.TestCaseData
             return retVal;
         }
 
-
         /// <summary>
         /// The evaluate.
         /// </summary>
@@ -201,11 +197,6 @@ namespace Mir.Stf.Utilities.TestCaseData
         /// </returns>
         public string Evaluate(string stringToEvaluate, OrderedDictionary dictFromCodeToOverlay = null)
         {
-//            var tdvDict = KeyValuePairUtils.OverlayDictionary(TestDataValuesDict, dictFromCodeToOverlay);
-
-            // TODO: register function handle for {CONSTANT} and {TESTDATA} ;
-//            StringTransformationUtils.RegisterAllStuFunctionsForType(this);
-
             var retVal = StringTransformationUtils.Evaluate(stringToEvaluate);
 
             return retVal;
@@ -242,7 +233,6 @@ namespace Mir.Stf.Utilities.TestCaseData
             var retVal = this.GetConstantValue(arg);
             return retVal;
         }
-
 
         /// <summary>
         /// The init.
@@ -281,22 +271,116 @@ namespace Mir.Stf.Utilities.TestCaseData
         /// </returns>
         private OrderedDictionary GetTestDataValuesDict()
         {
+            //// Compilation Step
             //// -Temp\TestDataValues.txt(all TestDataValue files compiled into one file)
             ////    - include files resolved(marked for debug with comments)
             ////
+            //// Resolution Step
             //// -Temp\TestDataValues.resolved.txt
             ////    - values overlayed
             ////
+            //// Transformation Step
             //// - Results\TestDataValues.transformed.txt(ready to load using KeyValuePairUtils)
             ////    -values evaluated
             ////    - Constants applied(Results\Constants.transformed.txt)
             ////- Simple functions called
 
-            var retVal = KeyValuePairUtils.ReadKeyValuePairsFromFile(TestDataValuesFilePath);
-            var resolvedTestDataValuesFilePath = TestCaseFileAndFolderUtils.GetTestCaseResultsFilePath("TestDataValues.Resolved.txt", false);
+            var compiledDict = CompileTestDataValues();
 
-            KeyValuePairUtils.SaveKeyValuePairsToFile(resolvedTestDataValuesFilePath, retVal, "Resolved Test Data Values");
+            var resolvedDict = ResolveTestDataValues();
+
+            var retVal = TransformTestDataValues();
             return retVal;
+        }
+
+        /// <summary>
+        /// The compile test data values.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="OrderedDictionary"/>.
+        /// </returns>
+        private OrderedDictionary CompileTestDataValues()
+        {
+            //// Compilation Step
+            //// -Temp\TestDataValues.txt(all TestDataValue files compiled into one file)
+            ////    - include files resolved(marked for debug with comments)
+            ////
+            var originalDict = KeyValuePairUtils.ReadKeyValuePairsFromFile(TestDataValuesFilePath);
+
+            // TODO: Do some compilation here as per comment above (gathering all TDV's together)
+            var retVal = originalDict;
+
+            var compiledTestDataValuesFilePath =
+                TestCaseFileAndFolderUtils.GetTestCaseTempFilePath("TestDataValues.compiled.txt", false);
+            KeyValuePairUtils.SaveKeyValuePairsToFile(compiledTestDataValuesFilePath, retVal, "Compiled Test Data Values");
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// The resolve test data values.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="OrderedDictionary"/>.
+        /// </returns>
+        private OrderedDictionary ResolveTestDataValues()
+        {
+            //// Resolution Step
+            //// -Temp\TestDataValues.resolved.txt
+            ////    - values overlayed
+            ////
+            var compiledTestDataValuesFilePath =
+                TestCaseFileAndFolderUtils.GetTestCaseTempFilePath("TestDataValues.compiled.txt", false);
+            var compiledDict = KeyValuePairUtils.ReadKeyValuePairsFromFile(compiledTestDataValuesFilePath);
+
+            // TODO: Do some resolving and overlaying as per comment above on Resolving step
+            var retVal = compiledDict;
+
+            var resolvedTestDataValuesFilePath =
+                TestCaseFileAndFolderUtils.GetTestCaseTempFilePath("TestDataValues.resolved.txt", false);
+            KeyValuePairUtils.SaveKeyValuePairsToFile(
+                resolvedTestDataValuesFilePath,
+                retVal,
+                "Resolved Test Data Values");
+            return retVal;
+        }
+
+        /// <summary>
+        /// The transform test data values.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="OrderedDictionary"/>.
+        /// </returns>
+        private OrderedDictionary TransformTestDataValues()
+        {
+            //// Transformation Step
+            //// - Results\TestDataValues.transformed.txt(ready to load using KeyValuePairUtils)
+            ////    -values evaluated
+            ////    - Constants applied(Results\Constants.transformed.txt)
+            ////- Simple functions called
+            var resolvedTestDataValuesFilePath =
+                TestCaseFileAndFolderUtils.GetTestCaseTempFilePath("TestDataValues.resolved.txt", false);
+            var resolvedDict = KeyValuePairUtils.ReadKeyValuePairsFromFile(resolvedTestDataValuesFilePath);
+
+            var transformedDict = new OrderedDictionary();
+
+            // TODO: Is this the kind of transformation we require see above
+            foreach (var key in resolvedDict.Keys)
+            {
+                var value = (string)resolvedDict[key];
+
+                var evaluatedValue = StringTransformationUtils.Evaluate(value);
+
+                transformedDict.Add(key, evaluatedValue);
+            }
+
+            var transformedTestDataValuesFilePath =
+                TestCaseFileAndFolderUtils.GetTestCaseResultsFilePath("TestDataValues.transformed.txt", false);
+            KeyValuePairUtils.SaveKeyValuePairsToFile(
+                transformedTestDataValuesFilePath,
+                transformedDict,
+                "Transformed Test Data Values");
+            return transformedDict;
         }
     }
 }
