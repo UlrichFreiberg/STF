@@ -10,8 +10,11 @@
 
 namespace Mir.Stf.Utilities.TestCaseData
 {
+    using System;
     using System.Collections.Specialized;
 
+    using Mir.Stf.Utilities.Interfaces;
+    using Mir.Stf.Utilities.StfTestUtilities;
     using Mir.Stf.Utilities.StringTransformationUtilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
@@ -48,6 +51,28 @@ namespace Mir.Stf.Utilities.TestCaseData
             ConstantsFilePath = TestCaseFileAndFolderUtils.GetTestCaseRootFilePath("Constants.txt");
             KeyValuePairUtils = new KeyValuePairUtils();
             StringTransformationUtils = new StringTransformationUtils();
+            Init();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCaseDirectoryDataUtils"/> class.
+        /// </summary>
+        /// <param name="testCaseFileAndFolderUtils">
+        /// The test Case File And Folder Utils.
+        /// </param>
+        /// <param name="stringTransformationUtils">
+        /// The string Transformation Utils.
+        /// </param>
+        public TestCaseDirectoryDataUtils(TestCaseFileAndFolderUtils testCaseFileAndFolderUtils, IStringTransformationUtils stringTransformationUtils)
+        {
+            TestCaseDirectoryRoot = testCaseFileAndFolderUtils.TestCaseDirectory;
+            TestCaseId = testCaseFileAndFolderUtils.TestCaseId;
+            TestCaseFileAndFolderUtils = testCaseFileAndFolderUtils;
+            TestDataValuesFilePath = TestCaseFileAndFolderUtils.GetTestCaseRootFilePath("TestDataValues.txt");
+            ConstantsFilePath = TestCaseFileAndFolderUtils.GetTestCaseRootFilePath("Constants.txt");
+            KeyValuePairUtils = new KeyValuePairUtils();
+            StringTransformationUtils = stringTransformationUtils;
+            StringTransformationUtils.RegisterAllStuFunctionsForType(this);
             Init();
         }
 
@@ -99,7 +124,7 @@ namespace Mir.Stf.Utilities.TestCaseData
         /// <summary>
         /// Gets or sets the string transformation utils.
         /// </summary>
-        private StringTransformationUtils StringTransformationUtils { get; set; }
+        private IStringTransformationUtils StringTransformationUtils { get; set; }
 
         /// <summary>
         /// The get test case input.
@@ -140,6 +165,29 @@ namespace Mir.Stf.Utilities.TestCaseData
         }
 
         /// <summary>
+        /// The get test data value.
+        /// </summary>
+        /// <param name="keyName">
+        /// The key name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string GetConstantValue(string keyName)
+        {
+            if (!ConstantsDict.Contains(keyName))
+            {
+                return null;
+            }
+
+            var dictValue = (string)ConstantsDict[keyName];
+            var retVal = Evaluate(dictValue);
+
+            return retVal;
+        }
+
+
+        /// <summary>
         /// The evaluate.
         /// </summary>
         /// <param name="stringToEvaluate">
@@ -153,15 +201,48 @@ namespace Mir.Stf.Utilities.TestCaseData
         /// </returns>
         public string Evaluate(string stringToEvaluate, OrderedDictionary dictFromCodeToOverlay = null)
         {
-            var tdvDict = KeyValuePairUtils.OverlayDictionary(TestDataValuesDict, dictFromCodeToOverlay);
+//            var tdvDict = KeyValuePairUtils.OverlayDictionary(TestDataValuesDict, dictFromCodeToOverlay);
 
             // TODO: register function handle for {CONSTANT} and {TESTDATA} ;
-            StringTransformationUtils.RegisterAllStuFunctionsForType(this);
+//            StringTransformationUtils.RegisterAllStuFunctionsForType(this);
 
             var retVal = StringTransformationUtils.Evaluate(stringToEvaluate);
 
             return retVal;
         }
+
+        /// <summary>
+        /// The stu test data.
+        /// </summary>
+        /// <param name="arg">
+        /// The arg.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        [StringTransformationUtilFunction("TESTDATA")]
+        public string StuTestData(string arg)
+        {
+            var retVal = GetTestDataValue(arg);
+            return retVal;
+        }
+
+        /// <summary>
+        /// The stu test data.
+        /// </summary>
+        /// <param name="arg">sss
+        /// The arg.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        [StringTransformationUtilFunction("CONSTANT")]
+        public string StuConstant(string arg)
+        {
+            var retVal = this.GetConstantValue(arg);
+            return retVal;
+        }
+
 
         /// <summary>
         /// The init.

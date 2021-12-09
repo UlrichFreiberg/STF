@@ -26,7 +26,7 @@ namespace UnitTest.StfTestUtilities
         [TestMethod]
         public void TestStfTestTestCases()
         {
-            HelperStfTestUtilities("number of unit test cases", 5);
+            HelperStfTestUtilities("number of unit test cases", 8);
             HelperStfTestUtilities("number of unit test cases for specific rootfolder ",
                 @".\TestData\StfTestUtilities", 
                 4);

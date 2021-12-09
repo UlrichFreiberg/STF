@@ -16,6 +16,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
     using System.Text.RegularExpressions;
 
     using Mir.Stf.Utilities.FileUtilities;
+    using Mir.Stf.Utilities.TestCaseData;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
@@ -168,6 +169,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
 
                 var templateFilePath = testCaseStepFilePathUtils.GetFilePathForStep(fileNameFilters[0], stepNum);
                 var templateFileName = testCaseStepFilePathUtils.GetFileNameForStep(fileNameFilters[0], stepNum);
+                var templateFileExtenstion = Path.GetExtension(templateFilePath);
                 if (string.IsNullOrEmpty(templateFilePath)
                     ||
                     string.IsNullOrEmpty(templateFileName))
@@ -178,7 +180,11 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                 }
 
                 // Transform Template file with config values
+                // TODO: dont do getClean ... dont do anything to template ... except transform what is informed in config
                 var templateContent = FileUtils.GetCleanFilecontent(templateFilePath);
+
+                // BOB:
+                StringTransformationUtils.RegisterAllStuFunctionsForType(new TestCaseDirectoryDataUtils(TestCaseId, testCaseStepFilePathUtils.RootFolder));
 
                 // loop through all config Keys and replace occurences in templateContent string 
                 // then write back to a file 
