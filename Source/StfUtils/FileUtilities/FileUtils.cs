@@ -244,6 +244,51 @@ namespace Mir.Stf.Utilities.FileUtilities
             return retVal;
         }
 
+
+        /// <summary>
+        /// Get file content.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string GetFilecontent(string fileName)
+        {
+            string retVal = null;
+
+            if (!ExistsFile(fileName))
+            {
+                return null;
+            }
+
+            try
+            {
+                retVal = File.ReadAllText(fileName);
+            }
+            catch (Exception ex)
+            {
+                LogError($"GetFilecontent: Got Ex: [{ex}]");
+                return null;
+            }
+            finally
+            {
+                var maxLogText = retVal?.Length ?? 0;
+
+                if (maxLogText > 500)
+                {
+                    maxLogText = 500;
+                }
+
+                // log the value of retVal
+                LogInfo($"GetFilecontent: First 500 character of file [{retVal?.Substring(0, maxLogText)}]");
+            }
+
+            return retVal;
+        }
+
+
         /// <summary>
         /// Get uncommented file content.
         /// </summary>

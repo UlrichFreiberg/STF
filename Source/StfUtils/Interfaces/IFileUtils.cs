@@ -150,5 +150,16 @@ namespace Mir.Stf.Utilities.Interfaces
         /// The <see cref="string"/>.
         /// </returns>
         string GetCleanFilecontent(string fileName, string startOfCommentLine = "//");
+
+        /// <summary>
+        /// The get filecontent.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string GetFilecontent(string fileName);
     }
 }

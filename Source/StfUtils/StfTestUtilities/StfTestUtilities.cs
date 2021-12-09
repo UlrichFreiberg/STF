@@ -180,8 +180,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                 }
 
                 // Transform Template file with config values
-                // TODO: dont do getClean ... dont do anything to template ... except transform what is informed in config
-                var templateContent = FileUtils.GetCleanFilecontent(templateFilePath);
+                var templateContent = FileUtils.GetFilecontent(templateFilePath);
 
                 // BOB:
                 StringTransformationUtils.RegisterAllStuFunctionsForType(new TestCaseDirectoryDataUtils(TestCaseId, testCaseStepFilePathUtils.RootFolder));
