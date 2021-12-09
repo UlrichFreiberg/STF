@@ -149,6 +149,8 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                 return retVal;
             }
 
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(TestCaseFileAndFolderUtils, this.StringTransformationUtils);
+
             for (int stepNum = 1; stepNum <= testCaseStepFilePathUtils.NumberOfSteps; stepNum++)
             {
                 var configFilePath = testCaseStepFilePathUtils.GetFilePathForStep(fileNameFilters[1], stepNum);
@@ -182,9 +184,6 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                 // Transform Template file with config values
                 var templateContent = FileUtils.GetFilecontent(templateFilePath);
 
-                // BOB:
-                StringTransformationUtils.RegisterAllStuFunctionsForType(new TestCaseDirectoryDataUtils(TestCaseId, testCaseStepFilePathUtils.RootFolder));
-
                 // loop through all config Keys and replace occurences in templateContent string 
                 // then write back to a file 
                 foreach (var key in configDictionary.Keys)
@@ -199,7 +198,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                         RegexOptions.Multiline);
                 }
 
-                var resultsFilePath = testCaseFileAndFolderUtils.GetTestCaseResultsFilePath($"{templateFileName}{".step"}{stepNum}{".results"}", false);
+                var resultsFilePath = TestCaseFileAndFolderUtils.GetTestCaseResultsFilePath($"{templateFileName}{".step"}{stepNum}{".results"}", false);
                 File.WriteAllText(resultsFilePath, templateContent);
             }
 
