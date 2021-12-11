@@ -131,6 +131,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         /// <param name="ignoreFileExtensions">
         /// The ignore File Extensions.
         /// </param>
+        /// 
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
@@ -194,7 +195,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
                     templateContent = Regex.Replace(
                         templateContent,
                         $"{key}.*$",
-                        $"{key} {evaluatedValue}",
+                        $"\"{key}\": {evaluatedValue}",
                         RegexOptions.Multiline);
                 }
 
