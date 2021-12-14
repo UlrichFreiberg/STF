@@ -13,6 +13,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Text.RegularExpressions;
 
     using Mir.Stf.Utilities.FileUtilities;
@@ -222,7 +223,7 @@ namespace Mir.Stf.Utilities.StfTestUtilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string GetTestStepResultsFilePath(string[] fileNameFilters, int stepNum, bool ignoreFileExtensions = false)
+        public string GetTestStepResultsFilePath(string[] fileNameFilters, int stepNum = 1, bool ignoreFileExtensions = false)
         {
             var retVal = String.Empty;
             var tcSFPU = testCaseStepFilePathUtils ?? (testCaseStepFilePathUtils = new TestCaseStepFilePathUtils(TestCaseFileAndFolderUtils.TestCaseDirectory,
@@ -253,6 +254,29 @@ namespace Mir.Stf.Utilities.StfTestUtilities
             return retVal;
         }
 
+
+        /// <summary>
+        /// The get test step results file content.
+        /// </summary>
+        /// <param name="fileNameFilters">
+        /// The file name filters.
+        /// </param>
+        /// <param name="stepNum">
+        /// The step num.
+        /// </param>
+        /// <param name="ignoreFileExtensions">
+        /// The ignore file extensions.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string GetTestStepResultsFileContent(string[] fileNameFilters, int stepNum = 1, bool ignoreFileExtensions = false)
+        {
+            var resultsFilePath = GetTestStepResultsFilePath(fileNameFilters, stepNum, ignoreFileExtensions);
+
+            var retVal = FileUtils.GetFilecontent(resultsFilePath);
+            return retVal;
+        }
 
         /// <summary>
         /// The get test case folder paths from cache.
