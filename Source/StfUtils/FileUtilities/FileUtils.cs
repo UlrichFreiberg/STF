@@ -19,23 +19,8 @@ namespace Mir.Stf.Utilities.FileUtilities
     /// <summary>
     /// The file utils.
     /// </summary>
-    public class FileUtils : StfUtilsBase, IFileUtils
+    public class FileUtils : StfUtilsBase
     {
-        /// <summary>
-        /// Gets the test case directory.
-        /// </summary>
-        public string TestCaseDirectory { get; private set; }
-
-        /// <summary>
-        /// Gets the test case directory results.
-        /// </summary>
-        public string TestCaseDirectoryResults { get; private set; }
-
-        /// <summary>
-        /// Gets the test case directory temp.
-        /// </summary>
-        public string TestCaseDirectoryTemp { get; private set; }
-
         /// <summary>
         /// The exists file.
         /// </summary>
@@ -254,7 +239,7 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string GetFilecontent(string fileName)
+        public string GetFileContent(string fileName)
         {
             string retVal = null;
 
@@ -269,7 +254,7 @@ namespace Mir.Stf.Utilities.FileUtilities
             }
             catch (Exception ex)
             {
-                LogError($"GetFilecontent: Got Ex: [{ex}]");
+                LogError($"GetFileContent: Got Ex: [{ex}]");
                 return null;
             }
             finally
@@ -282,12 +267,11 @@ namespace Mir.Stf.Utilities.FileUtilities
                 }
 
                 // log the value of retVal
-                LogInfo($"GetFilecontent: First 500 character of file [{retVal?.Substring(0, maxLogText)}]");
+                LogInfo($"GetFileContent: First 500 character of file [{retVal?.Substring(0, maxLogText)}]");
             }
 
             return retVal;
         }
-
 
         /// <summary>
         /// Get uncommented file content.
@@ -301,7 +285,7 @@ namespace Mir.Stf.Utilities.FileUtilities
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string GetCleanFilecontent(string fileName, string startOfCommentLine = "//")
+        public string GetCleanFileContent(string fileName, string startOfCommentLine = "//")
         {
             string retVal = null;
 
@@ -318,7 +302,7 @@ namespace Mir.Stf.Utilities.FileUtilities
             }
             catch (Exception ex)
             {
-                LogError($"GetCleanFilecontent: Got Ex: [{ex}]");
+                LogError($"GetCleanFileContent: Got Ex: [{ex}]");
                 return null;
             }
             finally
@@ -331,7 +315,7 @@ namespace Mir.Stf.Utilities.FileUtilities
                 }
 
                 // log the value of retVal
-                LogInfo($"GetCleanFilecontent: First 500 character of file [{retVal?.Substring(0, maxLogText)}]");
+                LogInfo($"GetCleanFileContent: First 500 character of file [{retVal?.Substring(0, maxLogText)}]");
             }
 
             return retVal;
@@ -414,85 +398,6 @@ namespace Mir.Stf.Utilities.FileUtilities
                 LogInfo($"WriteAllTextFile: RetVal = [{retVal}]");
             }
 
-            return retVal;
-        }
-
-        /// <summary>
-        /// The setup temp result folders.
-        /// </summary>
-        /// <param name="testCaseDirectory">
-        /// The test case directory.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool SetupTempResultFolders(string testCaseDirectory)
-        {
-            TestCaseDirectory = Path.IsPathRooted(testCaseDirectory)
-                              ? testCaseDirectory
-                              : Path.GetFullPath(testCaseDirectory);
-            TestCaseDirectoryTemp = Path.Combine(testCaseDirectory, "Temp");
-            TestCaseDirectoryResults = Path.Combine(testCaseDirectory, "Results");
-
-            LogInfo($"Setting up Temp and Result folder in [{TestCaseDirectory}]");
-
-            if (!Directory.Exists(TestCaseDirectoryTemp))
-            {
-                Directory.CreateDirectory(TestCaseDirectoryTemp);
-            }
-
-            if (!Directory.Exists(TestCaseDirectoryResults))
-            {
-                Directory.CreateDirectory(TestCaseDirectoryResults);
-            }
-
-            var retVal = Directory.Exists(TestCaseDirectoryTemp) && Directory.Exists(TestCaseDirectoryResults);
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// The get test case local file path.
-        /// </summary>
-        /// <param name="inputFilename">
-        /// The input filename.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string GetTestCaseLocalFilePath(string inputFilename)
-        {
-            var retVal = Path.Combine(TestCaseDirectory, inputFilename);
-            return retVal;
-        }
-
-        /// <summary>
-        /// The get test case temp dir file path.
-        /// </summary>
-        /// <param name="inputFilename">
-        /// The input filename.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string GetTestCaseTempDirFilePath(string inputFilename)
-        {
-            var retVal = Path.Combine(TestCaseDirectoryTemp, inputFilename);
-            return retVal;
-        }
-
-        /// <summary>
-        /// The get test case results dir file path.
-        /// </summary>
-        /// <param name="inputFilename">
-        /// The input filename.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string GetTestCaseResultsDirFilePath(string inputFilename)
-        {
-            var retVal = Path.Combine(TestCaseDirectoryResults, inputFilename);
             return retVal;
         }
     }
