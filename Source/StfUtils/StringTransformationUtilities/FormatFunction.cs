@@ -116,8 +116,9 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                     return null;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                ErrorMessage = $"Failed to parse int [{valueToFormat} - got exception [{ex}]";
                 return null;
             }
 
@@ -145,7 +146,7 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
         {
             DateTime inputValue;
 
-            ErrorMessage = $"Could not parse [{valueToFormat}] using [{inputFormat}]";
+            ErrorMessage = $"Failed to parse [{valueToFormat}] using [{inputFormat}]";
 
             try
             {
@@ -159,8 +160,9 @@ namespace Mir.Stf.Utilities.StringTransformationUtilities
                     return null;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                ErrorMessage += $" - got exception [{ex}]";
                 return null;
             }
 

@@ -12,6 +12,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
 {
     using System;
     using System.IO;
+    using System.Linq;
 
     /// <summary>
     /// The test case file and folder utils.
@@ -39,9 +40,9 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         /// </param>
         public TestCaseFileAndFolderUtils(int testCaseId, string rootFolder)
         {
-            DirectoryUtils = new DirectoryUtils(rootFolder);
+            TestCaseDirectoryCacheUtils = new TestCaseDirectoryCacheUtils(rootFolder);
             TestCaseId = testCaseId;
-            TestCaseDirectory = DirectoryUtils.GetTestCaseDirectoryPath(TestCaseId);
+            TestCaseDirectory = TestCaseDirectoryCacheUtils.GetTestCaseDirectoryPath(TestCaseId);
             SetupTempAndResultsFolders();
         }
 
@@ -53,7 +54,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         /// <summary>
         /// Gets the directory utils.
         /// </summary>
-        public DirectoryUtils DirectoryUtils { get; }
+        public TestCaseDirectoryCacheUtils TestCaseDirectoryCacheUtils { get; }
 
         /// <summary>
         /// Gets the test case id.
@@ -236,7 +237,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         {
             if (string.IsNullOrEmpty(baseDirectoryPath))
             {
-                return new string[0];
+                return Array.Empty<string>();
             }
 
             if (string.IsNullOrEmpty(relativeFilePath))
@@ -245,7 +246,23 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
                 return new[] { baseDirectoryPath };
             }
 
-            var retVal = Directory.GetFiles(baseDirectoryPath, relativeFilePath);
+            var relativeFilePathDir = Path.GetDirectoryName(relativeFilePath);
+            var directoryToGet = baseDirectoryPath;
+            var relativeFileNameToGet = relativeFilePath;
+
+            // needs this construct as Directory.GetFiles does not support file path - only file names
+            if (relativeFilePathDir?.Any() ?? false)
+            {
+                directoryToGet = Path.Combine(baseDirectoryPath, relativeFilePathDir);
+                relativeFileNameToGet = Path.GetFileName(relativeFilePath);
+            }
+
+            if (!Directory.Exists(directoryToGet))
+            {
+                return Array.Empty<string>();
+            }
+
+            var retVal = Directory.GetFiles(directoryToGet, relativeFileNameToGet);
 
             return retVal;
         }

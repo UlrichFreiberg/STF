@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DirectoryUtils.cs" company="Mir Software">
+// <copyright file="TestCaseDirectoryCacheUtils.cs" company="Mir Software">
 //   Copyright governed by Artistic license as described here:
 //          http://www.perlfoundation.org/artistic_license_2_0
 // </copyright>
 // <summary>
-//   Defines the DirectoryUtils type.
+//   Defines the TestCaseDirectoryCacheUtils type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -18,12 +18,10 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using Mir.Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The directory utils.
     /// </summary>
-    public class DirectoryUtils 
+    public class TestCaseDirectoryCacheUtils
     {
         /// <summary>
         /// The cache info filename.
@@ -31,12 +29,12 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         private const string CacheInfoFilename = "FolderPathCacheInfo.txt";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DirectoryUtils"/> class.
+        /// Initializes a new instance of the <see cref="TestCaseDirectoryCacheUtils"/> class.
         /// </summary>
         /// <param name="rootFolder">
         /// The root folder.
         /// </param>
-        public DirectoryUtils(string rootFolder)
+        public TestCaseDirectoryCacheUtils(string rootFolder)
         {
             RootFolder = rootFolder;
 
@@ -225,10 +223,8 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
         /// <returns>
         /// The test case folder paths
         /// </returns>
-        public List<string> GetTestCaseFolderPathsFromCache()
+        public string[] GetTestCaseFolderPaths()
         {
-            var retVal = new List<string>();
-
             if (!File.Exists(CacheInfoFilePath))
             {
                 RefreshCache();
@@ -239,12 +235,7 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
                 }
             }
 
-            StreamReader reader = new StreamReader(CacheInfoFilePath);
-            string line;
-            while ((line = reader.ReadLine()) != null)
-            {
-                retVal.Add(line);
-            }
+            var retVal = File.ReadAllLines(CacheInfoFilePath);
 
             return retVal;
         }
@@ -269,12 +260,14 @@ namespace Mir.Stf.Utilities.TestCaseDirectoryUtilities
                 }
             }
 
-            StreamReader reader = new StreamReader(CacheInfoFilePath);
+            var reader = new StreamReader(CacheInfoFilePath);
             string line;
+
             while ((line = reader.ReadLine()) != null)
             {
-                var tcId = GetTestCaseId(line);
-                retVal.Add(tcId);
+                var testCaseId = GetTestCaseId(line);
+
+                retVal.Add(testCaseId);
             }
 
             return retVal;

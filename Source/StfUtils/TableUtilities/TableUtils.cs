@@ -12,12 +12,13 @@ namespace Mir.Stf.Utilities.TableUtilities
 {
     using System.Collections.Generic;
     using System.Dynamic;
+    using System.Linq;
     using System.Reflection;
 
     using Interfaces;
 
     using Slapper;
-    using System.Linq;
+
     /// <summary>
     /// The web table header description.
     /// </summary>
@@ -114,7 +115,7 @@ namespace Mir.Stf.Utilities.TableUtilities
         /// The projection.
         /// </summary>
         /// <typeparam name="T">
-        /// The type of the record in the recieving end
+        /// The type of the record in the receiving end
         /// </typeparam>
         /// <returns>
         /// The map from the dynamic record into a provided record type.
@@ -139,7 +140,7 @@ namespace Mir.Stf.Utilities.TableUtilities
         /// The row as a string array
         /// </param>
         /// <typeparam name="T">
-        /// The type of the record in the recieving end
+        /// The type of the record in the receiving end
         /// </typeparam>
         /// <returns>
         /// The <see cref="T"/>.
@@ -166,7 +167,7 @@ namespace Mir.Stf.Utilities.TableUtilities
         /// The row as a string array
         /// </param>
         /// <typeparam name="T">
-        /// The type of the record in the recieving end
+        /// The type of the record in the receiving end
         /// </typeparam>
         /// <returns>
         /// The <see cref="T"/>.
@@ -184,7 +185,9 @@ namespace Mir.Stf.Utilities.TableUtilities
         /// <summary>
         /// Due to a bug/feature in Slapper the object to project cant be named ID
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">
+        /// The generic we are working with at the moment.
+        /// </typeparam>
         private void CheckIdProperty<T>()
         {
             var props = typeof(T).GetProperties();
@@ -192,7 +195,7 @@ namespace Mir.Stf.Utilities.TableUtilities
 
             if (idProp)
             {
-                var msg = string.Format("{0} does not allow a property called 'ID'. Please use a mapping", GetType().Name);
+                var msg = $"{GetType().Name} does not allow a property called 'ID'. Please use a mapping";
 
                 throw new System.Exception(msg);
             }

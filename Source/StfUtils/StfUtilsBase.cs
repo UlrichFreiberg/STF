@@ -12,51 +12,11 @@ namespace Mir.Stf.Utilities
 {
     using System;
 
-    using Mir.Stf.Utilities.FileUtilities;
-    using Mir.Stf.Utilities.Interfaces;
-    using Mir.Stf.Utilities.StringTransformationUtilities;
-
     /// <summary>
     /// The stf utils base.
     /// </summary>
     public class StfUtilsBase
     {
-        /// <summary>
-        /// Backing field for StringTransformationUtils
-        /// </summary>
-        private IStringTransformationUtils stringTransformationUtils;
-
-        /// <summary>
-        /// Backing field for FileUtils
-        /// </summary>
-        private IFileUtils fileUtils;
-
-        /// <summary>
-        /// Gets the string transformation utils.
-        /// </summary>
-        public IStringTransformationUtils StringTransformationUtils
-        {
-            get
-            {
-                var retVal = stringTransformationUtils ?? (stringTransformationUtils = new StringTransformationUtils());
-
-                return retVal;
-            }
-        }
-
-        /// <summary>
-        /// Gets the file utils.
-        /// </summary>
-        public IFileUtils FileUtils
-        {
-            get
-            {
-                var retVal = fileUtils ?? (fileUtils = new FileUtils());
-
-                return retVal;
-            }
-        }
-
         /// <summary>
         /// The log info.
         /// </summary>

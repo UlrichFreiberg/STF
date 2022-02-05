@@ -80,7 +80,7 @@ namespace Mir.Stf.Utilities
         /// </returns>
         public OrderedDictionary ReadKeyValuePairsFromFile(string fileName)
         {
-            var content = fileUtils.GetCleanFilecontent(fileName);
+            var content = fileUtils.GetCleanFileContent(fileName);
             var retVal = GetKeyValuePairs(content);
 
             return retVal;
