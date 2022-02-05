@@ -14,13 +14,14 @@ namespace UnitTest.TestCaseDirectoryUtilities.TestCaseFileAndFolderUtils
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Mir.Stf;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
     /// The unit test test case directory.
     /// </summary>
     [TestClass]
-    public class UnitTestTestCaseDirectory : UnitTestScriptBase
+    public class UnitTestTestCaseDirectory : StfTestScriptBase
     {
         /// <summary>
         /// The unit test test data root.
@@ -33,12 +34,12 @@ namespace UnitTest.TestCaseDirectoryUtilities.TestCaseFileAndFolderUtils
         [TestMethod]
         public void TestTestCaseDirectoryExists()
         {
-            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(4001, UnitTestTestDataRoot);
+            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(9001, UnitTestTestDataRoot);
             var actual = testCaseFileAndFolderUtils.TestCaseDirectory;
-            var expected = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), UnitTestTestDataRoot, "Tc4001"));
+            var expected = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), UnitTestTestDataRoot, "Tc9001"));
 
             StfAssert.AreEqual("TestCaseDirectory exists", expected, actual);
-            StfAssert.AreEqual("TestCaseID", 4001, testCaseFileAndFolderUtils.TestCaseId);
+            StfAssert.AreEqual("TestCaseID", 9001, testCaseFileAndFolderUtils.TestCaseId);
         }
 
         /// <summary>

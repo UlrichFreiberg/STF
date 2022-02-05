@@ -14,13 +14,14 @@ namespace UnitTest.TestCaseDirectoryUtilities.TestCaseFileAndFolderUtils
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Mir.Stf;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
     /// The unit test get directory path.
     /// </summary>
     [TestClass]
-    public class UnitTestGetDirectoryPath : UnitTestScriptBase
+    public class UnitTestGetDirectoryPath : StfTestScriptBase
     {
         /// <summary>
         /// The unit test test data root.
@@ -33,31 +34,31 @@ namespace UnitTest.TestCaseDirectoryUtilities.TestCaseFileAndFolderUtils
         [TestMethod]
         public void TestTestCaseDirectoriesExists()
         {
-            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(4001, UnitTestTestDataRoot);
+            var testCaseFileAndFolderUtils = new TestCaseFileAndFolderUtils(9001, UnitTestTestDataRoot);
 
             // root
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath(null), @"Tc4001");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath(string.Empty), @"Tc4001");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath(null), @"Tc9001");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath(string.Empty), @"Tc9001");
             HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath("FileName.NotExists"), null);
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath("FileName.NotExists", false), @"Tc4001\FileName.NotExists");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath("UnitTestRootFile01.txt"), @"Tc4001\UnitTestRootFile01.txt");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath("UnitTestRootFile01.txt", false), @"Tc4001\UnitTestRootFile01.txt");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath("FileName.NotExists", false), @"Tc9001\FileName.NotExists");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath("UnitTestRootFile01.txt"), @"Tc9001\UnitTestRootFile01.txt");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseRootFilePath("UnitTestRootFile01.txt", false), @"Tc9001\UnitTestRootFile01.txt");
 
             // Results
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath(null), @"Tc4001\Results");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath(string.Empty), @"Tc4001\Results");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath(null), @"Tc9001\Results");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath(string.Empty), @"Tc9001\Results");
             HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath("FileName.NotExists"), null);
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath("FileName.NotExists", false), @"Tc4001\Results\FileName.NotExists");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath("UnitTestResultFile01.txt"), @"Tc4001\Results\UnitTestResultFile01.txt");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath("UnitTestResultFile01.txt", false), @"Tc4001\Results\UnitTestResultFile01.txt");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath("FileName.NotExists", false), @"Tc9001\Results\FileName.NotExists");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath("UnitTestResultFile01.txt"), @"Tc9001\Results\UnitTestResultFile01.txt");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseResultsFilePath("UnitTestResultFile01.txt", false), @"Tc9001\Results\UnitTestResultFile01.txt");
 
             // Temp
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath(null), @"Tc4001\Temp");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath(string.Empty), @"Tc4001\Temp");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath(null), @"Tc9001\Temp");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath(string.Empty), @"Tc9001\Temp");
             HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath("FileName.NotExists"), null);
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath("FileName.NotExists", false), @"Tc4001\Temp\FileName.NotExists");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath("UnitTestTempFile01.txt"), @"Tc4001\Temp\UnitTestTempFile01.txt");
-            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath("UnitTestTempFile01.txt", false), @"Tc4001\Temp\UnitTestTempFile01.txt");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath("FileName.NotExists", false), @"Tc9001\Temp\FileName.NotExists");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath("UnitTestTempFile01.txt"), @"Tc9001\Temp\UnitTestTempFile01.txt");
+            HelperTestCaseDirectories(testCaseFileAndFolderUtils.GetTestCaseTempFilePath("UnitTestTempFile01.txt", false), @"Tc9001\Temp\UnitTestTempFile01.txt");
         }
 
         /// <summary>

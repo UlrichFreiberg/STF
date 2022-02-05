@@ -14,3 +14,4 @@ Thumbs.db
 /.vs/Stf/**
 !**/TestData/**/Results/**
 !**/TestData/**/Temp/**
+.vs/*

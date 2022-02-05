@@ -12,13 +12,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.StringTransformationUtilities
 {
+    using Mir.Stf;
     using Mir.Stf.Utilities.StringTransformationUtilities;
 
     /// <summary>
     /// The unit test simple functions.
     /// </summary>
     [TestClass]
-    public class UnitTestSimpleFunctions : UnitTestScriptBase
+    public class UnitTestSimpleFunctions : StfTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.

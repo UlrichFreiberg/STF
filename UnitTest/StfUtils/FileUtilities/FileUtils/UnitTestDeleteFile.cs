@@ -10,25 +10,44 @@
 
 namespace UnitTest.FileUtilities.FileUtils
 {
+    using System.IO;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Mir.Stf;
+    using Mir.Stf.Utilities.StfTestUtilities;
 
     /// <summary>
     /// The unit test delete file.
     /// </summary>
     [TestClass]
-    public class UnitTestDeleteFile : UnitTestScriptBase
+    public class UnitTestDeleteFile : StfTestScriptBase
     {
+        /// <summary>
+        /// Gets or sets the stf test utils.
+        /// </summary>
+        private StfTestUtils StfTestUtils { get; set; }
+
+        /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            StfTestUtils = new StfTestUtils(4502);
+        }
+
         /// <summary>
         /// The test delete file.
         /// </summary>
         [TestMethod]
         public void TestDeleteFile()
         {
-            HelperDeleteFile(@"C:\temp\Nope.txt", "Not existing file - path correct");
-            HelperDeleteFile(@"C:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect");
+            HelperDeleteFile(@"temp\Nope.txt", "Not existing file - path correct");
+            HelperDeleteFile(@"temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect");
             HelperDeleteFile(@"QQQ:\temp\FolderNotExist\Nope.txt", "Not existing file - path incorrect");
 
-            HelperDeleteFile(@"C:\temp\CreateFirstDel.txt", "Existing file(create first) - path correct", true, true);
+            HelperDeleteFile(@"temp\CreateFirstDel.txt", "Existing file(create first) - path correct", true, true);
 
             // Usual test
             HelperDeleteFile(null, "path is null");
@@ -52,13 +71,40 @@ namespace UnitTest.FileUtilities.FileUtils
         /// </param>
         private void HelperDeleteFile(string filename, string testComment, bool expected = true, bool createFileFirst = false)
         {
+            var rootedFileName = Path.IsPathRooted(filename)
+                               ? filename
+                               : StfTestUtils.GetTestCaseRootFilePath(filename, false);
             StfLogger.LogHeader(testComment);
 
-            CreateFileUtilsTestFile(filename, createFileFirst);
+            CreateFileUtilsTestFile(rootedFileName, createFileFirst);
 
-            var actual = FileUtils.DeleteFile(filename);
+            var actual = StfTestUtils.FileUtils.DeleteFile(rootedFileName);
 
             StfAssert.IsTrue(testComment, expected == actual);
+        }
+
+        /// <summary>
+        /// The create file utils test file.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <param name="createFile">
+        /// The create File.
+        /// </param>
+        /// <param name="content">
+        /// The intended content of the file.
+        /// </param>
+        private void CreateFileUtilsTestFile(string filename, bool createFile, string content = "UnitTestStuff")
+        {
+            if (!createFile)
+            {
+                return;
+            }
+
+            var ok = StfTestUtils.FileUtils.WriteAllTextFile(filename, content);
+
+            StfAssert.IsTrue("Was able to create the test file", ok);
         }
     }
 }

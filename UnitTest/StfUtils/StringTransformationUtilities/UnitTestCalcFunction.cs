@@ -12,12 +12,30 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.StringTransformationUtilities
 {
+    using Mir.Stf;
+    using Mir.Stf.Utilities.StfTestUtilities;
+    using Mir.Stf.Utilities.StringTransformationUtilities;
+
     /// <summary>
     /// The unit test calc function.
     /// </summary>
     [TestClass]
-    public class UnitTestCalcFunction : UnitTestScriptBase
-    {
+    public class UnitTestCalcFunction : StfTestScriptBase
+    { 
+        /// <summary>
+        /// Gets or sets the stf test utils.
+        /// </summary>
+        private StfTestUtils StfTestUtils { get; set; }
+
+        /// <summary>
+        /// The test initialize.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            StfTestUtils = new StfTestUtils(0);
+        }
+
         /// <summary>
         /// The test stu Calc function.
         /// </summary>
@@ -47,7 +65,7 @@ namespace UnitTest.StringTransformationUtilities
         /// </param>
         private void HelperTestCalc(string arg, string expected)
         {
-            var actual = StringTransformationUtils.EvaluateFunction("CALC", arg);
+            var actual = StfTestUtils.StringTransformationUtils.EvaluateFunction("CALC", arg);
 
             StfAssert.AreEqual(arg, expected, actual);
         }

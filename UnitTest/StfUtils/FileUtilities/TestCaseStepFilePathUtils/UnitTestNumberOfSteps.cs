@@ -12,6 +12,7 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Mir.Stf;
     using Mir.Stf.Utilities.FileUtilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
@@ -19,7 +20,7 @@ namespace UnitTest.FileUtilities.TestCaseStepFilePathUtils
     /// The unit test number of steps.
     /// </summary>
     [TestClass]
-    public class UnitTestNumberOfSteps : UnitTestScriptBase
+    public class UnitTestNumberOfSteps : StfTestScriptBase
     {
         /// <summary>
         /// The unit test test data root.

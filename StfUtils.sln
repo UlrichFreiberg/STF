@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfUtils", "Source\StfUtils\StfUtils.csproj", "{8A46E8A4-0DD5-4BBD-A990-40EC4C715EB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{8C180EFA-F6B4-4892-A1A4-3DA9FCBF2A49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StfUtils", "UnitTest\StfUtils\StfUtils.csproj", "{ADF34342-F1A8-4866-8B92-A76C36FBA3F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AD7D87C3-437E-410D-8C75-EC6EB64412FF}"
+	ProjectSection(SolutionItems) = preProject
+		StfUtils.testsettings = StfUtils.testsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ADF34342-F1A8-4866-8B92-A76C36FBA3F8} = {8C180EFA-F6B4-4892-A1A4-3DA9FCBF2A49}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68719A81-924A-47FC-9378-FD27AF85C951}
 	EndGlobalSection
 EndGlobal

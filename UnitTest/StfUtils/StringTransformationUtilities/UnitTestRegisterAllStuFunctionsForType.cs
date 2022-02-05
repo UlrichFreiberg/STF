@@ -14,13 +14,14 @@ namespace UnitTest.StringTransformationUtilities
 {
     using System.Diagnostics.CodeAnalysis;
 
+    using Mir.Stf;
     using Mir.Stf.Utilities.StringTransformationUtilities;
 
     /// <summary>
     /// The unit test register all stu functions for type.
     /// </summary>
     [TestClass]
-    public class UnitTestRegisterAllStuFunctionsForType : UnitTestScriptBase
+    public class UnitTestRegisterAllStuFunctionsForType : StfTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.

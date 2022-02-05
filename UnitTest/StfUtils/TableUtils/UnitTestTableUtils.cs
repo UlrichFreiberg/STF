@@ -12,13 +12,14 @@ namespace UnitTest.TableUtils
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Mir.Stf;
     using Mir.Stf.Utilities.TableUtilities;
 
     /// <summary>
     /// The unit test 1.
     /// </summary>
     [TestClass]
-    public class UnitTestTableUtils : UnitTestScriptBase
+    public class UnitTestTableUtils : StfTestScriptBase
     {
         /// <summary>
         /// The test method 1.

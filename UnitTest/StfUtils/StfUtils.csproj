@@ -103,9 +103,8 @@
     <Compile Include="EndToEnd\UnitTestTestDataManagement.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestCreateTextFile.cs" />
     <Compile Include="FileUtilities\FileUtils\UnitTestWriteAllTextFile.cs" />
-    <Compile Include="FileUtilities\TemplateConfigUtils\UnitTestNumberOfSteps.cs" />
     <Compile Include="FileUtilities\TestCaseStepFilePathUtils\UnitTestNumberOfSteps.cs" />
-    <Compile Include="StfTestUtilities\UnitTestStfTestUtilities.cs" />
+    <Compile Include="StfTestUtilities\UnitTestStfTestUtils.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestCalcFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestFormatFunction.cs" />
     <Compile Include="StringTransformationUtilities\UnitTestSelectFunction.cs" />
@@ -119,49 +118,66 @@
     <Compile Include="TestCaseData\TestCaseDirectoryDataUtils\UnitTestGetTestDataValue.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestGetDirectoryPath.cs" />
     <Compile Include="TestCaseDirectoryUtilities\TestCaseFileAndFolderUtils\UnitTestTestCaseDirectory.cs" />
-    <Content Include="TestData\EndToEnd\TestDataManagement\Tc4002\TestDataValues.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\EndToEnd\TestDataManagement\Tc4001\TestDataValues.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Compile Include="UnitTestGetKeynameKeyvalueEntries.cs" />
-    <Compile Include="FileUtilities\FileUtils\UnitTestGetCleanFilecontent.cs" />
+    <Compile Include="FileUtilities\FileUtils\UnitTestGetCleanFileContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetryerUtils\UnitTestsRetryer.cs" />
     <Compile Include="TableUtils\UnitTestTableUtils.cs" />
     <Compile Include="UnitTestScriptBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\TestData\FileUtilities\FileUtils\Tc4502 - DeleteFile\NeedFileForGit.txt" />
+    <Content Include="TestData\TestData\FileUtilities\FileUtils\Tc4504 - WriteAllTextFile\NeedFileForGit.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6001 - Simple\DuplicateKeys - CaseSignificant.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6001 - Simple\DuplicateKeys - IgnoreCase.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6001 - Simple\Expected\DuplicateKeys - CaseSignificant.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6001 - Simple\Expected\DuplicateKeys - IgnoreCase.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6001 - Simple\Expected\Simple.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6001 - Simple\Simple.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6002 - Becomes\Expected\SimpleAssignmentOperatorBECOMES.txt" />
+    <Content Include="TestData\TestData\KeyValuePairsUtils\Tc6002 - Becomes\SimpleAssignmentOperatorBECOMES.txt" />
+    <Content Include="TestData\TestData\TestCaseData\TestCaseDirectoryDataUtils\Tc8001\TestDataValues.txt" />
+    <Content Include="TestData\TestData\TestCaseDirectoryUtilities\Tc9001\Results\UnitTestResultFile01.txt" />
+    <Content Include="TestData\TestData\TestCaseDirectoryUtilities\Tc9001\Results\UnitTestResultFile02.txt" />
+    <Content Include="TestData\TestData\TestCaseDirectoryUtilities\Tc9001\Temp\UnitTestTempFile01.txt" />
+    <Content Include="TestData\TestData\TestCaseDirectoryUtilities\Tc9001\Temp\UnitTestTempFile02.txt" />
+    <Content Include="TestData\TestData\TestCaseDirectoryUtilities\Tc9001\UnitTestRootFile01.txt" />
+    <Content Include="TestData\TestData\TestCaseDirectoryUtilities\Tc9001\UnitTestRootFile02.txt" />
     <None Include="packages.config" />
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Config3.txt">
+    <Content Include="TestData\TestData\EndToEnd\TestDataManagement\Tc1001\TestDataValues.txt" />
+    <Content Include="TestData\TestData\EndToEnd\TestDataManagement\Tc1002\TestDataValues.txt" />
+    <Content Include="TestData\TestData\FileUtilities\FileUtils\Tc4501 - GetCleanFilecontent\FileWithComments.txt" />
+    <Content Include="TestData\TestData\FileUtilities\FileUtils\Tc4501 - GetCleanFilecontent\FileWithComments.txt.Expected.txt" />
+    <Content Include="TestData\TestData\FileUtilities\FileUtils\Tc4501 - GetCleanFilecontent\FileWithCommentsNoHeader.txt" />
+    <Content Include="TestData\TestData\FileUtilities\FileUtils\Tc4501 - GetCleanFilecontent\FileWithCommentsNoHeader.txt.Expected.txt" />
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Config3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template.xml">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template4.json">
+    <None Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\Template4.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues4.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues3.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43223\TestDataValues.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template4.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template3.xml">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template3.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -173,206 +189,163 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Doc\" />
-    <Folder Include="TestData\FileUtils\GetCleanFilecontent\Temp\" />
+    <Folder Include="TestData\TestData\FileUtilities\FileUtils\GetCleanFilecontent\Temp\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4011\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4011\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4011\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4011\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4012\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4012\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4012\Config2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4012\Config2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4012\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4012\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4021\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4021\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4021\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4021\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4021\Template2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4021\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Config2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Config2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Template2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4022\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\TestDataValues.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc43111\TestDataValues.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4331\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config4.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Config4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Template3.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4423\Template3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config2WithNoGap1.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config2WithNoGap1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config4.extra.dots.12.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Config4.extra.dots.12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template2_Uscore3.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template2_Uscore3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template3 spaces 2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4433\Template3 spaces 2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Config4.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Config4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Template2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Template3.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4432\Template3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Config.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Config2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Config2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Config3.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Config3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Template.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Template2.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Template3.txt">
+    <Content Include="TestData\TestData\FileUtilities\TestCaseStepFilePathUtils\Tc4033\Template3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\DuplicateKeys - CaseSignificant.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7001\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\DuplicateKeys - IgnoreCase.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7001\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\Expected\DuplicateKeys - CaseSignificant.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7002\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\Expected\DuplicateKeys - IgnoreCase.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7002\Config2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\Expected\SimpleAssignmentOperatorBECOMES.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7002\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\Expected\Simple.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7003\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\KeyValuePairsUtils\Simple.txt" />
-    <Content Include="TestData\KeyValuePairsUtils\SimpleAssignmentOperatorBECOMES.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7003\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7001\Config.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7003\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7001\Template.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7004\Config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7002\Config.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7004\Config2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7002\Config2.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7004\Template.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7002\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7003\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7003\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7003\Template2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7004\Config.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7004\Config2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7004\Template.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\StfTestUtilities\Tc7004\Template2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\TestCaseData\TestCaseDirectoryDataUtils\Tc4001\TestDataValues.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Results\UnitTestResultFile01.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Results\UnitTestResultFile02.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Temp\UnitTestTempFile01.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\Temp\UnitTestTempFile02.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\UnitTestRootFile01.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\TestCaseDirectoryUtilities\Tc4001\UnitTestRootFile02.txt">
+    <Content Include="TestData\TestData\StfTestUtilities\Tc7004\Template2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

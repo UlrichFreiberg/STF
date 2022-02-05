@@ -11,8 +11,11 @@
 namespace UnitTest
 {
     using Mir.Stf;
-    using Mir.Stf.Utilities;
+    using Mir.Stf.Utilities.FileUtilities;
     using Mir.Stf.Utilities.Interfaces;
+    using Mir.Stf.Utilities.StfTestUtilities;
+    using Mir.Stf.Utilities.StringTransformationUtilities;
+    using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
     /// <summary>
     /// The unit test utilities.
@@ -22,44 +25,40 @@ namespace UnitTest
     public class UnitTestScriptBase : StfTestScriptBase
     {
         /// <summary>
-        /// The stf utils base.
-        /// to leverage the caching of objects and ensure interface setup
-        /// we are using the same methods to get as the StfUtils class
+        /// Initializes a new instance of the <see cref="UnitTestScriptBase"/> class.
         /// </summary>
-        private readonly StfUtilsBase stfUtilsBase = new StfUtilsBase();
+        /// <param name="testCaseId">
+        /// The test case id.
+        /// </param>
+        /// <param name="rootFolder">
+        /// The root folder.
+        /// </param>
+        public UnitTestScriptBase(int testCaseId, string rootFolder)
+        {
+            StfTestUtils = new StfTestUtils(testCaseId, rootFolder);
+        }
 
         /// <summary>
         /// The string transformation utils.
         /// </summary>
-        public IStringTransformationUtils StringTransformationUtils => stfUtilsBase.StringTransformationUtils;
+        public StringTransformationUtils StringTransformationUtils => StfTestUtils.StringTransformationUtils;
 
         /// <summary>
         /// The file utils.
         /// </summary>
-        public IFileUtils FileUtils => stfUtilsBase.FileUtils;
+        public FileUtils FileUtils => StfTestUtils.FileUtils;
 
         /// <summary>
-        /// The create file utils test file.
+        /// The test case file and folder utils.
         /// </summary>
-        /// <param name="filename">
-        /// The filename.
-        /// </param>
-        /// <param name="createFile">
-        /// The create File.
-        /// </param>
-        /// <param name="content">
-        /// The intended content of the file.
-        /// </param>
-        public void CreateFileUtilsTestFile(string filename, bool createFile, string content = "UnitTestStuff")
+        public TestCaseFileAndFolderUtils TestCaseFileAndFolderUtils => StfTestUtils.TestCaseFileAndFolderUtils;
+
+        /// <summary>
+        /// Gets the stf test utils.
+        /// </summary>
+        private StfTestUtils StfTestUtils
         {
-            if (!createFile)
-            {
-                return;
-            }
-
-            var ok = FileUtils.WriteAllTextFile(filename, content);
-
-            StfAssert.IsTrue("Was able to create the test file", ok);
+            get;
         }
     }
 }

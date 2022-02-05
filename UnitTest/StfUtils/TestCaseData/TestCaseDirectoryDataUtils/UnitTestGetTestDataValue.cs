@@ -14,13 +14,14 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Mir.Stf;
     using Mir.Stf.Utilities.TestCaseData;
 
     /// <summary>
     /// The unit test get test data value.
     /// </summary>
     [TestClass]
-    public class UnitTestGetTestDataValue : UnitTestScriptBase
+    public class UnitTestGetTestDataValue : StfTestScriptBase
     {
         /// <summary>
         /// The unit test test data root.
@@ -33,7 +34,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         [TestMethod]
         public void TestGetTestDataValueSimple()
         {
-            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(8001, UnitTestTestDataRoot);
              var actual = testCaseDirectoryDataUtils.GetTestDataValue("FourtyTwo");
             var expected = "42";
 
@@ -46,7 +47,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         [TestMethod]
         public void TestGetTestDataValueExpr()
         {
-            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(8001, UnitTestTestDataRoot);
             var actual = testCaseDirectoryDataUtils.GetTestDataValue("TwoPlusOne");
             var expected = "3";
 
@@ -59,7 +60,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         [TestMethod]
         public void TestGetTestDataValueCalc()
         {
-            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(8001, UnitTestTestDataRoot);
             var actual = testCaseDirectoryDataUtils.GetTestDataValue("TwoPlusOne");
             var expected = "3";
 
@@ -72,7 +73,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         [TestMethod]
         public void TestGetTestDataValueSubStr1()
         {
-            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(8001, UnitTestTestDataRoot);
             var actual = testCaseDirectoryDataUtils.GetTestDataValue("SubStr1");
             var expected = "he q";
 
@@ -85,7 +86,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         [TestMethod]
         public void TestGetTestDataValueSubStr2()
         {
-            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(8001, UnitTestTestDataRoot);
             var actual = testCaseDirectoryDataUtils.GetTestDataValue("SubStr2");
             var expected = "he q";
 
@@ -98,7 +99,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         [TestMethod]
         public void TestGetTestDataValueSubStr3()
         {
-            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(8001, UnitTestTestDataRoot);
             var actual = testCaseDirectoryDataUtils.GetTestDataValue("SubStr3");
             var expected = "he q";
 
@@ -112,7 +113,7 @@ namespace UnitTest.TestCaseData.TestCaseDirectoryDataUtils
         [TestMethod]
         public void TestGetTestDataValueGuid()
         {
-            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(4001, UnitTestTestDataRoot);
+            var testCaseDirectoryDataUtils = new TestCaseDirectoryDataUtils(8001, UnitTestTestDataRoot);
             var actual = testCaseDirectoryDataUtils.GetTestDataValue("GName");
 
             var isGuid = Guid.TryParse(actual, out var _);

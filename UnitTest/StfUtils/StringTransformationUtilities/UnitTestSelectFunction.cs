@@ -14,13 +14,14 @@ namespace UnitTest.StringTransformationUtilities
 {
     using System.Collections.Generic;
 
+    using Mir.Stf;
     using Mir.Stf.Utilities.StringTransformationUtilities;
 
     /// <summary>
     /// The unit test select function.
     /// </summary>
     [TestClass]
-    public class UnitTestSelectFunction : UnitTestScriptBase
+    public class UnitTestSelectFunction : StfTestScriptBase
     {
         /// <summary>
         /// The string transformation utils.

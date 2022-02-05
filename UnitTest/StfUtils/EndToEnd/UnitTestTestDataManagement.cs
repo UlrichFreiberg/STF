@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.EndToEnd
 {
+    using Mir.Stf;
     using Mir.Stf.Utilities;
     using Mir.Stf.Utilities.TestCaseDirectoryUtilities;
 
@@ -19,7 +20,7 @@ namespace UnitTest.EndToEnd
     /// The unit test test data management.
     /// </summary>
     [TestClass]
-    public class UnitTestTestDataManagement : UnitTestScriptBase
+    public class UnitTestTestDataManagement : StfTestScriptBase
     {
         /// <summary>
         /// The test simple test data management.

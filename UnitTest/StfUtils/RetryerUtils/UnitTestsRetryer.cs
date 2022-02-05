@@ -13,13 +13,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.RetryerUtils
 {
+    using Mir.Stf;
     using Mir.Stf.Utilities.RetryerUtilities;
 
     /// <summary>
     /// The unit tests retryer.
     /// </summary>
     [TestClass]
-    public class UnitTestsRetryer : UnitTestScriptBase
+    public class UnitTestsRetryer : StfTestScriptBase
     {
         /// <summary>
         /// The simple success retryer test.
